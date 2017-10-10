@@ -37,6 +37,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F01D7CA1F8D13D1005CA03A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3F01D7CC1F8D1433005CA03A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3F01D7CE1F8D1448005CA03A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3F01D7CF1F8D1458005CA03A /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
 		3FDE8F8B1F8D0DF60057BF3C = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +84,10 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				3F01D7CF1F8D1458005CA03A /* Supporting files */,
+				3F01D7CE1F8D1448005CA03A /* View */,
+				3F01D7CC1F8D1433005CA03A /* Controller */,
+				3F01D7CA1F8D13D1005CA03A /* Model */,
 				3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */,
 				3FDE8F991F8D0DF60057BF3C /* ViewController.swift */,
 				3FDE8F9B1F8D0DF60057BF3C /* Main.storyboard */,
