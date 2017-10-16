@@ -21,8 +21,11 @@ class StudentViewController: UIViewController {
             userName.text = user?.username
         }
         let manager = RequestManager<StudentStructure>()
-        manager.getEntityList(byStructure: Entities.Student, returnResults: { _ in
-            
+        manager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
+            if error == nil,
+                students != nil{
+                self.studentList = students!
+            }
         })
 //        manager.getEntityList<StudentStructure>(byStructure: Entities.Student, returnResults: {array in
 //
