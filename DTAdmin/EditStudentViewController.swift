@@ -21,19 +21,27 @@ class EditStudentViewController: UIViewController {
             name.text = student!.student_name
             fName.text = student!.student_fname
             sName.text = student!.student_surname
-            let manager = RequestManager<GroupStructure>()
-            manager.getEntity(byId: student!.group_id, entityStructure: Entities.Group, returnResults: { (groupName, error) in
-                self.groupButton.setTitle(groupName?.group_name, for: .normal)
-            })
+            guard let groupName = getGroup(byId: student!.group_id) else { return }
+            groupButton.setTitle(groupName.group_name, for: .normal)
         }
-        let navigationItem = self.navigationItem
+    
         if titleViewController != nil {
             navigationItem.title = titleViewController
         }
         
         // Do any additional setup after loading the view.
     }
-    
+    func getGroup(byId: String) -> GroupStructure?{
+        let manager = RequestManager<GroupStructure>()
+        var group: GroupStructure?
+        manager.getEntity(byId: byId, entityStructure: Entities.Group, returnResults: { (groupInstance, error) in
+            if groupInstance != nil {
+                group = groupInstance!
+            }
+            self.groupButton.setTitle(group!.group_name, for: .normal)
+        })
+        return group
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

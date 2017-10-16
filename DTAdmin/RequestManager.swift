@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RequestManager<T:Decodable>{
+class RequestManager<T: Decodable> {
     
     let urlProtocol = "http://"
     let urlDomain = "vps9615.hyperhost.name"
@@ -90,8 +90,8 @@ class RequestManager<T:Decodable>{
         }.resume()
     }
     
-    func getEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ entity:T?, _ error: String?)->()){
-        let commandInUrl = "/"+entityStructure.rawValue+"/getRecord/"+byId
+    func getEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ entity: T?, _ error: String?)->()){
+        let commandInUrl = "/"+entityStructure.rawValue+"/getRecords/"+byId
         guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return}
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -100,24 +100,30 @@ class RequestManager<T:Decodable>{
         guard let selfCookie = self.cookie else {return}
         request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            var entity: T?
+            var entity = [T]()
             var errorMsg: String?
             guard let responseValue = response as? HTTPURLResponse else {return}
+            print(responseValue)
             if let sessionError = error {
                 errorMsg = sessionError.localizedDescription
             } else {
                 if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                     guard let data = data else { return }
                     do {
-                        entity = try JSONDecoder().decode(T.self, from: data)
+//                        let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                        print(json)
+//                        print(T.self)
+                        entity = try JSONDecoder().decode([T].self, from: data)
+//                        print(entity.first)
                     } catch {
+                        print(error)
                         errorMsg = "Incorrect data structure!"
                     }
                 } else {
                     errorMsg = "No such user or bad password!"
                 }
                 DispatchQueue.main.async {
-                    returnResults(entity, errorMsg)
+                    returnResults(entity.first, errorMsg)
                 }
             }
         }.resume()
