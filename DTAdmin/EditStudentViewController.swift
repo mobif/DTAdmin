@@ -21,9 +21,11 @@ class EditStudentViewController: UIViewController {
             name.text = student!.student_name
             fName.text = student!.student_fname
             sName.text = student!.student_surname
-            groupButton.setTitle(student!.group_id, for: .normal) 
+            let manager = RequestManager<GroupStructure>()
+            manager.getEntity(byId: student!.group_id, entityStructure: Entities.Group, returnResults: { (groupName, error) in
+                self.groupButton.setTitle(groupName?.group_name, for: .normal)
+            })
         }
-        
         let navigationItem = self.navigationItem
         if titleViewController != nil {
             navigationItem.title = titleViewController
@@ -31,6 +33,7 @@ class EditStudentViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
