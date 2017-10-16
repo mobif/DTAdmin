@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class StudentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
    
     var user: UserStructure?
     var cookie: HTTPCookie?
@@ -16,13 +16,15 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     var filtered = false
     var filteredList: [StudentStructure]{
         if filtered {
-            return studentList.filter({ $0.student_name.contains("a")})
+            guard let searchString = searchBar.text else {return studentList}
+            return studentList.filter({ $0.student_name.contains(searchString)})
         } else {
             return studentList
         }
     }
     
    
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var studentTable: UITableView!
     @IBOutlet weak var userName: UILabel!
     override func viewDidLoad() {
@@ -32,6 +34,8 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
             userName.text = user?.username
         }
         studentTable.delegate = self
+        studentTable.dataSource = self
+        searchBar.delegate = self
         let manager = RequestManager<StudentStructure>()
         manager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
             if error == nil,
@@ -42,20 +46,36 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         })
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        filtered = (searchBar.text!.count > 0)
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = searchText.count > 0
+        studentTable.reloadData()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studentList.count
+        return filteredList.count
     }
     
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! StudentsTableViewCell
+        
         cell.name.text = filteredList[indexPath.row].student_name
         cell.fName.text = filteredList[indexPath.row].student_fname
         cell.sName.text = filteredList[indexPath.row].student_surname
+        
         return cell
     }
     
