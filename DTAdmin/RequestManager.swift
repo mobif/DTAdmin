@@ -14,7 +14,7 @@ class RequestManager<T>{
     let urlDomain = "vps9615.hyperhost.name"
     let urlLogin = "/login/index"
     let urlStudents = "/student/getRecords"
-    private var entityType: T?
+    
     
     var cookie: HTTPCookie? {
         let cookies:[HTTPCookie] = HTTPCookieStorage.shared.cookies! as [HTTPCookie]
@@ -26,7 +26,7 @@ class RequestManager<T>{
         return nil
     }
     
-    func getLoginData(for userName: String, password: String, returnResults: @escaping (_ responseUser: DataStructures.User?, _ cookies: HTTPCookie?, _ error: String?) -> ()) {
+    func getLoginData(for userName: String, password: String, returnResults: @escaping (_ responseUser: UserStructure?, _ cookies: HTTPCookie?, _ error: String?) -> ()) {
         let parameters = ["username":userName,"password":password]
         var request = URLRequest(url: URL(string: urlProtocol + urlDomain + urlLogin)!)
         request.httpMethod = "POST"
@@ -34,7 +34,7 @@ class RequestManager<T>{
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            var logedUser: DataStructures.User?
+            var logedUser: UserStructure?
             var errorMsg: String?
             guard let responseValue = response as? HTTPURLResponse else {return}
             if let error = error {
@@ -43,7 +43,7 @@ class RequestManager<T>{
                 if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                     guard let data = data else { return }
                     do {
-                        logedUser = try JSONDecoder().decode(DataStructures.User.self, from: data)
+                        logedUser = try JSONDecoder().decode(UserStructure.self, from: data)
                     } catch {
                         errorMsg = "Incorrect data structure!"
                     }
@@ -57,15 +57,14 @@ class RequestManager<T>{
         }.resume()
     }
     
-    func getEntityList<T>(byStructure: Entities, returnResults: @escaping (_ list: [T]?) -> ()) {
-        
+    func getEntityList(byStructure: Entities, returnResults: @escaping (_ list: [T]?) -> ()) {
         let commandInUrl = "/"+byStructure.rawValue+"/getRecords"
         guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return}
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-        request.setValue("session=\(cookie)", forHTTPHeaderField: "Cookie")
+        request.setValue("session=\(self.cookie)", forHTTPHeaderField: "Cookie")
         let getSession = URLSession.shared
         getSession.dataTask(with: request) { (data, response, error) in
             if let sessionError = error {

@@ -10,9 +10,9 @@ import UIKit
 
 class StudentViewController: UIViewController {
 
-    var user: DataStructures.User?
+    var user: UserStructure?
     var cookie: HTTPCookie?
-    var studentList = [GenericStructure<StudentStructure>]()
+    var studentList = [StudentStructure]()
     
     @IBOutlet weak var userName: UILabel!
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class StudentViewController: UIViewController {
             userName.text = user?.username
         }
         let manager = RequestManager<StudentStructure>()
-        manager.getEntityList<StudentStructure>(byStructure: Entities.Student, returnResults: { _ in
+        manager.getEntityList(byStructure: Entities.Student, returnResults: { _ in
             
         })
 //        manager.getEntityList<StudentStructure>(byStructure: Entities.Student, returnResults: {array in

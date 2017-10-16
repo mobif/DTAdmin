@@ -17,10 +17,7 @@ struct StudentStructure: Decodable {
     var group_id: String
     var plain_password: String
     var photo: String
-    init() {
-        user_id = ""
-        gradebook_id = ""
-    }
+    
 }
     
 

@@ -12,10 +12,6 @@ struct UserStructure: Decodable{
     var id: String
     var username: String
     var roles: [String]
-    init() {
-        id = ""
-        username = ""
-        roles = []
-    }
+    
 }
 

@@ -20,10 +20,10 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func tapSignIn(_ sender: UIButton) {
-        let login = RequestManager()
+        let login = RequestManager<UserStructure>()
         guard let loginNameText = loginName.text else {return}
         guard let passwordText = password.text else {return}
-        login.getLoginData(for: loginNameText, password: passwordText, results: {
+        login.getLoginData(for: loginNameText, password: passwordText, returnResults: {
             (user, cookie, error) in
             if error != nil {
                 self.showWarningMsg(error!)
