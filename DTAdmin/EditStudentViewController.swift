@@ -14,6 +14,8 @@ class EditStudentViewController: UIViewController {
     @IBOutlet weak var fName: UITextField!
     @IBOutlet weak var sName: UITextField!
     @IBOutlet weak var groupButton: UIButton!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var numberBook: UITextField!
     var titleViewController: String?
     var selectedGroup: GroupStructure?
     override func viewDidLoad() {
@@ -22,6 +24,8 @@ class EditStudentViewController: UIViewController {
             name.text = student!.student_name
             fName.text = student!.student_fname
             sName.text = student!.student_surname
+            password.text = student!.plain_password
+            numberBook.text = student!.gradebook_id
             getGroup(byId: student!.group_id)
         } else {
             let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.saveStudent))
@@ -48,7 +52,6 @@ class EditStudentViewController: UIViewController {
         }
         self.navigationController?.pushViewController(groupsVC, animated: true)
     }
-    
     func getGroup(byId: String){
         let manager = RequestManager<GroupStructure>()
         var group: GroupStructure?
@@ -60,21 +63,4 @@ class EditStudentViewController: UIViewController {
             self.groupButton.setTitle(group!.group_name, for: .normal)
         })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
