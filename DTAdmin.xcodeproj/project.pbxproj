@@ -26,6 +26,8 @@
 		C78F5FAC1F93DA25003C007A /* StudentStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78F5FAB1F93DA25003C007A /* StudentStructure.swift */; };
 		C78F5FB01F93EDCB003C007A /* GenericStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78F5FAF1F93EDCB003C007A /* GenericStructure.swift */; };
 		C7902F601F947C420016D7BF /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7902F5F1F947C420016D7BF /* Entities.swift */; };
+		C79D17691F9553E2000C0D20 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D17681F9553E2000C0D20 /* GroupsTableViewController.swift */; };
+		C79D176B1F9554E9000C0D20 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D176A1F9554E9000C0D20 /* GroupTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		C78F5FAB1F93DA25003C007A /* StudentStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentStructure.swift; sourceTree = "<group>"; };
 		C78F5FAF1F93EDCB003C007A /* GenericStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStructure.swift; sourceTree = "<group>"; };
 		C7902F5F1F947C420016D7BF /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		C79D17681F9553E2000C0D20 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
+		C79D176A1F9554E9000C0D20 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				C7209C601F913B230054D53D /* Student.storyboard */,
 				C7209C621F913C980054D53D /* StudentViewController.swift */,
 				C7143CAA1F94E728005EEE56 /* EditStudentViewController.swift */,
+				C79D17681F9553E2000C0D20 /* GroupsTableViewController.swift */,
+				C79D176A1F9554E9000C0D20 /* GroupTableViewCell.swift */,
 				C7143CA81F94C7D2005EEE56 /* StudentsTableViewCell.swift */,
 				C7209C681F913F4F0054D53D /* LoginViewController.swift */,
 				C71620BB1F935DC800805A63 /* UserModel.swift */,
@@ -236,6 +242,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7902F601F947C420016D7BF /* Entities.swift in Sources */,
+				C79D176B1F9554E9000C0D20 /* GroupTableViewCell.swift in Sources */,
+				C79D17691F9553E2000C0D20 /* GroupsTableViewController.swift in Sources */,
 				C78F5FA81F93D5C2003C007A /* EntityStructure.swift in Sources */,
 				C78F5FA61F93B6E7003C007A /* HTTPStatusCodes.swift in Sources */,
 				C78F5FB01F93EDCB003C007A /* GenericStructure.swift in Sources */,

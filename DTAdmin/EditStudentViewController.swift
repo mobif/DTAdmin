@@ -15,14 +15,17 @@ class EditStudentViewController: UIViewController {
     @IBOutlet weak var sName: UITextField!
     @IBOutlet weak var groupButton: UIButton!
     var titleViewController: String?
+    var selectedGroup: GroupStructure?
     override func viewDidLoad() {
         super.viewDidLoad()
         if student != nil {
             name.text = student!.student_name
             fName.text = student!.student_fname
             sName.text = student!.student_surname
-            guard let groupName = getGroup(byId: student!.group_id) else { return }
-            groupButton.setTitle(groupName.group_name, for: .normal)
+            getGroup(byId: student!.group_id)
+        } else {
+            let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.saveStudent))
+            navigationItem.rightBarButtonItem = doneItem
         }
     
         if titleViewController != nil {
@@ -31,16 +34,31 @@ class EditStudentViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-    func getGroup(byId: String) -> GroupStructure?{
+    
+    @objc func saveStudent(){
+        
+    }
+    @IBAction func selectGroup(_ sender: UIButton) {
+        guard let groupsVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "GroupsTableViewController") as? GroupsTableViewController else {return}
+        groupsVC.titleViewController = "Groups"
+        groupsVC.selecectedGroup = {
+            group in
+            self.selectedGroup = group
+            self.groupButton.setTitle(group.group_name, for: .normal)
+        }
+        self.navigationController?.pushViewController(groupsVC, animated: true)
+    }
+    
+    func getGroup(byId: String){
         let manager = RequestManager<GroupStructure>()
         var group: GroupStructure?
         manager.getEntity(byId: byId, entityStructure: Entities.Group, returnResults: { (groupInstance, error) in
             if groupInstance != nil {
                 group = groupInstance!
             }
+            self.selectedGroup = groupInstance
             self.groupButton.setTitle(group!.group_name, for: .normal)
         })
-        return group
     }
 
     override func didReceiveMemoryWarning() {

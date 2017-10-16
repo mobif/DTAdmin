@@ -103,21 +103,15 @@ class RequestManager<T: Decodable> {
             var entity = [T]()
             var errorMsg: String?
             guard let responseValue = response as? HTTPURLResponse else {return}
-            print(responseValue)
             if let sessionError = error {
                 errorMsg = sessionError.localizedDescription
             } else {
                 if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                     guard let data = data else { return }
                     do {
-//                        let json = try JSONSerialization.jsonObject(with: data, options: [])
-//                        print(json)
-//                        print(T.self)
                         entity = try JSONDecoder().decode([T].self, from: data)
-//                        print(entity.first)
                     } catch {
-                        print(error)
-                        errorMsg = "Incorrect data structure!"
+                        errorMsg = error.localizedDescription
                     }
                 } else {
                     errorMsg = "No such user or bad password!"
