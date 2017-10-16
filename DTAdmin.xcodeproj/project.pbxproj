@@ -13,6 +13,19 @@
 		3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F9E1F8D0DF60057BF3C /* DTAdmin.xcdatamodeld */; };
 		3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */; };
 		3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */; };
+		C71620BC1F935DC800805A63 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71620BB1F935DC800805A63 /* UserModel.swift */; };
+		C71620C01F93B0CE00805A63 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71620BF1F93B0CE00805A63 /* DataStructures.swift */; };
+		C7209C611F913B230054D53D /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7209C601F913B230054D53D /* Student.storyboard */; };
+		C7209C631F913C980054D53D /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7209C621F913C980054D53D /* StudentViewController.swift */; };
+		C7209C651F913D9C0054D53D /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7209C641F913D9C0054D53D /* RequestManager.swift */; };
+		C7209C691F913F4F0054D53D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7209C681F913F4F0054D53D /* LoginViewController.swift */; };
+		C78F5FA61F93B6E7003C007A /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78F5FA51F93B6E7003C007A /* HTTPStatusCodes.swift */; };
+		C78F5FA81F93D5C2003C007A /* EntityStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78F5FA71F93D5C2003C007A /* EntityStructure.swift */; };
+		C78F5FAA1F93D6A9003C007A /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78F5FA91F93D6A9003C007A /* UserStructure.swift */; };
+		C78F5FAC1F93DA25003C007A /* StudentStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78F5FAB1F93DA25003C007A /* StudentStructure.swift */; };
+		C78F5FB01F93EDCB003C007A /* GenericStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78F5FAF1F93EDCB003C007A /* GenericStructure.swift */; };
+		C7902F5E1F947BB70016D7BF /* EntityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7902F5D1F947BB70016D7BF /* EntityFactory.swift */; };
+		C7902F601F947C420016D7BF /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7902F5F1F947C420016D7BF /* Entities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +37,19 @@
 		3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FDE8FA41F8D0DF60057BF3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FDE8FA61F8D0DF60057BF3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C71620BB1F935DC800805A63 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		C71620BF1F93B0CE00805A63 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
+		C7209C601F913B230054D53D /* Student.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
+		C7209C621F913C980054D53D /* StudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
+		C7209C641F913D9C0054D53D /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		C7209C681F913F4F0054D53D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C78F5FA51F93B6E7003C007A /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
+		C78F5FA71F93D5C2003C007A /* EntityStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityStructure.swift; sourceTree = "<group>"; };
+		C78F5FA91F93D6A9003C007A /* UserStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
+		C78F5FAB1F93DA25003C007A /* StudentStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentStructure.swift; sourceTree = "<group>"; };
+		C78F5FAF1F93EDCB003C007A /* GenericStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStructure.swift; sourceTree = "<group>"; };
+		C7902F5D1F947BB70016D7BF /* EntityFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactory.swift; sourceTree = "<group>"; };
+		C7902F5F1F947C420016D7BF /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +104,19 @@
 		3F05013A1F90ED08006651CE /* Student */ = {
 			isa = PBXGroup;
 			children = (
+				C7209C601F913B230054D53D /* Student.storyboard */,
+				C7209C621F913C980054D53D /* StudentViewController.swift */,
+				C7209C681F913F4F0054D53D /* LoginViewController.swift */,
+				C71620BB1F935DC800805A63 /* UserModel.swift */,
+				C7209C641F913D9C0054D53D /* RequestManager.swift */,
+				C71620BF1F93B0CE00805A63 /* DataStructures.swift */,
+				C78F5FA51F93B6E7003C007A /* HTTPStatusCodes.swift */,
+				C78F5FA71F93D5C2003C007A /* EntityStructure.swift */,
+				C78F5FAF1F93EDCB003C007A /* GenericStructure.swift */,
+				C78F5FA91F93D6A9003C007A /* UserStructure.swift */,
+				C78F5FAB1F93DA25003C007A /* StudentStructure.swift */,
+				C7902F5D1F947BB70016D7BF /* EntityFactory.swift */,
+				C7902F5F1F947C420016D7BF /* Entities.swift */,
 			);
 			name = Student;
 			sourceTree = "<group>";
@@ -182,6 +221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7209C611F913B230054D53D /* Student.storyboard in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
@@ -195,7 +235,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7902F601F947C420016D7BF /* Entities.swift in Sources */,
+				C78F5FA81F93D5C2003C007A /* EntityStructure.swift in Sources */,
+				C78F5FA61F93B6E7003C007A /* HTTPStatusCodes.swift in Sources */,
+				C71620C01F93B0CE00805A63 /* DataStructures.swift in Sources */,
+				C78F5FB01F93EDCB003C007A /* GenericStructure.swift in Sources */,
+				C7209C691F913F4F0054D53D /* LoginViewController.swift in Sources */,
+				C7902F5E1F947BB70016D7BF /* EntityFactory.swift in Sources */,
+				C7209C651F913D9C0054D53D /* RequestManager.swift in Sources */,
+				C71620BC1F935DC800805A63 /* UserModel.swift in Sources */,
+				C7209C631F913C980054D53D /* StudentViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				C78F5FAA1F93D6A9003C007A /* UserStructure.swift in Sources */,
+				C78F5FAC1F93DA25003C007A /* StudentStructure.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 			);
