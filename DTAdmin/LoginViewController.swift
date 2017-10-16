@@ -37,9 +37,11 @@ class LoginViewController: UIViewController {
             guard let userInstance = user else {return}
             studentVC.user = userInstance
             studentVC.cookie = cookieValue
-            //print(Thread.current)
-            
-            self.present(studentVC, animated: true, completion: nil)//navigationController?.pushViewController(studentVC, animated: true)
+            let navigationController = UINavigationController(rootViewController: studentVC)
+//            navigationController.pushViewController(studentVC, animated: true)
+//            let navigationController = UIStoryboard(name: "Student", bundle: nil).
+//            navigationController?.pushViewController(studentVC, animated: true)
+            self.present(navigationController, animated: true, completion: nil)
         })
     }
     private func showWarningMsg(_ textMsg: String) {

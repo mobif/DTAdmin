@@ -91,4 +91,8 @@ class RequestManager<T:Decodable>{
             }
         }.resume()
     }
+    
+    func getEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ entity:T?, _ error: String?)->()){
+    
+    }
 }

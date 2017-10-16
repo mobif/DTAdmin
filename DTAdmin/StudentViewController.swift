@@ -17,19 +17,22 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     var filteredList: [StudentStructure]{
         if filtered {
             guard let searchString = searchBar.text else {return studentList}
-            return studentList.filter({ $0.student_name.contains(searchString)})
+            return studentList.filter({
+                ($0.student_name.contains(searchString) || $0.student_fname.contains(searchString)) })
         } else {
             return studentList
         }
     }
-    
-   
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var studentTable: UITableView!
     @IBOutlet weak var userName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let navigationItem = self.navigationItem
         
+        navigationItem.title = "Students"
+        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addNewStudent))
+        navigationItem.rightBarButtonItem = doneItem
         if user != nil {
             userName.text = user?.username
         }
@@ -45,37 +48,37 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
             self.studentTable.reloadData()
         })
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    @objc func addNewStudent(){
+        guard let editStudentVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
+        editStudentVC.titleViewController = "New Student"
+        self.navigationController?.pushViewController(editStudentVC, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let studentInstance = filtered ? filteredList[indexPath.row] : studentList[indexPath.row]
+        
+        guard let editStudentVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
+        editStudentVC.titleViewController = "Edit"
+        editStudentVC.student = studentInstance
+        navigationController?.pushViewController(editStudentVC, animated: true)
+    }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         filtered = (searchBar.text!.count > 0)
-        
     }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filtered = searchText.count > 0
         studentTable.reloadData()
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredList.count
     }
-    
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! StudentsTableViewCell
-        
         cell.name.text = filteredList[indexPath.row].student_name
         cell.fName.text = filteredList[indexPath.row].student_fname
         cell.sName.text = filteredList[indexPath.row].student_surname
-        
         return cell
     }
     
