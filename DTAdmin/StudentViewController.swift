@@ -8,31 +8,57 @@
 
 import UIKit
 
-class StudentViewController: UIViewController {
-
+class StudentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+   
     var user: UserStructure?
     var cookie: HTTPCookie?
     var studentList = [StudentStructure]()
+    var filtered = false
+    var filteredList: [StudentStructure]{
+        if filtered {
+            return studentList.filter({ $0.student_name.contains("a")})
+        } else {
+            return studentList
+        }
+    }
     
+   
+    @IBOutlet weak var studentTable: UITableView!
     @IBOutlet weak var userName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if user != nil {
             userName.text = user?.username
         }
+        studentTable.delegate = self
         let manager = RequestManager<StudentStructure>()
         manager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
             if error == nil,
                 students != nil{
                 self.studentList = students!
             }
+            self.studentTable.reloadData()
         })
-//        manager.getEntityList<StudentStructure>(byStructure: Entities.Student, returnResults: {array in
-//
-//        })
-        // Do any additional setup after loading the view.
     }
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return studentList.count
+    }
+    
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! StudentsTableViewCell
+        cell.name.text = filteredList[indexPath.row].student_name
+        cell.fName.text = filteredList[indexPath.row].student_fname
+        cell.sName.text = filteredList[indexPath.row].student_surname
+        return cell
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

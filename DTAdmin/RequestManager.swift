@@ -66,7 +66,8 @@ class RequestManager<T:Decodable>{
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-        request.setValue("session=\(self.cookie)", forHTTPHeaderField: "Cookie")
+        guard let selfCookie = self.cookie else {return}
+        request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var dataList = [T]()
             var errorMsg: String?

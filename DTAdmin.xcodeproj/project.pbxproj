@@ -13,6 +13,7 @@
 		3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F9E1F8D0DF60057BF3C /* DTAdmin.xcdatamodeld */; };
 		3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */; };
 		3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */; };
+		C7143CA91F94C7D2005EEE56 /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7143CA81F94C7D2005EEE56 /* StudentsTableViewCell.swift */; };
 		C71620BC1F935DC800805A63 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71620BB1F935DC800805A63 /* UserModel.swift */; };
 		C7209C611F913B230054D53D /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7209C601F913B230054D53D /* Student.storyboard */; };
 		C7209C631F913C980054D53D /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7209C621F913C980054D53D /* StudentViewController.swift */; };
@@ -35,6 +36,7 @@
 		3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FDE8FA41F8D0DF60057BF3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FDE8FA61F8D0DF60057BF3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7143CA81F94C7D2005EEE56 /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
 		C71620BB1F935DC800805A63 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C7209C601F913B230054D53D /* Student.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		C7209C621F913C980054D53D /* StudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				C7209C601F913B230054D53D /* Student.storyboard */,
+				C7143CA81F94C7D2005EEE56 /* StudentsTableViewCell.swift */,
 				C7209C621F913C980054D53D /* StudentViewController.swift */,
 				C7209C681F913F4F0054D53D /* LoginViewController.swift */,
 				C71620BB1F935DC800805A63 /* UserModel.swift */,
@@ -238,6 +241,7 @@
 				C71620BC1F935DC800805A63 /* UserModel.swift in Sources */,
 				C7209C631F913C980054D53D /* StudentViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				C7143CA91F94C7D2005EEE56 /* StudentsTableViewCell.swift in Sources */,
 				C78F5FAA1F93D6A9003C007A /* UserStructure.swift in Sources */,
 				C78F5FAC1F93DA25003C007A /* StudentStructure.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
