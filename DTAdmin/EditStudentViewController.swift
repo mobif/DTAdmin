@@ -10,26 +10,26 @@ import UIKit
 
 class EditStudentViewController: UIViewController {
     var student: StudentStructure?
-    @IBOutlet weak var name: UITextField!
-    @IBOutlet weak var fName: UITextField!
-    @IBOutlet weak var sName: UITextField!
+    @IBOutlet weak var nameStudentTextField: UITextField!
+    @IBOutlet weak var familyNameStudentTextField: UITextField!
+    @IBOutlet weak var surnameStudentTextField: UITextField!
     @IBOutlet weak var groupButton: UIButton!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var numberBook: UITextField!
+    @IBOutlet weak var passwordStudentTextField: UITextField!
+    @IBOutlet weak var gradeBookIdTextField: UITextField!
     var titleViewController: String?
-    var selectedGroup: GroupStructure?
+    var selectedGroupForStudent: GroupStructure?
     override func viewDidLoad() {
         super.viewDidLoad()
         if student != nil {
-            name.text = student!.student_name
-            fName.text = student!.student_fname
-            sName.text = student!.student_surname
-            password.text = student!.plain_password
-            numberBook.text = student!.gradebook_id
+            nameStudentTextField.text = student!.student_name
+            familyNameStudentTextField.text = student!.student_fname
+            surnameStudentTextField.text = student!.student_surname
+            passwordStudentTextField.text = student!.plain_password
+            gradeBookIdTextField.text = student!.gradebook_id
             getGroupFromAPI(byId: student!.group_id)
         } else {
-            let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.saveStudent))
-            navigationItem.rightBarButtonItem = doneItem
+            let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postNewStudentToAPI))
+            navigationItem.rightBarButtonItem = saveButton
         }
         if titleViewController != nil {
             navigationItem.title = titleViewController
@@ -37,26 +37,25 @@ class EditStudentViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @objc func saveStudent(){
+    @objc func postNewStudentToAPI(){
         let postMan = PostManager<StudentStructure>()
-        if cheakFields(){
+        if cheakStudentFields(){
             postMan.insertEntity(entity: student!, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     print(error!)
                 } else {
                     self.navigationController?.popViewController(animated: true)
-                }
-            })
+                } })
         }
     }
     
-    func cheakFields() -> Bool {
-        guard let name = name.text else { return false}
-        guard let sname = sName.text else { return false}
-        guard let fname = fName.text else { return false}
-        guard let gradebook = numberBook.text else { return false}
-        guard let pass = password.text else { return false}
-        guard let group = selectedGroup else { return false}
+    func cheakStudentFields() -> Bool {
+        guard let name = nameStudentTextField.text else { return false}
+        guard let sname = surnameStudentTextField.text else { return false}
+        guard let fname = familyNameStudentTextField.text else { return false}
+        guard let gradebook = gradeBookIdTextField.text else { return false}
+        guard let pass = passwordStudentTextField.text else { return false}
+        guard let group = selectedGroupForStudent else { return false}
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) {
             if student == nil {
                 student = StudentStructure(user_id: "0", gradebook_id: gradebook, student_surname: sname, student_name: name, student_fname: fname, group_id: group.group_id, plain_password: pass, photo: "")
@@ -74,28 +73,26 @@ class EditStudentViewController: UIViewController {
         }
         return true
     }
-        
-    
     
     @IBAction func selectGroup(_ sender: UIButton) {
-        guard let groupsVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "GroupsTableViewController") as? GroupsTableViewController else {return}
-        groupsVC.titleViewController = "Groups"
-        groupsVC.selecectedGroup = {
+        guard let groupsViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "GroupsTableViewController") as? GroupsTableViewController else {return}
+        groupsViewController.titleViewController = "Groups"
+        groupsViewController.selecectedGroup = {
             group in
-            self.selectedGroup = group
+            self.selectedGroupForStudent = group
             self.groupButton.setTitle(group.group_name, for: .normal)
         }
-        self.navigationController?.pushViewController(groupsVC, animated: true)
+        self.navigationController?.pushViewController(groupsViewController, animated: true)
     }
     func getGroupFromAPI(byId: String){
         let manager = RequestManager<GroupStructure>()
-        var group: GroupStructure?
+        var groupForCurrentStudent: GroupStructure?
         manager.getEntity(byId: byId, entityStructure: Entities.Group, returnResults: { (groupInstance, error) in
             if groupInstance != nil {
-                group = groupInstance!
+                groupForCurrentStudent = groupInstance!
             }
-            self.selectedGroup = groupInstance
-            self.groupButton.setTitle(group!.group_name, for: .normal)
+            self.selectedGroupForStudent = groupInstance
+            self.groupButton.setTitle(groupForCurrentStudent!.group_name, for: .normal)
         })
     }
 }
