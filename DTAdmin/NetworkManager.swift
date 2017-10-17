@@ -115,28 +115,28 @@ class NetworkManager {
         }
     }
 
-    func createAdmin(username: String, password: String, email: String)  {
-        if let cookieValue = UserDefaults.standard.getCookie(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToInsertData) {
-            
-            let request = URLRequest(url: url)
-            let httpBody = JSONSerialization.data(withJSONObject: <#T##Any#>, options: <#T##JSONSerialization.WritingOptions#>)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue("UTF-8", forHTTPHeaderField: "Charset")
-            request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
-            
-            let postSession = URLSession.shared
-            postSession.dataTask(with: request) { (data, response, error) in
-                if let sessionError = error {
-                    print(sessionError)
-                } else {
-                    if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-                        
-                    }
-                }
-            }.resume()
-        }
-    }
+//    func createAdmin(username: String, password: String, email: String)  {
+//        if let cookieValue = UserDefaults.standard.getCookie(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToInsertData) {
+//            
+//            let request = URLRequest(url: url)
+//            let httpBody = JSONSerialization.data(withJSONObject: <#T##Any#>, options: <#T##JSONSerialization.WritingOptions#>)
+//            request.httpMethod = "POST"
+//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//            request.setValue("UTF-8", forHTTPHeaderField: "Charset")
+//            request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+//            
+//            let postSession = URLSession.shared
+//            postSession.dataTask(with: request) { (data, response, error) in
+//                if let sessionError = error {
+//                    print(sessionError)
+//                } else {
+//                    if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+//                        
+//                    }
+//                }
+//            }.resume()
+//        }
+//    }
 }
 
 extension UserDefaults {
