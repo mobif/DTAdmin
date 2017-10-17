@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StudentStructure: Decodable {
+struct StudentStructure: Decodable, Encodable {
     var user_id: String
     var gradebook_id: String
     var student_surname: String

@@ -123,15 +123,5 @@ class RequestManager<T: Decodable> {
         }.resume()
     }
     
-    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ entity: T?, _ error: String?)->()){
-        let commandInUrl = "/"+entityStructure.rawValue+"/insertData"
-        guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return}
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-        guard let selfCookie = self.cookie else {return}
-        request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
-        
-    }
+
 }
