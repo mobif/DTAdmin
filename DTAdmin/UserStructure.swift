@@ -7,11 +7,11 @@
 //
 
 import Foundation
-
+//{id, email, username, password, logins, last_login}
 struct UserStructure: Codable{
     var id: String
     var username: String
     var roles: [String]
-    
+    //var email: String
 }
 

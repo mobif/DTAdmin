@@ -33,8 +33,7 @@ class PostManager<T: Codable>{
     
     func getURLReqest(entityStructure: Entities, type: TypeReqest) -> URLRequest?{
         guard let URLCreationData = urlPrepare[type] else {return nil}
-        let idAttribute = (type == .InsertData) ? "/0" : ""
-        let commandInUrl = "/"+entityStructure.rawValue+URLCreationData.command + idAttribute
+        let commandInUrl = "/"+entityStructure.rawValue+URLCreationData.command
         guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return nil}
         var request = URLRequest(url: url)
         request.httpMethod = URLCreationData.method
@@ -49,7 +48,7 @@ class PostManager<T: Codable>{
         do {
             let newEntityAsJSON = try encoder.encode(entity)
             request.httpBody = newEntityAsJSON
-            print(String(data:newEntityAsJSON, encoding: .utf8)!)
+            //print(String(data:newEntityAsJSON, encoding: .utf8)!)
         } catch {
             returnResults(error.localizedDescription)
         }
@@ -57,7 +56,7 @@ class PostManager<T: Codable>{
         request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            print(String(data:data!, encoding: .utf8)!)
+            //print(String(data:data!, encoding: .utf8)!)
             guard let responseValue = response as? HTTPURLResponse else {return}
             if let error = error {
                 errorMsg = error.localizedDescription

@@ -33,6 +33,7 @@ class RequestManager<T: Codable> {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+        print(parameters)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var logedUser: T?
             var errorMsg: String?

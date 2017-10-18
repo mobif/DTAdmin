@@ -10,6 +10,7 @@ import UIKit
 
 class EditStudentViewController: UIViewController {
     var student: StudentStructure?
+    @IBOutlet weak var userAsigneButton: UIButton!
     @IBOutlet weak var nameStudentTextField: UITextField!
     @IBOutlet weak var familyNameStudentTextField: UITextField!
     @IBOutlet weak var surnameStudentTextField: UITextField!
@@ -18,6 +19,8 @@ class EditStudentViewController: UIViewController {
     @IBOutlet weak var gradeBookIdTextField: UITextField!
     var titleViewController: String?
     var selectedGroupForStudent: GroupStructure?
+    var selectedUserAccountForStudent: UserStructure?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if student != nil {
@@ -27,6 +30,7 @@ class EditStudentViewController: UIViewController {
             passwordStudentTextField.text = student!.plain_password
             gradeBookIdTextField.text = student!.gradebook_id
             getGroupFromAPI(byId: student!.group_id)
+            getUserFromAPI(byId: student!.user_id)
         } else {
             let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postNewStudentToAPI))
             navigationItem.rightBarButtonItem = saveButton
@@ -95,4 +99,17 @@ class EditStudentViewController: UIViewController {
             self.groupButton.setTitle(groupForCurrentStudent!.group_name, for: .normal)
         })
     }
+    func getUserFromAPI(byId: String) {
+        let manager = RequestManager<UserStructure>()
+        var userForCurrentStudent: UserStructure?
+        manager.getEntity(byId: byId, entityStructure: .User, returnResults: { (userInstance, error) in
+            if userInstance != nil, error == nil {
+                userForCurrentStudent = userInstance!
+            }
+            self.selectedUserAccountForStudent = userForCurrentStudent
+            let buttonTitle = userForCurrentStudent?.username
+            self.userAsigneButton.setTitle(buttonTitle, for: .normal)
+        })
+    }
+    
 }
