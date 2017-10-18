@@ -10,7 +10,7 @@ import Foundation
 
 enum Entities:String {
     case Student = "Student"
-    case User = "User"
+    case User = "AdminUser"
     case Faculty = "Faculty"
     case Group = "Group"
 }

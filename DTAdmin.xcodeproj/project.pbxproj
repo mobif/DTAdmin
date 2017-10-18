@@ -104,20 +104,7 @@
 		3F05013A1F90ED08006651CE /* Student */ = {
 			isa = PBXGroup;
 			children = (
-				C7209C601F913B230054D53D /* Student.storyboard */,
-				C7209C621F913C980054D53D /* StudentViewController.swift */,
-				C7143CAA1F94E728005EEE56 /* EditStudentViewController.swift */,
-				C79D17681F9553E2000C0D20 /* GroupsTableViewController.swift */,
-				C79D176A1F9554E9000C0D20 /* GroupTableViewCell.swift */,
-				C7143CA81F94C7D2005EEE56 /* StudentsTableViewCell.swift */,
-				C7209C681F913F4F0054D53D /* LoginViewController.swift */,
-				C7209C641F913D9C0054D53D /* RequestManager.swift */,
-				C79D176C1F956D2E000C0D20 /* PostManager.swift */,
-				C78F5FA51F93B6E7003C007A /* HTTPStatusCodes.swift */,
-				C78F5FA91F93D6A9003C007A /* UserStructure.swift */,
-				C7143CAC1F953179005EEE56 /* GroupStructure.swift */,
-				C78F5FAB1F93DA25003C007A /* StudentStructure.swift */,
-				C7902F5F1F947C420016D7BF /* Entities.swift */,
+				C79A3BD71F97BC7900128C82 /* Student */,
 			);
 			name = Student;
 			sourceTree = "<group>";
@@ -160,6 +147,27 @@
 				3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */,
 			);
 			path = DTAdmin;
+			sourceTree = "<group>";
+		};
+		C79A3BD71F97BC7900128C82 /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				C7209C601F913B230054D53D /* Student.storyboard */,
+				C7209C621F913C980054D53D /* StudentViewController.swift */,
+				C7143CAA1F94E728005EEE56 /* EditStudentViewController.swift */,
+				C79D17681F9553E2000C0D20 /* GroupsTableViewController.swift */,
+				C79D176A1F9554E9000C0D20 /* GroupTableViewCell.swift */,
+				C7143CA81F94C7D2005EEE56 /* StudentsTableViewCell.swift */,
+				C7209C681F913F4F0054D53D /* LoginViewController.swift */,
+				C7209C641F913D9C0054D53D /* RequestManager.swift */,
+				C79D176C1F956D2E000C0D20 /* PostManager.swift */,
+				C78F5FA51F93B6E7003C007A /* HTTPStatusCodes.swift */,
+				C78F5FA91F93D6A9003C007A /* UserStructure.swift */,
+				C7143CAC1F953179005EEE56 /* GroupStructure.swift */,
+				C78F5FAB1F93DA25003C007A /* StudentStructure.swift */,
+				C7902F5F1F947C420016D7BF /* Entities.swift */,
+			);
+			name = Student;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

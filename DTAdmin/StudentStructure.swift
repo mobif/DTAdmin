@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StudentStructure: Codable {
+struct StudentGetStructure: Codable {
     var user_id: String
     var gradebook_id: String
     var student_surname: String
@@ -18,5 +18,21 @@ struct StudentStructure: Codable {
     var plain_password: String
     var photo: String
 }
-    
-
+/*
+ * JSON Record for new student
+ * email, username, password, password_confirm
+ * gradebook_id, student_surname, student_name, student_fname, group_id
+ */
+struct StudentPostStructure: Codable {
+    var username: String
+    var password: String
+    var password_confirm: String
+    var plain_password: String
+    var email: String
+    var gradebook_id: String
+    var student_surname: String
+    var student_name: String
+    var student_fname: String
+    var group_id: String
+    var photo: String
+}

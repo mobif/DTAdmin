@@ -9,42 +9,53 @@
 import UIKit
 
 class EditStudentViewController: UIViewController {
-    var student: StudentStructure?
-    @IBOutlet weak var userAsigneButton: UIButton!
+    var studentLoaded: StudentGetStructure?
+    var studentForSave: StudentPostStructure?
+    
+    @IBOutlet weak var loginStudentTextField: UITextField!
+    @IBOutlet weak var emailStudentTextField: UITextField!
     @IBOutlet weak var nameStudentTextField: UITextField!
     @IBOutlet weak var familyNameStudentTextField: UITextField!
     @IBOutlet weak var surnameStudentTextField: UITextField!
     @IBOutlet weak var groupButton: UIButton!
     @IBOutlet weak var passwordStudentTextField: UITextField!
+    @IBOutlet weak var passwordConfirmTextField: UITextField!
     @IBOutlet weak var gradeBookIdTextField: UITextField!
     var titleViewController: String?
     var selectedGroupForStudent: GroupStructure?
-    var selectedUserAccountForStudent: UserStructure?
+    var selectedUserAccountForStudent: UserGetStructure?
+    var isNewStudent = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if student != nil {
-            nameStudentTextField.text = student!.student_name
-            familyNameStudentTextField.text = student!.student_fname
-            surnameStudentTextField.text = student!.student_surname
-            passwordStudentTextField.text = student!.plain_password
-            gradeBookIdTextField.text = student!.gradebook_id
-            getGroupFromAPI(byId: student!.group_id)
-            getUserFromAPI(byId: student!.user_id)
+        let saveButton: UIBarButtonItem
+        if studentLoaded != nil {
+            nameStudentTextField.text = studentLoaded!.student_name
+            familyNameStudentTextField.text = studentLoaded!.student_fname
+            surnameStudentTextField.text = studentLoaded!.student_surname
+            passwordStudentTextField.text = studentLoaded!.plain_password
+            gradeBookIdTextField.text = studentLoaded!.gradebook_id
+            
+            getGroupFromAPI(byId: studentLoaded!.group_id)
+            getUserFromAPI(byId: studentLoaded!.user_id)
+            saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postUpdateStudentToAPI))
+            isNewStudent = false
         } else {
-            let saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postNewStudentToAPI))
-            navigationItem.rightBarButtonItem = saveButton
+            
+            saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postNewStudentToAPI))
+            isNewStudent = true
         }
+        navigationItem.rightBarButtonItem = saveButton
         if titleViewController != nil {
             navigationItem.title = titleViewController
         }
-        // Do any additional setup after loading the view.
     }
     
-    @objc func postNewStudentToAPI(){
-        let postMan = PostManager<StudentStructure>()
-        if cheakStudentFields(){
-            postMan.insertEntity(entity: student!, entityStructure: Entities.Student, returnResults: { error in
+    @objc func postUpdateStudentToAPI(){
+        let postMan = PostManager<StudentPostStructure>()
+        if prepareForSave(){
+            guard let userIDForUpdate = studentLoaded?.user_id else { return }
+            postMan.updateEntity(byId: userIDForUpdate, entity: studentForSave!, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     print(error!)
                 } else {
@@ -53,27 +64,34 @@ class EditStudentViewController: UIViewController {
         }
     }
     
-    func cheakStudentFields() -> Bool {
+    @objc func postNewStudentToAPI(){
+        let postMan = PostManager<StudentPostStructure>()
+        if prepareForSave(){
+            postMan.insertEntity(entity: studentForSave!, entityStructure: Entities.Student, returnResults: { error in
+                if error != nil {
+                    print(error!)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                } })
+        }
+    }
+    
+    func prepareForSave() -> Bool {
+        guard let login = loginStudentTextField.text else { return false}
+        guard let email = emailStudentTextField.text else { return false}
         guard let name = nameStudentTextField.text else { return false}
         guard let sname = surnameStudentTextField.text else { return false}
         guard let fname = familyNameStudentTextField.text else { return false}
         guard let gradebook = gradeBookIdTextField.text else { return false}
         guard let pass = passwordStudentTextField.text else { return false}
-        guard let group = selectedGroupForStudent else { return false}
-        if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) {
-            if student == nil {
-                student = StudentStructure(user_id: "0", gradebook_id: gradebook, student_surname: sname, student_name: name, student_fname: fname, group_id: group.group_id, plain_password: pass, photo: "")
-            } else {
-                student?.student_name = name
-                student?.student_fname = fname
-                student?.student_surname = sname
-                student?.plain_password = pass
-                student?.gradebook_id = gradebook
-                student?.group_id = group.group_id
-            }
+        guard let passConfirm = passwordConfirmTextField.text else { return false}
+        guard let group = selectedGroupForStudent?.group_id else { return false}
+        
+        
+        if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
+            studentForSave = StudentPostStructure(username: login, password: pass, password_confirm: passConfirm, plain_password: pass, email: email, gradebook_id: gradebook, student_surname: sname, student_name: name, student_fname: fname, group_id: group, photo: "")
         } else {
             return false
-                
         }
         return true
     }
@@ -100,15 +118,15 @@ class EditStudentViewController: UIViewController {
         })
     }
     func getUserFromAPI(byId: String) {
-        let manager = RequestManager<UserStructure>()
-        var userForCurrentStudent: UserStructure?
+        let manager = RequestManager<UserGetStructure>()
+        var userForCurrentStudent: UserGetStructure?
         manager.getEntity(byId: byId, entityStructure: .User, returnResults: { (userInstance, error) in
             if userInstance != nil, error == nil {
                 userForCurrentStudent = userInstance!
             }
             self.selectedUserAccountForStudent = userForCurrentStudent
-            let buttonTitle = userForCurrentStudent?.username
-            self.userAsigneButton.setTitle(buttonTitle, for: .normal)
+            self.loginStudentTextField.text = userForCurrentStudent?.username
+            self.emailStudentTextField.text = userForCurrentStudent?.email
         })
     }
     

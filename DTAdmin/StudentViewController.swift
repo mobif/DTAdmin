@@ -12,9 +12,9 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
    
     var user: UserStructure?
     var cookie: HTTPCookie?
-    var studentList = [StudentStructure]()
+    var studentList = [StudentGetStructure]()
     var filtered = false
-    var filteredList: [StudentStructure]{
+    var filteredList: [StudentGetStructure]{
         if filtered {
             guard let searchString = searchBar.text else {return studentList}
             return studentList.filter({
@@ -39,7 +39,16 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         studentTable.delegate = self
         studentTable.dataSource = self
         searchBar.delegate = self
-        let manager = RequestManager<StudentStructure>()
+        updateTable()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateTable()
+    }
+    
+    func updateTable(){
+        let manager = RequestManager<StudentGetStructure>()
         manager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
             if error == nil,
                 students != nil{
@@ -48,6 +57,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
             self.studentTable.reloadData()
         })
     }
+    
     @objc func addNewStudent(){
         guard let editStudentVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
         editStudentVC.titleViewController = "New Student"
@@ -59,7 +69,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         guard let editStudentVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
         editStudentVC.titleViewController = "Edit"
-        editStudentVC.student = studentInstance
+        editStudentVC.studentLoaded = studentInstance
         navigationController?.pushViewController(editStudentVC, animated: true)
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -98,4 +108,11 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     */
 
+}
+extension UIViewController {
+    func showWarningMsg(_ textMsg: String) {
+        let alert = UIAlertController(title: "Error!", message: textMsg, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

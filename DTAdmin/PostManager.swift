@@ -14,11 +14,12 @@ class PostManager<T: Codable>{
     let urlLogin = "/login/index"
     let urlStudents = "/student/getRecords"
     
-    let urlPrepare: [TypeReqest:(command:String,method:String)] = [.InsertData:("/insertData","POST"),.GetRecords:("/getRecordsRange","GET")]
+    let urlPrepare: [TypeReqest:(command:String,method:String)] = [.InsertData:("/insertData","POST"),.GetRecords:("/getRecords","GET"), .UpdateData:("/update/","POST")]
     
     enum TypeReqest {
         case InsertData
         case GetRecords
+        case UpdateData
     }
     
     var cookie: HTTPCookie? {
@@ -31,32 +32,35 @@ class PostManager<T: Codable>{
         return nil
     }
     
-    func getURLReqest(entityStructure: Entities, type: TypeReqest) -> URLRequest?{
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "") -> URLRequest?{
         guard let URLCreationData = urlPrepare[type] else {return nil}
-        let commandInUrl = "/"+entityStructure.rawValue+URLCreationData.command
+        let commandInUrl = "/"+entityStructure.rawValue+URLCreationData.command + id
         guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return nil}
         var request = URLRequest(url: url)
         request.httpMethod = URLCreationData.method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
+        if let selfCookie = self.cookie {
+            request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
+        }
         return request
     }
     
-    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){
-        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.InsertData) else {return}
+    
+    func updateEntity(byId: String, entity:T, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){
+        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.UpdateData, id: byId) else {return}
         let encoder = JSONEncoder()
         do {
             let newEntityAsJSON = try encoder.encode(entity)
             request.httpBody = newEntityAsJSON
-            //print(String(data:newEntityAsJSON, encoding: .utf8)!)
+            print(String(data:newEntityAsJSON, encoding: .utf8)!)
         } catch {
             returnResults(error.localizedDescription)
         }
-        guard let selfCookie = self.cookie else {return}
-        request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
+        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            //print(String(data:data!, encoding: .utf8)!)
+            print(String(data:data!, encoding: .utf8)!)
             guard let responseValue = response as? HTTPURLResponse else {return}
             if let error = error {
                 errorMsg = error.localizedDescription
@@ -69,4 +73,33 @@ class PostManager<T: Codable>{
             }
             }.resume()
     }
+    
+    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){
+        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.InsertData) else {return}
+        let encoder = JSONEncoder()
+        do {
+            let newEntityAsJSON = try encoder.encode(entity)
+            request.httpBody = newEntityAsJSON
+            print(String(data:newEntityAsJSON, encoding: .utf8)!)
+        } catch {
+            returnResults(error.localizedDescription)
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var errorMsg: String?
+            print(String(data:data!, encoding: .utf8)!)
+            guard let responseValue = response as? HTTPURLResponse else {return}
+            if let error = error {
+                errorMsg = error.localizedDescription
+            }
+            if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
+                errorMsg = "Error!:\(responseValue.statusCode)"
+            }
+            DispatchQueue.main.async {
+                returnResults(errorMsg)
+            }
+            }.resume()
+    }
+    
+    
 }
