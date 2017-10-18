@@ -53,7 +53,7 @@ class HTTPService {
         
     }
     
-    static func getAllData<T:Decodable> (entityName:String,completion: @escaping ([T]) -> ()){
+    static func getAllData<T:Decodable> (entityName:String,completion: @escaping ([T],HTTPURLResponse) -> ()){
         let sessionValue =  UserDefaults.standard.object(forKey: "session") as! String
         print(sessionValue)
         let urlString = "http://vps9615.hyperhost.name/" + entityName + "/getRecords"
@@ -74,13 +74,15 @@ class HTTPService {
             do {
                 print("json")
                 let json = try JSONDecoder().decode([T].self, from: data)
-                completion(json)
+                completion(json,response as! HTTPURLResponse)
             } catch {
             }
+            
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(String(describing: response))")
             }
+            
         }
         task.resume()
     }
@@ -227,67 +229,67 @@ class HTTPService {
         task.resume()
     }
     
-    static func getCommonArrayForGroups (completion: @escaping ([Any]) -> ()){
-        //        let queueGrops = DispatchQueue.global(qos: .utility)
-        
-        let queue = DispatchQueue(label: "com.dt_api.app.queue")
-        let group = DispatchGroup()
-        //        queueGrops.async{
-        var groups:[Group] = []
-        var faculties:[Faculty] = []
-        var specialities:[Speciality] = []
-        group.enter()
-        queue.async {
-            print("get data")
-            HTTPService.getAllData(entityName: "group"){ (result:[Group]) in
-                groups = result
-            }
-            HTTPService.getAllData(entityName: "faculty"){ (result:[Faculty]) in
-                faculties = result
-            }
-            HTTPService.getAllData(entityName: "speciality"){ (result:[Speciality]) in
-                specialities = result
-            }
-            group.leave()
-        }
-        
-        
-        //            sleep(1)
-        queue.async {
-            while groups.isEmpty || specialities.isEmpty || faculties.isEmpty{
-                group.wait()
-            }
-            
-            var commonData:[Any] = []
-            print("new1")
-            for group in groups {
-                var newGroup:[String:Any] = [:]
-                newGroup["group_name"] = group.group_name
-                //                newGroup["group_id"] = group.group_id
-                newGroup["faculty_id"] = group.faculty_id
-                newGroup["speciality_id"] = group.speciality_id
-                for faculty in faculties {
-                    if (group.faculty_id == faculty.faculty_id){
-                        newGroup["faculty_name"] = faculty.faculty_name
-                        newGroup["faculty_description"] = faculty.faculty_description
-                    }
-                }
-                for speciality in specialities {
-                    if (group.speciality_id == speciality.speciality_id){
-                        newGroup["speciality_code"] = speciality.speciality_code
-                        newGroup["speciality_name"] = speciality.speciality_name
-                    }
-                }
-                print("newElement")
-                print(newGroup)
-                commonData.append(newGroup)
-            }
-            print("new2")
-            completion(commonData)
-        }
-        
-        //        }
-    }
+    //    static func getCommonArrayForGroups (completion: @escaping ([Any]) -> ()){
+    //        //        let queueGrops = DispatchQueue.global(qos: .utility)
+    //
+    //        let queue = DispatchQueue(label: "com.dt_api.app.queue")
+    //        let group = DispatchGroup()
+    //        //        queueGrops.async{
+    //        var groups:[Group] = []
+    //        var faculties:[Faculty] = []
+    //        var specialities:[Speciality] = []
+    //        group.enter()
+    //        queue.async {
+    //            print("get data")
+    //            HTTPService.getAllData(entityName: "group"){ (result:[Group]) in
+    //                groups = result
+    //            }
+    //            HTTPService.getAllData(entityName: "faculty"){ (result:[Faculty]) in
+    //                faculties = result
+    //            }
+    //            HTTPService.getAllData(entityName: "speciality"){ (result:[Speciality]) in
+    //                specialities = result
+    //            }
+    //            group.leave()
+    //        }
+    //
+    //
+    //        //            sleep(1)
+    //        queue.async {
+    //            while groups.isEmpty || specialities.isEmpty || faculties.isEmpty{
+    //                group.wait()
+    //            }
+    //
+    //            var commonData:[Any] = []
+    //            print("new1")
+    //            for group in groups {
+    //                var newGroup:[String:Any] = [:]
+    //                newGroup["group_name"] = group.group_name
+    //                //                newGroup["group_id"] = group.group_id
+    //                newGroup["faculty_id"] = group.faculty_id
+    //                newGroup["speciality_id"] = group.speciality_id
+    //                for faculty in faculties {
+    //                    if (group.faculty_id == faculty.faculty_id){
+    //                        newGroup["faculty_name"] = faculty.faculty_name
+    //                        newGroup["faculty_description"] = faculty.faculty_description
+    //                    }
+    //                }
+    //                for speciality in specialities {
+    //                    if (group.speciality_id == speciality.speciality_id){
+    //                        newGroup["speciality_code"] = speciality.speciality_code
+    //                        newGroup["speciality_name"] = speciality.speciality_name
+    //                    }
+    //                }
+    //                print("newElement")
+    //                print(newGroup)
+    //                commonData.append(newGroup)
+    //            }
+    //            print("new2")
+    //            completion(commonData)
+    //        }
+    
+    //        }
+    //    }
     
     
     

@@ -13,12 +13,13 @@ class LoginVC: UIViewController {
     @IBAction func loginTapped(_ sender: Any) {
         HTTPService.login(){(result:HTTPURLResponse) in
             if result.statusCode == 200 {
-//                let tableViewController = self.storyboard?.instantiateViewController(withIdentifier: "GroupVC") as! UIViewController
-//                self.navigationController?.pushViewController(tableViewController, animated: true)
-                print("true")
+                let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: "GroupVC") as! GroupVC
+                self.present(newViewController, animated: true, completion: nil)
             }
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
