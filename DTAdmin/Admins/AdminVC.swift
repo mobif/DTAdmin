@@ -49,8 +49,8 @@ class AdminVC: ViewController, UITableViewDelegate, UITableViewDataSource {
 //            UserDefaults.standard.setLoggedIn(to: true)
 //       }
 //        MARK: DEBUG - Using for geting list of admin
-        NetworkManager().createAdmin(username: "Veselun", password: "1qaz2wsx", email: "Veselun@tuhes.com.ua")
-        sleep(10)
+//        NetworkManager().createAdmin(username: "Veselun", password: "1qaz2wsx", email: "Veselun@tuhes.com.ua")
+//        sleep(10)
         NetworkManager().getAdmins { (admins) in
             print(UserDefaults.standard.getCookie())
             print(admins)

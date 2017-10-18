@@ -71,18 +71,6 @@
 			name = Faculty;
 			sourceTree = "<group>";
 		};
-		3F0501381F90ECF7006651CE /* Admin */ = {
-			isa = PBXGroup;
-			children = (
-				3FA888141F9688B200D602F3 /* AdminCreateUpdateVC.swift */,
-				3FA888161F9688B200D602F3 /* AdminVC.swift */,
-				3FA888151F9688B200D602F3 /* NetworkManager.swift */,
-				3FA888171F9688B200D602F3 /* UserModel.swift */,
-				3FA888121F9688A300D602F3 /* Admin.storyboard */,
-			);
-			name = Admin;
-			sourceTree = "<group>";
-		};
 		3F0501391F90ECFF006651CE /* Speciality */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +92,18 @@
 			name = Group;
 			sourceTree = "<group>";
 		};
+		3F3E68531F97BCB4004B8B2C /* Admins */ = {
+			isa = PBXGroup;
+			children = (
+				3FA888141F9688B200D602F3 /* AdminCreateUpdateVC.swift */,
+				3FA888161F9688B200D602F3 /* AdminVC.swift */,
+				3FA888151F9688B200D602F3 /* NetworkManager.swift */,
+				3FA888171F9688B200D602F3 /* UserModel.swift */,
+				3FA888121F9688A300D602F3 /* Admin.storyboard */,
+			);
+			path = Admins;
+			sourceTree = "<group>";
+		};
 		3FDE8F8B1F8D0DF60057BF3C = {
 			isa = PBXGroup;
 			children = (
@@ -123,10 +123,10 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				3F3E68531F97BCB4004B8B2C /* Admins */,
 				3F05013B1F90ED59006651CE /* Group */,
 				3F05013A1F90ED08006651CE /* Student */,
 				3F0501391F90ECFF006651CE /* Speciality */,
-				3F0501381F90ECF7006651CE /* Admin */,
 				3F0501371F90ECF1006651CE /* Faculty */,
 				3F0501361F90ECE0006651CE /* Subject */,
 				3F01D7CF1F8D1458005CA03A /* Supporting files */,
