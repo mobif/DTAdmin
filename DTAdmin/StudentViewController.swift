@@ -96,17 +96,25 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
+            let postMan = PostManager<StudentPostStructure>()
+            let studentId = self.filteredList[indexPath.row].user_id
+            postMan.deleteEntity(byId: studentId, entityStructure: Entities.Student, returnResults: { error in
+                if error != nil {
+                    print(error!)
+                } else {
+//                    self.studentTable.beginUpdates()
+//                    self.studentTable.deleteRows(at: [indexPath], with: .automatic)
+//                    self.studentTable.endUpdates()
+                    self.updateTable()
+                }
+            })
+        }
+        return [delete]
     }
-    */
+
+   
 
 }
 extension UIViewController {

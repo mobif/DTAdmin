@@ -14,12 +14,13 @@ class PostManager<T: Codable>{
     let urlLogin = "/login/index"
     let urlStudents = "/student/getRecords"
     
-    let urlPrepare: [TypeReqest:(command:String,method:String)] = [.InsertData:("/insertData","POST"),.GetRecords:("/getRecords","GET"), .UpdateData:("/update/","POST")]
+    let urlPrepare: [TypeReqest:(command:String,method:String)] = [.InsertData:("/insertData","POST"),.GetRecords:("/getRecords","GET"), .UpdateData:("/update/","POST"), .Delete:("/del/","GET")]
     
     enum TypeReqest {
         case InsertData
         case GetRecords
         case UpdateData
+        case Delete
     }
     
     var cookie: HTTPCookie? {
@@ -101,5 +102,21 @@ class PostManager<T: Codable>{
             }.resume()
     }
     
-    
+    func deleteEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){
+        guard let request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.Delete, id: byId) else {return}
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var errorMsg: String?
+            print(String(data:data!, encoding: .utf8)!)
+            guard let responseValue = response as? HTTPURLResponse else {return}
+            if let error = error {
+                errorMsg = error.localizedDescription
+            }
+            if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
+                errorMsg = "Error!:\(responseValue.statusCode)"
+            }
+            DispatchQueue.main.async {
+                returnResults(errorMsg)
+            }
+            }.resume()
+    }
 }
