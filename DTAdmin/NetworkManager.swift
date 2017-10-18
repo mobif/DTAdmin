@@ -16,6 +16,9 @@ class NetworkManager {
     let urlSuffixToAdmins = "/AdminUser"
     let urlSuffixToGetRecords = "/getRecords"
     let urlSuffixToInsertData = "/insertData"
+    let urlSuffixToGetRecordById = "/getRecords" //concat += </id> to get exact record
+    let urlSuffixToUpdateRecord = "/update" //concat += </id> to update record
+    //For sort -> //GET/ http://<host>/<entity>/getRecordsBySearch/<search_criteria_string>
     
 //    private enum Credentials {
 //        case username
@@ -32,13 +35,13 @@ class NetworkManager {
         let credentials = ["username": username, "password": password]
         let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: [])
         guard let url = URL(string: urlProtocolPrefix + urlToHost + urlSuffixToUserLogIn) else {return}
-        
+        //FIXME: DRY ZONE
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("utf-8", forHTTPHeaderField: "Charset")
         request.httpBody = httpBody
-        
+        //FIXME: DRY ZONE end
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             if let sessionError = error {
@@ -51,6 +54,7 @@ class NetworkManager {
                         DispatchQueue.main.sync {
                             if let cookie = self.cooikiesGetter(from: self.urlToHost).first?.value {
                                 completionHandler(user, cookie)
+                            
                             }
                         }
                     } catch {
@@ -86,13 +90,12 @@ class NetworkManager {
     
     func getAdmins(completionHandler: @escaping (_ user: [UserModel.Admins]) -> ()) {
         if UserDefaults.standard.isLoggedIn(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToGetRecords), let cookieValue = UserDefaults.standard.getCookie() {
-            
+            //FIXME: DRY zone
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("UTF-8", forHTTPHeaderField: "Charset")
             request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
-//            request.setValue("session=pck4lhsdd48imntgulq27j06o2", forHTTPHeaderField: "Cookie")
             
             let getSession = URLSession.shared
             getSession.dataTask(with: request) { (data, response, error) in
@@ -115,28 +118,34 @@ class NetworkManager {
         }
     }
 
-//    func createAdmin(username: String, password: String, email: String)  {
-//        if let cookieValue = UserDefaults.standard.getCookie(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToInsertData) {
-//            
-//            let request = URLRequest(url: url)
-//            let httpBody = JSONSerialization.data(withJSONObject: <#T##Any#>, options: <#T##JSONSerialization.WritingOptions#>)
-//            request.httpMethod = "POST"
-//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//            request.setValue("UTF-8", forHTTPHeaderField: "Charset")
-//            request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
-//            
-//            let postSession = URLSession.shared
-//            postSession.dataTask(with: request) { (data, response, error) in
-//                if let sessionError = error {
-//                    print(sessionError)
-//                } else {
-//                    if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-//                        
-//                    }
-//                }
-//            }.resume()
-//        }
-//    }
+    func createAdmin(username: String, password: String, email: String)  {
+        if let cookieValue = UserDefaults.standard.getCookie(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToInsertData) {
+            
+            //FIXME: DRY zone
+            let newAdmin = UserModel.NewAdmin(userName: username, password: password, email: email)
+            let httpBody = try? JSONSerialization.data(withJSONObject: newAdmin.dictionaryRespresentation, options: [])
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("UTF-8", forHTTPHeaderField: "Charset")
+            request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+            request.httpBody = httpBody
+
+            let postSession = URLSession.shared
+            postSession.dataTask(with: request) { (data, response, error) in
+                if let sessionError = error {
+                    print(sessionError)
+                } else {
+                    if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+                        if sessionResponse.statusCode == 200 {
+                            print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
+                        } else { print("Something went wrong, Staus code: ", sessionResponse.statusCode, sessionResponse.description)}
+                    }
+                }
+            }.resume()
+        }
+    }
 }
 
 extension UserDefaults {

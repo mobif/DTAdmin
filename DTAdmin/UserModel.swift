@@ -38,4 +38,18 @@ class UserModel {
             self.last_login = json["last_login"] as? String ?? nil
         }
     }
+    struct NewAdmin {
+        let userName: String
+        let password: String
+        let email: String
+        
+        var dictionaryRespresentation: [String:String] {
+            return [
+            "username": userName,
+            "password": password,
+            "password_confirm": password,
+            "email": email]
+        }
+        
+    }
 }

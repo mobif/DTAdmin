@@ -13,16 +13,17 @@ class AdminVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var adminsListTBV: UITableView!
     
     
-    var adminsList = [UserModel.Admins(json: ["id":"-1"])]
+    var adminsList: [UserModel.Admins]?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return adminsList.count
+        
+        return adminsList != nil ? adminsList!.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //TODO: make cell more informative
         let cell = tableView.dequeueReusableCell(withIdentifier: "reusableAdminCell")!
-        cell.textLabel?.text = adminsList[indexPath.row].username
+        cell.textLabel?.text = adminsList![indexPath.row].username
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -41,13 +42,15 @@ class AdminVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         
 //        MARK: DEBUG - Using for first login into system
-//        NetworkManager().logIn(username: "admin", password: "TYPE IN PASSWORD") { (admin, cookie) in
+//        NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
 //            print(admin, cookie)
 //            UserDefaults.standard.setUserName(name: admin.username)
 //            UserDefaults.standard.setCookie(cookie)
 //            UserDefaults.standard.setLoggedIn(to: true)
-//        }
+//       }
 //        MARK: DEBUG - Using for geting list of admin
+        NetworkManager().createAdmin(username: "Veselun", password: "1qaz2wsx", email: "Veselun@tuhes.com.ua")
+        sleep(10)
         NetworkManager().getAdmins { (admins) in
             print(UserDefaults.standard.getCookie())
             print(admins)
