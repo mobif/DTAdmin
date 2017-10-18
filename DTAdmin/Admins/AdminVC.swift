@@ -17,25 +17,28 @@ class AdminVC: ViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //        MARK: DEBUG - Using for first login into system
-    //        NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
-    //            print(admin, cookie)
-
-    //       }
-    //        NetworkManager().createAdmin(username: "Veselun", password: "1qaz2wsx", email: "Veselun@tuhes.com.ua")
-    //        sleep(10)
-    //        MARK: DEBUG - Using for geting list of admin
-    print("\nCookie",UserDefaults.standard.getCookie())
+//        MARK: DEBUG - Using for first login into system
+//        _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
+//        print(admin, cookie)
+//        }
+//    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
+//     sleep(10)
+//    self.adminsListTBV.reloadData()
+//        MARK: DEBUG - Using for geting list of admin
     NetworkManager().getAdmins { (admins) in
       print(UserDefaults.standard.getCookie())
       print(admins)
       self.adminsList = admins
       self.adminsListTBV.reloadData()
     }
-//  MARK: DEBUG - Using for first login into system
-//    NetworkManager().logOut()
+//        MARK: DEBUG - Using for first login into system
+//        _ = NetworkManager().logOut()
+//    _ = NetworkManager().updateAdmin(id: "29", userName: "Veselun", password: "1qaz@WSX", email: "veselun.pupkin@tuhes.if.com.ua")
   }
   
+  @IBAction func refreshButton(_ sender: Any) {
+    self.adminsListTBV.reloadData()
+  }
 }
 
 extension AdminVC: UITableViewDelegate {
@@ -61,6 +64,11 @@ extension AdminVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       //TODO: delete selected admin
+      guard let admin = self.adminsList?[indexPath.row] else {return}
+      if NetworkManager().deleteAdmin(id: admin.id) {
+        print("Is deleted: ", true)
+        self.adminsListTBV.reloadData()
+      } else { print("Is deleted: ", false)}
     }
     deleteOpt.backgroundColor = UIColor.red
     return [deleteOpt]

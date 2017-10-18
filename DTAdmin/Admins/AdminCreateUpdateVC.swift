@@ -15,7 +15,4 @@ class AdminCreateUpdateVC: ViewController {
     
   }
   
-  @IBAction func backBTN(_ sender: Any) {
-    
-  }
 }
