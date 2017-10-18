@@ -9,13 +9,13 @@
 import UIKit
 
 class AdminCreateUpdateVC: ViewController {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+  }
+  
+  @IBAction func backBTN(_ sender: Any) {
     
-    @IBAction func backBTN(_ sender: Any) {
-        
-    }
+  }
 }
