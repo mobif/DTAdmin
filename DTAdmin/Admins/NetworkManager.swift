@@ -31,17 +31,33 @@ class NetworkManager {
     let cookies:[HTTPCookie] = HTTPCookieStorage.shared.cookies! as [HTTPCookie]
     return cookies
   }
+  private func requestBasic(with url: URL, method: String) -> URLRequest {
+    var request = URLRequest(url: url)
+    request.httpMethod = method
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("utf-8", forHTTPHeaderField: "Charset")
+    
+    return request
+  }
+  private func requestBasic(with body: Data, url: URL, method: String) -> URLRequest {
+    var request = requestBasic(with: url, method: method)
+    request.httpBody = body
+    
+    return request
+  }
+  
   
   func logIn(username: String, password: String, completionHandler: @escaping (_ user: UserModel.Admin, _ cookie: String) -> ()){
     let credentials = [Credentials.userName.rawValue: username, Credentials.password.rawValue: password]
-    let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: [])
+    guard let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: []) else {return}
     guard let url = URL(string: urlProtocolPrefix + urlToHost + urlSuffixToUserLogIn) else {return}
     
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.setValue("utf-8", forHTTPHeaderField: "Charset")
-    request.httpBody = httpBody
+    var request = requestBasic(with: httpBody, url: url, method: "POST")
+//      URLRequest(url: url)
+//    request.httpMethod = "POST"
+//    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//    request.setValue("utf-8", forHTTPHeaderField: "Charset")
+//    request.httpBody = httpBody
 
     let session = URLSession.shared
     session.dataTask(with: request) { (data, response, error) in
