@@ -109,7 +109,7 @@
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RHd-Jn-A4p" id="GSw-9g-PRw">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEg-o2-5ug">
@@ -297,12 +297,12 @@
                         <viewLayoutGuide key="safeArea" id="YfK-v4-uIM"/>
                     </view>
                     <connections>
-                        <outlet property="fName" destination="czB-Ix-Xzc" id="bm0-Kg-KcR"/>
+                        <outlet property="familyNameStudentTextField" destination="czB-Ix-Xzc" id="lBu-la-E0g"/>
+                        <outlet property="gradeBookIdTextField" destination="hgj-F3-oa1" id="S9L-BE-JSI"/>
                         <outlet property="groupButton" destination="2DS-3L-efk" id="q0z-y6-Ev2"/>
-                        <outlet property="name" destination="m8w-9t-wMM" id="4ub-k8-1LW"/>
-                        <outlet property="numberBook" destination="hgj-F3-oa1" id="MCF-MH-pqF"/>
-                        <outlet property="password" destination="7Ve-Sa-Dnb" id="uLd-x3-Vp4"/>
-                        <outlet property="sName" destination="Jrd-5c-DZy" id="D2H-js-clF"/>
+                        <outlet property="nameStudentTextField" destination="m8w-9t-wMM" id="rO8-e8-EYN"/>
+                        <outlet property="passwordStudentTextField" destination="7Ve-Sa-Dnb" id="znH-dD-Wa4"/>
+                        <outlet property="surnameStudentTextField" destination="Jrd-5c-DZy" id="0Ka-pI-ZEZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rpt-c0-JMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -322,7 +322,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="98Y-Vn-gBe" id="bnV-7H-oiR">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRG-Jq-gl5">

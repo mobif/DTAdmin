@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RequestManager<T: Decodable> {
+class RequestManager<T: Codable> {
     
     let urlProtocol = "http://"
     let urlDomain = "vps9615.hyperhost.name"

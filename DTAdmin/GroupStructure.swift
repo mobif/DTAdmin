@@ -9,7 +9,7 @@
 import Foundation
 //Group: {group_id, group_name, faculty_id, speciality_id}
 //[{"group_id":"1","group_name":"СІ-12-1","speciality_id":"1","faculty_id":"1"}]
-struct GroupStructure: Decodable{
+struct GroupStructure: Codable{
     var group_id: String//Int
     var group_name: String
     var speciality_id: String//Int

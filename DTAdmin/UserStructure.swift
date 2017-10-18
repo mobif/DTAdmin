@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UserStructure: Decodable{
+struct UserStructure: Codable{
     var id: String
     var username: String
     var roles: [String]
