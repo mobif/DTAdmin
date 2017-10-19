@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginButtonClicked(_ sender: Any) {
+    @IBAction func loginButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     

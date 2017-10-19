@@ -21,7 +21,7 @@
                                 <rect key="frame" x="170" y="328.5" width="34" height="30"/>
                                 <state key="normal" title="login"/>
                                 <connections>
-                                    <action selector="loginButtonClicked:" destination="MHF-1Q-PdI" eventType="touchUpInside" id="yf5-O2-RIa"/>
+                                    <action selector="loginButtonTapped:" destination="MHF-1Q-PdI" eventType="touchUpInside" id="CMR-Kp-3FG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="351" y="565"/>
         </scene>
-        <!--Main Tab Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="8pa-5H-xuy">
             <objects>
-                <viewController id="619-fB-Xk4" customClass="MainTabController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="619-fB-Xk4" customClass="MainTabBarController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Ut-4j-wuR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

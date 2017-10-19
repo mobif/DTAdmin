@@ -14,8 +14,8 @@
 		3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */; };
 		3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */; };
 		8927571E1F9764FD00FF669D /* RootNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8927571D1F97649E00FF669D /* RootNavController.swift */; };
-		8927571F1F9764FF00FF669D /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8927571C1F97649E00FF669D /* MainTabController.swift */; };
 		892757211F9768D100FF669D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892757201F9768D100FF669D /* LoginViewController.swift */; };
+		893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C21F9892A9008565F1 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +27,9 @@
 		3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FDE8FA41F8D0DF60057BF3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FDE8FA61F8D0DF60057BF3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8927571C1F97649E00FF669D /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabController.swift; path = ../../Beckup/MainTabController.swift; sourceTree = "<group>"; };
 		8927571D1F97649E00FF669D /* RootNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootNavController.swift; path = ../../Beckup/RootNavController.swift; sourceTree = "<group>"; };
 		892757201F9768D100FF669D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		893450C21F9892A9008565F1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,8 +141,8 @@
 		8927571B1F97649300FF669D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				893450C21F9892A9008565F1 /* MainTabBarController.swift */,
 				892757201F9768D100FF669D /* LoginViewController.swift */,
-				8927571C1F97649E00FF669D /* MainTabController.swift */,
 				8927571D1F97649E00FF669D /* RootNavController.swift */,
 			);
 			name = Controllers;
@@ -222,8 +222,8 @@
 			files = (
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
-				8927571F1F9764FF00FF669D /* MainTabController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 				8927571E1F9764FD00FF669D /* RootNavController.swift in Sources */,
 			);
@@ -363,7 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DHT9CXHYVG;
 				INFOPLIST_FILE = DTAdmin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ss.ita.DTAdmin;
@@ -378,7 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DHT9CXHYVG;
 				INFOPLIST_FILE = DTAdmin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ss.ita.DTAdmin;
