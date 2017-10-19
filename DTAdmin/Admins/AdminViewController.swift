@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdminViewController: ViewController {
+class AdminViewController: UIViewController {
   
   @IBOutlet weak var adminsListTableView: UITableView!
   
@@ -17,8 +17,15 @@ class AdminViewController: ViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.title = "Administrators"
+    
+    
+    let btnAddAdmin = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
+    let btnSyncData = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
+    self.navigationItem.rightBarButtonItems = [btnAddAdmin, btnSyncData]
+    
 //    MARK: DEBUG - Using for first login into system
-//    _ = NetworkManager().logIn(username: "admin", password: "TYPE IN PASSWORD!!!") { (admin, cookie) in
+//    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
 //        print(admin, cookie)
 //        }
 //    MARK: DEBUG - Using to create new user, to preceed should be loginned before
@@ -33,6 +40,8 @@ class AdminViewController: ViewController {
 //    }
 //    MARK: DEBUG - Using for first login into system, to preceed should be loginned before
 //    _ = NetworkManager().logOut()
+    
+    
 
   }
   
@@ -40,8 +49,23 @@ class AdminViewController: ViewController {
     NetworkManager().getAdmins { (admins) in
       self.adminsList = admins
       self.adminsListTableView.reloadData()
+      
     }
   }
+  
+  @objc func showAdminCreateUpdateViewController() {
+    guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
+    self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
+  }
+  @objc func syncDataWithServer() {
+    NetworkManager().getAdmins { (admins) in
+      self.adminsList = admins
+      self.adminsListTableView.reloadData()
+    }
+  }
+}
+
+private func setUpNavigationBar() {
 }
 
 extension AdminViewController: UITableViewDelegate {

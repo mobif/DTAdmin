@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdminCreateUpdateViewController: ViewController {
+class AdminCreateUpdateViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
