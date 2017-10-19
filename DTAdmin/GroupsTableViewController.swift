@@ -18,9 +18,8 @@ class GroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         let manager = RequestManager<GroupStructure>()
         manager.getEntityList(byStructure: Entities.Group, returnResults: { (groups, error) in
-            if error == nil,
-                groups != nil{
-                self.groupList = groups!
+            if error == nil, let loadedGroups = groups {
+                self.groupList = loadedGroups
             }
             self.groupTable.reloadData()
         })
@@ -28,12 +27,10 @@ class GroupsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return groupList.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

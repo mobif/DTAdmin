@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//Apologize for using snake_style instead CamelCase that unrelated to The Code Convention but required by external API. :)
 struct StudentGetStructure: Codable {
     var user_id: String
     var gradebook_id: String

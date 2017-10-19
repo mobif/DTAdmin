@@ -29,19 +29,17 @@ class EditStudentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let saveButton: UIBarButtonItem
-        if studentLoaded != nil {
-            nameStudentTextField.text = studentLoaded!.student_name
-            familyNameStudentTextField.text = studentLoaded!.student_fname
-            surnameStudentTextField.text = studentLoaded!.student_surname
-            passwordStudentTextField.text = studentLoaded!.plain_password
-            gradeBookIdTextField.text = studentLoaded!.gradebook_id
-            
-            getGroupFromAPI(byId: studentLoaded!.group_id)
-            getUserFromAPI(byId: studentLoaded!.user_id)
+        if let studentLoaded = studentLoaded {
+            nameStudentTextField.text = studentLoaded.student_name
+            familyNameStudentTextField.text = studentLoaded.student_fname
+            surnameStudentTextField.text = studentLoaded.student_surname
+            passwordStudentTextField.text = studentLoaded.plain_password
+            gradeBookIdTextField.text = studentLoaded.gradebook_id
+            getGroupFromAPI(byId: studentLoaded.group_id)
+            getUserFromAPI(byId: studentLoaded.user_id)
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postUpdateStudentToAPI))
             isNewStudent = false
         } else {
-            
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postNewStudentToAPI))
             isNewStudent = true
         }
@@ -52,12 +50,12 @@ class EditStudentViewController: UIViewController {
     }
     
     @objc func postUpdateStudentToAPI(){
-        let postMan = PostManager<StudentPostStructure>()
         if prepareForSave(){
             guard let userIDForUpdate = studentLoaded?.user_id else { return }
-            postMan.updateEntity(byId: userIDForUpdate, entity: studentForSave!, entityStructure: Entities.Student, returnResults: { error in
+            guard let studentForSave = studentForSave else { return }
+            RequestManager<StudentPostStructure>().updateEntity(byId: userIDForUpdate, entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
-                    print(error!)
+                    self.showWarningMsg(error)
                 } else {
                     self.navigationController?.popViewController(animated: true)
                 } })
@@ -65,14 +63,15 @@ class EditStudentViewController: UIViewController {
     }
     
     @objc func postNewStudentToAPI(){
-        let postMan = PostManager<StudentPostStructure>()
         if prepareForSave(){
-            postMan.insertEntity(entity: studentForSave!, entityStructure: Entities.Student, returnResults: { error in
+            guard let studentForSave = studentForSave else { return }
+            RequestManager<StudentPostStructure>().insertEntity(entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     print(error!)
                 } else {
                     self.navigationController?.popViewController(animated: true)
-                } })
+                }
+            })
         }
     }
     
@@ -107,9 +106,8 @@ class EditStudentViewController: UIViewController {
         self.navigationController?.pushViewController(groupsViewController, animated: true)
     }
     func getGroupFromAPI(byId: String){
-        let manager = RequestManager<GroupStructure>()
         var groupForCurrentStudent: GroupStructure?
-        manager.getEntity(byId: byId, entityStructure: Entities.Group, returnResults: { (groupInstance, error) in
+        RequestManager<GroupStructure>().getEntity(byId: byId, entityStructure: Entities.Group, returnResults: { (groupInstance, error) in
             if groupInstance != nil {
                 groupForCurrentStudent = groupInstance!
             }
@@ -118,9 +116,8 @@ class EditStudentViewController: UIViewController {
         })
     }
     func getUserFromAPI(byId: String) {
-        let manager = RequestManager<UserGetStructure>()
         var userForCurrentStudent: UserGetStructure?
-        manager.getEntity(byId: byId, entityStructure: .User, returnResults: { (userInstance, error) in
+        RequestManager<UserGetStructure>().getEntity(byId: byId, entityStructure: .User, returnResults: { (userInstance, error) in
             if userInstance != nil, error == nil {
                 userForCurrentStudent = userInstance!
             }

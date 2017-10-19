@@ -31,24 +31,12 @@ class LoginViewController: UIViewController {
                 self.showWarningMsg(error!)
                 return
             }
-            guard let studentVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "StudentViewController") as? StudentViewController else {
+            guard let studentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "StudentViewController") as? StudentViewController else {
                 self.showWarningMsg("ViewController with id: students not found")
                     return
             }
-            guard let cookieValue = cookie else {return}
-            guard let userInstance = user else {return}
-            studentVC.user = userInstance
-            studentVC.cookie = cookieValue
-            let navigationController = UINavigationController(rootViewController: studentVC)
-//            navigationController.pushViewController(studentVC, animated: true)
-//            let navigationController = UIStoryboard(name: "Student", bundle: nil).
-//            navigationController?.pushViewController(studentVC, animated: true)
+            let navigationController = UINavigationController(rootViewController: studentViewController)
             self.present(navigationController, animated: true, completion: nil)
         })
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
