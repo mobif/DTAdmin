@@ -23,7 +23,6 @@ class SubjectTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showRecords()
-        // searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.showsScopeBar = true
         searchBar.scopeButtonTitles = ["Name","Description"]
         searchBar.selectedScopeButtonIndex = 0
@@ -36,13 +35,11 @@ class SubjectTableViewController: UITableViewController {
             tableView.reloadData()
         } else {
             inSearchMode = true
-            switch  searchBar.selectedScopeButtonIndex {
+            switch searchBar.selectedScopeButtonIndex {
             case 0:
                 filteredData = records.filter{$0.name.contains(searchBar.text!)}
             case 1:
                 filteredData = records.filter{$0.description.contains(searchBar.text!)}
-                //            case 2:
-            //                filteredData = records.filter{$0.id.contains(searchBar.text!)}
             default:
                 print("No match")
             }
@@ -56,7 +53,6 @@ class SubjectTableViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     private func showRecords() {
@@ -77,14 +73,11 @@ class SubjectTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if inSearchMode {
             return filteredData.count
         }
@@ -94,22 +87,21 @@ class SubjectTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if inSearchMode {
-            cell.textLabel?.text = filteredData[indexPath.row].name
-            cell.detailTextLabel?.text = filteredData[indexPath.row].description
+            let cellData = filteredData[indexPath.row]
+            cell.textLabel?.text = cellData.name
+            cell.detailTextLabel?.text = cellData.description
         } else {
-            cell.textLabel?.text = records[indexPath.row].name
-            cell.detailTextLabel?.text = records[indexPath.row].description
+            let cellData = records[indexPath.row]
+            cell.textLabel?.text = cellData.name
+            cell.detailTextLabel?.text = cellData.description
         }
         return cell
     }
     
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
     
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let item = records[indexPath.row].id
@@ -121,14 +113,14 @@ class SubjectTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Second") as? AddNewRecordViewController
+        if let nextPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Second") as? AddNewRecordViewController
         {
-            vc.subjectId = records[indexPath.row].id
-            vc.updateDates = true
-            vc.name = records[indexPath.row].name
-            vc.desc = records[indexPath.row].description
-            self.navigationController?.pushViewController(vc, animated: true)
+            nextPage.subjectId = records[indexPath.row].id
+            nextPage.updateDates = true
+            nextPage.name = records[indexPath.row].name
+            nextPage.desc = records[indexPath.row].description
+            self.navigationController?.pushViewController(nextPage, animated: true)
         }
     }
-
+    
 }
