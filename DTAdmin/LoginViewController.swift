@@ -1,6 +1,8 @@
+import UIKit
+
 class LoginViewController: UIViewController {
 
-import UIKit
+
 
     @IBOutlet weak var topTitleLabel: UILabel!
     @IBOutlet weak var loginTextField: UITextField!
@@ -22,22 +24,23 @@ import UIKit
     @IBAction func loginButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-}
+
+    func tapSignIn() {
+        let loginNameText = "admin"
+        let passwordText = "dtapi_admin"
         let login = RequestManager<UserStructure>()
-    @IBAction func tapSignIn(_ sender: UIButton) {
-        guard let loginNameText = loginName.text else {return}
-        guard let passwordText = password.text else {return}
         login.getLoginData(for: loginNameText, password: passwordText, returnResults: {
             (user, cookie, error) in
             if error != nil {
-                self.showWarningMsg(error!)
+                print(error)
                 return
             }
             guard let studentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "StudentViewController") as? StudentViewController else {
-                self.showWarningMsg("ViewController with id: students not found")
+                print("ViewController with id: students not found")
                     return
             }
             let navigationController = UINavigationController(rootViewController: studentViewController)
             self.present(navigationController, animated: true, completion: nil)
         })
     }
+}

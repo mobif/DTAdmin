@@ -15,7 +15,6 @@
 		892757211F9768D100FF669D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892757201F9768D100FF669D /* LoginViewController.swift */; };
 		893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C21F9892A9008565F1 /* MainTabBarController.swift */; };
 		893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C41F98B4F9008565F1 /* RootNavController.swift */; };
-		C7C741161F9928D100D50104 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C741091F9928D000D50104 /* PostManager.swift */; };
 		C7C741171F9928D100D50104 /* GroupStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C7410A1F9928D000D50104 /* GroupStructure.swift */; };
 		C7C741181F9928D100D50104 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C7410B1F9928D000D50104 /* StudentViewController.swift */; };
 		C7C741191F9928D100D50104 /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C7410C1F9928D000D50104 /* Student.storyboard */; };
@@ -41,7 +40,6 @@
 		892757201F9768D100FF669D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		893450C21F9892A9008565F1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		893450C41F98B4F9008565F1 /* RootNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavController.swift; sourceTree = "<group>"; };
-		C7C741091F9928D000D50104 /* PostManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		C7C7410A1F9928D000D50104 /* GroupStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupStructure.swift; sourceTree = "<group>"; };
 		C7C7410B1F9928D000D50104 /* StudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
 		C7C7410C1F9928D000D50104 /* Student.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
@@ -167,21 +165,28 @@
 		C7C741081F99287E00D50104 /* Student */ = {
 			isa = PBXGroup;
 			children = (
+				C7C741131F9928D100D50104 /* RequestManager.swift */,
 				C7C7410E1F9928D000D50104 /* EditStudentViewController.swift */,
 				C7C7410D1F9928D000D50104 /* Entities.swift */,
 				C7C741101F9928D100D50104 /* GroupsTableViewController.swift */,
-				C7C7410A1F9928D000D50104 /* GroupStructure.swift */,
 				C7C741141F9928D100D50104 /* GroupTableViewCell.swift */,
 				C7C7410F1F9928D000D50104 /* HTTPStatusCodes.swift */,
-				C7C741091F9928D000D50104 /* PostManager.swift */,
-				C7C741131F9928D100D50104 /* RequestManager.swift */,
-				C7C7410C1F9928D000D50104 /* Student.storyboard */,
 				C7C741111F9928D100D50104 /* StudentsTableViewCell.swift */,
-				C7C741121F9928D100D50104 /* StudentStructure.swift */,
 				C7C7410B1F9928D000D50104 /* StudentViewController.swift */,
-				C7C741151F9928D100D50104 /* UserStructure.swift */,
+				C7C7410C1F9928D000D50104 /* Student.storyboard */,
+				C7C741231F992E7B00D50104 /* Structures */,
 			);
 			path = Student;
+			sourceTree = "<group>";
+		};
+		C7C741231F992E7B00D50104 /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				C7C7410A1F9928D000D50104 /* GroupStructure.swift */,
+				C7C741121F9928D100D50104 /* StudentStructure.swift */,
+				C7C741151F9928D100D50104 /* UserStructure.swift */,
+			);
+			path = Structures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,7 +278,6 @@
 				C7C7411C1F9928D100D50104 /* HTTPStatusCodes.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 				C7C7411E1F9928D100D50104 /* StudentsTableViewCell.swift in Sources */,
-				C7C741161F9928D100D50104 /* PostManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
