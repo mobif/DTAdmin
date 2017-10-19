@@ -18,8 +18,7 @@ class AdminViewController: UIViewController {
     super.viewDidLoad()
     
     self.title = "Administrators"
-    
-    
+
     let btnAddAdmin = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
     let btnSyncData = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
     self.navigationItem.rightBarButtonItems = [btnAddAdmin, btnSyncData]
@@ -40,17 +39,7 @@ class AdminViewController: UIViewController {
 //    }
 //    MARK: DEBUG - Using for first login into system, to preceed should be loginned before
 //    _ = NetworkManager().logOut()
-    
-    
 
-  }
-  
-  @IBAction func refreshButtonTapped(_ sender: Any) {
-    NetworkManager().getAdmins { (admins) in
-      self.adminsList = admins
-      self.adminsListTableView.reloadData()
-      
-    }
   }
   
   @objc func showAdminCreateUpdateViewController() {
@@ -58,6 +47,7 @@ class AdminViewController: UIViewController {
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
   }
   @objc func syncDataWithServer() {
+//    print("Cookie",UserDefaults.standard.getCookie())
     NetworkManager().getAdmins { (admins) in
       self.adminsList = admins
       self.adminsListTableView.reloadData()
@@ -85,7 +75,11 @@ extension AdminViewController: UITableViewDataSource {
     return cell
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //TODO: send to next view -> adminsList[indexPath.row]
+    guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
+    adminCreateUpdateViewController.title = "Edit"
+    adminCreateUpdateViewController.adminInstanse = adminsList?[indexPath.row]
+    self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
+    
   }
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
