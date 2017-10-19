@@ -38,7 +38,7 @@ class AddNewRecordViewController: UIViewController {
                         self.httpStatusCode = code
                         DispatchQueue.main.async {
                             if self.httpStatusCode == 200 {
-                                let _ = self.navigationController?.popViewController(animated: true)
+                                _ = self.navigationController?.popViewController(animated: true)
                                 
                             } else {
                                 self.showMessage(message: "You cann't to save data!")
@@ -54,7 +54,7 @@ class AddNewRecordViewController: UIViewController {
                         self.httpStatusCode = code
                         DispatchQueue.main.async {
                             if self.httpStatusCode == 200 {
-                                let _ = self.navigationController?.popViewController(animated: true)
+                                _ = self.navigationController?.popViewController(animated: true)
                             } else {
                                 self.showMessage(message: "You cann't to save data!")
                             }
