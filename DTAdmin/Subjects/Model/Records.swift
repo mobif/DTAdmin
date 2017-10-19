@@ -13,15 +13,7 @@ struct Records: Decodable {
     let name : String
     let description : String
     
-    /*enum SerializationError:Error {
-     case missing(String)
-     case invalid(String, Any)
-     }*/
-    
     init(id : String, name : String, description : String ) {
-        /*guard let id = json["subject_id"] as? String else {throw SerializationError.missing("summary is missing")}
-         guard let name = json["subject_name"] as? String else {throw SerializationError.missing("icon is missing")}
-         guard let description = json["subject_description"] as? String else {throw SerializationError.missing("temp is missing")}*/
         self.id = id
         self.name = name
         self.description = description
@@ -39,8 +31,6 @@ struct Records: Decodable {
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! [Any]
-                    //print("There are =  \(json.count)")
-                    //print (json)
                     for trackDictionary in json {
                         if let trackDictionary = trackDictionary as? [String: Any],
                             let desc = trackDictionary["subject_description"] as? String ,
