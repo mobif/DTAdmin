@@ -10,19 +10,16 @@ import UIKit
 
 class AddNewRecordViewController: UIViewController {
 
-    private var httpStatusCode : Int? = nil
-    
-    let queryService = QueryService()
-    
     @IBOutlet weak var subjectName: UITextField!
     
     @IBOutlet weak var subjectDescription: UITextView!
     
     var updateDates = false
-    
-    var subjectId : String = ""
-    var name : String = ""
-    var desc : String = ""
+    var subjectId: String = ""
+    var name: String = ""
+    var desc: String = ""
+    private var httpStatusCode: Int? = nil
+    let queryService = QueryService()
     
     private func showMessage(message: String){
         let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
