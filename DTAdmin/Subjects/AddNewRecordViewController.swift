@@ -18,6 +18,7 @@ class AddNewRecordViewController: UIViewController {
     var subjectId: String = ""
     var name: String = ""
     var desc: String = ""
+    private var httpStatusCode: Int? = nil
     let queryService = QueryService()
     
     

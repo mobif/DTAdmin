@@ -123,13 +123,13 @@ class SubjectTableViewController: UITableViewController {
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // MARK: Show TestsViewController
+    /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let wayToShowTests = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "_") as? _
         {
             wayToShowTests._ = records
             self.navigationController?.pushViewController(wayToShowTests, animated: true)
         }
-    }
+    }*/
     
 }
