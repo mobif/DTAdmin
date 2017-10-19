@@ -12,34 +12,29 @@ class GroupVC: UIViewController {
     
     @IBOutlet weak var groupTableView: UITableView!
     
-    var commonData = [[String: String]]()
+    var commonData = [Group]()
     override func viewDidLoad() {
         super.viewDidLoad()
         groupTableView.delegate = self
         groupTableView.dataSource = self
-        getCommonArrayForGroups(){(result:[[String:String]]) in
-//            for i in result {
-//                print("value \(i)\n")
-//            }
-//            let json = JSONSerialization.data(withJSONObject: result, options: [])
-//            self.commonData = json as [[String: String]]
+        getCommonArrayForGroups(){(result:[Group]) in
+            for i in result {
+                print("value \(i)\n")
+                print("name \(String(describing: i.group_name))\n")
+            }
+            self.commonData = result
+            
             print("common")
             print(self.commonData)
-        }
-        // Do any additional setup after loading the view.
+            }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func getCommonArrayForGroups (completion: @escaping ([[String:String]]) -> ()){
+    func getCommonArrayForGroups (completion: @escaping ([Group]) -> ()){
         
         var groups:[Group] = []
         var faculties:[Faculty] = []
         var specialities:[Speciality] = []
-
+        
         HTTPService.getAllData(entityName: "group"){ (result:[Group],responce) in
             if responce.statusCode == 200 {
                 groups = result
@@ -49,28 +44,21 @@ class GroupVC: UIViewController {
                         HTTPService.getAllData(entityName: "speciality"){ (result:[Speciality],responce) in
                             if responce.statusCode == 200 {
                                 specialities = result
-                                var commonData:[[String:String]] = []
                                 for group in groups {
-                                    var newGroup:[String:String] = [:]
-                                    newGroup["group_name"] = group.group_name
-                                    newGroup["group_id"] = group.group_id
-                                    newGroup["faculty_id"] = group.faculty_id
-                                    newGroup["speciality_id"] = group.speciality_id
                                     for faculty in faculties {
                                         if (group.faculty_id == faculty.faculty_id){
-                                            newGroup["faculty_name"] = faculty.faculty_name
-                                            newGroup["faculty_description"] = faculty.faculty_description
+                                            group.faculty_name = faculty.faculty_name
+                                            group.faculty_description = faculty.faculty_description
                                         }
                                     }
                                     for speciality in specialities {
                                         if (group.speciality_id == speciality.speciality_id){
-                                            newGroup["speciality_code"] = speciality.speciality_code
-                                            newGroup["speciality_name"] = speciality.speciality_name
+                                            group.speciality_name = speciality.speciality_name
+                                            group.speciality_code = speciality.speciality_name
                                         }
                                     }
-                                    commonData.append(newGroup)
                                 }
-                                completion(commonData)
+                                completion(groups)
                             }
                         }
                     }
@@ -101,7 +89,7 @@ extension GroupVC : UITableViewDelegate {
 extension GroupVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = groupTableView.dequeueReusableCell(withIdentifier: "GroupCell")! as UITableViewCell
-        cell.textLabel?.text = commonData[indexPath.row]["group_name"]
+        cell.textLabel?.text = commonData[indexPath.row].group_name
         return cell
     }
     
