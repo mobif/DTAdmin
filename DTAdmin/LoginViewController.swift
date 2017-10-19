@@ -1,28 +1,30 @@
-//
-//  LoginViewController.swift
-//  DTAdmin
-//
-//  Created by Володимир on 10/13/17.
-//  Copyright © 2017 if-ios-077. All rights reserved.
-//
+class LoginViewController: UIViewController {
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
-    @IBOutlet weak var loginName: UITextField!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var topTitleLabel: UILabel!
+    @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        signInButton.layer.cornerRadius = signInButton.frame.height / 3
-        signInButton.clipsToBounds = true
-        
-        
-        // Do any additional setup after loading the view.
+        self.topTitleLabel.text = "DTAdmin"
+        self.loginTextField.placeholder = "login"
+        self.passwordTextField.placeholder = "password"
+        self.passwordTextField.isSecureTextEntry = true
+        self.loginButton.setTitle("Login", for: .normal)
+
     }
-    @IBAction func tapSignIn(_ sender: UIButton) {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
         let login = RequestManager<UserStructure>()
+    @IBAction func tapSignIn(_ sender: UIButton) {
         guard let loginNameText = loginName.text else {return}
         guard let passwordText = password.text else {return}
         login.getLoginData(for: loginNameText, password: passwordText, returnResults: {
@@ -39,4 +41,3 @@ class LoginViewController: UIViewController {
             self.present(navigationController, animated: true, completion: nil)
         })
     }
-}
