@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--LoginVC-->
+        <!--Login View Controller-->
         <scene sceneID="Yxg-hj-non">
             <objects>
-                <viewController id="dg8-DW-s0j" customClass="LoginVC" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dg8-DW-s0j" customClass="LoginViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aIn-kS-XIW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,7 +23,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="login"/>
                                 <connections>
-                                    <action selector="loginTapped:" destination="dg8-DW-s0j" eventType="touchUpInside" id="Hp7-Hz-lzJ"/>
+                                    <action selector="loginButtoTapped:" destination="dg8-DW-s0j" eventType="touchUpInside" id="ceG-bY-mhD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="184.80000000000001" y="-77.811094452773617"/>
         </scene>
-        <!--GroupVC-->
+        <!--Group View Controller-->
         <scene sceneID="c9C-XX-sNu">
             <objects>
-                <viewController storyboardIdentifier="GroupVC" id="oIg-gb-mTo" customClass="GroupVC" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupVC" id="oIg-gb-mTo" customClass="GroupViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pcx-D3-LSh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,7 +52,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GrouoCell" id="v8I-wT-uKi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupCell" id="v8I-wT-uKi">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v8I-wT-uKi" id="MMh-OS-ito">
@@ -67,7 +67,7 @@
                         <viewLayoutGuide key="safeArea" id="wJp-Hm-Zya"/>
                     </view>
                     <connections>
-                        <outlet property="groupTableView" destination="cJC-dJ-isb" id="BK5-ob-8ME"/>
+                        <outlet property="groupTableView" destination="cJC-dJ-isb" id="sbO-v1-KYW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLN-Ia-TdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
