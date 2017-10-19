@@ -17,29 +17,27 @@ class AdminViewController: ViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//        MARK: DEBUG - Using for first login into system
-//        _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
+//    MARK: DEBUG - Using for first login into system
+//    _ = NetworkManager().logIn(username: "admin", password: "TYPE IN PASSWORD!!!") { (admin, cookie) in
 //        print(admin, cookie)
 //        }
-//    MARK: DEBUG - Using to create new user
+//    MARK: DEBUG - Using to create new user, to preceed should be loginned before
 //    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
 
-//    MARK: DEBUG - Using for geting list of admin
+//    MARK: DEBUG - Using for geting list of admin, to preceed should be loginned before
 //    NetworkManager().getAdmins { (admins) in
 //      print(UserDefaults.standard.getCookie())
 //      print(admins)
 //      self.adminsList = admins
 //      self.adminsListTBV.reloadData()
 //    }
-//        MARK: DEBUG - Using for first login into system
-//        _ = NetworkManager().logOut()
-//    _ = NetworkManager().updateAdmin(id: "29", userName: "Veselun", password: "1qaz@WSX", email: "veselun.pupkin@tuhes.if.com.ua")
+//    MARK: DEBUG - Using for first login into system, to preceed should be loginned before
+//    _ = NetworkManager().logOut()
+
   }
   
   @IBAction func refreshButtonTapped(_ sender: Any) {
     NetworkManager().getAdmins { (admins) in
-      print(UserDefaults.standard.getCookie())
-      print(admins)
       self.adminsList = admins
       self.adminsListTableView.reloadData()
     }

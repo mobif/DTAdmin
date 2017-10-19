@@ -19,7 +19,7 @@ class NetworkManager {
   let urlSuffixToGetRecordById = "/getRecords"
   let urlSuffixToUpdateRecord = "/update"
   let urlSuffixToDeleteRecord = "/del"
-  //concat += </id> to update || delete record /entity/del/<id>
+  //concat += </id> to update || delete exact record Exp route -> ./../entity/del/<id>
   
   private enum Credentials: String {
     case userName = "username"
