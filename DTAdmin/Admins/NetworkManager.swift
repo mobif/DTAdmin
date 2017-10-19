@@ -39,20 +39,33 @@ class NetworkManager {
     
     return request
   }
-  private func requestBasic(with body: Data, url: URL, method: String) -> URLRequest {
+  private func requestBasicWithBody(httpBody: Data, url: URL, method: String) -> URLRequest {
     var request = requestBasic(with: url, method: method)
-    request.httpBody = body
+    request.httpBody = httpBody
     
     return request
   }
-  
+  private func requestWithCookie(url: URL, method: String) -> URLRequest? {
+    if UserDefaults.standard.isLoggedIn(), let cookieValue = UserDefaults.standard.getCookie() {
+      var request = requestBasic(with: url, method: method)
+      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+      return request
+    }
+    return nil
+  }
+  private func requestWithCookie(and body: Data, url: URL, method: String) -> URLRequest? {
+    if var request = requestWithCookie(url: url, method: method) {
+      request.httpBody = body
+      return request
+    } else { return nil }
+  }
   
   func logIn(username: String, password: String, completionHandler: @escaping (_ user: UserModel.Admin, _ cookie: String) -> ()){
     let credentials = [Credentials.userName.rawValue: username, Credentials.password.rawValue: password]
     guard let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: []) else {return}
     guard let url = URL(string: urlProtocolPrefix + urlToHost + urlSuffixToUserLogIn) else {return}
     
-    var request = requestBasic(with: httpBody, url: url, method: "POST")
+    let request = requestBasicWithBody(httpBody: httpBody, url: url, method: "POST")
 //      URLRequest(url: url)
 //    request.httpMethod = "POST"
 //    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -86,12 +99,13 @@ class NetworkManager {
   }
   
   func logOut() {
-    if UserDefaults.standard.isLoggedIn(), let url = URL(string: urlProtocolPrefix + urlToHost + urlSuffixToUserLogOut), let cookieValue = UserDefaults.standard.getCookie() {
-      var request = URLRequest(url: url)
-      request.httpMethod = "GET"
-      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-      request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+    if UserDefaults.standard.isLoggedIn(), let url = URL(string: urlProtocolPrefix + urlToHost + urlSuffixToUserLogOut) {//}, let cookieValue = UserDefaults.standard.getCookie() {
+//      var request = URLRequest(url: url)
+//      request.httpMethod = "GET"
+//      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//      request.addValue("UTF-8", forHTTPHeaderField: "Charset")
+//      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+      guard let request = requestWithCookie(url: url, method: "GET") else { return }
       
       let sessionGet = URLSession.shared
       sessionGet.dataTask(with: request) { (data, response, error) in
@@ -118,14 +132,14 @@ class NetworkManager {
   }
   
   func getAdmins(completionHandler: @escaping (_ user: [UserModel.Admins]) -> ()) {
-    if UserDefaults.standard.isLoggedIn(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToGetRecords), let cookieValue = UserDefaults.standard.getCookie() {
+    if UserDefaults.standard.isLoggedIn(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToGetRecords) {//}, let cookieValue = UserDefaults.standard.getCookie() {
 
-      var request = URLRequest(url: url)
-      request.httpMethod = "GET"
-      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-      request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
-      
+//      var request = URLRequest(url: url)
+//      request.httpMethod = "GET"
+//      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//      request.addValue("UTF-8", forHTTPHeaderField: "Charset")
+//      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+      guard let request = requestWithCookie(url: url, method: "GET") else { return }
       let getSession = URLSession.shared
       getSession.dataTask(with: request) { (data, response, error) in
         if let sessionError = error {
@@ -148,18 +162,20 @@ class NetworkManager {
   }
   
   func createAdmin(username: String, password: String, email: String)  {
-    if let cookieValue = UserDefaults.standard.getCookie(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToInsertData) {
+//    if let cookieValue = UserDefaults.standard.getCookie(),
+      if let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToInsertData) {
       
       let newAdmin = UserModel.NewAdmin(userName: username, password: password, email: email)
-      let httpBody = try? JSONSerialization.data(withJSONObject: newAdmin.dictionaryRespresentation, options: [])
+      guard let httpBody = try? JSONSerialization.data(withJSONObject: newAdmin.dictionaryRespresentation, options: []) else { return }
       
-      var request = URLRequest(url: url)
-      request.httpMethod = "POST"
-      request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      request.setValue("UTF-8", forHTTPHeaderField: "Charset")
-      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
-      request.httpBody = httpBody
+//      var request = URLRequest(url: url)
+//      request.httpMethod = "POST"
+//      request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//      request.setValue("UTF-8", forHTTPHeaderField: "Charset")
+//      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+//      request.httpBody = httpBody
       
+        guard let request = requestWithCookie(and: httpBody, url: url, method: "POST") else { return }
       let postSession = URLSession.shared
       postSession.dataTask(with: request) { (data, response, error) in
         if let sessionError = error {
@@ -204,14 +220,16 @@ class NetworkManager {
     return false
   }
   
-  func deleteAdmin(id: String) -> Bool {
-    if let cookieValue = UserDefaults.standard.getCookie(), let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToDeleteRecord + "/" + id) {
+  func deleteAdmin(id: String, completionHandler: @escaping (_ isCompleted: Bool) -> ()) {
+//    if let cookieValue = UserDefaults.standard.getCookie(),
+    if let url = URL(string: self.urlProtocolPrefix + self.urlToHost + self.urlSuffixToAdmins + self.urlSuffixToDeleteRecord + "/" + id) {
       
-      var request = URLRequest(url: url)
-      request.httpMethod = "GET"
-      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-      request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+//      var request = URLRequest(url: url)
+//      request.httpMethod = "GET"
+//      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//      request.addValue("UTF-8", forHTTPHeaderField: "Charset")
+//      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
+      guard let request = requestWithCookie(url: url, method: "GET") else { return }
       
       let getSession = URLSession.shared
       getSession.dataTask(with: request) { (data, response, error) in
@@ -222,14 +240,18 @@ class NetworkManager {
             if sessionResponse.statusCode == 200 {
               print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
               DispatchQueue.main.async {
-                return true
+                completionHandler(true)
               }
-            } else { print("Something went wrong, Staus code: ", sessionResponse.statusCode, sessionResponse.description)}
+            } else {
+              print("Something went wrong, Staus code: ", sessionResponse.statusCode, sessionResponse.description)
+              DispatchQueue.main.async {
+                completionHandler(false)
+              }
+            }
           }
         }
       }.resume()
     }
-    return false
   }
 }
 

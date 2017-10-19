@@ -27,7 +27,7 @@
                                             <barButtonItem systemItem="add" id="kEY-2o-rDD"/>
                                             <barButtonItem systemItem="refresh" id="kf2-pV-thg">
                                                 <connections>
-                                                    <action selector="refreshButton:" destination="fkA-hd-7Bn" id="DbB-dX-GqW"/>
+                                                    <action selector="refreshButtonTapped:" destination="fkA-hd-7Bn" id="5R6-Op-kQX"/>
                                                 </connections>
                                             </barButtonItem>
                                         </rightBarButtonItems>
@@ -73,7 +73,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="7Jj-ZF-sp5"/>
                     <connections>
-                        <outlet property="adminsListTBV" destination="ruL-8l-jSR" id="93j-dg-GeP"/>
+                        <outlet property="adminsListTableView" destination="ruL-8l-jSR" id="93j-dg-GeP"/>
                         <outlet property="searchDisplayController" destination="hS2-qz-Fqv" id="dWs-PS-i2Y"/>
                     </connections>
                 </viewController>

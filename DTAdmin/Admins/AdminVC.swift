@@ -10,7 +10,7 @@ import UIKit
 
 class AdminVC: ViewController {
   
-  @IBOutlet weak var adminsListTBV: UITableView!
+  @IBOutlet weak var adminsListTableView: UITableView!
   
   var adminsList: [UserModel.Admins]?
   
@@ -21,23 +21,28 @@ class AdminVC: ViewController {
 //        _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
 //        print(admin, cookie)
 //        }
+//    MARK: DEBUG - Using to create new user
 //    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
-//     sleep(10)
-//    self.adminsListTBV.reloadData()
-//        MARK: DEBUG - Using for geting list of admin
-    NetworkManager().getAdmins { (admins) in
-      print(UserDefaults.standard.getCookie())
-      print(admins)
-      self.adminsList = admins
-      self.adminsListTBV.reloadData()
-    }
+
+//    MARK: DEBUG - Using for geting list of admin
+//    NetworkManager().getAdmins { (admins) in
+//      print(UserDefaults.standard.getCookie())
+//      print(admins)
+//      self.adminsList = admins
+//      self.adminsListTBV.reloadData()
+//    }
 //        MARK: DEBUG - Using for first login into system
 //        _ = NetworkManager().logOut()
 //    _ = NetworkManager().updateAdmin(id: "29", userName: "Veselun", password: "1qaz@WSX", email: "veselun.pupkin@tuhes.if.com.ua")
   }
   
-  @IBAction func refreshButton(_ sender: Any) {
-    self.adminsListTBV.reloadData()
+  @IBAction func refreshButtonTapped(_ sender: Any) {
+    NetworkManager().getAdmins { (admins) in
+      print(UserDefaults.standard.getCookie())
+      print(admins)
+      self.adminsList = admins
+      self.adminsListTableView.reloadData()
+    }
   }
 }
 
@@ -48,7 +53,6 @@ extension AdminVC: UITableViewDelegate {
 extension AdminVC: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
     return adminsList != nil ? adminsList!.count : 0
   }
   
@@ -63,12 +67,12 @@ extension AdminVC: UITableViewDataSource {
   }
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-      //TODO: delete selected admin
-      guard let admin = self.adminsList?[indexPath.row] else {return}
-      if NetworkManager().deleteAdmin(id: admin.id) {
-        print("Is deleted: ", true)
-        self.adminsListTBV.reloadData()
-      } else { print("Is deleted: ", false)}
+      
+      guard let admin = self.adminsList?[indexPath.row] else { return }
+      NetworkManager().deleteAdmin(id: admin.id, completionHandler: { (isComplete) in
+        print("Is deleted: ", isComplete)
+        self.adminsListTableView.reloadData()
+      })
     }
     deleteOpt.backgroundColor = UIColor.red
     return [deleteOpt]
