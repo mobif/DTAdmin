@@ -102,24 +102,33 @@ class SubjectTableViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let item = records[indexPath.row].id
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            let item = self.records[indexPath.row].id
             print(item)
-            queryService.deleteReguest(sufix: "subject/del/\(item)")
-            records.remove(at: indexPath.row)
+            self.queryService.deleteReguest(sufix: "subject/del/\(item)")
+            self.records.remove(at: indexPath.row)
             tableView.reloadData()
         }
+        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+            if let wayToAddNewRecord = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Second") as? AddNewRecordViewController
+            {
+                wayToAddNewRecord.subjectId = self.records[indexPath.row].id
+                wayToAddNewRecord.updateDates = true
+                wayToAddNewRecord.name = self.records[indexPath.row].name
+                wayToAddNewRecord.desc = self.records[indexPath.row].description
+                self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
+            }
+        }
+        update.backgroundColor = UIColor.blue
+        return [delete, update]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let nextPage = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Second") as? AddNewRecordViewController
+        if let wayToShowTests = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "_") as? _
         {
-            nextPage.subjectId = records[indexPath.row].id
-            nextPage.updateDates = true
-            nextPage.name = records[indexPath.row].name
-            nextPage.desc = records[indexPath.row].description
-            self.navigationController?.pushViewController(nextPage, animated: true)
+            wayToShowTests._ = records
+            self.navigationController?.pushViewController(wayToShowTests, animated: true)
         }
     }
     
