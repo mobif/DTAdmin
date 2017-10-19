@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3FA888131F9688A300D602F3 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FA888121F9688A300D602F3 /* Admin.storyboard */; };
-		3FA888181F9688B200D602F3 /* AdminCreateUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateVC.swift */; };
+		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
 		3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888151F9688B200D602F3 /* NetworkManager.swift */; };
-		3FA8881A1F9688B200D602F3 /* AdminVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminVC.swift */; };
+		3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminViewController.swift */; };
 		3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888171F9688B200D602F3 /* UserModel.swift */; };
 		3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */; };
 		3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F991F8D0DF60057BF3C /* ViewController.swift */; };
@@ -22,9 +22,9 @@
 
 /* Begin PBXFileReference section */
 		3FA888121F9688A300D602F3 /* Admin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
-		3FA888141F9688B200D602F3 /* AdminCreateUpdateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateVC.swift; sourceTree = "<group>"; };
+		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888151F9688B200D602F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		3FA888161F9688B200D602F3 /* AdminVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminVC.swift; sourceTree = "<group>"; };
+		3FA888161F9688B200D602F3 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3FA888171F9688B200D602F3 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 		3F3E68531F97BCB4004B8B2C /* Admins */ = {
 			isa = PBXGroup;
 			children = (
-				3FA888141F9688B200D602F3 /* AdminCreateUpdateVC.swift */,
-				3FA888161F9688B200D602F3 /* AdminVC.swift */,
+				3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */,
+				3FA888161F9688B200D602F3 /* AdminViewController.swift */,
 				3FA888151F9688B200D602F3 /* NetworkManager.swift */,
 				3FA888171F9688B200D602F3 /* UserModel.swift */,
 				3FA888121F9688A300D602F3 /* Admin.storyboard */,
@@ -213,10 +213,10 @@
 			files = (
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
 				3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */,
-				3FA888181F9688B200D602F3 /* AdminCreateUpdateVC.swift in Sources */,
+				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
 				3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
-				3FA8881A1F9688B200D602F3 /* AdminVC.swift in Sources */,
+				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  AdminCreateUpdateVC.swift
+//  AdminCreateUpdateViewController.swift
 //  DTAdmin
 //
 //  Created by ITA student on 10/15/17.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AdminCreateUpdateVC: ViewController {
+class AdminCreateUpdateViewController: ViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
   }
-  
+
 }

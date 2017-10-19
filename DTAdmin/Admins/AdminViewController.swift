@@ -1,5 +1,5 @@
 //
-//  AdminVC.swift
+//  AdminViewController.swift
 //  DTAdmin
 //
 //  Created by ITA student on 10/15/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdminVC: ViewController {
+class AdminViewController: ViewController {
   
   @IBOutlet weak var adminsListTableView: UITableView!
   
@@ -46,11 +46,11 @@ class AdminVC: ViewController {
   }
 }
 
-extension AdminVC: UITableViewDelegate {
+extension AdminViewController: UITableViewDelegate {
   
 }
 
-extension AdminVC: UITableViewDataSource {
+extension AdminViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return adminsList != nil ? adminsList!.count : 0
