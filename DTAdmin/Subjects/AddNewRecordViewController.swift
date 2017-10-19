@@ -21,7 +21,7 @@ class AddNewRecordViewController: UIViewController {
     private var httpStatusCode: Int? = nil
     let queryService = QueryService()
     
-    private func showMessage(message: String){
+    private func showMessage(message: String) {
         let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
