@@ -17,8 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="juP-vc-Avv">
+                                <rect key="frame" x="16" y="274.5" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCY-TF-AVN">
+                                <rect key="frame" x="16" y="328.5" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vb-Lo-Iv6">
+                                <rect key="frame" x="16" y="64" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9p-cE-9fj">
-                                <rect key="frame" x="170" y="328.5" width="34" height="30"/>
+                                <rect key="frame" x="16" y="398.5" width="343" height="30"/>
                                 <state key="normal" title="login"/>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="MHF-1Q-PdI" eventType="touchUpInside" id="CMR-Kp-3FG"/>
@@ -27,14 +45,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="R9p-cE-9fj" firstAttribute="centerY" secondItem="bXT-4x-9hn" secondAttribute="centerY" id="C0Y-3R-1K7"/>
-                            <constraint firstItem="R9p-cE-9fj" firstAttribute="centerX" secondItem="bXT-4x-9hn" secondAttribute="centerX" id="eWu-t1-OE6"/>
+                            <constraint firstItem="R9p-cE-9fj" firstAttribute="top" secondItem="gCY-TF-AVN" secondAttribute="bottom" constant="40" id="81I-xz-7xF"/>
+                            <constraint firstItem="0vb-Lo-Iv6" firstAttribute="leading" secondItem="bXT-4x-9hn" secondAttribute="leading" constant="16" id="CQr-3i-qP3"/>
+                            <constraint firstItem="gCY-TF-AVN" firstAttribute="centerY" secondItem="bXT-4x-9hn" secondAttribute="centerY" id="G0g-hM-CJf"/>
+                            <constraint firstItem="bXT-4x-9hn" firstAttribute="trailing" secondItem="juP-vc-Avv" secondAttribute="trailing" constant="16" id="Ge7-RY-Oqk"/>
+                            <constraint firstItem="bXT-4x-9hn" firstAttribute="trailing" secondItem="0vb-Lo-Iv6" secondAttribute="trailing" constant="16" id="RyP-gC-lJL"/>
+                            <constraint firstItem="bXT-4x-9hn" firstAttribute="trailing" secondItem="gCY-TF-AVN" secondAttribute="trailing" constant="16" id="ans-ZI-w9s"/>
+                            <constraint firstItem="R9p-cE-9fj" firstAttribute="leading" secondItem="bXT-4x-9hn" secondAttribute="leading" constant="16" id="nJQ-mh-9Vv"/>
+                            <constraint firstItem="juP-vc-Avv" firstAttribute="leading" secondItem="bXT-4x-9hn" secondAttribute="leading" constant="16" id="rXk-Ls-wi3"/>
+                            <constraint firstItem="gCY-TF-AVN" firstAttribute="leading" secondItem="bXT-4x-9hn" secondAttribute="leading" constant="16" id="s9R-K3-2x3"/>
+                            <constraint firstItem="gCY-TF-AVN" firstAttribute="top" secondItem="juP-vc-Avv" secondAttribute="bottom" constant="24" id="wTP-5N-7xu"/>
+                            <constraint firstItem="bXT-4x-9hn" firstAttribute="trailing" secondItem="R9p-cE-9fj" secondAttribute="trailing" constant="16" id="ytc-oU-c6m"/>
+                            <constraint firstItem="0vb-Lo-Iv6" firstAttribute="top" secondItem="bXT-4x-9hn" secondAttribute="top" constant="44" id="zfQ-kP-1Go"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bXT-4x-9hn"/>
                     </view>
                     <navigationItem key="navigationItem" id="1xl-Xr-FDZ"/>
                     <connections>
                         <outlet property="loginButton" destination="R9p-cE-9fj" id="4H6-uV-4E0"/>
+                        <outlet property="loginTextField" destination="juP-vc-Avv" id="Q2j-yd-T8B"/>
+                        <outlet property="passwordTextField" destination="gCY-TF-AVN" id="0Is-Mt-osw"/>
+                        <outlet property="topTitleLabel" destination="0vb-Lo-Iv6" id="aWp-SP-yRg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3h-H3-Te6" userLabel="First Responder" sceneMemberID="firstResponder"/>

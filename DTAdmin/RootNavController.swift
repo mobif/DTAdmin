@@ -12,13 +12,7 @@ class RootNavController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //temp variable
-        let isLogined = true
-        
-        if !isLogined {
-            self.performSegue(withIdentifier: "toLogin", sender: self)
-        }
+        self.performSegue(withIdentifier: "toLogin", sender: self)
 
         // Do any additional setup after loading the view.
     }
