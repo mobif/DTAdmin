@@ -45,8 +45,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="XsY-9d-Te6"/>
                     <connections>
-                        <outlet property="loginField" destination="UDT-A7-w20" id="ZHO-U7-1tv"/>
-                        <outlet property="passwordField" destination="RUG-gG-e0d" id="zmA-fw-AF1"/>
+                        <outlet property="loginTextField" destination="UDT-A7-w20" id="ZhP-wW-3Nc"/>
+                        <outlet property="passwordTextField" destination="RUG-gG-e0d" id="zmA-fw-AF1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JrL-eE-aBI" userLabel="First Responder" sceneMemberID="firstResponder"/>

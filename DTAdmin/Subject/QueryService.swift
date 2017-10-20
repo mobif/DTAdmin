@@ -108,8 +108,6 @@ class QueryService {
             catch {
                 print(error.localizedDescription)
             }
-            
-            
         }
     }
 }

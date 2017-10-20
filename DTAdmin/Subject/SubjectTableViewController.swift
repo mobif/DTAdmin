@@ -58,10 +58,6 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-      // showRecords()
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -89,15 +85,11 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if inSearchMode {
             return filteredData.count
-        } else { return records.count }
-        
+        }
+        return records.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

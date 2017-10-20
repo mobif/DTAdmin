@@ -11,58 +11,51 @@ import UIKit
 class LogViewController: UIViewController {
 
     
-    @IBOutlet weak var loginField: UITextField!
+    @IBOutlet weak var loginTextField: UITextField!
     
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     let queryService = QueryService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
-    private func showMessage(message: String){
+    private func showMessage(message: String) {
         let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func logIn(_ sender: UIButton) {
-        let username = loginField.text
-        let password = passwordField.text
+        let username = loginTextField.text
+        let password = passwordTextField.text
         
         if let user = username, let psw = password {
             doLogin(user, psw)
         } else {
-            return showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user") )
+            return showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
         }
     }
     
-    func doLogin(_ user:String, _ psw:String) {
-        
-        queryService.postRequests(parameters : ["username": user, "password" : psw], sufix: "login/index", completion: {(array: [Records]?, code: Int, error: String) in
-    
+    func doLogin(_ user: String, _ psw: String) {
+        queryService.postRequests(parameters : ["username": user, "password": psw], sufix: "login/index", completion: {(array: [Records]?, code: Int, error: String) in
                 print(code)
                 DispatchQueue.main.async {
                     if code == 200 {
-                        if let wayToShowRecords = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "SubjectTableVC") as? SubjectTableViewController
-                        {
+                        if let wayToShowRecords = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "SubjectTableVC") as? SubjectTableViewController {
                             self.navigationController?.pushViewController(wayToShowRecords, animated: true)
                         }
                     } else {
                         self.showMessage(message: NSLocalizedString("Invalid login or password", comment: "Message for user") )
                     }
                 }
-            
             })
-        
     }
-
+    
 }

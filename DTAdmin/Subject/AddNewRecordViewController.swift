@@ -34,14 +34,12 @@ class AddNewRecordViewController: UIViewController {
         
         if !name.isEmpty && !description.isEmpty {
             if !updateDates {
-                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/InsertData", completion: {(item: [Records]?, code:Int, error: String) in
+                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/InsertData", completion: { (item: [Records]?, code:Int, error: String) in
                         DispatchQueue.main.async {
-                            if code == 200 {
-                                if let data = item {
-                                    self.item = data[0]
-                                    self.saveAction!(self.item)
-                                    self.navigationController?.popViewController(animated: true)
-                                }
+                            if code == 200, let data = item {
+                                self.item = data[0]
+                                self.saveAction!(self.item)
+                                self.navigationController?.popViewController(animated: true)
                             } else {
                                 self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }
@@ -49,17 +47,14 @@ class AddNewRecordViewController: UIViewController {
                                     self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }
                         }
-                    
-                    })
+                    } )
             } else {
                 queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/update/\(subjectId)", completion: {(item: [Records]?, code:Int, error: String) in
                     DispatchQueue.main.async {
-                        if code == 200 {
-                            if let data = item {
-                                self.item = data[0]
-                                self.saveAction!(self.item)
-                                self.navigationController?.popViewController(animated: true)
-                            }
+                        if code == 200, let data = item {
+                            self.item = data[0]
+                            self.saveAction!(self.item)
+                            self.navigationController?.popViewController(animated: true)
                         } else {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                         }
@@ -67,10 +62,10 @@ class AddNewRecordViewController: UIViewController {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                         }
                     }
-                })
+                } )
             }
         } else {
-            showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user") )
+            showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
         }
     }
     

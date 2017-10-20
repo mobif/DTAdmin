@@ -8,9 +8,7 @@
 
 import Foundation
 
-
-
-struct Records: Decodable {
+struct Records {
     let id: String
     let name: String
     let description: String
@@ -20,44 +18,5 @@ struct Records: Decodable {
         self.name = name
         self.description = description
     }
-    
-   /* static let basePath = "http://vps9615.hyperhost.name/subject/"
-    
-    static func getRecords (sufix: String, completion: @escaping ([Records]?, Int?) -> ()) {
-        
-        let url = basePath + sufix
-        let request = URLRequest(url: URL(string: url)!)
-        
-        let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
-            var recordsArray:[Records] = []
-            
-            guard let httpStatus = response as? HTTPURLResponse else { return }
-            if httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(String(describing: response))")
-            }
-            
-            if let data = data {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [Any] {
-                        for trackDictionary in json {
-                            if let trackDictionary = trackDictionary as? [String: Any],
-                                let desc = trackDictionary["subject_description"] as? String ,
-                                let id = trackDictionary["subject_id"] as? String,
-                                let name = trackDictionary["subject_name"] as? String {
-                                recordsArray.append(Records(id : id, name : name, description: desc))
-                            }
-                        }
-                    }
-                }
-                catch {
-                    print(error.localizedDescription)
-                }
-                completion(recordsArray, httpStatus.statusCode)
-            }
-        }
-        task.resume()
-    }*/
-    
 }
 
