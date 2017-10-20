@@ -16,8 +16,7 @@ class GroupsTableViewController: UITableViewController {
     @IBOutlet var groupTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let manager = RequestManager<GroupStructure>()
-        manager.getEntityList(byStructure: Entities.Group, returnResults: { (groups, error) in
+        RequestManager.getEntityList(byStructure: Entities.Group, type: GroupStructure, returnResults: { (groups, error) in
             if error == nil, let loadedGroups = groups {
                 self.groupList = loadedGroups
             }
@@ -35,7 +34,7 @@ class GroupsTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupTableViewCell
-        cell.name.text = groupList[indexPath.row].group_name
+        cell.name.text = groupList[indexPath.row].groupName
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

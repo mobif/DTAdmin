@@ -28,9 +28,9 @@ class LoginViewController: UIViewController {
     func tapSignIn() {
         let loginNameText = "admin"
         let passwordText = "dtapi_admin"
-        let login = RequestManager<UserStructure>()
-        login.getLoginData(for: loginNameText, password: passwordText, returnResults: {
-            (user, cookie, error) in
+        
+        RequestManager.getLoginData(for: loginNameText, password: passwordText, returnResults: {
+            (cookie, error) in
             if error != nil {
                 print(error)
                 return

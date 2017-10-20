@@ -7,17 +7,23 @@
 //
 
 import Foundation
-struct UserStructure: Codable{
-    var id: String
-    var username: String
-    var roles: [String]
-}
 
 struct UserGetStructure: Codable {
+
     var id: String
     var username: String
     var email: String
     var password: String
     var logins: String
-    var last_login: String?
+    var lastLogin: String
+    
+    init(json:[String:String]){
+        id = json["id"] ?? ""
+        username = json["username"] ?? ""
+        email = json["email"] ?? ""
+        password = json["password"] ?? ""
+        logins = json["logins"] ?? ""
+        lastLogin = json["last_login"] ?? ""
+    }
+
 }

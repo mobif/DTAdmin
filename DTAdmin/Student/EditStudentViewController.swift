@@ -9,8 +9,8 @@
 import UIKit
 
 class EditStudentViewController: UIViewController {
-    var studentLoaded: StudentGetStructure?
-    var studentForSave: StudentPostStructure?
+    var studentLoaded: StudentStructure?
+    var studentForSave: StudentStructure?
     
     @IBOutlet weak var loginStudentTextField: UITextField!
     @IBOutlet weak var emailStudentTextField: UITextField!
@@ -30,13 +30,13 @@ class EditStudentViewController: UIViewController {
         super.viewDidLoad()
         let saveButton: UIBarButtonItem
         if let studentLoaded = studentLoaded {
-            nameStudentTextField.text = studentLoaded.student_name
-            familyNameStudentTextField.text = studentLoaded.student_fname
-            surnameStudentTextField.text = studentLoaded.student_surname
-            passwordStudentTextField.text = studentLoaded.plain_password
-            gradeBookIdTextField.text = studentLoaded.gradebook_id
-            getGroupFromAPI(byId: studentLoaded.group_id)
-            getUserFromAPI(byId: studentLoaded.user_id)
+            nameStudentTextField.text = studentLoaded.studentName
+            familyNameStudentTextField.text = studentLoaded.studentFname
+            surnameStudentTextField.text = studentLoaded.studentSurname
+            passwordStudentTextField.text = studentLoaded.plainPassword
+            gradeBookIdTextField.text = studentLoaded.gradebookId
+            getGroupFromAPI(byId: studentLoaded.groupId)
+            getUserFromAPI(byId: studentLoaded.userId)
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postUpdateStudentToAPI))
             isNewStudent = false
         } else {
@@ -51,9 +51,9 @@ class EditStudentViewController: UIViewController {
     
     @objc func postUpdateStudentToAPI(){
         if prepareForSave(){
-            guard let userIDForUpdate = studentLoaded?.user_id else { return }
+            guard let userIDForUpdate = studentLoaded?.userId else { return }
             guard let studentForSave = studentForSave else { return }
-            RequestManager<StudentPostStructure>().updateEntity(byId: userIDForUpdate, entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
+            RequestManager.updateEntity(byId: userIDForUpdate, entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     self.showWarningMsg(error)
                 } else {
@@ -65,7 +65,7 @@ class EditStudentViewController: UIViewController {
     @objc func postNewStudentToAPI(){
         if prepareForSave(){
             guard let studentForSave = studentForSave else { return }
-            RequestManager<StudentPostStructure>().insertEntity(entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
+            RequestManager.insertEntity(entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     print(error!)
                 } else {
@@ -76,19 +76,24 @@ class EditStudentViewController: UIViewController {
     }
     
     func prepareForSave() -> Bool {
-        guard let login = loginStudentTextField.text else { return false}
-        guard let email = emailStudentTextField.text else { return false}
-        guard let name = nameStudentTextField.text else { return false}
-        guard let sname = surnameStudentTextField.text else { return false}
-        guard let fname = familyNameStudentTextField.text else { return false}
-        guard let gradebook = gradeBookIdTextField.text else { return false}
-        guard let pass = passwordStudentTextField.text else { return false}
-        guard let passConfirm = passwordConfirmTextField.text else { return false}
-        guard let group = selectedGroupForStudent?.group_id else { return false}
+        var json:[String:String]
+        json["username"] = loginStudentTextField.text
+        json["email"] = emailStudentTextField.text
+        json["student_name"] = nameStudentTextField.text
+        json["student_surname"] = surnameStudentTextField.text
+        json["student_fname"] = familyNameStudentTextField.text
+        json["gradebook_id"] = gradeBookIdTextField.text
+        json["password"] = passwordStudentTextField.text
+        json["password_confirm"] = passwordConfirmTextField.text
+        json["plain_password"] = passwordConfirmTextField.text
+        json["group"] = selectedGroupForStudent?.groupId
         
+        let newStudent = StudentStructure(json: json)
         
-        if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
-            studentForSave = StudentPostStructure(username: login, password: pass, password_confirm: passConfirm, plain_password: pass, email: email, gradebook_id: gradebook, student_surname: sname, student_name: name, student_fname: fname, group_id: group, photo: "")
+        if (newStudent.name.count > 2) && (surName.count > 2) && (fName.count > 1) && (gradeBook.count > 4) && (pass.count > 6) && (pass == passConfirm){
+            
+            
+            studentForSave = StudentStructure(userName: login, password: pass, passwordConfirm: passConfirm, plain_password: pass, email: email, gradebook_id: gradeBook, student_surname: sname, student_name: name, student_fname: fname, group_id: group, photo: "")
         } else {
             return false
         }
@@ -101,25 +106,26 @@ class EditStudentViewController: UIViewController {
         groupsViewController.selecectedGroup = {
             group in
             self.selectedGroupForStudent = group
-            self.groupButton.setTitle(group.group_name, for: .normal)
+            self.groupButton.setTitle(group.groupName, for: .normal)
         }
         self.navigationController?.pushViewController(groupsViewController, animated: true)
     }
     func getGroupFromAPI(byId: String){
         var groupForCurrentStudent: GroupStructure?
-        RequestManager<GroupStructure>().getEntity(byId: byId, entityStructure: Entities.Group, returnResults: { (groupInstance, error) in
-            if groupInstance != nil {
-                groupForCurrentStudent = groupInstance!
+        RequestManager.getEntity(byId: byId, entityStructure: Entities.Group, type: groupForCurrentStudent, returnResults: { (groupInstance, error) in
+            if let groupInstance = groupInstance, error == nil {
+                groupForCurrentStudent = groupInstance
             }
-            self.selectedGroupForStudent = groupInstance
-            self.groupButton.setTitle(groupForCurrentStudent!.group_name, for: .normal)
+            guard let groupForCurrentStudentUnwraped = groupForCurrentStudent else { return }
+            self.selectedGroupForStudent = groupForCurrentStudentUnwraped
+            self.groupButton.setTitle(groupForCurrentStudentUnwraped.groupName, for: .normal)
         })
     }
     func getUserFromAPI(byId: String) {
         var userForCurrentStudent: UserGetStructure?
-        RequestManager<UserGetStructure>().getEntity(byId: byId, entityStructure: .User, returnResults: { (userInstance, error) in
-            if userInstance != nil, error == nil {
-                userForCurrentStudent = userInstance!
+        RequestManager.getEntity(byId: byId, entityStructure: Entities.User, type: userForCurrentStudent, returnResults: { (userInstance, error) in
+            if let userInstance = userInstance, error == nil {
+                userForCurrentStudent = userInstance
             }
             self.selectedUserAccountForStudent = userForCurrentStudent
             self.loginStudentTextField.text = userForCurrentStudent?.username

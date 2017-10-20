@@ -10,8 +10,26 @@ import Foundation
 //Group: {group_id, group_name, faculty_id, speciality_id}
 //[{"group_id":"1","group_name":"СІ-12-1","speciality_id":"1","faculty_id":"1"}]
 struct GroupStructure: Codable{
-    var group_id: String//Int
-    var group_name: String
-    var speciality_id: String//Int
-    var faculty_id: String//Int
+    var groupId: String
+    var groupName: String
+    var specialityId: String
+    var facultyId: String
+    
+    init(json:[String:String]){
+        groupId = json["group_id"] ?? ""
+        groupName = json["grop_name"] ?? ""
+        specialityId = json["speciality_id"] ?? ""
+        facultyId = json["faculty_id"] ?? ""
+    }
+    
+    func toJSON() -> [String:String] {
+        var json = [String:String]()
+        let groupMirror = Mirror(reflecting: self)
+        for (name, value) in groupMirror.children {
+            guard let nameUnwraped = name else { continue }
+            json[nameUnwraped.camelToSnake()] = "\(value)"
+        }
+        return json
+    }
 }
+

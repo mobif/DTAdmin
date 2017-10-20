@@ -22,7 +22,6 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var studentTable: UITableView!
-    @IBOutlet weak var userName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         let navigationItem = self.navigationItem
@@ -41,8 +40,9 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func updateTable(){
-        let manager = RequestManager<StudentGetStructure>()
-        manager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
+        
+//        let manager = RequestManager<StudentGetStructure>()
+        RequestManager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
             if error == nil,
                 let loadedStudents = students {
                 self.studentList = loadedStudents
@@ -96,7 +96,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
             let studentId = self.filteredList[indexPath.row].user_id
-            RequestManager<StudentPostStructure>().deleteEntity(byId: studentId, entityStructure: Entities.Student, returnResults: { error in
+            RequestManager.deleteEntity(byId: studentId, entityStructure: Entities.Student, returnResults: { error in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
