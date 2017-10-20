@@ -49,7 +49,7 @@ class AdminCreateUpdateViewController: UIViewController {
     return false
   }
   
-  func isPasswordValid(_ password : String) -> Bool{
+  func isPasswordValid(_ password : String) -> Bool {
     let passwordRegEx = "^([a-zA-Z0-9@*#]{8,15})$"
     let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
     return passwordTest.evaluate(with: password)

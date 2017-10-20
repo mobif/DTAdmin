@@ -43,7 +43,7 @@ class UserModel {
     let password: String
     let email: String
     
-    var dictionaryRespresentation: [String:String] {
+    var dictionaryRepresentation: [String:String] {
       return [
         "username": userName,
         "password": password,

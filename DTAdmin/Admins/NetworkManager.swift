@@ -153,7 +153,7 @@ class NetworkManager {
   func createAdmin(username: String, password: String, email: String)  {
     if let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToInsertData.rawValue) {
       let newAdmin = UserModel.NewAdmin(userName: username, password: password, email: email)
-      guard let httpBody = try? JSONSerialization.data(withJSONObject: newAdmin.dictionaryRespresentation, options: []) else { return }
+      guard let httpBody = try? JSONSerialization.data(withJSONObject: newAdmin.dictionaryRepresentation, options: []) else { return }
       guard let request = requestWithCookie(and: httpBody, url: url, method: "POST") else { return }
       
       let postSession = URLSession.shared
@@ -174,7 +174,7 @@ class NetworkManager {
   func updateAdmin(id: String, userName: String, password: String, email: String, completionHandler: @escaping (_ isCompleted: Bool) -> ()) {
     if let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToUpdateRecord.rawValue + "/" + id) {
       let editedAdmin = UserModel.NewAdmin(userName: userName, password: password, email: email)
-      guard let httpBody = try? JSONSerialization.data(withJSONObject: editedAdmin.dictionaryRespresentation, options: []) else { return }
+      guard let httpBody = try? JSONSerialization.data(withJSONObject: editedAdmin.dictionaryRepresentation, options: []) else { return }
       guard let request = requestWithCookie(and: httpBody, url: url, method: "POST") else { return }
       
       let postSession = URLSession.shared
