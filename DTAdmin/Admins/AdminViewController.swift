@@ -17,27 +17,27 @@ class AdminViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.title = "Administrators"
+    self.title = NSLocalizedString("Administrators", comment: "Title for admins table list view")
 
-    let btnAddAdmin = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
-    let btnSyncData = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
-    self.navigationItem.rightBarButtonItems = [btnAddAdmin, btnSyncData]
+    let addNewAdminButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
+    let serverSyncDataButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
+    self.navigationItem.rightBarButtonItems = [addNewAdminButton, serverSyncDataButton]
     
 //    MARK: DEBUG - Using for first login into system
 //    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
 //        print(admin, cookie)
 //        }
-//    MARK: DEBUG - Using to create new user, to preceed should be loginned before
+//    MARK: DEBUG - Using to create new user, to proceed should be loginned before
 //    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
 
-//    MARK: DEBUG - Using for geting list of admin, to preceed should be loginned before
+//    MARK: DEBUG - Using for geting list of admin, to proceed should be loginned before
 //    NetworkManager().getAdmins { (admins) in
 //      print(UserDefaults.standard.getCookie())
 //      print(admins)
 //      self.adminsList = admins
 //      self.adminsListTBV.reloadData()
 //    }
-//    MARK: DEBUG - Using for first login into system, to preceed should be loginned before
+//    MARK: DEBUG - Using after first login into system, to proceed should be loginned before
 //    _ = NetworkManager().logOut()
 
   }
@@ -76,8 +76,8 @@ extension AdminViewController: UITableViewDataSource {
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
-    adminCreateUpdateViewController.title = "Edit"
-    adminCreateUpdateViewController.adminInstanse = adminsList?[indexPath.row]
+    adminCreateUpdateViewController.title = NSLocalizedString("Edit", comment: "Title for edit admin creation view")
+    adminCreateUpdateViewController.adminInstance = adminsList?[indexPath.row]
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
     
   }
@@ -86,8 +86,11 @@ extension AdminViewController: UITableViewDataSource {
       
       guard let admin = self.adminsList?[indexPath.row] else { return }
       NetworkManager().deleteAdmin(id: admin.id, completionHandler: { (isComplete) in
-        print("Is deleted: ", isComplete)
-        self.adminsListTableView.reloadData()
+        if isComplete {
+          print("Is deleted: ", isComplete)
+          self.adminsList?.remove(at: indexPath.row)
+          self.adminsListTableView.reloadData()
+        }
       })
     }
     deleteOpt.backgroundColor = UIColor.red
