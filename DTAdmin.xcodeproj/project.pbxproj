@@ -238,6 +238,7 @@
 				3FFA90061F978A80005C7F5A /* Records.swift in Sources */,
 				3FFA90021F9789D6005C7F5A /* SubjectTableViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				3FFA90081F978AA0005C7F5A /* QueryService.swift in Sources */,
 				3FFA90041F978A3D005C7F5A /* AddNewRecordViewController.swift in Sources */,
@@ -379,6 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DHT9CXHYVG;
 				INFOPLIST_FILE = DTAdmin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ss.ita.DTAdmin;
@@ -393,6 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DHT9CXHYVG;
 				INFOPLIST_FILE = DTAdmin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ss.ita.DTAdmin;
