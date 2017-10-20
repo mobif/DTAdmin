@@ -74,6 +74,9 @@ class AddNewRecordViewController: UIViewController {
             subjectNameTextField.text = name
             subjectDescriptionTextField.text = desc
         }
+        subjectDescriptionTextField.layer.cornerRadius = 5
+        subjectDescriptionTextField.layer.borderWidth = 1
+        subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
     }
     
     override func didReceiveMemoryWarning() {
