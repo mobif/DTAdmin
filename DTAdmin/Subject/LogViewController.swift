@@ -45,24 +45,23 @@ class LogViewController: UIViewController {
         }
     }
     
-    func doLogin(_ user:String, _ psw:String)
-    {
+    func doLogin(_ user:String, _ psw:String) {
         
-        queryService.postRequests(parameters : ["username" : user, "password" : psw], sufix : "login/index", completion: {(results:Int?) in
-            
-            if let code = results {
+        queryService.postRequests(parameters : ["username": user, "password" : psw], sufix: "login/index", completion: {(array: [Records]?, code: Int, error: String) in
+    
                 print(code)
                 DispatchQueue.main.async {
                     if code == 200 {
-                        let storyboard = UIStoryboard(name: "Subjects", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "SubjectTableVC") as? SubjectTableViewController
-                        self.navigationController?.pushViewController(vc!,animated: true)
+                        if let wayToShowRecords = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "SubjectTableVC") as? SubjectTableViewController
+                        {
+                            self.navigationController?.pushViewController(wayToShowRecords, animated: true)
+                        }
                     } else {
                         self.showMessage(message: NSLocalizedString("Invalid login or password", comment: "Message for user") )
                     }
                 }
-            }
-        })
+            
+            })
         
     }
 

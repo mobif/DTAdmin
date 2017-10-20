@@ -6,7 +6,9 @@
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
-import Foundation.NSURL
+import Foundation
+
+
 
 struct Records: Decodable {
     let id: String
@@ -19,7 +21,7 @@ struct Records: Decodable {
         self.description = description
     }
     
-    static let basePath = "http://vps9615.hyperhost.name/subject/"
+   /* static let basePath = "http://vps9615.hyperhost.name/subject/"
     
     static func getRecords (sufix: String, completion: @escaping ([Records]?, Int?) -> ()) {
         
@@ -55,6 +57,7 @@ struct Records: Decodable {
             }
         }
         task.resume()
-    }
+    }*/
+    
 }
 

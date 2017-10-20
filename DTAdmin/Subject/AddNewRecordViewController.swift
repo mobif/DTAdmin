@@ -19,7 +19,8 @@ class AddNewRecordViewController: UIViewController {
     var name: String = ""
     var desc: String = ""
     let queryService = QueryService()
-    
+    var saveAction: ((Records?) -> ())?
+    var item: Records?
     
     private func showMessage(message: String) {
         let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
@@ -33,29 +34,37 @@ class AddNewRecordViewController: UIViewController {
         
         if !name.isEmpty && !description.isEmpty {
             if !updateDates {
-                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/InsertData", completion: {(results:Int?) in
-                    if let code = results {
+                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/InsertData", completion: {(item: [Records]?, code:Int, error: String) in
                         DispatchQueue.main.async {
-                            let successfullHTTPResponce = 200
-                            if code == successfullHTTPResponce {
-                                 self.navigationController?.popViewController(animated: true)
-                                
+                            if code == 200 {
+                                if let data = item {
+                                    self.item = data[0]
+                                    self.saveAction!(self.item)
+                                    self.navigationController?.popViewController(animated: true)
+                                }
                             } else {
                                 self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
+                            }
+                            if !error.isEmpty {
+                                    self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }
                         }
-                    }
-                })
+                    
+                    })
             } else {
-                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/update/\(subjectId)", completion: {(results:Int?) in
-                    if let code = results {
-                        DispatchQueue.main.async {
-                            let successfullHTTPResponce = 200
-                            if code == successfullHTTPResponce {
+                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/update/\(subjectId)", completion: {(item: [Records]?, code:Int, error: String) in
+                    DispatchQueue.main.async {
+                        if code == 200 {
+                            if let data = item {
+                                self.item = data[0]
+                                self.saveAction!(self.item)
                                 self.navigationController?.popViewController(animated: true)
-                            } else {
-                                self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }
+                        } else {
+                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
+                        }
+                        if !error.isEmpty {
+                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                         }
                     }
                 })
@@ -76,7 +85,7 @@ class AddNewRecordViewController: UIViewController {
         }
         subjectDescriptionTextField.layer.cornerRadius = 5
         subjectDescriptionTextField.layer.borderWidth = 1
-        subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
+        subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
     }
     
     override func didReceiveMemoryWarning() {

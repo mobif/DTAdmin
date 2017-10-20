@@ -26,6 +26,19 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         searchBar.selectedScopeButtonIndex = 0
     }
     
+   @IBAction func addNewItem(_ sender: UIBarButtonItem) {
+        if let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController
+        {
+            wayToAddNewRecord.saveAction = { item in
+                guard let item = item else { return }
+                self.records.append(item)
+                self.records.sort { return $0.name < $1.name }
+                self.tableView.reloadData()
+            }
+            self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
+        }
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             inSearchMode = false
@@ -46,7 +59,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        showRecords()
+      // showRecords()
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,15 +67,16 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     private func showRecords() {
-        Records.getRecords(sufix: "getRecords", completion: { (results:[Records]?, statusCode: Int?) in
-            if let subjectData = results, let code = statusCode {
+        queryService.getRecords(sufix: "subject/getRecords", completion: { (results: [Records]?, code: Int, error: String) in
+            if let subjectData = results {
                 self.records = subjectData
                 self.records.sort { return $0.name < $1.name }
                 DispatchQueue.main.async {
                     if code == 200 {
                         self.tableView.reloadData()
-                    } else {
-                        self.showMessage(message: NSLocalizedString("Bad signal", comment: "Information for user"))
+                    }
+                    if !error.isEmpty {
+                        self.showMessage(message: error)
                     }
                 }
             }
@@ -116,6 +130,11 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
                 wayToAddNewRecord.updateDates = true
                 wayToAddNewRecord.name = self.records[indexPath.row].name
                 wayToAddNewRecord.desc = self.records[indexPath.row].description
+                wayToAddNewRecord.saveAction = { item in
+                    guard let item = item else { return }
+                    self.records[indexPath.row] = item
+                    self.tableView.reloadData()
+                }
                 self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
             }
         }

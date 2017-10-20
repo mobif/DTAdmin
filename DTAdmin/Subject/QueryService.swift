@@ -10,9 +10,14 @@ import Foundation
 
 class QueryService {
     
+    typealias QueryResult = ([Records]?, Int, String) -> ()
+    var records: [Records] = []
+    var statusCode: Int = 0
+    var errorMessage = ""
+    
     let basePath = "http://vps9615.hyperhost.name/"
     
-    func postRequests(parameters: [String : String], sufix: String, completion: @escaping (Int?) -> ()) {
+    func postRequests(parameters: [String : String], sufix: String, completion: @escaping QueryResult) {
         
         guard let url = URL(string: basePath + sufix) else { return }
         var request = URLRequest(url: url)
@@ -21,23 +26,49 @@ class QueryService {
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
         
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                print("error=\(String(describing: error))")
-                return
-            }
-            guard let httpStatus = response as? HTTPURLResponse else { return }
-            if httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(String(describing: response))")
-            }
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(String(describing: responseString))")
+        let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
             
-            completion(httpStatus.statusCode)
-            }.resume()
+            if let error = error {
+                self.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
+            } else if let data = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
+                self.updateSearchResults(data)
+                self.statusCode = response.statusCode
+                DispatchQueue.main.async {
+                    completion(self.records, self.statusCode, self.errorMessage)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil, self.statusCode, self.errorMessage)
+                }
+            }
+          
+        }
+        task.resume()
         
+    }
+
+    func getRecords (sufix: String, completion: @escaping QueryResult) {
+        
+        guard let url = URL(string: basePath + sufix) else { return }
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
+    
+            if let error = error {
+                self.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
+            } else if let data = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
+                self.updateSearchResults(data)
+                self.statusCode = response.statusCode
+                DispatchQueue.main.async {
+                    completion(self.records, self.statusCode, self.errorMessage)
+                }
+            }
+        }
+        task.resume()
     }
     
     func deleteReguest(sufix: String) {
@@ -51,14 +82,34 @@ class QueryService {
                 print("error=\(String(describing: error))")
                 return
             }
-
+            
             guard let httpStatus = response as? HTTPURLResponse else {return}
             if httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")   
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
             }
         }
         task.resume()
     }
     
+    fileprivate func updateSearchResults(_ data: Data?) {
+        if let data = data {
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [Any] {
+                    for trackDictionary in json {
+                        if let trackDictionary = trackDictionary as? [String: Any],
+                            let desc = trackDictionary["subject_description"] as? String ,
+                            let id = trackDictionary["subject_id"] as? String,
+                            let name = trackDictionary["subject_name"] as? String {
+                            records.append(Records(id : id, name : name, description: desc))
+                        }
+                    }
+                }
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+            
+            
+        }
+    }
 }
-
