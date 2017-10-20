@@ -69,7 +69,7 @@ extension AdminViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //TODO: make cell more informative
+    //TODO: make cell more informative, add more info labels
     let cell = tableView.dequeueReusableCell(withIdentifier: "reusableAdminCell")!
     cell.textLabel?.text = adminsList?[indexPath.row].username
     return cell
