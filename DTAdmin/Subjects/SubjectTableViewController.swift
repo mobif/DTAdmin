@@ -24,7 +24,7 @@ class SubjectTableViewController: UITableViewController {
         super.viewDidLoad()
         showRecords()
         searchBar.showsScopeBar = true
-        searchBar.scopeButtonTitles = ["Name","Description"]
+        searchBar.scopeButtonTitles = ["Name", "Description"]
         searchBar.selectedScopeButtonIndex = 0
     }
     
@@ -59,9 +59,7 @@ class SubjectTableViewController: UITableViewController {
         Records.getRecords(sufix: "getRecords", completion: { (results:[Records]?) in
             if let subjectData = results {
                 self.records = subjectData
-                self.records.sort { (rec1, rec2) -> Bool in
-                    return rec1.name < rec2.name
-                }
+                self.records.sort { return $0.name < $1.name }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -86,15 +84,12 @@ class SubjectTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var cellData = records[indexPath.row]
         if inSearchMode {
-            let cellData = filteredData[indexPath.row]
-            cell.textLabel?.text = cellData.name
-            cell.detailTextLabel?.text = cellData.description
-        } else {
-            let cellData = records[indexPath.row]
-            cell.textLabel?.text = cellData.name
-            cell.detailTextLabel?.text = cellData.description
+            cellData = filteredData[indexPath.row]
         }
+        cell.textLabel?.text = cellData.name
+        cell.detailTextLabel?.text = cellData.description
         return cell
     }
     
@@ -123,6 +118,7 @@ class SubjectTableViewController: UITableViewController {
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
+    
     // MARK: Show TestsViewController
     /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let wayToShowTests = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "_") as? _

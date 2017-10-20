@@ -12,7 +12,7 @@ class QueryService {
     
     let basePath = "http://vps9615.hyperhost.name/"
     
-    func postRequests(parameters : [String : String], sufix : String, completion: @escaping (Int?) -> ()) {
+    func postRequests(parameters: [String : String], sufix: String, completion: @escaping (Int?) -> ()) {
         
         guard let url = URL(string: basePath + sufix) else { return }
         var request = URLRequest(url: url)
@@ -27,7 +27,7 @@ class QueryService {
                 print("error=\(String(describing: error))")
                 return
             }
-            guard let httpStatus = response as? HTTPURLResponse else {return}
+            guard let httpStatus = response as? HTTPURLResponse else { return }
             if httpStatus.statusCode != 200 {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(String(describing: response))")
@@ -40,7 +40,7 @@ class QueryService {
         
     }
     
-    func deleteReguest(sufix: String ){
+    func deleteReguest(sufix: String) {
         guard let url = URL(string: basePath + sufix) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"

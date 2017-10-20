@@ -10,9 +10,9 @@ import UIKit
 
 class AddNewRecordViewController: UIViewController {
 
-    @IBOutlet weak var subjectName: UITextField!
+    @IBOutlet weak var subjectNameTextField: UITextField!
     
-    @IBOutlet weak var subjectDescription: UITextView!
+    @IBOutlet weak var subjectDescriptionTextField: UITextView!
     
     var updateDates = false
     var subjectId: String = ""
@@ -29,8 +29,8 @@ class AddNewRecordViewController: UIViewController {
     }
     
     @IBAction func saveNewRecord(_ sender: UIButton) {
-        guard let name = subjectName.text?.capitalized else { return }
-        guard let description = subjectDescription.text?.capitalized else { return }
+        guard let name = subjectNameTextField.text?.capitalized else { return }
+        guard let description = subjectDescriptionTextField.text?.capitalized else { return }
         
         if !name.isEmpty && !description.isEmpty {
             if !updateDates {
@@ -72,8 +72,8 @@ class AddNewRecordViewController: UIViewController {
             navigationItem.title = "Add new item"
         } else {
             navigationItem.title = "Update record"
-            subjectName.text = name
-            subjectDescription.text = desc
+            subjectNameTextField.text = name
+            subjectDescriptionTextField.text = desc
         }
     }
     
