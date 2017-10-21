@@ -241,7 +241,7 @@ extension UserDefaults {
     synchronize()
   }
   func isLoggedIn() -> Bool {
-    return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+    return StoreHelper.isLoggedUser()
   }
   func setUserName(name: String) {
     set(name, forKey: UserDefaultsKeys.userName.rawValue)
@@ -255,6 +255,6 @@ extension UserDefaults {
     synchronize()
   }
   func getCookie() -> String? {
-    return string(forKey: UserDefaultsKeys.cookieValue.rawValue)
+    return StoreHelper.getCookie().values.first
   }
 }

@@ -13,41 +13,48 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         self.delegate = self
         
+        var tabBarViewControllers = [UIViewController]()
+        
 //MARK: Create students tab
-        let studentsTab = UINavigationController()
-        studentsTab.setViewControllers([TabOneViewController()], animated: true)
+        let studentsTab = TabOneViewController()
+//        studentsTab.setViewControllers([], animated: true)
         let studentsBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
         studentsTab.tabBarItem = studentsBarItem
+        tabBarViewControllers.append(studentsTab)
 
 //MARK: Create subjects tab
         let subjectsTab = TabTwoViewController()
         let subjectsBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
         subjectsTab.tabBarItem = subjectsBarItem
+        tabBarViewControllers.append(subjectsTab)
 
 //MARK: Create groups tab
-        let groupsTab = UINavigationController()
-        groupsTab.setViewControllers([TabThreeViewController()], animated: true)
+        let groupsTab = TabThreeViewController()
+//        groupsTab.setViewControllers([], animated: true)
         let groupsBarItem = UITabBarItem(title: "Groups", image: nil, selectedImage: nil)
         groupsTab.tabBarItem = groupsBarItem
+        tabBarViewControllers.append(groupsTab)
         
 //MARK: Create faculty tab
         let facultyTab = TabFourViewController()
         let facultyBarItem = UITabBarItem(title: "Faculty", image: nil, selectedImage: nil)
         facultyTab.tabBarItem = facultyBarItem
+        tabBarViewControllers.append(facultyTab)
 
 //MARK: Create speciality tab
-        let specialityTab = UINavigationController()
-        specialityTab.setViewControllers([TabFiveViewController()], animated: true)
+        let specialityTab = TabFiveViewController()
         let specialityBarItem = UITabBarItem(title: "Speciality", image: nil, selectedImage: nil)
         specialityTab.tabBarItem = specialityBarItem
+        tabBarViewControllers.append(specialityTab)
         
 //MARK: Create admins tab
-        let adminsTab = TabSixViewController()
+        let adminStoryboard = UIStoryboard.init(name: "Admin", bundle: nil)
+        guard let adminsNavController = adminStoryboard.instantiateViewController(withIdentifier: "AdminListView") as? UINavigationController else { return }
         let adminsBarItem = UITabBarItem(title: "Admins", image: nil, selectedImage: nil)
-        adminsTab.tabBarItem = adminsBarItem
+        adminsNavController.tabBarItem = adminsBarItem
+        tabBarViewControllers.append(adminsNavController)
         
-        
-        self.viewControllers = [studentsTab, subjectsTab, groupsTab, facultyTab, specialityTab, adminsTab]
+        self.setViewControllers(tabBarViewControllers, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,14 +110,6 @@ class TabFiveViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.red
         self.title = "Speciality"
-    }
-}
-
-class TabSixViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
-        self.title = "Admins"
     }
 }
 

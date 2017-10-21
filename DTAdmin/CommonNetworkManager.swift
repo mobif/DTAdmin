@@ -17,8 +17,8 @@ struct Keys {
 
 struct API {
     static let AccessProtocol = "http://"
-    static let DomainURL = AccessProtocol + "vps9615.hyperhost.name"
-    static let LoginURL = URL(string: DomainURL + "/login/index")
+    static let DomainURL = "vps9615.hyperhost.name"
+    static let LoginURL = URL(string: AccessProtocol + DomainURL + "/login/index")
 }
 
 class CommonNetworkManager {
