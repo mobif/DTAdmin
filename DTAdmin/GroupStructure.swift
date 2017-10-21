@@ -7,11 +7,17 @@
 //
 
 import Foundation
-//Group: {group_id, group_name, faculty_id, speciality_id}
-//[{"group_id":"1","group_name":"СІ-12-1","speciality_id":"1","faculty_id":"1"}]
+
 struct GroupStructure: Codable{
-    var group_id: String//Int
-    var group_name: String
-    var speciality_id: String//Int
-    var faculty_id: String//Int
+    var groupId: String
+    var groupName: String
+    var specialityId: String
+    var facultyId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case groupId = "group_id"
+        case groupName = "group_name"
+        case specialityId = "speciality_id"
+        case facultyId = "faculty_id"
+    }
 }

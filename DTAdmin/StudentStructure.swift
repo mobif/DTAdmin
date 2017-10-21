@@ -9,30 +9,52 @@
 import Foundation
 
 struct StudentGetStructure: Codable {
-    var user_id: String
-    var gradebook_id: String
-    var student_surname: String
-    var student_name: String
-    var student_fname: String
-    var group_id: String
-    var plain_password: String
+    
+    var userId: String
+    var gradebookId: String
+    var studentSurname: String
+    var studentName: String
+    var studentFname: String
+    var groupId: String
+    var plainPassword: String
     var photo: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case gradebookId = "gradebook_id"
+        case studentSurname = "student_surname"
+        case studentName = "student_name"
+        case studentFname = "student_fname"
+        case groupId = "group_id"
+        case plainPassword = "plain_password"
+        case photo = "photo"
+    }
 }
-/*
- * JSON Record for new student
- * email, username, password, password_confirm
- * gradebook_id, student_surname, student_name, student_fname, group_id
- */
+
 struct StudentPostStructure: Codable {
-    var username: String
+    var userName: String
     var password: String
-    var password_confirm: String
-    var plain_password: String
+    var passwordConfirm: String
+    var plainPassword: String
     var email: String
-    var gradebook_id: String
-    var student_surname: String
-    var student_name: String
-    var student_fname: String
-    var group_id: String
+    var gradebookId: String
+    var studentSurname: String
+    var studentName: String
+    var studentFname: String
+    var groupId: String
     var photo: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userName = "username"
+        case password = "password"
+        case passwordConfirm = "password_confirm"
+        case plainPassword = "plain_password"
+        case email = "email"
+        case gradebookId = "gradebook_id"
+        case studentSurname = "student_surname"
+        case studentName = "student_name"
+        case studentFname = "student_fname"
+        case groupId = "group_id"
+        case photo = "photo"
+    }
 }

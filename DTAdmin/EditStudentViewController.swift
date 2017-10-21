@@ -30,14 +30,14 @@ class EditStudentViewController: UIViewController {
         super.viewDidLoad()
         let saveButton: UIBarButtonItem
         if studentLoaded != nil {
-            nameStudentTextField.text = studentLoaded!.student_name
-            familyNameStudentTextField.text = studentLoaded!.student_fname
-            surnameStudentTextField.text = studentLoaded!.student_surname
-            passwordStudentTextField.text = studentLoaded!.plain_password
-            gradeBookIdTextField.text = studentLoaded!.gradebook_id
+            nameStudentTextField.text = studentLoaded!.studentName
+            familyNameStudentTextField.text = studentLoaded!.studentFname
+            surnameStudentTextField.text = studentLoaded!.studentSurname
+            passwordStudentTextField.text = studentLoaded!.plainPassword
+            gradeBookIdTextField.text = studentLoaded!.gradebookId
             
-            getGroupFromAPI(byId: studentLoaded!.group_id)
-            getUserFromAPI(byId: studentLoaded!.user_id)
+            getGroupFromAPI(byId: studentLoaded!.groupId)
+            getUserFromAPI(byId: studentLoaded!.userId)
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postUpdateStudentToAPI))
             isNewStudent = false
         } else {
@@ -54,7 +54,7 @@ class EditStudentViewController: UIViewController {
     @objc func postUpdateStudentToAPI(){
         let postMan = PostManager<StudentPostStructure>()
         if prepareForSave(){
-            guard let userIDForUpdate = studentLoaded?.user_id else { return }
+            guard let userIDForUpdate = studentLoaded?.userId else { return }
             postMan.updateEntity(byId: userIDForUpdate, entity: studentForSave!, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     print(error!)
@@ -85,11 +85,11 @@ class EditStudentViewController: UIViewController {
         guard let gradebook = gradeBookIdTextField.text else { return false}
         guard let pass = passwordStudentTextField.text else { return false}
         guard let passConfirm = passwordConfirmTextField.text else { return false}
-        guard let group = selectedGroupForStudent?.group_id else { return false}
+        guard let group = selectedGroupForStudent?.groupId else { return false}
         
         
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
-            studentForSave = StudentPostStructure(username: login, password: pass, password_confirm: passConfirm, plain_password: pass, email: email, gradebook_id: gradebook, student_surname: sname, student_name: name, student_fname: fname, group_id: group, photo: "")
+            studentForSave = StudentPostStructure(userName: login, password: pass, passwordConfirm: passConfirm, plainPassword: pass, email: email, gradebookId: gradebook, studentSurname: sname, studentName: name, studentFname: fname, groupId: group, photo: "")
         } else {
             return false
         }
@@ -102,7 +102,7 @@ class EditStudentViewController: UIViewController {
         groupsViewController.selecectedGroup = {
             group in
             self.selectedGroupForStudent = group
-            self.groupButton.setTitle(group.group_name, for: .normal)
+            self.groupButton.setTitle(group.groupName, for: .normal)
         }
         self.navigationController?.pushViewController(groupsViewController, animated: true)
     }
@@ -114,7 +114,7 @@ class EditStudentViewController: UIViewController {
                 groupForCurrentStudent = groupInstance!
             }
             self.selectedGroupForStudent = groupInstance
-            self.groupButton.setTitle(groupForCurrentStudent!.group_name, for: .normal)
+            self.groupButton.setTitle(groupForCurrentStudent!.groupName, for: .normal)
         })
     }
     func getUserFromAPI(byId: String) {
@@ -125,7 +125,7 @@ class EditStudentViewController: UIViewController {
                 userForCurrentStudent = userInstance!
             }
             self.selectedUserAccountForStudent = userForCurrentStudent
-            self.loginStudentTextField.text = userForCurrentStudent?.username
+            self.loginStudentTextField.text = userForCurrentStudent?.userName
             self.emailStudentTextField.text = userForCurrentStudent?.email
         })
     }

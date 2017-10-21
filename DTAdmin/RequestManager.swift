@@ -77,7 +77,9 @@ class RequestManager<T: Codable> {
                 if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                     guard let data = data else { return }
                     do {
+                        print(String(data: data, encoding: .utf8)!)
                         dataList = try JSONDecoder().decode([T].self, from: data)
+                        
                     } catch {
                         errorMsg = "Incorrect data structure!"
                     }

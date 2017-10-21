@@ -18,7 +18,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         if filtered {
             guard let searchString = searchBar.text else {return studentList}
             return studentList.filter({
-                ($0.student_name.contains(searchString) || $0.student_fname.contains(searchString)) })
+                ($0.studentName.contains(searchString) || $0.studentFname.contains(searchString)) })
         } else {
             return studentList
         }
@@ -86,9 +86,9 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! StudentsTableViewCell
-        cell.name.text = filteredList[indexPath.row].student_name
-        cell.fName.text = filteredList[indexPath.row].student_fname
-        cell.sName.text = filteredList[indexPath.row].student_surname
+        cell.name.text = filteredList[indexPath.row].studentName
+        cell.fName.text = filteredList[indexPath.row].studentFname
+        cell.sName.text = filteredList[indexPath.row].studentSurname
         return cell
     }
     
@@ -99,7 +99,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
             let postMan = PostManager<StudentPostStructure>()
-            let studentId = self.filteredList[indexPath.row].user_id
+            let studentId = self.filteredList[indexPath.row].userId
             postMan.deleteEntity(byId: studentId, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     print(error!)

@@ -14,10 +14,20 @@ struct UserStructure: Codable{
 }
 
 struct UserGetStructure: Codable {
+    
     var id: String
-    var username: String
+    var userName: String
     var email: String
     var password: String
     var logins: String
-    var last_login: String?
+    var lastLogin: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case userName = "username"
+        case email = "email"
+        case password = "password"
+        case logins = "logins"
+        case lastLogin = "last_login"
+    }
 }
