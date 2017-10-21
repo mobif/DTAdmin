@@ -10,9 +10,21 @@ import UIKit
 
 class AdminViewController: UIViewController {
   
+  @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var adminsListTableView: UITableView!
   
   var adminsList: [UserModel.Admins]?
+  var isSearchStart = false
+  var filteredList: [UserModel.Admins]? {
+    if isSearchStart {
+      guard let searchSample = searchBar.text else { return adminsList }
+      return adminsList?.filter({
+        $0.username.contains(searchSample) || $0.email.contains(searchSample)
+      })
+    } else {
+      return adminsList
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -65,19 +77,19 @@ extension AdminViewController: UITableViewDelegate {
 extension AdminViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return adminsList != nil ? adminsList!.count : 0
+    return filteredList != nil ? filteredList!.count : 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     //TODO: make cell more informative, need to customize
     let cell = tableView.dequeueReusableCell(withIdentifier: "reusableAdminCell")!
-    cell.textLabel?.text = adminsList?[indexPath.row].username
+    cell.textLabel?.text = filteredList?[indexPath.row].username
     return cell
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.title = NSLocalizedString("Edit", comment: "Title for edit admin creation view")
-    adminCreateUpdateViewController.adminInstance = adminsList?[indexPath.row]
+    adminCreateUpdateViewController.adminInstance = filteredList?[indexPath.row]
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
     
   }
@@ -95,5 +107,18 @@ extension AdminViewController: UITableViewDataSource {
     }
     deleteOpt.backgroundColor = UIColor.red
     return [deleteOpt]
+  }
+}
+
+extension AdminViewController: UISearchBarDelegate {
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    guard let searchText = searchBar.text else { return }
+    isSearchStart = !searchText.isEmpty
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    isSearchStart = !searchText.isEmpty
+    adminsListTableView.reloadData()
   }
 }
