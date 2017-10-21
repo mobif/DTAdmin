@@ -22,6 +22,9 @@
 		893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C21F9892A9008565F1 /* MainTabBarController.swift */; };
 		893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C41F98B4F9008565F1 /* RootNavController.swift */; };
 		897D0E341F9B6BC300825E62 /* CommonNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E331F9B6BC300825E62 /* CommonNetworkManager.swift */; };
+		897D0E371F9B6DA700825E62 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E361F9B6DA700825E62 /* User.swift */; };
+		897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E391F9B733400825E62 /* StoreHelper.swift */; };
+		897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E3E1F9B77A000825E62 /* ParentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		893450C21F9892A9008565F1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		893450C41F98B4F9008565F1 /* RootNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavController.swift; sourceTree = "<group>"; };
 		897D0E331F9B6BC300825E62 /* CommonNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNetworkManager.swift; sourceTree = "<group>"; };
+		897D0E361F9B6DA700825E62 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		897D0E391F9B733400825E62 /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
+		897D0E3E1F9B77A000825E62 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +137,8 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
-				3F3E68531F97BCB4004B8B2C /* Admins */,
 				8927571A1F97648C00FF669D /* Common */,
+				3F3E68531F97BCB4004B8B2C /* Admins */,
 				3F05013B1F90ED59006651CE /* Group */,
 				3F05013A1F90ED08006651CE /* Student */,
 				3F0501391F90ECFF006651CE /* Speciality */,
@@ -150,8 +156,10 @@
 		8927571A1F97648C00FF669D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				897D0E381F9B732500825E62 /* Utils */,
 				893539951F990C58001255EA /* Networking */,
 				8927571B1F97649300FF669D /* Controllers */,
+				897D0E351F9B6D8700825E62 /* Model */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 		8927571B1F97649300FF669D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				897D0E3E1F9B77A000825E62 /* ParentViewController.swift */,
 				893450C21F9892A9008565F1 /* MainTabBarController.swift */,
 				892757201F9768D100FF669D /* LoginViewController.swift */,
 				893450C41F98B4F9008565F1 /* RootNavController.swift */,
@@ -172,6 +181,22 @@
 				897D0E331F9B6BC300825E62 /* CommonNetworkManager.swift */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		897D0E351F9B6D8700825E62 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				897D0E361F9B6DA700825E62 /* User.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		897D0E381F9B732500825E62 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				897D0E391F9B733400825E62 /* StoreHelper.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,7 +276,13 @@
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
 				897D0E341F9B6BC300825E62 /* CommonNetworkManager.swift in Sources */,
+				3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */,
+				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
+				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
+				3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
+				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
+				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
