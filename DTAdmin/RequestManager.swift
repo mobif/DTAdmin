@@ -104,7 +104,7 @@ class RequestManager<T: Codable> {
         guard let selfCookie = self.cookie else {return}
         request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            print(String(data:data!, encoding: .utf8)!)
+            //print(String(data:data!, encoding: .utf8)!)
             var entity = [T]()
             var errorMsg: String?
             guard let responseValue = response as? HTTPURLResponse else {return}

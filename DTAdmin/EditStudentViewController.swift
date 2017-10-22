@@ -8,8 +8,12 @@
 
 import UIKit
 
-class EditStudentViewController: UIViewController {
-    var studentLoaded: StudentGetStructure?
+class EditStudentViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
+    var studentLoaded: StudentGetStructure?{
+        didSet {
+            self.view.layoutIfNeeded()
+        }
+    }
     var studentForSave: StudentPostStructure?
     
     @IBOutlet weak var loginStudentTextField: UITextField!
@@ -21,6 +25,8 @@ class EditStudentViewController: UIViewController {
     @IBOutlet weak var passwordStudentTextField: UITextField!
     @IBOutlet weak var passwordConfirmTextField: UITextField!
     @IBOutlet weak var gradeBookIdTextField: UITextField!
+    @IBOutlet weak var studentPhoto: UIImageView!
+    
     var titleViewController: String?
     var selectedGroupForStudent: GroupStructure?
     var selectedUserAccountForStudent: UserGetStructure?
@@ -39,16 +45,55 @@ class EditStudentViewController: UIViewController {
             getGroupFromAPI(byId: studentLoaded.groupId)
             getUserFromAPI(byId: studentLoaded.userId)
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postUpdateStudentToAPI))
+            if studentLoaded.photo.count > 1 {
+                showStudentPhoto()
+            }
             isNewStudent = false
+            
         } else {
             
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postNewStudentToAPI))
             isNewStudent = true
         }
         navigationItem.rightBarButtonItem = saveButton
+        let onImageGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EditStudentViewController.imageTaped(recognizer:)))
+        onImageGestureRecognizer.numberOfTapsRequired = 1
+        studentPhoto.isUserInteractionEnabled = true
+        studentPhoto.addGestureRecognizer(onImageGestureRecognizer)
         if titleViewController != nil {
             navigationItem.title = titleViewController
         }
+    }
+    
+    @objc func imageTaped(recognizer: UITapGestureRecognizer) {
+        let imagePhoto = UIImagePickerController()
+        imagePhoto.delegate = self
+        imagePhoto.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imagePhoto.allowsEditing = false
+        self.present(imagePhoto, animated: true)
+    }
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let size = selectedImage.size
+            let scale = selectedImage.scale
+            let sizeX = size.width
+            let sizeY = size.height
+            let k = ( sizeX / sizeY ) * 100
+            print(size)
+            print(scale)
+            let resizedImage = selectedImage.convert(toSize:CGSize(width:k, height:100.0), scale: UIScreen.main.scale)
+            studentPhoto.image = resizedImage
+        } else {
+            showWarningMsg("Image not selected!")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showStudentPhoto(){
+        let dataDecoded : Data = Data(base64Encoded: (studentLoaded?.photo)!, options: .ignoreUnknownCharacters)!
+        let decodedimage = UIImage(data: dataDecoded)
+        studentPhoto.image = decodedimage
     }
     
     @objc func postUpdateStudentToAPI(){
@@ -57,15 +102,14 @@ class EditStudentViewController: UIViewController {
             guard let userIDForUpdate = studentLoaded?.userId else { return }
             guard let studentForSave = studentForSave else { return }
             postMan.updateEntity(byId: userIDForUpdate, entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
-                if error != nil {
-                    print(error!)
+                if let error = error {
+                    self.showWarningMsg(error)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(studentForSave.convertToGetStructure(id: userIDForUpdate), false)
                     }
                     self.navigationController?.popViewController(animated: true)
                 } })
-            
         }
     }
     
@@ -90,7 +134,6 @@ class EditStudentViewController: UIViewController {
                         self.showWarningMsg("Incorect response structure")
                         return
                     }
-                    
                     if let resultModification = self.resultModification {
                         resultModification(studentForSave.convertToGetStructure(id: newUserId), true)
                     }
@@ -102,11 +145,10 @@ class EditStudentViewController: UIViewController {
     func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
-                print(text)
                 let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 return dict
             } catch {
-                print(error.localizedDescription)
+                self.showWarningMsg(error.localizedDescription)
             }
         }
         return nil
@@ -120,16 +162,20 @@ class EditStudentViewController: UIViewController {
     
     func prepareForSave() -> Bool {
         guard let login = loginStudentTextField.text,
-         let email = emailStudentTextField.text,
-         let name = nameStudentTextField.text,
-         let sname = surnameStudentTextField.text,
-         let fname = familyNameStudentTextField.text,
-         let gradebook = gradeBookIdTextField.text,
-         let pass = passwordStudentTextField.text,
-         let passConfirm = passwordConfirmTextField.text,
-         let group = selectedGroupForStudent?.groupId else { return false}
+            let email = emailStudentTextField.text,
+            let name = nameStudentTextField.text,
+            let sname = surnameStudentTextField.text,
+            let fname = familyNameStudentTextField.text,
+            let gradebook = gradeBookIdTextField.text,
+            let pass = passwordStudentTextField.text,
+            let passConfirm = passwordConfirmTextField.text,
+            let image : UIImage = studentPhoto.image,
+            let imageData = UIImagePNGRepresentation(image),
+            let group = selectedGroupForStudent?.groupId else { return false}
+        let photo = imageData.base64EncodedString(options: .lineLength64Characters)
+        print(photo.count)
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
-            studentForSave = StudentPostStructure(userName: login, password: pass, passwordConfirm: passConfirm, plainPassword: pass, email: email, gradebookId: gradebook, studentSurname: sname, studentName: name, studentFname: fname, groupId: group, photo: "")
+            studentForSave = StudentPostStructure(userName: login, password: pass, passwordConfirm: passConfirm, plainPassword: pass, email: email, gradebookId: gradebook, studentSurname: sname, studentName: name, studentFname: fname, groupId: group, photo: photo)
         } else {
             return false
         }
@@ -137,7 +183,7 @@ class EditStudentViewController: UIViewController {
     }
     
     @IBAction func selectGroup(_ sender: UIButton) {
-        guard let groupsViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "GroupsTableViewController") as? GroupsTableViewController else {return}
+        guard let groupsViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "GroupsTableViewController") as? GroupsTableViewController else { return }
         groupsViewController.titleViewController = "Groups"
         groupsViewController.selecectedGroup = {
             group in
@@ -146,28 +192,39 @@ class EditStudentViewController: UIViewController {
         }
         self.navigationController?.pushViewController(groupsViewController, animated: true)
     }
-    func getGroupFromAPI(byId: String){
+    func getGroupFromAPI(byId: String) {
         let manager = RequestManager<GroupStructure>()
-        var groupForCurrentStudent: GroupStructure?
         manager.getEntity(byId: byId, entityStructure: Entities.Group, returnResults: { (groupInstance, error) in
-            if groupInstance != nil {
-                groupForCurrentStudent = groupInstance!
+            if let groupInstance = groupInstance {
+                self.selectedGroupForStudent = groupInstance
+                self.groupButton.setTitle(groupInstance.groupName, for: .normal)
+            } else if let error = error {
+                self.showWarningMsg(error)
             }
-            self.selectedGroupForStudent = groupInstance
-            self.groupButton.setTitle(groupForCurrentStudent!.groupName, for: .normal)
         })
     }
     func getUserFromAPI(byId: String) {
         let manager = RequestManager<UserGetStructure>()
-        var userForCurrentStudent: UserGetStructure?
         manager.getEntity(byId: byId, entityStructure: .User, returnResults: { (userInstance, error) in
-            if userInstance != nil, error == nil {
-                userForCurrentStudent = userInstance!
+            if let userInstance = userInstance {
+                self.selectedUserAccountForStudent = userInstance
+                self.loginStudentTextField.text = userInstance.userName
+                self.emailStudentTextField.text = userInstance.email
+            } else if let error = error {
+                self.showWarningMsg(error)
             }
-            self.selectedUserAccountForStudent = userForCurrentStudent
-            self.loginStudentTextField.text = userForCurrentStudent?.userName
-            self.emailStudentTextField.text = userForCurrentStudent?.email
         })
     }
-    
+}
+extension UIImage
+{
+    func convert(toSize size:CGSize, scale:CGFloat) -> UIImage
+    {
+        let imgRect = CGRect(origin: CGPoint(x:0.0, y:0.0), size: size)
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        self.draw(in: imgRect)
+        guard let copied = UIGraphicsGetImageFromCurrentImageContext() else { return self }
+        UIGraphicsEndImageContext()
+        return copied
+    }
 }

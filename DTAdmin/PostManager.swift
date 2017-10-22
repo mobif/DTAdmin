@@ -54,14 +54,14 @@ class PostManager<T: Codable>{
         do {
             let newEntityAsJSON = try encoder.encode(entity)
             request.httpBody = newEntityAsJSON
-            print(String(data:newEntityAsJSON, encoding: .utf8)!)
+            //print(String(data:newEntityAsJSON, encoding: .utf8)!)
         } catch {
             returnResults(error.localizedDescription)
         }
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            print(String(data:data!, encoding: .utf8)!)
+            //print(String(data:data!, encoding: .utf8)!)
             guard let responseValue = response as? HTTPURLResponse else {return}
             if let error = error {
                 errorMsg = error.localizedDescription
@@ -81,11 +81,9 @@ class PostManager<T: Codable>{
         do {
             let newEntityAsJSON = try encoder.encode(entity)
             request.httpBody = newEntityAsJSON
-            //print(String(data:newEntityAsJSON, encoding: .utf8)!)
         } catch {
             returnResults(nil, error.localizedDescription)
         }
-        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
             //print(String(data:data!, encoding: .utf8)!)
@@ -116,7 +114,7 @@ class PostManager<T: Codable>{
         guard let request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.Delete, id: byId) else {return}
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            print(String(data:data!, encoding: .utf8)!)
+            //print(String(data:data!, encoding: .utf8)!)
             guard let responseValue = response as? HTTPURLResponse else {return}
             if let error = error {
                 errorMsg = error.localizedDescription
