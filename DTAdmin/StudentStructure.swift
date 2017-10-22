@@ -58,3 +58,8 @@ struct StudentPostStructure: Codable {
         case photo = "photo"
     }
 }
+extension StudentPostStructure {
+    func convertToGetStructure (id: String) -> StudentGetStructure {
+        return StudentGetStructure(userId: id, gradebookId: gradebookId, studentSurname: studentSurname, studentName: studentName, studentFname: studentFname, groupId: groupId, plainPassword: plainPassword, photo: photo)
+    }
+}

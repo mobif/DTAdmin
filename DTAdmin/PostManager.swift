@@ -75,31 +75,41 @@ class PostManager<T: Codable>{
             }.resume()
     }
     
-    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){
+    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ id: String?, _ error: String?)->()){
         guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.InsertData) else {return}
         let encoder = JSONEncoder()
         do {
             let newEntityAsJSON = try encoder.encode(entity)
             request.httpBody = newEntityAsJSON
-            print(String(data:newEntityAsJSON, encoding: .utf8)!)
+            //print(String(data:newEntityAsJSON, encoding: .utf8)!)
         } catch {
-            returnResults(error.localizedDescription)
+            returnResults(nil, error.localizedDescription)
         }
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            print(String(data:data!, encoding: .utf8)!)
-            guard let responseValue = response as? HTTPURLResponse else {return}
+            //print(String(data:data!, encoding: .utf8)!)
             if let error = error {
                 errorMsg = error.localizedDescription
+            } else {
+                guard let responseValue = response as? HTTPURLResponse,
+                let data = data else {
+                    errorMsg = "Protocol response Error"
+                    DispatchQueue.main.async {
+                        returnResults(nil, errorMsg)
+                    }
+                    return
+                }
+                if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
+                    errorMsg = "Error!:\(responseValue.statusCode)"
+                } else {
+                    let resultString = String(data:data, encoding: .utf8)
+                    DispatchQueue.main.async {
+                        returnResults(resultString, errorMsg)
+                    }
+                }
             }
-            if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
-                errorMsg = "Error!:\(responseValue.statusCode)"
-            }
-            DispatchQueue.main.async {
-                returnResults(errorMsg)
-            }
-            }.resume()
+        }.resume()
     }
     
     func deleteEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){

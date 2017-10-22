@@ -42,36 +42,64 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         updateTable()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        updateTable()
-    }
-    
     func updateTable(){
         let manager = RequestManager<StudentGetStructure>()
         manager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
             if error == nil,
-                students != nil{
-                self.studentList = students!
+                let students = students {
+                self.studentList = students
             }
             self.studentTable.reloadData()
         })
     }
     
     @objc func addNewStudent(){
-        guard let editStudentVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
-        editStudentVC.titleViewController = "New Student"
-        self.navigationController?.pushViewController(editStudentVC, animated: true)
+        guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
+        editStudentViewController.titleViewController = "New Student"
+        editStudentViewController.resultModification = { (studentReturn, isNew) in
+            if isNew {
+                self.studentList.append(studentReturn)
+                self.studentTable.reloadData()
+            }
+        }
+        self.navigationController?.pushViewController(editStudentViewController, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let studentInstance = filtered ? filteredList[indexPath.row] : studentList[indexPath.row]
         
-        guard let editStudentVC = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
-        editStudentVC.titleViewController = "Edit"
-        editStudentVC.studentLoaded = studentInstance
-        navigationController?.pushViewController(editStudentVC, animated: true)
+        guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
+        editStudentViewController.titleViewController = "Edit"
+        editStudentViewController.studentLoaded = studentInstance
+        editStudentViewController.resultModification = { (studentReturn, isNew) in
+            if !isNew {
+                if self.filtered {
+                    guard let indexOfStudent = self.getIndex(byId: studentReturn.userId) else {
+                        self.showWarningMsg("Updated user not found!")
+                        return
+                    }
+                    self.studentList[indexOfStudent] = studentReturn
+                } else {
+                    self.studentList[indexPath.row] = studentReturn
+                }
+                self.studentTable.reloadData()
+                
+            }
+        }
+        navigationController?.pushViewController(editStudentViewController, animated: true)
     }
+    
+    func getIndex(byId: String) -> Int? {
+        let findAll = studentList.filter({$0.userId == byId})
+        let index = studentList.index(where: {$0.userId == byId})
+        if findAll.count > 1 {
+            return nil
+        } else {
+            return index
+        }
+    }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         filtered = (searchBar.text!.count > 0)
     }
@@ -85,36 +113,28 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         return filteredList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! StudentsTableViewCell
+        let cellWraped = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as? StudentsTableViewCell
+        guard let cell = cellWraped else { return UITableViewCell() }
         cell.name.text = filteredList[indexPath.row].studentName
         cell.fName.text = filteredList[indexPath.row].studentFname
         cell.sName.text = filteredList[indexPath.row].studentSurname
         return cell
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
             let postMan = PostManager<StudentPostStructure>()
             let studentId = self.filteredList[indexPath.row].userId
             postMan.deleteEntity(byId: studentId, entityStructure: Entities.Student, returnResults: { error in
-                if error != nil {
-                    print(error!)
+                if let error = error {
+                    self.showWarningMsg(error)
                 } else {
-//                    self.studentTable.beginUpdates()
-//                    self.studentTable.deleteRows(at: [indexPath], with: .automatic)
-//                    self.studentTable.endUpdates()
                     self.updateTable()
                 }
             })
         }
         return [delete]
     }
-
-   
 
 }
 extension UIViewController {

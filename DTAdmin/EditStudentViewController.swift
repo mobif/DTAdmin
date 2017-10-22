@@ -25,19 +25,19 @@ class EditStudentViewController: UIViewController {
     var selectedGroupForStudent: GroupStructure?
     var selectedUserAccountForStudent: UserGetStructure?
     var isNewStudent = true
+    var resultModification: ((StudentGetStructure, Bool) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let saveButton: UIBarButtonItem
-        if studentLoaded != nil {
-            nameStudentTextField.text = studentLoaded!.studentName
-            familyNameStudentTextField.text = studentLoaded!.studentFname
-            surnameStudentTextField.text = studentLoaded!.studentSurname
-            passwordStudentTextField.text = studentLoaded!.plainPassword
-            gradeBookIdTextField.text = studentLoaded!.gradebookId
-            
-            getGroupFromAPI(byId: studentLoaded!.groupId)
-            getUserFromAPI(byId: studentLoaded!.userId)
+        if let studentLoaded = studentLoaded {
+            nameStudentTextField.text = studentLoaded.studentName
+            familyNameStudentTextField.text = studentLoaded.studentFname
+            surnameStudentTextField.text = studentLoaded.studentSurname
+            passwordStudentTextField.text = studentLoaded.plainPassword
+            gradeBookIdTextField.text = studentLoaded.gradebookId
+            getGroupFromAPI(byId: studentLoaded.groupId)
+            getUserFromAPI(byId: studentLoaded.userId)
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postUpdateStudentToAPI))
             isNewStudent = false
         } else {
@@ -55,39 +55,79 @@ class EditStudentViewController: UIViewController {
         let postMan = PostManager<StudentPostStructure>()
         if prepareForSave(){
             guard let userIDForUpdate = studentLoaded?.userId else { return }
-            postMan.updateEntity(byId: userIDForUpdate, entity: studentForSave!, entityStructure: Entities.Student, returnResults: { error in
+            guard let studentForSave = studentForSave else { return }
+            postMan.updateEntity(byId: userIDForUpdate, entity: studentForSave, entityStructure: Entities.Student, returnResults: { error in
                 if error != nil {
                     print(error!)
                 } else {
+                    if let resultModification = self.resultModification {
+                        resultModification(studentForSave.convertToGetStructure(id: userIDForUpdate), false)
+                    }
                     self.navigationController?.popViewController(animated: true)
                 } })
+            
         }
     }
     
     @objc func postNewStudentToAPI(){
         let postMan = PostManager<StudentPostStructure>()
         if prepareForSave(){
-            postMan.insertEntity(entity: studentForSave!, entityStructure: Entities.Student, returnResults: { error in
-                if error != nil {
-                    print(error!)
+            guard let studentForSave = studentForSave else { return }
+            postMan.insertEntity(entity: studentForSave, entityStructure: Entities.Student, returnResults: { (resultString, error) in
+                if let error = error {
+                        self.showWarningMsg(error)
                 } else {
+                    guard let resultStringUnwraper = resultString else {
+                        self.showWarningMsg("No server response")
+                        return
+                    }
+                    let dictionaryResult = self.convertToDictionary(text: resultStringUnwraper)
+                    guard let dictionaryResultUnwraped = dictionaryResult else {
+                        self.showWarningMsg("Incorect response structure")
+                        return
+                    }
+                    guard let newUserId = self.getIdAsInt(dict: dictionaryResultUnwraped) else {
+                        self.showWarningMsg("Incorect response structure")
+                        return
+                    }
+                    
+                    if let resultModification = self.resultModification {
+                        resultModification(studentForSave.convertToGetStructure(id: newUserId), true)
+                    }
                     self.navigationController?.popViewController(animated: true)
                 } })
         }
     }
     
+    func convertToDictionary(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                print(text)
+                let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                return dict
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
+    
+    func getIdAsInt(dict: [String: Any]) -> String? {
+        let id = dict["id"] as? Int
+        guard let idValue = id else { return nil }
+        return String(idValue)
+    }
+    
     func prepareForSave() -> Bool {
-        guard let login = loginStudentTextField.text else { return false}
-        guard let email = emailStudentTextField.text else { return false}
-        guard let name = nameStudentTextField.text else { return false}
-        guard let sname = surnameStudentTextField.text else { return false}
-        guard let fname = familyNameStudentTextField.text else { return false}
-        guard let gradebook = gradeBookIdTextField.text else { return false}
-        guard let pass = passwordStudentTextField.text else { return false}
-        guard let passConfirm = passwordConfirmTextField.text else { return false}
-        guard let group = selectedGroupForStudent?.groupId else { return false}
-        
-        
+        guard let login = loginStudentTextField.text,
+         let email = emailStudentTextField.text,
+         let name = nameStudentTextField.text,
+         let sname = surnameStudentTextField.text,
+         let fname = familyNameStudentTextField.text,
+         let gradebook = gradeBookIdTextField.text,
+         let pass = passwordStudentTextField.text,
+         let passConfirm = passwordConfirmTextField.text,
+         let group = selectedGroupForStudent?.groupId else { return false}
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
             studentForSave = StudentPostStructure(userName: login, password: pass, passwordConfirm: passConfirm, plainPassword: pass, email: email, gradebookId: gradebook, studentSurname: sname, studentName: name, studentFname: fname, groupId: group, photo: "")
         } else {

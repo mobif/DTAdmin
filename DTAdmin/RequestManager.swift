@@ -33,7 +33,7 @@ class RequestManager<T: Codable> {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
-        print(parameters)
+        //print(parameters)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var logedUser: T?
             var errorMsg: String?
@@ -45,6 +45,7 @@ class RequestManager<T: Codable> {
                     guard let data = data else { return }
                     do {
                         logedUser = try JSONDecoder().decode(T.self, from: data)
+                        //UserDefaults.
                     } catch {
                         errorMsg = "Incorrect data structure!"
                     }
@@ -77,7 +78,7 @@ class RequestManager<T: Codable> {
                 if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                     guard let data = data else { return }
                     do {
-                        print(String(data: data, encoding: .utf8)!)
+                        //print(String(data: data, encoding: .utf8)!)
                         dataList = try JSONDecoder().decode([T].self, from: data)
                         
                     } catch {
