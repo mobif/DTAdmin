@@ -14,8 +14,15 @@ class GroupViewController: UIViewController {
     
     var commonDataForGroups = [Group]()
     
+    var newGroup: Group?
+    var updatedGroup: Group?
+    var indexForUpdateGroup: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Groups"
+        let createNewGroupBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(self.moveCreteUpdateGroupViewController))
+        self.navigationItem.rightBarButtonItem = createNewGroupBarButtonItem
         groupTableView.delegate = self
         groupTableView.dataSource = self
         
@@ -24,6 +31,17 @@ class GroupViewController: UIViewController {
             DispatchQueue.main.async {
                 self.groupTableView.reloadData()
             }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if newGroup != nil {
+           commonDataForGroups.append(newGroup!)
+            groupTableView.reloadData()
+        }
+        if updatedGroup != nil && indexForUpdateGroup != nil {
+            self.commonDataForGroups[indexForUpdateGroup!] = self.updatedGroup!
+            groupTableView.reloadData()
         }
     }
     
@@ -66,6 +84,14 @@ class GroupViewController: UIViewController {
             }
         }
     }
+    
+    @objc func moveCreteUpdateGroupViewController(sender:UIBarButtonItem) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
+        let creteUpdateGroupViewController = storyBoard.instantiateViewController(withIdentifier: "CreateUpdateVC") as! CreateUpdateViewController
+        
+            self.navigationController?.pushViewController(creteUpdateGroupViewController, animated: true)
+        
+    }
     /*
      // MARK: - Navigation
      
@@ -80,7 +106,19 @@ class GroupViewController: UIViewController {
 
 //MARK: table view delegate
 extension GroupViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
+        let creteUpdateGroupViewController = storyBoard.instantiateViewController(withIdentifier: "CreateUpdateVC") as! CreateUpdateViewController
+        self.indexForUpdateGroup = indexPath.row
+        creteUpdateGroupViewController.view.layoutIfNeeded()
+        creteUpdateGroupViewController.groupForUpdate = commonDataForGroups[indexPath.row]
+        creteUpdateGroupViewController.groupNameTextField.text = commonDataForGroups[indexPath.row].groupName
+        creteUpdateGroupViewController.selectFacultyButton.titleLabel?.text = commonDataForGroups[indexPath.row].facultyName
+        creteUpdateGroupViewController.selectSpecialityButton.titleLabel?.text = commonDataForGroups[indexPath.row].specialityName
+        
+            self.navigationController?.pushViewController(creteUpdateGroupViewController, animated: true)
+        
+    }
 }
 
 //MARK: table view data source
@@ -97,6 +135,21 @@ extension GroupViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return commonDataForGroups.count
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "DELETE"){(action, indexPath) in
+            HTTPService.deleteData(entityName: "group", id: self.commonDataForGroups[indexPath.row].groupId){
+                (request: HTTPURLResponse) in
+                if request.statusCode == 200 {
+                    self.commonDataForGroups.remove(at: indexPath.row)
+                    DispatchQueue.main.async {
+                        self.groupTableView.reloadData()
+                    }
+                }
+            }
+        }
+        return[delete]
     }
     
 }

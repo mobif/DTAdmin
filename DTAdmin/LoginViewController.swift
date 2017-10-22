@@ -15,7 +15,9 @@ class LoginViewController: UIViewController {
             if result.statusCode == 200 {
                 let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
                 let groupViewController = storyBoard.instantiateViewController(withIdentifier: "GroupVC") as! GroupViewController
-                self.present(groupViewController, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                   self.navigationController?.pushViewController(groupViewController, animated: true)
+                }
             }
         }
     }

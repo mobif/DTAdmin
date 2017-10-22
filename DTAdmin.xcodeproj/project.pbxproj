@@ -17,7 +17,10 @@
 		8427807D1F97A7F8002D6877 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427807C1F97A7F8002D6877 /* HTTPService.swift */; };
 		8427807F1F97A834002D6877 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427807E1F97A834002D6877 /* Entities.swift */; };
 		842780811F97A88B002D6877 /* GroupSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842780801F97A88B002D6877 /* GroupSB.storyboard */; };
+		844EAEE11F9B4B1600636600 /* FacultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EAEE01F9B4B1600636600 /* FacultyViewController.swift */; };
+		844EAEE31F9B4B2E00636600 /* SpecialityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844EAEE21F9B4B2E00636600 /* SpecialityViewController.swift */; };
 		8453CDAA1F98CEA2004949E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453CDA91F98CEA1004949E9 /* LoginViewController.swift */; };
+		84F41D0C1F9A0BE0004F7ED1 /* CreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F41D0B1F9A0BE0004F7ED1 /* CreateUpdateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +36,10 @@
 		8427807C1F97A7F8002D6877 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		8427807E1F97A834002D6877 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		842780801F97A88B002D6877 /* GroupSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupSB.storyboard; sourceTree = "<group>"; };
+		844EAEE01F9B4B1600636600 /* FacultyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyViewController.swift; sourceTree = "<group>"; };
+		844EAEE21F9B4B2E00636600 /* SpecialityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialityViewController.swift; sourceTree = "<group>"; };
 		8453CDA91F98CEA1004949E9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		84F41D0B1F9A0BE0004F7ED1 /* CreateUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUpdateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,9 @@
 				842780801F97A88B002D6877 /* GroupSB.storyboard */,
 				8453CDA91F98CEA1004949E9 /* LoginViewController.swift */,
 				840EACDA1F98D1F10055C9D4 /* GroupViewController.swift */,
+				84F41D0B1F9A0BE0004F7ED1 /* CreateUpdateViewController.swift */,
+				844EAEE01F9B4B1600636600 /* FacultyViewController.swift */,
+				844EAEE21F9B4B2E00636600 /* SpecialityViewController.swift */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -212,10 +221,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				840EACDB1F98D1F10055C9D4 /* GroupViewController.swift in Sources */,
+				844EAEE11F9B4B1600636600 /* FacultyViewController.swift in Sources */,
 				8427807F1F97A834002D6877 /* Entities.swift in Sources */,
+				84F41D0C1F9A0BE0004F7ED1 /* CreateUpdateViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
 				8453CDAA1F98CEA2004949E9 /* LoginViewController.swift in Sources */,
 				8427807D1F97A7F8002D6877 /* HTTPService.swift in Sources */,
+				844EAEE31F9B4B2E00636600 /* SpecialityViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 			);
