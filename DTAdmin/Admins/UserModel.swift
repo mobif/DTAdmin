@@ -21,6 +21,7 @@ class UserModel {
       roles = json["roles"] as? [String] ?? ["none"]
     }
   }
+  
   struct Admins: Decodable {
     let id: String
     let username: String
@@ -38,6 +39,7 @@ class UserModel {
       self.last_login = json["last_login"] as? String ?? nil
     }
   }
+  
   struct NewAdmin {
     let userName: String
     let password: String
@@ -50,6 +52,5 @@ class UserModel {
         "password_confirm": password,
         "email": email]
     }
-    
   }
 }

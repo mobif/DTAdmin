@@ -67,6 +67,7 @@ class NetworkManager {
   func logIn(username: String, password: String, completionHandler: @escaping (_ user: UserModel.Admin, _ cookie: String) -> ()) {
     let credentials = [Credentials.userName.rawValue: username, Credentials.password.rawValue: password]
 //    FIXME: in case JSONSerialization returns error we will not know about it
+//    try block will throw error and app will be terminated
     guard let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: []) else { return }
     guard let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToUserLogIn.rawValue) else { return }
     let request = requestBasicWithBody(httpBody: httpBody, url: url, method: "POST")

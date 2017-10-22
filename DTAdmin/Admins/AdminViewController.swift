@@ -71,7 +71,6 @@ private func setUpNavigationBar() {
 }
 
 extension AdminViewController: UITableViewDelegate {
-  
 }
 
 extension AdminViewController: UITableViewDataSource {
@@ -81,11 +80,11 @@ extension AdminViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //TODO: make cell more informative, need to customize
     let cell = tableView.dequeueReusableCell(withIdentifier: "reusableAdminCell")!
     cell.textLabel?.text = filteredList?[indexPath.row].username
     return cell
   }
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.title = NSLocalizedString("Edit", comment: "Title for edit admin creation view")
@@ -93,6 +92,7 @@ extension AdminViewController: UITableViewDataSource {
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
     
   }
+  
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       
