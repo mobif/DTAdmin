@@ -111,9 +111,18 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let item = self.records[indexPath.row].id
             print(item)
-            self.queryService.deleteReguest(sufix: "subject/del/\(item)")
-            self.records.remove(at: indexPath.row)
-            tableView.reloadData()
+            self.queryService.deleteReguest(sufix: "subject/del/\(item)", completion: { (code: Int) in
+                print(code)
+                DispatchQueue.main.async {
+                    if code == 200 {
+                        self.records.remove(at: indexPath.row)
+                        tableView.reloadData()
+                    } else {
+                        self.showMessage(message: NSLocalizedString("Error", comment: "Message for user") )
+                    }
+                }
+            })
+        
         }
         let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
             if let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController

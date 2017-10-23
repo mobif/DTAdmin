@@ -71,7 +71,7 @@ class QueryService {
         task.resume()
     }
     
-    func deleteReguest(sufix: String) {
+    func deleteReguest(sufix: String, completion: @escaping (Int) ->()) {
         guard let url = URL(string: basePath + sufix) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
@@ -87,6 +87,7 @@ class QueryService {
             if httpStatus.statusCode != 200 {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
             }
+            completion(httpStatus.statusCode)
         }
         task.resume()
     }
