@@ -25,7 +25,6 @@
 		C7902F601F947C420016D7BF /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7902F5F1F947C420016D7BF /* Entities.swift */; };
 		C79D17691F9553E2000C0D20 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D17681F9553E2000C0D20 /* GroupsTableViewController.swift */; };
 		C79D176B1F9554E9000C0D20 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D176A1F9554E9000C0D20 /* GroupTableViewCell.swift */; };
-		C79D176D1F956D2E000C0D20 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D176C1F956D2E000C0D20 /* PostManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +48,6 @@
 		C7902F5F1F947C420016D7BF /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		C79D17681F9553E2000C0D20 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		C79D176A1F9554E9000C0D20 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
-		C79D176C1F956D2E000C0D20 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,7 +158,6 @@
 				C7143CA81F94C7D2005EEE56 /* StudentsTableViewCell.swift */,
 				C7209C681F913F4F0054D53D /* LoginViewController.swift */,
 				C7209C641F913D9C0054D53D /* RequestManager.swift */,
-				C79D176C1F956D2E000C0D20 /* PostManager.swift */,
 				C78F5FA51F93B6E7003C007A /* HTTPStatusCodes.swift */,
 				C78F5FA91F93D6A9003C007A /* UserStructure.swift */,
 				C7143CAC1F953179005EEE56 /* GroupStructure.swift */,
@@ -247,7 +244,6 @@
 				C79D176B1F9554E9000C0D20 /* GroupTableViewCell.swift in Sources */,
 				C79D17691F9553E2000C0D20 /* GroupsTableViewController.swift in Sources */,
 				C78F5FA61F93B6E7003C007A /* HTTPStatusCodes.swift in Sources */,
-				C79D176D1F956D2E000C0D20 /* PostManager.swift in Sources */,
 				C7143CAD1F953179005EEE56 /* GroupStructure.swift in Sources */,
 				C7209C691F913F4F0054D53D /* LoginViewController.swift in Sources */,
 				C7209C651F913D9C0054D53D /* RequestManager.swift in Sources */,

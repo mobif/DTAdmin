@@ -117,7 +117,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
-            let postMan = PostManager<StudentPostStructure>()
+            let postMan = RequestManager<StudentPostStructure>()
             let studentId = self.filteredList[indexPath.row].userId
             postMan.deleteEntity(byId: studentId, entityStructure: Entities.Student, returnResults: { error in
                 if let error = error {

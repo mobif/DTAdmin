@@ -93,7 +93,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @objc func postUpdateStudentToAPI(){
-        let postMan = PostManager<StudentPostStructure>()
+        let postMan = RequestManager<StudentPostStructure>()
         if prepareForSave(){
             guard let userIDForUpdate = studentLoaded?.userId else { return }
             guard let studentForSave = studentForSave else { return }
@@ -110,7 +110,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @objc func postNewStudentToAPI(){
-        let postMan = PostManager<StudentPostStructure>()
+        let postMan = RequestManager<StudentPostStructure>()
         if prepareForSave(){
             guard let studentForSave = studentForSave else { return }
             postMan.insertEntity(entity: studentForSave, entityStructure: Entities.Student, returnResults: { (resultString, error) in

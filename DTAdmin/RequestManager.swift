@@ -25,6 +25,29 @@ class RequestManager<T: Codable> {
         }
         return nil
     }
+    let urlPrepare: [TypeReqest: (command: String,method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET")]
+    
+    enum TypeReqest {
+        case InsertData
+        case GetRecords
+        case UpdateData
+        case Delete
+        case GetOneRecord
+    }
+    
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "") -> URLRequest? {
+        guard let URLCreationData = urlPrepare[type] else { return nil }
+        let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id
+        guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else { return nil }
+        var request = URLRequest(url: url)
+        request.httpMethod = URLCreationData.method
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("UTF-8", forHTTPHeaderField: "Charset")
+        if let selfCookie = self.cookie {
+            request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
+        }
+        return request
+    }
     
     func getLoginData(for userName: String, password: String, returnResults: @escaping (_ responseUser: T?, _ cookies: HTTPCookie?, _ error: String?) -> ()) {
         let parameters = ["username":userName,"password":password]
@@ -33,7 +56,6 @@ class RequestManager<T: Codable> {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
-        //print(parameters)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var logedUser: T?
             var errorMsg: String?
@@ -60,14 +82,7 @@ class RequestManager<T: Codable> {
     }
     
     func getEntityList(byStructure: Entities, returnResults: @escaping (_ list: [T]?, _ error: String?) -> ()) {
-        let commandInUrl = "/"+byStructure.rawValue+"/getRecords"
-        guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return}
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-        guard let selfCookie = self.cookie else {return}
-        request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
+        guard let request = getURLReqest(entityStructure: byStructure, type: TypeReqest.GetRecords) else { return }
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var dataList = [T]()
             var errorMsg: String?
@@ -78,7 +93,6 @@ class RequestManager<T: Codable> {
                 if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                     guard let data = data else { return }
                     do {
-                        //print(String(data: data, encoding: .utf8)!)
                         dataList = try JSONDecoder().decode([T].self, from: data)
                         
                     } catch {
@@ -95,16 +109,8 @@ class RequestManager<T: Codable> {
     }
     
     func getEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ entity: T?, _ error: String?)->()) {
-        let commandInUrl = "/"+entityStructure.rawValue+"/getRecords/"+byId
-        guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return}
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-        guard let selfCookie = self.cookie else {return}
-        request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
+        guard let request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.GetOneRecord, id: byId) else { return }
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            //print(String(data:data!, encoding: .utf8)!)
             var entity = [T]()
             var errorMsg: String?
             guard let responseValue = response as? HTTPURLResponse else {return}
@@ -127,7 +133,87 @@ class RequestManager<T: Codable> {
             }
         }.resume()
     }
+    func updateEntity(byId: String, entity:T, entityStructure: Entities, returnResults: @escaping (_ error: String?) -> ()) {
+        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.UpdateData, id: byId) else { return }
+        let encoder = JSONEncoder()
+        do {
+            let newEntityAsJSON = try encoder.encode(entity)
+            request.httpBody = newEntityAsJSON
+        } catch {
+            returnResults(error.localizedDescription)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var errorMsg: String?
+            if let error = error {
+                errorMsg = error.localizedDescription
+                DispatchQueue.main.async {
+                    returnResults(errorMsg)
+                }
+            } else {
+                guard let responseValue = response as? HTTPURLResponse else { return }
+                if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
+                    errorMsg = "Error!:\(responseValue.statusCode)"
+                }
+                DispatchQueue.main.async {
+                    returnResults(errorMsg)
+                }
+            }
+            }.resume()
+    }
     
+    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ id: String?, _ error: String?) -> ()) {
+        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.InsertData) else { return }
+        let encoder = JSONEncoder()
+        do {
+            let newEntityAsJSON = try encoder.encode(entity)
+            request.httpBody = newEntityAsJSON
+        } catch {
+            returnResults(nil, error.localizedDescription)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var errorMsg: String?
+            if let error = error {
+                errorMsg = error.localizedDescription
+                DispatchQueue.main.async {
+                    returnResults(nil, errorMsg)
+                }
+            } else {
+                guard let responseValue = response as? HTTPURLResponse,
+                    let data = data else {
+                        errorMsg = "Protocol response Error"
+                        DispatchQueue.main.async {
+                            returnResults(nil, errorMsg)
+                        }
+                        return
+                }
+                if responseValue.statusCode != HTTPStatusCodes.OK.rawValue {
+                    errorMsg = "Error!:\(responseValue.statusCode)"
+                } else {
+                    let resultString = String(data:data, encoding: .utf8)
+                    DispatchQueue.main.async {
+                        returnResults(resultString, errorMsg)
+                    }
+                }
+            }
+            }.resume()
+    }
+    
+    func deleteEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.Delete, id: byId) else { return }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var errorMsg: String?
+            guard let responseValue = response as? HTTPURLResponse else { return }
+            if let error = error {
+                errorMsg = error.localizedDescription
+            }
+            if responseValue.statusCode != HTTPStatusCodes.OK.rawValue {
+                errorMsg = "Error!:\(responseValue.statusCode)"
+            }
+            DispatchQueue.main.async {
+                returnResults(errorMsg)
+            }
+            }.resume()
+    }
 
 }
 extension UserDefaults {
