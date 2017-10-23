@@ -94,7 +94,7 @@ class RequestManager<T: Codable> {
         }.resume()
     }
     
-    func getEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ entity: T?, _ error: String?)->()){
+    func getEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ entity: T?, _ error: String?)->()) {
         let commandInUrl = "/"+entityStructure.rawValue+"/getRecords/"+byId
         guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return}
         var request = URLRequest(url: url)
@@ -119,7 +119,7 @@ class RequestManager<T: Codable> {
                         errorMsg = error.localizedDescription
                     }
                 } else {
-                    errorMsg = "No such user or bad password!"
+                    errorMsg = NSLocalizedString("No such user or bad password!", comment: "No such user or bad password!")
                 }
                 DispatchQueue.main.async {
                     returnResults(entity.first, errorMsg)

@@ -14,7 +14,7 @@ class PostManager<T: Codable>{
     let urlLogin = "/login/index"
     let urlStudents = "/student/getRecords"
     
-    let urlPrepare: [TypeReqest:(command:String,method:String)] = [.InsertData:("/insertData","POST"),.GetRecords:("/getRecords","GET"), .UpdateData:("/update/","POST"), .Delete:("/del/","GET")]
+    let urlPrepare: [TypeReqest: (command: String,method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET")]
     
     enum TypeReqest {
         case InsertData
@@ -33,10 +33,10 @@ class PostManager<T: Codable>{
         return nil
     }
     
-    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "") -> URLRequest?{
-        guard let URLCreationData = urlPrepare[type] else {return nil}
-        let commandInUrl = "/"+entityStructure.rawValue+URLCreationData.command + id
-        guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else {return nil}
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "") -> URLRequest? {
+        guard let URLCreationData = urlPrepare[type] else { return nil }
+        let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id
+        guard let url = URL(string: urlProtocol+urlDomain+commandInUrl) else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = URLCreationData.method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -48,35 +48,36 @@ class PostManager<T: Codable>{
     }
     
     
-    func updateEntity(byId: String, entity:T, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){
-        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.UpdateData, id: byId) else {return}
+    func updateEntity(byId: String, entity:T, entityStructure: Entities, returnResults: @escaping (_ error: String?) -> ()) {
+        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.UpdateData, id: byId) else { return }
         let encoder = JSONEncoder()
         do {
             let newEntityAsJSON = try encoder.encode(entity)
             request.httpBody = newEntityAsJSON
-            //print(String(data:newEntityAsJSON, encoding: .utf8)!)
         } catch {
             returnResults(error.localizedDescription)
         }
-        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            //print(String(data:data!, encoding: .utf8)!)
-            guard let responseValue = response as? HTTPURLResponse else {return}
             if let error = error {
                 errorMsg = error.localizedDescription
+                DispatchQueue.main.async {
+                    returnResults(errorMsg)
+                }
+            } else {
+                guard let responseValue = response as? HTTPURLResponse else { return }
+                if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
+                    errorMsg = "Error!:\(responseValue.statusCode)"
+                }
+                DispatchQueue.main.async {
+                    returnResults(errorMsg)
+                }
             }
-            if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
-                errorMsg = "Error!:\(responseValue.statusCode)"
-            }
-            DispatchQueue.main.async {
-                returnResults(errorMsg)
-            }
-            }.resume()
+        }.resume()
     }
     
-    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ id: String?, _ error: String?)->()){
-        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.InsertData) else {return}
+    func insertEntity(entity:T, entityStructure: Entities, returnResults: @escaping (_ id: String?, _ error: String?) -> ()) {
+        guard var request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.InsertData) else { return }
         let encoder = JSONEncoder()
         do {
             let newEntityAsJSON = try encoder.encode(entity)
@@ -86,9 +87,11 @@ class PostManager<T: Codable>{
         }
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            //print(String(data:data!, encoding: .utf8)!)
             if let error = error {
                 errorMsg = error.localizedDescription
+                DispatchQueue.main.async {
+                    returnResults(nil, errorMsg)
+                }
             } else {
                 guard let responseValue = response as? HTTPURLResponse,
                 let data = data else {
@@ -98,7 +101,7 @@ class PostManager<T: Codable>{
                     }
                     return
                 }
-                if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
+                if responseValue.statusCode != HTTPStatusCodes.OK.rawValue {
                     errorMsg = "Error!:\(responseValue.statusCode)"
                 } else {
                     let resultString = String(data:data, encoding: .utf8)
@@ -110,16 +113,15 @@ class PostManager<T: Codable>{
         }.resume()
     }
     
-    func deleteEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ error: String?)->()){
-        guard let request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.Delete, id: byId) else {return}
+    func deleteEntity(byId: String, entityStructure: Entities, returnResults: @escaping (_ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: entityStructure, type: TypeReqest.Delete, id: byId) else { return }
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             var errorMsg: String?
-            //print(String(data:data!, encoding: .utf8)!)
-            guard let responseValue = response as? HTTPURLResponse else {return}
+            guard let responseValue = response as? HTTPURLResponse else { return }
             if let error = error {
                 errorMsg = error.localizedDescription
             }
-            if responseValue.statusCode != HTTPStatusCodes.OK.rawValue{
+            if responseValue.statusCode != HTTPStatusCodes.OK.rawValue {
                 errorMsg = "Error!:\(responseValue.statusCode)"
             }
             DispatchQueue.main.async {

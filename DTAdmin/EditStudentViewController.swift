@@ -76,22 +76,18 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let size = selectedImage.size
-            let scale = selectedImage.scale
-            let sizeX = size.width
-            let sizeY = size.height
-            let k = ( sizeX / sizeY ) * 100
-            print(size)
-            print(scale)
-            let resizedImage = selectedImage.convert(toSize:CGSize(width:k, height:100.0), scale: UIScreen.main.scale)
+            let aspectRatioForWidth = ( size.width / size.height ) * 100
+            let resizedImage = selectedImage.convert(toSize: CGSize(width: aspectRatioForWidth, height: 100.0), scale: UIScreen.main.scale)
             studentPhoto.image = resizedImage
         } else {
-            showWarningMsg("Image not selected!")
+            showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))
         }
         self.dismiss(animated: true, completion: nil)
     }
     
     func showStudentPhoto(){
-        let dataDecoded : Data = Data(base64Encoded: (studentLoaded?.photo)!, options: .ignoreUnknownCharacters)!
+        guard let photoBase64 = studentLoaded?.photo else { return }
+        let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters)!
         let decodedimage = UIImage(data: dataDecoded)
         studentPhoto.image = decodedimage
     }
@@ -122,16 +118,16 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
                         self.showWarningMsg(error)
                 } else {
                     guard let resultStringUnwraper = resultString else {
-                        self.showWarningMsg("No server response")
+                        self.showWarningMsg(NSLocalizedString("No server response", comment: "Server not respondig for request"))
                         return
                     }
                     let dictionaryResult = self.convertToDictionary(text: resultStringUnwraper)
                     guard let dictionaryResultUnwraped = dictionaryResult else {
-                        self.showWarningMsg("Incorect response structure")
+                        self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "The response message cannot be interpreted"))
                         return
                     }
                     guard let newUserId = self.getIdAsInt(dict: dictionaryResultUnwraped) else {
-                        self.showWarningMsg("Incorect response structure")
+                        self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
                         return
                     }
                     if let resultModification = self.resultModification {
@@ -177,6 +173,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
             studentForSave = StudentPostStructure(userName: login, password: pass, passwordConfirm: passConfirm, plainPassword: pass, email: email, gradebookId: gradebook, studentSurname: sname, studentName: name, studentFname: fname, groupId: group, photo: photo)
         } else {
+            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
             return false
         }
         return true

@@ -30,7 +30,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         let navigationItem = self.navigationItem
         
-        navigationItem.title = "Students"
+        navigationItem.title = NSLocalizedString("Students", comment: "List all students")
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addNewStudent))
         navigationItem.rightBarButtonItem = doneItem
         if user != nil {
@@ -55,7 +55,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func addNewStudent(){
         guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
-        editStudentViewController.titleViewController = "New Student"
+        editStudentViewController.titleViewController = NSLocalizedString("New Student", comment: "Create new Student")
         editStudentViewController.resultModification = { (studentReturn, isNew) in
             if isNew {
                 self.studentList.append(studentReturn)
@@ -70,13 +70,13 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         let studentInstance = filtered ? filteredList[indexPath.row] : studentList[indexPath.row]
         
         guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
-        editStudentViewController.titleViewController = "Edit"
+        editStudentViewController.titleViewController = NSLocalizedString("Edit", comment: "Edit account of student")
         editStudentViewController.studentLoaded = studentInstance
         editStudentViewController.resultModification = { (studentReturn, isNew) in
             if !isNew {
                 if self.filtered {
                     guard let indexOfStudent = self.getIndex(byId: studentReturn.userId) else {
-                        self.showWarningMsg("Updated user not found!")
+                        self.showWarningMsg(NSLocalizedString("User not found!", comment: "Updated user not found!"))
                         return
                     }
                     self.studentList[indexOfStudent] = studentReturn
@@ -84,20 +84,14 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
                     self.studentList[indexPath.row] = studentReturn
                 }
                 self.studentTable.reloadData()
-                
             }
         }
         navigationController?.pushViewController(editStudentViewController, animated: true)
     }
     
     func getIndex(byId: String) -> Int? {
-        let findAll = studentList.filter({$0.userId == byId})
-        let index = studentList.index(where: {$0.userId == byId})
-        if findAll.count > 1 {
-            return nil
-        } else {
-            return index
-        }
+        let index = studentList.index(where: { $0.userId == byId } )
+        return index
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -129,7 +123,16 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
-                    self.updateTable()
+                    if self.filtered {
+                        guard let indexOfStudent = self.getIndex(byId: studentId) else {
+                            self.showWarningMsg(NSLocalizedString("UserID not found!", comment: "UserID not found in list!"))
+                            return
+                        }
+                        self.studentList.remove(at: indexOfStudent)
+                    } else {
+                        self.studentList.remove(at: indexPath.row)
+                    }
+                    self.studentTable.reloadData()
                 }
             })
         }
