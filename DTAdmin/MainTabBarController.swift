@@ -54,6 +54,13 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         adminsNavController.tabBarItem = adminsBarItem
         tabBarViewControllers.append(adminsNavController)
         
+//MARK: Create timeTable tab
+        let timeTableStoryboard = UIStoryboard.init(name: "TimeTable", bundle: nil)
+        guard let timeTableNavController = timeTableStoryboard.instantiateViewController(withIdentifier: "timeTableNavController") as? UINavigationController else { return }
+        let timeTableBarItem = UITabBarItem(title: "Time Table", image: nil, selectedImage: nil)
+        timeTableNavController.tabBarItem = timeTableBarItem
+        tabBarViewControllers.append(timeTableNavController)
+        
         self.setViewControllers(tabBarViewControllers, animated: true)
     }
     

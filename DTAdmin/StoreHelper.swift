@@ -48,8 +48,8 @@ class StoreHelper: NSObject {
         UserDefaults.standard.synchronize()
     }
     
-    class func getCookie () -> [String : String] {
-        let cookie = UserDefaults.standard.value(forKey: "kCookie") as! [String : String]
+    class func getCookie () -> [String : String]? {
+        let cookie = UserDefaults.standard.value(forKey: "kCookie") as? [String : String]
         return cookie
     }
 }

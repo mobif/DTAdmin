@@ -50,9 +50,11 @@ class NetworkManager {
   
   private func requestWithCookie(url: URL, method: String) -> URLRequest? {
     if UserDefaults.standard.isLoggedIn(), let cookieValue = UserDefaults.standard.getCookie() {
-      var request = requestBasic(with: url, method: method)
-      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
-      return request
+        var request = requestBasic(with: url, method: method)
+        if let cookies = StoreHelper.getCookie() {
+            request.setValue(cookies[Keys.COOKIE_KEY], forHTTPHeaderField: Keys.COOKIE_KEY)
+        }
+        return request
     }
     return nil
   }
@@ -255,6 +257,6 @@ extension UserDefaults {
     synchronize()
   }
   func getCookie() -> String? {
-    return StoreHelper.getCookie().values.first
+    return StoreHelper.getCookie()?.values.first
   }
 }

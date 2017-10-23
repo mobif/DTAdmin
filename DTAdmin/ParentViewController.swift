@@ -26,11 +26,12 @@ class ParentViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func showAllert(title: String?, message: String?, completionHandler: @escaping () -> Void?) {
+    func showAllert(title: String?, message: String?, completionHandler: (() -> Void)?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ok", style: .cancel) { (action) in
-            completionHandler()
+            completionHandler?()
         }
+        
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
