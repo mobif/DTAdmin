@@ -12,6 +12,14 @@ class GroupViewController: UIViewController {
     
     @IBOutlet weak var groupTableView: UITableView!
     
+    @IBAction func createNewGroup(_ sender: Any) {
+        guard let createUpdateGroupViewController = getCreateUpdateGroupViewController() else { return }
+        createUpdateGroupViewController.saveAction = { newGroup in
+            self.commonDataForGroups.append(newGroup)
+        }
+        navigationController?.pushViewController(createUpdateGroupViewController, animated: true)
+    }
+    
     var commonDataForGroups = [Group]() {
         didSet {
             DispatchQueue.main.async {
@@ -23,8 +31,6 @@ class GroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Groups"
-        let createNewGroupBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(self.createNewGroup))
-        self.navigationItem.rightBarButtonItem = createNewGroupBarButtonItem
         groupTableView.delegate = self
         groupTableView.dataSource = self
         getCommonArrayForGroups(){(result:[Group]) in

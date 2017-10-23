@@ -11,6 +11,13 @@ import UIKit
 class CreateUpdateViewController: UIViewController {
     
     @IBOutlet weak var groupNameTextField: UITextField!
+    @IBAction func saveGroup(_ sender: Any) {
+        if groupForUpdate != nil {
+            self.updateGroup()
+        } else {
+            self.saveNewGroup()
+        }
+    }
     
     @IBOutlet weak var selectFacultyButton: UIButton!
     
@@ -53,8 +60,6 @@ class CreateUpdateViewController: UIViewController {
         super.viewDidLoad()
         if groupForUpdate != nil {
             self.title = "Update"
-            let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.updateGroup))
-            self.navigationItem.rightBarButtonItem = rightButton
             guard let groupName = self.groupForUpdate?.name,
                 let groupFacultName = self.groupForUpdate?.facultyName,
                 let groupSpecialityName = self.groupForUpdate?.specialityName! else { return }
@@ -63,8 +68,6 @@ class CreateUpdateViewController: UIViewController {
             self.selectSpecialityButton.titleLabel?.text = groupSpecialityName
         } else {
             self.title = "Create"
-            let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveNewGroup))
-            self.navigationItem.rightBarButtonItem = rightButton
         }
     }
     

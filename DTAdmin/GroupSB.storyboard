@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -109,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="1692" y="-778.56071964017997"/>
         </scene>
-        <!--Group View Controller-->
+        <!--Title-->
         <scene sceneID="c9C-XX-sNu">
             <objects>
                 <viewController storyboardIdentifier="GroupVC" id="oIg-gb-mTo" customClass="GroupViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
@@ -136,15 +136,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="wJp-Hm-Zya"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="vEb-c5-R7o">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="dFK-iK-7p7">
+                            <connections>
+                                <action selector="createNewGroup:" destination="oIg-gb-mTo" id="chN-TC-uVK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="groupTableView" destination="cJC-dJ-isb" id="sbO-v1-KYW"/>
+                        <segue destination="OnU-SB-xhX" kind="show" id="BJC-tu-ywF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLN-Ia-TdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="920.79999999999995" y="-77.811094452773617"/>
         </scene>
-        <!--Create Update View Controller-->
+        <!--Title-->
         <scene sceneID="Ihf-zJ-KaL">
             <objects>
                 <viewController storyboardIdentifier="CreateUpdateVC" id="OnU-SB-xhX" customClass="CreateUpdateViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
@@ -181,6 +189,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="jHr-HU-ypI"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="oTu-or-df0">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Rjp-XI-1gU">
+                            <connections>
+                                <action selector="saveGroup:" destination="OnU-SB-xhX" id="Ale-bn-5qF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="groupNameTextField" destination="mCd-6K-AR1" id="1RC-7Q-ttm"/>
                         <outlet property="selectFacultyButton" destination="y0L-vf-55Y" id="gxU-CX-FsW"/>
