@@ -63,6 +63,7 @@ class CreateUpdateViewController: UIViewController {
             guard let groupName = self.groupForUpdate?.name,
                 let groupFacultName = self.groupForUpdate?.facultyName,
                 let groupSpecialityName = self.groupForUpdate?.specialityName! else { return }
+            self.view.layoutIfNeeded()
             self.groupNameTextField.text = groupName
             self.selectFacultyButton.titleLabel?.text = groupFacultName
             self.selectSpecialityButton.titleLabel?.text = groupSpecialityName
