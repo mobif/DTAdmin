@@ -120,8 +120,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
             {
                 wayToAddNewRecord.subjectId = self.records[indexPath.row].id
                 wayToAddNewRecord.updateDates = true
-                wayToAddNewRecord.name = self.records[indexPath.row].name
-                wayToAddNewRecord.desc = self.records[indexPath.row].description
+                wayToAddNewRecord.subject = self.records[indexPath.row]
                 wayToAddNewRecord.saveAction = { item in
                     guard let item = item else { return }
                     self.records[indexPath.row] = item

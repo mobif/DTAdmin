@@ -16,11 +16,17 @@ class AddNewRecordViewController: UIViewController {
     
     var updateDates = false
     var subjectId: String = ""
-    var name: String = ""
-    var desc: String = ""
     let queryService = QueryService()
     var saveAction: ((Records?) -> ())?
     var item: Records?
+    var subject: Records? {
+        didSet {
+            guard let subject = subject else { return }
+            self.view.layoutIfNeeded()
+            self.subjectNameTextField.text = subject.name
+            self.subjectDescriptionTextField.text = subject.description
+        }
+    }
     
     private func showMessage(message: String) {
         let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
@@ -42,12 +48,12 @@ class AddNewRecordViewController: UIViewController {
                                 self.navigationController?.popViewController(animated: true)
                             } else {
                                 self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
-                            }
+                                }
                             if !error.isEmpty {
                                     self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }
                         }
-                    } )
+                    })
             } else {
                 queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/update/\(subjectId)", completion: {(item: [Records]?, code:Int, error: String) in
                     DispatchQueue.main.async {
@@ -57,12 +63,12 @@ class AddNewRecordViewController: UIViewController {
                             self.navigationController?.popViewController(animated: true)
                         } else {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
-                        }
+                            }
                         if !error.isEmpty {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                         }
                     }
-                } )
+                })
             }
         } else {
             showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
@@ -75,8 +81,6 @@ class AddNewRecordViewController: UIViewController {
             navigationItem.title = "Add new item"
         } else {
             navigationItem.title = "Update record"
-            subjectNameTextField.text = name
-            subjectDescriptionTextField.text = desc
         }
         subjectDescriptionTextField.layer.cornerRadius = 5
         subjectDescriptionTextField.layer.borderWidth = 1
