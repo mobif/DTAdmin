@@ -9,86 +9,54 @@
 import Foundation
 
 class Group {
-    let groupId: String
-    let groupName: String
-    let facultyId: String
-    let specialityId: String
+    var id: String
+    var name: String
+    var facultyId: String
+    var specialityId: String
     var facultyName: String?
     var facultyDescription: String?
     var specialityCode: String?
     var specialityName: String?
     
-    init(groupId: String,groupName: String,facultyId: String,specialityId: String) {
-        self.groupId = groupId
-        self.groupName = groupName
+    init?(dictionary: [String:String]) {
+        guard let groupId = dictionary["group_id"],
+            let groupName = dictionary["group_name"],
+            let facultyId = dictionary["faculty_id"],
+            let specialityId = dictionary["speciality_id"] else { return nil }
+        self.id = groupId
+        self.name = groupName
         self.facultyId = facultyId
         self.specialityId = specialityId
-        self.facultyName = nil
-        self.facultyDescription = nil
-        self.specialityCode = nil
-        self.specialityName = nil
     }
-    
-    static func getGroupsFromJSON(json:[[String:String]]) -> [Group] {
-        var groups = [Group]()
-        for group in json {
-            if let groupId = group["group_id"],
-                let groupName = group["group_name"],
-                let facultyId = group["faculty_id"],
-                let specialityId = group["speciality_id"] {
-                groups.append(Group(groupId: groupId, groupName: groupName, facultyId: facultyId, specialityId: specialityId))
-            }
-        }
-        return groups
-    }
-    
 }
 
 class Faculty {
-    let facultyId: String
-    let facultyName: String
-    let facultyDescription: String
+    var id: String
+    var name: String
+    var description: String
     
-    init(facultyName: String, facultyId: String, facultyDescription: String) {
-        self.facultyId = facultyId
-        self.facultyName = facultyName
-        self.facultyDescription = facultyDescription
-    }
-    
-    static func getFacultiesFromJSON(json:[[String:String]]) -> [Faculty] {
-        var faculties = [Faculty]()
-        for faculty in json {
-            if let facultyId = faculty["faculty_id"],
-                let facultyName = faculty["faculty_name"],
-                let facultyDescription = faculty["faculty_description"] {
-                faculties.append(Faculty(facultyName: facultyName, facultyId: facultyId, facultyDescription: facultyDescription))
-            }
-        }
-        return faculties
+    init?(dictionary: [String:String]) {
+        guard let facultyId = dictionary["faculty_id"],
+            let facultyName = dictionary["faculty_name"],
+            let facultyDescription = dictionary["faculty_description"] else { return nil }
+        self.id = facultyId
+        self.name = facultyName
+        self.description = facultyDescription
     }
 }
 
 class Speciality {
-    let specialityId: String
-    let specialityCode: String
-    let specialityName: String
+    var id: String
+    var code: String
+    var name: String
     
-    init(specialityCode: String, specialityName: String, specialityId: String) {
-        self.specialityId = specialityId
-        self.specialityCode = specialityCode
-        self.specialityName = specialityName
-    }
-    
-    static func getSpecialitiesFromJSON(json:[[String:String]]) -> [Speciality] {
-        var specialities = [Speciality]()
-        for faculty in json {
-            if let specialityId = faculty["speciality_id"],
-                let specialityCode = faculty["speciality_code"],
-                let specialityName = faculty["speciality_name"] {
-                specialities.append(Speciality(specialityCode: specialityCode, specialityName: specialityName, specialityId: specialityId))
-            }
-        }
-        return specialities
+    init?(dictionary: [String:String]) {
+        guard let specialityId = dictionary["speciality_id"],
+            let specialityCode = dictionary["speciality_code"],
+            let specialityName = dictionary["speciality_name"] else { return nil }
+        self.id = specialityId
+        self.code = specialityCode
+        self.name = specialityName
     }
 }
 

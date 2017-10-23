@@ -13,9 +13,14 @@ class FacultyViewController: UIViewController {
     @IBOutlet weak var facultyTableView: UITableView!
     
     var selectFaculty: ((Faculty) -> ())?
+    var faculties = [Faculty]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.facultyTableView.reloadData()
+            }
+        }
+    }
     
-    var faculties = [Faculty]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Faculties"
@@ -23,33 +28,14 @@ class FacultyViewController: UIViewController {
         facultyTableView.dataSource = self
         HTTPService.getAllData(entityName: "faculty") {
             (facultyJSON:[[String:String]],facultyResponce) in
-            let faculties = Faculty.getFacultiesFromJSON(json: facultyJSON)
+            let faculties = facultyJSON.flatMap{Faculty(dictionary: $0)}
             self.faculties = faculties
-            DispatchQueue.main.async {
-                self.facultyTableView.reloadData()
-            }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension FacultyViewController : UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFaculty = self.faculties[indexPath.row]
         self.selectFaculty!(selectedFaculty)
@@ -59,9 +45,10 @@ extension FacultyViewController : UITableViewDelegate {
 
 //MARK: table view data source
 extension FacultyViewController : UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = facultyTableView.dequeueReusableCell(withIdentifier: "FacultyCell", for: indexPath)
-        cell.textLabel?.text = faculties[indexPath.row].facultyName
+        cell.textLabel?.text = faculties[indexPath.row].name
         return cell
     }
     
@@ -72,5 +59,4 @@ extension FacultyViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return faculties.count
     }
-    
 }

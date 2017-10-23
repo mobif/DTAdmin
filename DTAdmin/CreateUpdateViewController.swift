@@ -9,12 +9,13 @@
 import UIKit
 
 class CreateUpdateViewController: UIViewController {
-
+    
     @IBOutlet weak var groupNameTextField: UITextField!
     
     @IBOutlet weak var selectFacultyButton: UIButton!
     
     @IBOutlet weak var selectSpecialityButton: UIButton!
+    
     @IBAction func selectFacultyTapped(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
         let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as! FacultyViewController
@@ -24,7 +25,7 @@ class CreateUpdateViewController: UIViewController {
                 self.faculty = selectedFaculty
                 self.selectFacultyButton.titleLabel?.lineBreakMode = .byWordWrapping
                 self.selectFacultyButton.titleLabel?.numberOfLines = 0
-                self.selectFacultyButton.titleLabel?.text = selectedFaculty.facultyName
+                self.selectFacultyButton.titleLabel?.text = selectedFaculty.name
             }
         }
     }
@@ -38,42 +39,63 @@ class CreateUpdateViewController: UIViewController {
                 self.speciality = selectedSpeciality
                 self.selectSpecialityButton.titleLabel?.lineBreakMode = .byWordWrapping
                 self.selectSpecialityButton.titleLabel?.numberOfLines = 0
-                self.selectSpecialityButton.titleLabel?.text = selectedSpeciality.specialityName
-                
+                self.selectSpecialityButton.titleLabel?.text = selectedSpeciality.name
             }
-            
         }
     }
+    
+    var saveAction: ((Group) -> ())?
     var faculty: Faculty?
     var speciality: Speciality?
-    var indexForUpdateGroup: Int?
     var groupForUpdate: Group?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if groupForUpdate != nil {
             self.title = "Update"
-            let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveNewGroup))
+            let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.updateGroup))
             self.navigationItem.rightBarButtonItem = rightButton
+            guard let groupName = self.groupForUpdate?.name,
+                let groupFacultName = self.groupForUpdate?.facultyName,
+                let groupSpecialityName = self.groupForUpdate?.specialityName! else { return }
+            self.groupNameTextField.text = groupName
+            self.selectFacultyButton.titleLabel?.text = groupFacultName
+            self.selectSpecialityButton.titleLabel?.text = groupSpecialityName
         } else {
             self.title = "Create"
-            let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.updateGroup))
+            let rightButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(self.saveNewGroup))
             self.navigationItem.rightBarButtonItem = rightButton
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @objc func updateGroup() {
+        guard let newGroupName = self.groupNameTextField.text else { return }
+        guard let newGroupFacultyId = self.faculty?.id else { return }
+        guard let newGroupSpecialityId = self.speciality?.id else { return }
+        let params = [
+            "group_name": newGroupName,
+            "speciality_id": newGroupSpecialityId,
+            "faculty_id": newGroupFacultyId
+        ]
+        guard let id = self.groupForUpdate?.id else { return }
+        HTTPService.putData(entityName: "group", id: id, postData: params) {
+            (result: HTTPURLResponse,updatedGroupData: [[String:String]]) in
+            if result.statusCode == 200 {
+                let groups = updatedGroupData.flatMap{Group(dictionary: $0)}
+                groups.first?.facultyName = self.faculty?.name ?? self.groupForUpdate?.facultyName
+                groups.first?.facultyDescription = self.faculty?.description ?? self.groupForUpdate?.facultyDescription
+                groups.first?.specialityName = self.speciality?.name ?? self.groupForUpdate?.specialityName
+                groups.first?.specialityCode = self.speciality?.code ?? self.groupForUpdate?.specialityCode
+                guard let updatedGroup = groups.first else { return }
+                self.saveAction!(updatedGroup)
+            }
+        }
     }
     
-    @objc func saveNewGroup (sender: UIBarButtonItem) {
+    @objc func saveNewGroup() {
         guard let newGroupName = self.groupNameTextField.text else { return }
-        print(newGroupName)
-        guard let newGroupFacultyId = self.faculty?.facultyId else { return }
-        print(String(newGroupFacultyId))
-        guard let newGroupSpecialityId = self.speciality?.specialityId else { return }
-        print(String(newGroupSpecialityId))
+        guard let newGroupFacultyId = self.faculty?.id else { return }
+        guard let newGroupSpecialityId = self.speciality?.id else { return }
         let params = [
             "group_name": newGroupName,
             "speciality_id": newGroupSpecialityId,
@@ -82,62 +104,14 @@ class CreateUpdateViewController: UIViewController {
         HTTPService.postData(entityName: "group", postData: params) {
             (result: HTTPURLResponse,newGroupData: [[String:String]]) in
             if result.statusCode == 200 {
-                let newGroup = Group.getGroupsFromJSON(json: newGroupData).first
-                newGroup?.facultyName = self.faculty?.facultyName
-                newGroup?.facultyDescription = self.faculty?.facultyDescription
-                newGroup?.specialityName = self.speciality?.specialityName
-                newGroup?.specialityCode = self.speciality?.specialityCode
-                let groupViewController = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 2] as! GroupViewController
-                groupViewController.newGroup = newGroup
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
+                let groups = newGroupData.flatMap{Group(dictionary: $0)}
+                groups.first?.facultyName = self.faculty?.name
+                groups.first?.facultyDescription = self.faculty?.description
+                groups.first?.specialityName = self.speciality?.name
+                groups.first?.specialityCode = self.speciality?.code
+                guard let newGroup = groups.first else { return }
+                self.saveAction!(newGroup)
             }
         }
     }
-    
-    @objc func updateGroup (sender: UIBarButtonItem) {
-        print("update")
-        print(self.groupForUpdate!)
-//        guard let updateGroupId = self.groupForUpdate?.groupId else { return }
-//        let updateGroupName = self.groupNameTextField.text != nil ? self.groupNameTextField.text! : self.groupForUpdate?.groupName
-//        let updateGroupFacultyId = self.faculty?.facultyId != nil ? self.faculty?.facultyId : self.groupForUpdate?.facultyId
-//        let updateGroupSpecialityId = self.speciality?.specialityId != nil ? self.speciality?.specialityId : self.groupForUpdate?.specialityId
-        guard let updateGroupId = self.groupForUpdate?.groupId,
-            let updateGroupName = self.groupNameTextField.text ?? self.groupForUpdate?.groupName,
-            let updateGroupFacultyId = self.faculty?.facultyId ?? self.groupForUpdate?.facultyId,
-            let updateGroupSpecialityId = self.speciality?.specialityId ?? self.groupForUpdate?.specialityId else { return }
-        let params = [
-            "group_name": updateGroupName,
-            "speciality_id": updateGroupSpecialityId,
-            "faculty_id": updateGroupFacultyId
-        ]
-        HTTPService.putData(entityName: "group", id: updateGroupId, postData: params) {
-            (result: HTTPURLResponse, newGroupData: [[String:String]]) in
-            if result.statusCode == 200 {
-                let updatedGroup = Group.getGroupsFromJSON(json: newGroupData).first
-                if updatedGroup != nil {
-                    updatedGroup?.facultyName = self.faculty?.facultyName != nil ? self.faculty?.facultyName : self.groupForUpdate?.facultyName
-                    updatedGroup?.facultyDescription = self.faculty?.facultyDescription != nil ? self.faculty?.facultyDescription : self.groupForUpdate?.facultyDescription
-                    updatedGroup?.specialityName = self.speciality?.specialityName != nil ? self.speciality?.specialityName : self.groupForUpdate?.specialityName
-                    updatedGroup?.specialityCode = self.speciality?.specialityCode != nil ? self.speciality?.specialityCode : self.groupForUpdate?.specialityCode
-                    let groupViewController = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 2] as! GroupViewController
-                    groupViewController.updatedGroup = updatedGroup
-                    DispatchQueue.main.async {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
-            }
-        }
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

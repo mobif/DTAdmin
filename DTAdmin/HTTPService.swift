@@ -86,7 +86,7 @@ class HTTPService {
     
     static func getData (entityName:String,id:String,completion: @escaping ([String:String],HTTPURLResponse) -> ()) {
         let sessionValue =  UserDefaults.standard.object(forKey: "session")
-        let urlString = hostUrl + entityName + "/getRecords" + id
+        let urlString = hostUrl + entityName + "/getRecords/" + id
         guard let url = URL(string: urlString) else {
             print("wrong get URL for \(entityName)")
             return
@@ -134,7 +134,6 @@ class HTTPService {
         do {
             let json = try JSONSerialization.data(withJSONObject: postData, options: [])
             request.httpBody = json
-            print(json)
         } catch {
             print("could not serialize JSON while writing data with \(entityName)")
             return
@@ -154,9 +153,8 @@ class HTTPService {
             } catch {
                 print("could not serialize data to JSON with \(entityName)")
             }
-           
+            
             print("data = \(String(describing: data))")
-            print(response!)
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 print("statusCode is not 200 while writing data with \(entityName)")
                 return
