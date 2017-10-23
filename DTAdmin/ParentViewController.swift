@@ -18,8 +18,6 @@ class ParentViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        // Do any additional setup after loading the view.
     }
 
     deinit {
@@ -44,19 +42,24 @@ class ParentViewController: UIViewController {
             self.backGroundView?.alpha = 0.5
             self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
             self.activityIndicator?.center = self.navigationController?.view.center ?? self.view.center
-            if !self.backGroundView!.subviews.contains(self.activityIndicator!) {
-                self.backGroundView?.addSubview(self.activityIndicator!)
+            if let backgroundView = self.backGroundView, let activitiIndicator = self.activityIndicator {
+                if !backgroundView.subviews.contains(activitiIndicator) {
+                    backgroundView.addSubview(activitiIndicator)
+                }
+                activitiIndicator.startAnimating()
+                if let navigationView = self.navigationController?.view {
+                    navigationView.addSubview(backgroundView)
+                    UIView.animate(withDuration: 0.3, animations: {
+                        navigationView.layoutIfNeeded()
+                    })
+                } else {
+                    self.view.addSubview(backgroundView)
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.view.layoutIfNeeded()
+                    })
+                }
+                backgroundView.clipsToBounds = true
             }
-            self.activityIndicator?.startAnimating()
-            
-            let navigationView = self.navigationController?.view
-            let view = navigationView != nil ? navigationView! : self.view!
-            
-            view.addSubview(self.backGroundView!)
-            UIView.animate(withDuration: 0.3, animations: {
-                view.layoutIfNeeded()
-            })
-            self.backGroundView!.clipsToBounds = true
         }
     }
     
@@ -70,19 +73,9 @@ class ParentViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-        //            if self.view.frame.origin.y == 0{
-        //                self.view.frame.origin.y -= keyboardSize.height
-        //            }
-        //        }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-        //            if self.view.frame.origin.y != 0{
-        //                self.view.frame.origin.y += keyboardSize.height
-        //            }
-        //        }
     }
     
     override func viewDidLayoutSubviews() {

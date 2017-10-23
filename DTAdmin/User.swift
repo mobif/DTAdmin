@@ -16,13 +16,13 @@ struct User {
     init() {}
     
     init(json: [String: Any]) {
-        if let id = json[Keys.ID_KEY] as? String {
+        if let id = json[Keys.id] as? String {
             self.id = id
         }
-        if let userName = json[Keys.USER_NAME_KEY] as? String {
+        if let userName = json[Keys.username] as? String {
             self.userName = userName
         }
-        if let roles = json[Keys.ROLES_KEY] as? [String] {
+        if let roles = json[Keys.roles] as? [String] {
             self.roles = roles
         }
     }

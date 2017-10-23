@@ -17,7 +17,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 //MARK: Create students tab
         let studentsTab = TabOneViewController()
-//        studentsTab.setViewControllers([], animated: true)
         let studentsBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
         studentsTab.tabBarItem = studentsBarItem
         tabBarViewControllers.append(studentsTab)
@@ -30,7 +29,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
 //MARK: Create groups tab
         let groupsTab = TabThreeViewController()
-//        groupsTab.setViewControllers([], animated: true)
         let groupsBarItem = UITabBarItem(title: "Groups", image: nil, selectedImage: nil)
         groupsTab.tabBarItem = groupsBarItem
         tabBarViewControllers.append(groupsTab)

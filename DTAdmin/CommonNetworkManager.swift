@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  CommonNetworkManager
 //  DTAdmin
 //
 //  Created by mac6 on 10/19/17.
@@ -9,11 +9,11 @@
 import Foundation
 
 struct Keys {
-    static let ID_KEY = "id"
-    static let USER_NAME_KEY = "username"
-    static let PASSWORD_KEY = "password"
-    static let ROLES_KEY = "roles"
-    static let COOKIE_KEY = "Cookie"
+    static let id = "id"
+    static let username = "username"
+    static let password = "password"
+    static let roles = "roles"
+    static let cookie = "Cookie"
 }
 
 struct API {
@@ -36,9 +36,9 @@ class CommonNetworkManager {
         return networkManager
     }()
 
-    var baseURL: URL
+    var baseURL: URL?
     private init() {
-        self.baseURL = API.LoginURL!
+        self.baseURL = API.LoginURL
     }
 
     class func shared() -> CommonNetworkManager {
@@ -46,10 +46,14 @@ class CommonNetworkManager {
     }
     
     func logIn(username: String, password: String, completionHandler: @escaping (_ user: User?, _ error: Error?) -> ()){
-        let parameters = [Keys.USER_NAME_KEY: username, Keys.PASSWORD_KEY: password]
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        let url = API.LoginURL
-        var request = URLRequest(url: url!)
+        let parameters = [Keys.username: username, Keys.password: password]
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
+            preconditionFailure("JSON serialization failed")
+        }
+        guard let url = API.LoginURL else {
+            preconditionFailure("Login url failed")
+        }
+        var request = URLRequest(url: url)
         request.httpBody = httpBody
         request.httpMethod = HttpMehtod.POST.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -83,10 +87,13 @@ class CommonNetworkManager {
     }
     
     func timeTable(by groupID: Int, completion: @escaping (_ timesTable: [TimeTable]?, _ error: Error?) -> ()) {
-        var request = URLRequest(url: (API.TimeTableForGroupURL?.appendingPathComponent("group_id=\"\(groupID)\""))!)
+        guard let url = API.TimeTableForGroupURL?.appendingPathComponent("group_id=\"\(groupID)\"") else {
+            preconditionFailure("TimeTable url error")
+        }
+        var request = URLRequest(url: url)
         request.httpMethod = HttpMehtod.GET.rawValue
         if let cookies = StoreHelper.getCookie() {
-            request.setValue(cookies[Keys.COOKIE_KEY], forHTTPHeaderField: Keys.COOKIE_KEY)
+            request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         }
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -110,10 +117,13 @@ class CommonNetworkManager {
     }
     
     func timeTable(completion: @escaping (_ timeTableArr: [TimeTable]?, _ error: Error?) -> ()) {
-        var request = URLRequest(url: (API.TimeTableURL?.appendingPathComponent("/getRecords"))!)
+        guard let url = API.TimeTableURL?.appendingPathComponent("/getRecords") else {
+            preconditionFailure("TimeTable url error")
+        }
+        var request = URLRequest(url: url)
         request.httpMethod = HttpMehtod.GET.rawValue
         if let cookies = StoreHelper.getCookie() {
-            request.setValue(cookies[Keys.COOKIE_KEY], forHTTPHeaderField: Keys.COOKIE_KEY)
+            request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         }
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -142,12 +152,17 @@ class CommonNetworkManager {
     }
     
     func createTimeTable(timeTable: TimeTable, completion: @escaping (_ timeTable: TimeTable?, _ error: Error?) -> ()) {
-        var request = URLRequest(url: (API.TimeTableURL?.appendingPathComponent("/insertData"))!)
+        guard let url = API.TimeTableURL?.appendingPathComponent("/getRecords") else {
+            preconditionFailure("createTimeTable url error")
+        }
+        var request = URLRequest(url: url)
         request.httpMethod = HttpMehtod.POST.rawValue
         if let cookies = StoreHelper.getCookie() {
-            request.setValue(cookies[Keys.COOKIE_KEY], forHTTPHeaderField: Keys.COOKIE_KEY)
+            request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         }
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: timeTable.jsonRepresentation, options: []) else { return }
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: timeTable.jsonRepresentation, options: []) else {
+            preconditionFailure("JSON serialization failed")
+        }
         request.httpBody = httpBody
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {

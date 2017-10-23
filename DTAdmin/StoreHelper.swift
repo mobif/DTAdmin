@@ -29,16 +29,16 @@ class StoreHelper: NSObject {
     class func saveUser(user: User?) {
         if let user = user {
             self.loginSuccessful()
-            UserDefaults.standard.setValue(user.id, forKey: Keys.ID_KEY)
-            UserDefaults.standard.setValue(user.userName, forKey: Keys.USER_NAME_KEY)
+            UserDefaults.standard.setValue(user.id, forKey: Keys.id)
+            UserDefaults.standard.setValue(user.userName, forKey: Keys.username)
             UserDefaults.standard.synchronize()
         }
     }
     
     class func getLoggedUser() -> User {
         var user = User()
-        user.id = UserDefaults.standard.value(forKey: Keys.ID_KEY) as? String
-        user.userName = UserDefaults.standard.value(forKey: Keys.USER_NAME_KEY) as? String
+        user.id = UserDefaults.standard.value(forKey: Keys.id) as? String
+        user.userName = UserDefaults.standard.value(forKey: Keys.username) as? String
         
         return user
     }
