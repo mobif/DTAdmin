@@ -10,8 +10,8 @@ import Foundation
 
 class QueryService {
     
-    typealias QueryResult = ([Records]?, Int, String) -> ()
-    var records: [Records] = []
+    typealias QueryResult = ([Subject]?, Int, String) -> ()
+    var records: [Subject] = []
     var statusCode: Int = 0
     var errorMessage = ""
     
@@ -29,7 +29,8 @@ class QueryService {
         let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
             
             if let error = error {
-                self.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
+                self.errorMessage = error.localizedDescription
+                completion(nil, 0, self.errorMessage)
             } else if let data = data,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
@@ -57,7 +58,8 @@ class QueryService {
         let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
     
             if let error = error {
-                self.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
+                self.errorMessage = error.localizedDescription
+                completion(nil, 0, self.errorMessage)
             } else if let data = data,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
@@ -71,23 +73,23 @@ class QueryService {
         task.resume()
     }
     
-    func deleteReguest(sufix: String, completion: @escaping (Int) ->()) {
+    func deleteReguest(sufix: String, completion: @escaping (Int, (String?)) ->()) {
         guard let url = URL(string: basePath + sufix) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
         let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
             
-            guard let _ = data, error == nil else {
-                print("error=\(String(describing: error))")
-                return
+            if let error = error {
+                self.errorMessage = error.localizedDescription
+                completion(0, self.errorMessage)
             }
             
             guard let httpStatus = response as? HTTPURLResponse else {return}
             if httpStatus.statusCode != 200 {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
             }
-            completion(httpStatus.statusCode)
+            completion(httpStatus.statusCode, nil)
         }
         task.resume()
     }
@@ -101,12 +103,13 @@ class QueryService {
                             let desc = trackDictionary["subject_description"] as? String ,
                             let id = trackDictionary["subject_id"] as? String,
                             let name = trackDictionary["subject_name"] as? String {
-                            records.append(Records(id : id, name : name, description: desc))
+                            records.append(Subject(id : id, name : name, description: desc))
                         }
                     }
                 }
             }
             catch {
+                errorMessage = error.localizedDescription
                 print(error.localizedDescription)
             }
         }

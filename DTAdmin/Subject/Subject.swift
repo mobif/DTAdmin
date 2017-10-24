@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Records {
+struct Subject {
     let id: String
     let name: String
     let description: String

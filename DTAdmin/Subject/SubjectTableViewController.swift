@@ -10,9 +10,9 @@ import UIKit
 
 class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
 
-    var records = [Records]()
+    var records = [Subject]()
     let queryService = QueryService()
-    var filteredData = [Records]()
+    var filteredData = [Subject]()
     var inSearchMode = false
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -63,7 +63,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     private func showRecords() {
-        queryService.getRecords(sufix: "subject/getRecords", completion: { (results: [Records]?, code: Int, error: String) in
+        queryService.getRecords(sufix: "subject/getRecords", completion: { (results: [Subject]?, code: Int, error: String) in
             if let subjectData = results {
                 self.records = subjectData
                 self.records.sort { return $0.name < $1.name }
@@ -111,9 +111,12 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let item = self.records[indexPath.row].id
             print(item)
-            self.queryService.deleteReguest(sufix: "subject/del/\(item)", completion: { (code: Int) in
+            self.queryService.deleteReguest(sufix: "subject/del/\(item)", completion: { (code: Int, error: (String)?) in
                 print(code)
                 DispatchQueue.main.async {
+                    if let error = error {
+                        self.showMessage(message: error)
+                    }
                     if code == 200 {
                         self.records.remove(at: indexPath.row)
                         tableView.reloadData()

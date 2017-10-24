@@ -12,7 +12,7 @@
 		3F25AB621F9A095500D36D71 /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25AB611F9A095500D36D71 /* SubjectTableViewController.swift */; };
 		3F651FAD1F9A0FDC005223F3 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F651FAC1F9A0FDC005223F3 /* LogViewController.swift */; };
 		3F663A091F9A1BAE00D87B28 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F663A081F9A1BAE00D87B28 /* QueryService.swift */; };
-		3F663A0B1F9A1BBB00D87B28 /* Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F663A0A1F9A1BBA00D87B28 /* Records.swift */; };
+		3F663A0B1F9A1BBB00D87B28 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F663A0A1F9A1BBA00D87B28 /* Subject.swift */; };
 		3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */; };
 		3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F991F8D0DF60057BF3C /* ViewController.swift */; };
 		3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8F9B1F8D0DF60057BF3C /* Main.storyboard */; };
@@ -30,7 +30,7 @@
 		3F25AB611F9A095500D36D71 /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
 		3F651FAC1F9A0FDC005223F3 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		3F663A081F9A1BAE00D87B28 /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
-		3F663A0A1F9A1BBA00D87B28 /* Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
+		3F663A0A1F9A1BBA00D87B28 /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FDE8F991F8D0DF60057BF3C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				3F25AB611F9A095500D36D71 /* SubjectTableViewController.swift */,
 				3F25AB5F1F9A094B00D36D71 /* Subjects.storyboard */,
 				3F663A081F9A1BAE00D87B28 /* QueryService.swift */,
-				3F663A0A1F9A1BBA00D87B28 /* Records.swift */,
+				3F663A0A1F9A1BBA00D87B28 /* Subject.swift */,
 				3F25AB591F9A092F00D36D71 /* AddNewRecordViewController.swift */,
 			);
 			path = Subject;
@@ -239,7 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F663A0B1F9A1BBB00D87B28 /* Records.swift in Sources */,
+				3F663A0B1F9A1BBB00D87B28 /* Subject.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
 				3F651FAD1F9A0FDC005223F3 /* LogViewController.swift in Sources */,

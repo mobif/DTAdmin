@@ -44,7 +44,7 @@ class LogViewController: UIViewController {
     }
     
     func doLogin(_ user: String, _ psw: String) {
-        queryService.postRequests(parameters : ["username": user, "password": psw], sufix: "login/index", completion: {(array: [Records]?, code: Int, error: String) in
+        queryService.postRequests(parameters : ["username": user, "password": psw], sufix: "login/index", completion: {(array: [Subject]?, code: Int, error: String) in
                 print(code)
                 DispatchQueue.main.async {
                     if code == 200 {

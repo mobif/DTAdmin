@@ -17,9 +17,9 @@ class AddNewRecordViewController: UIViewController {
     var updateDates = false
     var subjectId: String = ""
     let queryService = QueryService()
-    var saveAction: ((Records?) -> ())?
-    var item: Records?
-    var subject: Records? {
+    var saveAction: ((Subject?) -> ())?
+    var item: Subject?
+    var subject: Subject? {
         didSet {
             guard let subject = subject else { return }
             self.view.layoutIfNeeded()
@@ -40,38 +40,46 @@ class AddNewRecordViewController: UIViewController {
         
         if !name.isEmpty && !description.isEmpty {
             if !updateDates {
-                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/InsertData", completion: { (item: [Records]?, code:Int, error: String) in
-                        DispatchQueue.main.async {
-                            if code == 200, let data = item {
-                                self.item = data[0]
-                                self.saveAction!(self.item)
-                                self.navigationController?.popViewController(animated: true)
-                            } else {
-                                self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
-                                }
-                            if !error.isEmpty {
-                                    self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
-                            }
-                        }
-                    })
-            } else {
-                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/update/\(subjectId)", completion: {(item: [Records]?, code:Int, error: String) in
+                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/InsertData", completion: { (item: [Subject]?, code:Int, error: String) in
                     DispatchQueue.main.async {
-                        if code == 200, let data = item {
-                            self.item = data[0]
-                            self.saveAction!(self.item)
+                        if !error.isEmpty {
+                            self.showMessage(message: error)
+                        }
+                        if code == 200 {
+                            guard let data = item else {
+                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
+                                return
+                            }
+                            self.saveAction?(data[0])
+                            self.navigationController?.popViewController(animated: true)
+                        } else {
+                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
+                        }
+                        
+                    }
+                })
+            } else {
+                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/update/\(subjectId)", completion: {(item: [Subject]?, code:Int, error: String) in
+                    DispatchQueue.main.async {
+                        if !error.isEmpty {
+                            self.showMessage(message: error)
+                        }
+                        if code == 200 {
+                            guard let data = item else {
+                                self.showMessage(message: NSLocalizedString("Server error. Record isn't change!", comment: "Message for user"))
+                                return
+                            }
+                            self.saveAction?(data[0])
                             self.navigationController?.popViewController(animated: true)
                         } else {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }
-                        if !error.isEmpty {
-                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
-                        }
+                        
                     }
                 })
             }
         } else {
-            showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
+            self.showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
         }
     }
     
