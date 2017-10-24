@@ -72,13 +72,6 @@
 			name = Faculty;
 			sourceTree = "<group>";
 		};
-		3F0501381F90ECF7006651CE /* Admin */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Admin;
-			sourceTree = "<group>";
-		};
 		3F0501391F90ECFF006651CE /* Speciality */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +130,6 @@
 				3F05013B1F90ED59006651CE /* Group */,
 				3F05013A1F90ED08006651CE /* Student */,
 				3F0501391F90ECFF006651CE /* Speciality */,
-				3F0501381F90ECF7006651CE /* Admin */,
 				3F0501371F90ECF1006651CE /* Faculty */,
 				3F01D7CF1F8D1458005CA03A /* Supporting files */,
 				3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */,
@@ -225,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA888131F9688A300D602F3 /* Admin.storyboard in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
 				3F25AB601F9A094B00D36D71 /* Subjects.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
@@ -249,6 +242,7 @@
 				3F25AB621F9A095500D36D71 /* SubjectTableViewController.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
+				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
