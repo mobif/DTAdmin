@@ -123,6 +123,60 @@
             </objects>
             <point key="canvasLocation" x="-228" y="43.628185907046479"/>
         </scene>
+        <!--Detail Subject View Controller-->
+        <scene sceneID="2kR-lX-Dw7">
+            <objects>
+                <viewController storyboardIdentifier="DetailSubject" id="POR-fv-BoT" customClass="DetailSubjectViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="alO-Jn-cwi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weQ-Ic-foK">
+                                <rect key="frame" x="20" y="261" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbS-wf-ab8">
+                                <rect key="frame" x="20" y="332" width="95" height="30"/>
+                                <state key="normal" title="Show all tests"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84H-fh-bpY">
+                                <rect key="frame" x="20" y="220" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxE-bQ-O7V">
+                                <rect key="frame" x="245" y="332" width="110" height="30"/>
+                                <state key="normal" title="Show time table"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rbS-wf-ab8" firstAttribute="top" secondItem="weQ-Ic-foK" secondAttribute="bottom" constant="50" id="2wl-91-ro7"/>
+                            <constraint firstItem="caf-AP-M8m" firstAttribute="trailing" secondItem="weQ-Ic-foK" secondAttribute="trailing" constant="20" id="4q3-0V-XMa"/>
+                            <constraint firstItem="weQ-Ic-foK" firstAttribute="top" secondItem="84H-fh-bpY" secondAttribute="bottom" constant="20" id="FK0-jI-Nc5"/>
+                            <constraint firstItem="rxE-bQ-O7V" firstAttribute="top" secondItem="weQ-Ic-foK" secondAttribute="bottom" constant="50" id="J1A-Cr-eDE"/>
+                            <constraint firstItem="rbS-wf-ab8" firstAttribute="leading" secondItem="caf-AP-M8m" secondAttribute="leading" constant="20" id="ODI-cO-f6l"/>
+                            <constraint firstItem="caf-AP-M8m" firstAttribute="trailing" secondItem="rxE-bQ-O7V" secondAttribute="trailing" constant="20" id="Pd8-fb-huu"/>
+                            <constraint firstItem="weQ-Ic-foK" firstAttribute="top" secondItem="84H-fh-bpY" secondAttribute="bottom" constant="20" id="QlL-b6-Kle"/>
+                            <constraint firstItem="weQ-Ic-foK" firstAttribute="leading" secondItem="caf-AP-M8m" secondAttribute="leading" constant="20" id="YXt-1r-agG"/>
+                            <constraint firstItem="caf-AP-M8m" firstAttribute="trailing" secondItem="84H-fh-bpY" secondAttribute="trailing" constant="20" id="gs3-Vl-Uuv"/>
+                            <constraint firstItem="84H-fh-bpY" firstAttribute="leading" secondItem="caf-AP-M8m" secondAttribute="leading" constant="20" id="pO7-MI-e3b"/>
+                            <constraint firstItem="84H-fh-bpY" firstAttribute="top" secondItem="caf-AP-M8m" secondAttribute="top" constant="200" id="yNM-CT-N96"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="caf-AP-M8m"/>
+                    </view>
+                    <connections>
+                        <outlet property="subjectDescriptionTextField" destination="weQ-Ic-foK" id="Rx7-BS-i18"/>
+                        <outlet property="subjectNameTextField" destination="84H-fh-bpY" id="qee-V6-DKx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7bc-OU-cRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="557.60000000000002" y="386.35682158920542"/>
+        </scene>
         <!--Add New Record View Controller-->
         <scene sceneID="yjk-kc-3Dw">
             <objects>
@@ -203,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3u-RR-AHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="524" y="43.628185907046479"/>
+            <point key="canvasLocation" x="558" y="-366"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ezs-3g-jqQ">
