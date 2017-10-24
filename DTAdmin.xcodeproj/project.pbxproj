@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F25AB5A1F9A092F00D36D71 /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25AB591F9A092F00D36D71 /* AddNewRecordViewController.swift */; };
-		3F25AB601F9A094B00D36D71 /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F25AB5F1F9A094B00D36D71 /* Subjects.storyboard */; };
-		3F25AB621F9A095500D36D71 /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25AB611F9A095500D36D71 /* SubjectTableViewController.swift */; };
-		3F651FAD1F9A0FDC005223F3 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F651FAC1F9A0FDC005223F3 /* LogViewController.swift */; };
-		3F663A091F9A1BAE00D87B28 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F663A081F9A1BAE00D87B28 /* QueryService.swift */; };
-		3F663A0B1F9A1BBB00D87B28 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F663A0A1F9A1BBA00D87B28 /* Subject.swift */; };
+		3F2BF59B1F9F61F600B2FA7E /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */; };
+		3F2BF59C1F9F61F600B2FA7E /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5961F9F61F600B2FA7E /* Subject.swift */; };
+		3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */; };
+		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
+		3F2BF59F1F9F61F600B2FA7E /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5991F9F61F600B2FA7E /* LogViewController.swift */; };
+		3F2BF5A01F9F61F600B2FA7E /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF59A1F9F61F600B2FA7E /* QueryService.swift */; };
+		3FA888131F9688A300D602F3 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FA888121F9688A300D602F3 /* Admin.storyboard */; };
+		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
+		3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888151F9688B200D602F3 /* NetworkManager.swift */; };
+		3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminViewController.swift */; };
+		3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888171F9688B200D602F3 /* UserModel.swift */; };
 		3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */; };
 		3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F991F8D0DF60057BF3C /* ViewController.swift */; };
 		3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8F9B1F8D0DF60057BF3C /* Main.storyboard */; };
@@ -25,12 +30,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F25AB591F9A092F00D36D71 /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
-		3F25AB5F1F9A094B00D36D71 /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
-		3F25AB611F9A095500D36D71 /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
-		3F651FAC1F9A0FDC005223F3 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
-		3F663A081F9A1BAE00D87B28 /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
-		3F663A0A1F9A1BBA00D87B28 /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
+		3F2BF5961F9F61F600B2FA7E /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
+		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
+		3F2BF5991F9F61F600B2FA7E /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		3F2BF59A1F9F61F600B2FA7E /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
+		3FA888121F9688A300D602F3 /* Admin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
+		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
+		3FA888151F9688B200D602F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3FA888161F9688B200D602F3 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
+		3FA888171F9688B200D602F3 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FDE8F991F8D0DF60057BF3C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,17 +103,29 @@
 			name = Group;
 			sourceTree = "<group>";
 		};
-		3F25AB581F9A089A00D36D71 /* Subject */ = {
+		3F2BF5941F9F61C300B2FA7E /* Subject */ = {
 			isa = PBXGroup;
 			children = (
-				3F651FAC1F9A0FDC005223F3 /* LogViewController.swift */,
-				3F25AB611F9A095500D36D71 /* SubjectTableViewController.swift */,
-				3F25AB5F1F9A094B00D36D71 /* Subjects.storyboard */,
-				3F663A081F9A1BAE00D87B28 /* QueryService.swift */,
-				3F663A0A1F9A1BBA00D87B28 /* Subject.swift */,
-				3F25AB591F9A092F00D36D71 /* AddNewRecordViewController.swift */,
+				3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */,
+				3F2BF5991F9F61F600B2FA7E /* LogViewController.swift */,
+				3F2BF59A1F9F61F600B2FA7E /* QueryService.swift */,
+				3F2BF5961F9F61F600B2FA7E /* Subject.swift */,
+				3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */,
+				3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */,
 			);
 			path = Subject;
+			sourceTree = "<group>";
+		};
+		3F3E68531F97BCB4004B8B2C /* Admins */ = {
+			isa = PBXGroup;
+			children = (
+				3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */,
+				3FA888161F9688B200D602F3 /* AdminViewController.swift */,
+				3FA888151F9688B200D602F3 /* NetworkManager.swift */,
+				3FA888171F9688B200D602F3 /* UserModel.swift */,
+				3FA888121F9688A300D602F3 /* Admin.storyboard */,
+			);
+			path = Admins;
 			sourceTree = "<group>";
 		};
 		3FDE8F8B1F8D0DF60057BF3C = {
@@ -125,7 +147,8 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
-				3F25AB581F9A089A00D36D71 /* Subject */,
+				3F2BF5941F9F61C300B2FA7E /* Subject */,
+				3F3E68531F97BCB4004B8B2C /* Admins */,
 				8927571A1F97648C00FF669D /* Common */,
 				3F05013B1F90ED59006651CE /* Group */,
 				3F05013A1F90ED08006651CE /* Student */,
@@ -218,8 +241,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FA888131F9688A300D602F3 /* Admin.storyboard in Resources */,
+				3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
-				3F25AB601F9A094B00D36D71 /* Subjects.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
 			);
@@ -232,14 +255,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F663A0B1F9A1BBB00D87B28 /* Subject.swift in Sources */,
+				3F2BF59B1F9F61F600B2FA7E /* AddNewRecordViewController.swift in Sources */,
+				3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
-				3F651FAD1F9A0FDC005223F3 /* LogViewController.swift in Sources */,
-				3F663A091F9A1BAE00D87B28 /* QueryService.swift in Sources */,
-				3F25AB5A1F9A092F00D36D71 /* AddNewRecordViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
-				3F25AB621F9A095500D36D71 /* SubjectTableViewController.swift in Sources */,
+				3F2BF59F1F9F61F600B2FA7E /* LogViewController.swift in Sources */,
+				3F2BF59C1F9F61F600B2FA7E /* Subject.swift in Sources */,
+				3F2BF5A01F9F61F600B2FA7E /* QueryService.swift in Sources */,
+				3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */,
+				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
+				3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
