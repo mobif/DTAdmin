@@ -18,6 +18,17 @@
 		3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F9E1F8D0DF60057BF3C /* DTAdmin.xcdatamodeld */; };
 		3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */; };
 		3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */; };
+		3FEFEE431F9F63A500AAFB35 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE3E1F9F63A400AAFB35 /* RequestManager.swift */; };
+		3FEFEE441F9F63A500AAFB35 /* GroupStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE3F1F9F63A400AAFB35 /* GroupStructure.swift */; };
+		3FEFEE451F9F63A500AAFB35 /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE401F9F63A500AAFB35 /* UserStructure.swift */; };
+		3FEFEE461F9F63A500AAFB35 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE411F9F63A500AAFB35 /* Entities.swift */; };
+		3FEFEE471F9F63A500AAFB35 /* StudentStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */; };
+		3FEFEE4B1F9F63AF00AAFB35 /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEFEE481F9F63AF00AAFB35 /* Student.storyboard */; };
+		3FEFEE4C1F9F63AF00AAFB35 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE491F9F63AF00AAFB35 /* GroupTableViewCell.swift */; };
+		3FEFEE4D1F9F63AF00AAFB35 /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE4A1F9F63AF00AAFB35 /* StudentsTableViewCell.swift */; };
+		3FEFEE511F9F63B800AAFB35 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE4E1F9F63B800AAFB35 /* StudentViewController.swift */; };
+		3FEFEE521F9F63B800AAFB35 /* EditStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE4F1F9F63B800AAFB35 /* EditStudentViewController.swift */; };
+		3FEFEE531F9F63B800AAFB35 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEFEE501F9F63B800AAFB35 /* GroupsTableViewController.swift */; };
 		892757211F9768D100FF669D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892757201F9768D100FF669D /* LoginViewController.swift */; };
 		893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C21F9892A9008565F1 /* MainTabBarController.swift */; };
 		893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C41F98B4F9008565F1 /* RootNavController.swift */; };
@@ -37,6 +48,17 @@
 		3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FDE8FA41F8D0DF60057BF3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FDE8FA61F8D0DF60057BF3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FEFEE3E1F9F63A400AAFB35 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		3FEFEE3F1F9F63A400AAFB35 /* GroupStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupStructure.swift; sourceTree = "<group>"; };
+		3FEFEE401F9F63A500AAFB35 /* UserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
+		3FEFEE411F9F63A500AAFB35 /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentStructure.swift; sourceTree = "<group>"; };
+		3FEFEE481F9F63AF00AAFB35 /* Student.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
+		3FEFEE491F9F63AF00AAFB35 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		3FEFEE4A1F9F63AF00AAFB35 /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
+		3FEFEE4E1F9F63B800AAFB35 /* StudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
+		3FEFEE4F1F9F63B800AAFB35 /* EditStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStudentViewController.swift; sourceTree = "<group>"; };
+		3FEFEE501F9F63B800AAFB35 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		892757201F9768D100FF669D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		893450C21F9892A9008565F1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		893450C41F98B4F9008565F1 /* RootNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavController.swift; sourceTree = "<group>"; };
@@ -84,13 +106,6 @@
 			name = Speciality;
 			sourceTree = "<group>";
 		};
-		3F05013A1F90ED08006651CE /* Student */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Student;
-			sourceTree = "<group>";
-		};
 		3F05013B1F90ED59006651CE /* Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,10 +144,10 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				3FEFEE191F9F60C400AAFB35 /* Student */,
 				3F3E68531F97BCB4004B8B2C /* Admins */,
 				8927571A1F97648C00FF669D /* Common */,
 				3F05013B1F90ED59006651CE /* Group */,
-				3F05013A1F90ED08006651CE /* Student */,
 				3F0501391F90ECFF006651CE /* Speciality */,
 				3F0501371F90ECF1006651CE /* Faculty */,
 				3F0501361F90ECE0006651CE /* Subject */,
@@ -143,6 +158,48 @@
 				3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */,
 			);
 			path = DTAdmin;
+			sourceTree = "<group>";
+		};
+		3FEFEE191F9F60C400AAFB35 /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				3FEFEE391F9F62B200AAFB35 /* Models */,
+				3FEFEE381F9F62A700AAFB35 /* Views */,
+				3FEFEE361F9F627E00AAFB35 /* Controllers */,
+			);
+			path = Student;
+			sourceTree = "<group>";
+		};
+		3FEFEE361F9F627E00AAFB35 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3FEFEE4E1F9F63B800AAFB35 /* StudentViewController.swift */,
+				3FEFEE4F1F9F63B800AAFB35 /* EditStudentViewController.swift */,
+				3FEFEE501F9F63B800AAFB35 /* GroupsTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3FEFEE381F9F62A700AAFB35 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3FEFEE481F9F63AF00AAFB35 /* Student.storyboard */,
+				3FEFEE4A1F9F63AF00AAFB35 /* StudentsTableViewCell.swift */,
+				3FEFEE491F9F63AF00AAFB35 /* GroupTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3FEFEE391F9F62B200AAFB35 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3FEFEE411F9F63A500AAFB35 /* Entities.swift */,
+				3FEFEE3F1F9F63A400AAFB35 /* GroupStructure.swift */,
+				3FEFEE3E1F9F63A400AAFB35 /* RequestManager.swift */,
+				3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */,
+				3FEFEE401F9F63A500AAFB35 /* UserStructure.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8927571A1F97648C00FF669D /* Common */ = {
@@ -226,6 +283,7 @@
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
+				3FEFEE4B1F9F63AF00AAFB35 /* Student.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,15 +295,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
+				3FEFEE531F9F63B800AAFB35 /* GroupsTableViewController.swift in Sources */,
+				3FEFEE451F9F63A500AAFB35 /* UserStructure.swift in Sources */,
+				3FEFEE441F9F63A500AAFB35 /* GroupStructure.swift in Sources */,
+				3FEFEE4C1F9F63AF00AAFB35 /* GroupTableViewCell.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
+				3FEFEE461F9F63A500AAFB35 /* Entities.swift in Sources */,
+				3FEFEE511F9F63B800AAFB35 /* StudentViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				3FEFEE4D1F9F63AF00AAFB35 /* StudentsTableViewCell.swift in Sources */,
 				3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */,
 				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
 				3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
+				3FEFEE431F9F63A500AAFB35 /* RequestManager.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
+				3FEFEE471F9F63A500AAFB35 /* StudentStructure.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
+				3FEFEE521F9F63B800AAFB35 /* EditStudentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
