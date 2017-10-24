@@ -167,8 +167,9 @@
 				3FEFEE381F9F62A700AAFB35 /* Views */,
 				3FEFEE361F9F627E00AAFB35 /* Controllers */,
 			);
-			path = Student;
-			sourceTree = "<group>";
+			name = Student;
+			path = DTAdmin/Student;
+			sourceTree = SOURCE_ROOT;
 		};
 		3FEFEE361F9F627E00AAFB35 /* Controllers */ = {
 			isa = PBXGroup;
