@@ -41,6 +41,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             familyNameStudentTextField.text = studentLoaded.studentFname
             surnameStudentTextField.text = studentLoaded.studentSurname
             passwordStudentTextField.text = studentLoaded.plainPassword
+            passwordConfirmTextField.text = studentLoaded.plainPassword
             gradeBookIdTextField.text = studentLoaded.gradebookId
             getGroupFromAPI(byId: studentLoaded.groupId)
             getUserFromAPI(byId: studentLoaded.userId)
