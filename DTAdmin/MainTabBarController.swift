@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 //MARK: Create students tab
         let studentsTab = UINavigationController()
-        studentsTab.setViewControllers([TabOneViewController()], animated: true)
+        studentsTab.setViewControllers([StudentViewController()], animated: true)
         let studentsBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
         studentsTab.tabBarItem = studentsBarItem
 
