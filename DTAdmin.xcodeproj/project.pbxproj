@@ -200,11 +200,9 @@
 		3FEFEE391F9F62B200AAFB35 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C7CB8FB51FA06AF10013C0AB /* Structures */,
 				3FEFEE411F9F63A500AAFB35 /* Entities.swift */,
-				3FEFEE3F1F9F63A400AAFB35 /* GroupStructure.swift */,
 				3FEFEE3E1F9F63A400AAFB35 /* RequestManager.swift */,
-				3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */,
-				3FEFEE401F9F63A500AAFB35 /* UserStructure.swift */,
 				C7CFB4831F9FA0CA0097DC9D /* HTTPStatusCodes.swift */,
 				C7CB8FAF1FA05EA10013C0AB /* HTTPManager.swift */,
 				C7CFB4851F9FAE440097DC9D /* DataManager.swift */,
@@ -228,6 +226,16 @@
 				893450C41F98B4F9008565F1 /* RootNavController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C7CB8FB51FA06AF10013C0AB /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */,
+				3FEFEE3F1F9F63A400AAFB35 /* GroupStructure.swift */,
+				3FEFEE401F9F63A500AAFB35 /* UserStructure.swift */,
+			);
+			path = Structures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
