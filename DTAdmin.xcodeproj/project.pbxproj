@@ -32,6 +32,7 @@
 		892757211F9768D100FF669D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892757201F9768D100FF669D /* LoginViewController.swift */; };
 		893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C21F9892A9008565F1 /* MainTabBarController.swift */; };
 		893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893450C41F98B4F9008565F1 /* RootNavController.swift */; };
+		C7CB8FB01FA05EA10013C0AB /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB8FAF1FA05EA10013C0AB /* HTTPManager.swift */; };
 		C7CFB4841F9FA0CA0097DC9D /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFB4831F9FA0CA0097DC9D /* HTTPStatusCodes.swift */; };
 		C7CFB4861F9FAE440097DC9D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFB4851F9FAE440097DC9D /* DataManager.swift */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		892757201F9768D100FF669D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		893450C21F9892A9008565F1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		893450C41F98B4F9008565F1 /* RootNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavController.swift; sourceTree = "<group>"; };
+		C7CB8FAF1FA05EA10013C0AB /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		C7CFB4831F9FA0CA0097DC9D /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		C7CFB4851F9FAE440097DC9D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +206,7 @@
 				3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */,
 				3FEFEE401F9F63A500AAFB35 /* UserStructure.swift */,
 				C7CFB4831F9FA0CA0097DC9D /* HTTPStatusCodes.swift */,
+				C7CB8FAF1FA05EA10013C0AB /* HTTPManager.swift */,
 				C7CFB4851F9FAE440097DC9D /* DataManager.swift */,
 			);
 			path = Models;
@@ -311,6 +314,7 @@
 				C7CFB4841F9FA0CA0097DC9D /* HTTPStatusCodes.swift in Sources */,
 				3FEFEE511F9F63B800AAFB35 /* StudentViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				C7CB8FB01FA05EA10013C0AB /* HTTPManager.swift in Sources */,
 				3FEFEE4D1F9F63AF00AAFB35 /* StudentsTableViewCell.swift in Sources */,
 				3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */,
 				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,

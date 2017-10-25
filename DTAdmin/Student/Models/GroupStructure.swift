@@ -20,4 +20,10 @@ struct GroupStructure: Codable{
         case specialityId = "speciality_id"
         case facultyId = "faculty_id"
     }
+    init(dictionary: [String: String]) {
+        groupId = dictionary["group_id"] ?? ""
+        groupName = dictionary["group_name"] ?? ""
+        specialityId = dictionary["speciality_id"] ?? ""
+        facultyId = dictionary["faculty_id"] ?? ""
+    }
 }

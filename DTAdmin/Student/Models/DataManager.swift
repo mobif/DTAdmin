@@ -8,46 +8,12 @@
 
 import Foundation
 
-class DataManager {
-    let urlProtocol = "http://"
-    let urlDomain = "vps9615.hyperhost.name"
-
-    enum TypeReqest {
-        case InsertData
-        case GetRecords
-        case UpdateData
-        case Delete
-        case GetOneRecord
-    }
-    let urlPrepare: [TypeReqest: (command: String,method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET")]
+class DataManager: HTTPManager {
+   
     
-    var cookie: HTTPCookie? {
-        let cookies:[HTTPCookie] = HTTPCookieStorage.shared.cookies! as [HTTPCookie]
-        for cookieItem:HTTPCookie in cookies as [HTTPCookie] {
-            if cookieItem.domain == self.urlDomain {
-                return cookieItem
-            }
-        }
-        return nil
-    }
-    
-    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "") -> URLRequest? {
-        guard let URLCreationData = urlPrepare[type] else { return nil }
-        let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id
-        guard let url = URL(string: urlProtocol + urlDomain + commandInUrl) else { return nil }
-        var request = URLRequest(url: url)
-        request.httpMethod = URLCreationData.method
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-        if let selfCookie = self.cookie {
-            request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
-        }
-        return request
-    }
-    
-    func getGroups(completionHandler: (_ listGroups: [GroupStructure]?, _ error: String?) -> ()) {
+    func getGroups(completionHandler: @escaping (_ listGroups: [GroupStructure]?, _ error: String?) -> ()) {
         var groups: [GroupStructure]?
-        getEntityList(type: Entities.Group, completionHandler: { (list, error) in
+        getEntityList(typeEntity: Entities.Group, completionHandler: { (list, error) in
             if let error = error {
                completionHandler(nil, error)
             }
@@ -67,13 +33,56 @@ class DataManager {
         
     }
     
-    func getEntityList(type: Entities, completionHandler: (_ list: [Any]?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: type, type: TypeReqest.GetRecords) else {
+    func getEntityList(typeEntity: Entities, completionHandler: @escaping (_ list: [Any]?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords) else {
+            let error = "Cannot prepare header for URLRequest"
+            completionHandler(nil,error)
             return
         }
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-        }
+            var errorMsg: String?
+            if let sessionError = error {
+                errorMsg = sessionError.localizedDescription
+            } else {
+                guard let responseValue = response as? HTTPURLResponse else {
+                    errorMsg = "Incorect server response"
+                    DispatchQueue.main.async {
+                        completionHandler(nil, errorMsg)
+                    }
+                    return
+                }
+                if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
+                    guard let sessionData = data else {
+                        errorMsg = "No data in server response"
+                        DispatchQueue.main.async {
+                            completionHandler(nil, errorMsg)
+                        }
+                        return
+                    }
+                    var json: [[String:String]]?
+                    do {
+                        json = try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String:String]]
+                    } catch {
+                        print(error)
+                    }
+                    switch typeEntity {
+                    case .Group:
+                        let groups = json?.flatMap{ GroupStructure(dictionary: $0) }
+                        DispatchQueue.main.sync {
+                            completionHandler(groups, nil)
+                        }
+                    case .Student:
+                        let students = json?.flatMap{ StudentStructure(dictionary: $0) }
+                        DispatchQueue.main.sync {
+                            completionHandler(students, nil)
+                        }
+                        
+                    default:
+                        print("error")
+                    }
+                }
+            }
+        }.resume()
     }
 }
 
