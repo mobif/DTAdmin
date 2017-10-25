@@ -78,7 +78,7 @@ class QueryService {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
-        let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
             
             if let error = error {
                 self.errorMessage = error.localizedDescription
