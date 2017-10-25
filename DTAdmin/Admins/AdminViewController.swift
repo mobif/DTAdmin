@@ -61,7 +61,9 @@ class AdminViewController: UIViewController {
   @objc func syncDataWithServer() {
 //    print("Cookie",UserDefaults.standard.getCookie())
     NetworkManager().getAdmins { (admins) in
-      self.adminsList = admins
+//      FIXME: Optinal bug
+//      self.adminsList = admins.sorted(by: { Int($0.id)! < Int($1.id)! })
+      self.adminsList = admins.sorted(by: { $0.username < $1.username})
       self.adminsListTableView.reloadData()
     }
   }

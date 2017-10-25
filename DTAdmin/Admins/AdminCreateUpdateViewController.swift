@@ -15,32 +15,37 @@ class AdminCreateUpdateViewController: UIViewController {
   @IBOutlet weak var confirmTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   
-  var adminInstance: UserModel.Admins?
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    if adminInstance != nil {
-      prepareView(isEdit: true)
-      let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.update))
-      self.navigationItem.rightBarButtonItems = [saveButton]
-    } else {
-      self.title = NSLocalizedString("New", comment: "Title for new admin creation view")
-      let addButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.create))
-      self.navigationItem.rightBarButtonItems = [addButton]
-    }
-  }
-  
-  func prepareView(isEdit: Bool) {
-    if isEdit {
+  var adminInstance: UserModel.Admins? {
+    didSet {
+      self.view.layoutIfNeeded()
       userNameTextField.text = adminInstance?.username
       userNameTextField.isEnabled = false
       actualPaswordTextField.text = adminInstance?.password
       emailTextField.text = adminInstance?.email
+      self.title = NSLocalizedString("Edit", comment: "Title for admin editing view")
+      let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.update))
+      self.navigationItem.rightBarButtonItems = [saveButton]
     }
   }
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    prepareCreationView()
+    
+  }
+  
+  private func prepareCreationView() {
+    self.title = NSLocalizedString("New", comment: "Title for new admin creation view")
+    let addButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.create))
+    self.navigationItem.rightBarButtonItems = [addButton]
+  }
+  
   func checkPaswords() -> Bool {
-    if actualPaswordTextField.text == confirmTextField.text, isPasswordValid(actualPaswordTextField.text!) {
+    let passwordRegEx = "^([a-zA-Z0-9@*#]{8,15})$"
+    let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
+    if actualPaswordTextField.text == confirmTextField.text,
+      passwordTest.evaluate(with: actualPaswordTextField.text!) {
       print("password OK")
       return true
     } else {
@@ -49,30 +54,23 @@ class AdminCreateUpdateViewController: UIViewController {
     return false
   }
   
-  func isPasswordValid(_ password : String) -> Bool {
-    let passwordRegEx = "^([a-zA-Z0-9@*#]{8,15})$"
-    let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
-    return passwordTest.evaluate(with: password)
-  }
-  
-  func unWrapFields() -> (id: String, username: String, password: String, email: String)? {
+  func unWrapFields() -> (username: String, password: String, email: String)? {
     if let username = userNameTextField.text,
       let password = actualPaswordTextField.text,
       let email = emailTextField.text {
-      let id = adminInstance?.id ?? "-1"
-      return (id, username, password, email)
+      return (username, password, email)
     }
     return nil
   }
   
-  func isValidEmail(testStr:String) -> Bool {
+  func checkEmail() -> Bool {
     let emailRegEx = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-    return emailTest.evaluate(with: testStr)
-  }
-  
-  func checkEmail() -> Bool {
-    if isValidEmail(testStr: unWrapFields()!.email) {
+    guard let email = emailTextField.text else {
+      assertionFailure("[AdminCreateUpdateVC] Wrong text at emailTextField")
+      return false
+    }
+    if emailTest.evaluate(with: email) {
       print("Email OK")
       return true
     } else {
@@ -85,13 +83,17 @@ class AdminCreateUpdateViewController: UIViewController {
     let alert = UIAlertController(title: NSLocalizedString("Alert", comment: "Alert title"), message: message, preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
     self.present(alert, animated: true, completion: nil)
+    
   }
   
   @objc private func create() {
-    if !(userNameTextField.text?.isEmpty)! {
+    if let userName = userNameTextField.text {
       if checkPaswords(), checkEmail() {
         guard let params = unWrapFields() else { return }
-        NetworkManager().createAdmin(username: params.username, password: params.password, email: params.email)
+        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {(admin, error) in
+          //          FIXME: Handle response
+          print(admin, error)
+        })
         self.navigationController?.popViewController(animated: true)
       }
     } else {
@@ -102,8 +104,9 @@ class AdminCreateUpdateViewController: UIViewController {
   @objc private func update() {
     if checkPaswords(), checkEmail() {
       guard let params = unWrapFields() else { return }
-      NetworkManager().updateAdmin(id: params.id, userName: params.username, password: params.password, email: params.email) { (isOk) in
-        print("OK")
+      NetworkManager().editAdmin(id: (adminInstance?.id)!, userName: params.username, password: params.password, email: params.email) { (isOk, admin, error) in
+        //          FIXME: Handle response
+        print(isOk, admin, error)
         self.navigationController?.popViewController(animated: true)
       }
     }

@@ -20,7 +20,7 @@ class NetworkManager {
     case suffixToInsertData = "/insertData"
     case suffixToUpdateRecord = "/update"
     case suffixToDeleteRecord = "/del"
-//  concat += </id> to update || delete exact record Exp route -> ./../entity/del/<id>
+    //  concat += </id> to update || delete exact record Exp route -> ./../entity/del/<id>
   }
   
   private enum Credentials: String {
@@ -64,35 +64,38 @@ class NetworkManager {
     } else { return nil }
   }
   
-  func logIn(username: String, password: String, completionHandler: @escaping (_ user: UserModel.Admin, _ cookie: String) -> ()) {
+  func logIn(username: String, password: String, completionHandler: @escaping (_ user: UserModel.Admin?, _ error: Error?) -> ()) { //, _ cookie: String) -> ()) {
     let credentials = [Credentials.userName.rawValue: username, Credentials.password.rawValue: password]
-//    FIXME: in case JSONSerialization returns error we will not know about it
-//    try block will throw error and app will be terminated
+    //    FIXME: in case JSONSerialization returns error we will not know about it
+    //    try block will throw error and app will be terminated
     guard let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: []) else { return }
     guard let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToUserLogIn.rawValue) else { return }
     let request = requestBasicWithBody(httpBody: httpBody, url: url, method: "POST")
     
     let session = URLSession.shared
     session.dataTask(with: request) { (data, response, error) in
-      if let sessionError = error {
-        print(sessionError)
-      } else {
-        if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-          if sessionResponse.statusCode == 200 {
-            do {
-              let user = try JSONDecoder().decode(UserModel.Admin.self, from: sessionData)
-              DispatchQueue.main.sync {
-                if let cookie = self.cooikiesGetter(from: Urls.toHost.rawValue).first?.value {
-                  UserDefaults.standard.setUserName(name: user.username)
-                  UserDefaults.standard.setCookie(cookie)
-                  UserDefaults.standard.setLoggedIn(to: true)
-                  completionHandler(user, cookie)
-                }
+      let sessionError = error
+      if let sessionResponse = response as? HTTPURLResponse,
+        let sessionData = data {
+        if sessionResponse.statusCode == 200 {
+          do {
+            let user = try JSONDecoder().decode(UserModel.Admin.self, from: sessionData)
+            DispatchQueue.main.sync {
+              if let cookie = self.cooikiesGetter(from: Urls.toHost.rawValue).first?.value {
+                UserDefaults.standard.setUserName(name: user.username)
+                UserDefaults.standard.setCookie(cookie)
+                UserDefaults.standard.setLoggedIn(to: true)
+                completionHandler(user, nil)
               }
-            } catch {
-              print(error)
             }
-          } else { print(sessionResponse) }
+          } catch {
+            print(error)
+          }
+        } else {
+          completionHandler(nil, sessionError)
+          //          FIXME: erase print
+          print(sessionResponse, sessionError!)
+          
         }
       }
       }.resume()
@@ -104,82 +107,70 @@ class NetworkManager {
       
       let sessionGet = URLSession.shared
       sessionGet.dataTask(with: request) { (data, response, error) in
-        if let sessionError = error {
-          print(sessionError)
-        } else {
-          if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-            print(sessionResponse)
-            print(sessionData)
-            do {
-              let json = try JSONSerialization.jsonObject(with: sessionData, options: [])
-              print(json)
-              DispatchQueue.main.async {
-                UserDefaults.standard.setLoggedIn(to: false)
-                UserDefaults.standard.setCookie(nil)
-              }
-            } catch {
-              print(error)
+        if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+          print(sessionResponse)
+          print(sessionData)
+          do {
+            let json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+            print(json)
+            DispatchQueue.main.async {
+              UserDefaults.standard.setLoggedIn(to: false)
+              UserDefaults.standard.setCookie(nil)
             }
+          } catch {
+            print(error)
           }
+        } else {
+          print("Failed during logout", error)
         }
         }.resume()
     }
   }
   
-  func getAdmins(completionHandler: @escaping (_ user: [UserModel.Admins]) -> ()) {
+  func getAdmins(completionHandler: @escaping (_ adminsList: [UserModel.Admins]?, _ error: Error?) -> ()) {
     if UserDefaults.standard.isLoggedIn(), let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToGetRecords.rawValue) {
       guard let request = requestWithCookie(url: url, method: "GET") else { return }
       
-      let getSession = URLSession.shared
-      getSession.dataTask(with: request) { (data, response, error) in
-        if let sessionError = error {
-          print(sessionError)
-        } else {
-          if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-            print(sessionResponse.statusCode)
-            do {
-              let admins = try JSONDecoder().decode([UserModel.Admins].self, from: sessionData)
-              DispatchQueue.main.sync {
-                completionHandler(admins)
-              }
-            } catch {
-              print(error)
+      _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let sessionError = error, let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+          print(sessionResponse)
+          do {
+            let admins = try JSONDecoder().decode([UserModel.Admins].self, from: sessionData)
+            DispatchQueue.main.sync {
+              completionHandler(admins, nil)
             }
+          } catch {
+            completionHandler(nil, sessionError)
           }
         }
         }.resume()
     }
   }
   
-  func createAdmin(username: String, password: String, email: String)  {
+  func createAdmin(username: String, password: String, email: String, completionHandler: @escaping (_ newAdmin: UserModel.NewAdmin?, _ error: Error?) -> ()) {
     if let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToInsertData.rawValue) {
       let newAdmin = UserModel.NewAdmin(userName: username, password: password, email: email)
       guard let httpBody = try? JSONSerialization.data(withJSONObject: newAdmin.dictionaryRepresentation, options: []) else { return }
       guard let request = requestWithCookie(and: httpBody, url: url, method: "POST") else { return }
       
-      let postSession = URLSession.shared
-      postSession.dataTask(with: request) { (data, response, error) in
-        if let sessionError = error {
-          print(sessionError)
-        } else {
-          if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-            if sessionResponse.statusCode == 200 {
-              print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
-            } else { print("Something went wrong, Status code: ", sessionResponse.statusCode, sessionResponse.description)}
-          }
-        }
+      _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+          if sessionResponse.statusCode == 200 {
+            print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
+            completionHandler(newAdmin, nil)
+          } else { print("Something went wrong, Status code: ", sessionResponse.statusCode, sessionResponse.description) }
+        } else { completionHandler(nil, error) }
         }.resume()
     }
   }
   
-  func updateAdmin(id: String, userName: String, password: String, email: String, completionHandler: @escaping (_ isCompleted: Bool) -> ()) {
+  func editAdmin(id: String, userName: String, password: String, email: String, completionHandler: @escaping (_ isCompleted: Bool, _ admin: UserModel.NewAdmin?, _ error: Error?) -> ()) {
     if let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToUpdateRecord.rawValue + "/" + id) {
       let editedAdmin = UserModel.NewAdmin(userName: userName, password: password, email: email)
       guard let httpBody = try? JSONSerialization.data(withJSONObject: editedAdmin.dictionaryRepresentation, options: []) else { return }
       guard let request = requestWithCookie(and: httpBody, url: url, method: "POST") else { return }
       
-      let postSession = URLSession.shared
-      postSession.dataTask(with: request) { (data, response, error) in
+      _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
         if let sessionError = error {
           print(sessionError)
         } else {
@@ -187,12 +178,14 @@ class NetworkManager {
             if sessionResponse.statusCode == 200 {
               print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
               DispatchQueue.main.async {
-                completionHandler(true)
+                //                FIXME: Complete return
+                completionHandler(true, nil, nil)
               }
             } else {
               print("Something went wrong during Update, Status code: ", sessionResponse.statusCode, sessionResponse.description)
               DispatchQueue.main.async {
-                completionHandler(false)
+                //                FIXME: Complete return
+                completionHandler(false, nil, nil)
               }
             }
           }
@@ -201,26 +194,21 @@ class NetworkManager {
     }
   }
   
-  func deleteAdmin(id: String, completionHandler: @escaping (_ isCompleted: Bool) -> ()) {
+  func deleteAdmin(id: String, completionHandler: @escaping (_ isCompleted: Bool, _ error: Error?) -> ()) {
     if let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToDeleteRecord.rawValue + "/" + id) {
       guard let request = requestWithCookie(url: url, method: "GET") else { return }
       
-      let getSession = URLSession.shared
-      getSession.dataTask(with: request) { (data, response, error) in
-        if let sessionError = error {
-          print(sessionError)
-        } else {
-          if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-            if sessionResponse.statusCode == 200 {
-              print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
-              DispatchQueue.main.async {
-                completionHandler(true)
-              }
-            } else {
-              print("Something went wrong, Status code: ", sessionResponse.statusCode, sessionResponse.description)
-              DispatchQueue.main.async {
-                completionHandler(false)
-              }
+      _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+          if sessionResponse.statusCode == 200 {
+            print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
+            DispatchQueue.main.async {
+              completionHandler(true, nil)
+            }
+          } else {
+            print("Something went wrong, Status code: ", sessionResponse.statusCode, sessionResponse.description)
+            DispatchQueue.main.async {
+              completionHandler(false, error)
             }
           }
         }
