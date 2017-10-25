@@ -35,8 +35,8 @@ class AddNewRecordViewController: UIViewController {
     }
     
     @IBAction func saveNewRecord(_ sender: UIButton) {
-        guard let name = subjectNameTextField.text?.capitalized else { return }
-        guard let description = subjectDescriptionTextField.text?.capitalized else { return }
+        guard let name = subjectNameTextField.text else { return }
+        guard let description = subjectDescriptionTextField.text else { return }
         
         if !name.isEmpty && !description.isEmpty {
             if !updateDates {
@@ -50,8 +50,13 @@ class AddNewRecordViewController: UIViewController {
                                 self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
                                 return
                             }
-                            self.saveAction?(data[0])
-                            self.navigationController?.popViewController(animated: true)
+                            if data.count > 0 {
+                                self.saveAction?(data[0])
+                                self.navigationController?.popViewController(animated: true)
+                                
+                            } else {
+                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
+                            }
                         } else {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                         }
@@ -69,8 +74,13 @@ class AddNewRecordViewController: UIViewController {
                                 self.showMessage(message: NSLocalizedString("Server error. Record isn't change!", comment: "Message for user"))
                                 return
                             }
-                            self.saveAction?(data[0])
-                            self.navigationController?.popViewController(animated: true)
+                            if data.count > 0 {
+                                self.saveAction?(data[0])
+                                self.navigationController?.popViewController(animated: true)
+                            } else {
+                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
+                            }
+                            
                         } else {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }

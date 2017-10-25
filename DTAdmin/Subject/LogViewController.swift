@@ -33,11 +33,11 @@ class LogViewController: UIViewController {
     }
     
     @IBAction func logIn(_ sender: UIButton) {
-        let username = loginTextField.text
-        let password = passwordTextField.text
+        guard let username = loginTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
         
-        if let user = username, let psw = password {
-            doLogin(user, psw)
+        if !username.isEmpty, !password.isEmpty {
+            doLogin(username, password)
         } else {
             return showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
         }
@@ -48,7 +48,7 @@ class LogViewController: UIViewController {
                 print(code)
                 DispatchQueue.main.async {
                     if code == 200 {
-                        if let wayToShowRecords = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "SubjectTableVC") as? SubjectTableViewController {
+                        if let wayToShowRecords = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "SubjectTableViewController") as? SubjectTableViewController {
                             self.navigationController?.pushViewController(wayToShowRecords, animated: true)
                         }
                     } else {

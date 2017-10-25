@@ -68,11 +68,11 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
                 self.records = subjectData
                 self.records.sort { return $0.name < $1.name }
                 DispatchQueue.main.async {
-                    if code == 200 {
-                        self.tableView.reloadData()
-                    }
                     if !error.isEmpty {
                         self.showMessage(message: error)
+                    }
+                    if code == 200 {
+                        self.tableView.reloadData()
                     }
                 }
             }
@@ -86,10 +86,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if inSearchMode {
-            return filteredData.count
-        }
-        return records.count
+        return inSearchMode ? filteredData.count : records.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
