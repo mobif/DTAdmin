@@ -23,20 +23,18 @@ struct StudentStructure {
     var groupId: String
     var photo: String
     
-    init(dictionary: [String: String]) {
-        userId = dictionary["user_id"]
-        userName = dictionary["username"] ?? ""
-        password = dictionary["password"] ?? ""
-        passwordConfirm = dictionary["password_confirm"] ?? ""
-        plainPassword = dictionary["plain_password"] ?? ""
-        email = dictionary["email"] ?? ""
-        gradebookId = dictionary["gradebook_id"] ?? ""
-        studentSurname = dictionary["student_surname"] ?? ""
-        studentName = dictionary["student_name"] ?? ""
-        studentFname = dictionary["student_fname"] ?? ""
-        groupId = dictionary["group_id"] ?? ""
-        photo = dictionary["photo"] ?? ""
+    init(dictionary: [String: Any]) {
+        userId = dictionary["user_id"] as? String
+        userName = dictionary["username"] as? String ?? ""
+        password = dictionary["password"] as? String ?? ""
+        passwordConfirm = dictionary["password_confirm"] as? String ?? ""
+        plainPassword = dictionary["plain_password"] as? String ?? ""
+        email = dictionary["email"] as? String ?? ""
+        gradebookId = dictionary["gradebook_id"] as? String ?? ""
+        studentSurname = dictionary["student_surname"] as? String ?? ""
+        studentName = dictionary["student_name"] as? String ?? ""
+        studentFname = dictionary["student_fname"] as? String ?? ""
+        groupId = dictionary["group_id"] as? String ?? ""
+        photo = dictionary["photo"] as? String ?? ""
     }
-
-
 }

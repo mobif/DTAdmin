@@ -16,14 +16,20 @@ struct UserStructure {
     var lastLogin: String?
     var roles: [String]
 
-    init(dictionary: [String: String]) {
-        id = dictionary["id"] ?? ""
-        email = dictionary["email"] ?? ""
-        userName = dictionary["username"] ?? ""
-        password = dictionary["password"] ?? ""
-        logins = dictionary["logins"] ?? ""
-        lastLogin = dictionary["last_login"] ?? ""
-        roles = dictionary["roles"] ?? []
+    init?(dictionary: [String: Any]) {
+        id = dictionary["id"] as? String
+        lastLogin = dictionary["last_login"] as? String
+        guard let email = dictionary["email"] as? String,
+            let userName = dictionary["username"] as? String,
+            let password = dictionary["password"] as? String,
+            let logins = dictionary["logins"] as? String,
+            let roles = dictionary["roles"] as? [String]
+            else { return nil }
+        self.email = email
+        self.userName = userName
+        self.password = password
+        self.logins = logins
+        self.roles = roles
     }
 }
 

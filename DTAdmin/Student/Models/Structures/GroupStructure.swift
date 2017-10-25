@@ -8,22 +8,16 @@
 
 import Foundation
 
-struct GroupStructure: Codable{
+struct GroupStructure {
     var groupId: String
     var groupName: String
     var specialityId: String
     var facultyId: String
     
-    enum CodingKeys: String, CodingKey {
-        case groupId = "group_id"
-        case groupName = "group_name"
-        case specialityId = "speciality_id"
-        case facultyId = "faculty_id"
-    }
-    init(dictionary: [String: String]) {
-        groupId = dictionary["group_id"] ?? ""
-        groupName = dictionary["group_name"] ?? ""
-        specialityId = dictionary["speciality_id"] ?? ""
-        facultyId = dictionary["faculty_id"] ?? ""
+    init(dictionary: [String: Any]) {
+        groupId = dictionary["group_id"] as? String ?? ""
+        groupName = dictionary["group_name"] as? String ?? ""
+        specialityId = dictionary["speciality_id"] as? String ?? ""
+        facultyId = dictionary["faculty_id"] as? String ?? ""
     }
 }

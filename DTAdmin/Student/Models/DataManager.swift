@@ -59,9 +59,9 @@ class DataManager: HTTPManager {
                         }
                         return
                     }
-                    var json: [[String:String]]?
+                    var json: [[String: Any]]?
                     do {
-                        json = try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String:String]]
+                        json = try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String: Any]]
                     } catch {
                         print(error)
                     }
