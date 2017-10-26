@@ -91,7 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLx-EM-zyg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1006.875" y="151.25"/>
+            <point key="canvasLocation" x="1344.8" y="150.67466266866569"/>
         </scene>
         <!--Edit Student View Controller-->
         <scene sceneID="7FY-iJ-lcW">
@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rpt-c0-JMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1776.8" y="149.77511244377811"/>
+            <point key="canvasLocation" x="2116" y="149.77511244377811"/>
         </scene>
         <!--Groups Table View Controller-->
         <scene sceneID="tqf-2A-reV">
@@ -365,7 +365,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cz-w8-80O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2548.125" y="152.11267605633802"/>
+            <point key="canvasLocation" x="2887.1999999999998" y="151.57421289355324"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DVD-Qx-yLZ">
+            <objects>
+                <navigationController storyboardIdentifier="StudentNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="oXN-JX-gSK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uxh-8J-chp">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lx8-qC-w65" kind="relationship" relationship="rootViewController" id="FN1-0n-19i"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PY4-Ug-boa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="545" y="152"/>
         </scene>
     </scenes>
 </document>

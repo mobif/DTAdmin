@@ -16,10 +16,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         var tabBarViewControllers = [UIViewController]()
         
 //MARK: Create students tab
-        let studentsTab = TabOneViewController()
-        let studentsBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
-        studentsTab.tabBarItem = studentsBarItem
-        tabBarViewControllers.append(studentsTab)
+        let studentStoryboard = UIStoryboard.init(name: "Student", bundle: nil)
+        guard let studentNavigationController = studentStoryboard.instantiateViewController(withIdentifier: "StudentNavigationController") as? UINavigationController else { return }
+        let studentBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
+        studentNavigationController.tabBarItem = studentBarItem
+        tabBarViewControllers.append(studentNavigationController)
 
 //MARK: Create subjects tab
         let subjectsTab = TabTwoViewController()
