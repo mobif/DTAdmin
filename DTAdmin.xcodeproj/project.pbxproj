@@ -247,7 +247,6 @@
 			isa = PBXGroup;
 			children = (
 				C7535CD71FA2670100B6CBD1 /* Models */,
-				C7535CDD1FA2670100B6CBD1 /* Structures */,
 				890376021F9DE0EC002A99A8 /* Extensions */,
 				89C96E081F9D03CC0019FE77 /* Controlls */,
 				897D0E381F9B732500825E62 /* Utils */,
@@ -326,6 +325,7 @@
 		C7535CD71FA2670100B6CBD1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C7535CDD1FA2670100B6CBD1 /* Structures */,
 				C7535CD81FA2670100B6CBD1 /* DataManager.swift */,
 				C7535CD91FA2670100B6CBD1 /* Entities.swift */,
 				C7535CDA1FA2670100B6CBD1 /* HTTPManager.swift */,
