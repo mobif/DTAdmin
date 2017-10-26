@@ -331,8 +331,7 @@
 				C7535CDA1FA2670100B6CBD1 /* HTTPManager.swift */,
 				C7535CDB1FA2670100B6CBD1 /* HTTPStatusCodes.swift */,
 			);
-			name = Models;
-			path = Student/Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C7535CDD1FA2670100B6CBD1 /* Structures */ = {
