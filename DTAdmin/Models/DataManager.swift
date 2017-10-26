@@ -28,9 +28,7 @@ class DataManager: HTTPManager {
         }
         getResponse(request: request) { (list, error) in
             if let error = error {
-                DispatchQueue.main.sync {
                     completionHandler(nil, error)
-                }
             }
             guard let  json = list as? [[String: Any]] else {
                 print("Response is empty")
@@ -45,17 +43,14 @@ class DataManager: HTTPManager {
             }
             catch {
                 print("Error: \(error)")
-                DispatchQueue.main.sync {
-                    completionHandler(nil, error.localizedDescription)
-                }
+                completionHandler(nil, error.localizedDescription)
             }
-            DispatchQueue.main.sync {
-                completionHandler(entytiList, nil)
-            }
+            completionHandler(entytiList, nil)
         }
     }
     
     private func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
+        print(request)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let sessionError = error {
                 DispatchQueue.main.async {
@@ -87,13 +82,17 @@ class DataManager: HTTPManager {
                         }
                         return
                     }
+                } else {
+                    DispatchQueue.main.async {
+                        completionHandler(nil, "Error response: \(responseValue.statusCode)")
+                    }
                 }
             }
         }.resume()
     }
     
     func getEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords, id: byId) else {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetOneRecord, id: byId) else {
             let error = "Cannot prepare header for URLRequest"
             completionHandler(nil, error)
             return
@@ -129,17 +128,92 @@ class DataManager: HTTPManager {
             completionHandler(entityUnwraped, nil)
         }
     }
-    func updateEntity<TypeEntity>(byId: String, entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords, id: byId) else {
+    
+    func updateEntity<TypeEntity: Serializable>(byId: String, entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ error: String?) -> ()) {
+        guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.UpdateData, id: byId) else {
             let error = "Cannot prepare header for URLRequest"
             completionHandler(error)
             return }
-        
-        let postData = //to dictionary
-        let json = try JSONSerialization.data(withJSONObject: postData, options: [])
-        request.httpBody = json
-        
+        let postData = entity.dictionary
+        do {
+            let json = try JSONSerialization.data(withJSONObject: postData, options: [])
+            request.httpBody = json
+        } catch {
+            completionHandler(error.localizedDescription)
+        }
+        getResponse(request: request) { (entity, error) in
+            if let error = error {
+                DispatchQueue.main.sync {
+                    completionHandler(error)
+                }
+            } else {
+                guard let  json = entity as? [String: Any] else {
+                    print("Response is empty")
+                    return
+                }
+                // MARK: Debug part
+                print(json["id"]!)
+//                DispatchQueue.main.sync {
+//                    completionHandler()
+//                }
+            }
+        }
     }
+    func insertEntity<TypeEntity: Serializable>(entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
+        guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.InsertData) else {
+            let error = "Cannot prepare header for URLRequest"
+            completionHandler(nil, error)
+            return }
+        let postData = entity.dictionary
+        do {
+            let json = try JSONSerialization.data(withJSONObject: postData, options: [])
+            request.httpBody = json
+        } catch {
+            completionHandler(nil, error.localizedDescription)
+        }
+        getResponse(request: request) { (entity, error) in
+            if let error = error {
+                DispatchQueue.main.sync {
+                    completionHandler(nil, error)
+                }
+            } else {
+                guard let  json = entity as? [String: Any] else {
+                    print("Response is empty")
+                    return
+                }
+                // MARK: Debug part
+                print(json["id"]!)
+                //                DispatchQueue.main.sync {
+                //                    completionHandler()
+                //                }
+            }
+        }
+    }
+    
+    func deleteEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.Delete, id: byId) else {
+            let error = "Cannot prepare header for URLRequest"
+            completionHandler(nil, error)
+            return }
+        getResponse(request: request) { (entity, error) in
+            if let error = error {
+                DispatchQueue.main.sync {
+                    completionHandler(nil, error)
+                }
+            } else {
+                guard let  json = entity as? [String: Any] else {
+                    print("Response is empty")
+                    return
+                }
+                // MARK: Debug part
+                print(json["id"]!)
+                //                DispatchQueue.main.sync {
+                //                    completionHandler()
+                //                }
+            }
+        }
+    }
+    
 }
 
 

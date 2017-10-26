@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct QuestionStructure {
+struct QuestionStructure: Serializable {
     var id: String?
     var testId: String
     var questionText: String
@@ -27,6 +27,11 @@ struct QuestionStructure {
         self.level = level
         self.type = type
         self.attachment = attachment
+    }
+    var dictionary: [String: Any] {
+        var result: [String: Any] = ["test_id": self.testId, "question_text": self.questionText, "level": self.level, "type": self.type, "attachment": self.attachment]
+        if let id = id { result["question_id"] = id }
+        return result
     }
 }
 

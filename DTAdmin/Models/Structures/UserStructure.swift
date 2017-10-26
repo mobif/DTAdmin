@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct UserStructure {
+struct UserStructure: Serializable {
     var id: String?
     var userName: String
     var email: String
@@ -29,6 +29,12 @@ struct UserStructure {
         self.password = password
         self.logins = logins
         self.roles = roles
+    }
+    var dictionary: [String: Any] {
+        var result:[String: Any] = ["email": self.email, "username": self.userName, "password": self.password, "logins": self.logins, "roles": self.roles]
+        if let id = self.id { result["id"] = id }
+        if let lastLogin = self.lastLogin { result["last_login"] = lastLogin}
+        return result
     }
 }
 

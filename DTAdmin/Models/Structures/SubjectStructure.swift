@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct SubjectStructure {
+struct SubjectStructure: Serializable {
     var id: String?
     var name: String
     var description: String?
@@ -16,5 +16,11 @@ struct SubjectStructure {
         description = dictionary["subject_description"] as? String
         guard let name = dictionary["subject_name"] as? String else { return nil }
         self.name = name
+    }
+    var dictionary: [String: Any] {
+        var result:[String: Any] = ["subject_name": self.name]
+        if let id = self.id { result["subject_id"] = id }
+        if let description = self.description { result["subject_description"] = description }
+        return result
     }
 }

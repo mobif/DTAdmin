@@ -327,6 +327,7 @@
 			children = (
 				C7535CDD1FA2670100B6CBD1 /* Structures */,
 				C7535CD81FA2670100B6CBD1 /* DataManager.swift */,
+				C7535CE21FA2670100B6CBD1 /* Serializable.swift */,
 				C7535CD91FA2670100B6CBD1 /* Entities.swift */,
 				C7535CDA1FA2670100B6CBD1 /* HTTPManager.swift */,
 				C7535CDB1FA2670100B6CBD1 /* HTTPStatusCodes.swift */,
@@ -341,7 +342,6 @@
 				C7535CDF1FA2670100B6CBD1 /* FacultyStructure.swift */,
 				C7535CE01FA2670100B6CBD1 /* GroupStructure.swift */,
 				C7535CE11FA2670100B6CBD1 /* QuestionStructure.swift */,
-				C7535CE21FA2670100B6CBD1 /* Serializable.swift */,
 				C7535CE31FA2670100B6CBD1 /* SpecialityStructure.swift */,
 				C7535CE41FA2670100B6CBD1 /* StudentStructure.swift */,
 				C7535CE51FA2670100B6CBD1 /* SubjectStructure.swift */,

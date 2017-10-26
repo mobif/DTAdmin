@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class TestDetailStructure {
+class TestDetailStructure: Serializable {
     var id: String?
     var testId: String
     var level: String
@@ -24,5 +24,10 @@ class TestDetailStructure {
         self.level = level
         self.tasks = tasks
         self.rate = rate
+    }
+    var dictionary: [String: Any] {
+        var result: [String: Any] = ["test_id": self.testId, "level": self.level, "tasks": self.tasks, "rate": self.rate]
+        if let id = id { result["id"] = id }
+        return result
     }
 }

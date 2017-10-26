@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GroupStructure {
+struct GroupStructure: Serializable {
     var groupId: String?
     var groupName: String
     var specialityId: String
@@ -21,5 +21,10 @@ struct GroupStructure {
         self.groupName = groupName
         self.specialityId = specialityId
         self.facultyId = facultyId
+    }
+    var dictionary: [String: Any] {
+        var result:[String: Any] = ["group_name": self.groupName, "speciality_id": self.specialityId, "faculty_id": self.facultyId]
+        if let groupId = self.groupId { result["group_id"] = groupId }
+        return result
     }
 }

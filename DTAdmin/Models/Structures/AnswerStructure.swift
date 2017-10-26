@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AnswerStructure {
+struct AnswerStructure: Serializable {
     var id: String?
     var questionId: String
     var trueAnswer: String
@@ -25,5 +25,10 @@ struct AnswerStructure {
         self.trueAnswer = trueAnswer
         self.answerText = answerText
         self.attachmant = attachment
+    }
+    var dictionary: [String: Any] {
+        var result: [String: Any] = ["question_id": self.questionId, "true_answer": self.trueAnswer, "answer_text": self.answerText, "attachment": self.attachmant]
+        if let id = id { result["answer_id"] = id }
+        return result
     }
 }

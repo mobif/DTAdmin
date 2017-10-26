@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class SpecialityStructure {
+class SpecialityStructure: Serializable {
     var id: String?
     var name: String
     var code: String?
@@ -16,6 +16,12 @@ class SpecialityStructure {
         code = dictionary["speciality_code"] as? String
         guard let name = dictionary["speciality_name"] as? String else { return nil }
         self.name = name
+    }
+    var dictionary: [String: Any] {
+        var result:[String: Any] = ["speciality_name": self.name]
+        if let id = self.id { result["speciality_id"] = id }
+        if let code = self.code { result["speciality_code"] = code}
+        return result
     }
 }
 

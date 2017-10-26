@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StudentStructure {
+struct StudentStructure: Serializable {
     
     var userId: String?
     var userName: String
@@ -46,5 +46,10 @@ struct StudentStructure {
         self.studentFname = studentFname
         self.groupId = groupId
         self.photo = photo
+    }
+    var dictionary: [String: Any] {
+        var result: [String: Any] = ["username": self.userName, "password": self.password, "password_confirm": self.passwordConfirm, "plain_password": self.plainPassword, "email": self.email, "gradebook_id": self.gradebookId, "student_surname": self.studentSurname, "student_name": self.studentName, "student_fname": self.studentFname, "group_id": self.groupId, "photo": self.photo]
+        if let userId = userId { result["user_id"] = userId }
+        return result
     }
 }

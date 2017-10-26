@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct FacultyStructure {
+struct FacultyStructure: Serializable {
     var id: String?
     var name: String
     var description: String?
@@ -16,5 +16,11 @@ struct FacultyStructure {
         description = dictionary["faculty_description"] as? String
         guard let name = dictionary["faculty_name"] as? String else { return nil }
         self.name = name
+    }
+    var dictionary: [String: Any] {
+        var result:[String: Any] = ["faculty_name": self.name]
+        if let id = self.id { result["faculty_id"] = id }
+        if let description = self.description { result["faculty_description"] = description}
+        return result
     }
 }

@@ -7,11 +7,11 @@
 //
 
 import Foundation
-struct TestStructure {
+struct TestStructure: Serializable {
     var id: String?
     var name: String
     var subjectId: String
-    var tasks: Int
+    var tasks: String
     var timeForTest: String
     var enabled: String
     var attempts: String
@@ -19,7 +19,7 @@ struct TestStructure {
         id = dictionary["test_id"] as? String
         guard let name = dictionary["test_name"] as? String,
             let subjectId = dictionary["subject_id"] as? String,
-            let tasks = dictionary["tasks"] as? Int,
+            let tasks = dictionary["tasks"] as? String,
             let timeForTest = dictionary["time_for_test"] as? String,
             let enabled = dictionary["enabled"] as? String,
             let attempts = dictionary["attempts"] as? String
@@ -30,5 +30,10 @@ struct TestStructure {
         self.timeForTest = timeForTest
         self.enabled = enabled
         self.attempts = attempts
+    }
+    var dictionary: [String: Any] {
+        var result: [String: Any] = ["test_name": self.name, "subject_id": self.subjectId, "tasks": self.tasks, "time_for_test": self.timeForTest, "enabled": self.enabled, "attempts": self.attempts]
+        if let id = id { result["test_id"] = id }
+        return result
     }
 }

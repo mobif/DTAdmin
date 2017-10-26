@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct TimeTableStructure {
+struct TimeTableStructure: Serializable {
     var id: String?
     var groupId: String
     var subjectId: String
@@ -30,5 +30,10 @@ struct TimeTableStructure {
         self.startTime = startTime
         self.endDate = endDate
         self.endTime = endTime
+    }
+    var dictionary: [String: Any] {
+        var result: [String: Any] = ["group_id": self.groupId, "subject_id": self.subjectId, "start_date": self.startDate, "start_time": self.startTime, "end_date": self.endDate, "end_time": self.endTime]
+        if let id = id { result["timetable_id"] = id }
+        return result
     }
 }
