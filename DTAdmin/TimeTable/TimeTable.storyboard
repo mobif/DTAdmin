@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -81,44 +81,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SdD-JK-C9F" customClass="PickedTextField" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="16" y="91.5" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subjects" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Lc-el-FtM">
-                                <rect key="frame" x="16" y="137.5" width="343" height="19.5"/>
+                                <rect key="frame" x="16" y="136" width="343" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-im-JdT" customClass="PickedTextField" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="16" y="165" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtm-hj-3xI">
-                                <rect key="frame" x="16" y="211" width="343" height="19.5"/>
+                                <rect key="frame" x="16" y="208.5" width="343" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TyX-DS-8ws" customClass="TimePicker" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="16" y="238.5" width="343" height="30"/>
+                                <rect key="frame" x="16" y="236" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cO-cl-1B9">
-                                <rect key="frame" x="16" y="284.5" width="343" height="21"/>
+                                <rect key="frame" x="16" y="282" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AZb-Bb-l5P" customClass="TimePicker" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="16" y="313.5" width="343" height="30"/>
+                                <rect key="frame" x="16" y="311" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -130,34 +118,48 @@
                                     <action selector="saveButtonTapped:" destination="Q53-gE-vFe" eventType="touchUpInside" id="PhC-wk-Wfu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fg-qk-2XQ">
+                                <rect key="frame" x="16" y="163.5" width="343" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <connections>
+                                    <action selector="subjectButtonClicked:" destination="Q53-gE-vFe" eventType="touchUpInside" id="NML-5F-ykA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZ7-SN-Ihv">
+                                <rect key="frame" x="16" y="91" width="343" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <connections>
+                                    <action selector="groupButtonTapped:" destination="Q53-gE-vFe" eventType="touchUpInside" id="JTc-wW-6wv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Jtm-hj-3xI" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="0lF-fd-PjU"/>
-                            <constraint firstItem="SdD-JK-C9F" firstAttribute="top" secondItem="hLD-3v-fr8" secondAttribute="bottom" constant="8" id="1LE-WB-rqS"/>
-                            <constraint firstItem="Jtm-hj-3xI" firstAttribute="top" secondItem="ccY-im-JdT" secondAttribute="bottom" constant="16" id="3s6-bK-02P"/>
+                            <constraint firstItem="JZ7-SN-Ihv" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="1BG-aM-snK"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="gFm-Yx-bbs" secondAttribute="trailing" constant="16" id="7PF-Nk-rRl"/>
+                            <constraint firstItem="Jtm-hj-3xI" firstAttribute="top" secondItem="3Fg-qk-2XQ" secondAttribute="bottom" constant="16" id="8JJ-4z-UBY"/>
                             <constraint firstItem="AZb-Bb-l5P" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="CP8-2R-hTw"/>
                             <constraint firstItem="hLD-3v-fr8" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="E1O-Z4-iJR"/>
-                            <constraint firstItem="3Lc-el-FtM" firstAttribute="top" secondItem="SdD-JK-C9F" secondAttribute="bottom" constant="16" id="K7x-Is-cax"/>
+                            <constraint firstItem="3Fg-qk-2XQ" firstAttribute="top" secondItem="3Lc-el-FtM" secondAttribute="bottom" constant="8" id="G2g-g1-qBJ"/>
+                            <constraint firstItem="JZ7-SN-Ihv" firstAttribute="top" secondItem="hLD-3v-fr8" secondAttribute="bottom" constant="8" id="Gdc-i9-urn"/>
+                            <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="JZ7-SN-Ihv" secondAttribute="trailing" constant="16" id="HmU-Ng-j8E"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="TyX-DS-8ws" secondAttribute="trailing" constant="16" id="Kha-7x-hw4"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="3Lc-el-FtM" secondAttribute="trailing" constant="16" id="LPv-wA-N9W"/>
                             <constraint firstItem="gFm-Yx-bbs" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="Ovw-Wb-C8l"/>
-                            <constraint firstItem="ccY-im-JdT" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="Xce-Je-PTD"/>
+                            <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="3Fg-qk-2XQ" secondAttribute="trailing" constant="16" id="RvB-5I-rpW"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="Jtm-hj-3xI" secondAttribute="trailing" constant="16" id="YQY-7H-GH5"/>
-                            <constraint firstItem="SdD-JK-C9F" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="bco-CC-NFH"/>
                             <constraint firstItem="3Lc-el-FtM" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="bfy-UG-OTg"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="bottom" secondItem="gFm-Yx-bbs" secondAttribute="bottom" constant="16" id="cT5-Rb-Yfc"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="5cO-cl-1B9" secondAttribute="trailing" constant="16" id="daE-qm-eBO"/>
+                            <constraint firstItem="3Fg-qk-2XQ" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="hEB-Ka-dvP"/>
                             <constraint firstItem="5cO-cl-1B9" firstAttribute="top" secondItem="TyX-DS-8ws" secondAttribute="bottom" constant="16" id="i0z-Wv-Ste"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="AZb-Bb-l5P" secondAttribute="trailing" constant="16" id="i5c-Y7-P8d"/>
                             <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="hLD-3v-fr8" secondAttribute="trailing" constant="16" id="iN5-gv-BRU"/>
                             <constraint firstItem="TyX-DS-8ws" firstAttribute="top" secondItem="Jtm-hj-3xI" secondAttribute="bottom" constant="8" id="kPn-3K-EyE"/>
                             <constraint firstItem="AZb-Bb-l5P" firstAttribute="top" secondItem="5cO-cl-1B9" secondAttribute="bottom" constant="8" id="pCr-gI-vZz"/>
                             <constraint firstItem="hLD-3v-fr8" firstAttribute="top" secondItem="Bom-YP-ivQ" secondAttribute="top" constant="44" id="pOr-9X-a58"/>
-                            <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="SdD-JK-C9F" secondAttribute="trailing" constant="16" id="t3Z-Hp-Shu"/>
-                            <constraint firstItem="ccY-im-JdT" firstAttribute="top" secondItem="3Lc-el-FtM" secondAttribute="bottom" constant="8" id="tM7-6q-Myd"/>
-                            <constraint firstItem="Bom-YP-ivQ" firstAttribute="trailing" secondItem="ccY-im-JdT" secondAttribute="trailing" constant="16" id="uY3-PE-L4d"/>
+                            <constraint firstItem="3Lc-el-FtM" firstAttribute="top" secondItem="JZ7-SN-Ihv" secondAttribute="bottom" constant="16" id="tFq-bO-Rzd"/>
                             <constraint firstItem="TyX-DS-8ws" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="uaf-mi-S5g"/>
                             <constraint firstItem="5cO-cl-1B9" firstAttribute="leading" secondItem="Bom-YP-ivQ" secondAttribute="leading" constant="16" id="yMj-LH-ehj"/>
                         </constraints>
@@ -165,10 +167,10 @@
                     </view>
                     <connections>
                         <outlet property="endTimePicker" destination="AZb-Bb-l5P" id="73x-OS-SHS"/>
-                        <outlet property="groupPickedTextField" destination="SdD-JK-C9F" id="Qe9-3f-Ajs"/>
+                        <outlet property="groupButton" destination="JZ7-SN-Ihv" id="HOc-F6-fco"/>
                         <outlet property="saveButton" destination="gFm-Yx-bbs" id="Cgk-tb-Vpy"/>
                         <outlet property="startTimePicker" destination="TyX-DS-8ws" id="Q1D-Fe-l5d"/>
-                        <outlet property="subjectsPickedTextField" destination="ccY-im-JdT" id="Cgz-O6-eqD"/>
+                        <outlet property="subjectsButton" destination="3Fg-qk-2XQ" id="tKx-oa-v1a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="we0-az-iXP" userLabel="First Responder" sceneMemberID="firstResponder"/>

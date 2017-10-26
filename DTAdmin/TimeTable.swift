@@ -45,12 +45,12 @@ struct TimeTable {
     
     var jsonRepresentation: [String: String] {
         var dict = [String: String] ()
-        dict["group_id"] = groupID
-        dict["subject_id"] = subjectID
-        dict["start_date"] = startDate
-        dict["start_time"] = startTime
-        dict["end_date"] = endDate
-        dict["end_time"] = endTime
+        dict["group_id"] = groupID ?? ""
+        dict["subject_id"] = subjectID ?? ""
+        dict["start_date"] = startDate ?? ""
+        dict["start_time"] = startTime ?? ""
+        dict["end_date"] = endDate ?? ""
+        dict["end_time"] = endTime ?? ""
         return dict
     }
 }

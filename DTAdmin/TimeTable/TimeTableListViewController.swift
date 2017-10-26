@@ -57,7 +57,7 @@ class TimeTableListViewController: ParentViewController, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let timeTableItem = self.timeTableList[indexPath.row]
-        cell.textLabel?.text = timeTableItem.startTime
+        cell.textLabel?.text = "Start date: \(timeTableItem.startDate ?? "") Start time: \(timeTableItem.startTime ?? "")"
         return cell
     }
     

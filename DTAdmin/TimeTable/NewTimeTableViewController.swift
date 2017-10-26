@@ -18,10 +18,10 @@ enum TimeType: Int {
     case End = 1
 }
 
-class NewTimeTableViewController: UIViewController, PickerDelegate, TimePickerDelegate {
+class NewTimeTableViewController: ParentViewController, TimePickerDelegate {
 
-    @IBOutlet weak var groupPickedTextField: PickedTextField!
-    @IBOutlet weak var subjectsPickedTextField: PickedTextField!
+    @IBOutlet weak var groupButton: UIButton!
+    @IBOutlet weak var subjectsButton: UIButton!
     @IBOutlet weak var startTimePicker: TimePicker!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var endTimePicker: TimePicker!
@@ -32,10 +32,8 @@ class NewTimeTableViewController: UIViewController, PickerDelegate, TimePickerDe
         super.viewDidLoad()
         self.title = "New Time Table"
         self.saveButton.setTitle("Save", for: .normal)
-        self.groupPickedTextField.tag = DataPickerType.Group.rawValue
-        self.groupPickedTextField.customDelegate = self
-        self.subjectsPickedTextField.tag = DataPickerType.Subject.rawValue
-        self.subjectsPickedTextField.customDelegate = self
+        self.subjectsButton.setTitle("Select Subject", for: .normal)
+        self.groupButton.setTitle("Select Group", for: .normal)
         self.startTimePicker.timeDelegate = self
         self.startTimePicker.tag = TimeType.Start.rawValue
         self.endTimePicker.timeDelegate = self
@@ -50,6 +48,27 @@ class NewTimeTableViewController: UIViewController, PickerDelegate, TimePickerDe
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         print(self.newTimeTable)
+        self.startActivity()
+        CommonNetworkManager.shared().createTimeTable(timeTable: self.newTimeTable) { (newTimeTable, error) in
+            self.stopActivity()
+            if let error = error {
+                self.showAllert(title: "Error", message: error.localizedDescription, completionHandler: nil)
+            } else if newTimeTable != nil {
+                self.showAllert(title: nil, message: "Time Table added successfully!", completionHandler: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            } else {
+                self.showAllert(title: "Error", message: "Error insertion data!", completionHandler: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
+        }
+    }
+    
+    @IBAction func subjectButtonClicked(_ sender: Any) {
+    }
+    
+    @IBAction func groupButtonTapped(_ sender: Any) {
     }
     
     //MARK: picker delegate method

@@ -17,11 +17,13 @@ struct Keys {
 }
 
 struct API {
-    static let AccessProtocol = "http://"
-    static let DomainURL = "vps9615.hyperhost.name"
-    static let LoginURL = URL(string: AccessProtocol + DomainURL + "/login/index")
-    static let TimeTableForGroupURL = URL(string: AccessProtocol + DomainURL + "/timeTable/getTimeTablesForGroup")
-    static let TimeTableURL = URL(string: AccessProtocol + DomainURL + "/timeTable")
+    static let accessProtocol = "http://"
+    static let domainURL = "vps9615.hyperhost.name"
+    static let loginURL = URL(string: accessProtocol + domainURL + "/login/index")
+    static let timeTableForGroupURL = URL(string: accessProtocol + domainURL + "/timeTable/getTimeTablesForGroup")
+    static let timeTableURL = URL(string: accessProtocol + domainURL + "/timeTable")
+    static let subjectsURL = URL(string: accessProtocol + domainURL + "/Subject")
+    static let groupURL = URL(string: accessProtocol + domainURL + "/Group")
 }
 
 enum HttpMehtod: String {
@@ -38,19 +40,19 @@ class CommonNetworkManager {
 
     var baseURL: URL?
     private init() {
-        self.baseURL = API.LoginURL
+        self.baseURL = API.loginURL
     }
 
     class func shared() -> CommonNetworkManager {
         return sharedNetworkManager
     }
     
-    func logIn(username: String, password: String, completionHandler: @escaping (_ user: User?, _ error: Error?) -> ()){
+    func logIn(username: String, password: String, completionHandler: @escaping (_ user: User?, _ error: Error?) -> ()) {
         let parameters = [Keys.username: username, Keys.password: password]
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
             preconditionFailure("JSON serialization failed")
         }
-        guard let url = API.LoginURL else {
+        guard let url = API.loginURL else {
             preconditionFailure("Login url failed")
         }
         var request = URLRequest(url: url)
@@ -70,16 +72,14 @@ class CommonNetworkManager {
                             let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
                             let user = User(json: json ?? [String: Any]())
                             HTTPCookieStorage.shared.cookies?.forEach({ (cookie) in
-                                if cookie.domain == API.DomainURL {
+                                if cookie.domain == API.domainURL {
                                     StoreHelper.setCookie(cookie: cookie)
                                 }
                             })
                             completionHandler(user, nil)
                         } catch {
-                            print(error)
+                            print("Error json parsing")
                         }
-                    } else {
-                        print(response)
                     }
                 }
             }
@@ -87,7 +87,7 @@ class CommonNetworkManager {
     }
     
     func timeTable(by groupID: Int, completion: @escaping (_ timesTable: [TimeTable]?, _ error: Error?) -> ()) {
-        guard let url = API.TimeTableForGroupURL?.appendingPathComponent("group_id=\"\(groupID)\"") else {
+        guard let url = API.timeTableForGroupURL?.appendingPathComponent("group_id=\"\(groupID)\"") else {
             preconditionFailure("TimeTable url error")
         }
         var request = URLRequest(url: url)
@@ -108,8 +108,6 @@ class CommonNetworkManager {
                         } catch {
                             print(error)
                         }
-                    } else {
-                        print(response)
                     }
                 }
             }
@@ -117,7 +115,7 @@ class CommonNetworkManager {
     }
     
     func timeTable(completion: @escaping (_ timeTableArr: [TimeTable]?, _ error: Error?) -> ()) {
-        guard let url = API.TimeTableURL?.appendingPathComponent("/getRecords") else {
+        guard let url = API.timeTableURL?.appendingPathComponent("/getRecords") else {
             preconditionFailure("TimeTable url error")
         }
         var request = URLRequest(url: url)
@@ -142,9 +140,6 @@ class CommonNetworkManager {
                         } catch {
                             print(error)
                         }
-                    } else {
-                        completion(nil, error)
-                        print(response)
                     }
                 }
             }
@@ -152,7 +147,7 @@ class CommonNetworkManager {
     }
     
     func createTimeTable(timeTable: TimeTable, completion: @escaping (_ timeTable: TimeTable?, _ error: Error?) -> ()) {
-        guard let url = API.TimeTableURL?.appendingPathComponent("/getRecords") else {
+        guard let url = API.timeTableURL?.appendingPathComponent("/insertData") else {
             preconditionFailure("createTimeTable url error")
         }
         var request = URLRequest(url: url)
@@ -172,17 +167,15 @@ class CommonNetworkManager {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data) as? [[String: Any]]
                         let timeTable = TimeTable(json: json?.first)
-                        completion(timeTable, nil)
+                        if response.statusCode == 200 {
+                            completion(timeTable, nil)
+                        }
                     } catch {
-                        print(error)
-                    }
-                    if response.statusCode == 200 {
-                        
-                    } else {
-                        print(response)
+                        print("JSON parsing failed")
                     }
                 }
             }
             }.resume()
     }
+    
 }
