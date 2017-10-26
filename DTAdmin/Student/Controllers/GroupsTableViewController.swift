@@ -9,21 +9,22 @@
 import UIKit
 
 class GroupsTableViewController: UITableViewController {
-
+    let dataMnaager = DataManager.dataManager
     var groupList = [GroupStructure]()
     var selecectedGroup: ((GroupStructure) -> ())?
     var titleViewController:String?
     @IBOutlet var groupTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let manager = RequestManager<GroupStructure>()
-        manager.getEntityList(byStructure: Entities.Group, returnResults: { (groups, error) in
+        dataMnaager.getList(byEntity: .Group) { (groups, error) in
             if error == nil,
-                groups != nil{
-                self.groupList = groups!
+                let groups = groups as? [GroupStructure]{
+                self.groupList = groups
+                self.groupTable.reloadData()
+            } else {
+                self.showWarningMsg(error ?? "Incorect type data")
             }
-            self.groupTable.reloadData()
-        })
+        }
     }
     // MARK: - Table view data source
 

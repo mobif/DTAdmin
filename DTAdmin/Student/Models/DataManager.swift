@@ -9,43 +9,61 @@
 import Foundation
 
 class DataManager: HTTPManager {
-   
     
-    func getGroups(completionHandler: @escaping (_ listGroups: [GroupStructure]?, _ error: String?) -> ()) {
-        var groups: [GroupStructure]?
-        getEntityList(typeEntity: Entities.Group, completionHandler: { (list, error) in
-            if let error = error {
-               completionHandler(nil, error)
-            }
-            if let list = list {
-                groups = list as? [GroupStructure]
-                guard let listGroups = groups else {
-                    let error = "Incorrect type of elements"
-                    completionHandler(nil, error)
-                    return
-                }
-                completionHandler(listGroups, nil)
-            } else {
-                let error = "No response"
-                completionHandler(nil, error)
-            }
-        })
-        
+    static let dataManager = DataManager()
+    
+    private override init() {
     }
     
-    func getEntityList(typeEntity: Entities, completionHandler: @escaping (_ list: [Any]?, _ error: String?) -> ()) {
+    private let entityToArray: [Entities: Any] = [.Faculty: { FacultyStructure(dictionary: $0) }, .Speciality: { SpecialityStructure(dictionary: $0) },
+    .Group: { GroupStructure(dictionary: $0) }, .Subject: { SubjectStructure(dictionary: $0) }, .Test: { TestStructure(dictionary: $0) },
+    .TestDetail: { TestDetailStructure(dictionary: $0) }, .TimeTable: { TimeTableStructure(dictionary: $0) }, .Question: { QuestionStructure(dictionary: $0) },
+    .Answer: { AnswerStructure(dictionary: $0) }, .Student: { StudentStructure(dictionary: $0) }]
+    
+    func getList(byEntity typeEntity: Entities, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords) else {
             let error = "Cannot prepare header for URLRequest"
             completionHandler(nil,error)
             return
         }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.sync {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [[String: Any]] else {
+                print("Response is empty")
+                return
+            }
+            var entytiList = [Any]()
+            guard let definedBehave = self.entityToArray[typeEntity] as? ([String : Any]) throws -> String? else {
+                print("It can't be unwraped to \(typeEntity)")
+                return }
+            do {
+            entytiList = try json.flatMap(definedBehave)
+            }
+            catch {
+                print("Error: \(error)")
+                DispatchQueue.main.sync {
+                    completionHandler(nil, error.localizedDescription)
+                }
+            }
+            DispatchQueue.main.sync {
+                completionHandler(entytiList, nil)
+            }
+        }
+    }
+    
+    private func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            var errorMsg: String?
             if let sessionError = error {
-                errorMsg = sessionError.localizedDescription
+                DispatchQueue.main.async {
+                    completionHandler(nil, sessionError.localizedDescription)
+                }
             } else {
                 guard let responseValue = response as? HTTPURLResponse else {
-                    errorMsg = "Incorect server response"
+                    let errorMsg = "Incorect server response"
                     DispatchQueue.main.async {
                         completionHandler(nil, errorMsg)
                     }
@@ -53,36 +71,74 @@ class DataManager: HTTPManager {
                 }
                 if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                     guard let sessionData = data else {
-                        errorMsg = "No data in server response"
+                        let errorMsg = "No data in server response"
                         DispatchQueue.main.async {
                             completionHandler(nil, errorMsg)
                         }
                         return
                     }
-                    var json: [[String: Any]]?
+                    //JSON Serialization
                     do {
-                        json = try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String: Any]]
+                        let json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+                        completionHandler(json, nil)
                     } catch {
-                        print(error)
-                    }
-                    switch typeEntity {
-                    case .Group:
-                        let groups = json?.flatMap{ GroupStructure(dictionary: $0) }
-                        DispatchQueue.main.sync {
-                            completionHandler(groups, nil)
+                        DispatchQueue.main.async {
+                            completionHandler(nil, error.localizedDescription)
                         }
-                    case .Student:
-                        let students = json?.flatMap{ StudentStructure(dictionary: $0) }
-                        DispatchQueue.main.sync {
-                            completionHandler(students, nil)
-                        }
-                        
-                    default:
-                        print("error")
+                        return
                     }
                 }
             }
         }.resume()
+    }
+    
+    func getEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords, id: byId) else {
+            let error = "Cannot prepare header for URLRequest"
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (entity, error) in
+            if let error = error {
+                DispatchQueue.main.sync {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = entity as? [String: Any] else {
+                print("Response is empty")
+                return
+            }
+            var entity: Any?
+            switch typeEntity {
+            case .Faculty: entity = FacultyStructure(dictionary: json)
+            case .Speciality: entity = SpecialityStructure(dictionary: json)
+            case .Group: entity = GroupStructure(dictionary: json)
+            case .Subject: entity = SubjectStructure(dictionary: json)
+            case .Test: entity = TestStructure(dictionary: json)
+            case .TestDetail: entity = TestDetailStructure(dictionary: json)
+            case .TimeTable: entity = TimeTableStructure(dictionary: json)
+            case .Question: entity = QuestionStructure(dictionary: json)
+            case .Answer: entity = AnswerStructure(dictionary: json)
+            case .Student: entity = StudentStructure(dictionary: json)
+            case .User: entity = UserStructure(dictionary: json)
+            }
+            guard let entityUnwraped = entity else {
+                completionHandler(nil, "Incorrect type")
+                return
+            }
+            completionHandler(entityUnwraped, nil)
+        }
+    }
+    func updateEntity<TypeEntity>(byId: String, entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords, id: byId) else {
+            let error = "Cannot prepare header for URLRequest"
+            completionHandler(error)
+            return }
+        
+        let postData = //to dictionary
+        let json = try JSONSerialization.data(withJSONObject: postData, options: [])
+        request.httpBody = json
+        
     }
 }
 

@@ -9,8 +9,15 @@
 import Foundation
 
 enum Entities:String {
+    case Faculty = "Faculty"
+    case Speciality = "Speciality"
+    case Group = "Group"
+    case Subject = "Subject"
+    case Test = "Test"
+    case TestDetail = "TestDetail"
+    case TimeTable = "TimeTable"
+    case Question = "Question"
+    case Answer = "Answer"
     case Student = "Student"
     case User = "AdminUser"
-    case Faculty = "Faculty"
-    case Group = "Group"
 }

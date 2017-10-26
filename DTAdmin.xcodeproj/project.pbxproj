@@ -35,6 +35,14 @@
 		C7CB8FB01FA05EA10013C0AB /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB8FAF1FA05EA10013C0AB /* HTTPManager.swift */; };
 		C7CFB4841F9FA0CA0097DC9D /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFB4831F9FA0CA0097DC9D /* HTTPStatusCodes.swift */; };
 		C7CFB4861F9FAE440097DC9D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFB4851F9FAE440097DC9D /* DataManager.swift */; };
+		C7EE38581FA10839004F9613 /* FacultyStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE38571FA10839004F9613 /* FacultyStructure.swift */; };
+		C7EE385A1FA10D80004F9613 /* SubjectStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE38591FA10D80004F9613 /* SubjectStructure.swift */; };
+		C7EE385C1FA10DEA004F9613 /* TestStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE385B1FA10DEA004F9613 /* TestStructure.swift */; };
+		C7EE385E1FA11143004F9613 /* TimeTableStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE385D1FA11143004F9613 /* TimeTableStructure.swift */; };
+		C7EE38601FA11C8A004F9613 /* QuestionStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE385F1FA11C8A004F9613 /* QuestionStructure.swift */; };
+		C7EE38621FA12ABD004F9613 /* AnswerStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE38611FA12ABD004F9613 /* AnswerStructure.swift */; };
+		C7EE38641FA12C80004F9613 /* SpecialityStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE38631FA12C80004F9613 /* SpecialityStructure.swift */; };
+		C7EE38661FA12EEF004F9613 /* TestDetailStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE38651FA12EEF004F9613 /* TestDetailStructure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +76,14 @@
 		C7CB8FAF1FA05EA10013C0AB /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		C7CFB4831F9FA0CA0097DC9D /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		C7CFB4851F9FAE440097DC9D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C7EE38571FA10839004F9613 /* FacultyStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyStructure.swift; sourceTree = "<group>"; };
+		C7EE38591FA10D80004F9613 /* SubjectStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectStructure.swift; sourceTree = "<group>"; };
+		C7EE385B1FA10DEA004F9613 /* TestStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStructure.swift; sourceTree = "<group>"; };
+		C7EE385D1FA11143004F9613 /* TimeTableStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableStructure.swift; sourceTree = "<group>"; };
+		C7EE385F1FA11C8A004F9613 /* QuestionStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStructure.swift; sourceTree = "<group>"; };
+		C7EE38611FA12ABD004F9613 /* AnswerStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerStructure.swift; sourceTree = "<group>"; };
+		C7EE38631FA12C80004F9613 /* SpecialityStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialityStructure.swift; sourceTree = "<group>"; };
+		C7EE38651FA12EEF004F9613 /* TestDetailStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailStructure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,8 +247,16 @@
 		C7CB8FB51FA06AF10013C0AB /* Structures */ = {
 			isa = PBXGroup;
 			children = (
-				3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */,
+				C7EE38571FA10839004F9613 /* FacultyStructure.swift */,
+				C7EE38631FA12C80004F9613 /* SpecialityStructure.swift */,
 				3FEFEE3F1F9F63A400AAFB35 /* GroupStructure.swift */,
+				C7EE38591FA10D80004F9613 /* SubjectStructure.swift */,
+				C7EE385B1FA10DEA004F9613 /* TestStructure.swift */,
+				C7EE38651FA12EEF004F9613 /* TestDetailStructure.swift */,
+				C7EE385D1FA11143004F9613 /* TimeTableStructure.swift */,
+				C7EE385F1FA11C8A004F9613 /* QuestionStructure.swift */,
+				C7EE38611FA12ABD004F9613 /* AnswerStructure.swift */,
+				3FEFEE421F9F63A500AAFB35 /* StudentStructure.swift */,
 				3FEFEE401F9F63A500AAFB35 /* UserStructure.swift */,
 			);
 			path = Structures;
@@ -312,13 +336,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7EE38661FA12EEF004F9613 /* TestDetailStructure.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
+				C7EE385A1FA10D80004F9613 /* SubjectStructure.swift in Sources */,
 				3FEFEE531F9F63B800AAFB35 /* GroupsTableViewController.swift in Sources */,
 				3FEFEE451F9F63A500AAFB35 /* UserStructure.swift in Sources */,
 				3FEFEE441F9F63A500AAFB35 /* GroupStructure.swift in Sources */,
 				3FEFEE4C1F9F63AF00AAFB35 /* GroupTableViewCell.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
+				C7EE38601FA11C8A004F9613 /* QuestionStructure.swift in Sources */,
+				C7EE385C1FA10DEA004F9613 /* TestStructure.swift in Sources */,
 				3FEFEE461F9F63A500AAFB35 /* Entities.swift in Sources */,
+				C7EE38621FA12ABD004F9613 /* AnswerStructure.swift in Sources */,
 				C7CFB4841F9FA0CA0097DC9D /* HTTPStatusCodes.swift in Sources */,
 				3FEFEE511F9F63B800AAFB35 /* StudentViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
@@ -330,7 +359,10 @@
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				3FEFEE431F9F63A500AAFB35 /* RequestManager.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
+				C7EE38581FA10839004F9613 /* FacultyStructure.swift in Sources */,
 				3FEFEE471F9F63A500AAFB35 /* StudentStructure.swift in Sources */,
+				C7EE38641FA12C80004F9613 /* SpecialityStructure.swift in Sources */,
+				C7EE385E1FA11143004F9613 /* TimeTableStructure.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				C7CFB4861F9FAE440097DC9D /* DataManager.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,

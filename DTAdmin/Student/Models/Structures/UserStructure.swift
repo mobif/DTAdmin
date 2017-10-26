@@ -15,7 +15,6 @@ struct UserStructure {
     var logins: String
     var lastLogin: String?
     var roles: [String]
-
     init?(dictionary: [String: Any]) {
         id = dictionary["id"] as? String
         lastLogin = dictionary["last_login"] as? String

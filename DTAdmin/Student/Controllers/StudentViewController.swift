@@ -9,12 +9,12 @@
 import UIKit
 
 class StudentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-   
+    let dataManager = DataManager.dataManager
     var user: UserStructure?
     var cookie: HTTPCookie?
-    var studentList = [StudentGetStructure]()
+    var studentList = [StudentStructure]()
     var filtered = false
-    var filteredList: [StudentGetStructure]{
+    var filteredList: [StudentStructure]{
         if filtered {
             guard let searchString = searchBar.text else {return studentList}
             return studentList.filter({
@@ -25,7 +25,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var studentTable: UITableView!
-    @IBOutlet weak var userName: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let navigationItem = self.navigationItem
@@ -33,9 +33,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationItem.title = NSLocalizedString("Students", comment: "List all students")
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addNewStudent))
         navigationItem.rightBarButtonItem = doneItem
-        if user != nil {
-            userName.text = user?.username
-        }
+        
 //        studentTable.delegate = self
 //        studentTable.dataSource = self
 //        searchBar.delegate = self
@@ -43,14 +41,15 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func updateTable(){
-        let manager = RequestManager<StudentGetStructure>()
-        manager.getEntityList(byStructure: Entities.Student, returnResults: { (students, error) in
+        dataManager.getList(byEntity: .Student) { (students, error) in
             if error == nil,
-                let students = students {
+                let students = students as? [StudentStructure] {
                 self.studentList = students
+                self.studentTable.reloadData()
+            } else {
+                self.showWarningMsg(error ?? "Incorect type data")
             }
-            self.studentTable.reloadData()
-        })
+        }
     }
     
     @objc func addNewStudent(){

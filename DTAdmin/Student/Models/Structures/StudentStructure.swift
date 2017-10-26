@@ -22,19 +22,29 @@ struct StudentStructure {
     var studentFname: String
     var groupId: String
     var photo: String
-    
-    init(dictionary: [String: Any]) {
+    init?(dictionary: [String: Any]) {
         userId = dictionary["user_id"] as? String
-        userName = dictionary["username"] as? String ?? ""
-        password = dictionary["password"] as? String ?? ""
-        passwordConfirm = dictionary["password_confirm"] as? String ?? ""
-        plainPassword = dictionary["plain_password"] as? String ?? ""
-        email = dictionary["email"] as? String ?? ""
-        gradebookId = dictionary["gradebook_id"] as? String ?? ""
-        studentSurname = dictionary["student_surname"] as? String ?? ""
-        studentName = dictionary["student_name"] as? String ?? ""
-        studentFname = dictionary["student_fname"] as? String ?? ""
-        groupId = dictionary["group_id"] as? String ?? ""
-        photo = dictionary["photo"] as? String ?? ""
+        guard let userName = dictionary["username"] as? String,
+            let password = dictionary["password"] as? String,
+            let passwordConfirm = dictionary["password_confirm"] as? String,
+            let plainPassword = dictionary["plain_password"] as? String,
+            let email = dictionary["email"] as? String,
+            let gradebookId = dictionary["gradebook_id"] as? String,
+            let studentSurname = dictionary["student_surname"] as? String,
+            let studentName = dictionary["student_name"] as? String,
+            let studentFname = dictionary["student_fname"] as? String,
+            let groupId = dictionary["group_id"] as? String,
+            let photo = dictionary["photo"] as? String else { return nil }
+        self.userName = userName
+        self.password = password
+        self.passwordConfirm = passwordConfirm
+        self.plainPassword = plainPassword
+        self.email = email
+        self.gradebookId = gradebookId
+        self.studentSurname = studentSurname
+        self.studentName = studentName
+        self.studentFname = studentFname
+        self.groupId = groupId
+        self.photo = photo
     }
 }
