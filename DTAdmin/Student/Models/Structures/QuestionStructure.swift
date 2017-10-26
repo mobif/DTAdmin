@@ -28,5 +28,10 @@ struct QuestionStructure {
         self.type = type
         self.attachment = attachment
     }
+    var dictionary: [String: Any] {
+        var result: [String: Any] = ["question_id": self.questionId, "true_answer": self.trueAnswer, "answer_text": self.answerText, "attachment": self.attachmant]
+        if let id = id { result["question_id"] = id }
+        return result
+    }
 }
 

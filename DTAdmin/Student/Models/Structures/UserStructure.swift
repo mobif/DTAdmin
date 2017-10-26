@@ -30,5 +30,11 @@ struct UserStructure {
         self.logins = logins
         self.roles = roles
     }
+    var dictionary: [String: Any] {
+        var result:[String: Any] = ["email": self.email, "username": self.userName, "password": self.password, "logins": self.logins, "roles": self.roles]
+        if let id = self.id { result["id"] = id }
+        if let lastLogin = self.lastLogin { result["last_login"] = lastLogin}
+        return result
+    }
 }
 
