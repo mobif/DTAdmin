@@ -95,7 +95,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         if inSearchMode {
             cellData = filteredData[indexPath.row]
         }
-        cell.textLabel?.text = cellData.name
+        cell.textLabel?.text = cellData.id + " " + cellData.name
         cell.detailTextLabel?.text = cellData.description
         return cell
     }

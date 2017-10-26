@@ -50,6 +50,7 @@ class QueryService {
         
     }
 
+
     func getRecords (sufix: String, completion: @escaping QueryResult) {
         
         guard let url = URL(string: basePath + sufix) else { return }

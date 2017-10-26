@@ -23,6 +23,13 @@ class DetailSubjectViewController: UIViewController {
         }
     }
 
+    @IBAction func showTestsForSubject(_ sender: UIButton) {
+        if let wayToShowTestsForSubject = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "TestForSubjectTableViewController") as? TestsForSubjectTableViewController {
+            wayToShowTestsForSubject.subjectId = self.subject?.id
+            self.navigationController?.pushViewController(wayToShowTestsForSubject, animated: true)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -18,7 +18,7 @@ class AddNewRecordViewController: UIViewController {
     var subjectId: String = ""
     let queryService = QueryService()
     var saveAction: ((Subject?) -> ())?
-    var item: Subject?
+    //var item: Subject?
     var subject: Subject? {
         didSet {
             guard let subject = subject else { return }
@@ -95,11 +95,7 @@ class AddNewRecordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !updateDates {
-            navigationItem.title = "Add new item"
-        } else {
-            navigationItem.title = "Update record"
-        }
+        self.navigationItem.title = updateDates ? "Update record" : "Add new item"
         subjectDescriptionTextField.layer.cornerRadius = 5
         subjectDescriptionTextField.layer.borderWidth = 1
         subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
@@ -108,4 +104,5 @@ class AddNewRecordViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
 }
