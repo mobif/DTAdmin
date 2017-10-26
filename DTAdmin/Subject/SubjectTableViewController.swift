@@ -142,13 +142,12 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         return [delete, update]
     }
     
-    // MARK: Show TestsViewController
-    /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let wayToShowTests = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "_") as? _
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let wayToShowTests = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "DetailSubject") as? DetailSubjectViewController
         {
-            wayToShowTests._ = records
+            wayToShowTests.subject = self.records[indexPath.row]
             self.navigationController?.pushViewController(wayToShowTests, animated: true)
         }
-    }*/
+    }
     
 }
