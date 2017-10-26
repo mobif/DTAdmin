@@ -73,20 +73,19 @@
             <point key="canvasLocation" x="351" y="565"/>
         </scene>
         <!--Main Tab Bar Controller-->
-        <scene sceneID="8pa-5H-xuy">
+        <scene sceneID="8bQ-HH-kJf">
             <objects>
-                <viewController id="619-fB-Xk4" customClass="MainTabBarController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3Ut-4j-wuR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="C5v-Ym-zrN"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Eef-ux-biM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kob-P3-PAm" sceneMemberID="firstResponder"/>
+                <tabBarController id="4Si-nx-HyY" customClass="MainTabBarController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XyK-7w-0pc"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tHO-ow-emn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bpn-Qh-bBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="-176"/>
+            <point key="canvasLocation" x="350" y="-177"/>
         </scene>
         <!--Root Nav Controller-->
         <scene sceneID="AGa-an-0xN">
@@ -98,10 +97,10 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="619-fB-Xk4" kind="relationship" relationship="rootViewController" id="oXH-TN-guC"/>
                         <segue destination="MHF-1Q-PdI" kind="show" identifier="toLogin" animates="NO" id="wGF-Ho-n7W">
                             <nil key="action"/>
                         </segue>
+                        <segue destination="4Si-nx-HyY" kind="relationship" relationship="rootViewController" id="BcL-9E-yKD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdV-FZ-Jtz" userLabel="First Responder" sceneMemberID="firstResponder"/>
