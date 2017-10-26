@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: ParentViewController {
 
     @IBOutlet weak var topTitleLabel: UILabel!
     @IBOutlet weak var loginTextField: UITextField!
@@ -22,6 +22,10 @@ class LoginViewController: UIViewController {
         self.passwordTextField.placeholder = "password"
         self.passwordTextField.isSecureTextEntry = true
         self.loginButton.setTitle("Login", for: .normal)
+        
+        //test data
+        self.loginTextField.text = "admin"
+        self.passwordTextField.text = "dtapi_admin"
 
         // Do any additional setup after loading the view.
     }
@@ -32,7 +36,18 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.startActivity()
+        CommonNetworkManager.shared().logIn(username: self.loginTextField.text ?? "", password: self.passwordTextField.text ?? "") { (user, error) in
+            self.stopActivity()
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                StoreHelper.saveUser(user: user)
+                DispatchQueue.main.async {
+                   self.navigationController?.popViewController(animated: false)
+                }
+            }
+        }
     }
     
     /*

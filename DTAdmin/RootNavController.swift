@@ -12,8 +12,9 @@ class RootNavController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.performSegue(withIdentifier: "toLogin", sender: self)
-
+        if !StoreHelper.isLoggedUser() {
+            self.performSegue(withIdentifier: "toLogin", sender: self)
+        }
         // Do any additional setup after loading the view.
     }
 

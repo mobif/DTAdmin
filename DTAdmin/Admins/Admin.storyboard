@@ -12,7 +12,7 @@
         <!--Admin View Controller-->
         <scene sceneID="8od-oc-L4Y">
             <objects>
-                <viewController storyboardIdentifier="AdminListView" id="fkA-hd-7Bn" customClass="AdminViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fkA-hd-7Bn" customClass="AdminViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L5X-sR-qH8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,7 +165,7 @@
         <!--Item-->
         <scene sceneID="Gwn-ir-H3q">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GyU-4r-Wla" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AdminListView" automaticallyAdjustsScrollViewInsets="NO" id="GyU-4r-Wla" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="7Jj-ZF-sp5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jsp-m7-pmf">

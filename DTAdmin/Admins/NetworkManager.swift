@@ -20,7 +20,6 @@ class NetworkManager {
     case suffixToInsertData = "/insertData"
     case suffixToUpdateRecord = "/update"
     case suffixToDeleteRecord = "/del"
-//  concat += </id> to update || delete exact record Exp route -> ./../entity/del/<id>
   }
   
   private enum Credentials: String {
@@ -50,9 +49,11 @@ class NetworkManager {
   
   private func requestWithCookie(url: URL, method: String) -> URLRequest? {
     if UserDefaults.standard.isLoggedIn(), let cookieValue = UserDefaults.standard.getCookie() {
-      var request = requestBasic(with: url, method: method)
-      request.setValue("session=\(cookieValue)", forHTTPHeaderField: "Cookie")
-      return request
+        var request = requestBasic(with: url, method: method)
+        if let cookies = StoreHelper.getCookie() {
+            request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
+        }
+        return request
     }
     return nil
   }
@@ -241,7 +242,7 @@ extension UserDefaults {
     synchronize()
   }
   func isLoggedIn() -> Bool {
-    return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+    return StoreHelper.isLoggedUser()
   }
   func setUserName(name: String) {
     set(name, forKey: UserDefaultsKeys.userName.rawValue)
@@ -255,6 +256,6 @@ extension UserDefaults {
     synchronize()
   }
   func getCookie() -> String? {
-    return string(forKey: UserDefaultsKeys.cookieValue.rawValue)
+    return StoreHelper.getCookie()?.values.first
   }
 }
