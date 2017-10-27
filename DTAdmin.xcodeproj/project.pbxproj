@@ -101,6 +101,13 @@
 		3F05013B1F90ED59006651CE /* Group */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		3FB3C9B51FA375190038602B /* Groups */ = {
+			isa = PBXGroup;
+			children = (
 				8427807C1F97A7F8002D6877 /* HTTPService.swift */,
 				8427807E1F97A834002D6877 /* Entities.swift */,
 				842780801F97A88B002D6877 /* GroupSB.storyboard */,
@@ -110,7 +117,7 @@
 				844EAEE01F9B4B1600636600 /* FacultyViewController.swift */,
 				844EAEE21F9B4B2E00636600 /* SpecialityViewController.swift */,
 			);
-			name = Group;
+			path = Groups;
 			sourceTree = "<group>";
 		};
 		3FDE8F8B1F8D0DF60057BF3C = {
@@ -132,6 +139,7 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				3FB3C9B51FA375190038602B /* Groups */,
 				3F05013B1F90ED59006651CE /* Group */,
 				3F05013A1F90ED08006651CE /* Student */,
 				3F0501391F90ECFF006651CE /* Speciality */,
