@@ -1,20 +1,31 @@
 //
-//  RootNavController.swift
+//  DetailSubjectViewController.swift
 //  DTAdmin
 //
-//  Created by mac6 on 10/18/17.
+//  Created by ITA student on 10/24/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
 import UIKit
 
-class RootNavController: UINavigationController {
+class DetailSubjectViewController: UIViewController {
+    
+    @IBOutlet weak var subjectNameTextField: UILabel!
+    
+    @IBOutlet weak var subjectDescriptionTextField: UILabel!
+    
+    var subject: Subject? {
+        didSet {
+            guard let subject = subject else { return }
+            self.view.layoutIfNeeded()
+            self.subjectNameTextField.text = subject.id + " " + subject.name 
+            self.subjectDescriptionTextField.text = subject.description
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !StoreHelper.isLoggedUser() {
-            self.performSegue(withIdentifier: "toLogin", sender: self)
-        }
+
         // Do any additional setup after loading the view.
     }
 
