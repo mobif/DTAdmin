@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--View Controller-->
         <scene sceneID="Yxg-hj-non">
             <objects>
-                <viewController id="dg8-DW-s0j" customClass="LoginViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dg8-DW-s0j" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aIn-kS-XIW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
