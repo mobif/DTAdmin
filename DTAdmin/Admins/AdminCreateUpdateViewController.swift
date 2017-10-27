@@ -89,42 +89,31 @@ class AdminCreateUpdateViewController: UIViewController {
   }
   
   @objc private func create() {
-    if let userName = userNameTextField.text {
-      if checkPaswords(), checkEmail() {
-        guard let params = unWrapFields() else { return }
-        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {( newAdmin, admin, error) in
+    guard let userName = userNameTextField.text, checkPaswords(), checkEmail(), let params = unWrapFields() else {
+        showAlert(message: NSLocalizedString("Wrong username or ema", comment: "Username field has wrong parameter"))
+        return
+      }
+        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {(admin, error) in
           //          FIXME: Handle response
-          print(newAdmin, admin, error)
-//          if let newAdmin = newAdmin, let adminId = adminId {
-//            NetworkManager().getRecord(by: adminId, completionHandler: { (adm, response, err) in
-//              if let adm = adm{
-//                print(adm)
-//                self.saveAction!(adm)
-//                self.navigationController?.popViewController(animated: true)
-//
-//              }
-//            })
-//          }
+          if let error = error {
+            self.showAlert(message: NSLocalizedString(error.localizedDescription, comment: "Admin create request failed with error"))
+            return
+          }
           guard let admin = admin else { return }
           self.saveAction!(admin)
           self.navigationController?.popViewController(animated: true)
         })
-      }
-    } else {
-      showAlert(message: NSLocalizedString("Wrong username", comment: "Username field has wrong parameter"))
-    }
   }
   
   @objc private func update() {
-    if checkPaswords(), checkEmail() {
-      guard let params = unWrapFields(), let id = admin?.id else { return }
-      NetworkManager().editAdmin(id: id, userName: params.username, password: params.password, email: params.email) { (isOk, admin, error) in
+    guard checkPaswords(), checkEmail(), let params = unWrapFields(), let id = admin?.id else { return }
+      NetworkManager().editAdmin(id: id, userName: params.username, password: params.password, email: params.email) { (admin, error) in
         //          FIXME: Handle response
-        print(isOk, admin, error)
+//        print(admin, error)
         
         self.navigationController?.popViewController(animated: true)
       }
     }
-  }
+  
   
 }
