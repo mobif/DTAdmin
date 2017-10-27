@@ -20,13 +20,15 @@ class AdminCreateUpdateViewController: UIViewController {
       self.view.layoutIfNeeded()
       userNameTextField.text = adminInstance?.username
       userNameTextField.isEnabled = false
-      actualPaswordTextField.text = adminInstance?.password
+      //actualPaswordTextField.text = adminInstance?.password
       emailTextField.text = adminInstance?.email
       self.title = NSLocalizedString("Edit", comment: "Title for admin editing view")
       let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.update))
       self.navigationItem.rightBarButtonItems = [saveButton]
     }
   }
+  
+  var saveAction: ((UserModel.Admins?) -> ())?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -90,9 +92,23 @@ class AdminCreateUpdateViewController: UIViewController {
     if let userName = userNameTextField.text {
       if checkPaswords(), checkEmail() {
         guard let params = unWrapFields() else { return }
-        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {(admin, error) in
+        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {( newAdmin, adminId, error) in
           //          FIXME: Handle response
-          print(admin, error)
+          print(newAdmin, adminId, error)
+          if let newAdmin = newAdmin, let adminId = adminId {
+            //            var dict = newAdmin.dictionaryRepresentation
+            //            dict["id"] = adminId
+            //            var adm = UserModel.Admins.init(json: dict)
+            //            print(adm)
+            NetworkManager().getRecord(by: adminId, completionHandler: { (adm, response, err) in
+//              DispatchQueue.main.sync {
+                if let adm = adm{
+                  print(adm)
+                  self.saveAction!(adm)
+                }
+//              }
+            })
+          }
         })
         self.navigationController?.popViewController(animated: true)
       }
@@ -107,6 +123,7 @@ class AdminCreateUpdateViewController: UIViewController {
       NetworkManager().editAdmin(id: (adminInstance?.id)!, userName: params.username, password: params.password, email: params.email) { (isOk, admin, error) in
         //          FIXME: Handle response
         print(isOk, admin, error)
+        //self.saveAction!(admin)
         self.navigationController?.popViewController(animated: true)
       }
     }

@@ -72,8 +72,7 @@ class NetworkManager {
     guard let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToUserLogIn.rawValue) else { return }
     let request = requestBasicWithBody(httpBody: httpBody, url: url, method: "POST")
     
-    let session = URLSession.shared
-    session.dataTask(with: request) { (data, response, error) in
+    _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
       let sessionError = error
       if let sessionResponse = response as? HTTPURLResponse,
         let sessionData = data {
@@ -127,28 +126,56 @@ class NetworkManager {
     }
   }
   
-  func getAdmins(completionHandler: @escaping (_ adminsList: [UserModel.Admins]?, _ error: Error?) -> ()) {
+  func getAdmins(completionHandler: @escaping (_ adminsList: [UserModel.Admins]?, _ response: HTTPURLResponse, _ error: Error?) -> ()) {
     if UserDefaults.standard.isLoggedIn(), let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToGetRecords.rawValue) {
       guard let request = requestWithCookie(url: url, method: "GET") else { return }
       
       _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
-        if let sessionError = error, let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+        if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
           print(sessionResponse)
-          do {
-            let admins = try JSONDecoder().decode([UserModel.Admins].self, from: sessionData)
-            DispatchQueue.main.sync {
-              completionHandler(admins, nil)
+          if sessionResponse.statusCode == 200 {
+            do {
+              let admins = try JSONDecoder().decode([UserModel.Admins].self, from: sessionData)
+              DispatchQueue.main.sync {
+                completionHandler(admins, sessionResponse, nil)
+              }
+            } catch {
+              completionHandler(nil, sessionResponse, error)
             }
-          } catch {
-            completionHandler(nil, sessionError)
+            
           }
         }
         }.resume()
     }
   }
   
-  func createAdmin(username: String, password: String, email: String, completionHandler: @escaping (_ newAdmin: UserModel.NewAdmin?, _ error: Error?) -> ()) {
+  func getRecord(by id: String, completionHandler: @escaping (_ adminsList: UserModel.Admins?, _ response: HTTPURLResponse, _ error: Error?) -> ()) {
+    if UserDefaults.standard.isLoggedIn(), let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToGetRecords.rawValue + "/\(id)") {
+      guard let request = requestWithCookie(url: url, method: "GET") else { return }
+      print(url)
+      _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+          print(sessionResponse)
+          if sessionResponse.statusCode == 200 {
+            do {
+              let admin = try JSONDecoder().decode(UserModel.Admins.self, from: sessionData)
+              print(admin)
+              DispatchQueue.main.async {
+                completionHandler(admin, sessionResponse, nil)
+              }
+            } catch {
+              completionHandler(nil, sessionResponse, error)
+            }
+            
+          }
+        }
+        }.resume()
+    }
+  }
+  
+  func createAdmin(username: String, password: String, email: String, completionHandler: @escaping (_ newAdmin: UserModel.NewAdmin?, _ adminID: String?, _ error: Error?) -> ()) {
     if let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToInsertData.rawValue) {
+      
       let newAdmin = UserModel.NewAdmin(userName: username, password: password, email: email)
       guard let httpBody = try? JSONSerialization.data(withJSONObject: newAdmin.dictionaryRepresentation, options: []) else { return }
       guard let request = requestWithCookie(and: httpBody, url: url, method: "POST") else { return }
@@ -156,10 +183,23 @@ class NetworkManager {
       _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
         if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
           if sessionResponse.statusCode == 200 {
+//            let newAdminResponse: ["id": String, "response": String]?
+            guard let newAdminID = try? JSONDecoder().decode([String: String].self, from: sessionData) else { return }
             print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
-            completionHandler(newAdmin, nil)
+            //var newAdminToArr: UserModel.Admins?
+            print(newAdminID, "And just ID - \(newAdminID["id"])")
+           
+//              self.getRecord(by: (newAdminID["id"]!), completionHandler: { (admin, response, err) in
+//              if let admin = admin {
+//                newAdminToArr = admin
+                completionHandler(newAdmin, newAdminID["id"], nil)
+//              }
+//            })
+            
+              
+            
           } else { print("Something went wrong, Status code: ", sessionResponse.statusCode, sessionResponse.description) }
-        } else { completionHandler(nil, error) }
+        } else { completionHandler(nil, nil, error) }
         }.resume()
     }
   }
@@ -171,12 +211,10 @@ class NetworkManager {
       guard let request = requestWithCookie(and: httpBody, url: url, method: "POST") else { return }
       
       _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
-        if let sessionError = error {
-          print(sessionError)
-        } else {
+        
           if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
             if sessionResponse.statusCode == 200 {
-              print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
+              print("\nResponse\n", sessionResponse, "\nData\n", sessionData.description)
               DispatchQueue.main.async {
                 //                FIXME: Complete return
                 completionHandler(true, nil, nil)
@@ -189,7 +227,7 @@ class NetworkManager {
               }
             }
           }
-        }
+        
         }.resume()
     }
   }

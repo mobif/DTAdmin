@@ -13,7 +13,12 @@ class AdminViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var adminsListTableView: UITableView!
   
-  var adminsList: [UserModel.Admins]?
+  var adminsList: [UserModel.Admins]? {
+    willSet {
+      self.view.layoutIfNeeded()
+      self.adminsListTableView.reloadData()
+    }
+  }
   var isSearchStart = false
   var filteredList: [UserModel.Admins]? {
     if isSearchStart {
@@ -30,41 +35,59 @@ class AdminViewController: UIViewController {
     super.viewDidLoad()
     
     self.title = NSLocalizedString("Administrators", comment: "Title for admins table list view")
-
+    
     let addNewAdminButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
     let serverSyncDataButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
     self.navigationItem.rightBarButtonItems = [addNewAdminButton, serverSyncDataButton]
     
-//    MARK: DEBUG - Using for first login into system
-//    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
-//        print(admin, cookie)
-//        }
-//    MARK: DEBUG - Using to create new user, to proceed should be loginned before
-//    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
-
-//    MARK: DEBUG - Using for geting list of admin, to proceed should be loginned before
-//    NetworkManager().getAdmins { (admins) in
-//      print(UserDefaults.standard.getCookie())
-//      print(admins)
-//      self.adminsList = admins
-//      self.adminsListTBV.reloadData()
-//    }
-//    MARK: DEBUG - Using after first login into system, to proceed should be loginned before
-//    _ = NetworkManager().logOut()
-
+    
+    //    MARK: DEBUG - Using for first login into system
+    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
+      print(admin, cookie)
+    }
+    print(UserDefaults.standard.getCookie())
+    //    MARK: DEBUG - Using to create new user, to proceed should be loginned before
+    //    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
+    
+    //    MARK: DEBUG - Using for geting list of admin, to proceed should be loginned before
+    //    NetworkManager().getAdmins { (admins) in
+    //      print(UserDefaults.standard.getCookie())
+    //      print(admins)
+    //      self.adminsList = admins
+    //      self.adminsListTBV.reloadData()
+    //    }
+    
+    //    MARK: DEBUG - Using after first login into system, to proceed should be loginned before
+    //    _ = NetworkManager().logOut()
+    
   }
   
   @objc func showAdminCreateUpdateViewController() {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
+    adminCreateUpdateViewController.saveAction = { admin in
+      print("Error after crate and get record from server \(admin!)")
+      DispatchQueue.main.sync {
+        if let admin = admin {
+        self.adminsList?.append(admin)
+        self.adminsListTableView.reloadData()
+        print(admin)
+        }
+      }
+    }
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
   }
+  
   @objc func syncDataWithServer() {
-//    print("Cookie",UserDefaults.standard.getCookie())
-    NetworkManager().getAdmins { (admins) in
-//      FIXME: Optinal bug
-//      self.adminsList = admins.sorted(by: { Int($0.id)! < Int($1.id)! })
-      self.adminsList = admins.sorted(by: { $0.username < $1.username})
-      self.adminsListTableView.reloadData()
+    //    print("Cookie",UserDefaults.standard.getCookie())
+    NetworkManager().getAdmins { (admins, response, error)  in
+      //      FIXME: Optinal bug
+      //      self.adminsList = admins.sorted(by: { Int($0.id)! < Int($1.id)! })
+      if let admins = admins {
+        self.adminsList = admins.sorted(by: { $0.username < $1.username})
+        self.adminsListTableView.reloadData()
+      }// else {
+      print(error, response)
+      //      }
     }
   }
 }
@@ -99,9 +122,9 @@ extension AdminViewController: UITableViewDataSource {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       
       guard let admin = self.adminsList?[indexPath.row] else { return }
-      NetworkManager().deleteAdmin(id: admin.id, completionHandler: { (isComplete) in
+      NetworkManager().deleteAdmin(id: admin.id, completionHandler: { (isComplete, error) in
         if isComplete {
-          print("Is deleted: ", isComplete)
+          print("Is deleted: ", isComplete, error)
           self.adminsList?.remove(at: indexPath.row)
           self.adminsListTableView.reloadData()
         }
