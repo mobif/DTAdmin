@@ -13,12 +13,7 @@ class AdminViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var adminsListTableView: UITableView!
   
-  var adminsList: [UserModel.Admins]? {
-    willSet {
-      self.view.layoutIfNeeded()
-      self.adminsListTableView.reloadData()
-    }
-  }
+  var adminsList: [UserModel.Admins]?
   var isSearchStart = false
   var filteredList: [UserModel.Admins]? {
     if isSearchStart {
@@ -27,6 +22,11 @@ class AdminViewController: UIViewController {
         $0.username.contains(searchSample) || $0.email.contains(searchSample)
       })
     } else {
+      if let admins = adminsList {
+//        self.adminsList =
+        return admins.sorted(by: { $0.username < $1.username})
+//        self.adminsListTableView.reloadData()
+      }
       return adminsList
     }
   }
@@ -59,21 +59,28 @@ class AdminViewController: UIViewController {
     
     //    MARK: DEBUG - Using after first login into system, to proceed should be loginned before
     //    _ = NetworkManager().logOut()
-    
+//    NetworkManager().getRecord(by: "79") { (admin, resp, err) in
+//      print(admin,resp,err)
+//    }
   }
   
   @objc func showAdminCreateUpdateViewController() {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.saveAction = { admin in
       print("Error after crate and get record from server \(admin!)")
-      DispatchQueue.main.sync {
+//      DispatchQueue.main.sync {
         if let admin = admin {
-        self.adminsList?.append(admin)
-        self.adminsListTableView.reloadData()
-        print(admin)
+          
+//          self.adminsListTableView.beginUpdates()
+          self.adminsList?.append(admin)
+//          self.adminsListTableView.insertRows(at: <#T##[IndexPath]#>, with: <#T##UITableViewRowAnimation#>)
+          
+          self.adminsListTableView.reloadData()
+//          self.adminsListTableView.endUpdates()
+          print(admin)
         }
       }
-    }
+//    }
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
   }
   
@@ -113,7 +120,7 @@ extension AdminViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.title = NSLocalizedString("Edit", comment: "Title for edit admin creation view")
-    adminCreateUpdateViewController.adminInstance = filteredList?[indexPath.row]
+    adminCreateUpdateViewController.admin = filteredList?[indexPath.row]
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
     
   }

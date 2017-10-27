@@ -35,7 +35,7 @@ class UserModel {
       self.username = json["username"] as? String ?? "null"
       self.email = json["email"] as? String ?? "null"
       self.password = json["password"] as? String ?? "null"
-      self.logins = json["logins"] as? String ?? "null"
+      self.logins = json["logins"] as? String ?? "0"
       self.last_login = json["last_login"] as? String ?? nil
     }
   }

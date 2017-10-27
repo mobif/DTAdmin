@@ -151,17 +151,18 @@ class NetworkManager {
   
   func getRecord(by id: String, completionHandler: @escaping (_ adminsList: UserModel.Admins?, _ response: HTTPURLResponse, _ error: Error?) -> ()) {
     if UserDefaults.standard.isLoggedIn(), let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToGetRecords.rawValue + "/\(id)") {
+      
       guard let request = requestWithCookie(url: url, method: "GET") else { return }
-      print(url)
+      
       _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
         if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-          print(sessionResponse)
+          
           if sessionResponse.statusCode == 200 {
             do {
-              let admin = try JSONDecoder().decode(UserModel.Admins.self, from: sessionData)
-              print(admin)
+              let admin = try JSONDecoder().decode([UserModel.Admins].self, from: sessionData)
+      
               DispatchQueue.main.async {
-                completionHandler(admin, sessionResponse, nil)
+                completionHandler(admin.first, sessionResponse, nil)
               }
             } catch {
               completionHandler(nil, sessionResponse, error)
@@ -173,7 +174,7 @@ class NetworkManager {
     }
   }
   
-  func createAdmin(username: String, password: String, email: String, completionHandler: @escaping (_ newAdmin: UserModel.NewAdmin?, _ adminID: String?, _ error: Error?) -> ()) {
+  func createAdmin(username: String, password: String, email: String, completionHandler: @escaping (_ newAdmin: UserModel.NewAdmin?, _ admin: UserModel.Admins?, _ error: Error?) -> ()) {
     if let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToAdmins.rawValue + Urls.suffixToInsertData.rawValue) {
       
       let newAdmin = UserModel.NewAdmin(userName: username, password: password, email: email)
@@ -185,18 +186,18 @@ class NetworkManager {
           if sessionResponse.statusCode == 200 {
 //            let newAdminResponse: ["id": String, "response": String]?
             guard let newAdminID = try? JSONDecoder().decode([String: String].self, from: sessionData) else { return }
-            print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
+//            print("\nResponse\n", sessionResponse, "\nData\n", sessionData)
             //var newAdminToArr: UserModel.Admins?
-            print(newAdminID, "And just ID - \(newAdminID["id"])")
-           
-//              self.getRecord(by: (newAdminID["id"]!), completionHandler: { (admin, response, err) in
-//              if let admin = admin {
-//                newAdminToArr = admin
-                completionHandler(newAdmin, newAdminID["id"], nil)
-//              }
-//            })
+//            print(newAdminID, "And just ID - \(newAdminID["id"])")
             
-              
+            self.getRecord(by: (newAdminID["id"]!), completionHandler: { (admin, response, err) in
+              if let admin = admin {
+//                newAdminToArr = admin
+                completionHandler(newAdmin, admin, nil)
+              } else { completionHandler(nil, nil, nil)}
+            })
+            
+            
             
           } else { print("Something went wrong, Status code: ", sessionResponse.statusCode, sessionResponse.description) }
         } else { completionHandler(nil, nil, error) }

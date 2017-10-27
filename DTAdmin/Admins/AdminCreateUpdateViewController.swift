@@ -15,13 +15,13 @@ class AdminCreateUpdateViewController: UIViewController {
   @IBOutlet weak var confirmTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   
-  var adminInstance: UserModel.Admins? {
+  var admin: UserModel.Admins? {
     didSet {
       self.view.layoutIfNeeded()
-      userNameTextField.text = adminInstance?.username
+      userNameTextField.text = admin?.username
       userNameTextField.isEnabled = false
       //actualPaswordTextField.text = adminInstance?.password
-      emailTextField.text = adminInstance?.email
+      emailTextField.text = admin?.email
       self.title = NSLocalizedString("Edit", comment: "Title for admin editing view")
       let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.update))
       self.navigationItem.rightBarButtonItems = [saveButton]
@@ -92,38 +92,36 @@ class AdminCreateUpdateViewController: UIViewController {
     if let userName = userNameTextField.text {
       if checkPaswords(), checkEmail() {
         guard let params = unWrapFields() else { return }
-        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {( newAdmin, adminId, error) in
+        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {( newAdmin, admin, error) in
           //          FIXME: Handle response
-          print(newAdmin, adminId, error)
-          if let newAdmin = newAdmin, let adminId = adminId {
-            //            var dict = newAdmin.dictionaryRepresentation
-            //            dict["id"] = adminId
-            //            var adm = UserModel.Admins.init(json: dict)
-            //            print(adm)
-            NetworkManager().getRecord(by: adminId, completionHandler: { (adm, response, err) in
-//              DispatchQueue.main.sync {
-                if let adm = adm{
-                  print(adm)
-                  self.saveAction!(adm)
-                }
+          print(newAdmin, admin, error)
+//          if let newAdmin = newAdmin, let adminId = adminId {
+//            NetworkManager().getRecord(by: adminId, completionHandler: { (adm, response, err) in
+//              if let adm = adm{
+//                print(adm)
+//                self.saveAction!(adm)
+//                self.navigationController?.popViewController(animated: true)
+//
 //              }
-            })
-          }
+//            })
+//          }
+          guard let admin = admin else { return }
+          self.saveAction!(admin)
+          self.navigationController?.popViewController(animated: true)
         })
-        self.navigationController?.popViewController(animated: true)
       }
     } else {
-      showAlert(message: NSLocalizedString("Wrong username", comment: "Username field has wrong parametr"))
+      showAlert(message: NSLocalizedString("Wrong username", comment: "Username field has wrong parameter"))
     }
   }
   
   @objc private func update() {
     if checkPaswords(), checkEmail() {
-      guard let params = unWrapFields() else { return }
-      NetworkManager().editAdmin(id: (adminInstance?.id)!, userName: params.username, password: params.password, email: params.email) { (isOk, admin, error) in
+      guard let params = unWrapFields(), let id = admin?.id else { return }
+      NetworkManager().editAdmin(id: id, userName: params.username, password: params.password, email: params.email) { (isOk, admin, error) in
         //          FIXME: Handle response
         print(isOk, admin, error)
-        //self.saveAction!(admin)
+        
         self.navigationController?.popViewController(animated: true)
       }
     }
