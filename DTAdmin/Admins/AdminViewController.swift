@@ -40,12 +40,14 @@ class AdminViewController: UIViewController {
     let serverSyncDataButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
     self.navigationItem.rightBarButtonItems = [addNewAdminButton, serverSyncDataButton]
     
+//    StoreHelper.logout()
+    print(StoreHelper.getCookie())
     
     //    MARK: DEBUG - Using for first login into system
-    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
-      print(admin, cookie)
-    }
-    print(UserDefaults.standard.getCookie())
+//    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
+//      print(admin, cookie)
+//    }
+//    print(UserDefaults.standard.getCookie())
     //    MARK: DEBUG - Using to create new user, to proceed should be loginned before
     //    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
     
