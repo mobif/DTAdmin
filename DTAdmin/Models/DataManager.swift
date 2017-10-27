@@ -9,16 +9,13 @@
 import Foundation
 
 class DataManager: HTTPManager {
-    
-    static let dataManager = DataManager()
-    
-    private override init() {
+    private static var sharedDataManager: DataManager = {
+        let dataManager = DataManager()
+        return dataManager
+    }()
+    class func shared() -> DataManager {
+        return sharedDataManager
     }
-    
-    private let entityToArray: [Entities: Any] = [.Faculty: { FacultyStructure(dictionary: $0) }, .Speciality: { SpecialityStructure(dictionary: $0) },
-    .Group: { GroupStructure(dictionary: $0) }, .Subject: { SubjectStructure(dictionary: $0) }, .Test: { TestStructure(dictionary: $0) },
-    .TestDetail: { TestDetailStructure(dictionary: $0) }, .TimeTable: { TimeTableStructure(dictionary: $0) }, .Question: { QuestionStructure(dictionary: $0) },
-    .Answer: { AnswerStructure(dictionary: $0) }, .Student: { StudentStructure(dictionary: $0) }]
     
     func getList(byEntity typeEntity: Entities, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords) else {
@@ -28,24 +25,32 @@ class DataManager: HTTPManager {
         }
         getResponse(request: request) { (list, error) in
             if let error = error {
+                StoreHelper.logout()
+                DispatchQueue.main.async {
                     completionHandler(nil, error)
+                }
             }
             guard let  json = list as? [[String: Any]] else {
                 print("Response is empty")
                 return
             }
             var entytiList = [Any]()
-            guard let definedBehave = self.entityToArray[typeEntity] as? ([String : Any]) throws -> String? else {
-                print("It can't be unwraped to \(typeEntity)")
-                return }
-            do {
-            entytiList = try json.flatMap(definedBehave)
+            switch typeEntity {
+            case .Faculty: entytiList = json.flatMap{ FacultyStructure(dictionary: $0) }
+            case .Speciality: entytiList = json.flatMap{ SpecialityStructure(dictionary: $0) }
+            case .Group: entytiList = json.flatMap{ GroupStructure(dictionary: $0) }
+            case .Subject: entytiList = json.flatMap{ SubjectStructure(dictionary: $0) }
+            case .Test: entytiList = json.flatMap{ TestStructure(dictionary: $0) }
+            case .TestDetail: entytiList = json.flatMap{ TestDetailStructure(dictionary: $0) }
+            case .TimeTable: entytiList = json.flatMap{ TimeTableStructure(dictionary: $0) }
+            case .Question: entytiList = json.flatMap{ QuestionStructure(dictionary: $0) }
+            case .Answer: entytiList = json.flatMap{ AnswerStructure(dictionary: $0) }
+            case .Student: entytiList = json.flatMap{ StudentStructure(dictionary: $0) }
+            case .User: entytiList = json.flatMap{ UserStructure(dictionary: $0) }
             }
-            catch {
-                print("Error: \(error)")
-                completionHandler(nil, error.localizedDescription)
+            DispatchQueue.main.async {
+                completionHandler(entytiList, nil)
             }
-            completionHandler(entytiList, nil)
         }
     }
     
@@ -75,7 +80,9 @@ class DataManager: HTTPManager {
                     //JSON Serialization
                     do {
                         let json = try JSONSerialization.jsonObject(with: sessionData, options: [])
-                        completionHandler(json, nil)
+                        DispatchQueue.main.async {
+                            completionHandler(json, nil)
+                        }
                     } catch {
                         DispatchQueue.main.async {
                             completionHandler(nil, error.localizedDescription)
@@ -94,38 +101,50 @@ class DataManager: HTTPManager {
     func getEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetOneRecord, id: byId) else {
             let error = "Cannot prepare header for URLRequest"
-            completionHandler(nil, error)
+            DispatchQueue.main.async {
+                completionHandler(nil, error)
+            }
             return
         }
         getResponse(request: request) { (entity, error) in
             if let error = error {
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     completionHandler(nil, error)
                 }
             }
-            guard let  json = entity as? [String: Any] else {
-                print("Response is empty")
+            guard let entity = entity else {
+                completionHandler(nil, "Response nil")
                 return
             }
-            var entity: Any?
-            switch typeEntity {
-            case .Faculty: entity = FacultyStructure(dictionary: json)
-            case .Speciality: entity = SpecialityStructure(dictionary: json)
-            case .Group: entity = GroupStructure(dictionary: json)
-            case .Subject: entity = SubjectStructure(dictionary: json)
-            case .Test: entity = TestStructure(dictionary: json)
-            case .TestDetail: entity = TestDetailStructure(dictionary: json)
-            case .TimeTable: entity = TimeTableStructure(dictionary: json)
-            case .Question: entity = QuestionStructure(dictionary: json)
-            case .Answer: entity = AnswerStructure(dictionary: json)
-            case .Student: entity = StudentStructure(dictionary: json)
-            case .User: entity = UserStructure(dictionary: json)
+            guard let  jsonArray = entity as? [[String: Any]] else {
+                completionHandler(nil, "Structure incorrect: \(entity)")
+                return
             }
-            guard let entityUnwraped = entity else {
+            guard let json = jsonArray.first else {
+                completionHandler(nil, "Response is empty: \(jsonArray)")
+                return
+            }
+            var entityInstance: Any?
+            switch typeEntity {
+            case .Faculty: entityInstance = FacultyStructure(dictionary: json)
+            case .Speciality: entityInstance = SpecialityStructure(dictionary: json)
+            case .Group: entityInstance = GroupStructure(dictionary: json)
+            case .Subject: entityInstance = SubjectStructure(dictionary: json)
+            case .Test: entityInstance = TestStructure(dictionary: json)
+            case .TestDetail: entityInstance = TestDetailStructure(dictionary: json)
+            case .TimeTable: entityInstance = TimeTableStructure(dictionary: json)
+            case .Question: entityInstance = QuestionStructure(dictionary: json)
+            case .Answer: entityInstance = AnswerStructure(dictionary: json)
+            case .Student: entityInstance = StudentStructure(dictionary: json)
+            case .User: entityInstance = UserStructure(dictionary: json)
+            }
+            guard let entityUnwraped = entityInstance else {
                 completionHandler(nil, "Incorrect type")
                 return
             }
-            completionHandler(entityUnwraped, nil)
+            DispatchQueue.main.async {
+                completionHandler(entityUnwraped, nil)
+            }
         }
     }
     
@@ -143,19 +162,16 @@ class DataManager: HTTPManager {
         }
         getResponse(request: request) { (entity, error) in
             if let error = error {
-                DispatchQueue.main.sync {
-                    completionHandler(error)
-                }
+                completionHandler(error)
             } else {
-                guard let  json = entity as? [String: Any] else {
-                    print("Response is empty")
+                guard let entityUnwraped = entity else { return }
+                guard let  json = entityUnwraped as? [String: Any] else {
+                    print("Response is empty \(entityUnwraped)")
                     return
                 }
                 // MARK: Debug part
-                print(json["id"]!)
-//                DispatchQueue.main.sync {
-//                    completionHandler()
-//                }
+                print("Respons for Update: \(json)")
+                completionHandler(nil)
             }
         }
     }
@@ -173,19 +189,17 @@ class DataManager: HTTPManager {
         }
         getResponse(request: request) { (entity, error) in
             if let error = error {
-                DispatchQueue.main.sync {
-                    completionHandler(nil, error)
-                }
+                completionHandler(nil, error)
             } else {
+                guard let entity = entity else { return }
                 guard let  json = entity as? [String: Any] else {
-                    print("Response is empty")
+                    let errorMsg = "Response is empty: \(entity)"
+                    completionHandler(nil, errorMsg)
                     return
                 }
                 // MARK: Debug part
-                print(json["id"]!)
-                //                DispatchQueue.main.sync {
-                //                    completionHandler()
-                //                }
+                print(json)
+                completionHandler(json["id"], nil)
             }
         }
     }
@@ -201,19 +215,20 @@ class DataManager: HTTPManager {
                     completionHandler(nil, error)
                 }
             } else {
-                guard let  json = entity as? [String: Any] else {
+                guard let entity = entity else { return }
+                guard let  json = entity as? [String: String] else {
                     print("Response is empty")
                     return
                 }
                 // MARK: Debug part
-                print(json["id"]!)
-                //                DispatchQueue.main.sync {
-                //                    completionHandler()
-                //                }
+                if json["response"] == "ok" {
+                    completionHandler("ok", nil)
+                } else {
+                    completionHandler(nil, json["response"])
+                }
             }
         }
     }
-    
 }
 
 

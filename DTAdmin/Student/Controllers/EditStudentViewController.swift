@@ -9,7 +9,7 @@
 import UIKit
 
 class EditStudentViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
-    let dataManager = DataManager.dataManager
+    
     var studentLoaded: StudentStructure?{
         didSet {
             self.view.layoutIfNeeded()
@@ -100,7 +100,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         if prepareForSave(){
             guard let userIDForUpdate = studentLoaded?.userId else { return }
             guard let studentForSave = studentForSave else { return }
-            dataManager.updateEntity(byId: userIDForUpdate, entity: studentForSave, typeEntity: .Student) { error in
+            DataManager.shared().updateEntity(byId: userIDForUpdate, entity: studentForSave, typeEntity: .Student) { error in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
@@ -116,25 +116,19 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     @objc func postNewStudentToAPI(){
         if prepareForSave(){
             guard let studentForSave = studentForSave else { return }
-            dataManager.insertEntity(entity: studentForSave, typeEntity: .Student) { (result, error) in
+            DataManager.shared().insertEntity(entity: studentForSave, typeEntity: .Student) { (id, error) in
                 if let error = error {
-                        self.showWarningMsg(error)
+                    self.showWarningMsg(error)
                 } else {
-                    guard let resultUnwraped = result as? [String: Any] else {
-                        self.showWarningMsg(NSLocalizedString("No server response", comment: "Server not respondig for request"))
+                    guard let id = id else {
+                        self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
                         return
                     }
-//                    let dictionaryResult = self.convertToDictionary(text: resultStringUnwraper)
-//                    guard let dictionaryResultUnwraped = dictionaryResult else {
-//                        self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "The response message cannot be interpreted"))
-//                        return
-//                    }
-//                    guard let newUserId = self.getIdAsInt(dict: resultUnwraped) else {
-//                        self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
-//                        return
-//                    }
+                    let newUserId = String(describing: id)
+                    var newStudent = studentForSave
+                    newStudent.userId = newUserId
                     if let resultModification = self.resultModification {
-                        resultModification(studentForSave, true)
+                        resultModification(newStudent, true)
                     }
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -197,7 +191,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     }
     func getGroupFromAPI(byId: String) {
 //        let manager = RequestManager<GroupStructure>()
-        dataManager.getEntity(byId: byId, typeEntity: .Group) { (groupInstance, error) in
+        DataManager.shared().getEntity(byId: byId, typeEntity: .Group) { (groupInstance, error) in
             if let groupInstance = groupInstance as? GroupStructure {
                 self.selectedGroupForStudent = groupInstance
                 self.groupButton.setTitle(groupInstance.groupName, for: .normal)
@@ -208,7 +202,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     }
     func getUserFromAPI(byId: String) {
         //let manager = RequestManager<UserGetStructure>()
-        dataManager.getEntity(byId: byId, typeEntity: .User) { (userInstance, error) in
+        DataManager.shared().getEntity(byId: byId, typeEntity: .User) { (userInstance, error) in
             if let userInstance = userInstance as? UserStructure{
                 self.selectedUserAccountForStudent = userInstance
                 self.loginStudentTextField.text = userInstance.userName

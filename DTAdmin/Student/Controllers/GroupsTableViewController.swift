@@ -9,14 +9,13 @@
 import UIKit
 
 class GroupsTableViewController: UITableViewController {
-    let dataMnaager = DataManager.dataManager
     var groupList = [GroupStructure]()
     var selecectedGroup: ((GroupStructure) -> ())?
     var titleViewController:String?
     @IBOutlet var groupTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataMnaager.getList(byEntity: .Group) { (groups, error) in
+        DataManager.shared().getList(byEntity: .Group) { (groups, error) in
             if error == nil,
                 let groups = groups as? [GroupStructure]{
                 self.groupList = groups

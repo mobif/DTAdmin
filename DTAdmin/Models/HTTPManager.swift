@@ -21,16 +21,6 @@ class HTTPManager {
     }
     let urlPrepare: [TypeReqest: (command: String,method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET")]
     
-    var cookie: HTTPCookie? {
-        let cookies:[HTTPCookie] = HTTPCookieStorage.shared.cookies! as [HTTPCookie]
-        for cookieItem:HTTPCookie in cookies as [HTTPCookie] {
-            if cookieItem.domain == self.urlDomain {
-                return cookieItem
-            }
-        }
-        return nil
-    }
-    
     func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "") -> URLRequest? {
         guard let URLCreationData = urlPrepare[type] else { return nil }
         let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id
@@ -39,8 +29,8 @@ class HTTPManager {
         request.httpMethod = URLCreationData.method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("UTF-8", forHTTPHeaderField: "Charset")
-        if let selfCookie = self.cookie {
-            request.setValue("session=\(selfCookie.value)", forHTTPHeaderField: "Cookie")
+        if let cookies = StoreHelper.getCookie() {
+            request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         }
         return request
     }

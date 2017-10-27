@@ -9,7 +9,6 @@
 import UIKit
 
 class StudentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-    let dataManager = DataManager.dataManager
     var user: UserStructure?
     var cookie: HTTPCookie?
     var studentList = [StudentStructure]()
@@ -29,19 +28,18 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         let navigationItem = self.navigationItem
-        
         navigationItem.title = NSLocalizedString("Students", comment: "List all students")
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addNewStudent))
         navigationItem.rightBarButtonItem = doneItem
-        
-//        studentTable.delegate = self
-//        studentTable.dataSource = self
-//        searchBar.delegate = self
         updateTable()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        //updateTable()//for test, not to be passed to production
+    }
+    
     func updateTable(){
-        dataManager.getList(byEntity: .Student) { (students, error) in
+        DataManager.shared().getList(byEntity: .Student) { (students, error) in
             if error == nil,
                 let students = students as? [StudentStructure] {
                 self.studentList = students
@@ -121,7 +119,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
             //let postMan = RequestManager<StudentPostStructure>()
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
             
-            self.dataManager.deleteEntity(byId: studentId, typeEntity: .Student)  { (result, error) in
+            DataManager.shared().deleteEntity(byId: studentId, typeEntity: .Student)  { (result, error) in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
