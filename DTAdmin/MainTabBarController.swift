@@ -93,14 +93,6 @@ class TabOneViewController: UIViewController {
     }
 }
 
-class TabTwoViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
-        self.title = "Subjects"
-    }
-}
-
 class TabThreeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
