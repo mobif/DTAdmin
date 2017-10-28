@@ -66,6 +66,13 @@ class NewTimeTableViewController: ParentViewController, TimePickerDelegate {
     }
     
     @IBAction func subjectButtonClicked(_ sender: Any) {
+        let subjectStoryboard = UIStoryboard.stoyboard(by: .Subject)
+        guard let subjectViewController = subjectStoryboard.instantiateViewController(withIdentifier: "SubjectTableViewController") as? SubjectTableViewController else { return }
+        subjectViewController.selectedSubject = { subject in
+            self.newTimeTable.subjectID = subject.id
+            self.subjectsButton.setTitle(subject.name, for: .normal)
+        }
+        self.navigationController?.pushViewController(subjectViewController, animated: true)
     }
     
     @IBAction func groupButtonTapped(_ sender: Any) {

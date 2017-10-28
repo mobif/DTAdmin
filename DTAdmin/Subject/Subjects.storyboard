@@ -99,6 +99,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxE-bQ-O7V">
                                 <rect key="frame" x="245" y="332" width="110" height="30"/>
                                 <state key="normal" title="Show time table"/>
+                                <connections>
+                                    <action selector="timeTableButtonTapped:" destination="POR-fv-BoT" eventType="touchUpInside" id="8LB-7o-nsC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
