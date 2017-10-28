@@ -14,6 +14,7 @@ class AdminViewController: UIViewController {
   @IBOutlet weak var adminsListTableView: UITableView!
 
   var isSearchStart = false
+  
   var adminsList: [UserModel.Admins]?
   var filteredList: [UserModel.Admins]? {
     if isSearchStart {
@@ -21,12 +22,10 @@ class AdminViewController: UIViewController {
       return adminsList?.filter({
         $0.username.contains(searchSample) || $0.email.contains(searchSample)
       })
-    } else {
-      if let admins = adminsList {
-        return admins.sorted(by: { $0.username < $1.username})
-      }
-      return adminsList
+    } else if let admins = adminsList {
+      return admins.sorted(by: { $0.username < $1.username})
     }
+    return adminsList
   }
   
   override func viewDidLoad() {
@@ -34,16 +33,14 @@ class AdminViewController: UIViewController {
     
     setUpView()
     
-//    StoreHelper.logout()
-    print(StoreHelper.getCookie())
+    //    StoreHelper.logout()
+    //    print(StoreHelper.getCookie() as Any)
     
     //    MARK: DEBUG - Using for first login into system
-//    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
-//      print(admin, cookie)
-//    }
-//    print(UserDefaults.standard.getCookie())
-    //    MARK: DEBUG - Using to create new user, to proceed should be loginned before
-    //    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
+    //    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
+    //      print(admin, cookie)
+    //    }
+    //    print(UserDefaults.standard.getCookie())
     
     //    MARK: DEBUG - Using for geting list of admin, to proceed should be loginned before
     //    NetworkManager().getAdmins { (admins) in
@@ -55,9 +52,7 @@ class AdminViewController: UIViewController {
     
     //    MARK: DEBUG - Using after first login into system, to proceed should be loginned before
     //    _ = NetworkManager().logOut()
-//    NetworkManager().getRecord(by: "79") { (admin, resp, err) in
-//      print(admin,resp,err)
-//    }
+    
   }
   
   private func setUpView() {
@@ -73,7 +68,6 @@ class AdminViewController: UIViewController {
   @objc func showAdminCreateUpdateViewController() {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.saveAction = { admin in
-      print("Error after crate and get record from server \(admin!)")
         if let admin = admin {
           self.adminsList?.append(admin)
           self.adminsListTableView.reloadData()
@@ -81,16 +75,19 @@ class AdminViewController: UIViewController {
       }
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
   }
+  
   //MARK: temporary exist just for ease debug proces
   @objc func syncDataWithServer() {
     NetworkManager().getAdmins { (admins, response, error)  in
       if let admins = admins {
         self.adminsList = admins.sorted(by: { $0.username < $1.username})
         self.adminsListTableView.reloadData()
+      } else {
+        print(error!.localizedDescription, response)
       }
-      print(error, response)
     }
   }
+  
 }
 
 extension AdminViewController: UITableViewDelegate {
@@ -111,10 +108,14 @@ extension AdminViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.title = NSLocalizedString("Edit", comment: "Title for edit admin creation view")
-//    FIXME: fix update return
     adminCreateUpdateViewController.admin = filteredList?[indexPath.row]
+    adminCreateUpdateViewController.saveAction = { admin in
+      if let admin = admin {
+        self.adminsList?[indexPath.row] = admin
+        self.adminsListTableView.reloadData()
+      }
+    }
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
-    
   }
   
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -132,9 +133,11 @@ extension AdminViewController: UITableViewDataSource {
           self.adminsListTableView.endUpdates()
       })
     }
+    
     deleteOpt.backgroundColor = UIColor.red
     return [deleteOpt]
   }
+  
 }
 
 extension AdminViewController: UISearchBarDelegate {
@@ -148,4 +151,5 @@ extension AdminViewController: UISearchBarDelegate {
     isSearchStart = !searchText.isEmpty
     adminsListTableView.reloadData()
   }
+  
 }

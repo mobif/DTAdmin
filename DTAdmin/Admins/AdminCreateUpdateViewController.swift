@@ -18,11 +18,12 @@ class AdminCreateUpdateViewController: UIViewController {
   var admin: UserModel.Admins? {
     didSet {
       self.view.layoutIfNeeded()
+      self.title = NSLocalizedString("Edit", comment: "Title for admin editing view")
+      
       userNameTextField.text = admin?.username
       userNameTextField.isEnabled = false
-      //actualPaswordTextField.text = adminInstance?.password
       emailTextField.text = admin?.email
-      self.title = NSLocalizedString("Edit", comment: "Title for admin editing view")
+      
       let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.update))
       self.navigationItem.rightBarButtonItems = [saveButton]
     }
@@ -43,6 +44,15 @@ class AdminCreateUpdateViewController: UIViewController {
     self.navigationItem.rightBarButtonItems = [addButton]
   }
   
+  func unWrapFields() -> (username: String, password: String, email: String)? {
+    if let username = userNameTextField.text,
+      let password = actualPaswordTextField.text,
+      let email = emailTextField.text {
+      return (username, password, email)
+    }
+    return nil
+  }
+  
   func checkPaswords() -> Bool {
     let passwordRegEx = "^([a-zA-Z0-9@*#]{8,15})$"
     let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
@@ -54,15 +64,6 @@ class AdminCreateUpdateViewController: UIViewController {
       showAlert(message: NSLocalizedString("Passwords do not match", comment: "Passwords at inputed fields not match"))
     }
     return false
-  }
-  
-  func unWrapFields() -> (username: String, password: String, email: String)? {
-    if let username = userNameTextField.text,
-      let password = actualPaswordTextField.text,
-      let email = emailTextField.text {
-      return (username, password, email)
-    }
-    return nil
   }
   
   func checkEmail() -> Bool {
@@ -89,31 +90,38 @@ class AdminCreateUpdateViewController: UIViewController {
   }
   
   @objc private func create() {
-    guard let userName = userNameTextField.text, checkPaswords(), checkEmail(), let params = unWrapFields() else {
-        showAlert(message: NSLocalizedString("Wrong username or ema", comment: "Username field has wrong parameter"))
+    guard let userName = userNameTextField.text,
+      checkPaswords(), checkEmail(),
+      let params = unWrapFields() else {
+      showAlert(message: NSLocalizedString("Wrong username or ema", comment: "Username field has wrong parameter"))
+      return
+    }
+    
+    NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: { (admin, error) in
+      if let error = error {
+        self.showAlert(message: NSLocalizedString(error.localizedDescription, comment: "Admin create request failed with error"))
         return
       }
-        NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: {(admin, error) in
-          //          FIXME: Handle response
-          if let error = error {
-            self.showAlert(message: NSLocalizedString(error.localizedDescription, comment: "Admin create request failed with error"))
-            return
-          }
-          guard let admin = admin else { return }
-          self.saveAction!(admin)
-          self.navigationController?.popViewController(animated: true)
-        })
+      guard let admin = admin else { return }
+      self.saveAction!(admin)
+      self.navigationController?.popViewController(animated: true)
+    })
   }
   
   @objc private func update() {
-    guard checkPaswords(), checkEmail(), let params = unWrapFields(), let id = admin?.id else { return }
-      NetworkManager().editAdmin(id: id, userName: params.username, password: params.password, email: params.email) { (admin, error) in
-        //          FIXME: Handle response
-//        print(admin, error)
-        
-        self.navigationController?.popViewController(animated: true)
+    guard checkPaswords(), checkEmail(),
+      let params = unWrapFields(),
+      let id = admin?.id else { return }
+    
+    NetworkManager().editAdmin(id: id, userName: params.username, password: params.password, email: params.email) { (admin, error) in
+      if let error = error {
+        self.showAlert(message: NSLocalizedString(error.localizedDescription, comment: "Admin create request failed with error"))
+        return
       }
+      guard let admin = admin else { return }
+      self.saveAction!(admin)
+      self.navigationController?.popViewController(animated: true)
     }
-  
+  }
   
 }
