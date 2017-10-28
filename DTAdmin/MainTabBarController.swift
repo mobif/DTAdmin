@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         var tabBarViewControllers = [UIViewController]()
         
 //MARK: Create students tab
-        let studentStoryboard = UIStoryboard.init(name: "Student", bundle: nil)
+        let studentStoryboard = UIStoryboard(name: "Student", bundle: nil)
         guard let studentNavigationController = studentStoryboard.instantiateViewController(withIdentifier: "StudentNavigationController") as? UINavigationController else { return }
         let studentBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
         studentNavigationController.tabBarItem = studentBarItem
@@ -47,14 +47,14 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(specialityTab)
         
 //MARK: Create admins tab
-        let adminStoryboard = UIStoryboard.init(name: "Admin", bundle: nil)
+        let adminStoryboard = UIStoryboard(name: "Admin", bundle: nil)
         guard let adminsNavController = adminStoryboard.instantiateViewController(withIdentifier: "AdminListView") as? UINavigationController else { return }
         let adminsBarItem = UITabBarItem(title: "Admins", image: nil, selectedImage: nil)
         adminsNavController.tabBarItem = adminsBarItem
         tabBarViewControllers.append(adminsNavController)
         
 //MARK: Create timeTable tab
-        let timeTableStoryboard = UIStoryboard.init(name: "TimeTable", bundle: nil)
+        let timeTableStoryboard = UIStoryboard(name: "TimeTable", bundle: nil)
         guard let timeTableNavController = timeTableStoryboard.instantiateViewController(withIdentifier: "timeTableNavController") as? UINavigationController else { return }
         let timeTableBarItem = UITabBarItem(title: "Time Table", image: nil, selectedImage: nil)
         timeTableNavController.tabBarItem = timeTableBarItem

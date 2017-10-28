@@ -24,7 +24,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var studentTable: UITableView!
-
+    lazy var refreshControl: UIRefreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         let navigationItem = self.navigationItem
@@ -32,14 +32,26 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addNewStudent))
         navigationItem.rightBarButtonItem = doneItem
         updateTable()
+        refreshControl.addTarget(self, action: #selector(updateTable), for: .valueChanged)
+        studentTable.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //updateTable()//for test, not to be passed to production
     }
     
-    func updateTable(){
-        DataManager.shared().getList(byEntity: .Student) { (students, error) in
+    @objc func updateTable(){
+        DataManager.shared.getCountItems(forEntity: .Student) { (count, error) in
+            if let error = error {
+                self.showWarningMsg(error)
+            } else {
+                if let count = count {
+                    print(count)
+                }
+            }
+        }
+        
+        DataManager.shared.getList(byEntity: .Student) { (students, error) in
             if error == nil,
                 let students = students as? [StudentStructure] {
                 self.studentList = students
@@ -47,7 +59,9 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
             } else {
                 self.showWarningMsg(error ?? "Incorect type data")
             }
+            
         }
+        self.refreshControl.endRefreshing()
     }
     
     @objc func addNewStudent(){
@@ -119,7 +133,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
             //let postMan = RequestManager<StudentPostStructure>()
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
             
-            DataManager.shared().deleteEntity(byId: studentId, typeEntity: .Student)  { (result, error) in
+            DataManager.shared.deleteEntity(byId: studentId, typeEntity: .Student)  { (result, error) in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
