@@ -15,47 +15,54 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         var tabBarViewControllers = [UIViewController]()
         
-//MARK: Create students tab
+// Create students tab
         let studentsTab = TabOneViewController()
         let studentsBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
+        studentsBarItem.image = UIImage(named: "ic_person_outline_white")
         studentsTab.tabBarItem = studentsBarItem
         tabBarViewControllers.append(studentsTab)
 
-//MARK: Create subjects tab
+// Create subjects tab
         let subjectsTab = TabTwoViewController()
         let subjectsBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
+        subjectsBarItem.image = UIImage(named: "ic_subject_white")
         subjectsTab.tabBarItem = subjectsBarItem
         tabBarViewControllers.append(subjectsTab)
 
-//MARK: Create groups tab
+// Create groups tab
         let groupsTab = TabThreeViewController()
         let groupsBarItem = UITabBarItem(title: "Groups", image: nil, selectedImage: nil)
+        groupsBarItem.image = UIImage(named: "ic_supervisor_account_white")
         groupsTab.tabBarItem = groupsBarItem
         tabBarViewControllers.append(groupsTab)
         
-//MARK: Create faculty tab
+// Create faculty tab
         let facultyTab = TabFourViewController()
         let facultyBarItem = UITabBarItem(title: "Faculty", image: nil, selectedImage: nil)
+        facultyBarItem.image = UIImage(named: "ic_account_balance_white")
         facultyTab.tabBarItem = facultyBarItem
         tabBarViewControllers.append(facultyTab)
 
-//MARK: Create speciality tab
+// Create speciality tab
         let specialityTab = TabFiveViewController()
         let specialityBarItem = UITabBarItem(title: "Speciality", image: nil, selectedImage: nil)
+        specialityBarItem.image = UIImage(named: "ic_subject_white")
         specialityTab.tabBarItem = specialityBarItem
         tabBarViewControllers.append(specialityTab)
         
-//MARK: Create admins tab
+// Create admins tab
         let adminStoryboard = UIStoryboard.init(name: "Admin", bundle: nil)
         guard let adminsNavController = adminStoryboard.instantiateViewController(withIdentifier: "AdminListView") as? UINavigationController else { return }
         let adminsBarItem = UITabBarItem(title: "Admins", image: nil, selectedImage: nil)
+        adminsBarItem.image = UIImage(named: "ic_subject_white")
         adminsNavController.tabBarItem = adminsBarItem
         tabBarViewControllers.append(adminsNavController)
         
-//MARK: Create timeTable tab
+// Create timeTable tab
         let timeTableStoryboard = UIStoryboard.init(name: "TimeTable", bundle: nil)
         guard let timeTableNavController = timeTableStoryboard.instantiateViewController(withIdentifier: "timeTableNavController") as? UINavigationController else { return }
         let timeTableBarItem = UITabBarItem(title: "Time Table", image: nil, selectedImage: nil)
+        timeTableBarItem.image = UIImage(named: "ic_subject_white")
         timeTableNavController.tabBarItem = timeTableBarItem
         tabBarViewControllers.append(timeTableNavController)
         
