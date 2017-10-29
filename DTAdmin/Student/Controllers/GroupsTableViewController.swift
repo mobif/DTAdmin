@@ -17,7 +17,7 @@ class GroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         DataManager.shared.getList(byEntity: .Group) { (groups, error) in
             if error == nil,
-                let groups = groups as? [GroupStructure]{
+                let groups = groups as? [GroupStructure] {
                 self.groupList = groups
                 self.groupTable.reloadData()
             } else {
@@ -26,14 +26,11 @@ class GroupsTableViewController: UITableViewController {
         }
     }
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return groupList.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
