@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController1: UIViewController {
+class LoginGroupViewController: UIViewController {
     
     @IBAction func loginButtoTapped(_ sender: Any) {
         HTTPService.login(){(result:HTTPURLResponse) in

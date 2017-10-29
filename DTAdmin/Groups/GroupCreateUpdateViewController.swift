@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUpdateViewController: UIViewController {
+class GroupCreateUpdateViewController: UIViewController {
     
     @IBOutlet weak var groupNameTextField: UITextField!
     @IBAction func saveGroup(_ sender: Any) {
@@ -17,6 +17,7 @@ class CreateUpdateViewController: UIViewController {
         } else {
             self.saveNewGroup()
         }
+        navigationController?.popViewController(animated: true)
     }
     
     @IBOutlet weak var selectFacultyButton: UIButton!
@@ -25,13 +26,11 @@ class CreateUpdateViewController: UIViewController {
     
     @IBAction func selectFacultyTapped(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
-        let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as! FacultyViewController
+        let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as! FacultyForGroupViewController
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(facultyViewController, animated: true)
             facultyViewController.selectFaculty = { selectedFaculty in
                 self.faculty = selectedFaculty
-                self.selectFacultyButton.titleLabel?.lineBreakMode = .byWordWrapping
-                self.selectFacultyButton.titleLabel?.numberOfLines = 0
                 self.selectFacultyButton.titleLabel?.text = selectedFaculty.name
             }
         }
@@ -39,13 +38,11 @@ class CreateUpdateViewController: UIViewController {
     
     @IBAction func selectSpecialityTapped(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
-        let specialityViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialityViewController") as! SpecialityViewController
+        let specialityViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialityViewController") as! SpecialityForGroupViewController
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(specialityViewController, animated: true)
             specialityViewController.selectSpeciality = { selectedSpeciality in
                 self.speciality = selectedSpeciality
-                self.selectSpecialityButton.titleLabel?.lineBreakMode = .byWordWrapping
-                self.selectSpecialityButton.titleLabel?.numberOfLines = 0
                 self.selectSpecialityButton.titleLabel?.text = selectedSpeciality.name
             }
         }
@@ -61,21 +58,40 @@ class CreateUpdateViewController: UIViewController {
         if groupForUpdate != nil {
             self.title = "Update"
             guard let groupName = self.groupForUpdate?.name,
-                let groupFacultName = self.groupForUpdate?.facultyName,
-                let groupSpecialityName = self.groupForUpdate?.specialityName! else { return }
-            self.view.layoutIfNeeded()
+                let groupFacultId = self.groupForUpdate?.facultyId,
+                let groupSpecialityId = self.groupForUpdate?.specialityId else { return }
             self.groupNameTextField.text = groupName
-            self.selectFacultyButton.titleLabel?.text = groupFacultName
-            self.selectSpecialityButton.titleLabel?.text = groupSpecialityName
+            HTTPService.getData(entityName: "faculty", id: groupFacultId) {
+                (facultyJSON,facultyResponce) in
+                if facultyResponce.statusCode == 200 {
+                    let faculty = facultyJSON.flatMap{Faculty(dictionary: $0)}
+                    if faculty.first != nil {
+                        DispatchQueue.main.async {
+                            self.selectFacultyButton.titleLabel?.text = faculty.first?.name
+                        }
+                    }
+                }
+            }
+            HTTPService.getData(entityName: "speciality", id: groupSpecialityId) {
+                (specialityJSON,specialityResponce) in
+                if specialityResponce.statusCode == 200 {
+                    let speciality = specialityJSON.flatMap{Speciality(dictionary: $0)}
+                    if speciality.first != nil {
+                        DispatchQueue.main.async {
+                            self.selectSpecialityButton.titleLabel?.text = speciality.first?.name
+                        }
+                    }
+                }
+            }
         } else {
             self.title = "Create"
         }
     }
     
-    @objc func updateGroup() {
+    func updateGroup() {
         guard let newGroupName = self.groupNameTextField.text else { return }
-        guard let newGroupFacultyId = self.faculty?.id else { return }
-        guard let newGroupSpecialityId = self.speciality?.id else { return }
+        guard let newGroupFacultyId = self.faculty?.id ?? self.groupForUpdate?.facultyId else { return }
+        guard let newGroupSpecialityId = self.speciality?.id ?? self.groupForUpdate?.specialityId else { return }
         let params = [
             "group_name": newGroupName,
             "speciality_id": newGroupSpecialityId,
@@ -86,17 +102,13 @@ class CreateUpdateViewController: UIViewController {
             (result: HTTPURLResponse,updatedGroupData: [[String:String]]) in
             if result.statusCode == 200 {
                 let groups = updatedGroupData.flatMap{Group(dictionary: $0)}
-                groups.first?.facultyName = self.faculty?.name ?? self.groupForUpdate?.facultyName
-                groups.first?.facultyDescription = self.faculty?.description ?? self.groupForUpdate?.facultyDescription
-                groups.first?.specialityName = self.speciality?.name ?? self.groupForUpdate?.specialityName
-                groups.first?.specialityCode = self.speciality?.code ?? self.groupForUpdate?.specialityCode
                 guard let updatedGroup = groups.first else { return }
                 self.saveAction!(updatedGroup)
             }
         }
     }
     
-    @objc func saveNewGroup() {
+    func saveNewGroup() {
         guard let newGroupName = self.groupNameTextField.text else { return }
         guard let newGroupFacultyId = self.faculty?.id else { return }
         guard let newGroupSpecialityId = self.speciality?.id else { return }
@@ -109,10 +121,6 @@ class CreateUpdateViewController: UIViewController {
             (result: HTTPURLResponse,newGroupData: [[String:String]]) in
             if result.statusCode == 200 {
                 let groups = newGroupData.flatMap{Group(dictionary: $0)}
-                groups.first?.facultyName = self.faculty?.name
-                groups.first?.facultyDescription = self.faculty?.description
-                groups.first?.specialityName = self.speciality?.name
-                groups.first?.specialityCode = self.speciality?.code
                 guard let newGroup = groups.first else { return }
                 self.saveAction!(newGroup)
             }

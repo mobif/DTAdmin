@@ -4,15 +4,15 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller1-->
+        <!--Login Group View Controller-->
         <scene sceneID="Yxg-hj-non">
             <objects>
-                <viewController id="dg8-DW-s0j" customClass="LoginViewController1" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dg8-DW-s0j" customClass="LoginGroupViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aIn-kS-XIW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,10 +39,96 @@
             </objects>
             <point key="canvasLocation" x="184.80000000000001" y="-77.811094452773617"/>
         </scene>
-        <!--Speciality View Controller-->
+        <!--Group Details View Controller-->
+        <scene sceneID="gXd-FZ-Kxf">
+            <objects>
+                <viewController storyboardIdentifier="GroupDetailsVC" id="640-jM-pUQ" customClass="GroupDetailsViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h0M-fl-SUi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Faculty Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86O-Xq-YfI">
+                                <rect key="frame" x="16" y="145" width="343" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Faculty Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jP3-nL-GAF">
+                                <rect key="frame" x="16" y="200" width="343" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Speciality Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEv-dB-OM1">
+                                <rect key="frame" x="16" y="255" width="343" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Speciality Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iP3-wt-sk6">
+                                <rect key="frame" x="16" y="310" width="343" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U62-KV-CpV">
+                                <rect key="frame" x="16" y="399" width="343" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="Students"/>
+                                <connections>
+                                    <action selector="getStudentsByGroupTapped:" destination="640-jM-pUQ" eventType="touchUpInside" id="CWz-8p-s93"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0M-ro-bcm">
+                                <rect key="frame" x="16" y="455" width="343" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="Time Table"/>
+                                <connections>
+                                    <action selector="getTimeTableByGroupTapped:" destination="640-jM-pUQ" eventType="touchUpInside" id="ngv-ep-vwu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAj-Yd-tNE">
+                                <rect key="frame" x="16" y="511" width="343" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="Results"/>
+                                <connections>
+                                    <action selector="getResultsByGroupTapped:" destination="640-jM-pUQ" eventType="touchUpInside" id="6VK-k6-kGh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptJ-mi-rIk">
+                                <rect key="frame" x="16" y="90" width="343" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="pyL-pj-7cn"/>
+                    </view>
+                    <connections>
+                        <outlet property="facultyDescriptionLabel" destination="jP3-nL-GAF" id="ULk-mW-BKu"/>
+                        <outlet property="facultyNameLabel" destination="86O-Xq-YfI" id="ps2-Sq-3fX"/>
+                        <outlet property="groupNameLabel" destination="ptJ-mi-rIk" id="tIk-TC-PeE"/>
+                        <outlet property="specialityCodeLabel" destination="iP3-wt-sk6" id="5W6-NJ-hZT"/>
+                        <outlet property="specialityNameLabel" destination="VEv-dB-OM1" id="jve-4l-hQL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sqS-kg-LrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="184.80000000000001" y="-778.56071964017997"/>
+        </scene>
+        <!--Speciality For Group View Controller-->
         <scene sceneID="nHw-BR-ciz">
             <objects>
-                <viewController storyboardIdentifier="SpecialityViewController" id="H8H-jZ-PBT" customClass="SpecialityViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpecialityViewController" id="H8H-jZ-PBT" customClass="SpecialityForGroupViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RLZ-Y4-Xvs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,10 +160,10 @@
             </objects>
             <point key="canvasLocation" x="920.79999999999995" y="-778.56071964017997"/>
         </scene>
-        <!--Faculty View Controller-->
+        <!--Faculty For Group View Controller-->
         <scene sceneID="mMG-xh-yEN">
             <objects>
-                <viewController storyboardIdentifier="FacultyViewController" id="qqj-GP-mdD" customClass="FacultyViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FacultyViewController" id="qqj-GP-mdD" customClass="FacultyForGroupViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YOg-xG-0x1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,7 +241,7 @@
         <!--Title-->
         <scene sceneID="Ihf-zJ-KaL">
             <objects>
-                <viewController storyboardIdentifier="CreateUpdateVC" id="OnU-SB-xhX" customClass="CreateUpdateViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateUpdateVC" id="OnU-SB-xhX" customClass="GroupCreateUpdateViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uoK-qF-XYs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpecialityViewController: UIViewController {
+class SpecialityForGroupViewController: UIViewController {
     
     @IBOutlet weak var specialityTableView: UITableView!
     
@@ -27,14 +27,16 @@ class SpecialityViewController: UIViewController {
         specialityTableView.delegate = self
         specialityTableView.dataSource = self
         HTTPService.getAllData(entityName: "speciality") {
-            (specialityJSON:[[String:String]],facultyResponce) in
-            let specialities = specialityJSON.flatMap{Speciality(dictionary: $0)}
-            self.specialities = specialities
+            (specialityJSON:[[String:String]],specialityResponce) in
+            if specialityResponce.statusCode == 200 {
+                let specialities = specialityJSON.flatMap{Speciality(dictionary: $0)}
+                self.specialities = specialities
+            }
         }
     }
 }
 
-extension SpecialityViewController : UITableViewDelegate {
+extension SpecialityForGroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSpeciality = self.specialities[indexPath.row]
@@ -44,7 +46,7 @@ extension SpecialityViewController : UITableViewDelegate {
 }
 
 //MARK: table view data source
-extension SpecialityViewController : UITableViewDataSource {
+extension SpecialityForGroupViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = specialityTableView.dequeueReusableCell(withIdentifier: "SpecialityCell", for: indexPath)

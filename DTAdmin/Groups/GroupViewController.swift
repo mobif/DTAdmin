@@ -15,15 +15,26 @@ class GroupViewController: UIViewController {
     @IBAction func createNewGroup(_ sender: Any) {
         guard let createUpdateGroupViewController = getCreateUpdateGroupViewController() else { return }
         createUpdateGroupViewController.saveAction = { newGroup in
-            self.commonDataForGroups.append(newGroup)
+//            self.commonDataForGroups.append(newGroup)
+            self.groups.append(newGroup)
         }
         navigationController?.pushViewController(createUpdateGroupViewController, animated: true)
     }
     
-    var commonDataForGroups = [Group]() {
+//    var commonDataForGroups = [Group]() {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.groupTableView.reloadData()
+//            }
+//        }
+//    }
+    
+    var isSelectAction: Bool?
+    var selectGroup: ((Group) -> ())?
+    var groups = [Group]() {
         didSet {
             DispatchQueue.main.async {
-                self.groupTableView.reloadData()
+                self.self.groupTableView.reloadData()
             }
         }
     }
@@ -33,31 +44,28 @@ class GroupViewController: UIViewController {
         self.title = "Groups"
         groupTableView.delegate = self
         groupTableView.dataSource = self
-        getCommonArrayForGroups(){(result:[Group]) in
-            self.commonDataForGroups = result
+//        getCommonArrayForGroups(){(result:[Group]) in
+//            self.commonDataForGroups = result
+//        }
+        HTTPService.getAllData(entityName: "group") {
+            (groupJSON:[[String:String]],groupResponce) in
+            let groups = groupJSON.flatMap{Group(dictionary: $0)}
+            self.groups = groups
         }
     }
     
-    @objc func getCreateUpdateGroupViewController() -> CreateUpdateViewController? {
+    func getCreateUpdateGroupViewController() -> GroupCreateUpdateViewController? {
         let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
-        let creteUpdateGroupViewController = storyBoard.instantiateViewController(withIdentifier: "CreateUpdateVC") as! CreateUpdateViewController
+        let creteUpdateGroupViewController = storyBoard.instantiateViewController(withIdentifier: "CreateUpdateVC") as! GroupCreateUpdateViewController
         return creteUpdateGroupViewController
     }
     
-    @objc func createNewGroup() {
+    func updateGroup(index: Int) {
         guard let createUpdateGroupViewController = getCreateUpdateGroupViewController() else { return }
-        createUpdateGroupViewController.saveAction = { newGroup in
-            self.commonDataForGroups.append(newGroup)
-        }
-        navigationController?.pushViewController(createUpdateGroupViewController, animated: true)
-    }
-    
-    @objc func updateGroup(index: Int) {
-        guard let createUpdateGroupViewController = getCreateUpdateGroupViewController() else { return }
-        createUpdateGroupViewController.groupForUpdate = self.commonDataForGroups[index]
+        createUpdateGroupViewController.groupForUpdate = self.groups[index]
         createUpdateGroupViewController.saveAction = { updatedGroup in
-            if let index = self.commonDataForGroups.index(where: {$0.id == updatedGroup.id}) {
-                self.commonDataForGroups[index] = updatedGroup
+            if let index = self.groups.index(where: {$0.id == updatedGroup.id}) {
+                self.groups[index] = updatedGroup
             } else {
                 print("wrong index for update")
             }
@@ -65,52 +73,26 @@ class GroupViewController: UIViewController {
         navigationController?.pushViewController(createUpdateGroupViewController, animated: true)
     }
     
-    func getCommonArrayForGroups (completion: @escaping ([Group]) -> ()) {
-        var groups = [Group]()
-        HTTPService.getAllData(entityName: "group") {
-            (groupJSON:[[String:String]],groupResponce) in
-            groups = groupJSON.flatMap{Group(dictionary: $0)}
-            print(groups)
-            if groupResponce.statusCode == 200 {
-                HTTPService.getAllData(entityName: "faculty") {
-                    (facultyJSON:[[String:String]],facultyResponce) in
-                    let faculties = facultyJSON.flatMap{Faculty(dictionary: $0)}
-                    print(faculties)
-                    if facultyResponce.statusCode == 200 {
-                        HTTPService.getAllData(entityName: "speciality")  {
-                            (specialityJSON:[[String:String]],specialityResponce) in
-                            let specialities = specialityJSON.flatMap{Speciality(dictionary: $0)}
-                            print(specialities)
-                            if specialityResponce.statusCode == 200 {
-                                for group in groups {
-                                    for faculty in faculties {
-                                        if (group.facultyId == faculty.id) {
-                                            group.facultyName = faculty.name
-                                            group.facultyDescription = faculty.description
-                                        }
-                                    }
-                                    for speciality in specialities {
-                                        if (group.specialityId == speciality.id) {
-                                            group.specialityName = speciality.name
-                                            group.specialityCode = speciality.code
-                                        }
-                                    }
-                                }
-                                completion(groups)
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    func showGroupDetails(group: Group) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
+        let groupDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "GroupDetailsVC") as! GroupDetailsViewController
+        groupDetailsViewController.group = group
+        navigationController?.pushViewController(groupDetailsViewController, animated: true)
     }
+    
 }
 
 //MARK: table view delegate
 extension GroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        updateGroup(index: indexPath.row)
+        if self.isSelectAction == nil {
+            showGroupDetails(group: groups[indexPath.row])
+        } else {
+            let selectedGroup = self.groups[indexPath.row]
+            self.selectGroup!(selectedGroup)
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -119,26 +101,27 @@ extension GroupViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = groupTableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
-        cell.textLabel?.text = commonDataForGroups[indexPath.row].name
+        cell.textLabel?.text = groups[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commonDataForGroups.count
+        return groups.count
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "DELETE"){(action, indexPath) in
-            HTTPService.deleteData(entityName: "group", id: self.commonDataForGroups[indexPath.row].id){
+            HTTPService.deleteData(entityName: "group", id: self.groups[indexPath.row].id){
                 (request: HTTPURLResponse) in
                 if request.statusCode == 200 {
-                    self.commonDataForGroups.remove(at: indexPath.row)
-                    DispatchQueue.main.async {
-                        self.groupTableView.reloadData()
-                    }
+                    self.groups.remove(at: indexPath.row)
                 }
             }
         }
-        return[delete]
+        
+        let update = UITableViewRowAction(style: .normal, title: "UPDATE"){(action, indexPath) in
+            self.updateGroup(index: indexPath.row)
+        }
+        return[delete,update]
     }
 }

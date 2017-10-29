@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FacultyViewController: UIViewController {
+class FacultyForGroupViewController: UIViewController {
     
     @IBOutlet weak var facultyTableView: UITableView!
     
@@ -34,7 +34,7 @@ class FacultyViewController: UIViewController {
     }
 }
 
-extension FacultyViewController : UITableViewDelegate {
+extension FacultyForGroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFaculty = self.faculties[indexPath.row]
@@ -44,16 +44,12 @@ extension FacultyViewController : UITableViewDelegate {
 }
 
 //MARK: table view data source
-extension FacultyViewController : UITableViewDataSource {
+extension FacultyForGroupViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = facultyTableView.dequeueReusableCell(withIdentifier: "FacultyCell", for: indexPath)
         cell.textLabel?.text = faculties[indexPath.row].name
         return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

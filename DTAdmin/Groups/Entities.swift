@@ -13,10 +13,10 @@ class Group {
     var name: String
     var facultyId: String
     var specialityId: String
-    var facultyName: String?
-    var facultyDescription: String?
-    var specialityCode: String?
-    var specialityName: String?
+//    var facultyName: String?
+//    var facultyDescription: String?
+//    var specialityCode: String?
+//    var specialityName: String?
     
     init?(dictionary: [String:String]) {
         guard let groupId = dictionary["group_id"],

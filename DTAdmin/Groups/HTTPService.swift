@@ -75,7 +75,8 @@ class HTTPService {
                     print("statusCode is not 200 while geting data with \(entityName)")
                     return
                 }
-                completion(json!, response)
+                guard let jsonData = json else { return }
+                completion(jsonData, response)
             } catch {
                 print("could not serialize JSON while geting data with \(entityName)")
                 return
@@ -84,7 +85,7 @@ class HTTPService {
         task.resume()
     }
     
-    static func getData (entityName:String,id:String,completion: @escaping ([String:String],HTTPURLResponse) -> ()) {
+    static func getData (entityName:String,id:String,completion: @escaping ([[String:String]],HTTPURLResponse) -> ()) {
         let sessionValue =  UserDefaults.standard.object(forKey: "session")
         let urlString = hostUrl + entityName + "/getRecords/" + id
         guard let url = URL(string: urlString) else {
@@ -104,12 +105,13 @@ class HTTPService {
             }
             print("data = \(String(describing: data))")
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:String]
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [[String:String]]
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                     print("statusCode is not 200 while geting data with \(entityName) id \(id)")
                     return
                 }
-                completion(json!, response)
+                guard let jsonData = json else { return }
+                completion(jsonData, response)
             } catch {
                 print("could not serialize JSON while geting data with \(entityName) id \(id)")
                 return
