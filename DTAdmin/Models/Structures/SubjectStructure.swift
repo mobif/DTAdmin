@@ -18,7 +18,7 @@ struct SubjectStructure: Serializable {
         self.name = name
     }
     var dictionary: [String: Any] {
-        var result:[String: Any] = ["subject_name": self.name]
+        var result: [String: Any] = ["subject_name": self.name]
         if let id = self.id { result["subject_id"] = id }
         if let description = self.description { result["subject_description"] = description }
         return result

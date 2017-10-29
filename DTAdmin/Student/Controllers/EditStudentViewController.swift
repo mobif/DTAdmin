@@ -10,7 +10,7 @@ import UIKit
 
 class EditStudentViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
     
-    var studentLoaded: StudentStructure?{
+    var studentLoaded: StudentStructure? {
         didSet {
             self.view.layoutIfNeeded()
         }
@@ -53,9 +53,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
                 showStudentPhoto()
             }
             isNewStudent = false
-            
         } else {
-            
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postNewStudentToAPI))
             isNewStudent = true
         }
@@ -68,7 +66,6 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             navigationItem.title = titleViewController
         }
     }
-    
     @objc func imageTaped(recognizer: UITapGestureRecognizer) {
         let imagePhoto = UIImagePickerController()
         imagePhoto.delegate = self
@@ -76,12 +73,12 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         imagePhoto.allowsEditing = false
         self.present(imagePhoto, animated: true)
     }
-    
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let size = selectedImage.size
-            let aspectRatioForWidth = ( size.width / size.height ) * 100
-            let resizedImage = selectedImage.convert(toSize: CGSize(width: aspectRatioForWidth, height: 100.0), scale: UIScreen.main.scale)
+            let imageHeight: CGFloat = 100.0
+            let aspectRatioForWidth = ( size.width / size.height ) * imageHeight
+            let resizedImage = selectedImage.convert(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight), scale: UIScreen.main.scale)
             studentPhoto.image = resizedImage
         } else {
             showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))
@@ -91,7 +88,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     
     func showStudentPhoto(){
         guard let photoBase64 = studentLoaded?.photo else { return }
-        let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters)!
+        guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
         let decodedimage = UIImage(data: dataDecoded)
         studentPhoto.image = decodedimage
     }
@@ -135,27 +132,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             }
         }
     }
-    
-    func convertToDictionary(text: String) -> [String: Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                return dict
-            } catch {
-                self.showWarningMsg(error.localizedDescription)
-            }
-        }
-        return nil
-    }
-    
-    func getIdAsInt(dict: [String: Any]) -> String? {
-        let id = dict["id"] as? Int
-        guard let idValue = id else { return nil }
-        return String(idValue)
-    }
-    
     func prepareForSave() -> Bool {
-        //var prepare: [String: String]
         guard let login = loginStudentTextField.text,
             let email = emailStudentTextField.text,
             let name = nameStudentTextField.text,
@@ -168,7 +145,6 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             let imageData = UIImagePNGRepresentation(image),
             let group = selectedGroupForStudent?.groupId else { return false}
         let photo = imageData.base64EncodedString(options: .lineLength64Characters)
-        //print(photo.count)
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
             let dictionary: [String: Any] = ["username": login, "password": pass, "password_confirm": passConfirm, "plain_password": pass, "email": email, "gradebook_id": gradebook, "student_surname": sname, "student_name": name, "student_fname": fname, "group_id": group, "photo": photo]
             studentForSave = StudentStructure(dictionary: dictionary)
@@ -190,7 +166,6 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         self.navigationController?.pushViewController(groupsViewController, animated: true)
     }
     func getGroupFromAPI(byId: String) {
-//        let manager = RequestManager<GroupStructure>()
         DataManager.shared.getEntity(byId: byId, typeEntity: .Group) { (groupInstance, error) in
             if let groupInstance = groupInstance as? GroupStructure {
                 self.selectedGroupForStudent = groupInstance
@@ -201,7 +176,6 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     func getUserFromAPI(byId: String) {
-        //let manager = RequestManager<UserGetStructure>()
         DataManager.shared.getEntity(byId: byId, typeEntity: .User) { (userInstance, error) in
             if let userInstance = userInstance as? UserStructure{
                 self.selectedUserAccountForStudent = userInstance

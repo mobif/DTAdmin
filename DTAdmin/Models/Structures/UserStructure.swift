@@ -30,7 +30,7 @@ struct UserStructure: Serializable {
         self.logins = logins
     }
     var dictionary: [String: Any] {
-        var result:[String: Any] = ["email": self.email, "username": self.userName, "password": self.password, "logins": self.logins]
+        var result: [String: Any] = ["email": self.email, "username": self.userName, "password": self.password, "logins": self.logins]
         if let id = self.id { result["id"] = id }
         if let lastLogin = self.lastLogin { result["last_login"] = lastLogin }
         if let roles = roles { result["roles"] = roles }

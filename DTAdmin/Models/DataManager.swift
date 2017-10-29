@@ -9,20 +9,20 @@
 import Foundation
 
 class DataManager: HTTPManager {
-//    private static var sharedDataManager: DataManager = {
-//        let dataManager = DataManager()
-//        return dataManager
-//    }()
-//    class func shared() -> DataManager {
-//        return sharedDataManager
-//    }
+
     static var shared = DataManager()
     private override init(){}
-    
+/**
+     Returns an array containing the non-nil defined type of elements from API
+     - Parameters:
+        - typeEntity : Type of entity from Entities enum
+        - listEntity : Returns an optional array of elements type Any. Use __cast to type__ for all elements according to structure of data
+        - error : Optional string in case of error while receiving data
+*/
     func getList(byEntity typeEntity: Entities, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords) else {
             let error = "Cannot prepare header for URLRequest"
-            completionHandler(nil,error)
+            completionHandler(nil, error)
             return
         }
         getResponse(request: request) { (list, error) in
@@ -38,24 +38,23 @@ class DataManager: HTTPManager {
             }
             var entytiList = [Any]()
             switch typeEntity {
-            case .Faculty: entytiList = json.flatMap{ FacultyStructure(dictionary: $0) }
-            case .Speciality: entytiList = json.flatMap{ SpecialityStructure(dictionary: $0) }
-            case .Group: entytiList = json.flatMap{ GroupStructure(dictionary: $0) }
-            case .Subject: entytiList = json.flatMap{ SubjectStructure(dictionary: $0) }
-            case .Test: entytiList = json.flatMap{ TestStructure(dictionary: $0) }
-            case .TestDetail: entytiList = json.flatMap{ TestDetailStructure(dictionary: $0) }
-            case .TimeTable: entytiList = json.flatMap{ TimeTableStructure(dictionary: $0) }
-            case .Question: entytiList = json.flatMap{ QuestionStructure(dictionary: $0) }
-            case .Answer: entytiList = json.flatMap{ AnswerStructure(dictionary: $0) }
-            case .Student: entytiList = json.flatMap{ StudentStructure(dictionary: $0) }
-            case .User: entytiList = json.flatMap{ UserStructure(dictionary: $0) }
+            case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
+            case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
+            case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
+            case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
+            case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
+            case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
+            case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
+            case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
+            case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
+            case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
+            case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
             }
             DispatchQueue.main.async {
                 completionHandler(entytiList, nil)
             }
         }
     }
-    
     private func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
         print(request)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -116,7 +115,7 @@ class DataManager: HTTPManager {
             let quantityString = String(quantity)
             guard let request = self.getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecordsRange, limit: quantityString, offset: indexString) else {
                 let error = "Cannot prepare header for URLRequest"
-                completionHandler(nil,error)
+                completionHandler(nil, error)
                 return
             }
             self.getResponse(request: request) { (list, error) in
@@ -132,17 +131,17 @@ class DataManager: HTTPManager {
                 }
                 var entytiList = [Any]()
                 switch typeEntity {
-                case .Faculty: entytiList = json.flatMap{ FacultyStructure(dictionary: $0) }
-                case .Speciality: entytiList = json.flatMap{ SpecialityStructure(dictionary: $0) }
-                case .Group: entytiList = json.flatMap{ GroupStructure(dictionary: $0) }
-                case .Subject: entytiList = json.flatMap{ SubjectStructure(dictionary: $0) }
-                case .Test: entytiList = json.flatMap{ TestStructure(dictionary: $0) }
-                case .TestDetail: entytiList = json.flatMap{ TestDetailStructure(dictionary: $0) }
-                case .TimeTable: entytiList = json.flatMap{ TimeTableStructure(dictionary: $0) }
-                case .Question: entytiList = json.flatMap{ QuestionStructure(dictionary: $0) }
-                case .Answer: entytiList = json.flatMap{ AnswerStructure(dictionary: $0) }
-                case .Student: entytiList = json.flatMap{ StudentStructure(dictionary: $0) }
-                case .User: entytiList = json.flatMap{ UserStructure(dictionary: $0) }
+                case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
+                case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
+                case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
+                case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
+                case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
+                case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
+                case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
+                case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
+                case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
+                case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
+                case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
                 }
                 DispatchQueue.main.async {
                     completionHandler(entytiList, nil)
@@ -201,7 +200,7 @@ class DataManager: HTTPManager {
         }
     }
     
-    func getCountItems(forEntity: Entities, completion: @escaping (_ count: UInt?, _ Error: String?) -> () ){
+    func getCountItems(forEntity: Entities, completion: @escaping (_ count: UInt?, _ Error: String?) -> () ) {
         guard let request = getURLReqest(entityStructure: forEntity, type: TypeReqest.GetCount) else {
             let error = "Cannot prepare header for URLRequest"
             completion(nil, error)

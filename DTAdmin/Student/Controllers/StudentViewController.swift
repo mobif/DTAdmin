@@ -8,16 +8,15 @@
 
 import UIKit
 
-class StudentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class StudentViewController: ParentViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     var user: UserStructure?
     var cookie: HTTPCookie?
     var studentList = [StudentStructure]()
     var filtered = false
-    var filteredList: [StudentStructure]{
+    var filteredList: [StudentStructure] {
         if filtered {
             guard let searchString = searchBar.text else {return studentList}
-            return studentList.filter({
-                ($0.studentName.contains(searchString) || $0.studentFname.contains(searchString)) })
+            return studentList.filter( { ($0.studentName.contains(searchString) || $0.studentFname.contains(searchString)) } )
         } else {
             return studentList
         }
@@ -35,23 +34,10 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         refreshControl.addTarget(self, action: #selector(updateTable), for: .valueChanged)
         studentTable.refreshControl = refreshControl
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //updateTable()//for test, not to be passed to production
-    }
-    
     @objc func updateTable(){
-        DataManager.shared.getCountItems(forEntity: .Student) { (count, error) in
-            if let error = error {
-                self.showWarningMsg(error)
-            } else {
-                if let count = count {
-                    print(count)
-                }
-            }
-        }
-        
+        startActivity()
         DataManager.shared.getList(byEntity: .Student) { (students, error) in
+            self.stopActivity()
             if error == nil,
                 let students = students as? [StudentStructure] {
                 self.studentList = students
@@ -63,7 +49,6 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         self.refreshControl.endRefreshing()
     }
-    
     @objc func addNewStudent(){
         guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
         editStudentViewController.titleViewController = NSLocalizedString("New Student", comment: "Create new Student")
@@ -74,9 +59,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
         self.navigationController?.pushViewController(editStudentViewController, animated: true)
-        
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let studentInstance = filtered ? filteredList[indexPath.row] : studentList[indexPath.row]
         
@@ -100,12 +83,10 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         navigationController?.pushViewController(editStudentViewController, animated: true)
     }
-    
     func getIndex(byId: String) -> Int? {
         let index = studentList.index(where: { $0.userId == byId } )
         return index
     }
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         filtered = (searchBar.text!.count > 0)
     }
@@ -126,13 +107,9 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.sName.text = filteredList[indexPath.row].studentSurname
         return cell
     }
-
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
-            
-            //let postMan = RequestManager<StudentPostStructure>()
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
-            
             DataManager.shared.deleteEntity(byId: studentId, typeEntity: .Student)  { (result, error) in
                 if let error = error {
                     self.showWarningMsg(error)
@@ -152,7 +129,6 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         return [delete]
     }
-
 }
 extension UIViewController {
     func showWarningMsg(_ textMsg: String) {

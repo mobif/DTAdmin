@@ -20,7 +20,7 @@ struct FacultyStructure: Serializable {
     var dictionary: [String: Any] {
         var result:[String: Any] = ["faculty_name": self.name]
         if let id = self.id { result["faculty_id"] = id }
-        if let description = self.description { result["faculty_description"] = description}
+        if let description = self.description { result["faculty_description"] = description }
         return result
     }
 }
