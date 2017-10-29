@@ -65,41 +65,41 @@ class NetworkManager {
     } else { return nil }
   }
   
-//  func logIn(username: String, password: String, completionHandler: @escaping (_ user: UserModel.Admin?, _ error: Error?) -> ()) { //, _ cookie: String) -> ()) {
-//    let credentials = [Credentials.userName.rawValue: username, Credentials.password.rawValue: password]
-//    //    FIXME: in case JSONSerialization returns error we will not know about it
-//    //    try block will throw error and app will be terminated
-//    guard let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: []) else { return }
-//    guard let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToUserLogIn.rawValue) else { return }
-//    let request = requestBasicWithBody(httpBody: httpBody, url: url, method: "POST")
-//
-//    _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
-//      let sessionError = error
-//      if let sessionResponse = response as? HTTPURLResponse,
-//        let sessionData = data {
-//        if sessionResponse.statusCode == 200 {
-//          do {
-//            let user = try JSONDecoder().decode(UserModel.Admin.self, from: sessionData)
-//            DispatchQueue.main.sync {
-//              if let cookie = self.cooikiesGetter(from: Urls.toHost.rawValue).first?.value {
-//                UserDefaults.standard.setUserName(name: user.username)
-//                UserDefaults.standard.setCookie(cookie)
-//                UserDefaults.standard.setLoggedIn(to: true)
-//                completionHandler(user, nil)
-//              }
-//            }
-//          } catch {
-//            print(error)
-//          }
-//        } else {
-//          completionHandler(naail, sessionError)
-//          //          FIXME: erase print
-//          print(sessionResponse, sessionError!)
-//
-//        }
-//      }
-//      }.resume()
-//  }
+  func logIn(username: String, password: String, completionHandler: @escaping (_ user: UserModel.Admin?, _ error: Error?) -> ()) { //, _ cookie: String) -> ()) {
+    let credentials = [Credentials.userName.rawValue: username, Credentials.password.rawValue: password]
+    //    FIXME: in case JSONSerialization returns error we will not know about it
+    //    try block will throw error and app will be terminated
+    guard let httpBody = try? JSONSerialization.data(withJSONObject: credentials, options: []) else { return }
+    guard let url = URL(string: Urls.protocolPrefix.rawValue + Urls.toHost.rawValue + Urls.suffixToUserLogIn.rawValue) else { return }
+    let request = requestBasicWithBody(httpBody: httpBody, url: url, method: "POST")
+
+    _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+      let sessionError = error
+      if let sessionResponse = response as? HTTPURLResponse,
+        let sessionData = data {
+        if sessionResponse.statusCode == 200 {
+          do {
+            let user = try JSONDecoder().decode(UserModel.Admin.self, from: sessionData)
+            DispatchQueue.main.sync {
+              if let cookie = self.cooikiesGetter(from: Urls.toHost.rawValue).first?.value {
+                UserDefaults.standard.setUserName(name: user.username)
+                UserDefaults.standard.setCookie(cookie)
+                UserDefaults.standard.setLoggedIn(to: true)
+                completionHandler(user, nil)
+              }
+            }
+          } catch {
+            print(error)
+          }
+        } else {
+          completionHandler(nil, sessionError)
+          //          FIXME: erase print
+          print(sessionResponse, sessionError!)
+
+        }
+      }
+      }.resume()
+  }
   
   func logOut() {
     guard  UserDefaults.standard.isLoggedIn(),

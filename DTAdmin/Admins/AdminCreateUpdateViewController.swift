@@ -15,12 +15,12 @@ class AdminCreateUpdateViewController: UIViewController {
   @IBOutlet weak var confirmTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
   
-  var admin: UserModel.Admins? {
+  var admin: UserStructure? {
     didSet {
       self.view.layoutIfNeeded()
       self.title = NSLocalizedString("Edit", comment: "Title for admin editing view")
       
-      userNameTextField.text = admin?.username
+      userNameTextField.text = admin?.userName
       userNameTextField.isEnabled = false
       emailTextField.text = admin?.email
       
@@ -28,8 +28,8 @@ class AdminCreateUpdateViewController: UIViewController {
       self.navigationItem.rightBarButtonItems = [saveButton]
     }
   }
-  
-  var saveAction: ((UserModel.Admins?) -> ())?
+
+  var saveAction: ((UserStructure?) -> ())?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,12 +44,14 @@ class AdminCreateUpdateViewController: UIViewController {
     self.navigationItem.rightBarButtonItems = [addButton]
   }
   
-  func unWrapFields() -> (username: String, password: String, email: String)? {
-    if let username = userNameTextField.text,
-      let password = actualPaswordTextField.text,
-      let email = emailTextField.text {
-      return (username, password, email)
+  private func unWrapFields() -> (userName: String, password: String, email: String)? {
+    if userNameTextField.text != "",
+      let userName = userNameTextField?.text,
+      let password = actualPaswordTextField?.text,
+      let email = emailTextField?.text {
+      return (userName, password, email)
     }
+    self.showWarningMsg("Username field is empty")
     return nil
   }
   
@@ -61,7 +63,7 @@ class AdminCreateUpdateViewController: UIViewController {
       print("password OK")
       return true
     } else {
-      showAlert(message: NSLocalizedString("Passwords do not match", comment: "Passwords at inputed fields not match"))
+      showWarningMsg(NSLocalizedString("Passwords fileds are empty or don't match", comment: "Passwords fields empty or don't match"))
     }
     return false
   }
@@ -77,7 +79,7 @@ class AdminCreateUpdateViewController: UIViewController {
       print("Email OK")
       return true
     } else {
-      showAlert(message: NSLocalizedString("Wrong email", comment: "Inputed email has invalid structure"))
+      showWarningMsg(NSLocalizedString("Wrong email", comment: "Inputed email has invalid structure"))
     }
     return false
   }
@@ -90,36 +92,43 @@ class AdminCreateUpdateViewController: UIViewController {
   }
   
   @objc private func create() {
-    guard let userName = userNameTextField.text,
-      checkPaswords(), checkEmail(),
+    guard checkPaswords(), checkEmail(),
       let params = unWrapFields() else {
-      showAlert(message: NSLocalizedString("Wrong username or ema", comment: "Username field has wrong parameter"))
       return
     }
-    
-    NetworkManager().createAdmin(username: userName, password: params.password, email: params.email, completionHandler: { (admin, error) in
-      if let error = error {
-        self.showAlert(message: NSLocalizedString(error.localizedDescription, comment: "Admin create request failed with error"))
-        return
+    guard var userForSave = UserStructure(dictionary: ["id": "-1", "username": params.userName, "email": params.email, "password": params.password, "logins": "0"]) else { return }
+ 
+    DataManager.shared.insertEntity(entity: userForSave, typeEntity: .User) { (id, error) in
+      guard let error = error else {
+        if let id = id as? String {
+          userForSave.id = id
+          self.saveAction!(userForSave)
+          self.navigationController?.popViewController(animated: true)
+          return
+        } else {
+          assertionFailure("AdminCreate..VC, Bad id return after creation")
+          return
+        }
       }
-      guard let admin = admin else { return }
-      self.saveAction!(admin)
-      self.navigationController?.popViewController(animated: true)
-    })
+      self.showWarningMsg(NSLocalizedString(error, comment: "Admin create request failed with error..."))
+    }
   }
   
   @objc private func update() {
     guard checkPaswords(), checkEmail(),
       let params = unWrapFields(),
       let id = admin?.id else { return }
-    
-    NetworkManager().editAdmin(id: id, userName: params.username, password: params.password, email: params.email) { (admin, error) in
+
+    guard var userForSave = admin else { return }
+    userForSave.userName = params.userName
+    userForSave.email = params.email
+    userForSave.password = params.password
+    DataManager.shared.updateEntity(byId: id, entity:  userForSave, typeEntity: .User) { (error) in
       if let error = error {
-        self.showAlert(message: NSLocalizedString(error.localizedDescription, comment: "Admin create request failed with error"))
+        self.showWarningMsg(NSLocalizedString(error, comment: "Admin update request failed with error..."))
         return
       }
-      guard let admin = admin else { return }
-      self.saveAction!(admin)
+      self.saveAction!(userForSave)
       self.navigationController?.popViewController(animated: true)
     }
   }

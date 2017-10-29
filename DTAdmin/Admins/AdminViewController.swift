@@ -8,86 +8,73 @@
 
 import UIKit
 
-class AdminViewController: UIViewController {
+class AdminViewController: ParentViewController {
   
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var adminsListTableView: UITableView!
 
   var isSearchStart = false
   
-  var adminsList: [UserModel.Admins]?
-  var filteredList: [UserModel.Admins]? {
+  var admins: [UserStructure]?
+  
+  var filteredList: [UserStructure]? {
     if isSearchStart {
-      guard let searchSample = searchBar.text else { return adminsList }
-      return adminsList?.filter({
-        $0.username.contains(searchSample) || $0.email.contains(searchSample)
+      guard let searchSample = searchBar.text else { return self.admins }
+      return self.admins?.filter({
+        $0.userName.contains(searchSample) || $0.email.contains(searchSample)
       })
-    } else if let admins = adminsList {
-      return admins.sorted(by: { $0.username < $1.username})
+    } else {
+      self.admins = self.admins?.sorted(by: { $0.userName < $1.userName})
+      return self.admins
     }
-    return adminsList
   }
+  
+  lazy var refreshControl: UIRefreshControl = UIRefreshControl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUpView()
-    
-    //    StoreHelper.logout()
-    //    print(StoreHelper.getCookie() as Any)
-    
-    //    MARK: DEBUG - Using for first login into system
-    //    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
-    //      print(admin, cookie)
-    //    }
-    //    print(UserDefaults.standard.getCookie())
-    
-    //    MARK: DEBUG - Using for geting list of admin, to proceed should be loginned before
-    //    NetworkManager().getAdmins { (admins) in
-    //      print(UserDefaults.standard.getCookie())
-    //      print(admins)
-    //      self.adminsList = admins
-    //      self.adminsListTBV.reloadData()
-    //    }
-    
-    //    MARK: DEBUG - Using after first login into system, to proceed should be loginned before
-    //    _ = NetworkManager().logOut()
-    
+    updateTable()
+    refreshControl.addTarget(self, action: #selector(updateTable), for: .valueChanged)
+    adminsListTableView.refreshControl = refreshControl
+
+    //    MARK: Debug helper for login test
+    StoreHelper.logout()
   }
   
   private func setUpView() {
     self.title = NSLocalizedString("Administrators", comment: "Title for admins table list view")
     
     let addNewAdminButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
-    //MARK: temporary exist just for ease debug proces
-    let serverSyncDataButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
-    
-    self.navigationItem.rightBarButtonItems = [addNewAdminButton, serverSyncDataButton]
+    self.navigationItem.rightBarButtonItems = [addNewAdminButton]
+  }
+  
+  @objc private func updateTable() {
+    startActivity()
+    DataManager.shared.getList(byEntity: .User) { (admins, error) in
+      self.stopActivity()
+      guard let admins = admins as? [UserStructure] else {
+        self.refreshControl.endRefreshing()
+        self.showWarningMsg(error ?? "Incorect data")
+        return
+      }
+      self.admins = admins
+      self.adminsListTableView.reloadData()
+    }
+    self.refreshControl.endRefreshing()
   }
   
   @objc func showAdminCreateUpdateViewController() {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.saveAction = { admin in
         if let admin = admin {
-          self.adminsList?.append(admin)
+          self.admins?.append(admin)
           self.adminsListTableView.reloadData()
         }
       }
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
   }
-  
-  //MARK: temporary exist just for ease debug proces
-  @objc func syncDataWithServer() {
-    NetworkManager().getAdmins { (admins, response, error)  in
-      if let admins = admins {
-        self.adminsList = admins.sorted(by: { $0.username < $1.username})
-        self.adminsListTableView.reloadData()
-      } else {
-        print(error!.localizedDescription, response)
-      }
-    }
-  }
-  
 }
 
 extension AdminViewController: UITableViewDelegate {
@@ -101,7 +88,7 @@ extension AdminViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "reusableAdminCell")!
-    cell.textLabel?.text = filteredList?[indexPath.row].username
+    cell.textLabel?.text = filteredList?[indexPath.row].userName
     return cell
   }
   
@@ -111,7 +98,7 @@ extension AdminViewController: UITableViewDataSource {
     adminCreateUpdateViewController.admin = filteredList?[indexPath.row]
     adminCreateUpdateViewController.saveAction = { admin in
       if let admin = admin {
-        self.adminsList?[indexPath.row] = admin
+        self.admins?[indexPath.row] = admin
         self.adminsListTableView.reloadData()
       }
     }
@@ -121,16 +108,16 @@ extension AdminViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       
-      guard let admin = self.adminsList?[indexPath.row] else { return }
-      NetworkManager().deleteAdmin(id: admin.id, completionHandler: { (error) in
-          if let error = error {
-            print(error.localizedDescription)
-            return
-          }
+      guard let admin = self.admins?[indexPath.row] else { return }
+      DataManager.shared.deleteEntity(byId: admin.id, typeEntity: .User, completionHandler: { (status, error) in
+        guard let error = error else {
           self.adminsListTableView.beginUpdates()
-          self.adminsList?.remove(at: indexPath.row)
+          self.admins?.remove(at: indexPath.row)
           self.adminsListTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
           self.adminsListTableView.endUpdates()
+          return
+        }
+        self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed admin delete"))
       })
     }
     
