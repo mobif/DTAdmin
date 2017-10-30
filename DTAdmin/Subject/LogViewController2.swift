@@ -33,8 +33,8 @@ class LogViewController2: UIViewController {
     }
     
     @IBAction func logIn(_ sender: UIButton) {
-        guard let username = loginTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
+        guard let username = loginTextField2.text else { return }
+        guard let password = passwordTextField2.text else { return }
         
         if !username.isEmpty, !password.isEmpty {
             doLogin(username, password)

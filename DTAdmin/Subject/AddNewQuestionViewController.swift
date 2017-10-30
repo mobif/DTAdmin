@@ -140,6 +140,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     func createDayPicker() {
         
         let dayPicker = UIPickerView()
+        dayPicker.tag = 0
         dayPicker.delegate = self
         questionLevelTextField.inputView = dayPicker
         questionTypeTextField.inputView = dayPicker
@@ -150,6 +151,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     func createToolbar() {
         
         let toolBar = UIToolbar()
+        toolBar.tag = 1
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddNewQuestionViewController.dismissKeyboard))
