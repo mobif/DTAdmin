@@ -2,7 +2,7 @@
 //  DataManager.swift
 //  DTAdmin
 //
-//  Created by Володимир on 10/24/17.
+//  Created by Volodymyr on 10/24/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 
 class DataManager: HTTPManager {
 
-    static var shared = DataManager()
+    static let shared = DataManager()
     private override init(){}
 /**
      Returns an array containing the non-nil defined type of elements from API
@@ -21,19 +21,18 @@ class DataManager: HTTPManager {
 */
     func getList(byEntity typeEntity: Entities, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords) else {
-            let error = "Cannot prepare header for URLRequest"
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
         }
         getResponse(request: request) { (list, error) in
             if let error = error {
                 StoreHelper.logout()
-                DispatchQueue.main.async {
-                    completionHandler(nil, error)
-                }
+                completionHandler(nil, error)
             }
             guard let  json = list as? [[String: Any]] else {
-                print("Response is empty")
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
                 return
             }
             var entytiList = [Any]()
@@ -56,7 +55,6 @@ class DataManager: HTTPManager {
         }
     }
     private func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
-        print(request)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let sessionError = error {
                 DispatchQueue.main.async {
@@ -64,35 +62,41 @@ class DataManager: HTTPManager {
                 }
             } else {
                 guard let responseValue = response as? HTTPURLResponse else {
-                    let errorMsg = "Incorect server response"
+                    let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
                     DispatchQueue.main.async {
                         completionHandler(nil, errorMsg)
                     }
                     return
                 }
-                if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
-                    guard let sessionData = data else {
-                        let errorMsg = "No data in server response"
-                        DispatchQueue.main.async {
-                            completionHandler(nil, errorMsg)
-                        }
-                        return
-                    }
-                    //JSON Serialization
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: sessionData, options: [])
-                        DispatchQueue.main.async {
-                            completionHandler(json, nil)
-                        }
-                    } catch {
-                        DispatchQueue.main.async {
-                            completionHandler(nil, error.localizedDescription)
-                        }
-                        return
-                    }
-                } else {
+                guard let sessionData = data else {
+                    let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
                     DispatchQueue.main.async {
-                        completionHandler(nil, "Error response: \(responseValue.statusCode)")
+                        completionHandler(nil, errorMsg)
+                    }
+                    return
+                }
+                //JSON Serialization
+                var json: Any
+                do {
+                    json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(nil, error.localizedDescription)
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
+                        completionHandler(json, nil)
+                    } else {
+                        var errorMsg: String = ""
+                        if let errorReason = json as? [String: String]  {
+                            guard let errorServerMsg = errorReason["response"] else { return }
+                            errorMsg = errorServerMsg
+                        }
+                        errorMsg = NSLocalizedString("Error response: \(responseValue.statusCode) - \(errorMsg)", comment: "Incorrect request")
+                        completionHandler(nil, errorMsg)
                     }
                 }
             }
@@ -105,11 +109,11 @@ class DataManager: HTTPManager {
                 completionHandler(nil, errorExists)
             }
             guard let count = count else {
-                completionHandler(nil, "Uncountable list of Entity")
+                completionHandler(nil, NSLocalizedString("Uncountable list of Entity", comment: "Uncountable list of Entity or response is incorrect"))
                 return
             }
             if index + quantity > count {
-                completionHandler(nil, "Out of Bounds")
+                completionHandler(nil, NSLocalizedString("Out of Bounds", comment: "Out of Bounds"))
             }
             let indexString = String(index)
             let quantityString = String(quantity)
@@ -126,7 +130,8 @@ class DataManager: HTTPManager {
                     }
                 }
                 guard let  json = list as? [[String: Any]] else {
-                    print("Response is empty")
+                    let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                    completionHandler(nil, error)
                     return
                 }
                 var entytiList = [Any]()
@@ -152,7 +157,7 @@ class DataManager: HTTPManager {
     
     func getEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetOneRecord, id: byId) else {
-            let error = "Cannot prepare header for URLRequest"
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             DispatchQueue.main.async {
                 completionHandler(nil, error)
             }
@@ -165,15 +170,16 @@ class DataManager: HTTPManager {
                 }
             }
             guard let entity = entity else {
-                completionHandler(nil, "Response nil")
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
                 return
             }
             guard let  jsonArray = entity as? [[String: Any]] else {
-                completionHandler(nil, "Structure incorrect: \(entity)")
+                completionHandler(nil, NSLocalizedString("Structure is incorrect: \(entity)", comment: "Response unrelated to structure"))
                 return
             }
             guard let json = jsonArray.first else {
-                completionHandler(nil, "Response is empty: \(jsonArray)")
+                completionHandler(nil, NSLocalizedString("Response is empty: \(jsonArray)", comment: "Response is empty"))
                 return
             }
             var entityInstance: Any?
@@ -191,7 +197,7 @@ class DataManager: HTTPManager {
             case .User: entityInstance = UserStructure(dictionary: json)
             }
             guard let entityUnwraped = entityInstance else {
-                completionHandler(nil, "Incorrect type")
+                completionHandler(nil, NSLocalizedString("Incorrect type", comment: "Incorrect type"))
                 return
             }
             DispatchQueue.main.async {
@@ -202,22 +208,24 @@ class DataManager: HTTPManager {
     
     func getCountItems(forEntity: Entities, completion: @escaping (_ count: UInt?, _ Error: String?) -> () ) {
         guard let request = getURLReqest(entityStructure: forEntity, type: TypeReqest.GetCount) else {
-            let error = "Cannot prepare header for URLRequest"
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completion(nil, error)
-            return }
+            return
+        }
         getResponse(request: request) { (response, error) in
             if let error = error {
                 completion(nil, error)
             } else {
                 guard let responseUnwraped = response else { return }
                 guard let  json = responseUnwraped as? [String: Any] else {
-                    print("Response is empty \(responseUnwraped)")
-                    completion(nil, "Response is empty: \(responseUnwraped)")
+                    let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                    completion(nil, error)
                     return
                 }
                 // MARK: Debug part
                 guard let countString = json["numberOfRecords"] as? String else {
-                    completion(nil, "No such respons")
+                    let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
+                    completion(nil, errorMsg)
                     return
                 }
                 let count = UInt(countString)
@@ -228,7 +236,7 @@ class DataManager: HTTPManager {
 
     func updateEntity<TypeEntity: Serializable>(byId: String, entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ error: String?) -> ()) {
         guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.UpdateData, id: byId) else {
-            let error = "Cannot prepare header for URLRequest"
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(error)
             return }
         let postData = entity.dictionary
@@ -244,18 +252,18 @@ class DataManager: HTTPManager {
             } else {
                 guard let entityUnwraped = entity else { return }
                 guard let  json = entityUnwraped as? [String: Any] else {
-                    print("Response is empty \(entityUnwraped)")
+                    let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                    completionHandler(error)
                     return
                 }
                 // MARK: Debug part
-                print("Respons for Update: \(json)")
                 completionHandler(nil)
             }
         }
     }
     func insertEntity<TypeEntity: Serializable>(entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
         guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.InsertData) else {
-            let error = "Cannot prepare header for URLRequest"
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return }
         let postData = entity.dictionary
@@ -271,12 +279,11 @@ class DataManager: HTTPManager {
             } else {
                 guard let entity = entity else { return }
                 guard let  json = entity as? [String: Any] else {
-                    let errorMsg = "Response is empty: \(entity)"
+                    let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
                     completionHandler(nil, errorMsg)
                     return
                 }
                 // MARK: Debug part
-                print(json)
                 completionHandler(json["id"], nil)
             }
         }
@@ -284,7 +291,7 @@ class DataManager: HTTPManager {
     
     func deleteEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.Delete, id: byId) else {
-            let error = "Cannot prepare header for URLRequest"
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return }
         getResponse(request: request) { (entity, error) in
@@ -295,7 +302,8 @@ class DataManager: HTTPManager {
             } else {
                 guard let entity = entity else { return }
                 guard let  json = entity as? [String: String] else {
-                    print("Response is empty")
+                    let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                    completionHandler(nil, error)
                     return
                 }
                 // MARK: Debug part
