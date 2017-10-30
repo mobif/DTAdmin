@@ -10,16 +10,16 @@ import UIKit
 
 class DetailSubjectViewController: UIViewController {
     
-    @IBOutlet weak var subjectNameTextField: UILabel!
+    @IBOutlet weak var subjectNameLabel: UILabel!
     
-    @IBOutlet weak var subjectDescriptionTextField: UILabel!
+    @IBOutlet weak var subjectDescriptionLabel: UILabel!
     
     var subject: Subject? {
         didSet {
             guard let subject = subject else { return }
             self.view.layoutIfNeeded()
-            self.subjectNameTextField.text = subject.id + " " + subject.name 
-            self.subjectDescriptionTextField.text = subject.description
+            self.subjectNameLabel.text = subject.id + " " + subject.name
+            self.subjectDescriptionLabel.text = subject.description
         }
     }
 

@@ -76,17 +76,9 @@ class QuestionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as! QuestionTableViewCell
-
-        cell.questionText.text = questions[indexPath.row].questionText
-        cell.level.text = "Level: " + questions[indexPath.row].level
-        cell.type.text = "Type: " + questions[indexPath.row].type
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) 
+        cell.textLabel?.text = questions[indexPath.row].questionText
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 125.0
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -126,6 +118,14 @@ class QuestionsTableViewController: UITableViewController {
         }
         update.backgroundColor = UIColor.blue
         return [delete, update]
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let wayToShowQuestionInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionInfo") as? QuestionInfoViewController
+        {
+            wayToShowQuestionInfo.question = self.questions[indexPath.row]
+            self.navigationController?.pushViewController(wayToShowQuestionInfo, animated: true)
+        }
     }
     
 

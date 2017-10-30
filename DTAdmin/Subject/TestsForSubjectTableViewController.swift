@@ -59,17 +59,9 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as! TestTableViewCell
-        cell.testName.text = test[indexPath.row].testName
-        cell.testTask.text = "Tasks: " + test[indexPath.row].tasks
-        cell.timeForTest.text = "Time for test: " + test[indexPath.row].timeForTest
-        cell.attempts.text = "Attempts: " + test[indexPath.row].attempts
-        cell.enabled.text = "Enabled: " + test[indexPath.row].enabled
+        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
+        cell.textLabel?.text = test[indexPath.row].testName
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -88,11 +80,11 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let wayToShowQuestions = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionTableView") as? QuestionsTableViewController
+        if let wayToShowTestInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "showTestInfo") as? ShowTestInfoViewController
         {
-            wayToShowQuestions.testId = self.test[indexPath.row].testId
+            wayToShowTestInfo.test = self.test[indexPath.row]
             print(test[indexPath.row].testId)
-            self.navigationController?.pushViewController(wayToShowQuestions, animated: true)
+            self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
         }
     }
 

@@ -12,6 +12,20 @@
 		3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888151F9688B200D602F3 /* NetworkManager.swift */; };
 		3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminViewController.swift */; };
 		3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888171F9688B200D602F3 /* UserModel.swift */; };
+		3FDB84E71FA35E690054A94D /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC05CD31FA21EE800F98D76 /* Subjects.storyboard */; };
+		3FDB84E81FA35F660054A94D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CD01FA21EE700F98D76 /* Subject.swift */; };
+		3FDB84E91FA35F690054A94D /* TestsForSubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CD11FA21EE800F98D76 /* TestsForSubjectTableViewController.swift */; };
+		3FDB84EB1FA35F6E0054A94D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CC81FA21EE700F98D76 /* Test.swift */; };
+		3FDB84EC1FA35F710054A94D /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CD61FA21EE800F98D76 /* SubjectTableViewController.swift */; };
+		3FDB84EE1FA35F770054A94D /* QuestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CCE1FA21EE700F98D76 /* QuestionsTableViewController.swift */; };
+		3FDB84EF1FA35F7A0054A94D /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CD21FA21EE800F98D76 /* Question.swift */; };
+		3FDB84F01FA35F7D0054A94D /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CCB1FA21EE700F98D76 /* QueryService.swift */; };
+		3FDB84F11FA35F800054A94D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CD51FA21EE800F98D76 /* LogViewController.swift */; };
+		3FDB84F21FA35F820054A94D /* DetailSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CCD1FA21EE700F98D76 /* DetailSubjectViewController.swift */; };
+		3FDB84F31FA35F840054A94D /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CCC1FA21EE700F98D76 /* AddNewRecordViewController.swift */; };
+		3FDB84F41FA35F870054A94D /* AddNewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC05CCF1FA21EE700F98D76 /* AddNewQuestionViewController.swift */; };
+		3FDB84F61FA379910054A94D /* ShowTestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB84F51FA379910054A94D /* ShowTestInfoViewController.swift */; };
+		3FDB84F81FA3818A0054A94D /* QuestionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB84F71FA3818A0054A94D /* QuestionInfoViewController.swift */; };
 		3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */; };
 		3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F991F8D0DF60057BF3C /* ViewController.swift */; };
 		3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8F9B1F8D0DF60057BF3C /* Main.storyboard */; };
@@ -41,7 +55,6 @@
 		3FA888161F9688B200D602F3 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3FA888171F9688B200D602F3 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3FC05CC81FA21EE700F98D76 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		3FC05CC91FA21EE700F98D76 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		3FC05CCB1FA21EE700F98D76 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		3FC05CCC1FA21EE700F98D76 /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
 		3FC05CCD1FA21EE700F98D76 /* DetailSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSubjectViewController.swift; sourceTree = "<group>"; };
@@ -51,9 +64,10 @@
 		3FC05CD11FA21EE800F98D76 /* TestsForSubjectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsForSubjectTableViewController.swift; sourceTree = "<group>"; };
 		3FC05CD21FA21EE800F98D76 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		3FC05CD31FA21EE800F98D76 /* Subjects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
-		3FC05CD41FA21EE800F98D76 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		3FC05CD51FA21EE800F98D76 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		3FC05CD61FA21EE800F98D76 /* SubjectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
+		3FDB84F51FA379910054A94D /* ShowTestInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTestInfoViewController.swift; sourceTree = "<group>"; };
+		3FDB84F71FA3818A0054A94D /* QuestionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionInfoViewController.swift; sourceTree = "<group>"; };
 		3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FDE8F991F8D0DF60057BF3C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -137,13 +151,13 @@
 				3FC05CCB1FA21EE700F98D76 /* QueryService.swift */,
 				3FC05CD21FA21EE800F98D76 /* Question.swift */,
 				3FC05CCE1FA21EE700F98D76 /* QuestionsTableViewController.swift */,
-				3FC05CC91FA21EE700F98D76 /* QuestionTableViewCell.swift */,
 				3FC05CD01FA21EE700F98D76 /* Subject.swift */,
 				3FC05CD31FA21EE800F98D76 /* Subjects.storyboard */,
+				3FDB84F71FA3818A0054A94D /* QuestionInfoViewController.swift */,
+				3FDB84F51FA379910054A94D /* ShowTestInfoViewController.swift */,
 				3FC05CD61FA21EE800F98D76 /* SubjectTableViewController.swift */,
 				3FC05CC81FA21EE700F98D76 /* Test.swift */,
 				3FC05CD11FA21EE800F98D76 /* TestsForSubjectTableViewController.swift */,
-				3FC05CD41FA21EE800F98D76 /* TestTableViewCell.swift */,
 			);
 			path = Subject;
 			sourceTree = "<group>";
@@ -336,6 +350,7 @@
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
+				3FDB84E71FA35E690054A94D /* Subjects.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,21 +362,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */,
+				3FDB84F21FA35F820054A94D /* DetailSubjectViewController.swift in Sources */,
+				3FDB84F41FA35F870054A94D /* AddNewQuestionViewController.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
+				3FDB84F81FA3818A0054A94D /* QuestionInfoViewController.swift in Sources */,
+				3FDB84EF1FA35F7A0054A94D /* Question.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
+				3FDB84EB1FA35F6E0054A94D /* Test.swift in Sources */,
+				3FDB84EC1FA35F710054A94D /* SubjectTableViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				3FDB84E91FA35F690054A94D /* TestsForSubjectTableViewController.swift in Sources */,
+				3FDB84EE1FA35F770054A94D /* QuestionsTableViewController.swift in Sources */,
+				3FDB84F61FA379910054A94D /* ShowTestInfoViewController.swift in Sources */,
 				897D0E341F9B6BC300825E62 /* CommonNetworkManager.swift in Sources */,
 				3FA8881B1F9688B200D602F3 /* UserModel.swift in Sources */,
+				3FDB84F01FA35F7D0054A94D /* QueryService.swift in Sources */,
 				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
 				3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */,
 				890376041F9DE0FB002A99A8 /* Date.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */,
+				3FDB84F11FA35F800054A94D /* LogViewController.swift in Sources */,
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
+				3FDB84F31FA35F840054A94D /* AddNewRecordViewController.swift in Sources */,
 				89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */,
+				3FDB84E81FA35F660054A94D /* Subject.swift in Sources */,
 				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
