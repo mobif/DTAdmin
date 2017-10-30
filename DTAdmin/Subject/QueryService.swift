@@ -54,7 +54,10 @@ class QueryService {
     func getRecords (sufix: String, completion: @escaping QueryResult) {
         
         guard let url = URL(string: basePath + sufix) else { return }
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        if let cookies = StoreHelper.getCookie() {
+            request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
+        }
         
         let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
     

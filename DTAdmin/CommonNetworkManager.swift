@@ -21,6 +21,7 @@ struct API {
     static let domainURL = "vps9615.hyperhost.name"
     static let loginURL = URL(string: accessProtocol + domainURL + "/login/index")
     static let timeTableForGroupURL = URL(string: accessProtocol + domainURL + "/timeTable/getTimeTablesForGroup")
+    static let timeTableForSubjectURL = URL(string: accessProtocol + domainURL + "/timeTable/getTimeTablesForSubject")
     static let timeTableURL = URL(string: accessProtocol + domainURL + "/timeTable")
     static let subjectsURL = URL(string: accessProtocol + domainURL + "/Subject")
     static let groupURL = URL(string: accessProtocol + domainURL + "/Group")
@@ -88,6 +89,34 @@ class CommonNetworkManager {
     
     func timeTable(by groupID: Int, completion: @escaping (_ timesTable: [TimeTable]?, _ error: Error?) -> ()) {
         guard let url = API.timeTableForGroupURL?.appendingPathComponent("group_id=\"\(groupID)\"") else {
+            preconditionFailure("TimeTable url error")
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = HttpMehtod.GET.rawValue
+        if let cookies = StoreHelper.getCookie() {
+            request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
+        }
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                if let response = response as? HTTPURLResponse, let data = data {
+                    if response.statusCode == 200 {
+                        do {
+                            let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                            print(json)
+                            completion([TimeTable](), nil)
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+            }
+            }.resume()
+    }
+    
+    func timeTableSubject(by subjectID: Int, completion: @escaping (_ timesTable: [TimeTable]?, _ error: Error?) -> ()) {
+        guard let url = API.timeTableForSubjectURL?.appendingPathComponent("subject_id=\"\(subjectID)\"") else {
             preconditionFailure("TimeTable url error")
         }
         var request = URLRequest(url: url)

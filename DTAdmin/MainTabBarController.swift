@@ -23,10 +23,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(studentNavigationController)
 
 //MARK: Create subjects tab
-        let subjectsTab = TabTwoViewController()
-        let subjectsBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
-        subjectsTab.tabBarItem = subjectsBarItem
-        tabBarViewControllers.append(subjectsTab)
+        let subjectStoryboard = UIStoryboard.stoyboard(by: .Subject)
+        guard let subjectNavController = subjectStoryboard.instantiateViewController(withIdentifier: "SubjectNavController") as? UINavigationController else { return }
+        let subjectBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
+        subjectNavController.tabBarItem = subjectBarItem
+        tabBarViewControllers.append(subjectNavController)
 
 //MARK: Create groups tab
         let groupsTab = TabThreeViewController()
@@ -84,14 +85,6 @@ class TabOneViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.blue
         self.title = "Students"
-    }
-}
-
-class TabTwoViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
-        self.title = "Subjects"
     }
 }
 

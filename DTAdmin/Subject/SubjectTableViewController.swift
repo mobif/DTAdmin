@@ -14,6 +14,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     let queryService = QueryService()
     var filteredData = [Subject]()
     var inSearchMode = false
+    var selectedSubject: ((Subject) -> ())?
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -143,10 +144,15 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let wayToShowTests = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "DetailSubject") as? DetailSubjectViewController
-        {
-            wayToShowTests.subject = self.records[indexPath.row]
-            self.navigationController?.pushViewController(wayToShowTests, animated: true)
+        if let selectedSubject = self.selectedSubject {
+            selectedSubject(self.records[indexPath.row])
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            if let wayToShowTests = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "DetailSubject") as? DetailSubjectViewController
+            {
+                wayToShowTests.subject = self.records[indexPath.row]
+                self.navigationController?.pushViewController(wayToShowTests, animated: true)
+            }
         }
     }
     

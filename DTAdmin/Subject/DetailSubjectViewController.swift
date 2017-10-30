@@ -41,7 +41,13 @@ class DetailSubjectViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func timeTableButtonTapped(_ sender: Any) {
+        let timeTableStoryboard = UIStoryboard.stoyboard(by: .TimeTable)
+        guard let timeTableViewController = timeTableStoryboard.instantiateViewController(withIdentifier: "TimeTableListViewController") as? TimeTableListViewController else { return }
+        timeTableViewController.subjectID = Int(self.subject?.id ?? "")
+        self.navigationController?.pushViewController(timeTableViewController, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
