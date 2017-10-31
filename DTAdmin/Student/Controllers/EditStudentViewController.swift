@@ -2,7 +2,7 @@
 //  EditStudentViewController.swift
 //  DTAdmin
 //
-//  Created by Володимир on 10/16/17.
+//  Created by Volodymyr on 10/16/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
@@ -16,7 +16,6 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     var studentForSave: StudentStructure?
-    
     @IBOutlet weak var loginStudentTextField: UITextField!
     @IBOutlet weak var emailStudentTextField: UITextField!
     @IBOutlet weak var nameStudentTextField: UITextField!
@@ -27,13 +26,11 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var passwordConfirmTextField: UITextField!
     @IBOutlet weak var gradeBookIdTextField: UITextField!
     @IBOutlet weak var studentPhoto: UIImageView!
-    
     var titleViewController: String?
     var selectedGroupForStudent: GroupStructure?
     var selectedUserAccountForStudent: UserStructure?
     var isNewStudent = true
     var resultModification: ((StudentStructure, Bool) -> ())?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let saveButton: UIBarButtonItem
@@ -187,8 +184,14 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         }
     }
 }
-extension UIImage
-{
+extension UIImage {
+/**
+     Resize image to defined size and scale according to bitmap-based graphics context.
+     - Parameters:
+        - size: The size (measured in points) of the new bitmap context.
+        - scale: The scale factor to apply to the bitmap.
+     - returns: Image after resizing.
+ */
     func convert(toSize size:CGSize, scale:CGFloat) -> UIImage
     {
         let imgRect = CGRect(origin: CGPoint(x:0.0, y:0.0), size: size)
