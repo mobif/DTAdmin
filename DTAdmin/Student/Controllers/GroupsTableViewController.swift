@@ -21,7 +21,7 @@ class GroupsTableViewController: UITableViewController {
                 self.groupList = groups
                 self.groupTable.reloadData()
             } else {
-                self.showWarningMsg(error ?? "Incorect type data")
+                self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
             }
         }
     }
