@@ -129,6 +129,12 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             }
         }
     }
+/**
+     This function checks all data from fields for creation of instance new student.
+     - Precondition: Each field must have its properly value. Group and photo has to be selected also.
+     - Postcondition: In case if checking is success then would be prepared the instance for transfer to API, otherwise shows warning.
+     - Returns: If result of checking is success returns True, and False if not.
+*/
     func prepareForSave() -> Bool {
         guard let login = loginStudentTextField.text,
             let email = emailStudentTextField.text,
