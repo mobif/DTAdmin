@@ -81,6 +81,8 @@ class CommonNetworkManager {
                         } catch {
                             print("Error json parsing")
                         }
+                    } else {
+                        completionHandler(nil, error)
                     }
                 }
             }
@@ -109,6 +111,8 @@ class CommonNetworkManager {
                         } catch {
                             print(error)
                         }
+                    } else {
+                        completion(nil, error)
                     }
                 }
             }
@@ -137,6 +141,8 @@ class CommonNetworkManager {
                         } catch {
                             print(error)
                         }
+                    } else {
+                        completion(nil, error)
                     }
                 }
             }
@@ -169,6 +175,8 @@ class CommonNetworkManager {
                         } catch {
                             print(error)
                         }
+                    } else {
+                        completion(nil, error)
                     }
                 }
             }
@@ -198,6 +206,8 @@ class CommonNetworkManager {
                         let timeTable = TimeTable(json: json?.first)
                         if response.statusCode == 200 {
                             completion(timeTable, nil)
+                        } else {
+                            completion(nil, error)
                         }
                     } catch {
                         print("JSON parsing failed")

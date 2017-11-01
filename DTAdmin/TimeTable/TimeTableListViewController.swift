@@ -35,7 +35,7 @@ class TimeTableListViewController: ParentViewController, UITableViewDataSource, 
             CommonNetworkManager.shared().timeTableSubject(by: subjectID, completion: { (timeTableList, error) in
                 self.stopActivity()
                 if let error = error {
-                    self.showAllert(title: "Error", message: error.localizedDescription, completionHandler: nil)
+                    self.showAllert(title: NSLocalizedString("Error", comment: "Alert title"), message: error.localizedDescription, completionHandler: nil)
                 } else {
                     self.timeTableList = timeTableList ?? [TimeTable]()
                 }
@@ -45,7 +45,7 @@ class TimeTableListViewController: ParentViewController, UITableViewDataSource, 
             CommonNetworkManager.shared().timeTable(by: groupID, completion: { (timeTableList, error) in
                 self.stopActivity()
                 if let error = error {
-                    self.showAllert(title: "Error", message: error.localizedDescription, completionHandler: nil)
+                    self.showAllert(title: NSLocalizedString("Error", comment: "Alert title"), message: error.localizedDescription, completionHandler: nil)
                 } else {
                     self.timeTableList = timeTableList ?? [TimeTable]()
                 }
@@ -55,7 +55,7 @@ class TimeTableListViewController: ParentViewController, UITableViewDataSource, 
             CommonNetworkManager.shared().timeTable { (timeTableList, error) in
                 self.stopActivity()
                 if let error = error {
-                    self.showAllert(title: "Error", message: error.localizedDescription, completionHandler: nil)
+                    self.showAllert(title: NSLocalizedString("Error", comment: "Alert title"), message: error.localizedDescription, completionHandler: nil)
                 } else {
                     self.timeTableList = timeTableList ?? [TimeTable]()
                 }
