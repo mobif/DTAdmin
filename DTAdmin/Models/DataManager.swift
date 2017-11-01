@@ -278,13 +278,23 @@ class DataManager: HTTPManager {
                 completionHandler(nil, error)
             } else {
                 guard let entity = entity else { return }
-                guard let  json = entity as? [String: Any] else {
-                    let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
-                    completionHandler(nil, errorMsg)
-                    return
+                switch typeEntity {
+                case .Subject:
+                    guard let  json = entity as? [[String: Any]] else {
+                        let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
+                        completionHandler(nil, errorMsg)
+                        return
+                    }
+                    completionHandler(json, nil)
+                default:
+                    guard let  json = entity as? [String: Any] else {
+                        let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
+                        completionHandler(nil, errorMsg)
+                        return
+                    }
+                    // MARK: Debug part
+                    completionHandler(json["id"], nil)
                 }
-                // MARK: Debug part
-                completionHandler(json["id"], nil)
             }
         }
     }
