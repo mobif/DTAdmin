@@ -8,11 +8,11 @@
 
 //  Question: {question_id, test_id, question_text, level, type, attachment}
 
-
+//
 
 import UIKit
 
-class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     @IBOutlet weak var qustionTextField: UITextField!
     
@@ -22,7 +22,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     
     @IBOutlet weak var questionAttachmentImageView: UIImageView!
     
-    var typePickerData = ["1", "2", "3"]
+    //var typePickerData = ["1", "2", "3"]
     
     var selectedDay: String?
     
@@ -87,18 +87,34 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func prepareForSave() -> Bool {
+//        guard let questionText = qustionTextField.text,
+//            let level = questionLevelTextField.text,
+//            let type = questionTypeTextField else { return false }
+//        if let attachment : UIImage = questionAttachmentImageView.image {
+//            let attachmentData = UIImagePNGRepresentation(attachment)
+//            let picture = attachmentData?.base64EncodedString(options: .lineLength64Characters)
+//            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": picture]
+//            questionForSave = QuestionStructure(dictionary: dictionary)
+//        } else {
+//            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
+//            questionForSave = QuestionStructure(dictionary: dictionary)
+//            }
+//        return true
         guard let questionText = qustionTextField.text,
-            let level = questionLevelTextField.text,
-            let type = questionTypeTextField else { return false }
-        if let attachment : UIImage = questionAttachmentImageView.image {
-            let attachmentData = UIImagePNGRepresentation(attachment)
-            let picture = attachmentData?.base64EncodedString(options: .lineLength64Characters)
-            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": picture]
-            questionForSave = QuestionStructure(dictionary: dictionary)
-        } else {
+          let level = questionLevelTextField.text,
+        let type = questionTypeTextField.text else { return false }
+        if questionText.count > 2 {
             let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
+            print(testId)
+            print(questionText)
+            print(level)
+            print(type)
             questionForSave = QuestionStructure(dictionary: dictionary)
-            }
+            print(questionForSave)
+        } else {
+            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+            return false
+        }
         return true
     }
     
@@ -136,9 +152,9 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = updateDates ? "Update question" : "Add new question"
-        questionTypeTextField.delegate = self
-        createDayPicker()
-        createToolbar()
+//        questionTypeTextField.delegate = self
+//        createDayPicker()
+//        createToolbar()
         questionAttachmentImageView.layer.cornerRadius = 5
         questionAttachmentImageView.layer.borderWidth = 1
         questionAttachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
@@ -154,49 +170,49 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         self.present(alert, animated: true, completion: nil)
     }
     
-    func createDayPicker() {
-        let dayPicker = UIPickerView()
-        dayPicker.delegate = self
-        questionTypeTextField.inputView = dayPicker
-    }
-
-    func createToolbar() {
-        let toolBar = UIToolbar()
-        //toolBar.tag = 0
-        toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddNewQuestionViewController.dismissKeyboard))
-        toolBar.setItems([doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        questionTypeTextField.inputAccessoryView = toolBar
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
+//    func createDayPicker() {
+//        let dayPicker = UIPickerView()
+//        dayPicker.delegate = self
+//        questionTypeTextField.inputView = dayPicker
+//    }
+//
+//    func createToolbar() {
+//        let toolBar = UIToolbar()
+//        //toolBar.tag = 0
+//        toolBar.sizeToFit()
+//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddNewQuestionViewController.dismissKeyboard))
+//        toolBar.setItems([doneButton], animated: false)
+//        toolBar.isUserInteractionEnabled = true
+//        questionTypeTextField.inputAccessoryView = toolBar
+//    }
+//
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
     
 }
 
-extension AddNewQuestionViewController: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return typePickerData.count
-    }
-
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return typePickerData[row]
-    }
-
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            selectedDay = typePickerData[row]
-            questionTypeTextField.text = selectedDay
-    }
-
-}
+//extension AddNewQuestionViewController: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+//
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//
+//
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return typePickerData.count
+//    }
+//
+//
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return typePickerData[row]
+//    }
+//
+//
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//            selectedDay = typePickerData[row]
+//            questionTypeTextField.text = selectedDay
+//    }
+//
+//}
 
