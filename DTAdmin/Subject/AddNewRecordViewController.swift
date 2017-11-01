@@ -29,29 +29,19 @@ class AddNewRecordViewController: UIViewController {
         }
     }
     
-    private func showMessage(message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     @IBAction func saveNewRecord(_ sender: UIButton) {
         if !updateDates {
             if prepareForSave(){
                 guard let subjectForSave = subjectForSave else { return }
-                DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .Subject) { (id, error) in
+                DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .Subject) { (subjectResult, error) in
                     if let error = error {
                         self.showWarningMsg(error)
                     } else {
-                        guard let id = id else {
-                            self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
-                            return
-                        }
-                        let newUserId = String(describing: id)
-                        var newStudent = subjectForSave
-                        newStudent.id = newUserId
+                        guard let result = subjectResult as? [[String : Any]] else { return }
+                        guard let resultFirst = result.first else { return }
+                        guard let subjectResult = SubjectStructure(dictionary: resultFirst) else { return }
                         if let resultModification = self.resultModification {
-                            resultModification(newStudent)
+                            resultModification(subjectResult)
                         }
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -59,12 +49,13 @@ class AddNewRecordViewController: UIViewController {
             }
         } else {
             if prepareForSave(){
-                guard let subjectId = subjectId else { return }
+                guard let subjectIdUnwrap = subjectId else { return }
                 guard let subjectForSave = subjectForSave else { return }
-                DataManager.shared.updateEntity(byId: subjectId, entity: subjectForSave, typeEntity: .Subject) { error in
+                DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .Subject) { error in
                     if let error = error {
                         self.showWarningMsg(error)
                     } else {
+                        //self.subjectForSave?.id = subjectIdUnwrap
                         if let resultModification = self.resultModification {
                             resultModification(subjectForSave)
                         }
@@ -73,14 +64,14 @@ class AddNewRecordViewController: UIViewController {
                 }
             }
         }
-        
     }
+    
     func prepareForSave() -> Bool {
         guard let name = subjectNameTextField.text,
             let description = subjectDescriptionTextField.text else { return false }
         if (name.count > 2) && (description.count > 2) {
             let dictionary: [String: Any] = ["subject_name": name, "subject_description": description]
-            subjectForSave = SubjectStructure(dictionary: dictionary)
+            self.subjectForSave = SubjectStructure(dictionary: dictionary)
         } else {
             showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
             return false

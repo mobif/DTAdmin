@@ -24,7 +24,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(studentNavigationController)
 
 //MARK: Create subjects tab
-        let subjectStoryboard = UIStoryboard.stoyboard(by: .Subject)
+        let subjectStoryboard = UIStoryboard.storyboard(by: .Subject)
         guard let subjectNavController = subjectStoryboard.instantiateViewController(withIdentifier: "SubjectNavController") as? UINavigationController else { return }
         let subjectBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
         subjectNavController.tabBarItem = subjectBarItem

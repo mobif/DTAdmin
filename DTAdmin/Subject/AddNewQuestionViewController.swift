@@ -47,7 +47,6 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
        if !updateDates {
             if prepareForSave(){
-                print(questionForSave)
                 guard let questionForSave = questionForSave else { return }
                 
                 DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .Question) { (id, error) in
@@ -91,20 +90,18 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         guard let questionText = qustionTextField.text,
             let level = questionLevelTextField.text,
             let type = questionTypeTextField else { return false }
-        guard let attachment : UIImage = questionAttachmentImageView.image,
-            let attachmentData = UIImagePNGRepresentation(attachment) else { return false }
-        let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
-        if questionText.count > 1 {
-            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
-            print(dictionary)
+        if let attachment : UIImage = questionAttachmentImageView.image {
+            let attachmentData = UIImagePNGRepresentation(attachment)
+            let picture = attachmentData?.base64EncodedString(options: .lineLength64Characters)
+            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": picture]
             questionForSave = QuestionStructure(dictionary: dictionary)
-            print(questionForSave)
         } else {
-            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
-            return false
-        }
+            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
+            questionForSave = QuestionStructure(dictionary: dictionary)
+            }
         return true
     }
+    
     
     func showQuestionAttachment(){
         guard let photoBase64 = question?.attachment else { return }
@@ -113,7 +110,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         questionAttachmentImageView.image = decodedimage
     }
     
-    @IBAction func openGallery(_ sender: UIButton) {
+    @objc func openGallery(_ sender: UIButton) {
         let image = UIImagePickerController()
         image.delegate = self
         image.sourceType = UIImagePickerControllerSourceType.photoLibrary
@@ -123,7 +120,11 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            questionAttachmentImageView.image = image
+            let size = image.size
+            let imageHeight: CGFloat = 100.0
+            let aspectRatioForWidth = ( size.width / size.height ) * imageHeight
+            let resizedImage = image.convert(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight), scale: UIScreen.main.scale)
+            questionAttachmentImageView.image = resizedImage
         } else {
             showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))
         }
@@ -155,7 +156,6 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     
     func createDayPicker() {
         let dayPicker = UIPickerView()
-        //dayPicker.tag = 0
         dayPicker.delegate = self
         questionTypeTextField.inputView = dayPicker
     }

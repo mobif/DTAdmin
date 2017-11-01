@@ -35,13 +35,12 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
    @IBAction func addNewItem(_ sender: UIBarButtonItem) {
     guard let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController else { return }
     
-        wayToAddNewRecord.resultModification = { (subjectReturn) in
-       
+        wayToAddNewRecord.resultModification = { subjectReturn in
             self.records.append(subjectReturn)
             self.records.sort { return $0.name < $1.name }
             self.tableView.reloadData()
-            }
-            self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
+        }
+        self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
     
     }
     
@@ -56,7 +55,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
             case 0:
                 filteredData = records.filter{$0.name.contains(searchBar.text!)}
             case 1:
-                filteredData = records.filter{$0.description!.contains(searchBar.text!)}
+                filteredData = records.filter{$0.description.contains(searchBar.text!)}
             default:
                 print("No match")
             }
@@ -73,14 +72,13 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
             if error == nil,
                 let students = subjects as? [SubjectStructure] {
                 self.records = students
-                self.records.sort { return $0.name < $1.name }
+                self.records.sort { return $0.id! > $1.id! }
                 self.tableView.reloadData()
+                self.refresher.endRefreshing()
             } else {
                 self.showWarningMsg(error ?? "Incorect type data")
             }
-            
         }
-        
     }
     
     private func showMessage(message: String) {
@@ -99,7 +97,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         if inSearchMode {
             cellData = filteredData[indexPath.row]
         }
-        cell.textLabel?.text = cellData.id! + " " + cellData.name
+        cell.textLabel?.text = cellData.name
         cell.detailTextLabel?.text = cellData.description
         return cell
     }

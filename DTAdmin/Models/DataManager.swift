@@ -30,26 +30,27 @@ class DataManager: HTTPManager {
                 StoreHelper.logout()
                 completionHandler(nil, error)
             }
-        guard let  json = list as? [[String: Any]] else {
-            print("Response is empty")
-            return
-        }
-        var entytiList = [Any]()
-        switch typeEntity {
-        case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
-        case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
-        case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
-        case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
-        case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
-        case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
-        case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
-        case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
-        case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
-        case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
-        case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
+            guard let  json = list as? [[String: Any]] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
             }
-        DispatchQueue.main.async {
-            completionHandler(entytiList, nil)
+            var entytiList = [Any]()
+            switch typeEntity {
+            case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
+            case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
+            case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
+            case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
+            case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
+            case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
+            case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
+            case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
+            case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
+            case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
+            case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
+            }
+            DispatchQueue.main.async {
+                completionHandler(entytiList, nil)
             }
         }
     }
@@ -79,7 +80,7 @@ class DataManager: HTTPManager {
                 var json: Any
                 do {
                     json = try JSONSerialization.jsonObject(with: sessionData, options: [])
-                    
+
                 } catch {
                     DispatchQueue.main.async {
                         completionHandler(nil, error.localizedDescription)
@@ -102,7 +103,7 @@ class DataManager: HTTPManager {
             }
         }.resume()
     }
-    
+
     func getListRange(forEntity typeEntity: Entities, entityId: String, quantity: UInt, fromNo index: UInt,  completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
 //        getCountItems(forEntity: typeEntity) { (count, error) in
 //            if let errorExists = error  {
@@ -153,8 +154,8 @@ class DataManager: HTTPManager {
                 }
             }
         }
-    
-    
+
+
     func getEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetOneRecord, id: byId) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
@@ -205,7 +206,7 @@ class DataManager: HTTPManager {
             }
         }
     }
-    
+
     func getEntityByAnother(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.getTestsBySubject, id: byId) else {
             let error = "Cannot prepare header for URLRequest"
@@ -244,7 +245,7 @@ class DataManager: HTTPManager {
             }
         }
     }
-    
+
     func getCountItems(forEntity: Entities, completion: @escaping (_ count: UInt?, _ Error: String?) -> () ) {
         guard let request = getURLReqest(entityStructure: forEntity, type: TypeReqest.GetCount) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
@@ -291,19 +292,18 @@ class DataManager: HTTPManager {
             } else {
                 guard let entityUnwraped = entity else { return }
 //                guard let  json = entityUnwraped as? [String: Any] else {
-//                    print("Response is empty \(entityUnwraped)")
+//                    let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+//                    completionHandler(error)
 //                    return
 //                }
-//                 //MARK: Debug part
-//                print("Respons for Update: \(json)")
+                // MARK: Debug part
                 completionHandler(nil)
             }
         }
     }
     func insertEntity<TypeEntity: Serializable>(entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
         guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.InsertData) else {
-            let error = "Cannot prepare header for URLRequest"
-            print(error)
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return }
         let postData = entity.dictionary
@@ -318,16 +318,25 @@ class DataManager: HTTPManager {
                 completionHandler(nil, error)
             } else {
                 guard let entity = entity else { return }
-//                guard let  json = entity as? [String: Any] else {
-//                    let errorMsg = "Response is empty: \(entity)"
-//                    completionHandler(nil, errorMsg)
-//                    return
-//                }
-//                // MARK: Debug part
-//                print(json)
-//                completionHandler(json["id"], nil)
-                print(entity)
-                completionHandler(entity, nil)
+                switch typeEntity {
+                case .Subject:
+                    guard let  json = entity as? [[String: Any]] else {
+                        let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
+                        completionHandler(nil, errorMsg)
+                        return
+                    }
+                    completionHandler(json, nil)
+                default:
+                    guard let  json = entity as? [String: Any] else {
+                        let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
+                        completionHandler(nil, errorMsg)
+                        return
+                        
+                    }
+                    // MARK: Debug part
+                    completionHandler(json["id"], nil)
+
+                }
             }
         }
     }
