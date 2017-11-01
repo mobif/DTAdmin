@@ -10,7 +10,7 @@ import UIKit
 
 class TestsForSubjectTableViewController: UITableViewController {
     
-    var test = [Test]()
+    var test = [TestStructure]()
     var subjectId: String?
 
     override func viewDidLoad() {
@@ -27,40 +27,28 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     func showTests(id: String) {
-        Test.showTests(sufix: id, completion: { (results:[Test]?) in
-            
-            if let data = results {
-                self.test = data
-                for item in self.test {
-                    print("Name " + item.testName)
-                    print("Tasks " + item.tasks)
-                    print("timeForTest" + item.timeForTest)
-                    print("attempts" + item.attempts)
-                    print("enabled" + item.enabled)
-                    print("id " + item.testId)
-                    
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
+        DataManager.shared.getEntityByAnother(byId: id, typeEntity: .Test) { (tests, error) in
+            if error == nil,
+                let tests = tests as? [TestStructure] {
+                self.test = tests
+                self.tableView.reloadData()
+            } else {
+                self.showWarningMsg(error ?? "Incorect type data")
             }
-            
-        })
+        }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return test.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
-        cell.textLabel?.text = test[indexPath.row].testName
+        cell.textLabel?.text = test[indexPath.row].name
         return cell
     }
 
@@ -83,7 +71,7 @@ class TestsForSubjectTableViewController: UITableViewController {
         if let wayToShowTestInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "showTestInfo") as? ShowTestInfoViewController
         {
             wayToShowTestInfo.test = self.test[indexPath.row]
-            print(test[indexPath.row].testId)
+            print(test[indexPath.row].id!)
             self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
         }
     }

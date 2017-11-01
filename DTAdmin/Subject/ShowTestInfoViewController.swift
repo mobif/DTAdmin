@@ -16,11 +16,11 @@ class ShowTestInfoViewController: UIViewController {
     @IBOutlet weak var enabledLabel: UILabel!
     @IBOutlet weak var attemptsLabel: UILabel!
     
-    var test: Test? {
+    var test: TestStructure? {
         didSet {
             guard let test = test else { return }
             self.view.layoutIfNeeded()
-            self.testNameLabel.text = test.testName
+            self.testNameLabel.text = test.name
             self.tasksLabel.text = "Tasks: " + test.tasks
             self.timeForTestLabel.text = "Time for test: " + test.timeForTest
             self.enabledLabel.text = "Enabled: " + test.enabled
@@ -35,32 +35,21 @@ class ShowTestInfoViewController: UIViewController {
     @IBAction func showTestQuestions(_ sender: UIButton) {
         if let wayToShowQuestions = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionTableView") as? QuestionsTableViewController
         {
-            wayToShowQuestions.testId = self.test!.testId
-            print(test!.testId)
+            guard let test = test else { return }
+            guard let testId = test.id else { return }
+            wayToShowQuestions.testId = testId
+            print(testId)
             self.navigationController?.pushViewController(wayToShowQuestions, animated: true)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        self.navigationItem.title = "Detail subject test"
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

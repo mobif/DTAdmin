@@ -10,11 +10,11 @@ import UIKit
 
 class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
 
-    var records = [Subject]()
-    let queryService = QueryService()
-    var filteredData = [Subject]()
+    var records = [SubjectStructure]()
+    var filteredData = [SubjectStructure]()
     var inSearchMode = false
-    var selectedSubject: ((Subject) -> ())?
+    var selectedSubject: ((SubjectStructure) -> ())?
+    var refresher: UIRefreshControl!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -25,19 +25,24 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         searchBar.showsScopeBar = true
         searchBar.scopeButtonTitles = ["Name", "Description"]
         searchBar.selectedScopeButtonIndex = 0
+        refresher = UIRefreshControl()
+        tableView.addSubview(refresher)
+        refresher.attributedTitle = NSAttributedString (string: "Pull to refresh")
+        refresher.tintColor = UIColor(red: 1.0, green: 0.21, blue: 0.55, alpha: 0.5)
+        refresher.addTarget(self, action: #selector(showRecords), for: .valueChanged)
     }
     
    @IBAction func addNewItem(_ sender: UIBarButtonItem) {
-        if let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController
-        {
-            wayToAddNewRecord.saveAction = { item in
-                guard let item = item else { return }
-                self.records.append(item)
-                self.records.sort { return $0.name < $1.name }
-                self.tableView.reloadData()
+    guard let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController else { return }
+    
+        wayToAddNewRecord.resultModification = { (subjectReturn) in
+       
+            self.records.append(subjectReturn)
+            self.records.sort { return $0.name < $1.name }
+            self.tableView.reloadData()
             }
             self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
-        }
+    
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -51,7 +56,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
             case 0:
                 filteredData = records.filter{$0.name.contains(searchBar.text!)}
             case 1:
-                filteredData = records.filter{$0.description.contains(searchBar.text!)}
+                filteredData = records.filter{$0.description!.contains(searchBar.text!)}
             default:
                 print("No match")
             }
@@ -63,21 +68,19 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    private func showRecords() {
-        queryService.getRecords(sufix: "subject/getRecords", completion: { (results: [Subject]?, code: Int, error: String) in
-            if let subjectData = results {
-                self.records = subjectData
+    @objc private func showRecords() {
+        DataManager.shared.getList(byEntity: .Subject) { (subjects, error) in
+            if error == nil,
+                let students = subjects as? [SubjectStructure] {
+                self.records = students
                 self.records.sort { return $0.name < $1.name }
-                DispatchQueue.main.async {
-                    if !error.isEmpty {
-                        self.showMessage(message: error)
-                    }
-                    if code == 200 {
-                        self.tableView.reloadData()
-                    }
-                }
+                self.tableView.reloadData()
+            } else {
+                self.showWarningMsg(error ?? "Incorect type data")
             }
-        })
+            
+        }
+        
     }
     
     private func showMessage(message: String) {
@@ -96,7 +99,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         if inSearchMode {
             cellData = filteredData[indexPath.row]
         }
-        cell.textLabel?.text = cellData.id + " " + cellData.name
+        cell.textLabel?.text = cellData.id! + " " + cellData.name
         cell.detailTextLabel?.text = cellData.description
         return cell
     }
@@ -107,33 +110,24 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            let item = self.records[indexPath.row].id
-            print(item)
-            self.queryService.deleteReguest(sufix: "subject/del/\(item)", completion: { (code: Int, error: (String)?) in
-                print(code)
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.showMessage(message: error)
+            guard let subjectId = self.records[indexPath.row].id else { return }
+            DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .Subject)  { (result, error) in
+                if let error = error {
+                    self.showMessage(message: NSLocalizedString(error, comment: "Message for user") )
+                } else {
+                    self.records.remove(at: indexPath.row)
                     }
-                    if code == 200 {
-                        self.records.remove(at: indexPath.row)
-                        tableView.reloadData()
-                    } else {
-                        self.showMessage(message: NSLocalizedString("Error", comment: "Message for user") )
-                    }
+            self.tableView.reloadData()
                 }
-            })
-        
-        }
+            }
         let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
             if let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController
             {
-                wayToAddNewRecord.subjectId = self.records[indexPath.row].id
+                wayToAddNewRecord.subjectId = self.records[indexPath.row].id!
                 wayToAddNewRecord.updateDates = true
                 wayToAddNewRecord.subject = self.records[indexPath.row]
-                wayToAddNewRecord.saveAction = { item in
-                    guard let item = item else { return }
-                    self.records[indexPath.row] = item
+                wayToAddNewRecord.resultModification = { subjectResult in
+                    self.records[indexPath.row] = subjectResult
                     self.tableView.reloadData()
                 }
                 self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
@@ -142,7 +136,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectedSubject = self.selectedSubject {
             selectedSubject(self.records[indexPath.row])
@@ -155,5 +149,5 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
     }
-    
+
 }

@@ -12,8 +12,7 @@ import UIKit
 
 class QuestionsTableViewController: UITableViewController {
     
-    var questions = [Question]()
-    let queryService = QueryService()
+    var questions = [QuestionStructure]()
     var testId: String?
 
     override func viewDidLoad() {
@@ -21,7 +20,6 @@ class QuestionsTableViewController: UITableViewController {
         self.navigationItem.title = "Questions"
         guard let id = testId else { return }
         print(id)
-        
         showQuestions(id: id)
     }
 
@@ -30,26 +28,15 @@ class QuestionsTableViewController: UITableViewController {
     }
 
     func showQuestions(id: String) {
-        Question.showQuestions(sufix: "getRecordsRangeByTest/" + id + "/100/0", completion: { (results:[Question]?) in
-            
-            if let data = results {
-                self.questions = data
-                for item in self.questions {
-                    print("questionId " + item.questionId)
-                    print("questionText " + item.questionText)
-                    print("testId " + item.testId)
-                    print("level " + item.level)
-                    print("type " + item.type)
-                    print("attachment " + item.attachment)
-
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
+        DataManager.shared.getListRange(forEntity: .Question, entityId: id, quantity: 100, fromNo: 0) {(questions, error) in
+            if error == nil,
+                let questions = questions as? [QuestionStructure] {
+                self.questions = questions
+                self.tableView.reloadData()
+            } else {
+                self.showWarningMsg(error ?? "Incorect type data")
             }
-            
-        })
+        }
     }
     
     private func showMessage(message: String) {
@@ -62,10 +49,11 @@ class QuestionsTableViewController: UITableViewController {
         if let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController
         {
             wayToAddNewQuestion.testId = testId!
-            wayToAddNewQuestion.saveAction = { item in
-                guard let item = item else { return }
-                self.questions.append(item)
+            wayToAddNewQuestion.resultModification = { (questionReturn, isNew) in
+            if isNew {
+                self.questions.append(questionReturn)
                 self.tableView.reloadData()
+            }
             }
             self.navigationController?.pushViewController(wayToAddNewQuestion, animated: true)
         }
@@ -82,44 +70,36 @@ class QuestionsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            let item = self.questions[indexPath.row].questionId
-            print(item)
-            self.queryService.deleteReguest(sufix: "question/del/\(item)", completion: { (code: Int, error: (String)?) in
-                print(code)
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.showMessage(message: error)
+       let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            guard let questionId = self.questions[indexPath.row].id else { return }
+            DataManager.shared.deleteEntity(byId: questionId, typeEntity: .Question)  { (result, error) in
+                if let error = error {
+                    self.showMessage(message: NSLocalizedString(error, comment: "Message for user") )
+                } else {
+                    self.questions.remove(at: indexPath.row)
                     }
-                    if code == 200 {
-                        self.questions.remove(at: indexPath.row)
-                        tableView.reloadData()
-                    } else {
-                        self.showMessage(message: NSLocalizedString("Error", comment: "Message for user") )
-                    }
+            self.tableView.reloadData()
                 }
-            })
-
-        }
+            }
         let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
-            if let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController
-            {
-                wayToAddNewQuestion.questionId = self.questions[indexPath.row].questionId
+            if let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController {
+                guard let questionId = self.questions[indexPath.row].id else { return }
+                wayToAddNewQuestion.questionId = questionId
                 wayToAddNewQuestion.testId = self.questions[indexPath.row].testId
                 wayToAddNewQuestion.updateDates = true
                 wayToAddNewQuestion.question = self.questions[indexPath.row]
-                wayToAddNewQuestion.saveAction = { item in
-                    guard let item = item else { return }
-                    self.questions[indexPath.row] = item
-                    self.tableView.reloadData()
-                }
+//                wayToAddNewQuestion.saveAction = { item in
+//                    guard let item = item else { return }
+//                    self.questions[indexPath.row] = item
+//                    self.tableView.reloadData()
+//                }
                 self.navigationController?.pushViewController(wayToAddNewQuestion, animated: true)
             }
         }
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let wayToShowQuestionInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionInfo") as? QuestionInfoViewController
         {

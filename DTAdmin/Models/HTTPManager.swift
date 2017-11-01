@@ -19,15 +19,17 @@ class HTTPManager {
         case Delete
         case GetOneRecord
         case GetCount
-        case GetRecordsRange
+        case GetRecordsRangeByTest
+        case getTestsBySubject
     }
-    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET"), .GetCount: ("/countRecords", "GET"), .GetRecordsRange: ("/getRecordsRange", "GET") ]
+    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET"), .GetCount: ("/countRecords", "GET"), .GetRecordsRangeByTest: ("/getRecordsRangeByTest/", "GET"), .getTestsBySubject: ("/getTestsBySubject/", "GET") ]
     
     func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "", limit: String = "", offset: String = "") -> URLRequest? {
         guard let URLCreationData = urlPrepare[type] else { return nil }
         let rangeString = (limit != "" || offset != "") ? "/\(limit)/\(offset)" : ""
         let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id + rangeString
         guard let url = URL(string: urlProtocol + urlDomain + commandInUrl) else { return nil }
+        //print(url)
         var request = URLRequest(url: url)
         request.httpMethod = URLCreationData.method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

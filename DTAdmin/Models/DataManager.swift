@@ -32,29 +32,30 @@ class DataManager: HTTPManager {
                     completionHandler(nil, error)
                 }
             }
-            guard let  json = list as? [[String: Any]] else {
-                print("Response is empty")
-                return
+        guard let  json = list as? [[String: Any]] else {
+            print("Response is empty")
+            return
+        }
+        var entytiList = [Any]()
+        switch typeEntity {
+        case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
+        case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
+        case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
+        case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
+        case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
+        case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
+        case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
+        case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
+        case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
+        case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
+        case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
             }
-            var entytiList = [Any]()
-            switch typeEntity {
-            case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
-            case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
-            case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
-            case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
-            case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
-            case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
-            case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
-            case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
-            case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
-            case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
-            case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
-            }
-            DispatchQueue.main.async {
-                completionHandler(entytiList, nil)
+        DispatchQueue.main.async {
+            completionHandler(entytiList, nil)
             }
         }
     }
+    
     private func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
         print(request)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -99,21 +100,21 @@ class DataManager: HTTPManager {
         }.resume()
     }
     
-    func getListRange(forEntity typeEntity: Entities, fromNo index: UInt, quantity:UInt, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
-        getCountItems(forEntity: typeEntity) { (count, error) in
-            if let errorExists = error  {
-                completionHandler(nil, errorExists)
-            }
-            guard let count = count else {
-                completionHandler(nil, "Uncountable list of Entity")
-                return
-            }
-            if index + quantity > count {
-                completionHandler(nil, "Out of Bounds")
-            }
+    func getListRange(forEntity typeEntity: Entities, entityId: String, quantity: UInt, fromNo index: UInt,  completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
+//        getCountItems(forEntity: typeEntity) { (count, error) in
+//            if let errorExists = error  {
+//                completionHandler(nil, errorExists)
+//            }
+//            guard let count = count else {
+//                completionHandler(nil, "Uncountable list of Entity")
+//                return
+//            }
+//            if index + quantity > count {
+//                completionHandler(nil, "Out of Bounds")
+//            }
             let indexString = String(index)
             let quantityString = String(quantity)
-            guard let request = self.getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecordsRange, limit: quantityString, offset: indexString) else {
+            guard let request = self.getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecordsRangeByTest, id: entityId, limit: quantityString, offset: indexString) else {
                 let error = "Cannot prepare header for URLRequest"
                 completionHandler(nil, error)
                 return
@@ -148,7 +149,7 @@ class DataManager: HTTPManager {
                 }
             }
         }
-    }
+    
     
     func getEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetOneRecord, id: byId) else {
@@ -200,6 +201,45 @@ class DataManager: HTTPManager {
         }
     }
     
+    func getEntityByAnother(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.getTestsBySubject, id: byId) else {
+            let error = "Cannot prepare header for URLRequest"
+            DispatchQueue.main.async {
+                completionHandler(nil, error)
+            }
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                StoreHelper.logout()
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [[String: Any]] else {
+                print("Response is empty")
+                return
+            }
+            var entytiList = [Any]()
+            switch typeEntity {
+            case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
+            case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
+            case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
+            case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
+            case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
+            case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
+            case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
+            case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
+            case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
+            case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
+            case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
+            }
+            DispatchQueue.main.async {
+                completionHandler(entytiList, nil)
+            }
+        }
+    }
+    
     func getCountItems(forEntity: Entities, completion: @escaping (_ count: UInt?, _ Error: String?) -> () ) {
         guard let request = getURLReqest(entityStructure: forEntity, type: TypeReqest.GetCount) else {
             let error = "Cannot prepare header for URLRequest"
@@ -243,12 +283,12 @@ class DataManager: HTTPManager {
                 completionHandler(error)
             } else {
                 guard let entityUnwraped = entity else { return }
-                guard let  json = entityUnwraped as? [String: Any] else {
-                    print("Response is empty \(entityUnwraped)")
-                    return
-                }
-                // MARK: Debug part
-                print("Respons for Update: \(json)")
+//                guard let  json = entityUnwraped as? [String: Any] else {
+//                    print("Response is empty \(entityUnwraped)")
+//                    return
+//                }
+//                 //MARK: Debug part
+//                print("Respons for Update: \(json)")
                 completionHandler(nil)
             }
         }
@@ -256,6 +296,7 @@ class DataManager: HTTPManager {
     func insertEntity<TypeEntity: Serializable>(entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
         guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.InsertData) else {
             let error = "Cannot prepare header for URLRequest"
+            print(error)
             completionHandler(nil, error)
             return }
         let postData = entity.dictionary
@@ -270,14 +311,16 @@ class DataManager: HTTPManager {
                 completionHandler(nil, error)
             } else {
                 guard let entity = entity else { return }
-                guard let  json = entity as? [String: Any] else {
-                    let errorMsg = "Response is empty: \(entity)"
-                    completionHandler(nil, errorMsg)
-                    return
-                }
-                // MARK: Debug part
-                print(json)
-                completionHandler(json["id"], nil)
+//                guard let  json = entity as? [String: Any] else {
+//                    let errorMsg = "Response is empty: \(entity)"
+//                    completionHandler(nil, errorMsg)
+//                    return
+//                }
+//                // MARK: Debug part
+//                print(json)
+//                completionHandler(json["id"], nil)
+                print(entity)
+                completionHandler(entity, nil)
             }
         }
     }

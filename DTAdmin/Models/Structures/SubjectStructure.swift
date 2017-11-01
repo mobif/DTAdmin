@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct SubjectStructure: Serializable {
     var id: String?
     var name: String

@@ -23,77 +23,95 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var questionAttachmentImageView: UIImageView!
     
     var typePickerData = ["1", "2", "3"]
-    var levelPickerData = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+    
     var selectedDay: String?
     
     var testId: String = ""
-    var questionId: String = ""
-    var saveAction: ((Question?) -> ())?
+    var questionId: String?
+    var resultModification: ((QuestionStructure, Bool) -> ())?
     var updateDates = false
-    var question: Question? {
+    var question: QuestionStructure? {
         didSet {
             guard let question = question else { return }
             self.view.layoutIfNeeded()
             self.qustionTextField.text = question.questionText
             self.questionLevelTextField.text = question.level
             self.questionTypeTextField.text = question.type
+            if question.attachment.count > 1 {
+                showQuestionAttachment()
+            }
         }
     }
+    var questionForSave: QuestionStructure?
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
-        guard let questionText = qustionTextField.text else { return }
-        guard let questionLevel = questionLevelTextField.text else { return }
-        guard let questionType = questionTypeTextField.text else { return }
-        
-        if !questionText.isEmpty && !questionLevel.isEmpty && !questionType.isEmpty {
-            if !updateDates{
-                Question.postRequests(parameters : ["test_id" : testId, "question_text" : questionText, "level" : questionLevel, "type" : questionType, "attachment" : ""], sufix : "InsertData", completion: { (item: [Question]?, code:Int) in
-                    DispatchQueue.main.async {
-                        if code == 200 {
-                            guard let data = item else {
-                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
-                                return
-                            }
-                            if data.count > 0 {
-                                self.saveAction?(data[0])
-                                self.navigationController?.popViewController(animated: true)
-                                
-                            } else {
-                                self.showMessage(message: NSLocalizedString("Server error.\n Record isn't add!", comment: "Message for user"))
-                            }
-                        } else {
-                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
+       if !updateDates {
+            if prepareForSave(){
+                print(questionForSave)
+                guard let questionForSave = questionForSave else { return }
+                
+                DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .Question) { (id, error) in
+                    if let error = error {
+                        self.showWarningMsg(error)
+                    } else {
+                        guard let id = id else {
+                            self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
+                            return
                         }
-                        
-                    }
-                })
-            } else {
-                Question.postRequests(parameters : ["test_id" : testId, "question_text" : questionText, "level" : questionLevel, "type" : questionType, "attachment" : ""], sufix : "update/\(questionId)", completion: { (item: [Question]?, code:Int) in
-                    DispatchQueue.main.async {
-                        if code == 200 {
-                            guard let data = item else {
-                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
-                                return
-                            }
-                            if data.count > 0 {
-                                self.saveAction?(data[0])
-                                self.navigationController?.popViewController(animated: true)
-                                
-                            } else {
-                                self.showMessage(message: NSLocalizedString("Server error.\n Record isn't add!", comment: "Message for user"))
-                            }
-                        } else {
-                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
+                        let newUserId = String(describing: id)
+                        var newStudent = questionForSave
+                        newStudent.id = newUserId
+                        if let resultModification = self.resultModification {
+                            resultModification(newStudent, true)
                         }
-                        
+                        self.navigationController?.popViewController(animated: true)
                     }
-                })
+                }
             }
         } else {
-            self.showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
-        }    }
+            if prepareForSave(){
+                guard let questionId = questionId else { return }
+                guard let questionForSave = questionForSave else { return }
+                DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .Question) { error in
+                    if let error = error {
+                        self.showWarningMsg(error)
+                    } else {
+                        if let resultModification = self.resultModification {
+                            resultModification(questionForSave, false)
+                        }
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+        }
+        
+    }
     
-  
+    func prepareForSave() -> Bool {
+        guard let questionText = qustionTextField.text,
+            let level = questionLevelTextField.text,
+            let type = questionTypeTextField else { return false }
+        guard let attachment : UIImage = questionAttachmentImageView.image,
+            let attachmentData = UIImagePNGRepresentation(attachment) else { return false }
+        let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
+        if questionText.count > 1 {
+            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
+            print(dictionary)
+            questionForSave = QuestionStructure(dictionary: dictionary)
+            print(questionForSave)
+        } else {
+            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+            return false
+        }
+        return true
+    }
+    
+    func showQuestionAttachment(){
+        guard let photoBase64 = question?.attachment else { return }
+        guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
+        let decodedimage = UIImage(data: dataDecoded)
+        questionAttachmentImageView.image = decodedimage
+    }
     
     @IBAction func openGallery(_ sender: UIButton) {
         let image = UIImagePickerController()
@@ -107,7 +125,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             questionAttachmentImageView.image = image
         } else {
-            //Error message
+            showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -117,14 +135,12 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = updateDates ? "Update question" : "Add new question"
-        questionLevelTextField.delegate = self
         questionTypeTextField.delegate = self
         createDayPicker()
         createToolbar()
         questionAttachmentImageView.layer.cornerRadius = 5
         questionAttachmentImageView.layer.borderWidth = 1
         questionAttachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -138,68 +154,49 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func createDayPicker() {
-        
         let dayPicker = UIPickerView()
-        dayPicker.tag = 0
+        //dayPicker.tag = 0
         dayPicker.delegate = self
-        questionLevelTextField.inputView = dayPicker
         questionTypeTextField.inputView = dayPicker
-
     }
-    
-    
+
     func createToolbar() {
-        
         let toolBar = UIToolbar()
-        toolBar.tag = 1
+        //toolBar.tag = 0
         toolBar.sizeToFit()
-        
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddNewQuestionViewController.dismissKeyboard))
-        
         toolBar.setItems([doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-        
-        questionLevelTextField.inputAccessoryView = toolBar
         questionTypeTextField.inputAccessoryView = toolBar
     }
-    
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
-//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-//        return activeField = textField
-//    }
-    
 }
 
 extension AddNewQuestionViewController: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-    
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        <#code#>
-//    }
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
-    
+
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return typePickerData.count
     }
-    
-    
+
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return typePickerData[row]
     }
-    
-    
+
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        selectedDay = typePickerData[row]
-        questionLevelTextField.text = selectedDay
-        questionTypeTextField.text = selectedDay
+            selectedDay = typePickerData[row]
+            questionTypeTextField.text = selectedDay
     }
-    
+
 }
+
