@@ -1,10 +1,10 @@
 // !$*UTF8*$!
 {
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 48;
-	objects = {
+    archiveVersion = 1;
+    classes = {
+    };
+    objectVersion = 48;
+    objects = {
 
 /* Begin PBXBuildFile section */
 		3F00E8251FA75ADA0055FAB6 /* AddNewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F00E81D1FA75ABE0055FAB6 /* AddNewQuestionViewController.swift */; };
@@ -591,22 +591,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3FDE8F9B1F8D0DF60057BF3C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3FDE8F9C1F8D0DF60057BF3C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3FDE8FA41F8D0DF60057BF3C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
+        3FDE8F9B1F8D0DF60057BF3C /* Main.storyboard */ = {
+            isa = PBXVariantGroup;
+            children = (
+                3FDE8F9C1F8D0DF60057BF3C /* Base */,
+            );
+            name = Main.storyboard;
+            sourceTree = "<group>";
+        };
+        3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */ = {
+            isa = PBXVariantGroup;
+            children = (
+                3FDE8FA41F8D0DF60057BF3C /* Base */,
+            );
+            name = LaunchScreen.storyboard;
+            sourceTree = "<group>";
+        };
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -810,17 +810,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		3FDE8F9E1F8D0DF60057BF3C /* DTAdmin.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3FDE8F9F1F8D0DF60057BF3C /* DTAdmin.xcdatamodel */,
-			);
-			currentVersion = 3FDE8F9F1F8D0DF60057BF3C /* DTAdmin.xcdatamodel */;
-			path = DTAdmin.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
+        3FDE8F9E1F8D0DF60057BF3C /* DTAdmin.xcdatamodeld */ = {
+            isa = XCVersionGroup;
+            children = (
+                3FDE8F9F1F8D0DF60057BF3C /* DTAdmin.xcdatamodel */,
+            );
+            currentVersion = 3FDE8F9F1F8D0DF60057BF3C /* DTAdmin.xcdatamodel */;
+            path = DTAdmin.xcdatamodeld;
+            sourceTree = "<group>";
+            versionGroupType = wrapper.xcdatamodel;
+        };
 /* End XCVersionGroup section */
-	};
-	rootObject = 3FDE8F8C1F8D0DF60057BF3C /* Project object */;
+    };
+    rootObject = 3FDE8F8C1F8D0DF60057BF3C /* Project object */;
 }

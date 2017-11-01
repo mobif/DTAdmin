@@ -2,13 +2,12 @@
 //  StudentViewController.swift
 //  DTAdmin
 //
-//  Created by Володимир on 10/13/17.
+//  Created by Volodymyr on 10/13/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
 import UIKit
-
-class StudentViewController: ParentViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class StudentViewController: ParentViewController, UITableViewDelegate {
     var user: UserStructure?
     var cookie: HTTPCookie?
     var studentList = [StudentStructure]()
@@ -43,7 +42,7 @@ class StudentViewController: ParentViewController, UITableViewDataSource, UITabl
                 self.studentList = students
                 self.studentTable.reloadData()
             } else {
-                self.showWarningMsg(error ?? "Incorect type data")
+                self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
             }
             
         }
@@ -59,6 +58,42 @@ class StudentViewController: ParentViewController, UITableViewDataSource, UITabl
             }
         }
         self.navigationController?.pushViewController(editStudentViewController, animated: true)
+    }
+    
+    func getIndex(byId: String) -> Int? {
+        let index = studentList.index(where: { $0.userId == byId } )
+        return index
+    }
+    
+}
+extension UIViewController {
+    func showWarningMsg(_ textMsg: String) {
+        let alert = UIAlertController(title: "Error!", message: textMsg, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+extension StudentViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        filtered = (searchBar.text!.count > 0)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = searchText.count > 0
+        studentTable.reloadData()
+    }
+}
+extension StudentViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredList.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellWraped = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as? StudentsTableViewCell
+        guard let cell = cellWraped else { return UITableViewCell() }
+        cell.name.text = filteredList[indexPath.row].studentName
+        cell.fName.text = filteredList[indexPath.row].studentFname
+        cell.sName.text = filteredList[indexPath.row].studentSurname
+        return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let studentInstance = filtered ? filteredList[indexPath.row] : studentList[indexPath.row]
@@ -83,30 +118,6 @@ class StudentViewController: ParentViewController, UITableViewDataSource, UITabl
         }
         navigationController?.pushViewController(editStudentViewController, animated: true)
     }
-    func getIndex(byId: String) -> Int? {
-        let index = studentList.index(where: { $0.userId == byId } )
-        return index
-    }
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        filtered = (searchBar.text!.count > 0)
-    }
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = searchText.count > 0
-        studentTable.reloadData()
-    }
-    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredList.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellWraped = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as? StudentsTableViewCell
-        guard let cell = cellWraped else { return UITableViewCell() }
-        cell.name.text = filteredList[indexPath.row].studentName
-        cell.fName.text = filteredList[indexPath.row].studentFname
-        cell.sName.text = filteredList[indexPath.row].studentSurname
-        return cell
-    }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
@@ -128,12 +139,5 @@ class StudentViewController: ParentViewController, UITableViewDataSource, UITabl
             }
         }
         return [delete]
-    }
-}
-extension UIViewController {
-    func showWarningMsg(_ textMsg: String) {
-        let alert = UIAlertController(title: "Error!", message: textMsg, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
 }

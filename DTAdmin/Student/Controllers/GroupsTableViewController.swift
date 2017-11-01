@@ -2,7 +2,7 @@
 //  GroupsTableViewController.swift
 //  DTAdmin
 //
-//  Created by Володимир on 10/16/17.
+//  Created by Volodymyr on 10/16/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
@@ -21,7 +21,7 @@ class GroupsTableViewController: UITableViewController {
                 self.groupList = groups
                 self.groupTable.reloadData()
             } else {
-                self.showWarningMsg(error ?? "Incorect type data")
+                self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
             }
         }
     }

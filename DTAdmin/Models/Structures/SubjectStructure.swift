@@ -2,7 +2,7 @@
 //  SubjectStructure.swift
 //  DTAdmin
 //
-//  Created by Володимир on 10/25/17.
+//  Created by Volodymyr on 10/25/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
