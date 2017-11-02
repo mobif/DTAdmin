@@ -251,7 +251,7 @@ class DataManager: HTTPManager {
                 completionHandler(error)
             } else {
                 guard let entityUnwraped = entity else { return }
-                guard let  json = entityUnwraped as? [String: Any] else {
+                guard let json = entityUnwraped as? [String: Any] else {
                     let error = NSLocalizedString("Response is empty", comment: "No data in server response")
                     completionHandler(error)
                     return
