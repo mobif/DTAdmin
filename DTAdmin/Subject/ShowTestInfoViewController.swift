@@ -33,14 +33,11 @@ class ShowTestInfoViewController: UIViewController {
     }
     
     @IBAction func showTestQuestions(_ sender: UIButton) {
-        if let wayToShowQuestions = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionTableView") as? QuestionsTableViewController
-        {
-            guard let test = test else { return }
-            guard let testId = test.id else { return }
-            wayToShowQuestions.testId = testId
-            print(testId)
-            self.navigationController?.pushViewController(wayToShowQuestions, animated: true)
-        }
+        guard let wayToShowQuestions = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionTableView") as? QuestionsTableViewController else { return }
+        guard let test = test else { return }
+        guard let testId = test.id else { return }
+        wayToShowQuestions.testId = testId
+        self.navigationController?.pushViewController(wayToShowQuestions, animated: true)
     }
     
     override func viewDidLoad() {

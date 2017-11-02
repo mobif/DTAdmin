@@ -10,32 +10,69 @@
 
 import UIKit
 
-class QuestionsTableViewController: UITableViewController {
+class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
     
     var questions = [QuestionStructure]()
     var testId: String?
+    var countOfQuestions: UInt = 100
+    var refresherForQuestion: UIRefreshControl!
+    var filteredData = [QuestionStructure]()
+    var inSearchMode = false
 
+    @IBOutlet weak var searchOfQuestion: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Questions"
-        guard let id = testId else { return }
-        print(id)
-        showQuestions(id: id)
+        refresherForQuestion = UIRefreshControl()
+        tableView.addSubview(refresherForQuestion)
+        refresherForQuestion.attributedTitle = NSAttributedString (string: "Pull to refresh")
+        refresherForQuestion.tintColor = UIColor(red: 1.0, green: 0.21, blue: 0.55, alpha: 0.5)
+        refresherForQuestion.addTarget(self, action: #selector(showQuestions), for: .valueChanged)
+        searchOfQuestion.showsScopeBar = true
+        searchOfQuestion.scopeButtonTitles = ["Question", "Level", "Type"]
+        searchOfQuestion.selectedScopeButtonIndex = 0
+        
+        guard let id = self.testId else { return }
+        showQuestions(id: id, quantity: countOfQuestions)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    func showQuestions(id: String) {
-        DataManager.shared.getListRange(forEntity: .Question, entityId: id, quantity: 100, fromNo: 0) {(questions, error) in
+    @objc func showQuestions(id: String, quantity: UInt) {
+        DataManager.shared.getListRange(forEntity: .Question, entityId: id, quantity: quantity, fromNo: 0) {(questions, error) in
             if error == nil,
                 let questions = questions as? [QuestionStructure] {
                 self.questions = questions
                 self.tableView.reloadData()
+                self.refresherForQuestion.endRefreshing()
             } else {
-                self.showWarningMsg(error ?? "Incorect type data")
+                self.showMessage(message: error ?? "Incorect type data")
             }
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            view.endEditing(true)
+            tableView.reloadData()
+        } else {
+            inSearchMode = true
+            guard let searchText = searchOfQuestion.text else { return }
+            switch searchBar.selectedScopeButtonIndex {
+            case 0:
+                filteredData = questions.filter{$0.questionText.contains(searchText)}
+            case 1:
+                filteredData = questions.filter{$0.type.contains(searchText)}
+            case 2:
+                filteredData = questions.filter{$0.level.contains(searchText)}
+            default:
+                print("No match")
+            }
+            tableView.reloadData()
         }
     }
     
@@ -46,26 +83,27 @@ class QuestionsTableViewController: UITableViewController {
     }
     
     @IBAction func addQuestion(_ sender: UIBarButtonItem) {
-        if let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController
-        {
-            wayToAddNewQuestion.testId = testId!
-            wayToAddNewQuestion.resultModification = { (questionReturn, isNew) in
-            if isNew {
-                self.questions.append(questionReturn)
-                self.tableView.reloadData()
-            }
-            }
-            self.navigationController?.pushViewController(wayToAddNewQuestion, animated: true)
+        guard let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController
+            else { return }
+        wayToAddNewQuestion.testId = testId!
+        wayToAddNewQuestion.resultModification = { questionReturn in
+            self.questions.append(questionReturn)
+            self.tableView.reloadData()
         }
+        self.navigationController?.pushViewController(wayToAddNewQuestion, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questions.count
+        return inSearchMode ? filteredData.count : questions.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) 
-        cell.textLabel?.text = questions[indexPath.row].questionText
+        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
+        var cellData = questions[indexPath.row]
+        if inSearchMode {
+            cellData = filteredData[indexPath.row]
+        }
+        cell.textLabel?.text = cellData.questionText
         return cell
     }
     
@@ -82,31 +120,27 @@ class QuestionsTableViewController: UITableViewController {
                 }
             }
         let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
-            if let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController {
-                guard let questionId = self.questions[indexPath.row].id else { return }
-                wayToAddNewQuestion.questionId = questionId
-                wayToAddNewQuestion.testId = self.questions[indexPath.row].testId
-                wayToAddNewQuestion.updateDates = true
-                wayToAddNewQuestion.question = self.questions[indexPath.row]
-//                wayToAddNewQuestion.saveAction = { item in
-//                    guard let item = item else { return }
-//                    self.questions[indexPath.row] = item
-//                    self.tableView.reloadData()
-//                }
-                self.navigationController?.pushViewController(wayToAddNewQuestion, animated: true)
+            guard let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController else { return }
+            guard let questionId = self.questions[indexPath.row].id else { return }
+            wayToAddNewQuestion.questionId = questionId
+            wayToAddNewQuestion.testId = self.questions[indexPath.row].testId
+            wayToAddNewQuestion.updateDates = true
+            wayToAddNewQuestion.question = self.questions[indexPath.row]
+            wayToAddNewQuestion.resultModification = { questionResult in
+                self.questions[indexPath.row] = questionResult
+                self.tableView.reloadData()
             }
+            self.navigationController?.pushViewController(wayToAddNewQuestion, animated: true)
         }
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let wayToShowQuestionInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionInfo") as? QuestionInfoViewController
-        {
-            wayToShowQuestionInfo.question = self.questions[indexPath.row]
-            self.navigationController?.pushViewController(wayToShowQuestionInfo, animated: true)
-        }
+        guard let wayToShowQuestionInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionInfo") as? QuestionInfoViewController
+            else { return }
+        wayToShowQuestionInfo.question = self.questions[indexPath.row]
+        self.navigationController?.pushViewController(wayToShowQuestionInfo, animated: true)
     }
-    
 
 }

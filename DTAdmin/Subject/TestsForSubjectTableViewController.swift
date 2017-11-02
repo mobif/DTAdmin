@@ -18,7 +18,6 @@ class TestsForSubjectTableViewController: UITableViewController {
         self.navigationItem.title = "Subject tests"
         guard let id = subjectId else { return }
         print(id)
-        
         showTests(id: id)
     }
     
@@ -68,12 +67,9 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let wayToShowTestInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "showTestInfo") as? ShowTestInfoViewController
-        {
-            wayToShowTestInfo.test = self.test[indexPath.row]
-            print(test[indexPath.row].id!)
-            self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
-        }
+        guard let wayToShowTestInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "showTestInfo") as? ShowTestInfoViewController else { return }
+        wayToShowTestInfo.test = self.test[indexPath.row]
+        self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
     }
 
 }

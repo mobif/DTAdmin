@@ -31,34 +31,42 @@ class AddNewRecordViewController: UIViewController {
     
     @IBAction func saveNewRecord(_ sender: UIButton) {
         if !updateDates {
-            if prepareForSave(){
-                guard let subjectForSave = subjectForSave else { return }
-                DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .Subject) { (subjectResult, error) in
-                    if let error = error {
-                        self.showWarningMsg(error)
-                    } else {
-                        guard let result = subjectResult as? [[String : Any]] else { return }
-                        guard let resultFirst = result.first else { return }
-                        guard let subjectResult = SubjectStructure(dictionary: resultFirst) else { return }
-                        if let resultModification = self.resultModification {
-                            resultModification(subjectResult)
-                        }
-                        self.navigationController?.popViewController(animated: true)
+            saveNewSubject()
+            
+        } else {
+            updateSubject()
+        }
+    }
+    
+    func saveNewSubject() {
+        if prepareForSave(){
+            guard let subjectForSave = subjectForSave else { return }
+            DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .Subject) { (subjectResult, error) in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    guard let result = subjectResult as? [[String : Any]] else { return }
+                    guard let resultFirst = result.first else { return }
+                    guard let subjectResult = SubjectStructure(dictionary: resultFirst) else { return }
+                    if let resultModification = self.resultModification {
+                        resultModification(subjectResult)
                     }
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
-        } else {
-            if prepareForSave(){
-                guard let subjectIdUnwrap = subjectId else { return }
-                guard let subjectForSave = subjectForSave else { return }
-                DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .Subject) { error in
-                    if let error = error {
-                        self.showWarningMsg(error)
-                    } else {
-                        //self.subjectForSave?.id = subjectIdUnwrap
-                        if let resultModification = self.resultModification {
-                            resultModification(subjectForSave)
-                        }
+        }
+    }
+    
+    func updateSubject() {
+        if prepareForSave(){
+            guard let subjectIdUnwrap = subjectId else { return }
+            guard let subjectForSave = subjectForSave else { return }
+            DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .Subject) { error in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    if let resultModification = self.resultModification {
+                        resultModification(subjectForSave)
                         self.navigationController?.popViewController(animated: true)
                     }
                 }

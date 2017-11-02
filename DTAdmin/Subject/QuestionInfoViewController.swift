@@ -26,12 +26,23 @@ class QuestionInfoViewController: UIViewController {
             self.view.layoutIfNeeded()
             self.questionLabel.text = question.questionText
             self.questionLevelLabel.text = "Level: " + question.level
-            self.questionTypeLabel.text = "Type" + question.type
+            self.questionTypeLabel.text = "Type: " + question.type
+            if question.attachment.count > 1 {
+                showQuestionAttachment()
+            }
         }
+    }
+    
+    func showQuestionAttachment(){
+        guard let photoBase64 = question?.attachment else { return }
+        guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
+        let decodedimage = UIImage(data: dataDecoded)
+        questionAttachmentImageView.image = decodedimage
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Question Info"
         guard let question = question else { return }
         print(question.questionText)
         print(question.level)
@@ -40,7 +51,6 @@ class QuestionInfoViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

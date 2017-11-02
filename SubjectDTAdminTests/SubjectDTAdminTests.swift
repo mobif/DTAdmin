@@ -2,17 +2,18 @@
 //  SubjectDTAdminTests.swift
 //  SubjectDTAdminTests
 //
-//  Created by ITA student on 10/31/17.
+//  Created by ITA student on 11/1/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
 import XCTest
+
 @testable import DTAdmin
 
 class SubjectDTAdminTests: XCTestCase {
     
     var sessionUnderTest: URLSession!
-    let object = ["username": "admin", "password": "dtapi_admin"]
+    let loginParam = ["username" : "admin", "password" : "dtapi_admin"]
     
     override func setUp() {
         super.setUp()
@@ -24,19 +25,21 @@ class SubjectDTAdminTests: XCTestCase {
         super.tearDown()
     }
     
-    func testValidCallToServerHTTPStatusCode200() {
-        let url = URL(string: "http://vps9615.hyperhost.name/login/index")
+    func testValidCallHTTPStatusCode200() {
+        // given
+        let url = URL(string: "https://vps9615.hyperhost.name/login/index")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: object, options: []) else { return }
-        request.httpBody = httpBody
-
         
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: loginParam, options: []) else { return }
+        request.httpBody = httpBody
+        // 1
         let promise = expectation(description: "Completion handler invoked")
         var statusCode: Int?
         var responseError: Error?
         
+        // when
         let dataTask = sessionUnderTest.dataTask(with: request) { data, response, error in
             statusCode = (response as? HTTPURLResponse)?.statusCode
             responseError = error
@@ -50,30 +53,6 @@ class SubjectDTAdminTests: XCTestCase {
         // then
         XCTAssertNil(responseError)
         XCTAssertEqual(statusCode, 200)
-        
-        
-        let url1 = URL(string: "http://vps9615.hyperhost.name/subject/getRecords")
-        // 1
-        let promise1 = expectation(description: "Status code: 200")
-        
-        // when
-        let dataTask1 = sessionUnderTest.dataTask(with: url1!) { data, response, error in
-            // then
-            if let error = error {
-                XCTFail("Error: \(error.localizedDescription)")
-                return
-            } else if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                if statusCode == 200 {
-                    // 2
-                    promise1.fulfill()
-                } else {
-                    XCTFail("Status code: \(statusCode)")
-                }
-            }
-        }
-        dataTask1.resume()
-        // 3
-        waitForExpectations(timeout: 5, handler: nil)
     }
     
     func testPerformanceExample() {

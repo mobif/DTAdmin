@@ -29,7 +29,6 @@ class HTTPManager {
         let rangeString = (limit != "" || offset != "") ? "/\(limit)/\(offset)" : ""
         let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id + rangeString
         guard let url = URL(string: urlProtocol + urlDomain + commandInUrl) else { return nil }
-        //print(url)
         var request = URLRequest(url: url)
         request.httpMethod = URLCreationData.method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

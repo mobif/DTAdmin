@@ -263,6 +263,7 @@ class DataManager: HTTPManager {
                     return
                 }
                 // MARK: Debug part
+               
                 guard let countString = json["numberOfRecords"] as? String else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
                     completion(nil, errorMsg)
@@ -320,6 +321,13 @@ class DataManager: HTTPManager {
                 guard let entity = entity else { return }
                 switch typeEntity {
                 case .Subject:
+                    guard let  json = entity as? [[String: Any]] else {
+                        let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
+                        completionHandler(nil, errorMsg)
+                        return
+                    }
+                    completionHandler(json, nil)
+                case .Question:
                     guard let  json = entity as? [[String: Any]] else {
                         let errorMsg = NSLocalizedString("Response is empty: \(entity)", comment: "No data in server response")
                         completionHandler(nil, errorMsg)

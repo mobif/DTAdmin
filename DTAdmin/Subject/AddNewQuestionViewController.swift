@@ -12,23 +12,35 @@
 
 import UIKit
 
-class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PickerDelegate  {
 
     @IBOutlet weak var qustionTextField: UITextField!
     
-    @IBOutlet weak var questionLevelTextField: UITextField!
+    @IBOutlet weak var questionLevelTextField: PickedTextField!
     
-    @IBOutlet weak var questionTypeTextField: UITextField!
+    @IBOutlet weak var questionTypeTextField: PickedTextField!
     
     @IBOutlet weak var questionAttachmentImageView: UIImageView!
     
-    //var typePickerData = ["1", "2", "3"]
+    var levels: [Int] {
+        var array = [Int]()
+        for i in 1...30 {
+             array.append(i)
+        }
+        return array
+    }
     
-    var selectedDay: String?
+    var types: [Int] {
+        var array = [Int]()
+        for i in 1...3 {
+            array.append(i)
+        }
+        return array
+    }
     
     var testId: String = ""
     var questionId: String?
-    var resultModification: ((QuestionStructure, Bool) -> ())?
+    var resultModification: ((QuestionStructure) -> ())?
     var updateDates = false
     var question: QuestionStructure? {
         didSet {
@@ -46,78 +58,86 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
        if !updateDates {
-            if prepareForSave(){
-                guard let questionForSave = questionForSave else { return }
-                
-                DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .Question) { (id, error) in
-                    if let error = error {
-                        self.showWarningMsg(error)
-                    } else {
-                        guard let id = id else {
-                            self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
-                            return
-                        }
-                        let newUserId = String(describing: id)
-                        var newStudent = questionForSave
-                        newStudent.id = newUserId
-                        if let resultModification = self.resultModification {
-                            resultModification(newStudent, true)
-                        }
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
-            }
+            saveNewQuestion()
         } else {
-            if prepareForSave(){
-                guard let questionId = questionId else { return }
-                guard let questionForSave = questionForSave else { return }
-                DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .Question) { error in
-                    if let error = error {
-                        self.showWarningMsg(error)
-                    } else {
-                        if let resultModification = self.resultModification {
-                            resultModification(questionForSave, false)
-                        }
-                        self.navigationController?.popViewController(animated: true)
+            updateQuestion()
+        }
+    }
+    
+    func saveNewQuestion() {
+        if prepareForSave(){
+            guard let questionForSave = questionForSave else { return }
+            DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .Question) { (questionResult, error) in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    guard let result = questionResult as? [[String : Any]] else { return }
+                    guard let resultFirst = result.first else { return }
+                    guard let questionResult = QuestionStructure(dictionary: resultFirst) else { return }
+                    if let resultModification = self.resultModification {
+                        resultModification(questionResult)
                     }
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }
-        
+    }
+    
+    func updateQuestion() {
+        if prepareForSave(){
+            guard let questionId = questionId else { return }
+            guard let questionForSave = questionForSave else { return }
+            DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .Question) { error in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    if let resultModification = self.resultModification {
+                        resultModification(questionForSave)
+                    }
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+    }
+    
+    @IBAction func removeImage(_ sender: UIButton) {
+        questionAttachmentImageView.image = nil
     }
     
     func prepareForSave() -> Bool {
-//        guard let questionText = qustionTextField.text,
-//            let level = questionLevelTextField.text,
-//            let type = questionTypeTextField else { return false }
-//        if let attachment : UIImage = questionAttachmentImageView.image {
-//            let attachmentData = UIImagePNGRepresentation(attachment)
-//            let picture = attachmentData?.base64EncodedString(options: .lineLength64Characters)
-//            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": picture]
-//            questionForSave = QuestionStructure(dictionary: dictionary)
-//        } else {
-//            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
-//            questionForSave = QuestionStructure(dictionary: dictionary)
-//            }
-//        return true
         guard let questionText = qustionTextField.text,
-          let level = questionLevelTextField.text,
-        let type = questionTypeTextField.text else { return false }
-        if questionText.count > 2 {
-            let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
-            print(testId)
-            print(questionText)
-            print(level)
-            print(type)
-            questionForSave = QuestionStructure(dictionary: dictionary)
-            print(questionForSave)
+            let level = questionLevelTextField.text,
+            let type = questionTypeTextField.text else { return false }
+        
+        if let attachment : UIImage = questionAttachmentImageView.image, let attachmentData = UIImagePNGRepresentation(attachment) {
+            let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
+            if questionText.count > 2 {
+                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": picture]
+                print(testId)
+                print(questionText)
+                print(level)
+                print(type)
+                questionForSave = QuestionStructure(dictionary: dictionary)
+            } else {
+                showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+                return false
+            }
+            return true
         } else {
-            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
-            return false
+            if questionText.count > 2 {
+                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
+                print(testId)
+                print(questionText)
+                print(level)
+                print(type)
+                questionForSave = QuestionStructure(dictionary: dictionary)
+            } else {
+                showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+                return false
+            }
+            return true
         }
-        return true
     }
-    
     
     func showQuestionAttachment(){
         guard let photoBase64 = question?.attachment else { return }
@@ -148,16 +168,19 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = updateDates ? "Update question" : "Add new question"
-//        questionTypeTextField.delegate = self
-//        createDayPicker()
-//        createToolbar()
+        questionLevelTextField.customDelegate = self
+        questionTypeTextField.customDelegate = self
         questionAttachmentImageView.layer.cornerRadius = 5
         questionAttachmentImageView.layer.borderWidth = 1
         questionAttachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+    
+        self.questionLevelTextField.dropDownData = levels
+        self.questionTypeTextField.tag = 0
+        self.questionTypeTextField.dropDownData = types
+        self.questionTypeTextField.tag = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -170,49 +193,18 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         self.present(alert, animated: true, completion: nil)
     }
     
-//    func createDayPicker() {
-//        let dayPicker = UIPickerView()
-//        dayPicker.delegate = self
-//        questionTypeTextField.inputView = dayPicker
-//    }
-//
-//    func createToolbar() {
-//        let toolBar = UIToolbar()
-//        //toolBar.tag = 0
-//        toolBar.sizeToFit()
-//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AddNewQuestionViewController.dismissKeyboard))
-//        toolBar.setItems([doneButton], animated: false)
-//        toolBar.isUserInteractionEnabled = true
-//        questionTypeTextField.inputAccessoryView = toolBar
-//    }
-//
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-    
-}
+    func pickedValue(value: Any, tag: Int) {
+        if let intValue = value as? Int {
+            switch tag {
+            case 0:
+                self.questionLevelTextField.text = String(intValue)
+            case 1:
+                self.questionTypeTextField.text = String(intValue)
+            default:
+                break
+            }
+        }
+    }
 
-//extension AddNewQuestionViewController: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-//
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return typePickerData.count
-//    }
-//
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return typePickerData[row]
-//    }
-//
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//            selectedDay = typePickerData[row]
-//            questionTypeTextField.text = selectedDay
-//    }
-//
-//}
+}
 
