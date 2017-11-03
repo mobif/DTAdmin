@@ -11,6 +11,9 @@ import UIKit
 class TimeTableListViewController: ParentViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
+    var subjectID: Int?
+    var groupID: Int?
+    
     var timeTableList = [TimeTable]() {
         didSet {
             DispatchQueue.main.async {
@@ -27,13 +30,35 @@ class TimeTableListViewController: ParentViewController, UITableViewDataSource, 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.startActivity()
-        CommonNetworkManager.shared().timeTable { (timeTableList, error) in
-            self.stopActivity()
-            if let error = error {
-                self.showAllert(title: "Error", message: error.localizedDescription, completionHandler: nil)
-            } else {
-                self.timeTableList = timeTableList ?? [TimeTable]()
+        if let subjectID = self.subjectID {
+            self.startActivity()
+            CommonNetworkManager.shared().timeTableSubject(by: subjectID, completion: { (timeTableList, error) in
+                self.stopActivity()
+                if let error = error {
+                    self.showAllert(title: NSLocalizedString("Error", comment: "Alert title"), message: error.localizedDescription, completionHandler: nil)
+                } else {
+                    self.timeTableList = timeTableList ?? [TimeTable]()
+                }
+            })
+        } else if let groupID = self.groupID {
+            self.startActivity()
+            CommonNetworkManager.shared().timeTable(by: groupID, completion: { (timeTableList, error) in
+                self.stopActivity()
+                if let error = error {
+                    self.showAllert(title: NSLocalizedString("Error", comment: "Alert title"), message: error.localizedDescription, completionHandler: nil)
+                } else {
+                    self.timeTableList = timeTableList ?? [TimeTable]()
+                }
+            })
+        } else {
+            self.startActivity()
+            CommonNetworkManager.shared().timeTable { (timeTableList, error) in
+                self.stopActivity()
+                if let error = error {
+                    self.showAllert(title: NSLocalizedString("Error", comment: "Alert title"), message: error.localizedDescription, completionHandler: nil)
+                } else {
+                    self.timeTableList = timeTableList ?? [TimeTable]()
+                }
             }
         }
     }
@@ -46,6 +71,7 @@ class TimeTableListViewController: ParentViewController, UITableViewDataSource, 
     @IBAction func addItemTapped(_ sender: Any) {
         let timeTableStoryboard = UIStoryboard.init(name: "TimeTable", bundle: nil)
         guard let newTimeTableController = timeTableStoryboard.instantiateViewController(withIdentifier: "NewTimeTableViewController") as? NewTimeTableViewController else { return }
+        
         self.navigationController?.pushViewController(newTimeTableController, animated: true)
     }
     
@@ -59,6 +85,10 @@ class TimeTableListViewController: ParentViewController, UITableViewDataSource, 
         let timeTableItem = self.timeTableList[indexPath.row]
         cell.textLabel?.text = "Start date: \(timeTableItem.startDate ?? "") Start time: \(timeTableItem.startTime ?? "")"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
     /*
