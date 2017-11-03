@@ -16,8 +16,8 @@
 		3F67C9091FA9E019002DDA64 /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F67C9001FA9DF85002DDA64 /* Subjects.storyboard */; };
 		3F67C90A1FA9E01D002DDA64 /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C8F91FA9DF85002DDA64 /* SubjectTableViewController.swift */; };
 		3F67C90B1FA9E020002DDA64 /* TestsForSubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C8FA1FA9DF85002DDA64 /* TestsForSubjectTableViewController.swift */; };
-		3F67C90D1FA9E0EA002DDA64 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C90C1FA9E0EA002DDA64 /* Storyboard.swift */; };
 		3F6F72771FAA4DC90012832C /* SubjectDTAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6F72761FAA4DC90012832C /* SubjectDTAdminTests.swift */; };
+		3F7407971FACB31B004A2235 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7407961FACB31B004A2235 /* Storyboard.swift */; };
 		3FA888131F9688A300D602F3 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FA888121F9688A300D602F3 /* Admin.storyboard */; };
 		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
 		3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888151F9688B200D602F3 /* NetworkManager.swift */; };
@@ -87,10 +87,10 @@
 		3F67C8FF1FA9DF85002DDA64 /* ShowTestInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTestInfoViewController.swift; sourceTree = "<group>"; };
 		3F67C9001FA9DF85002DDA64 /* Subjects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
 		3F67C9021FA9DF85002DDA64 /* AddNewQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewQuestionViewController.swift; sourceTree = "<group>"; };
-		3F67C90C1FA9E0EA002DDA64 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Storyboard.swift; path = ../../../Desktop/DTAdmin/Storyboard.swift; sourceTree = "<group>"; };
 		3F6F72741FAA4DC90012832C /* SubjectDTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubjectDTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6F72761FAA4DC90012832C /* SubjectDTAdminTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDTAdminTests.swift; sourceTree = "<group>"; };
 		3F6F72781FAA4DC90012832C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F7407961FACB31B004A2235 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Storyboard.swift; path = DTAdmin/Storyboard.swift; sourceTree = SOURCE_ROOT; };
 		3FA888121F9688A300D602F3 /* Admin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888151F9688B200D602F3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				890376031F9DE0FB002A99A8 /* Date.swift */,
-				3F67C90C1FA9E0EA002DDA64 /* Storyboard.swift */,
+				3F7407961FACB31B004A2235 /* Storyboard.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -565,7 +565,7 @@
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3F67C9041FA9DFF2002DDA64 /* AddNewRecordViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
-				3F67C90D1FA9E0EA002DDA64 /* Storyboard.swift in Sources */,
+				3F7407971FACB31B004A2235 /* Storyboard.swift in Sources */,
 				C7535CF21FA2670100B6CBD1 /* QuestionStructure.swift in Sources */,
 				3F67C9051FA9DFF5002DDA64 /* DetailSubjectViewController.swift in Sources */,
 				C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */,
