@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -97,10 +97,8 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="MHF-1Q-PdI" kind="show" identifier="toLogin" animates="NO" id="wGF-Ho-n7W">
-                            <nil key="action"/>
-                        </segue>
-                        <segue destination="4Si-nx-HyY" kind="relationship" relationship="rootViewController" id="BcL-9E-yKD"/>
+                        <segue destination="MHF-1Q-PdI" kind="relationship" relationship="rootViewController" id="jbi-4y-Ysu"/>
+                        <segue destination="4Si-nx-HyY" kind="show" identifier="toMain" animates="NO" id="8da-JC-NNc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdV-FZ-Jtz" userLabel="First Responder" sceneMemberID="firstResponder"/>

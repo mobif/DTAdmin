@@ -8,92 +8,135 @@
 
 import UIKit
 
-class AdminViewController: UIViewController {
+class AdminViewController: ParentViewController {
   
+  @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var adminsListTableView: UITableView!
+
+  var isSearchStart = false
   
-  var adminsList: [UserModel.Admins]?
+  var admins: [UserStructure]?
+  
+  var filteredList: [UserStructure]? {
+    if isSearchStart {
+      guard let searchSample = searchBar.text else { return self.admins }
+      return self.admins?.filter({
+        $0.userName.contains(searchSample) || $0.email.contains(searchSample)
+      })
+    } else {
+      self.admins = self.admins?.sorted(by: { $0.userName < $1.userName})
+      return self.admins
+    }
+  }
+  
+  lazy var refreshControl: UIRefreshControl = UIRefreshControl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
+    setUpView()
+    updateTable()
+    refreshControl.addTarget(self, action: #selector(updateTable), for: .valueChanged)
+    adminsListTableView.refreshControl = refreshControl
+
+//    MARK: Debug helper for login test
+//    StoreHelper.logout()
+  }
+  
+  private func setUpView() {
     self.title = NSLocalizedString("Administrators", comment: "Title for admins table list view")
-
-    let addNewAdminButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
-    let serverSyncDataButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.syncDataWithServer))
-    self.navigationItem.rightBarButtonItems = [addNewAdminButton, serverSyncDataButton]
     
-//    MARK: DEBUG - Using for first login into system
-//    _ = NetworkManager().logIn(username: "admin", password: "dtapi_admin") { (admin, cookie) in
-//        print(admin, cookie)
-//        }
-//    MARK: DEBUG - Using to create new user, to proceed should be loginned before
-//    _ = NetworkManager().createAdmin(username: "veselun", password: "1qaz2wsx", email: "veselun@tuhes.if.com")
-
-//    MARK: DEBUG - Using for geting list of admin, to proceed should be loginned before
-//    NetworkManager().getAdmins { (admins) in
-//      print(UserDefaults.standard.getCookie())
-//      print(admins)
-//      self.adminsList = admins
-//      self.adminsListTBV.reloadData()
-//    }
-//    MARK: DEBUG - Using after first login into system, to proceed should be loginned before
-//    _ = NetworkManager().logOut()
-
+    let addNewAdminButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.showAdminCreateUpdateViewController))
+    self.navigationItem.rightBarButtonItems = [addNewAdminButton]
+  }
+  
+  @objc private func updateTable() {
+    startActivity()
+    DataManager.shared.getList(byEntity: .User) { (admins, error) in
+      self.stopActivity()
+      guard let admins = admins as? [UserStructure] else {
+        self.refreshControl.endRefreshing()
+        self.showWarningMsg(error ?? "Incorect data")
+        return
+      }
+      self.admins = admins
+      self.adminsListTableView.reloadData()
+    }
+    self.refreshControl.endRefreshing()
   }
   
   @objc func showAdminCreateUpdateViewController() {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
+    adminCreateUpdateViewController.saveAction = { admin in
+        if let admin = admin {
+          self.admins?.append(admin)
+          self.adminsListTableView.reloadData()
+        }
+      }
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
   }
-  @objc func syncDataWithServer() {
-//    print("Cookie",UserDefaults.standard.getCookie())
-    NetworkManager().getAdmins { (admins) in
-      self.adminsList = admins
-      self.adminsListTableView.reloadData()
-    }
-  }
-}
-
-private func setUpNavigationBar() {
 }
 
 extension AdminViewController: UITableViewDelegate {
-  
 }
 
 extension AdminViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return adminsList != nil ? adminsList!.count : 0
+    return filteredList != nil ? filteredList!.count : 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //TODO: make cell more informative, need to customize
     let cell = tableView.dequeueReusableCell(withIdentifier: "reusableAdminCell")!
-    cell.textLabel?.text = adminsList?[indexPath.row].username
+    cell.textLabel?.text = filteredList?[indexPath.row].userName
     return cell
   }
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let adminCreateUpdateViewController = UIStoryboard(name: "Admin", bundle: nil).instantiateViewController(withIdentifier: "AdminCreateUpdateViewController") as? AdminCreateUpdateViewController else  { return }
     adminCreateUpdateViewController.title = NSLocalizedString("Edit", comment: "Title for edit admin creation view")
-    adminCreateUpdateViewController.adminInstance = adminsList?[indexPath.row]
+    adminCreateUpdateViewController.admin = filteredList?[indexPath.row]
+    adminCreateUpdateViewController.saveAction = { admin in
+      if let admin = admin {
+        self.admins?[indexPath.row] = admin
+        self.adminsListTableView.reloadData()
+      }
+    }
     self.navigationController?.pushViewController(adminCreateUpdateViewController, animated: true)
-    
   }
+  
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       
-      guard let admin = self.adminsList?[indexPath.row] else { return }
-      NetworkManager().deleteAdmin(id: admin.id, completionHandler: { (isComplete) in
-        if isComplete {
-          print("Is deleted: ", isComplete)
-          self.adminsList?.remove(at: indexPath.row)
-          self.adminsListTableView.reloadData()
+      guard let admin = self.admins?[indexPath.row] else { return }
+      DataManager.shared.deleteEntity(byId: admin.id, typeEntity: .User, completionHandler: { (status, error) in
+        guard let error = error else {
+          self.adminsListTableView.beginUpdates()
+          self.admins?.remove(at: indexPath.row)
+          self.adminsListTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+          self.adminsListTableView.endUpdates()
+          return
         }
+        self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed admin delete"))
       })
     }
+    
     deleteOpt.backgroundColor = UIColor.red
     return [deleteOpt]
   }
+  
+}
+
+extension AdminViewController: UISearchBarDelegate {
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    guard let searchText = searchBar.text else { return }
+    isSearchStart = !searchText.isEmpty
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    isSearchStart = !searchText.isEmpty
+    adminsListTableView.reloadData()
+  }
+  
 }

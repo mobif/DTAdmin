@@ -21,7 +21,7 @@ class DataManager: HTTPManager {
      - error : Optional string in case of error while receiving data
      */
     func getList(byEntity typeEntity: Entities, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
-        if typeEntity == .Student || typeEntity == .Question || typeEntity == .Answer || typeEntity == .User {
+      if typeEntity == .Student || typeEntity == .Question || typeEntity == .Answer {
             completionHandler(nil, NSLocalizedString("Request not supported.", comment: "Request not supported for entity."))
         }
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords) else {
@@ -48,6 +48,7 @@ class DataManager: HTTPManager {
             case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
             case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
             case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
+            case .User: entytiList = json.flatMap { UserStructure(dictionary: $0)}
             default:
                 DispatchQueue.main.async {
                     completionHandler(nil, NSLocalizedString("Request not supported.", comment: "Request not supported for entity."))
