@@ -46,7 +46,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
                 getUserFromAPI(byId: userId)
             }
             saveButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(self.postUpdateStudentToAPI))
-            if studentLoaded.photo.count > 1 {
+            if studentLoaded.photo != nil {
                 showStudentPhoto()
             }
             isNewStudent = false

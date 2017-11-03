@@ -20,13 +20,15 @@ class HTTPManager {
         case GetOneRecord
         case GetCount
         case GetRecordsRange
+        case GetStudentsByGroup
     }
-    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET"), .GetCount: ("/countRecords", "GET"), .GetRecordsRange: ("/getRecordsRange", "GET") ]
+    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET"), .GetCount: ("/countRecords", "GET"), .GetRecordsRange: ("/getRecordsRange", "GET"), .GetStudentsByGroup: ("/getStudentsByGroup/", "GET") ]
     
-    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "", limit: String = "", offset: String = "") -> URLRequest? {
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "", limit: String = "", offset: String = "", withoutImages: Bool = false) -> URLRequest? {
         guard let URLCreationData = urlPrepare[type] else { return nil }
-        let rangeString = (limit != "" || offset != "") ? "/\(limit)/\(offset)" : ""
-        let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id + rangeString
+        let withImages = withoutImages ? "/without_images" : ""
+        let rangeString = (limit != "" && offset != "") ? "/\(limit)/\(offset)" : ""
+        let commandInUrl = "/" + entityStructure.rawValue + URLCreationData.command + id + rangeString + withImages
         guard let url = URL(string: urlProtocol + urlDomain + commandInUrl) else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = URLCreationData.method
