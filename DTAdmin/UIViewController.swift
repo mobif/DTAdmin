@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController {
     func showLoginScreen() {
+        StoreHelper.logout()
         if let rootNavController = self.navigationController?.navigationController as? RootNavController {
             rootNavController.popToRootViewController(animated: true)
         } else if let rootNavController = self.navigationController as? RootNavController {
