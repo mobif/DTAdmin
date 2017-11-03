@@ -28,7 +28,7 @@
         <!--Time Table List View Controller-->
         <scene sceneID="nS6-Hq-fkY">
             <objects>
-                <viewController id="tSz-ct-EVz" customClass="TimeTableListViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimeTableListViewController" id="tSz-ct-EVz" customClass="TimeTableListViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VK1-dc-nan">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
