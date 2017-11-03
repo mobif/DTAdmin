@@ -32,17 +32,31 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
         searchOfQuestion.showsScopeBar = true
         searchOfQuestion.scopeButtonTitles = ["Question", "Level", "Type"]
         searchOfQuestion.selectedScopeButtonIndex = 0
-        
-        guard let id = self.testId else { return }
-        showQuestions(id: id, quantity: countOfQuestions)
+        getCountOfQuestion()
+//        guard let id = self.testId else { return }
+//        showQuestions(id: id, quantity: countOfQuestions)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
+    func getCountOfQuestion() {
+        DataManager.shared.getCountItems(forEntity: .Question) { count, error in
+            if let error = error {
+                self.showMessage(message: error)
+            } else {
+                if let countOfQuestions = count {
+                    print(countOfQuestions)
+                    guard let id = self.testId else { return }
+                    self.showQuestions(id: id, quantity: countOfQuestions)
+                }
+            }
+        }
+    }
+    
     @objc func showQuestions(id: String, quantity: UInt) {
-        DataManager.shared.getListRange(forEntity: .Question, entityId: id, quantity: quantity, fromNo: 0) {(questions, error) in
+        DataManager.shared.getListOfQuestions(forEntity: .Question, entityId: id, quantity: quantity, fromNo: 0) {(questions, error) in
             if error == nil,
                 let questions = questions as? [QuestionStructure] {
                 self.questions = questions
