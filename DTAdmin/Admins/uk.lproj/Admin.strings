@@ -1,12 +1,12 @@
 
 /* Class = "UITextField"; placeholder = "New Password"; ObjectID = "1Ib-GJ-ch4"; */
-"1Ib-GJ-ch4.placeholder" = "Новий пароль";
+"1Ib-GJ-ch4.placeholder" = "Введіть новий пароль";
 
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2Xj-jg-agf"; */
-"2Xj-jg-agf.placeholder" = "Логін";
+"2Xj-jg-agf.placeholder" = "Введіть логін";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "7Jj-ZF-sp5"; */
-"7Jj-ZF-sp5.title" = "Item";
+"7Jj-ZF-sp5.title" = "Адміністратори";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "Yjf-0g-9Zt"; */
 "Yjf-0g-9Zt.text" = "Title";
@@ -21,10 +21,10 @@
 "cgr-r7-DQU.placeholder" = "Пошук за логіном або поштою";
 
 /* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "cxR-vT-iWK"; */
-"cxR-vT-iWK.placeholder" = "Підтвердження паролю";
+"cxR-vT-iWK.placeholder" = "Введіть підтвердження паролю";
 
 /* Class = "UITextField"; placeholder = "Email: user@mail.com"; ObjectID = "ewp-WJ-th7"; */
-"ewp-WJ-th7.placeholder" = "Введіть електронну пошта";
+"ewp-WJ-th7.placeholder" = "Введіть електронну пошту";
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "gGj-sB-Kro"; */
 "gGj-sB-Kro.text" = "Пароль";

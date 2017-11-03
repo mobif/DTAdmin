@@ -39,8 +39,8 @@ class AdminViewController: ParentViewController {
     refreshControl.addTarget(self, action: #selector(updateTable), for: .valueChanged)
     adminsListTableView.refreshControl = refreshControl
 
-    //    MARK: Debug helper for login test
-    StoreHelper.logout()
+//    MARK: Debug helper for login test
+//    StoreHelper.logout()
   }
   
   private func setUpView() {
