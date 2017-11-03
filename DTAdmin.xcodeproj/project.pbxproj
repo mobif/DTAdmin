@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F4B4C091FACA26C00B69F9F /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B4C081FACA26C00B69F9F /* Storyboard.swift */; };
 		3F67C9031FA9DFEF002DDA64 /* AddNewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C9021FA9DF85002DDA64 /* AddNewQuestionViewController.swift */; };
 		3F67C9041FA9DFF2002DDA64 /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C8FD1FA9DF85002DDA64 /* AddNewRecordViewController.swift */; };
 		3F67C9051FA9DFF5002DDA64 /* DetailSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C8FE1FA9DF85002DDA64 /* DetailSubjectViewController.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F4B4C081FACA26C00B69F9F /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		3F67C8F71FA9DF85002DDA64 /* QuestionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionInfoViewController.swift; sourceTree = "<group>"; };
 		3F67C8F81FA9DF85002DDA64 /* QuestionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsTableViewController.swift; sourceTree = "<group>"; };
 		3F67C8F91FA9DF85002DDA64 /* SubjectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				897D0E391F9B733400825E62 /* StoreHelper.swift */,
+				3F4B4C081FACA26C00B69F9F /* Storyboard.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
 				89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */,
 				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
+				3F4B4C091FACA26C00B69F9F /* Storyboard.swift in Sources */,
 				3F67C90A1FA9E01D002DDA64 /* SubjectTableViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
