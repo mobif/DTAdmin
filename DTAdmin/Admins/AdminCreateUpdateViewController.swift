@@ -54,9 +54,14 @@ class AdminCreateUpdateViewController: UIViewController {
     self.showWarningMsg("Username field is empty")
     return nil
   }
-  
+/**
+   This function validate passed password due suggested pattern written with RehEx
+   - Precondition: Password have to be 8-15 symbols length, contains charecters a-z, A-Z, 0-9 and some special symbols such as @,*,#,$.
+   - Postcondition: In case if checking is success then would be printed result into console, otherwise shows warning.
+   - Returns: If result of checking is success returns True, and False if not.
+ */
   func checkPaswords() -> Bool {
-    let passwordRegEx = "^([a-zA-Z0-9@*#]{8,15})$"
+    let passwordRegEx = "^([a-zA-Z0-9@*#$]{8,15})$"
     let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
     if actualPaswordTextField.text == confirmTextField.text,
       passwordTest.evaluate(with: actualPaswordTextField.text!) {
@@ -67,7 +72,12 @@ class AdminCreateUpdateViewController: UIViewController {
     }
     return false
   }
-  
+/**
+   This function checks all data from fields for creation of instance new student.
+   - Precondition: Each field must have its properly value. Group and photo has to be selected also.
+   - Postcondition: In case if checking is success then would be prepared the instance for transfer to API, otherwise shows warning.
+   - Returns: If result of checking is success returns True, and False if not.
+ */
   func checkEmail() -> Bool {
     let emailRegEx = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
