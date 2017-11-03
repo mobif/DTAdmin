@@ -81,23 +81,14 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    private func showMessage(message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return inSearchMode ? filteredData.count : records.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var cellData = records[indexPath.row]
-        if inSearchMode {
-            cellData = filteredData[indexPath.row]
-        }
-        cell.textLabel?.text = cellData.name
+        let cellData = inSearchMode ? filteredData[indexPath.row] : records[indexPath.row]
+        cell.textLabel?.text = "\(indexPath.row + 1). " + cellData.name
         cell.detailTextLabel?.text = cellData.description
         return cell
     }
@@ -146,4 +137,12 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
 
+}
+
+extension UITableViewController {
+    func showMessage(message: String) {
+        let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

@@ -28,20 +28,18 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.addSubview(refresherForQuestion)
         refresherForQuestion.attributedTitle = NSAttributedString (string: "Pull to refresh")
         refresherForQuestion.tintColor = UIColor(red: 1.0, green: 0.21, blue: 0.55, alpha: 0.5)
-        refresherForQuestion.addTarget(self, action: #selector(showQuestions), for: .valueChanged)
+        refresherForQuestion.addTarget(self, action: #selector(getCountOfQuestion), for: .valueChanged)
         searchOfQuestion.showsScopeBar = true
         searchOfQuestion.scopeButtonTitles = ["Question", "Level", "Type"]
         searchOfQuestion.selectedScopeButtonIndex = 0
         getCountOfQuestion()
-//        guard let id = self.testId else { return }
-//        showQuestions(id: id, quantity: countOfQuestions)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    func getCountOfQuestion() {
+    @objc func getCountOfQuestion() {
         DataManager.shared.getCountItems(forEntity: .Question) { count, error in
             if let error = error {
                 self.showMessage(message: error)
@@ -53,15 +51,15 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
                 }
             }
         }
+        self.refresherForQuestion.endRefreshing()
     }
     
-    @objc func showQuestions(id: String, quantity: UInt) {
+    func showQuestions(id: String, quantity: UInt) {
         DataManager.shared.getListOfQuestions(forEntity: .Question, entityId: id, quantity: quantity, fromNo: 0) {(questions, error) in
             if error == nil,
                 let questions = questions as? [QuestionStructure] {
                 self.questions = questions
                 self.tableView.reloadData()
-                self.refresherForQuestion.endRefreshing()
             } else {
                 self.showMessage(message: error ?? "Incorect type data")
             }
@@ -90,12 +88,6 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    private func showMessage(message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     @IBAction func addQuestion(_ sender: UIBarButtonItem) {
         guard let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController
             else { return }
@@ -113,11 +105,8 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
-        var cellData = questions[indexPath.row]
-        if inSearchMode {
-            cellData = filteredData[indexPath.row]
-        }
-        cell.textLabel?.text = cellData.questionText
+        let cellData = inSearchMode ? filteredData[indexPath.row] : questions[indexPath.row]
+        cell.textLabel?.text = "\(indexPath.row + 1). " + cellData.questionText
         return cell
     }
     

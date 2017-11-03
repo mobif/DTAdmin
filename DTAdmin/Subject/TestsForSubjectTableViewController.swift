@@ -32,7 +32,7 @@ class TestsForSubjectTableViewController: UITableViewController {
                 self.test = tests
                 self.tableView.reloadData()
             } else {
-                self.showWarningMsg(error ?? "Incorect type data")
+                self.showMessage(message: error ?? "Incorect type data")
             }
         }
     }
@@ -47,7 +47,7 @@ class TestsForSubjectTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
-        cell.textLabel?.text = test[indexPath.row].name
+        cell.textLabel?.text = "\(indexPath.row + 1). " + test[indexPath.row].name
         return cell
     }
 
