@@ -101,7 +101,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     }
     
     @IBAction func removeImage(_ sender: UIButton) {
-        questionAttachmentImageView.image = nil
+        questionAttachmentImageView.image = UIImage(named: "if_picture_1814111")
     }
     
     func prepareForSave() -> Bool {
