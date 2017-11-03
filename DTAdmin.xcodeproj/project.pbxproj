@@ -34,6 +34,7 @@
 		897D0E371F9B6DA700825E62 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E361F9B6DA700825E62 /* User.swift */; };
 		897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E391F9B733400825E62 /* StoreHelper.swift */; };
 		897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E3E1F9B77A000825E62 /* ParentViewController.swift */; };
+		899DBC4C1FAC7DF000139DA9 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */; };
 		89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E001F9CD6A60019FE77 /* TimeTable.swift */; };
 		89C96E031F9CFD1F0019FE77 /* TimeTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89C96E021F9CFD1F0019FE77 /* TimeTable.storyboard */; };
 		89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E041F9CFD6E0019FE77 /* TimeTableListViewController.swift */; };
@@ -94,6 +95,7 @@
 		897D0E361F9B6DA700825E62 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		897D0E391F9B733400825E62 /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
 		897D0E3E1F9B77A000825E62 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
+		899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		89C96E001F9CD6A60019FE77 /* TimeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
 		89C96E021F9CFD1F0019FE77 /* TimeTable.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimeTable.storyboard; sourceTree = "<group>"; };
 		89C96E041F9CFD6E0019FE77 /* TimeTableListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableListViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			children = (
 				894AA5C91FA9E40E00B7669D /* Storyboard.swift */,
 				890376031F9DE0FB002A99A8 /* Date.swift */,
+				899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
 				C7535CED1FA2670100B6CBD1 /* HTTPStatusCodes.swift in Sources */,
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
+				899DBC4C1FAC7DF000139DA9 /* UIViewController.swift in Sources */,
 				3F2BF5A21F9F7A5900B2FA7E /* DetailSubjectViewController.swift in Sources */,
 				3FA888191F9688B200D602F3 /* NetworkManager.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
