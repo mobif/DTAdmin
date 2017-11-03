@@ -23,7 +23,7 @@ class SpecialityCreateUpdateViewController: UIViewController {
             self.view.layoutIfNeeded()
             specialityNameTextField.text = specialityInstance?.name
             specialityCodeTextField.text = specialityInstance?.code
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 if self.canEdit {
                     self.title = "Editing"
                     self.createButton.titleLabel?.text = "Save"
@@ -32,7 +32,7 @@ class SpecialityCreateUpdateViewController: UIViewController {
                 } else {
                     self.title = "New speciality"
                 }
-            }
+//            }
         }
     }
     
