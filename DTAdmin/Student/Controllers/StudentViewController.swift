@@ -8,8 +8,7 @@
 
 import UIKit
 class StudentViewController: ParentViewController, UITableViewDelegate {
-    var user: UserStructure?
-    var cookie: HTTPCookie?
+    var selectedGroup: GroupStructure?
     var studentList = [StudentStructure]()
     var filtered = false
     var filteredList: [StudentStructure] {
@@ -35,21 +34,49 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
     }
     @objc func updateTable(){
         startActivity()
-        DataManager.shared.getList(byEntity: .Student) { (students, error) in
-            self.stopActivity()
-            if error == nil,
-                let students = students as? [StudentStructure] {
-                self.studentList = students
-                self.studentTable.reloadData()
-            } else {
-                self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
+        if let group = selectedGroup {
+            guard let groupId = group.groupId else {
+                showWarningMsg(NSLocalizedString("Undefined group", comment: "Selected group havent ID"))
+                return
             }
-            
+            DataManager.shared.getStudents(forGroup: groupId, withoutImages: true)  { (students, error) in
+                self.stopActivity()
+                if error == nil,
+                    let students = students {
+                    self.studentList = students
+                    self.studentTable.reloadData()
+                } else {
+                    guard let error = error else {
+                        self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
+                        return }
+                    self.showWarningMsg(error)
+                    if error.contains("Error response: 403") {
+                        StoreHelper.logout()
+                    }
+                }
+            }
+        } else {
+            DataManager.shared.getListRange(forEntity: .Student, fromNo: 0, quantity: 0) { (students, error) in
+                self.stopActivity()
+                if error == nil,
+                    let students = students as? [StudentStructure] {
+                    self.studentList = students
+                    self.studentTable.reloadData()
+                } else {
+                    guard let error = error else {
+                        self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
+                        return }
+                    self.showWarningMsg(error)
+                    if error.contains("Error response: 403") {
+                        StoreHelper.logout()
+                    }
+                }
+            }
         }
         self.refreshControl.endRefreshing()
     }
     @objc func addNewStudent(){
-        guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
+        guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else { return }
         editStudentViewController.titleViewController = NSLocalizedString("New Student", comment: "Create new Student")
         editStudentViewController.resultModification = { (studentReturn, isNew) in
             if isNew {
