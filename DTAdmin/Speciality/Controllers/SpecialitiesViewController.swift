@@ -9,11 +9,13 @@
 
 import UIKit
 
-class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
   
     var specialitiesArray = [SpecialityStructure]()
+    var filteredSpecialitiesArray = [SpecialityStructure]()
     lazy var refresh: UIRefreshControl = UIRefreshControl()
     @IBOutlet weak var specialitiesTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         specialitiesTableView.refreshControl = refresh
         refreshData()
+        setUpSerchBar()
     }
     
     
@@ -31,6 +34,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             if error == nil,
                 let specialityies = speciality as? [SpecialityStructure] {
                 self.specialitiesArray = specialityies
+                self.filteredSpecialitiesArray = self.specialitiesArray
                 self.specialitiesTableView.reloadData()
             } else {
                 self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
@@ -40,16 +44,33 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         self.refresh.endRefreshing()
     }
 
+    /* - - - search - - - */
+    private func setUpSerchBar(){
+        searchBar.delegate = self
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            filteredSpecialitiesArray = specialitiesArray
+            specialitiesTableView.reloadData()
+            return
+        }
+        filteredSpecialitiesArray = specialitiesArray.filter({ $0.name.lowercased().contains(searchText.lowercased())
+        })
+        specialitiesTableView.reloadData()
+    }
+    
+    /* - - - tableView - - - */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return specialitiesArray.count
+        return filteredSpecialitiesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "specialityCell", for: indexPath) as? SpecialityTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
-        cell.specialityIdLabel.text = specialitiesArray[indexPath.row].id
-        cell.specialityCodeLabel.text = specialitiesArray[indexPath.row].code
-        cell.specialityNameLabel.text = specialitiesArray[indexPath.row].name
+        cell.specialityIdLabel.text = filteredSpecialitiesArray[indexPath.row].id
+        cell.specialityCodeLabel.text = filteredSpecialitiesArray[indexPath.row].code
+        cell.specialityNameLabel.text = filteredSpecialitiesArray[indexPath.row].name
         return cell
     }
     
