@@ -247,12 +247,28 @@
 		4C364C511FAB117A00CDC1B0 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				4C364C541FAB126100CDC1B0 /* Test.storyboard */,
-				4C364C521FAB123600CDC1B0 /* TestsViewController.swift */,
-				4C364C561FAB13A900CDC1B0 /* NewTestViewController.swift */,
-				4C364C581FAB164400CDC1B0 /* TestCell.swift */,
+				4C5494831FAB5215005FDCBC /* Controllers */,
+				4C5494821FAB5205005FDCBC /* Views */,
 			);
 			path = Test;
+			sourceTree = "<group>";
+		};
+		4C5494821FAB5205005FDCBC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4C364C541FAB126100CDC1B0 /* Test.storyboard */,
+				4C364C561FAB13A900CDC1B0 /* NewTestViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4C5494831FAB5215005FDCBC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C364C521FAB123600CDC1B0 /* TestsViewController.swift */,
+				4C364C581FAB164400CDC1B0 /* TestCell.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		890376021F9DE0EC002A99A8 /* Extensions */ = {
