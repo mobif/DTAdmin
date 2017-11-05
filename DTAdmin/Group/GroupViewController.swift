@@ -8,55 +8,74 @@
 
 import UIKit
 
-class GroupViewController: UIViewController {
+class GroupViewController: ParentViewController {
     
     @IBOutlet weak var groupTableView: UITableView!
     
     @IBAction func createNewGroup(_ sender: Any) {
         guard let createUpdateGroupViewController = getCreateUpdateGroupViewController() else { return }
         createUpdateGroupViewController.saveAction = { newGroup in
-//            self.commonDataForGroups.append(newGroup)
             self.groups.append(newGroup)
         }
         navigationController?.pushViewController(createUpdateGroupViewController, animated: true)
     }
     
-//    var commonDataForGroups = [Group]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.groupTableView.reloadData()
-//            }
-//        }
-//    }
-    
     var isSelectAction: Bool?
-    var selectGroup: ((Group) -> ())?
-    var groups = [Group]() {
+    var refreshControl: UIRefreshControl?
+    /**
+     This clousure perfoms by transmitting the object to be selected by the user to other controllers
+     */
+    var selectGroup: ((GroupStructure) -> ())?
+    var groups = [GroupStructure]() {
         didSet {
             DispatchQueue.main.async {
-                self.self.groupTableView.reloadData()
+                self.groupTableView.reloadData()
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Groups"
+        self.title = NSLocalizedString("Groups", comment: "Title for Groups table view")
         groupTableView.delegate = self
         groupTableView.dataSource = self
-//        getCommonArrayForGroups(){(result:[Group]) in
-//            self.commonDataForGroups = result
-//        }
-        HTTPService.getAllData(entityName: "group") {
-            (groupJSON:[[String:String]],groupResponce) in
-            let groups = groupJSON.flatMap{Group(dictionary: $0)}
-            self.groups = groups
+        refreshControl = UIRefreshControl()
+        updateTable()
+        refreshControl!.tintColor = UIColor.red
+        refreshControl!.backgroundColor = UIColor.gray
+        refreshControl!.attributedTitle = NSAttributedString(string: "wait")
+        refreshControl!.addTarget(self, action: #selector(updateTable), for: .valueChanged)
+        if #available(iOS 10.0, *){
+            groupTableView.refreshControl = refreshControl
+        } else {
+            groupTableView.addSubview(refreshControl!)
         }
+        
+    }
+    
+    @objc func updateTable() {
+        startActivity()
+        DataManager.shared.getList(byEntity: .Group) { (groups, error) in
+            self.stopActivity()
+            guard let groups = groups as? [GroupStructure] else {
+                DispatchQueue.main.async {
+                    self.refreshControl!.endRefreshing()
+                }
+                self.showWarningMsg(error ?? "Incorect data")
+                return
+            }
+            self.groups = groups
+            DispatchQueue.main.async {
+                self.groupTableView.reloadData()
+                self.refreshControl!.endRefreshing()
+            }
+        }
+        
     }
     
     func getCreateUpdateGroupViewController() -> GroupCreateUpdateViewController? {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
-        let creteUpdateGroupViewController = storyBoard.instantiateViewController(withIdentifier: "CreateUpdateVC") as! GroupCreateUpdateViewController
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
+        guard let creteUpdateGroupViewController = storyBoard.instantiateViewController(withIdentifier: "CreateUpdateVC") as? GroupCreateUpdateViewController else { return nil }
         return creteUpdateGroupViewController
     }
     
@@ -64,8 +83,8 @@ class GroupViewController: UIViewController {
         guard let createUpdateGroupViewController = getCreateUpdateGroupViewController() else { return }
         createUpdateGroupViewController.groupForUpdate = self.groups[index]
         createUpdateGroupViewController.saveAction = { updatedGroup in
-            if let index = self.groups.index(where: {$0.id == updatedGroup.id}) {
-                self.groups[index] = updatedGroup
+            if let indexPath = self.groups.index(where: {$0.groupId == updatedGroup.groupId}) {
+                self.groups[indexPath] = updatedGroup
             } else {
                 print("wrong index for update")
             }
@@ -73,9 +92,9 @@ class GroupViewController: UIViewController {
         navigationController?.pushViewController(createUpdateGroupViewController, animated: true)
     }
     
-    func showGroupDetails(group: Group) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
-        let groupDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "GroupDetailsVC") as! GroupDetailsViewController
+    func showGroupDetails(group: GroupStructure) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
+        guard let groupDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "GroupDetailsVC") as? GroupDetailsViewController else { return }
         groupDetailsViewController.group = group
         navigationController?.pushViewController(groupDetailsViewController, animated: true)
     }
@@ -101,7 +120,7 @@ extension GroupViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = groupTableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
-        cell.textLabel?.text = groups[indexPath.row].name
+        cell.textLabel?.text = groups[indexPath.row].groupName
         return cell
     }
     
@@ -111,17 +130,21 @@ extension GroupViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "DELETE"){(action, indexPath) in
-            HTTPService.deleteData(entityName: "group", id: self.groups[indexPath.row].id){
-                (request: HTTPURLResponse) in
-                if request.statusCode == 200 {
+            DataManager.shared.deleteEntity(byId: self.groups[indexPath.row].groupId!, typeEntity: .Group, completionHandler: { (status, error) in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
                     self.groups.remove(at: indexPath.row)
                 }
-            }
+            })
         }
-        
         let update = UITableViewRowAction(style: .normal, title: "UPDATE"){(action, indexPath) in
             self.updateGroup(index: indexPath.row)
         }
         return[delete,update]
     }
 }
+
+
+
+

@@ -12,8 +12,11 @@ class FacultyForGroupViewController: UIViewController {
     
     @IBOutlet weak var facultyTableView: UITableView!
     
-    var selectFaculty: ((Faculty) -> ())?
-    var faculties = [Faculty]() {
+    /**
+     This clousure perfoms by transmitting the object to be selected by the user to other controllers
+     */
+    var selectFaculty: ((FacultyStructure) -> ())?
+    var faculties = [FacultyStructure]() {
         didSet {
             DispatchQueue.main.async {
                 self.facultyTableView.reloadData()
@@ -23,17 +26,21 @@ class FacultyForGroupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Faculties"
+        self.title = NSLocalizedString("Faculties", comment: "Title for Faculties table view")
         facultyTableView.delegate = self
         facultyTableView.dataSource = self
-        HTTPService.getAllData(entityName: "faculty") {
-            (facultyJSON:[[String:String]],facultyResponce) in
-            let faculties = facultyJSON.flatMap{Faculty(dictionary: $0)}
-            self.faculties = faculties
+        DataManager.shared.getList(byEntity: .Faculty){ (faculties, error) in
+            if let error = error {
+                self.showWarningMsg(error)
+            } else {
+                guard let faculties = faculties as? [FacultyStructure] else {return}
+                self.faculties = faculties
+            }
         }
     }
 }
 
+//MARK: table view delegate
 extension FacultyForGroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

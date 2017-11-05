@@ -26,41 +26,40 @@ class GroupDetailsViewController: UIViewController {
     @IBAction func getResultsByGroupTapped(_ sender: Any) {
     }
     
-    var group: Group?
+    var group: GroupStructure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Details"
         getDetailsByGroup()
     }
-
+    
     func getDetailsByGroup() {
         guard let group = group else { return }
-        self.groupNameLabel.text = group.name
-        HTTPService.getData(entityName: "faculty", id: group.facultyId) {
-            (facultyJSON,facultyResponce) in
-            if facultyResponce.statusCode == 200 {
-                let faculty = facultyJSON.flatMap{Faculty(dictionary: $0)}
-                if faculty.first != nil {
-                    DispatchQueue.main.async {
-                    self.facultyNameLabel.text = faculty.first?.name
-                    self.facultyDescriptionLabel.text = faculty.first?.description
-                    }
+        self.groupNameLabel.text = group.groupName
+        DataManager.shared.getEntity(byId: group.facultyId, typeEntity: .Faculty){
+            (faculty, error) in
+            if let error = error {
+                self.showWarningMsg(error)
+            } else {
+                guard let faculty = faculty as? FacultyStructure else { return }
+                DispatchQueue.main.async {
+                    self.facultyNameLabel.text = faculty.name
+                    self.facultyDescriptionLabel.text = faculty.description
                 }
             }
         }
-        HTTPService.getData(entityName: "speciality", id: group.specialityId) {
-            (specialityJSON,specialityResponce) in
-            if specialityResponce.statusCode == 200 {
-                let speciality = specialityJSON.flatMap{Speciality(dictionary: $0)}
-                if speciality.first != nil {
-                    DispatchQueue.main.async {
-                    self.specialityNameLabel.text = speciality.first?.name
-                    self.specialityCodeLabel.text = speciality.first?.code
-                    }
+        DataManager.shared.getEntity(byId: group.specialityId, typeEntity: .Speciality){
+            (speciality, error) in
+            if let error = error {
+                self.showWarningMsg(error)
+            } else {
+                guard let speciality = speciality as? SpecialityStructure else { return }
+                DispatchQueue.main.async {
+                    self.specialityNameLabel.text = speciality.name
+                    self.specialityCodeLabel.text = speciality.code
                 }
             }
         }
     }
-
 }

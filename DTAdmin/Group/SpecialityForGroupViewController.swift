@@ -12,8 +12,11 @@ class SpecialityForGroupViewController: UIViewController {
     
     @IBOutlet weak var specialityTableView: UITableView!
     
-    var selectSpeciality: ((Speciality) -> ())?
-    var specialities = [Speciality]() {
+    /**
+     This clousure perfoms by transmitting the object to be selected by the user to other controllers
+     */
+    var selectSpeciality: ((SpecialityStructure) -> ())?
+    var specialities = [SpecialityStructure]() {
         didSet {
             DispatchQueue.main.async {
                 self.specialityTableView.reloadData()
@@ -23,19 +26,21 @@ class SpecialityForGroupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Specialities"
+        self.title = NSLocalizedString("Specialities", comment: "Title for Specialities table view")
         specialityTableView.delegate = self
         specialityTableView.dataSource = self
-        HTTPService.getAllData(entityName: "speciality") {
-            (specialityJSON:[[String:String]],specialityResponce) in
-            if specialityResponce.statusCode == 200 {
-                let specialities = specialityJSON.flatMap{Speciality(dictionary: $0)}
+        DataManager.shared.getList(byEntity: .Speciality){ (specialities, error) in
+            if let error = error {
+                self.showWarningMsg(error)
+            } else {
+                guard let specialities = specialities as? [SpecialityStructure] else {return}
                 self.specialities = specialities
             }
         }
     }
 }
 
+//MARK: table view delegate
 extension SpecialityForGroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -25,66 +25,63 @@ class GroupCreateUpdateViewController: UIViewController {
     @IBOutlet weak var selectSpecialityButton: UIButton!
     
     @IBAction func selectFacultyTapped(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
-        let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as! FacultyForGroupViewController
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(facultyViewController, animated: true)
-            facultyViewController.selectFaculty = { selectedFaculty in
-                self.faculty = selectedFaculty
-                self.selectFacultyButton.titleLabel?.text = selectedFaculty.name
-            }
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
+        guard let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as? FacultyForGroupViewController else { return }
+        self.navigationController?.pushViewController(facultyViewController, animated: true)
+        facultyViewController.selectFaculty = { selectedFaculty in
+            self.faculty = selectedFaculty
+            self.selectFacultyButton.titleLabel?.text = selectedFaculty.name
         }
     }
     
     @IBAction func selectSpecialityTapped(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupSB", bundle: nil)
-        let specialityViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialityViewController") as! SpecialityForGroupViewController
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(specialityViewController, animated: true)
-            specialityViewController.selectSpeciality = { selectedSpeciality in
-                self.speciality = selectedSpeciality
-                self.selectSpecialityButton.titleLabel?.text = selectedSpeciality.name
-            }
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
+        guard let specialityViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialityViewController") as? SpecialityForGroupViewController else { return }
+        self.navigationController?.pushViewController(specialityViewController, animated: true)
+        specialityViewController.selectSpeciality = { selectedSpeciality in
+            self.speciality = selectedSpeciality
+            self.selectSpecialityButton.titleLabel?.text = selectedSpeciality.name
         }
     }
     
-    var saveAction: ((Group) -> ())?
-    var faculty: Faculty?
-    var speciality: Speciality?
-    var groupForUpdate: Group?
+    var saveAction: ((GroupStructure) -> ())?
+    var faculty: FacultyStructure?
+    var speciality: SpecialityStructure?
+    var groupForUpdate: GroupStructure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if groupForUpdate != nil {
-            self.title = "Update"
-            guard let groupName = self.groupForUpdate?.name,
+            self.title = NSLocalizedString("Update", comment: "Title for update group")
+            guard let groupName = self.groupForUpdate?.groupName,
                 let groupFacultId = self.groupForUpdate?.facultyId,
                 let groupSpecialityId = self.groupForUpdate?.specialityId else { return }
             self.groupNameTextField.text = groupName
-            HTTPService.getData(entityName: "faculty", id: groupFacultId) {
-                (facultyJSON,facultyResponce) in
-                if facultyResponce.statusCode == 200 {
-                    let faculty = facultyJSON.flatMap{Faculty(dictionary: $0)}
-                    if faculty.first != nil {
-                        DispatchQueue.main.async {
-                            self.selectFacultyButton.titleLabel?.text = faculty.first?.name
-                        }
+            self.view.layoutIfNeeded()
+            DataManager.shared.getEntity(byId: groupFacultId, typeEntity: .Faculty){
+                (faculty, error) in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    guard let faculty = faculty as? FacultyStructure else { return }
+                    DispatchQueue.main.async {
+                        self.selectFacultyButton.titleLabel?.text = faculty.name
                     }
                 }
             }
-            HTTPService.getData(entityName: "speciality", id: groupSpecialityId) {
-                (specialityJSON,specialityResponce) in
-                if specialityResponce.statusCode == 200 {
-                    let speciality = specialityJSON.flatMap{Speciality(dictionary: $0)}
-                    if speciality.first != nil {
-                        DispatchQueue.main.async {
-                            self.selectSpecialityButton.titleLabel?.text = speciality.first?.name
-                        }
+            DataManager.shared.getEntity(byId: groupSpecialityId, typeEntity: .Speciality){
+                (speciality, error) in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    guard let speciality = speciality as? SpecialityStructure else { return }
+                    DispatchQueue.main.async {
+                        self.selectFacultyButton.titleLabel?.text = speciality.name
                     }
                 }
             }
         } else {
-            self.title = "Create"
+            self.title = NSLocalizedString("Create", comment: "Title for create new group")
         }
     }
     
@@ -97,13 +94,15 @@ class GroupCreateUpdateViewController: UIViewController {
             "speciality_id": newGroupSpecialityId,
             "faculty_id": newGroupFacultyId
         ]
-        guard let id = self.groupForUpdate?.id else { return }
-        HTTPService.putData(entityName: "group", id: id, postData: params) {
-            (result: HTTPURLResponse,updatedGroupData: [[String:String]]) in
-            if result.statusCode == 200 {
-                let groups = updatedGroupData.flatMap{Group(dictionary: $0)}
-                guard let updatedGroup = groups.first else { return }
-                self.saveAction!(updatedGroup)
+        guard var groupForUpdate = GroupStructure(dictionary: params) else { return }
+        guard let id = self.groupForUpdate?.groupId else { return }
+        DataManager.shared.updateEntity(byId: id, entity: groupForUpdate, typeEntity: .Group){
+            (error) in
+            if let error = error {
+                self.showWarningMsg(error)
+            } else {
+                groupForUpdate.groupId = id
+                self.saveAction!(groupForUpdate)
             }
         }
     }
@@ -117,12 +116,15 @@ class GroupCreateUpdateViewController: UIViewController {
             "speciality_id": newGroupSpecialityId,
             "faculty_id": newGroupFacultyId
         ]
-        HTTPService.postData(entityName: "group", postData: params) {
-            (result: HTTPURLResponse,newGroupData: [[String:String]]) in
-            if result.statusCode == 200 {
-                let groups = newGroupData.flatMap{Group(dictionary: $0)}
-                guard let newGroup = groups.first else { return }
-                self.saveAction!(newGroup)
+        guard var groupForSave = GroupStructure(dictionary: params) else { return }
+        DataManager.shared.insertEntity(entity: groupForSave, typeEntity: .Group) {
+            (id, error) in
+            if let error = error {
+                self.showWarningMsg(error)
+            } else {
+                guard let id = id as? String else { return }
+                groupForSave.groupId = id
+                self.saveAction!(groupForSave)
             }
         }
     }
