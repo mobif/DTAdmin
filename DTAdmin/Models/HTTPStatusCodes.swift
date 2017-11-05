@@ -36,7 +36,7 @@ enum HTTPStatusCodes: Int {
     case PermanentRedirect
     // 400 Client Error
     case BadRequest = 400
-    case Unauthorized
+    case Unauthorized = 403
     case PaymentRequired
     case Forbidden
     case NotFound
