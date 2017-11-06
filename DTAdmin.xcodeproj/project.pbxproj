@@ -59,6 +59,7 @@
 		C7535CF91FA2670100B6CBD1 /* TimeTableStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE81FA2670100B6CBD1 /* TimeTableStructure.swift */; };
 		C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE91FA2670100B6CBD1 /* UserStructure.swift */; };
 		C7709DC51FAE09FC00994224 /* TestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7709DC41FAE09FC00994224 /* TestDataManager.swift */; };
+		C77747EE1FAFC28100CAC856 /* TestStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77747ED1FAFC28100CAC856 /* TestStudent.swift */; };
 		C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D6891FA267580092170E /* GroupTableViewCell.swift */; };
 		C799D68D1FA267590092170E /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C799D68A1FA267580092170E /* Student.storyboard */; };
 		C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D68B1FA267580092170E /* StudentsTableViewCell.swift */; };
@@ -133,6 +134,7 @@
 		C7709DBA1FAE09B300994224 /* DTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7709DBE1FAE09B300994224 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7709DC41FAE09FC00994224 /* TestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestDataManager.swift; path = DTAdminTests/TestDataManager.swift; sourceTree = SOURCE_ROOT; };
+		C77747ED1FAFC28100CAC856 /* TestStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStudent.swift; sourceTree = "<group>"; };
 		C799D6891FA267580092170E /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		C799D68A1FA267580092170E /* Student.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		C799D68B1FA267580092170E /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			children = (
 				C7709DBE1FAE09B300994224 /* Info.plist */,
 				C7709DC41FAE09FC00994224 /* TestDataManager.swift */,
+				C77747ED1FAFC28100CAC856 /* TestStudent.swift */,
 			);
 			path = DTAdminTests;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7709DC51FAE09FC00994224 /* TestDataManager.swift in Sources */,
+				C77747EE1FAFC28100CAC856 /* TestStudent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

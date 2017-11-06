@@ -9,20 +9,20 @@
 import XCTest
 @testable import DTAdmin
 
-var sessionUnderTest: URLSession!
+
 
 class TestDataManager: XCTestCase {
-    
+    var sessionUnderTest: URLSession!
     override func setUp() {
         super.setUp()
         CommonNetworkManager.shared().logIn(username: "admin", password: "dtapi_admin") { (user, error) in
             XCTAssertNil(error)
             XCTAssertNotNil(user)
-            sessionUnderTest = URLSession(configuration: URLSessionConfiguration.default)
+            self.sessionUnderTest = URLSession(configuration: URLSessionConfiguration.default)
         }
     }
     override func tearDown() {
-        sessionUnderTest = nil
+        self.sessionUnderTest = nil
         super.tearDown()
     }
     //MARK: Testing getList
@@ -196,6 +196,10 @@ class TestDataManager: XCTestCase {
         XCTAssertNil(counts[.User])
         XCTAssertNotEqual(counts.count, Entities.allValues.count)
     }
+    //MARK: Testing serving of entities
+    
+    
+    
     //MARK: Testing getListRange
     func testGetListRangeUsers() {
         weak var promise = expectation(description: "User list")

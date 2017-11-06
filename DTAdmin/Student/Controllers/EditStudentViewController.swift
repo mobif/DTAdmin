@@ -9,7 +9,6 @@
 import UIKit
 
 class EditStudentViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
-    
     var studentLoaded: StudentStructure? {
         didSet {
             self.view.layoutIfNeeded()
@@ -73,7 +72,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let size = selectedImage.size
-            let imageHeight: CGFloat = 100.0
+            let imageHeight: CGFloat = 50.0
             let aspectRatioForWidth = ( size.width / size.height ) * imageHeight
             let resizedImage = selectedImage.convert(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight), scale: UIScreen.main.scale)
             studentPhoto.image = resizedImage
@@ -93,12 +92,13 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     @objc func postUpdateStudentToAPI(){
         if prepareForSave(){
             guard let userIDForUpdate = studentLoaded?.userId else { return }
-            guard let studentForSave = studentForSave else { return }
+            guard var studentForSave = studentForSave else { return }
             DataManager.shared.updateEntity(byId: userIDForUpdate, entity: studentForSave, typeEntity: .Student) { error in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
                     if let resultModification = self.resultModification {
+                        studentForSave.userId = userIDForUpdate
                         resultModification(studentForSave, false)
                     }
                     self.navigationController?.popViewController(animated: true)
@@ -144,13 +144,14 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             let gradebook = gradeBookIdTextField.text,
             let pass = passwordStudentTextField.text,
             let passConfirm = passwordConfirmTextField.text,
-            let image : UIImage = studentPhoto.image,
-            let imageData = UIImagePNGRepresentation(image),
             let group = selectedGroupForStudent?.groupId else { return false}
-        let photo = imageData.base64EncodedString(options: .lineLength64Characters)
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
-            let dictionary: [String: Any] = ["username": login, "password": pass, "password_confirm": passConfirm, "plain_password": pass, "email": email, "gradebook_id": gradebook, "student_surname": sname, "student_name": name, "student_fname": fname, "group_id": group, "photo": photo]
+            let dictionary: [String: Any] = ["username": login, "password": pass, "password_confirm": passConfirm, "plain_password": pass, "email": email, "gradebook_id": gradebook, "student_surname": sname, "student_name": name, "student_fname": fname, "group_id": group]
             studentForSave = StudentStructure(dictionary: dictionary)
+            if let image : UIImage = studentPhoto.image, let imageData = UIImagePNGRepresentation(image) {
+                let photo = imageData.base64EncodedString(options: .lineLength64Characters)
+                studentForSave?.photo = photo
+            }
         } else {
             showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
             return false
