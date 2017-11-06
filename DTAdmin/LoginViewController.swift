@@ -44,7 +44,9 @@ class LoginViewController: ParentViewController {
             } else {
                 StoreHelper.saveUser(user: user)
                 DispatchQueue.main.async {
-                   self.navigationController?.popViewController(animated: false)
+                    if let rootNavController = self.navigationController as? RootNavController {
+                        rootNavController.moveToMain()
+                    }
                 }
             }
         }

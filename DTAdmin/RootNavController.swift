@@ -12,8 +12,8 @@ class RootNavController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !StoreHelper.isLoggedUser() {
-            self.performSegue(withIdentifier: "toLogin", sender: self)
+        if StoreHelper.isLoggedUser() {
+            self.moveToMain()
         }
         // Do any additional setup after loading the view.
     }
@@ -23,6 +23,9 @@ class RootNavController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
+    func moveToMain() {
+        self.performSegue(withIdentifier: "toMain", sender: self)
+    }
 
     /*
     // MARK: - Navigation
