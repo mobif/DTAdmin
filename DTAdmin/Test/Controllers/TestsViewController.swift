@@ -18,8 +18,9 @@ class TestsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.shared.getList(byEntity: .Test) { (tests, error) in
-            self.testsList = tests as! [TestStructure]
-            self.testsTableView.reloadData()
+            print(tests, error)
+//            self.testsList = tests as? [TestStructure]
+//            self.testsTableView.reloadData()
         }
     }
 }
