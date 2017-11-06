@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D05782D1FB0734D0080F970 /* DTAdminTestsSpeciality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D05782C1FB0734D0080F970 /* DTAdminTestsSpeciality.swift */; };
 		3F2BF59B1F9F61F600B2FA7E /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */; };
 		3F2BF59C1F9F61F600B2FA7E /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5961F9F61F600B2FA7E /* Subject.swift */; };
 		3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */; };
@@ -67,7 +68,20 @@
 		C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D68B1FA267580092170E /* StudentsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2D05782F1FB0734D0080F970 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FDE8F8C1F8D0DF60057BF3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FDE8F931F8D0DF60057BF3C;
+			remoteInfo = DTAdmin;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2D05782A1FB0734D0080F970 /* DTAdminTestsSpeciality.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTestsSpeciality.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D05782C1FB0734D0080F970 /* DTAdminTestsSpeciality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTAdminTestsSpeciality.swift; sourceTree = "<group>"; };
+		2D05782E1FB0734D0080F970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
 		3F2BF5961F9F61F600B2FA7E /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +147,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2D0578271FB0734D0080F970 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3FDE8F911F8D0DF60057BF3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -143,6 +164,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D05782B1FB0734D0080F970 /* DTAdminTestsSpeciality */ = {
+			isa = PBXGroup;
+			children = (
+				2D05782C1FB0734D0080F970 /* DTAdminTestsSpeciality.swift */,
+				2D05782E1FB0734D0080F970 /* Info.plist */,
+			);
+			path = DTAdminTestsSpeciality;
+			sourceTree = "<group>";
+		};
 		3F01D7CF1F8D1458005CA03A /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				3FDE8F961F8D0DF60057BF3C /* DTAdmin */,
+				2D05782B1FB0734D0080F970 /* DTAdminTestsSpeciality */,
 				3FDE8F951F8D0DF60057BF3C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -231,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */,
+				2D05782A1FB0734D0080F970 /* DTAdminTestsSpeciality.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -388,6 +420,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2D0578291FB0734D0080F970 /* DTAdminTestsSpeciality */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D0578331FB0734E0080F970 /* Build configuration list for PBXNativeTarget "DTAdminTestsSpeciality" */;
+			buildPhases = (
+				2D0578261FB0734D0080F970 /* Sources */,
+				2D0578271FB0734D0080F970 /* Frameworks */,
+				2D0578281FB0734D0080F970 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D0578301FB0734D0080F970 /* PBXTargetDependency */,
+			);
+			name = DTAdminTestsSpeciality;
+			productName = DTAdminTestsSpeciality;
+			productReference = 2D05782A1FB0734D0080F970 /* DTAdminTestsSpeciality.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3FDE8F931F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FDE8FA91F8D0DF60057BF3C /* Build configuration list for PBXNativeTarget "DTAdmin" */;
@@ -415,6 +465,11 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "if-ios-077";
 				TargetAttributes = {
+					2D0578291FB0734D0080F970 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3FDE8F931F8D0DF60057BF3C;
+					};
 					3FDE8F931F8D0DF60057BF3C = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -435,11 +490,19 @@
 			projectRoot = "";
 			targets = (
 				3FDE8F931F8D0DF60057BF3C /* DTAdmin */,
+				2D0578291FB0734D0080F970 /* DTAdminTestsSpeciality */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2D0578281FB0734D0080F970 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3FDE8F921F8D0DF60057BF3C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,6 +521,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2D0578261FB0734D0080F970 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D05782D1FB0734D0080F970 /* DTAdminTestsSpeciality.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3FDE8F901F8D0DF60057BF3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -517,6 +588,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2D0578301FB0734D0080F970 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FDE8F931F8D0DF60057BF3C /* DTAdmin */;
+			targetProxy = 2D05782F1FB0734D0080F970 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		3FA8A6931FAC8864002465E7 /* Admin.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -547,6 +626,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2D0578311FB0734D0080F970 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DTAdminTestsSpeciality/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vo.DTAdminTestsSpeciality;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Debug;
+		};
+		2D0578321FB0734D0080F970 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DTAdminTestsSpeciality/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vo.DTAdminTestsSpeciality;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Release;
+		};
 		3FDE8FA71F8D0DF60057BF3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -689,6 +798,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2D0578331FB0734E0080F970 /* Build configuration list for PBXNativeTarget "DTAdminTestsSpeciality" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D0578311FB0734D0080F970 /* Debug */,
+				2D0578321FB0734D0080F970 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3FDE8F8F1F8D0DF60057BF3C /* Build configuration list for PBXProject "DTAdmin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

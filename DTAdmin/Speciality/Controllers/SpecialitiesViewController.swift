@@ -79,6 +79,10 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
     }
     
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        
+//    }
+    
     /* - - - edit && delete - - -  */
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
