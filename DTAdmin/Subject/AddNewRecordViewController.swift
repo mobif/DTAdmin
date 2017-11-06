@@ -15,11 +15,12 @@ class AddNewRecordViewController: UIViewController {
     @IBOutlet weak var subjectDescriptionTextField: UITextView!
     
     var updateDates = false
-    var subjectId: String = ""
-    let queryService = QueryService()
-    var saveAction: ((Subject?) -> ())?
-    var item: Subject?
-    var subject: Subject? {
+    var subjectId: String?
+    
+    var resultModification: ((SubjectStructure) -> ())?
+    var subjectForSave: SubjectStructure?
+
+    var subject: SubjectStructure? {
         didSet {
             guard let subject = subject else { return }
             self.view.layoutIfNeeded()
@@ -28,82 +29,67 @@ class AddNewRecordViewController: UIViewController {
         }
     }
     
-    private func showMessage(message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    @IBAction func saveNewRecord(_ sender: UIButton) {
+        if !updateDates {
+            saveNewSubject()
+            
+        } else {
+            updateSubject()
+        }
     }
     
-    @IBAction func saveNewRecord(_ sender: UIButton) {
-        guard let name = subjectNameTextField.text else { return }
-        guard let description = subjectDescriptionTextField.text else { return }
-        
-        if !name.isEmpty && !description.isEmpty {
-            if !updateDates {
-                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/InsertData", completion: { (item: [Subject]?, code:Int, error: String) in
-                    DispatchQueue.main.async {
-                        if !error.isEmpty {
-                            self.showMessage(message: error)
-                        }
-                        if code == 200 {
-                            guard let data = item else {
-                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
-                                return
-                            }
-                            if data.count > 0 {
-                                self.saveAction?(data[0])
-                                self.navigationController?.popViewController(animated: true)
-                                
-                            } else {
-                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
-                            }
-                        } else if code == HTTPStatusCodes.Unauthorized.rawValue {
-                            self.showLoginScreen()
-                        } else {
-                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
-                        }
-                        
+    func saveNewSubject() {
+        if prepareForSave(){
+            guard let subjectForSave = subjectForSave else { return }
+            DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .Subject) { (subjectResult, error) in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    guard let result = subjectResult as? [[String : Any]] else { return }
+                    guard let resultFirst = result.first else { return }
+                    guard let subjectResult = SubjectStructure(dictionary: resultFirst) else { return }
+                    if let resultModification = self.resultModification {
+                        resultModification(subjectResult)
                     }
-                })
-            } else {
-                queryService.postRequests(parameters : ["subject_name" : name, "subject_description" : description], sufix : "subject/update/\(subjectId)", completion: {(item: [Subject]?, code:Int, error: String) in
-                    DispatchQueue.main.async {
-                        if !error.isEmpty {
-                            self.showMessage(message: error)
-                        }
-                        if code == 200 {
-                            guard let data = item else {
-                                self.showMessage(message: NSLocalizedString("Server error. Record isn't change!", comment: "Message for user"))
-                                return
-                            }
-                            if data.count > 0 {
-                                self.saveAction?(data[0])
-                                self.navigationController?.popViewController(animated: true)
-                            } else {
-                                self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
-                            }
-                            
-                        } else if code == HTTPStatusCodes.Unauthorized.rawValue {
-                            self.showLoginScreen()
-                        } else {
-                            self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
-                            }
-                        
-                    }
-                })
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
-        } else {
-            self.showMessage(message: NSLocalizedString("Please, enter all fields!", comment: "Message for user"))
         }
+    }
+    
+    func updateSubject() {
+        if prepareForSave(){
+            guard let subjectIdUnwrap = subjectId else { return }
+            guard let subjectForSave = subjectForSave else { return }
+            DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .Subject) { error in
+                if let error = error {
+                    self.showWarningMsg(error)
+                } else {
+                    if let resultModification = self.resultModification {
+                        resultModification(subjectForSave)
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    func prepareForSave() -> Bool {
+        guard let name = subjectNameTextField.text,
+            let description = subjectDescriptionTextField.text else { return false }
+        if (name.count > 2) && (description.count > 2) {
+            let dictionary: [String: Any] = ["subject_name": name, "subject_description": description]
+            self.subjectForSave = SubjectStructure(dictionary: dictionary)
+        } else {
+            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+            return false
+        }
+        return true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !updateDates {
-            navigationItem.title = "Add new item"
-        } else {
-            navigationItem.title = "Update record"
-        }
+        self.navigationItem.title = updateDates ? "Update record" : "Add new item"
         subjectDescriptionTextField.layer.cornerRadius = 5
         subjectDescriptionTextField.layer.borderWidth = 1
         subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
@@ -112,4 +98,5 @@ class AddNewRecordViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
 }
