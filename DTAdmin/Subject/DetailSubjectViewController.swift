@@ -10,28 +10,32 @@ import UIKit
 
 class DetailSubjectViewController: UIViewController {
     
-    @IBOutlet weak var subjectNameTextField: UILabel!
+    @IBOutlet weak var subjectNameLabel: UILabel!
     
-    @IBOutlet weak var subjectDescriptionTextField: UILabel!
+    @IBOutlet weak var subjectDescriptionLabel: UILabel!
     
-    var subject: Subject? {
+    var subject: SubjectStructure? {
         didSet {
             guard let subject = subject else { return }
             self.view.layoutIfNeeded()
-            self.subjectNameTextField.text = subject.id + " " + subject.name 
-            self.subjectDescriptionTextField.text = subject.description
+            self.subjectNameLabel.text = subject.name
+            self.subjectDescriptionLabel.text = subject.description
         }
     }
 
+    @IBAction func showTestsForSubject(_ sender: UIButton) {
+        guard let wayToShowTestsForSubject = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "TestForSubjectTableViewController") as? TestsForSubjectTableViewController else { return }
+            wayToShowTestsForSubject.subjectId = self.subject?.id
+            self.navigationController?.pushViewController(wayToShowTestsForSubject, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.navigationItem.title = "Detail subject"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func timeTableButtonTapped(_ sender: Any) {
@@ -40,15 +44,5 @@ class DetailSubjectViewController: UIViewController {
         timeTableViewController.subjectID = Int(self.subject?.id ?? "")
         self.navigationController?.pushViewController(timeTableViewController, animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

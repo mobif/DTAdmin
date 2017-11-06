@@ -5,7 +5,6 @@
 //  Created by Volodymyr on 10/16/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
-
 import UIKit
 
 class EditStudentViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
@@ -129,12 +128,12 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             }
         }
     }
-/**
+    /**
      This function checks all data from fields for creation of instance new student.
      - Precondition: Each field must have its properly value. Group and photo has to be selected also.
      - Postcondition: In case if checking is success then would be prepared the instance for transfer to API, otherwise shows warning.
      - Returns: If result of checking is success returns True, and False if not.
-*/
+     */
     func prepareForSave() -> Bool {
         guard let login = loginStudentTextField.text,
             let email = emailStudentTextField.text,
@@ -191,13 +190,13 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     }
 }
 extension UIImage {
-/**
+    /**
      Resize image to defined size and scale according to bitmap-based graphics context.
      - Parameters:
-        - size: The size (measured in points) of the new bitmap context.
-        - scale: The scale factor to apply to the bitmap.
+     - size: The size (measured in points) of the new bitmap context.
+     - scale: The scale factor to apply to the bitmap.
      - returns: Image after resizing.
- */
+     */
     func convert(toSize size:CGSize, scale:CGFloat) -> UIImage
     {
         let imgRect = CGRect(origin: CGPoint(x:0.0, y:0.0), size: size)

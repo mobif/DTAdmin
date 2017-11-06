@@ -49,14 +49,14 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(specialityTab)
         
 //MARK: Create admins tab
-        let adminStoryboard = UIStoryboard.stoyboard(by: .admin)
+        let adminStoryboard = UIStoryboard(name: "Admin", bundle: nil)
         guard let adminsNavController = adminStoryboard.instantiateViewController(withIdentifier: "AdminListView") as? UINavigationController else { return }
         let adminsBarItem = UITabBarItem(title: "Admins", image: nil, selectedImage: nil)
         adminsNavController.tabBarItem = adminsBarItem
         tabBarViewControllers.append(adminsNavController)
         
 //MARK: Create timeTable tab
-        let timeTableStoryboard = UIStoryboard.stoyboard(by: .timeTable)
+        let timeTableStoryboard = UIStoryboard(name: "TimeTable", bundle: nil)
         guard let timeTableNavController = timeTableStoryboard.instantiateViewController(withIdentifier: "timeTableNavController") as? UINavigationController else { return }
         let timeTableBarItem = UITabBarItem(title: "Time Table", image: nil, selectedImage: nil)
         timeTableNavController.tabBarItem = timeTableBarItem
