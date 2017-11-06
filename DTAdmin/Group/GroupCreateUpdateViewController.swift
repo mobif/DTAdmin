@@ -102,7 +102,8 @@ class GroupCreateUpdateViewController: UIViewController {
                 self.showWarningMsg(error)
             } else {
                 groupForUpdate.groupId = id
-                self.saveAction!(groupForUpdate)
+                guard let saveAction = self.saveAction else { return }
+                saveAction(groupForUpdate)
             }
         }
     }
@@ -124,7 +125,8 @@ class GroupCreateUpdateViewController: UIViewController {
             } else {
                 guard let id = id as? String else { return }
                 groupForSave.groupId = id
-                self.saveAction!(groupForSave)
+                guard let saveAction = self.saveAction else { return }
+                saveAction(groupForSave)
             }
         }
     }

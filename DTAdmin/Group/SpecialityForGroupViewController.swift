@@ -45,8 +45,9 @@ extension SpecialityForGroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSpeciality = self.specialities[indexPath.row]
-        self.selectSpeciality!(selectedSpeciality)
-        _ = navigationController?.popViewController(animated: true)
+        guard let selectSpeciality = self.selectSpeciality else { return }
+        selectSpeciality(selectedSpeciality)
+        navigationController?.popViewController(animated: true)
     }
 }
 

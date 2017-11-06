@@ -33,7 +33,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 //MARK: Create groups tab
         let groupStoryboard = UIStoryboard.stoyboard(by: .group)
         guard let groupNavController = groupStoryboard.instantiateViewController(withIdentifier: "GroupNavController") as? UINavigationController else { return }
-//        let groupsTab = TabThreeViewController()
         let groupsBarItem = UITabBarItem(title: "Groups", image: nil, selectedImage: nil)
         groupNavController.tabBarItem = groupsBarItem
         tabBarViewControllers.append(groupNavController)

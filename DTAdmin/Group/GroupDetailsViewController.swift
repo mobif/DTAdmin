@@ -30,7 +30,7 @@ class GroupDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Details"
+        self.title = NSLocalizedString("Details", comment: "Title for Group Detail view")
         getDetailsByGroup()
     }
     

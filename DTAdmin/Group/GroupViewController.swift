@@ -41,16 +41,12 @@ class GroupViewController: ParentViewController {
         groupTableView.dataSource = self
         refreshControl = UIRefreshControl()
         updateTable()
-        refreshControl!.tintColor = UIColor.red
-        refreshControl!.backgroundColor = UIColor.gray
-        refreshControl!.attributedTitle = NSAttributedString(string: "wait")
-        refreshControl!.addTarget(self, action: #selector(updateTable), for: .valueChanged)
-        if #available(iOS 10.0, *){
-            groupTableView.refreshControl = refreshControl
-        } else {
-            groupTableView.addSubview(refreshControl!)
-        }
-        
+        guard let refreshControl = refreshControl else { return }
+        refreshControl.tintColor = UIColor.red
+        refreshControl.backgroundColor = UIColor.gray
+        refreshControl.attributedTitle = NSAttributedString(string: "wait")
+        refreshControl.addTarget(self, action: #selector(updateTable), for: .valueChanged)
+        groupTableView.refreshControl = refreshControl
     }
     
     @objc func updateTable() {
@@ -61,7 +57,7 @@ class GroupViewController: ParentViewController {
                 DispatchQueue.main.async {
                     self.refreshControl!.endRefreshing()
                 }
-                self.showWarningMsg(error ?? "Incorect data")
+                self.showWarningMsg(error ?? NSLocalizedString("Incorect data", comment: "Error while downloading data from server"))
                 return
             }
             self.groups = groups
@@ -110,7 +106,7 @@ extension GroupViewController : UITableViewDelegate {
         } else {
             let selectedGroup = self.groups[indexPath.row]
             self.selectGroup!(selectedGroup)
-            _ = navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
         }
     }
 }

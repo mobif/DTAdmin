@@ -45,8 +45,9 @@ extension FacultyForGroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFaculty = self.faculties[indexPath.row]
-        self.selectFaculty!(selectedFaculty)
-        _ = navigationController?.popViewController(animated: true)
+        guard let selectFaculty = self.selectFaculty else { return }
+        selectFaculty(selectedFaculty)
+        navigationController?.popViewController(animated: true)
     }
 }
 
