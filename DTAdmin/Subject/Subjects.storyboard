@@ -214,7 +214,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="if_picture_1814111" translatesAutoresizingMaskIntoConstraints="NO" id="YiZ-no-ogH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="YiZ-no-ogH">
                                 <rect key="frame" x="20" y="293" width="280" height="146"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="146" id="4xy-V9-81g"/>
@@ -302,7 +302,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="if_picture_1814111" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-Rr-ldG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="PIb-Rr-ldG">
                                 <rect key="frame" x="20" y="343" width="280" height="128"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mf3-8l-8n8">
@@ -597,6 +597,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="if_picture_1814111" width="128" height="128"/>
+        <image name="Image" width="128" height="128"/>
     </resources>
 </document>

@@ -105,7 +105,7 @@ class DataManager: HTTPManager {
                     }
                 }
             }
-            }.resume()
+        }.resume()
     }
     
     func getListRange(forEntity typeEntity: Entities, fromNo index: UInt, quantity:UInt, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
@@ -206,42 +206,58 @@ class DataManager: HTTPManager {
         }
     }
     
-    func getEntityByAnother(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetTestsBySubject, id: byId) else {
-            let error = "Cannot prepare header for URLRequest"
-            DispatchQueue.main.async {
-                completionHandler(nil, error)
-            }
-            return
-        }
-        getResponse(request: request) { (list, error) in
-            if let error = error {
-                StoreHelper.logout()
+    func getEntityBy(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
+        if typeEntity == .Test {
+            guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetTestsBySubject, id: byId) else {
+                let error = "Cannot prepare header for URLRequest"
                 DispatchQueue.main.async {
                     completionHandler(nil, error)
                 }
+                return
             }
+            getResponse(request: request) { (list, error) in
+                if let error = error {
+                    StoreHelper.logout()
+                    DispatchQueue.main.async {
+                        completionHandler(nil, error)
+                    }
+                }
             guard let  json = list as? [[String: Any]] else {
                 print("Response is empty")
                 return
+                }
+                self.extractEntity(json: json, typeEntity: typeEntity) { entity in
+                    guard let newEntity = entity as? [Any?] else {
+                        let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                        completionHandler(nil, error)
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        completionHandler(newEntity, nil)
+                    }
+                }
             }
-            var entytiList = [Any]()
+        }
+
+    }
+    
+    private func extractEntity(json: [[String: Any]], typeEntity: Entities, completionHandler: @escaping (_ list: Any?) -> ()) {
+        var entytiList = [Any]()
             switch typeEntity {
-            case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
-            case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
-            case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
-            case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
-            case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
-            case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
-            case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
-            case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
-            case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
-            case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
-            case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
+                case .Faculty: entytiList = json.flatMap { FacultyStructure(dictionary: $0) }
+                case .Speciality: entytiList = json.flatMap { SpecialityStructure(dictionary: $0) }
+                case .Group: entytiList = json.flatMap { GroupStructure(dictionary: $0) }
+                case .Subject: entytiList = json.flatMap { SubjectStructure(dictionary: $0) }
+                case .Test: entytiList = json.flatMap { TestStructure(dictionary: $0) }
+                case .TestDetail: entytiList = json.flatMap { TestDetailStructure(dictionary: $0) }
+                case .TimeTable: entytiList = json.flatMap { TimeTableStructure(dictionary: $0) }
+                case .Question: entytiList = json.flatMap { QuestionStructure(dictionary: $0) }
+                case .Answer: entytiList = json.flatMap { AnswerStructure(dictionary: $0) }
+                case .Student: entytiList = json.flatMap { StudentStructure(dictionary: $0) }
+                case .User: entytiList = json.flatMap { UserStructure(dictionary: $0) }
             }
-            DispatchQueue.main.async {
-                completionHandler(entytiList, nil)
-            }
+        DispatchQueue.main.async {
+            completionHandler(entytiList)
         }
     }
     

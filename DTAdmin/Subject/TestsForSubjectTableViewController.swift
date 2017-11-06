@@ -26,7 +26,7 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     func showTests(id: String) {
-        DataManager.shared.getEntityByAnother(byId: id, typeEntity: .Test) { (tests, error) in
+        DataManager.shared.getEntityBy(byId: id, typeEntity: .Test) { (tests, error) in
             if error == nil,
                 let tests = tests as? [TestStructure] {
                 self.test = tests
