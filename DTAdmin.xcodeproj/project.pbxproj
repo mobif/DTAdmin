@@ -17,6 +17,7 @@
 		3F67C90A1FA9E01D002DDA64 /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C8F91FA9DF85002DDA64 /* SubjectTableViewController.swift */; };
 		3F67C90B1FA9E020002DDA64 /* TestsForSubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C8FA1FA9DF85002DDA64 /* TestsForSubjectTableViewController.swift */; };
 		3F7407971FACB31B004A2235 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7407961FACB31B004A2235 /* Storyboard.swift */; };
+		3F76CF6C1FB0F3E90024A599 /* DTAdminTestsSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F76CF6B1FB0F3E90024A599 /* DTAdminTestsSubject.swift */; };
 		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
 		3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminViewController.swift */; };
 		3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8A6931FAC8864002465E7 /* Admin.storyboard */; };
@@ -73,6 +74,20 @@
 			remoteGlobalIDString = 3FDE8F931F8D0DF60057BF3C;
 			remoteInfo = DTAdmin;
 		};
+		3F76CF601FB0F2610024A599 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FDE8F8C1F8D0DF60057BF3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FDE8F931F8D0DF60057BF3C;
+			remoteInfo = DTAdmin;
+		};
+		3F76CF6E1FB0F3E90024A599 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FDE8F8C1F8D0DF60057BF3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FDE8F931F8D0DF60057BF3C;
+			remoteInfo = DTAdmin;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +102,10 @@
 		3F67C9021FA9DF85002DDA64 /* AddNewQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewQuestionViewController.swift; sourceTree = "<group>"; };
 		3F6F72741FAA4DC90012832C /* SubjectDTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubjectDTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7407961FACB31B004A2235 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Storyboard.swift; path = DTAdmin/Storyboard.swift; sourceTree = SOURCE_ROOT; };
+		3F76CF5B1FB0F2610024A599 /* Subj ;ectDTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Subj ;ectDTAdminTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F76CF691FB0F3E90024A599 /* DTAdminTestsSubject.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTestsSubject.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F76CF6B1FB0F3E90024A599 /* DTAdminTestsSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTAdminTestsSubject.swift; sourceTree = "<group>"; };
+		3F76CF6D1FB0F3E90024A599 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888161F9688B200D602F3 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3FA8A6921FAC8864002465E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Admin.storyboard; sourceTree = "<group>"; };
@@ -141,6 +160,20 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		3F6F72711FAA4DC90012832C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F76CF581FB0F2610024A599 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F76CF661FB0F3E90024A599 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -223,10 +256,20 @@
 			path = Admins;
 			sourceTree = "<group>";
 		};
+		3F76CF6A1FB0F3E90024A599 /* DTAdminTestsSubject */ = {
+			isa = PBXGroup;
+			children = (
+				3F76CF6B1FB0F3E90024A599 /* DTAdminTestsSubject.swift */,
+				3F76CF6D1FB0F3E90024A599 /* Info.plist */,
+			);
+			path = DTAdminTestsSubject;
+			sourceTree = "<group>";
+		};
 		3FDE8F8B1F8D0DF60057BF3C = {
 			isa = PBXGroup;
 			children = (
 				3FDE8F961F8D0DF60057BF3C /* DTAdmin */,
+				3F76CF6A1FB0F3E90024A599 /* DTAdminTestsSubject */,
 				3FDE8F951F8D0DF60057BF3C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -236,6 +279,8 @@
 			children = (
 				3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */,
 				3F6F72741FAA4DC90012832C /* SubjectDTAdminTests.xctest */,
+				3F76CF5B1FB0F2610024A599 /* Subj ;ectDTAdminTests.xctest */,
+				3F76CF691FB0F3E90024A599 /* DTAdminTestsSubject.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -411,6 +456,42 @@
 			productReference = 3F6F72741FAA4DC90012832C /* SubjectDTAdminTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		3F76CF5A1FB0F2610024A599 /* Subj ;ectDTAdminTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F76CF621FB0F2610024A599 /* Build configuration list for PBXNativeTarget "Subj ;ectDTAdminTests" */;
+			buildPhases = (
+				3F76CF571FB0F2610024A599 /* Sources */,
+				3F76CF581FB0F2610024A599 /* Frameworks */,
+				3F76CF591FB0F2610024A599 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F76CF611FB0F2610024A599 /* PBXTargetDependency */,
+			);
+			name = "Subj ;ectDTAdminTests";
+			productName = "Subj ;ectDTAdminTests";
+			productReference = 3F76CF5B1FB0F2610024A599 /* Subj ;ectDTAdminTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3F76CF681FB0F3E90024A599 /* DTAdminTestsSubject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F76CF721FB0F3E90024A599 /* Build configuration list for PBXNativeTarget "DTAdminTestsSubject" */;
+			buildPhases = (
+				3F76CF651FB0F3E90024A599 /* Sources */,
+				3F76CF661FB0F3E90024A599 /* Frameworks */,
+				3F76CF671FB0F3E90024A599 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F76CF6F1FB0F3E90024A599 /* PBXTargetDependency */,
+			);
+			name = DTAdminTestsSubject;
+			productName = DTAdminTestsSubject;
+			productReference = 3F76CF691FB0F3E90024A599 /* DTAdminTestsSubject.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3FDE8F931F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FDE8FA91F8D0DF60057BF3C /* Build configuration list for PBXNativeTarget "DTAdmin" */;
@@ -440,6 +521,17 @@
 				TargetAttributes = {
 					3F6F72731FAA4DC90012832C = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3FDE8F931F8D0DF60057BF3C;
+					};
+					3F76CF5A1FB0F2610024A599 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3FDE8F931F8D0DF60057BF3C;
+					};
+					3F76CF681FB0F3E90024A599 = {
+						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 3FDE8F931F8D0DF60057BF3C;
 					};
@@ -464,12 +556,28 @@
 			targets = (
 				3FDE8F931F8D0DF60057BF3C /* DTAdmin */,
 				3F6F72731FAA4DC90012832C /* SubjectDTAdminTests */,
+				3F76CF5A1FB0F2610024A599 /* Subj ;ectDTAdminTests */,
+				3F76CF681FB0F3E90024A599 /* DTAdminTestsSubject */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3F6F72721FAA4DC90012832C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F76CF591FB0F2610024A599 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F76CF671FB0F3E90024A599 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -497,6 +605,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F76CF571FB0F2610024A599 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F76CF651FB0F3E90024A599 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F76CF6C1FB0F3E90024A599 /* DTAdminTestsSubject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +687,16 @@
 			target = 3FDE8F931F8D0DF60057BF3C /* DTAdmin */;
 			targetProxy = 3F6F72791FAA4DC90012832C /* PBXContainerItemProxy */;
 		};
+		3F76CF611FB0F2610024A599 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FDE8F931F8D0DF60057BF3C /* DTAdmin */;
+			targetProxy = 3F76CF601FB0F2610024A599 /* PBXContainerItemProxy */;
+		};
+		3F76CF6F1FB0F3E90024A599 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FDE8F931F8D0DF60057BF3C /* DTAdmin */;
+			targetProxy = 3F76CF6E1FB0F3E90024A599 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -600,11 +733,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SubjectDTAdminTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alina.SubjectDTAdminTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
@@ -615,10 +750,71 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SubjectDTAdminTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alina.SubjectDTAdminTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Release;
+		};
+		3F76CF631FB0F2610024A599 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Subj ;ectDTAdminTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alina.Subj--ectDTAdminTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Debug;
+		};
+		3F76CF641FB0F2610024A599 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Subj ;ectDTAdminTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alina.Subj--ectDTAdminTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Release;
+		};
+		3F76CF701FB0F3E90024A599 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DTAdminTestsSubject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alina.DTAdminTestsSubject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Debug;
+		};
+		3F76CF711FB0F3E90024A599 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DTAdminTestsSubject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alina.DTAdminTestsSubject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -773,6 +969,24 @@
 			buildConfigurations = (
 				3F6F727B1FAA4DC90012832C /* Debug */,
 				3F6F727C1FAA4DC90012832C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F76CF621FB0F2610024A599 /* Build configuration list for PBXNativeTarget "Subj ;ectDTAdminTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F76CF631FB0F2610024A599 /* Debug */,
+				3F76CF641FB0F2610024A599 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F76CF721FB0F3E90024A599 /* Build configuration list for PBXNativeTarget "DTAdminTestsSubject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F76CF701FB0F3E90024A599 /* Debug */,
+				3F76CF711FB0F3E90024A599 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIStoryboard {
-    class func storyboard(by type: StoryboardType) -> UIStoryboard {
+    class func stoyboard(by type: StoryboardType) -> UIStoryboard {
         return UIStoryboard.init(name: type.rawValue, bundle: nil)
     }
 }
