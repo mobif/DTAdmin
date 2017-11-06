@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Entities:String {
+enum Entities: String {
     case Faculty = "Faculty"
     case Speciality = "Speciality"
     case Group = "Group"
@@ -20,4 +20,6 @@ enum Entities:String {
     case Answer = "Answer"
     case Student = "Student"
     case User = "AdminUser"
+    static let allValues: [Entities] = [Faculty, Speciality, Group, Subject, Test, TestDetail, TimeTable, Question, Answer, Student, User]
 }
+
