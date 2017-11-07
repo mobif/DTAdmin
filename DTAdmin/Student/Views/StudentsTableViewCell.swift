@@ -10,7 +10,7 @@ import UIKit
 
 class StudentsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var sizeImageLabel: UILabel!
+
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var fName: UILabel!
     @IBOutlet weak var sName: UILabel!

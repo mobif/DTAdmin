@@ -120,10 +120,6 @@ extension StudentViewController: UITableViewDataSource {
         cell.name.text = filteredList[indexPath.row].studentName
         cell.fName.text = filteredList[indexPath.row].studentFname
         cell.sName.text = filteredList[indexPath.row].studentSurname
-//        if let photo = filteredList[indexPath.row].photo {
-//            cell.sizeImageLabel.text = String(photo.count)
-//        }
-        //cell.sizeImageLabel.text = filteredList[indexPath.row].
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
