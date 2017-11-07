@@ -541,6 +541,49 @@ class DataManager: HTTPManager {
             }
         }
     }
+    func countRecords(byTest testId: String, completionHandler: @escaping (_ tables: UInt?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: .Question, type: .CountRecordsByTest, id: testId) else {
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [String: String] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
+            }
+            guard let countString = json["numberOfRecords"] else { return }
+            let result = UInt(countString)
+            completionHandler(result, nil)
+        }
+    }
+    func getRecordsRange(byTest testId: String, limit: String, offset: String, completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: .Question, type: .GetRecordsRangeByTest, id: testId, limit: limit, offset: offset) else {
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [[String: Any]] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
+            }
+            let recordList = json.flatMap { QuestionStructure(dictionary: $0) }
+            completionHandler(recordList, nil)
+        }
+    }
 }
 
 

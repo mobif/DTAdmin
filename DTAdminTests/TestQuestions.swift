@@ -25,7 +25,7 @@ class TestQuestions: XCTestCase {
         super.tearDown()
     }
     func testGetQuestionsByLevelRand() {
-        weak var promise = expectation(description: "Get list students by group")
+        weak var promise = expectation(description: "Get Questions by Level")
         var questionList: [QuestionStructure]?
         var errorRequest: String?
         DataManager.shared.getQuestionsRand(byLevel: "1", testID: "1", number: "3") {
@@ -40,7 +40,7 @@ class TestQuestions: XCTestCase {
         XCTAssertNotNil(questionList)
     }
     func testGetQuestionIdsRand() {
-        weak var promise = expectation(description: "Get list students by group")
+        weak var promise = expectation(description: "Get Questions IDs randomly by level")
         var questionList: [String]?
         var errorRequest: String?
         DataManager.shared.getQuestionIdsRand(byLevel: "1", testID: "1", number: "3") {
@@ -55,7 +55,7 @@ class TestQuestions: XCTestCase {
         XCTAssertNotNil(questionList)
     }
     func testGetAnswers() {
-        weak var promise = expectation(description: "Get list students by group")
+        weak var promise = expectation(description: "Get answers by question")
         var questionList: [AnswerStructure]?
         var errorRequest: String?
         DataManager.shared.getAnswers(byQuestion: "1") {
@@ -68,6 +68,21 @@ class TestQuestions: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(errorRequest)
         XCTAssertNotNil(questionList)
+    }
+    func testCountRecordsByTest() {
+        weak var promise = expectation(description: "Test counting of records by test")
+        var records: UInt?
+        var errorRequest: String?
+        DataManager.shared.countRecords(byTest: "1") {
+            (count, error) in
+            errorRequest = error
+            records = count
+            promise?.fulfill()
+            promise = nil
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssertNil(errorRequest)
+        XCTAssertNotNil(records)
     }
     
     func testPerformanceExample() {
