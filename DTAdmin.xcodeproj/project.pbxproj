@@ -39,6 +39,7 @@
 		89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E061F9D01DC0019FE77 /* NewTimeTableViewController.swift */; };
 		89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E091F9D03DC0019FE77 /* PickedTextField.swift */; };
 		89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E0B1F9D079D0019FE77 /* TimePicker.swift */; };
+		C72B03E71FB0F2B3004BB6C8 /* TestQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72B03E61FB0F2B3004BB6C8 /* TestQuestions.swift */; };
 		C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */; };
 		C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */; };
 		C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */; };
@@ -58,10 +59,22 @@
 		C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE71FA2670100B6CBD1 /* TestStructure.swift */; };
 		C7535CF91FA2670100B6CBD1 /* TimeTableStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE81FA2670100B6CBD1 /* TimeTableStructure.swift */; };
 		C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE91FA2670100B6CBD1 /* UserStructure.swift */; };
+		C7709DC51FAE09FC00994224 /* TestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7709DC41FAE09FC00994224 /* TestDataManager.swift */; };
+		C77747EE1FAFC28100CAC856 /* TestStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77747ED1FAFC28100CAC856 /* TestStudent.swift */; };
 		C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D6891FA267580092170E /* GroupTableViewCell.swift */; };
 		C799D68D1FA267590092170E /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C799D68A1FA267580092170E /* Student.storyboard */; };
 		C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D68B1FA267580092170E /* StudentsTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C7709DBF1FAE09B300994224 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FDE8F8C1F8D0DF60057BF3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FDE8F931F8D0DF60057BF3C;
+			remoteInfo = DTAdmin;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
@@ -100,10 +113,11 @@
 		89C96E061F9D01DC0019FE77 /* NewTimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeTableViewController.swift; sourceTree = "<group>"; };
 		89C96E091F9D03DC0019FE77 /* PickedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickedTextField.swift; sourceTree = "<group>"; };
 		89C96E0B1F9D079D0019FE77 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		C72B03E61FB0F2B3004BB6C8 /* TestQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestions.swift; sourceTree = "<group>"; };
 		C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStudentViewController.swift; sourceTree = "<group>"; };
 		C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
-		C7535CD81FA2670100B6CBD1 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C7535CD81FA2670100B6CBD1 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = DTAdmin/Models/DataManager.swift; sourceTree = SOURCE_ROOT; };
 		C7535CD91FA2670100B6CBD1 /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		C7535CDA1FA2670100B6CBD1 /* HTTPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		C7535CDB1FA2670100B6CBD1 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
@@ -119,6 +133,10 @@
 		C7535CE71FA2670100B6CBD1 /* TestStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStructure.swift; sourceTree = "<group>"; };
 		C7535CE81FA2670100B6CBD1 /* TimeTableStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableStructure.swift; sourceTree = "<group>"; };
 		C7535CE91FA2670100B6CBD1 /* UserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
+		C7709DBA1FAE09B300994224 /* DTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7709DBE1FAE09B300994224 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7709DC41FAE09FC00994224 /* TestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestDataManager.swift; path = DTAdminTests/TestDataManager.swift; sourceTree = SOURCE_ROOT; };
+		C77747ED1FAFC28100CAC856 /* TestStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStudent.swift; sourceTree = "<group>"; };
 		C799D6891FA267580092170E /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		C799D68A1FA267580092170E /* Student.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		C799D68B1FA267580092170E /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
@@ -126,6 +144,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		3FDE8F911F8D0DF60057BF3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7709DB71FAE09B300994224 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				3FDE8F961F8D0DF60057BF3C /* DTAdmin */,
+				C7709DBB1FAE09B300994224 /* DTAdminTests */,
 				3FDE8F951F8D0DF60057BF3C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -211,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */,
+				C7709DBA1FAE09B300994224 /* DTAdminTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -355,6 +382,17 @@
 			path = Structures;
 			sourceTree = "<group>";
 		};
+		C7709DBB1FAE09B300994224 /* DTAdminTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7709DBE1FAE09B300994224 /* Info.plist */,
+				C7709DC41FAE09FC00994224 /* TestDataManager.swift */,
+				C77747ED1FAFC28100CAC856 /* TestStudent.swift */,
+				C72B03E61FB0F2B3004BB6C8 /* TestQuestions.swift */,
+			);
+			path = DTAdminTests;
+			sourceTree = "<group>";
+		};
 		C799D6881FA267580092170E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,19 +423,42 @@
 			productReference = 3FDE8F941F8D0DF60057BF3C /* DTAdmin.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C7709DB91FAE09B300994224 /* DTAdminTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7709DC31FAE09B300994224 /* Build configuration list for PBXNativeTarget "DTAdminTests" */;
+			buildPhases = (
+				C7709DB61FAE09B300994224 /* Sources */,
+				C7709DB71FAE09B300994224 /* Frameworks */,
+				C7709DB81FAE09B300994224 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7709DC01FAE09B300994224 /* PBXTargetDependency */,
+			);
+			name = DTAdminTests;
+			productName = DTAdminTests;
+			productReference = C7709DBA1FAE09B300994224 /* DTAdminTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3FDE8F8C1F8D0DF60057BF3C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "if-ios-077";
 				TargetAttributes = {
 					3FDE8F931F8D0DF60057BF3C = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+					};
+					C7709DB91FAE09B300994224 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3FDE8F931F8D0DF60057BF3C;
 					};
 				};
 			};
@@ -415,6 +476,7 @@
 			projectRoot = "";
 			targets = (
 				3FDE8F931F8D0DF60057BF3C /* DTAdmin */,
+				C7709DB91FAE09B300994224 /* DTAdminTests */,
 			);
 		};
 /* End PBXProject section */
@@ -431,6 +493,13 @@
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7709DB81FAE09B300994224 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,7 +560,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7709DB61FAE09B300994224 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7709DC51FAE09FC00994224 /* TestDataManager.swift in Sources */,
+				C72B03E71FB0F2B3004BB6C8 /* TestQuestions.swift in Sources */,
+				C77747EE1FAFC28100CAC856 /* TestStudent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7709DC01FAE09B300994224 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FDE8F931F8D0DF60057BF3C /* DTAdmin */;
+			targetProxy = C7709DBF1FAE09B300994224 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3FA8A6931FAC8864002465E7 /* Admin.storyboard */ = {
@@ -662,6 +749,38 @@
 			};
 			name = Release;
 		};
+		C7709DC11FAE09B300994224 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DTAdminTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.winner.DTAdminTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Debug;
+		};
+		C7709DC21FAE09B300994224 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DTAdminTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.winner.DTAdminTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DTAdmin.app/DTAdmin";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -679,6 +798,15 @@
 			buildConfigurations = (
 				3FDE8FAA1F8D0DF60057BF3C /* Debug */,
 				3FDE8FAB1F8D0DF60057BF3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7709DC31FAE09B300994224 /* Build configuration list for PBXNativeTarget "DTAdminTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7709DC11FAE09B300994224 /* Debug */,
+				C7709DC21FAE09B300994224 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

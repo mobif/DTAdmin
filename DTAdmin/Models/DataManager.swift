@@ -356,6 +356,234 @@ class DataManager: HTTPManager {
             }
         }
     }
+    
+    func getGroups(bySpeciality speciality: String, completionHandler: @escaping (_ groups: [GroupStructure]?, _ error: String?) -> ()) {
+        getList(byID: speciality, type: .GetGroupBySpeciality, entityStructure: .Group) {
+            (list, error) in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            if let list = list {
+                let groupList = list as? [GroupStructure]
+                completionHandler( groupList, nil)
+            } else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+            }
+        }
+    }
+    func getGroups(byFaculty faculty: String, completionHandler: @escaping (_ groups: [GroupStructure]?, _ error: String?) -> ()) {
+        getList(byID: faculty, type: .GetGroupByFaculty, entityStructure: .Group) {
+            (list, error) in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            if let list = list {
+                let groupList = list as? [GroupStructure]
+                completionHandler( groupList, nil)
+            } else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+            }
+        }
+    }
+    func getTestDetails(byTest test: String, completionHandler: @escaping (_ testDetails: [TestDetailStructure]?, _ error: String?) -> ()) {
+        getList(byID: test, type: .GetTestDetailsByTest, entityStructure: .TestDetail) {
+            (list, error) in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            if let list = list {
+                let testList = list as? [TestDetailStructure]
+                completionHandler( testList, nil)
+            } else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+            }
+        }
+    }
+    func getTest(bySubject subject: String, completionHandler: @escaping (_ tests: [TestStructure]?, _ error: String?) -> ()) {
+        getList(byID: subject, type: .GetTestsBySubject, entityStructure: .Test) {
+            (list, error) in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            if let list = list {
+                let testList = list as? [TestStructure]
+                completionHandler(testList, nil)
+            } else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+            }
+        }
+    }
+    
+    func getTimeTables(forGroup group: String, completionHandler: @escaping (_ tables: [TimeTableStructure]?, _ error: String?) -> ()) {
+        getList(byID: group, type: .GetTimeTablesForGroup, entityStructure: .TimeTable) {
+            (list, error) in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            if let list = list {
+                let timeTables = list as? [TimeTableStructure]
+                completionHandler(timeTables, nil)
+            } else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+            }
+        }
+    }
+    func getTimeTables(forSubject subject: String, completionHandler: @escaping (_ tables: [TimeTableStructure]?, _ error: String?) -> ()) {
+        getList(byID: subject, type: .GetTimeTablesForSubject, entityStructure: .TimeTable) {
+            (list, error) in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            if let list = list {
+                let timeTables = list as? [TimeTableStructure]
+                completionHandler(timeTables, nil)
+            } else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+            }
+        }
+    }
+    
+    private func getList(byID: String, type: TypeReqest, entityStructure: Entities, completionHandler: @escaping (_ list: [Any]?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: entityStructure, type: type, id: byID) else {
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [[String: Any]] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
+            }
+            var listAny: [Any]?
+            switch entityStructure {
+            case .TestDetail: listAny = json.flatMap { TestDetailStructure(dictionary: $0) }
+            case .Group: listAny = json.flatMap { GroupStructure(dictionary: $0) }
+            case .Test: listAny = json.flatMap { TestStructure(dictionary: $0) }
+            case .TimeTable: listAny = json.flatMap { TimeTableStructure(dictionary: $0) }
+            case .Answer: listAny = json.flatMap { AnswerStructure(dictionary: $0) }
+            default: completionHandler(nil, NSLocalizedString("Request not supported!", comment: "Request not supported!"))
+            }
+            DispatchQueue.main.async {
+                completionHandler(listAny, nil)
+            }
+        }
+    }
+    func getQuestionsRand(byLevel level: String, testID testId: String, number: String, completionHandler: @escaping (_ questions: [QuestionStructure]?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: .Question, type: .GetQuestionsByLevelRand, id: testId, limit: level, offset: number) else {
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [[String: Any]] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
+            }
+            let questionList = json.flatMap { QuestionStructure(dictionary: $0) }
+            DispatchQueue.main.async {
+                completionHandler(questionList, nil)
+            }
+        }
+    }
+    func getQuestionIdsRand(byLevel level: String, testID testId: String, number: String, completionHandler: @escaping (_ questions: [String]?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: .Question, type: .GetQuestionIdsByLevelRand, id: testId, limit: level, offset: number) else {
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [[String: String]] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
+            }
+            let questionList = json.flatMap { $0["question_id"] }
+            DispatchQueue.main.async {
+                completionHandler(questionList, nil)
+            }
+        }
+    }
+    func getAnswers(byQuestion question: String, completionHandler: @escaping (_ tables: [AnswerStructure]?, _ error: String?) -> ()) {
+        getList(byID: question, type: .GetAnswersByQuestion, entityStructure: .Answer) {
+            (list, error) in
+            if let error = error {
+                completionHandler(nil, error)
+            }
+            if let list = list {
+                let answerList = list as? [AnswerStructure]
+                completionHandler(answerList, nil)
+            } else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+            }
+        }
+    }
+    func countRecords(byTest testId: String, completionHandler: @escaping (_ tables: UInt?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: .Question, type: .CountRecordsByTest, id: testId) else {
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [String: String] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
+            }
+            guard let countString = json["numberOfRecords"] else { return }
+            let result = UInt(countString)
+            completionHandler(result, nil)
+        }
+    }
+    func getRecordsRange(byTest testId: String, limit: String, offset: String, completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
+        guard let request = getURLReqest(entityStructure: .Question, type: .GetRecordsRangeByTest, id: testId, limit: limit, offset: offset) else {
+            let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completionHandler(nil, error)
+            return
+        }
+        getResponse(request: request) { (list, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+            guard let  json = list as? [[String: Any]] else {
+                let error = NSLocalizedString("Response is empty", comment: "No data in server response")
+                completionHandler(nil, error)
+                return
+            }
+            let recordList = json.flatMap { QuestionStructure(dictionary: $0) }
+            completionHandler(recordList, nil)
+        }
+    }
 }
 
 
