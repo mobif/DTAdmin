@@ -21,10 +21,17 @@ class HTTPManager {
         case GetCount
         case GetRecordsRange
         case GetStudentsByGroup
-        case GetRecordsRangeByTest
+        case GetGroupBySpeciality
+        case GetGroupByFaculty
+        case GetTestDetailsByTest
         case GetTestsBySubject
+        case GetTimeTablesForGroup
+        case GetTimeTablesForSubject
+        case GetQuestionsByLevelRand
+        case GetQuestionIdsByLevelRand
+        case GetAnswersByQuestion
     }
-    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET"), .GetCount: ("/countRecords", "GET"), .GetRecordsRange: ("/getRecordsRange", "GET"), .GetStudentsByGroup: ("/getStudentsByGroup/", "GET"), .GetRecordsRangeByTest: ("/getRecordsRangeByTest/", "GET"), .GetTestsBySubject: ("/getTestsBySubject/", "GET") ]
+    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET"), .GetCount: ("/countRecords", "GET"), .GetRecordsRange: ("/getRecordsRange", "GET"), .GetStudentsByGroup: ("/getStudentsByGroup/", "GET"), .GetGroupBySpeciality: ("/getGroupsBySpeciality/", "GET"), .GetGroupByFaculty: ("/getGroupsByFaculty/", "GET"), .GetTestDetailsByTest: ("/getTestDetailsByTest/", "GET"), .GetTestsBySubject: ("/getTestsBySubject/", "GET"), .GetTimeTablesForGroup: ("/getTimeTablesForGroup/", "GET"), .GetTimeTablesForSubject: ("/getTimeTablesForSubject/", "GET"), .GetQuestionsByLevelRand: ("/getQuestionsByLevelRand/", "GET"), .GetQuestionIdsByLevelRand: ("/getQuestionIdsByLevelRand/", "GET"), .GetAnswersByQuestion: ("/getAnswersByQuestion/", "GET") ]
     
     func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "", limit: String = "", offset: String = "", withoutImages: Bool = false) -> URLRequest? {
         guard let URLCreationData = urlPrepare[type] else { return nil }

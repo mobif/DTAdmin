@@ -26,9 +26,9 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     func showTests(id: String) {
-        DataManager.shared.getEntityBy(byId: id, typeEntity: .Test) { (tests, error) in
-            if error == nil,
-                let tests = tests as? [TestStructure] {
+        DataManager.shared.getTest(bySubject: id) { (tests, error) in
+            if error == nil {
+                guard let tests = tests else { return }
                 self.test = tests
                 self.tableView.reloadData()
             } else {

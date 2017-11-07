@@ -52,17 +52,17 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
         self.refresherForQuestion.endRefreshing()
     }
     
-    func showQuestions(id: String, quantity: UInt) {
-        DataManager.shared.getListOfQuestions(forEntity: .Question, entityId: id, quantity: quantity, fromNo: 0) {(questions, error) in
-            if error == nil,
-                let questions = questions as? [QuestionStructure] {
-                self.questions = questions
-                self.tableView.reloadData()
-            } else {
-                self.showMessage(message: error ?? "Incorect type data")
-            }
-        }
-    }
+//    func showQuestions(id: String, quantity: UInt) {
+//        DataManager.shared (forEntity: .Question, entityId: id, quantity: quantity, fromNo: 0) {(questions, error) in
+//            if error == nil,
+//                let questions = questions as? [QuestionStructure] {
+//                self.questions = questions
+//                self.tableView.reloadData()
+//            } else {
+//                self.showMessage(message: error ?? "Incorect type data")
+//            }
+//        }
+//    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {

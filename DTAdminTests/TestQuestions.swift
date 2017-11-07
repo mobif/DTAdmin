@@ -28,6 +28,7 @@ class TestQuestions: XCTestCase {
         weak var promise = expectation(description: "Get list students by group")
         var questionList: [QuestionStructure]?
         var errorRequest: String?
+        
         DataManager.shared.getQuestionsRand(byLevel: "1", testID: "1", number: "3") {
             (questions, error) in
             errorRequest = error
