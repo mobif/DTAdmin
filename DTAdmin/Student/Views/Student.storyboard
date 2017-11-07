@@ -59,12 +59,20 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="En9-ss-Rp9">
+                                                            <rect key="frame" x="238" y="0.0" width="85" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="fName" destination="Dca-nQ-l7S" id="PcY-Yo-nSP"/>
                                                     <outlet property="name" destination="uEg-o2-5ug" id="Ot8-eX-LBO"/>
                                                     <outlet property="sName" destination="2oH-3S-Lnl" id="jhz-E2-fUG"/>
+                                                    <outlet property="sizeImageLabel" destination="En9-ss-Rp9" id="4n3-EB-Vrb"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
