@@ -225,15 +225,10 @@
 		3F2BF5941F9F61C300B2FA7E /* Subject */ = {
 			isa = PBXGroup;
 			children = (
-				3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */,
+				3F74A9EE1FB2151B00E6602F /* Question */,
+				3F74A9ED1FB2151300E6602F /* Test */,
+				3F74A9EF1FB215DE00E6602F /* Subject */,
 				3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */,
-				3F2BF5A11F9F7A5900B2FA7E /* DetailSubjectViewController.swift */,
-				3F74A9D21FB1E8EC00E6602F /* TestsForSubjectTableViewController.swift */,
-				3F74A9D41FB1E93700E6602F /* ShowTestInfoViewController.swift */,
-				3F74A9D61FB1E96600E6602F /* QuestionsTableViewController.swift */,
-				3F74A9D81FB1E99C00E6602F /* QuestionInfoViewController.swift */,
-				3F74A9DA1FB1E9C700E6602F /* AddNewQuestionViewController.swift */,
-				3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */,
 			);
 			path = Subject;
 			sourceTree = "<group>";
@@ -255,6 +250,35 @@
 				3F74A9E41FB1FD2E00E6602F /* Info.plist */,
 			);
 			path = TestSubject;
+			sourceTree = "<group>";
+		};
+		3F74A9ED1FB2151300E6602F /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				3F74A9D21FB1E8EC00E6602F /* TestsForSubjectTableViewController.swift */,
+				3F74A9D41FB1E93700E6602F /* ShowTestInfoViewController.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		3F74A9EE1FB2151B00E6602F /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				3F74A9D61FB1E96600E6602F /* QuestionsTableViewController.swift */,
+				3F74A9D81FB1E99C00E6602F /* QuestionInfoViewController.swift */,
+				3F74A9DA1FB1E9C700E6602F /* AddNewQuestionViewController.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
+		3F74A9EF1FB215DE00E6602F /* Subject */ = {
+			isa = PBXGroup;
+			children = (
+				3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */,
+				3F2BF5A11F9F7A5900B2FA7E /* DetailSubjectViewController.swift */,
+				3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */,
+			);
+			path = Subject;
 			sourceTree = "<group>";
 		};
 		3FDE8F8B1F8D0DF60057BF3C = {
