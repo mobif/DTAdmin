@@ -39,6 +39,7 @@
 		89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E061F9D01DC0019FE77 /* NewTimeTableViewController.swift */; };
 		89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E091F9D03DC0019FE77 /* PickedTextField.swift */; };
 		89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E0B1F9D079D0019FE77 /* TimePicker.swift */; };
+		C72B03E71FB0F2B3004BB6C8 /* TestQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72B03E61FB0F2B3004BB6C8 /* TestQuestions.swift */; };
 		C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */; };
 		C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */; };
 		C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */; };
@@ -112,6 +113,7 @@
 		89C96E061F9D01DC0019FE77 /* NewTimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeTableViewController.swift; sourceTree = "<group>"; };
 		89C96E091F9D03DC0019FE77 /* PickedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickedTextField.swift; sourceTree = "<group>"; };
 		89C96E0B1F9D079D0019FE77 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		C72B03E61FB0F2B3004BB6C8 /* TestQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestions.swift; sourceTree = "<group>"; };
 		C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStudentViewController.swift; sourceTree = "<group>"; };
 		C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				C7709DBE1FAE09B300994224 /* Info.plist */,
 				C7709DC41FAE09FC00994224 /* TestDataManager.swift */,
 				C77747ED1FAFC28100CAC856 /* TestStudent.swift */,
+				C72B03E61FB0F2B3004BB6C8 /* TestQuestions.swift */,
 			);
 			path = DTAdminTests;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7709DC51FAE09FC00994224 /* TestDataManager.swift in Sources */,
+				C72B03E71FB0F2B3004BB6C8 /* TestQuestions.swift in Sources */,
 				C77747EE1FAFC28100CAC856 /* TestStudent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
