@@ -45,7 +45,7 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
                 if let countOfQuestions = count {
                     print(countOfQuestions)
                     guard let id = self.testId else { return }
-                    self.showQuestions(id: id, quantity: countOfQuestions)
+                    //self.showQuestions(id: id, quantity: countOfQuestions)
                 }
             }
         }

@@ -42,16 +42,43 @@ class TestSubject: XCTestCase {
     
     func testAddNewSubject() {
         let newSubject = SubjectStructure(dictionary: ["subject_name" : "New subject", "subject_description" : "New description"])
+        var subjectResult: SubjectStructure?
         var error: String?
         weak var promise = expectation(description: "Add new subject record")
         DataManager.shared.insertEntity(entity: newSubject!, typeEntity: .Subject) { subjectRecord, errorMessage in
+            error = errorMessage
+            let result = subjectRecord as! [[String : Any]]
+            let resultFirst = result.first!
+            subjectResult = SubjectStructure(dictionary: resultFirst)
+            promise?.fulfill()
+            promise = nil
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssertNil(error)
+        XCTAssertNotNil(subjectResult)
+    }
+    
+    func testUpdateSubject() {
+        let updateSubject = SubjectStructure(dictionary: ["subject_name" : "Update subject", "subject_description" : "Update description"])
+        var error: String?
+        weak var promise = expectation(description: "Update subject record")
+        DataManager.shared.updateEntity(byId: "1", entity: updateSubject!, typeEntity: .Subject) { errorMessage in
             error = errorMessage
             promise?.fulfill()
             promise = nil
         }
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(error)
-        
+    }
+    
+    func testDeleteSubject() {
+        weak var promise = expectation(description: "Delete subject record")
+        DataManager.shared.deleteEntity(byId: "1", typeEntity: .Subject) { response, error in
+            XCTAssertNil(error)
+            promise?.fulfill()
+            promise = nil
+        }
+        waitForExpectations(timeout: 5, handler: nil)
     }
     
     func testPerformanceExample() {
