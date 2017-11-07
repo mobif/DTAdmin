@@ -11,6 +11,7 @@ import XCTest
 
 class TestSubject: XCTestCase {
     var sessionUnderTest: URLSession!
+    
     override func setUp() {
         super.setUp()
         CommonNetworkManager.shared().logIn(username: "admin", password: "dtapi_admin") { (user, error) in
@@ -41,8 +42,8 @@ class TestSubject: XCTestCase {
     }
     
     func testAddNewSubject() {
-        let newSubject = SubjectStructure(dictionary: ["subject_name" : "New subject", "subject_description" : "New description"])
         var subjectResult: SubjectStructure?
+        let newSubject = SubjectStructure(dictionary: ["subject_name" : "Example for delete115", "subject_description" : "Example for delete1"])
         var error: String?
         weak var promise = expectation(description: "Add new subject record")
         DataManager.shared.insertEntity(entity: newSubject!, typeEntity: .Subject) { subjectRecord, errorMessage in
@@ -59,10 +60,10 @@ class TestSubject: XCTestCase {
     }
     
     func testUpdateSubject() {
-        let updateSubject = SubjectStructure(dictionary: ["subject_name" : "Update subject", "subject_description" : "Update description"])
+        let updateSubject = SubjectStructure(dictionary: ["subject_name" : "11111", "subject_description" : "11111"])
         var error: String?
         weak var promise = expectation(description: "Update subject record")
-        DataManager.shared.updateEntity(byId: "1", entity: updateSubject!, typeEntity: .Subject) { errorMessage in
+        DataManager.shared.updateEntity(byId: "200", entity: updateSubject!, typeEntity: .Subject) { errorMessage in
             error = errorMessage
             promise?.fulfill()
             promise = nil
@@ -72,13 +73,15 @@ class TestSubject: XCTestCase {
     }
     
     func testDeleteSubject() {
+        var error: String?
         weak var promise = expectation(description: "Delete subject record")
-        DataManager.shared.deleteEntity(byId: "1", typeEntity: .Subject) { response, error in
-            XCTAssertNil(error)
+        DataManager.shared.deleteEntity(byId: "205", typeEntity: .Subject) { response, errorMessage in
+            error = errorMessage
             promise?.fulfill()
             promise = nil
         }
         waitForExpectations(timeout: 5, handler: nil)
+        XCTAssertNil(error)
     }
     
     func testPerformanceExample() {
