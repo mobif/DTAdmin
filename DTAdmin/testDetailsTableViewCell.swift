@@ -10,15 +10,10 @@ import UIKit
 
 class testDetailsTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    @IBOutlet weak var testDetailId: UILabel!
+    @IBOutlet weak var testDetailTestId: UILabel!
+    @IBOutlet weak var testDetailLevel: UILabel!
+    @IBOutlet weak var testDetailTasks: UILabel!
+    @IBOutlet weak var testDetailRate: UILabel!
+    
 }

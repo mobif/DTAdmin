@@ -31,8 +31,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     @objc func refreshData(){
         refresh.beginRefreshing()
         DataManager.shared.getList(byEntity: .Speciality) { (speciality, error) in
-            if error == nil,
-                let specialityies = speciality as? [SpecialityStructure] {
+            if error == nil, let specialityies = speciality as? [SpecialityStructure] {
                 self.specialitiesArray = specialityies
                 self.filteredSpecialitiesArray = self.specialitiesArray
                 self.specialitiesTableView.reloadData()
@@ -68,9 +67,10 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "specialityCell", for: indexPath) as? SpecialityTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
-        cell.specialityIdLabel.text = filteredSpecialitiesArray[indexPath.row].id
-        cell.specialityCodeLabel.text = filteredSpecialitiesArray[indexPath.row].code
-        cell.specialityNameLabel.text = filteredSpecialitiesArray[indexPath.row].name
+        let array = filteredSpecialitiesArray[indexPath.row]
+        cell.specialityIdLabel.text = array.id
+        cell.specialityCodeLabel.text = array.code
+        cell.specialityNameLabel.text = array.name
         return cell
     }
     
