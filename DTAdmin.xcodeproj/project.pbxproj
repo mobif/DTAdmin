@@ -20,6 +20,8 @@
 		3F5470CB1FACB835003E9B96 /* SpecialityCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5470C71FACB835003E9B96 /* SpecialityCreateUpdateViewController.swift */; };
 		3F5470CC1FACB835003E9B96 /* Speciality.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5470C81FACB835003E9B96 /* Speciality.storyboard */; };
 		3F5470CD1FACB835003E9B96 /* SpecialityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5470C91FACB835003E9B96 /* SpecialityTableViewCell.swift */; };
+		3F966FF01FB1E544008C402F /* Speciality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F966FEF1FB1E544008C402F /* Speciality.swift */; };
+		3F966FF21FB20776008C402F /* testDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F966FF11FB20776008C402F /* testDetailsTableViewCell.swift */; };
 		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
 		3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminViewController.swift */; };
 		3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8A6931FAC8864002465E7 /* Admin.storyboard */; };
@@ -95,6 +97,8 @@
 		3F5470C71FACB835003E9B96 /* SpecialityCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3F5470C81FACB835003E9B96 /* Speciality.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speciality.storyboard; sourceTree = "<group>"; };
 		3F5470C91FACB835003E9B96 /* SpecialityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityTableViewCell.swift; sourceTree = "<group>"; };
+		3F966FEF1FB1E544008C402F /* Speciality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speciality.swift; sourceTree = "<group>"; };
+		3F966FF11FB20776008C402F /* testDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888161F9688B200D602F3 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3FA8A6921FAC8864002465E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Admin.storyboard; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				3F2ADB591FB0AA6900D6207F /* TestDetails.storyboard */,
+				3F966FF11FB20776008C402F /* testDetailsTableViewCell.swift */,
 				3F2ADB5B1FB0AA8300D6207F /* TestDetailsViewController.swift */,
 			);
 			name = TestDetails;
@@ -420,6 +425,7 @@
 				C7709DBE1FAE09B300994224 /* Info.plist */,
 				C7709DC41FAE09FC00994224 /* TestDataManager.swift */,
 				C77747ED1FAFC28100CAC856 /* TestStudent.swift */,
+				3F966FEF1FB1E544008C402F /* Speciality.swift */,
 			);
 			path = DTAdminTests;
 			sourceTree = "<group>";
@@ -593,6 +599,7 @@
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 				C7535CF21FA2670100B6CBD1 /* QuestionStructure.swift in Sources */,
+				3F966FF21FB20776008C402F /* testDetailsTableViewCell.swift in Sources */,
 				C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,6 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F966FF01FB1E544008C402F /* Speciality.swift in Sources */,
 				C7709DC51FAE09FC00994224 /* TestDataManager.swift in Sources */,
 				C77747EE1FAFC28100CAC856 /* TestStudent.swift in Sources */,
 			);
