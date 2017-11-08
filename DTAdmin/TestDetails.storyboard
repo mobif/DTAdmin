@@ -121,11 +121,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="testDetailId" destination="IJW-LZ-UAN" id="XG1-St-TdE"/>
-                                            <outlet property="testDetailLevel" destination="vwx-tl-dD4" id="KIy-Z4-9ss"/>
-                                            <outlet property="testDetailRate" destination="LqV-EM-6br" id="WHH-LQ-bYO"/>
-                                            <outlet property="testDetailTasks" destination="Q2h-WC-n5X" id="Tfc-oC-2sB"/>
-                                            <outlet property="testDetailTestId" destination="ugb-SJ-x8D" id="zvB-wU-bri"/>
+                                            <outlet property="testDetailId" destination="IJW-LZ-UAN" id="4IF-pt-rQC"/>
+                                            <outlet property="testDetailLevel" destination="vwx-tl-dD4" id="rA8-6u-euc"/>
+                                            <outlet property="testDetailRate" destination="LqV-EM-6br" id="Qxf-JA-XXE"/>
+                                            <outlet property="testDetailTasks" destination="Q2h-WC-n5X" id="0dX-CS-hbi"/>
+                                            <outlet property="testDetailTestId" destination="ugb-SJ-x8D" id="YKE-fu-hf8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -42,7 +42,46 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         cell.testDetailRate.text = array.rate
         return cell
     }
-
+    
+    /* - - - edit && delete - - -  */
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        <#code#>
+    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
+//            guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality", bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController") as? SpecialityCreateUpdateViewController else  { return }
+//            specialityCreateUpdateViewController.specialityInstance = self.specialitiesArray[indexPath.row]
+//            specialityCreateUpdateViewController.canEdit = true
+//            specialityCreateUpdateViewController.resultModification = { updateResult in
+//                self.specialitiesArray[indexPath.row] = updateResult
+//                self.specialitiesTableView.reloadData()
+//            }
+//            self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
+//        })
+//        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { action, indexPath in
+//            let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this speciality?", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
+//                alert.dismiss(animated: true, completion: nil)
+//                guard let id = self.specialitiesArray[indexPath.row].id else { return }
+//                if indexPath.row < self.filteredSpecialitiesArray.count {
+//                    DataManager.shared.deleteEntity(byId: id, typeEntity: Entities.Speciality) { (deleted, error) in
+//                        if let error = error {
+//                            self.showWarningMsg(error)
+//                        } else {
+//                            self.filteredSpecialitiesArray.remove(at: indexPath.row)
+//                            tableView.deleteRows(at: [indexPath], with: .top)
+//                            self.specialitiesTableView.reloadData()
+//                        }
+//                    }
+//                }
+//            }))
+//            alert.addAction(UIAlertAction(title: "NO", style: .default, handler: { (action) in
+//                alert.dismiss(animated: true, completion: nil)
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//        })
+//        return [edit, delete]
+//    }
 
     @IBAction func addButtonTapped(_ sender: Any) {
         guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
