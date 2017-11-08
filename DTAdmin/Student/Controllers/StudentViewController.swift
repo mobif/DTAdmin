@@ -91,7 +91,6 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
         let index = studentList.index(where: { $0.userId == byId } )
         return index
     }
-    
 }
 extension UIViewController {
     func showWarningMsg(_ textMsg: String) {

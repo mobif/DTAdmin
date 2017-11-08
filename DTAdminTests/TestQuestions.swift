@@ -84,6 +84,21 @@ class TestQuestions: XCTestCase {
         XCTAssertNil(errorRequest)
         XCTAssertNotNil(records)
     }
+    func testGetRecordsRangeByTest() {
+        weak var promise = expectation(description: "Test get Records range test")
+        var questionList: [QuestionStructure]?
+        var errorRequest: String?
+        DataManager.shared.getRecordsRange(byTest: "1", limit: "3", offset: "2") {
+         (list, error) in
+            questionList = list
+            errorRequest = error
+            promise?.fulfill()
+            promise = nil
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssertNil(errorRequest)
+        XCTAssertNotNil(questionList)
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
