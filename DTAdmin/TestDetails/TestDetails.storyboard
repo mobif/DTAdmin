@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rf-bv-pV7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rf-bv-pV7">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +22,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Fod-Z7-HNV" customClass="TestDetailsTableViewCell" customModule="DTAdmin" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="testDetailsCell" id="Fod-Z7-HNV" customClass="TestDetailsTableViewCell" customModule="DTAdmin" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fod-Z7-HNV" id="p9v-as-8Ep">
@@ -68,64 +68,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="testDetailId" destination="XHZ-99-8rx" id="hcE-8D-pgY"/>
-                                            <outlet property="testDetailLevel" destination="X51-nb-ii0" id="NIR-s4-s6s"/>
-                                            <outlet property="testDetailRate" destination="qeS-Y6-PIX" id="wwq-Qz-FsX"/>
-                                            <outlet property="testDetailTasks" destination="Vnv-i0-3Vm" id="uBY-hv-IaO"/>
-                                            <outlet property="testDetailTestId" destination="ena-gu-gGN" id="4R5-Dl-MoV"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="testDetailsCell" id="Krx-gY-AJk" customClass="TestDetailsTableViewCell" customModule="DTAdmin" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Krx-gY-AJk" id="gDc-It-Ox3">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwx-tl-dD4">
-                                                    <rect key="frame" x="111" y="11" width="52" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2h-WC-n5X">
-                                                    <rect key="frame" x="171" y="11" width="55" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqV-EM-6br">
-                                                    <rect key="frame" x="242" y="11" width="50" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="test_id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugb-SJ-x8D">
-                                                    <rect key="frame" x="37" y="11" width="54" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJW-LZ-UAN">
-                                                    <rect key="frame" x="8" y="11" width="21" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="testDetailId" destination="IJW-LZ-UAN" id="4IF-pt-rQC"/>
-                                            <outlet property="testDetailLevel" destination="vwx-tl-dD4" id="rA8-6u-euc"/>
-                                            <outlet property="testDetailRate" destination="LqV-EM-6br" id="Qxf-JA-XXE"/>
-                                            <outlet property="testDetailTasks" destination="Q2h-WC-n5X" id="0dX-CS-hbi"/>
-                                            <outlet property="testDetailTestId" destination="ugb-SJ-x8D" id="YKE-fu-hf8"/>
+                                            <outlet property="testDetailId" destination="XHZ-99-8rx" id="Wh6-b1-9Rx"/>
+                                            <outlet property="testDetailLevel" destination="X51-nb-ii0" id="n8i-JN-3zK"/>
+                                            <outlet property="testDetailRate" destination="qeS-Y6-PIX" id="ean-bP-UCQ"/>
+                                            <outlet property="testDetailTasks" destination="Vnv-i0-3Vm" id="Bn1-iQ-uFi"/>
+                                            <outlet property="testDetailTestId" destination="ena-gu-gGN" id="2lA-3d-Qma"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -205,6 +152,7 @@
                         <viewLayoutGuide key="safeArea" id="zuH-fU-XqQ"/>
                     </view>
                     <connections>
+                        <outlet property="createButton" destination="fFo-XF-2WK" id="ULK-TF-Yho"/>
                         <outlet property="numberOfMarkTextField" destination="s0X-NO-bxB" id="ZGh-NB-Jn4"/>
                         <outlet property="numberOfTaskTextField" destination="N66-Qe-lm6" id="ql6-nt-t2h"/>
                         <outlet property="testLevelTextfield" destination="vMB-wx-9lX" id="QBr-Ua-q4Y"/>

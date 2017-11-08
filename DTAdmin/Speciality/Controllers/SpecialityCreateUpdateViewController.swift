@@ -44,7 +44,7 @@ class SpecialityCreateUpdateViewController: UIViewController {
     /* - - - building for request - - - */
     func prepareForRequest() -> Bool {
         guard let code = specialityCodeTextField.text, let name = specialityNameTextField.text else { return false }
-        let dictionary: [String: Any] = ["speciality_code": code, "speciality_name": name]
+        let dictionary: [String: Any] = ["speciality_id": idForEditing, "speciality_code": code, "speciality_name": name]
         self.specialityForSave = SpecialityStructure(dictionary: dictionary)
         return true
     }

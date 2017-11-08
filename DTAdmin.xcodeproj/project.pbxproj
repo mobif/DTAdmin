@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F2ADB5A1FB0AA6900D6207F /* TestDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2ADB591FB0AA6900D6207F /* TestDetails.storyboard */; };
-		3F2ADB5C1FB0AA8300D6207F /* TestDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2ADB5B1FB0AA8300D6207F /* TestDetailsViewController.swift */; };
+		2DEF89161FB39445000728CF /* TestDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF89131FB39445000728CF /* TestDetailsViewController.swift */; };
+		2DEF89171FB39445000728CF /* TestDetailCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF89141FB39445000728CF /* TestDetailCreateUpdateViewController.swift */; };
+		2DEF89181FB39445000728CF /* TestDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEF89151FB39445000728CF /* TestDetails.storyboard */; };
+		2DEF891A1FB39484000728CF /* TestDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF89191FB39484000728CF /* TestDetailsTableViewCell.swift */; };
 		3F2BF59B1F9F61F600B2FA7E /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */; };
 		3F2BF59C1F9F61F600B2FA7E /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5961F9F61F600B2FA7E /* Subject.swift */; };
 		3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */; };
@@ -21,7 +23,6 @@
 		3F5470CC1FACB835003E9B96 /* Speciality.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5470C81FACB835003E9B96 /* Speciality.storyboard */; };
 		3F5470CD1FACB835003E9B96 /* SpecialityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5470C91FACB835003E9B96 /* SpecialityTableViewCell.swift */; };
 		3F966FF01FB1E544008C402F /* Speciality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F966FEF1FB1E544008C402F /* Speciality.swift */; };
-		3F9BB3441FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BB3431FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift */; };
 		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
 		3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminViewController.swift */; };
 		3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8A6931FAC8864002465E7 /* Admin.storyboard */; };
@@ -84,8 +85,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F2ADB591FB0AA6900D6207F /* TestDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestDetails.storyboard; sourceTree = "<group>"; };
-		3F2ADB5B1FB0AA8300D6207F /* TestDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailsViewController.swift; sourceTree = "<group>"; };
+		2DEF89131FB39445000728CF /* TestDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailsViewController.swift; sourceTree = "<group>"; };
+		2DEF89141FB39445000728CF /* TestDetailCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailCreateUpdateViewController.swift; sourceTree = "<group>"; };
+		2DEF89151FB39445000728CF /* TestDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestDetails.storyboard; sourceTree = "<group>"; };
+		2DEF89191FB39484000728CF /* TestDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
 		3F2BF5961F9F61F600B2FA7E /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +101,6 @@
 		3F5470C81FACB835003E9B96 /* Speciality.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speciality.storyboard; sourceTree = "<group>"; };
 		3F5470C91FACB835003E9B96 /* SpecialityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityTableViewCell.swift; sourceTree = "<group>"; };
 		3F966FEF1FB1E544008C402F /* Speciality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speciality.swift; sourceTree = "<group>"; };
-		3F9BB3431FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888161F9688B200D602F3 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3FA8A6921FAC8864002465E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Admin.storyboard; sourceTree = "<group>"; };
@@ -174,6 +176,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DAB987A1FB3935B00919E62 /* TestDetails */ = {
+			isa = PBXGroup;
+			children = (
+				2DEF891B1FB3A165000728CF /* Controllers */,
+				2DEF89151FB39445000728CF /* TestDetails.storyboard */,
+				2DEF89191FB39484000728CF /* TestDetailsTableViewCell.swift */,
+			);
+			path = TestDetails;
+			sourceTree = "<group>";
+		};
+		2DEF891B1FB3A165000728CF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2DEF89131FB39445000728CF /* TestDetailsViewController.swift */,
+				2DEF89141FB39445000728CF /* TestDetailCreateUpdateViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		3F01D7CF1F8D1458005CA03A /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,16 +226,6 @@
 			children = (
 			);
 			name = Group;
-			sourceTree = "<group>";
-		};
-		3F2ADB581FB0AA2800D6207F /* TestDetails */ = {
-			isa = PBXGroup;
-			children = (
-				3F2ADB591FB0AA6900D6207F /* TestDetails.storyboard */,
-				3F9BB3431FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift */,
-				3F2ADB5B1FB0AA8300D6207F /* TestDetailsViewController.swift */,
-			);
-			name = TestDetails;
 			sourceTree = "<group>";
 		};
 		3F2BF5941F9F61C300B2FA7E /* Subject */ = {
@@ -281,7 +292,7 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
-				3F2ADB581FB0AA2800D6207F /* TestDetails */,
+				2DAB987A1FB3935B00919E62 /* TestDetails */,
 				3F5470C41FACB835003E9B96 /* Speciality */,
 				89C96DFF1F9CC2F90019FE77 /* TimeTable */,
 				8927571A1F97648C00FF669D /* Common */,
@@ -523,7 +534,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F2ADB5A1FB0AA6900D6207F /* TestDetails.storyboard in Resources */,
+				2DEF89181FB39445000728CF /* TestDetails.storyboard in Resources */,
 				89C96E031F9CFD1F0019FE77 /* TimeTable.storyboard in Resources */,
 				3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */,
 				C799D68D1FA267590092170E /* Student.storyboard in Resources */,
@@ -552,6 +563,7 @@
 				89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */,
 				C7535CF71FA2670100B6CBD1 /* TestDetailStructure.swift in Sources */,
 				C7535CEA1FA2670100B6CBD1 /* DataManager.swift in Sources */,
+				2DEF891A1FB39484000728CF /* TestDetailsTableViewCell.swift in Sources */,
 				3F2BF59B1F9F61F600B2FA7E /* AddNewRecordViewController.swift in Sources */,
 				894AA5CA1FA9E40E00B7669D /* Storyboard.swift in Sources */,
 				C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */,
@@ -559,7 +571,7 @@
 				3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */,
 				C7535CF41FA2670100B6CBD1 /* SpecialityStructure.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
-				3F9BB3441FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift in Sources */,
+				2DEF89171FB39445000728CF /* TestDetailCreateUpdateViewController.swift in Sources */,
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
@@ -596,7 +608,7 @@
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
 				C7535CEF1FA2670100B6CBD1 /* AnswerStructure.swift in Sources */,
 				C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */,
-				3F2ADB5C1FB0AA8300D6207F /* TestDetailsViewController.swift in Sources */,
+				2DEF89161FB39445000728CF /* TestDetailsViewController.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 				C7535CF21FA2670100B6CBD1 /* QuestionStructure.swift in Sources */,

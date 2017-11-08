@@ -11,7 +11,7 @@ import UIKit
 class TestDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var testDetailArray = [TestDetailStructure]()
-    var id = "1"
+    var id = "3"
     @IBOutlet weak var testDetailsTableView: UITableView!
     
     override func viewDidLoad() {
@@ -45,9 +45,41 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     /* - - - edit && delete - - -  */
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        <#code#>
+        let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
+            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else  { return }
+            testDetailCreateUpdateViewController.testDetailsInstance = self.testDetailArray[indexPath.row]
+            testDetailCreateUpdateViewController.canEdit = true
+            testDetailCreateUpdateViewController.resultModification = { updateResult in
+                self.testDetailArray[indexPath.row] = updateResult
+                self.testDetailsTableView.reloadData()
+            }
+            self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
+        })
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { action, indexPath in
+            let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this test detail?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
+                alert.dismiss(animated: true, completion: nil)
+                guard let id = self.testDetailArray[indexPath.row].id else { return }
+                if indexPath.row < self.testDetailArray.count {
+                    DataManager.shared.deleteEntity(byId: id, typeEntity: Entities.TestDetail) { (deleted, error) in
+                        if let error = error {
+                            self.showWarningMsg(error)
+                        } else {
+                            self.testDetailArray.remove(at: indexPath.row)
+                            tableView.deleteRows(at: [indexPath], with: .top)
+                            self.testDetailsTableView.reloadData()
+                        }
+                    }
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "NO", style: .default, handler: { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        })
+        return [delete, edit]
     }
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+	//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 //        let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
 //            guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality", bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController") as? SpecialityCreateUpdateViewController else  { return }
 //            specialityCreateUpdateViewController.specialityInstance = self.specialitiesArray[indexPath.row]
@@ -86,6 +118,10 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func addButtonTapped(_ sender: Any) {
         guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
         self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
+        testDetailCreateUpdateViewController.resultModification = { newTestDetail in
+            self.testDetailArray.append(newTestDetail)
+            self.testDetailsTableView.reloadData()
+        }
     }
     
     /* - - - LogIn for testing - - - */
