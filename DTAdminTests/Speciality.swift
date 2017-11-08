@@ -23,7 +23,7 @@ class Speciality: XCTestCase {
         weak var promise = expectation(description: "Test insert of fake speciality")
         DataManager.shared.insertEntity(entity: testItem!, typeEntity: Entities.Speciality) { (newSpeciality, error) in
             let speciality = newSpeciality as? SpecialityStructure
-            let specialityId = speciality?.id
+            let specialityId = speciality
             let code = speciality?.code
             let name = speciality?.name
             errorResponse = error
