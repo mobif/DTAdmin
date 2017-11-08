@@ -64,6 +64,7 @@
 		C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D6891FA267580092170E /* GroupTableViewCell.swift */; };
 		C799D68D1FA267590092170E /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C799D68A1FA267580092170E /* Student.storyboard */; };
 		C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D68B1FA267580092170E /* StudentsTableViewCell.swift */; };
+		C7F86A341FB37A6400C6E174 /* TestMockStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F86A331FB37A6400C6E174 /* TestMockStudent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		C799D6891FA267580092170E /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		C799D68A1FA267580092170E /* Student.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		C799D68B1FA267580092170E /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
+		C7F86A331FB37A6400C6E174 /* TestMockStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockStudent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +391,7 @@
 				C7709DC41FAE09FC00994224 /* TestDataManager.swift */,
 				C77747ED1FAFC28100CAC856 /* TestStudent.swift */,
 				C72B03E61FB0F2B3004BB6C8 /* TestQuestions.swift */,
+				C7F86A331FB37A6400C6E174 /* TestMockStudent.swift */,
 			);
 			path = DTAdminTests;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7709DC51FAE09FC00994224 /* TestDataManager.swift in Sources */,
+				C7F86A341FB37A6400C6E174 /* TestMockStudent.swift in Sources */,
 				C72B03E71FB0F2B3004BB6C8 /* TestQuestions.swift in Sources */,
 				C77747EE1FAFC28100CAC856 /* TestStudent.swift in Sources */,
 			);

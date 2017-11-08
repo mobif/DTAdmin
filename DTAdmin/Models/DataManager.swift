@@ -11,6 +11,7 @@ import Foundation
 class DataManager: HTTPManager {
 
     static let shared = DataManager()
+    var session:URLSession = URLSession.shared
     private override init(){}
 /**
      Returns an array containing the non-nil defined type of elements from API
@@ -60,7 +61,7 @@ class DataManager: HTTPManager {
         }
     }
     private func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        session.dataTask(with: request) { (data, response, error) in
             if let sessionError = error {
                 DispatchQueue.main.async {
                     completionHandler(nil, sessionError.localizedDescription)
