@@ -322,9 +322,9 @@ class DataManager: HTTPManager {
             return }
         getResponse(request: request) { (entity, error) in
             if let error = error {
-                DispatchQueue.main.sync {
+                
                     completionHandler(nil, error)
-                }
+                
             } else {
                 guard let entity = entity else { return }
                 guard let  json = entity as? [String: String] else {
