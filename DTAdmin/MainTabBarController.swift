@@ -31,10 +31,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(subjectNavController)
 
 //MARK: Create groups tab
-        let groupsTab = TabThreeViewController()
+        let groupStoryboard = UIStoryboard.stoyboard(by: .group)
+        guard let groupNavController = groupStoryboard.instantiateViewController(withIdentifier: "GroupNavController") as? UINavigationController else { return }
         let groupsBarItem = UITabBarItem(title: "Groups", image: nil, selectedImage: nil)
-        groupsTab.tabBarItem = groupsBarItem
-        tabBarViewControllers.append(groupsTab)
+        groupNavController.tabBarItem = groupsBarItem
+        tabBarViewControllers.append(groupNavController)
         
 //MARK: Create faculty tab
         let facultyTab = TabFourViewController()
