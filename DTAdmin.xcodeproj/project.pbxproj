@@ -21,7 +21,8 @@
 		3F5470CC1FACB835003E9B96 /* Speciality.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5470C81FACB835003E9B96 /* Speciality.storyboard */; };
 		3F5470CD1FACB835003E9B96 /* SpecialityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5470C91FACB835003E9B96 /* SpecialityTableViewCell.swift */; };
 		3F966FF01FB1E544008C402F /* Speciality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F966FEF1FB1E544008C402F /* Speciality.swift */; };
-		3F966FF21FB20776008C402F /* testDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F966FF11FB20776008C402F /* testDetailsTableViewCell.swift */; };
+		3F966FF21FB20776008C402F /* TestDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F966FF11FB20776008C402F /* TestDetailsTableViewCell.swift */; };
+		3F9BB3441FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BB3431FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift */; };
 		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
 		3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888161F9688B200D602F3 /* AdminViewController.swift */; };
 		3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FA8A6931FAC8864002465E7 /* Admin.storyboard */; };
@@ -98,7 +99,8 @@
 		3F5470C81FACB835003E9B96 /* Speciality.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speciality.storyboard; sourceTree = "<group>"; };
 		3F5470C91FACB835003E9B96 /* SpecialityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityTableViewCell.swift; sourceTree = "<group>"; };
 		3F966FEF1FB1E544008C402F /* Speciality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speciality.swift; sourceTree = "<group>"; };
-		3F966FF11FB20776008C402F /* testDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		3F966FF11FB20776008C402F /* TestDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		3F9BB3431FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3FA888161F9688B200D602F3 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3FA8A6921FAC8864002465E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Admin.storyboard; sourceTree = "<group>"; };
@@ -211,7 +213,8 @@
 			isa = PBXGroup;
 			children = (
 				3F2ADB591FB0AA6900D6207F /* TestDetails.storyboard */,
-				3F966FF11FB20776008C402F /* testDetailsTableViewCell.swift */,
+				3F9BB3431FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift */,
+				3F966FF11FB20776008C402F /* TestDetailsTableViewCell.swift */,
 				3F2ADB5B1FB0AA8300D6207F /* TestDetailsViewController.swift */,
 			);
 			name = TestDetails;
@@ -559,6 +562,7 @@
 				3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */,
 				C7535CF41FA2670100B6CBD1 /* SpecialityStructure.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
+				3F9BB3441FB340AE00A3FCFA /* TestDetailCreateUpdateViewController.swift in Sources */,
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
@@ -599,7 +603,7 @@
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 				C7535CF21FA2670100B6CBD1 /* QuestionStructure.swift in Sources */,
-				3F966FF21FB20776008C402F /* testDetailsTableViewCell.swift in Sources */,
+				3F966FF21FB20776008C402F /* TestDetailsTableViewCell.swift in Sources */,
 				C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

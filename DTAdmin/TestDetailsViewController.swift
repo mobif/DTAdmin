@@ -18,9 +18,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
 
         DataManager.shared.getTestDetails(byTest: id) { (details, error) in
-            print(details)
             if error == nil, let testDetails = details as? [TestDetailStructure] {
-                print(error, details, testDetails)
                 self.testDetailArray = testDetails
                 self.testDetailsTableView.reloadData()
             } else {
@@ -34,7 +32,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "testDetailsCell", for: indexPath) as? testDetailsTableViewCell
+        let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "testDetailsCell", for: indexPath) as? TestDetailsTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
         let array = testDetailArray[indexPath.row]
         cell.testDetailId.text = array.id
@@ -47,12 +45,9 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
 
 
     @IBAction func addButtonTapped(_ sender: Any) {
-        testDetailsTableView.reloadData()
-        print(testDetailArray)
-        
+        guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
+        self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
     }
-    
-    
     
     /* - - - LogIn for testing - - - */
     @IBAction func loginButtonTapped(_ sender: Any) {

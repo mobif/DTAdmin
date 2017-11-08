@@ -54,8 +54,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             specialitiesTableView.reloadData()
             return
         }
-        filteredSpecialitiesArray = specialitiesArray.filter({ $0.name.lowercased().contains(searchText.lowercased())
-        })
+        filteredSpecialitiesArray = specialitiesArray.filter({ $0.name.lowercased().contains(searchText.lowercased())})
         specialitiesTableView.reloadData()
     }
     
@@ -100,12 +99,12 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
                 guard let id = self.specialitiesArray[indexPath.row].id else { return }
-                if indexPath.row < self.specialitiesArray.count {
+                if indexPath.row < self.filteredSpecialitiesArray.count {
                     DataManager.shared.deleteEntity(byId: id, typeEntity: Entities.Speciality) { (deleted, error) in
                         if let error = error {
                             self.showWarningMsg(error)
                         } else {
-                            self.specialitiesArray.remove(at: indexPath.row)
+                            self.filteredSpecialitiesArray.remove(at: indexPath.row)
                             tableView.deleteRows(at: [indexPath], with: .top)
                             self.specialitiesTableView.reloadData()
                         }
