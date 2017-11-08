@@ -11,20 +11,34 @@ import XCTest
 class Speciality: XCTestCase {
     
     func testStructure(){
-        var testSpeciality: SpecialityStructure?
-//        var specialityId: String = "0"
+//        var testSpeciality: [SpecialityStructure]?
+        var errorResponse: String?
         let testDictionary: [String: String] = ["speciality_code": "777", "speciality_name": "testSpeciality"]
-        let newSpeciality = SpecialityStructure(dictionary: testDictionary)
+        let newSpecialityForTest = SpecialityStructure(dictionary: testDictionary)
         
-        XCTAssertEqual(newSpeciality!.code, "777")
-        XCTAssertEqual(newSpeciality!.name, "testSpeciality")
+        XCTAssertEqual(newSpecialityForTest!.code, "777")
+        XCTAssertEqual(newSpecialityForTest!.name, "testSpeciality")
 
-//        let testItem = newSpeciality
-//        DataManager.shared.insertEntity(entity: testItem!, typeEntity: Entities.Speciality) { (newId, error) in
-//            let id = newId as! [SpecialityStructure]
-//            let newError = error
-//            print("*******************", id, error)
-//        }
+        let testItem = newSpecialityForTest
+        weak var promise = expectation(description: "Test insert of fake speciality")
+        DataManager.shared.insertEntity(entity: testItem!, typeEntity: Entities.Speciality) { (newSpeciality, error) in
+            let speciality = newSpeciality as? SpecialityStructure
+            let specialityId = speciality?.id
+            let code = speciality?.code
+            let name = speciality?.name
+            errorResponse = error
+
+            XCTAssertNil(errorResponse)
+            XCTAssertNotNil(specialityId)
+            XCTAssertEqual(code, newSpecialityForTest!.code)
+            XCTAssertEqual(name, newSpecialityForTest!.name)
+            promise?.fulfill()
+            promise = nil
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+        
+        
+
         
     }
     
