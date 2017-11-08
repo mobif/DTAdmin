@@ -63,7 +63,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     func saveNewQuestion() {
         if prepareForSave(){
             guard let questionForSave = questionForSave else { return }
-            DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .Question) { (questionResult, error) in
+            DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) { (questionResult, error) in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
@@ -83,7 +83,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         if prepareForSave(){
             guard let questionId = questionId else { return }
             guard let questionForSave = questionForSave else { return }
-            DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .Question) { error in
+            DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .question) { error in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {

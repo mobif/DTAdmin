@@ -76,7 +76,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     @objc private func showRecords() {
-        DataManager.shared.getList(byEntity: .Subject) { (subjects, error) in
+        DataManager.shared.getList(byEntity: .subject) { (subjects, error) in
             if error == nil,
                 let students = subjects as? [SubjectStructure] {
                 self.records = students
@@ -108,7 +108,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             guard let subjectId = self.records[indexPath.row].id else { return }
-            DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .Subject)  { (result, error) in
+            DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, error) in
                 if let error = error {
                     self.showMessage(message: NSLocalizedString(error, comment: "Message for user") )
                 } else {

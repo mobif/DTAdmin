@@ -108,7 +108,7 @@ class AdminCreateUpdateViewController: UIViewController {
     }
     guard var userForSave = UserStructure(dictionary: ["id": "-1", "username": params.userName, "email": params.email, "password": params.password, "logins": "0"]) else { return }
  
-    DataManager.shared.insertEntity(entity: userForSave, typeEntity: .User) { (id, error) in
+    DataManager.shared.insertEntity(entity: userForSave, typeEntity: .user) { (id, error) in
       guard let error = error else {
         if let id = id as? String {
           userForSave.id = id
@@ -133,7 +133,7 @@ class AdminCreateUpdateViewController: UIViewController {
     userForSave.userName = params.userName
     userForSave.email = params.email
     userForSave.password = params.password
-    DataManager.shared.updateEntity(byId: id, entity:  userForSave, typeEntity: .User) { (error) in
+    DataManager.shared.updateEntity(byId: id, entity:  userForSave, typeEntity: .user) { (error) in
       if let error = error {
         self.showWarningMsg(NSLocalizedString(error, comment: "Admin update request failed with error..."))
         return

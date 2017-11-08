@@ -52,7 +52,7 @@ class AdminViewController: ParentViewController {
   
   @objc private func updateTable() {
     startActivity()
-    DataManager.shared.getList(byEntity: .User) { (admins, error) in
+    DataManager.shared.getList(byEntity: .user) { (admins, error) in
       self.stopActivity()
       guard let admins = admins as? [UserStructure] else {
         self.refreshControl.endRefreshing()
@@ -109,7 +109,7 @@ extension AdminViewController: UITableViewDataSource {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       
       guard let admin = self.admins?[indexPath.row] else { return }
-      DataManager.shared.deleteEntity(byId: admin.id, typeEntity: .User, completionHandler: { (status, error) in
+      DataManager.shared.deleteEntity(byId: admin.id, typeEntity: .user, completionHandler: { (status, error) in
         guard let error = error else {
           self.adminsListTableView.beginUpdates()
           self.admins?.remove(at: indexPath.row)

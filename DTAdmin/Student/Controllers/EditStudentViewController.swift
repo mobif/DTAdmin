@@ -93,7 +93,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         if prepareForSave(){
             guard let userIDForUpdate = studentLoaded?.userId else { return }
             guard var studentForSave = studentForSave else { return }
-            DataManager.shared.updateEntity(byId: userIDForUpdate, entity: studentForSave, typeEntity: .Student) { error in
+            DataManager.shared.updateEntity(byId: userIDForUpdate, entity: studentForSave, typeEntity: .student) { error in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
@@ -110,7 +110,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     @objc func postNewStudentToAPI(){
         if prepareForSave(){
             guard let studentForSave = studentForSave else { return }
-            DataManager.shared.insertEntity(entity: studentForSave, typeEntity: .Student) { (id, error) in
+            DataManager.shared.insertEntity(entity: studentForSave, typeEntity: .student) { (id, error) in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
@@ -170,7 +170,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         self.navigationController?.pushViewController(groupsViewController, animated: true)
     }
     func getGroupFromAPI(byId: String) {
-        DataManager.shared.getEntity(byId: byId, typeEntity: .Group) { (groupInstance, error) in
+        DataManager.shared.getEntity(byId: byId, typeEntity: .group) { (groupInstance, error) in
             if let groupInstance = groupInstance as? GroupStructure {
                 self.selectedGroupForStudent = groupInstance
                 self.groupButton.setTitle(groupInstance.groupName, for: .normal)
@@ -180,7 +180,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     func getUserFromAPI(byId: String) {
-        DataManager.shared.getEntity(byId: byId, typeEntity: .User) { (userInstance, error) in
+        DataManager.shared.getEntity(byId: byId, typeEntity: .user) { (userInstance, error) in
             if let userInstance = userInstance as? UserStructure{
                 self.selectedUserAccountForStudent = userInstance
                 self.loginStudentTextField.text = userInstance.userName

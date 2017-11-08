@@ -56,7 +56,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                 }
             }
         } else {
-            DataManager.shared.getListRange(forEntity: .Student, fromNo: 0, quantity: 0) { (students, error) in
+            DataManager.shared.getListRange(forEntity: .student, fromNo: 0, quantity: 0) { (students, error) in
                 self.stopActivity()
                 if error == nil,
                     let students = students as? [StudentStructure] {
@@ -146,7 +146,7 @@ extension StudentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Del") { action, index in
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
-            DataManager.shared.deleteEntity(byId: studentId, typeEntity: .Student)  { (result, error) in
+            DataManager.shared.deleteEntity(byId: studentId, typeEntity: .student)  { (result, error) in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {

@@ -38,7 +38,7 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     @objc func getCountOfQuestion() {
-        DataManager.shared.getCountItems(forEntity: .Question) { count, error in
+        DataManager.shared.getCountItems(forEntity: .question) { count, error in
             if let error = error {
                 self.showMessage(message: error)
             } else {
@@ -53,7 +53,7 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func showQuestions(id: String, quantity: UInt) {
-        DataManager.shared.getListRange(forEntity: .Question, fromNo: 0, quantity: quantity) {(questions, error) in
+        DataManager.shared.getListRange(forEntity: .question, fromNo: 0, quantity: quantity) {(questions, error) in
             if error == nil,
                 let questions = questions as? [QuestionStructure] {
                 self.questions = questions
@@ -111,7 +111,7 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             guard let questionId = self.questions[indexPath.row].id else { return }
-            DataManager.shared.deleteEntity(byId: questionId, typeEntity: .Question)  { (result, error) in
+            DataManager.shared.deleteEntity(byId: questionId, typeEntity: .question)  { (result, error) in
                 if let error = error {
                     self.showMessage(message: NSLocalizedString(error, comment: "Message for user") )
                 } else {
