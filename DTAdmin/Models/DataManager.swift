@@ -24,7 +24,7 @@ class DataManager: HTTPManager {
       if typeEntity == .Student || typeEntity == .Question || typeEntity == .Answer {
             completionHandler(nil, NSLocalizedString("Request not supported.", comment: "Request not supported for entity."))
         }
-        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecords) else {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.getRecords) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
@@ -128,7 +128,7 @@ class DataManager: HTTPManager {
                 quantityString = String(quantity)
             }
             indexString = String(index)
-            guard let request = self.getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetRecordsRange, limit: quantityString, offset: indexString) else {
+            guard let request = self.getURLReqest(entityStructure: typeEntity, type: TypeReqest.getRecordsRange, limit: quantityString, offset: indexString) else {
                 let error = "Cannot prepare header for URLRequest"
                 completionHandler(nil, error)
                 return
@@ -167,7 +167,7 @@ class DataManager: HTTPManager {
     }
     
     func getEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ entity: Any?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.GetOneRecord, id: byId) else {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.getOneRecord, id: byId) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             DispatchQueue.main.async {
                 completionHandler(nil, error)
@@ -218,7 +218,7 @@ class DataManager: HTTPManager {
     }
     
     func getCountItems(forEntity: Entities, completion: @escaping (_ count: UInt?, _ Error: String?) -> () ) {
-        guard let request = getURLReqest(entityStructure: forEntity, type: TypeReqest.GetCount) else {
+        guard let request = getURLReqest(entityStructure: forEntity, type: TypeReqest.getCount) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completion(nil, error)
             return
@@ -250,7 +250,7 @@ class DataManager: HTTPManager {
     }
 
     func updateEntity<TypeEntity: Serializable>(byId: String, entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ error: String?) -> ()) {
-        guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.UpdateData, id: byId) else {
+        guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.updateData, id: byId) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(error)
             return }
@@ -269,7 +269,7 @@ class DataManager: HTTPManager {
         }
     }
     func insertEntity<TypeEntity: Serializable>(entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
-        guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.InsertData) else {
+        guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.insertData) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return }
@@ -307,7 +307,7 @@ class DataManager: HTTPManager {
     }
     
     func deleteEntity(byId: String, typeEntity: Entities, completionHandler: @escaping (_ confirmation: Any?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.Delete, id: byId) else {
+        guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.delete, id: byId) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return }
@@ -334,7 +334,7 @@ class DataManager: HTTPManager {
     }
     //The function returns list Students for defined group, in records excluded image data
     func getStudents(forGroup group: String, withoutImages: Bool, completionHandler: @escaping (_ students: [StudentStructure]?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: .Student, type: TypeReqest.GetStudentsByGroup, id: group, withoutImages: withoutImages) else {
+        guard let request = getURLReqest(entityStructure: .Student, type: TypeReqest.getStudentsByGroup, id: group, withoutImages: withoutImages) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
@@ -358,7 +358,7 @@ class DataManager: HTTPManager {
     }
     
     func getGroups(bySpeciality speciality: String, completionHandler: @escaping (_ groups: [GroupStructure]?, _ error: String?) -> ()) {
-        getList(byID: speciality, type: .GetGroupBySpeciality, entityStructure: .Group) {
+        getList(byID: speciality, type: .getGroupBySpeciality, entityStructure: .Group) {
             (list, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -373,7 +373,7 @@ class DataManager: HTTPManager {
         }
     }
     func getGroups(byFaculty faculty: String, completionHandler: @escaping (_ groups: [GroupStructure]?, _ error: String?) -> ()) {
-        getList(byID: faculty, type: .GetGroupByFaculty, entityStructure: .Group) {
+        getList(byID: faculty, type: .getGroupByFaculty, entityStructure: .Group) {
             (list, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -388,7 +388,7 @@ class DataManager: HTTPManager {
         }
     }
     func getTestDetails(byTest test: String, completionHandler: @escaping (_ testDetails: [TestDetailStructure]?, _ error: String?) -> ()) {
-        getList(byID: test, type: .GetTestDetailsByTest, entityStructure: .TestDetail) {
+        getList(byID: test, type: .getTestDetailsByTest, entityStructure: .TestDetail) {
             (list, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -403,7 +403,7 @@ class DataManager: HTTPManager {
         }
     }
     func getTest(bySubject subject: String, completionHandler: @escaping (_ tests: [TestStructure]?, _ error: String?) -> ()) {
-        getList(byID: subject, type: .GetTestsBySubject, entityStructure: .Test) {
+        getList(byID: subject, type: .getTestsBySubject, entityStructure: .Test) {
             (list, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -419,7 +419,7 @@ class DataManager: HTTPManager {
     }
     
     func getTimeTables(forGroup group: String, completionHandler: @escaping (_ tables: [TimeTableStructure]?, _ error: String?) -> ()) {
-        getList(byID: group, type: .GetTimeTablesForGroup, entityStructure: .TimeTable) {
+        getList(byID: group, type: .getTimeTablesForGroup, entityStructure: .TimeTable) {
             (list, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -434,7 +434,7 @@ class DataManager: HTTPManager {
         }
     }
     func getTimeTables(forSubject subject: String, completionHandler: @escaping (_ tables: [TimeTableStructure]?, _ error: String?) -> ()) {
-        getList(byID: subject, type: .GetTimeTablesForSubject, entityStructure: .TimeTable) {
+        getList(byID: subject, type: .getTimeTablesForSubject, entityStructure: .TimeTable) {
             (list, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -481,7 +481,7 @@ class DataManager: HTTPManager {
         }
     }
     func getQuestionsRand(byLevel level: String, testID testId: String, number: String, completionHandler: @escaping (_ questions: [QuestionStructure]?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: .Question, type: .GetQuestionsByLevelRand, id: testId, limit: level, offset: number) else {
+        guard let request = getURLReqest(entityStructure: .Question, type: .getQuestionsByLevelRand, id: testId, limit: level, offset: number) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
@@ -504,7 +504,7 @@ class DataManager: HTTPManager {
         }
     }
     func getQuestionIdsRand(byLevel level: String, testID testId: String, number: String, completionHandler: @escaping (_ questions: [String]?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: .Question, type: .GetQuestionIdsByLevelRand, id: testId, limit: level, offset: number) else {
+        guard let request = getURLReqest(entityStructure: .Question, type: .getQuestionIdsByLevelRand, id: testId, limit: level, offset: number) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
@@ -527,7 +527,7 @@ class DataManager: HTTPManager {
         }
     }
     func getAnswers(byQuestion question: String, completionHandler: @escaping (_ tables: [AnswerStructure]?, _ error: String?) -> ()) {
-        getList(byID: question, type: .GetAnswersByQuestion, entityStructure: .Answer) {
+        getList(byID: question, type: .getAnswersByQuestion, entityStructure: .Answer) {
             (list, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -542,7 +542,7 @@ class DataManager: HTTPManager {
         }
     }
     func countRecords(byTest testId: String, completionHandler: @escaping (_ tables: UInt?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: .Question, type: .CountRecordsByTest, id: testId) else {
+        guard let request = getURLReqest(entityStructure: .Question, type: .countRecordsByTest, id: testId) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
@@ -564,7 +564,7 @@ class DataManager: HTTPManager {
         }
     }
     func getRecordsRange(byTest testId: String, limit: String, offset: String, completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: .Question, type: .GetRecordsRangeByTest, id: testId, limit: limit, offset: offset) else {
+        guard let request = getURLReqest(entityStructure: .Question, type: .getRecordsRangeByTest, id: testId, limit: limit, offset: offset) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
