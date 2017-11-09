@@ -53,7 +53,7 @@ class TestDetailCreateUpdateViewController: UIViewController {
     func prepareForRequest() -> Bool {
         guard let level = testLevelTextfield.text, let task = numberOfTaskTextField.text, let rate = numberOfMarkTextField.text else { return false }
         if !level.isEmpty && !task.isEmpty && !rate.isEmpty {
-            let dictionary: [String: Any] = ["id": idForEditing, "test_id": id, "level": level, "tasks": task, "rate": rate]
+            let dictionary: [String: Any] = ["test_id": id, "level": level, "tasks": task, "rate": rate]
             self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
             return true
         } else {

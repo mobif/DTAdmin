@@ -50,7 +50,7 @@ class SpecialityCreateUpdateViewController: UIViewController {
     func prepareForRequest() -> Bool {
         guard let code = specialityCodeTextField.text, let name = specialityNameTextField.text else { return false }
         if !code.isEmpty && !name.isEmpty {
-            let dictionary: [String : Any] = ["speciality_id": idForEditing, "speciality_code": code, "speciality_name": name]
+            let dictionary: [String : Any] = ["speciality_code": code, "speciality_name": name]
             self.specialityForSave = SpecialityStructure(dictionary: dictionary)
             return true
         } else {
