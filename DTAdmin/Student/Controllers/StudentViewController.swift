@@ -65,7 +65,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                             return }
                         self.showWarningMsg(error)
                         if error.contains("Error response: 403") {
-                            self.showLoginScreen()
+                            self.navigationController?.popViewController(animated: true)
                         }
                     }
                 }
@@ -85,7 +85,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                             return }
                         self.showWarningMsg(error)
                         if error.contains("Error response: 403") {
-                            self.showLoginScreen()
+                            self.navigationController?.popViewController(animated: true)
                         }
                     }
                 }
