@@ -91,7 +91,6 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
         let index = studentList.index(where: { $0.userId == byId } )
         return index
     }
-    
 }
 extension UIViewController {
     func showWarningMsg(_ textMsg: String) {
@@ -124,7 +123,6 @@ extension StudentViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let studentInstance = filtered ? filteredList[indexPath.row] : studentList[indexPath.row]
-        
         guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
         editStudentViewController.titleViewController = NSLocalizedString("Edit", comment: "Edit account of student")
         editStudentViewController.studentLoaded = studentInstance

@@ -13,16 +13,27 @@ class HTTPManager {
     let urlDomain = "vps9615.hyperhost.name"
     
     enum TypeReqest {
-        case InsertData
-        case GetRecords
-        case UpdateData
-        case Delete
-        case GetOneRecord
-        case GetCount
-        case GetRecordsRange
-        case GetStudentsByGroup
+        case insertData
+        case getRecords
+        case updateData
+        case delete
+        case getOneRecord
+        case getCount
+        case getRecordsRange
+        case getStudentsByGroup
+        case getGroupBySpeciality
+        case getGroupByFaculty
+        case getTestDetailsByTest
+        case getTestsBySubject
+        case getTimeTablesForGroup
+        case getTimeTablesForSubject
+        case getQuestionsByLevelRand
+        case getQuestionIdsByLevelRand
+        case getAnswersByQuestion
+        case countRecordsByTest
+        case getRecordsRangeByTest
     }
-    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.InsertData: ("/insertData", "POST"), .GetRecords: ("/getRecords", "GET"), .UpdateData: ("/update/", "POST"), .Delete: ("/del/", "GET"), .GetOneRecord: ("/getRecords/", "GET"), .GetCount: ("/countRecords", "GET"), .GetRecordsRange: ("/getRecordsRange", "GET"), .GetStudentsByGroup: ("/getStudentsByGroup/", "GET") ]
+    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.insertData: ("/insertData", "POST"), .getRecords: ("/getRecords", "GET"), .updateData: ("/update/", "POST"), .delete: ("/del/", "GET"), .getOneRecord: ("/getRecords/", "GET"), .getCount: ("/countRecords", "GET"), .getRecordsRange: ("/getRecordsRange", "GET"), .getStudentsByGroup: ("/getStudentsByGroup/", "GET"), .getGroupBySpeciality: ("/getGroupsBySpeciality/", "GET"), .getGroupByFaculty: ("/getGroupsByFaculty/", "GET"), .getTestDetailsByTest: ("/getTestDetailsByTest/", "GET"), .getTestsBySubject: ("/getTestsBySubject/", "GET"), .getTimeTablesForGroup: ("/getTimeTablesForGroup/", "GET"), .getTimeTablesForSubject: ("/getTimeTablesForSubject/", "GET"), .getQuestionsByLevelRand: ("/getQuestionsByLevelRand/", "GET"), .getQuestionIdsByLevelRand: ("/getQuestionIdsByLevelRand/", "GET"), .getAnswersByQuestion: ("/getAnswersByQuestion/", "GET"), .countRecordsByTest: ("/countRecordsByTest/", "GET"), .getRecordsRangeByTest: ("/getRecordsRangeByTest/", "GET") ]
     
     func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "", limit: String = "", offset: String = "", withoutImages: Bool = false) -> URLRequest? {
         guard let URLCreationData = urlPrepare[type] else { return nil }
