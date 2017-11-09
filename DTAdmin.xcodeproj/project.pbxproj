@@ -34,6 +34,10 @@
 		3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6736A1FB48B88001C7147 /* DetailSubjectViewController.swift */; };
 		3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */; };
 		3FF673721FB48BAD001C7147 /* ShowTestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */; };
+		4C3B5C0F1FB4991E0015026A /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3B5C0D1FB4991E0015026A /* Test.storyboard */; };
+		4C3B5C101FB4991E0015026A /* NewTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B5C0E1FB4991E0015026A /* NewTestViewController.swift */; };
+		4C3B5C151FB499340015026A /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B5C121FB499340015026A /* TestCell.swift */; };
+		4C3B5C161FB499340015026A /* TestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B5C131FB499340015026A /* TestsViewController.swift */; };
 		843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843422261FAF41B20087A418 /* DTAdminTests.swift */; };
 		8434222F1FAF7EB60087A418 /* GroupStructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434222E1FAF7EB60087A418 /* GroupStructureTests.swift */; };
 		890376041F9DE0FB002A99A8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890376031F9DE0FB002A99A8 /* Date.swift */; };
@@ -117,6 +121,10 @@
 		3FF6736A1FB48B88001C7147 /* DetailSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSubjectViewController.swift; sourceTree = "<group>"; };
 		3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsForSubjectTableViewController.swift; sourceTree = "<group>"; };
 		3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTestInfoViewController.swift; sourceTree = "<group>"; };
+		4C3B5C0D1FB4991E0015026A /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Test.storyboard; path = ../../../../Test/Views/Test.storyboard; sourceTree = "<group>"; };
+		4C3B5C0E1FB4991E0015026A /* NewTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewTestViewController.swift; path = ../../../../Test/Views/NewTestViewController.swift; sourceTree = "<group>"; };
+		4C3B5C121FB499340015026A /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestCell.swift; path = ../../../../Test/Controllers/TestCell.swift; sourceTree = "<group>"; };
+		4C3B5C131FB499340015026A /* TestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestsViewController.swift; path = ../../../../Test/Controllers/TestsViewController.swift; sourceTree = "<group>"; };
 		843422241FAF41B20087A418 /* DTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		843422261FAF41B20087A418 /* DTAdminTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTAdminTests.swift; sourceTree = "<group>"; };
 		843422281FAF41B20087A418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -275,6 +283,7 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				4C3B5C0A1FB498870015026A /* Test */,
 				3F9505C31FACB8E1003F3EB9 /* Group */,
 				89C96DFF1F9CC2F90019FE77 /* TimeTable */,
 				8927571A1F97648C00FF669D /* Common */,
@@ -346,6 +355,33 @@
 				3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */,
 			);
 			path = Test;
+			sourceTree = "<group>";
+		};
+		4C3B5C0A1FB498870015026A /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				4C3B5C0C1FB498D90015026A /* Views */,
+				4C3B5C0B1FB498C30015026A /* Controllers */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		4C3B5C0B1FB498C30015026A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C3B5C121FB499340015026A /* TestCell.swift */,
+				4C3B5C131FB499340015026A /* TestsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4C3B5C0C1FB498D90015026A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4C3B5C0E1FB4991E0015026A /* NewTestViewController.swift */,
+				4C3B5C0D1FB4991E0015026A /* Test.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		843422251FAF41B20087A418 /* DTAdminTests */ = {
@@ -577,6 +613,7 @@
 				3F9505E71FACBA16003F3EB9 /* Group.storyboard in Resources */,
 				3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
+				4C3B5C0F1FB4991E0015026A /* Test.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
 			);
@@ -627,7 +664,9 @@
 				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
 				3FF6735F1FB48B3A001C7147 /* AddNewAnswerViewController.swift in Sources */,
 				C7535CED1FA2670100B6CBD1 /* HTTPStatusCodes.swift in Sources */,
+				4C3B5C151FB499340015026A /* TestCell.swift in Sources */,
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
+				4C3B5C101FB4991E0015026A /* NewTestViewController.swift in Sources */,
 				3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */,
 				3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
@@ -636,6 +675,7 @@
 				C7535CF11FA2670100B6CBD1 /* GroupStructure.swift in Sources */,
 				89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */,
 				C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */,
+				4C3B5C161FB499340015026A /* TestsViewController.swift in Sources */,
 				C7535CF51FA2670100B6CBD1 /* StudentStructure.swift in Sources */,
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
 				3FF6736B1FB48B89001C7147 /* SubjectTableViewController.swift in Sources */,

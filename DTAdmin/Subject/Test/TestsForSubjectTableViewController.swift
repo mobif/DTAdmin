@@ -22,7 +22,13 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     @IBAction func addTest(_ sender: UIBarButtonItem) {
-        //add new test
+        guard let newTestViewController = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else  { return }
+        newTestViewController.subjectId = self.subjectId
+        newTestViewController.resultModification = { test in
+            self.test.append(test)
+            self.tableView.reloadData()
+        }
+        self.navigationController?.pushViewController(newTestViewController, animated: true)
     }
     
     func showTests(id: String) {
