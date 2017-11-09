@@ -44,10 +44,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(facultyTab)
 
 //MARK: Create speciality tab
-        let specialityTab = TabFiveViewController()
+        let specialityTab = UIStoryboard.stoyboard(by: .speciality)
+        guard let specialityNavController = specialityTab.instantiateViewController(withIdentifier: "SpecialityNavController") as? UINavigationController else { return }
         let specialityBarItem = UITabBarItem(title: "Speciality", image: nil, selectedImage: nil)
-        specialityTab.tabBarItem = specialityBarItem
-        tabBarViewControllers.append(specialityTab)
+        specialityNavController.tabBarItem = specialityBarItem
+        tabBarViewControllers.append(specialityNavController)
         
 //MARK: Create admins tab
         let adminStoryboard = UIStoryboard.stoyboard(by: .admin)
