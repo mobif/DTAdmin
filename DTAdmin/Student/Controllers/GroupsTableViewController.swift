@@ -15,7 +15,7 @@ class GroupsTableViewController: UITableViewController {
     @IBOutlet var groupTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        DataManager.shared.getList(byEntity: .Group) { (groups, error) in
+        DataManager.shared.getList(byEntity: .group) { (groups, error) in
             if error == nil,
                 let groups = groups as? [GroupStructure] {
                 self.groupList = groups

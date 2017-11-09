@@ -51,7 +51,7 @@ class GroupViewController: ParentViewController {
     
     @objc func updateTable() {
         startActivity()
-        DataManager.shared.getList(byEntity: .Group) { (groups, error) in
+        DataManager.shared.getList(byEntity: .group) { (groups, error) in
             self.stopActivity()
             guard let groups = groups as? [GroupStructure] else {
                 DispatchQueue.main.async {
@@ -126,7 +126,7 @@ extension GroupViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "DELETE"){(action, indexPath) in
-            DataManager.shared.deleteEntity(byId: self.groups[indexPath.row].groupId!, typeEntity: .Group, completionHandler: { (status, error) in
+            DataManager.shared.deleteEntity(byId: self.groups[indexPath.row].groupId!, typeEntity: .group, completionHandler: { (status, error) in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {

@@ -58,7 +58,7 @@ class GroupCreateUpdateViewController: UIViewController {
                 let groupSpecialityId = self.groupForUpdate?.specialityId else { return }
             self.groupNameTextField.text = groupName
             self.view.layoutIfNeeded()
-            DataManager.shared.getEntity(byId: groupFacultId, typeEntity: .Faculty){
+            DataManager.shared.getEntity(byId: groupFacultId, typeEntity: .faculty){
                 (faculty, error) in
                 if let error = error {
                     self.showWarningMsg(error)
@@ -69,7 +69,7 @@ class GroupCreateUpdateViewController: UIViewController {
                     }
                 }
             }
-            DataManager.shared.getEntity(byId: groupSpecialityId, typeEntity: .Speciality){
+            DataManager.shared.getEntity(byId: groupSpecialityId, typeEntity: .speciality){
                 (speciality, error) in
                 if let error = error {
                     self.showWarningMsg(error)
@@ -96,7 +96,7 @@ class GroupCreateUpdateViewController: UIViewController {
         ]
         guard var groupForUpdate = GroupStructure(dictionary: params) else { return }
         guard let id = self.groupForUpdate?.groupId else { return }
-        DataManager.shared.updateEntity(byId: id, entity: groupForUpdate, typeEntity: .Group){
+        DataManager.shared.updateEntity(byId: id, entity: groupForUpdate, typeEntity: .group){
             (error) in
             if let error = error {
                 self.showWarningMsg(error)
@@ -118,7 +118,7 @@ class GroupCreateUpdateViewController: UIViewController {
             "faculty_id": newGroupFacultyId
         ]
         guard var groupForSave = GroupStructure(dictionary: params) else { return }
-        DataManager.shared.insertEntity(entity: groupForSave, typeEntity: .Group) {
+        DataManager.shared.insertEntity(entity: groupForSave, typeEntity: .group) {
             (id, error) in
             if let error = error {
                 self.showWarningMsg(error)
