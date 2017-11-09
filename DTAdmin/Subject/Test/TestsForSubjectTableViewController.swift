@@ -61,13 +61,38 @@ class TestsForSubjectTableViewController: UITableViewController {
         return true
     }
     
+    // Nastia's method
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") {_,_ in
-            //delete test record
-        }
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+                        let testToDelete = self.test[indexPath.row]
+                        DataManager.shared.deleteEntity(byId: testToDelete.id!, typeEntity: .test, completionHandler: { (status, error) in
+                            guard let error = error else {
+                                self.tableView.beginUpdates()
+                                self.test.remove(at: indexPath.row)
+                                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                                self.tableView.endUpdates()
+                                return
+                            }
+                            self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed test delete"))
+                        })
+                    }
         let update = UITableViewRowAction(style: .normal, title: "Update") {_,_ in
-            //update test record
+            //TODO: update test record
+            // Alina's code for subjects
+//            let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+//                guard let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController else { return }
+//                wayToAddNewRecord.subjectId = self.records[indexPath.row].id
+//                wayToAddNewRecord.updateDates = true
+//                wayToAddNewRecord.subject = self.records[indexPath.row]
+//                wayToAddNewRecord.resultModification = { subjectResult in
+//                    self.records[indexPath.row] = subjectResult
+//                    self.tableView.reloadData()
+//                }
+//                self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
+//            }
         }
+        
+        delete.backgroundColor = UIColor.red
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
