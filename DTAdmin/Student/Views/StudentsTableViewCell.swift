@@ -10,6 +10,7 @@ import UIKit
 
 class StudentsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var actionWait: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var fName: UILabel!
     @IBOutlet weak var sName: UILabel!
