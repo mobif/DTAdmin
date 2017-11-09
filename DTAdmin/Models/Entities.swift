@@ -9,17 +9,17 @@
 import Foundation
 
 enum Entities: String {
-    case Faculty = "Faculty"
-    case Speciality = "Speciality"
-    case Group = "Group"
-    case Subject = "Subject"
-    case Test = "Test"
-    case TestDetail = "TestDetail"
-    case TimeTable = "TimeTable"
-    case Question = "Question"
-    case Answer = "Answer"
-    case Student = "Student"
-    case User = "AdminUser"
-    static let allValues: [Entities] = [Faculty, Speciality, Group, Subject, Test, TestDetail, TimeTable, Question, Answer, Student, User]
+    case faculty = "Faculty"
+    case speciality = "Speciality"
+    case group = "Group"
+    case subject = "Subject"
+    case test = "Test"
+    case testDetail = "TestDetail"
+    case timeTable = "TimeTable"
+    case question = "Question"
+    case answer = "Answer"
+    case student = "Student"
+    case user = "AdminUser"
+    static let allValues: [Entities] = [faculty, speciality, group, subject, test, testDetail, timeTable, question, answer, student, user]
 }
 

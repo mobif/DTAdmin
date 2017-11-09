@@ -7,13 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F2BF59B1F9F61F600B2FA7E /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */; };
-		3F2BF59C1F9F61F600B2FA7E /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5961F9F61F600B2FA7E /* Subject.swift */; };
-		3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */; };
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
-		3F2BF59F1F9F61F600B2FA7E /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5991F9F61F600B2FA7E /* LogViewController.swift */; };
-		3F2BF5A01F9F61F600B2FA7E /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF59A1F9F61F600B2FA7E /* QueryService.swift */; };
-		3F2BF5A21F9F7A5900B2FA7E /* DetailSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2BF5A11F9F7A5900B2FA7E /* DetailSubjectViewController.swift */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
@@ -29,6 +23,17 @@
 		3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE8F9E1F8D0DF60057BF3C /* DTAdmin.xcdatamodeld */; };
 		3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */; };
 		3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */; };
+		3FF6735B1FB48B19001C7147 /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6735A1FB48B19001C7147 /* AnswerTableViewCell.swift */; };
+		3FF6735E1FB48B3A001C7147 /* AnswersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6735C1FB48B39001C7147 /* AnswersTableViewController.swift */; };
+		3FF6735F1FB48B3A001C7147 /* AddNewAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6735D1FB48B3A001C7147 /* AddNewAnswerViewController.swift */; };
+		3FF673641FB48B6B001C7147 /* QuestionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673611FB48B6B001C7147 /* QuestionInfoViewController.swift */; };
+		3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673621FB48B6B001C7147 /* QuestionsTableViewController.swift */; };
+		3FF673661FB48B6B001C7147 /* AddNewQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673631FB48B6B001C7147 /* AddNewQuestionViewController.swift */; };
+		3FF6736B1FB48B89001C7147 /* SubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673681FB48B88001C7147 /* SubjectTableViewController.swift */; };
+		3FF6736C1FB48B89001C7147 /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673691FB48B88001C7147 /* AddNewRecordViewController.swift */; };
+		3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6736A1FB48B88001C7147 /* DetailSubjectViewController.swift */; };
+		3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */; };
+		3FF673721FB48BAD001C7147 /* ShowTestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */; };
 		843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843422261FAF41B20087A418 /* DTAdminTests.swift */; };
 		8434222F1FAF7EB60087A418 /* GroupStructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434222E1FAF7EB60087A418 /* GroupStructureTests.swift */; };
 		890376041F9DE0FB002A99A8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890376031F9DE0FB002A99A8 /* Date.swift */; };
@@ -40,7 +45,6 @@
 		897D0E371F9B6DA700825E62 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E361F9B6DA700825E62 /* User.swift */; };
 		897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E391F9B733400825E62 /* StoreHelper.swift */; };
 		897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E3E1F9B77A000825E62 /* ParentViewController.swift */; };
-		899DBC4C1FAC7DF000139DA9 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */; };
 		89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E001F9CD6A60019FE77 /* TimeTable.swift */; };
 		89C96E031F9CFD1F0019FE77 /* TimeTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89C96E021F9CFD1F0019FE77 /* TimeTable.storyboard */; };
 		89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E041F9CFD6E0019FE77 /* TimeTableListViewController.swift */; };
@@ -82,13 +86,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
-		3F2BF5961F9F61F600B2FA7E /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
-		3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
-		3F2BF5991F9F61F600B2FA7E /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
-		3F2BF59A1F9F61F600B2FA7E /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
-		3F2BF5A11F9F7A5900B2FA7E /* DetailSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSubjectViewController.swift; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +106,17 @@
 		3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FDE8FA41F8D0DF60057BF3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FDE8FA61F8D0DF60057BF3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FF6735A1FB48B19001C7147 /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerTableViewCell.swift; sourceTree = "<group>"; };
+		3FF6735C1FB48B39001C7147 /* AnswersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswersTableViewController.swift; sourceTree = "<group>"; };
+		3FF6735D1FB48B3A001C7147 /* AddNewAnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewAnswerViewController.swift; sourceTree = "<group>"; };
+		3FF673611FB48B6B001C7147 /* QuestionInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionInfoViewController.swift; sourceTree = "<group>"; };
+		3FF673621FB48B6B001C7147 /* QuestionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsTableViewController.swift; sourceTree = "<group>"; };
+		3FF673631FB48B6B001C7147 /* AddNewQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewQuestionViewController.swift; sourceTree = "<group>"; };
+		3FF673681FB48B88001C7147 /* SubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewController.swift; sourceTree = "<group>"; };
+		3FF673691FB48B88001C7147 /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
+		3FF6736A1FB48B88001C7147 /* DetailSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSubjectViewController.swift; sourceTree = "<group>"; };
+		3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsForSubjectTableViewController.swift; sourceTree = "<group>"; };
+		3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTestInfoViewController.swift; sourceTree = "<group>"; };
 		843422241FAF41B20087A418 /* DTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		843422261FAF41B20087A418 /* DTAdminTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTAdminTests.swift; sourceTree = "<group>"; };
 		843422281FAF41B20087A418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -213,13 +222,11 @@
 		3F2BF5941F9F61C300B2FA7E /* Subject */ = {
 			isa = PBXGroup;
 			children = (
-				3F2BF5951F9F61F600B2FA7E /* AddNewRecordViewController.swift */,
-				3F2BF5991F9F61F600B2FA7E /* LogViewController.swift */,
-				3F2BF59A1F9F61F600B2FA7E /* QueryService.swift */,
-				3F2BF5961F9F61F600B2FA7E /* Subject.swift */,
+				3FF6736E1FB48B9A001C7147 /* Test */,
+				3FF673671FB48B77001C7147 /* Subject */,
+				3FF673601FB48B40001C7147 /* Question */,
+				3FF673571FB48AB3001C7147 /* Answers */,
 				3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */,
-				3F2BF5A11F9F7A5900B2FA7E /* DetailSubjectViewController.swift */,
-				3F2BF5971F9F61F600B2FA7E /* SubjectTableViewController.swift */,
 			);
 			path = Subject;
 			sourceTree = "<group>";
@@ -284,6 +291,61 @@
 				3FDE8FA31F8D0DF60057BF3C /* LaunchScreen.storyboard */,
 			);
 			path = DTAdmin;
+			sourceTree = "<group>";
+		};
+		3FF673571FB48AB3001C7147 /* Answers */ = {
+			isa = PBXGroup;
+			children = (
+				3FF673591FB48AE7001C7147 /* View */,
+				3FF673581FB48ADE001C7147 /* Controllers */,
+			);
+			path = Answers;
+			sourceTree = "<group>";
+		};
+		3FF673581FB48ADE001C7147 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3FF6735D1FB48B3A001C7147 /* AddNewAnswerViewController.swift */,
+				3FF6735C1FB48B39001C7147 /* AnswersTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3FF673591FB48AE7001C7147 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3FF6735A1FB48B19001C7147 /* AnswerTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3FF673601FB48B40001C7147 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				3FF673631FB48B6B001C7147 /* AddNewQuestionViewController.swift */,
+				3FF673611FB48B6B001C7147 /* QuestionInfoViewController.swift */,
+				3FF673621FB48B6B001C7147 /* QuestionsTableViewController.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
+		3FF673671FB48B77001C7147 /* Subject */ = {
+			isa = PBXGroup;
+			children = (
+				3FF673691FB48B88001C7147 /* AddNewRecordViewController.swift */,
+				3FF6736A1FB48B88001C7147 /* DetailSubjectViewController.swift */,
+				3FF673681FB48B88001C7147 /* SubjectTableViewController.swift */,
+			);
+			path = Subject;
+			sourceTree = "<group>";
+		};
+		3FF6736E1FB48B9A001C7147 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */,
+				3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 		843422251FAF41B20087A418 /* DTAdminTests */ = {
@@ -538,16 +600,17 @@
 				89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */,
 				C7535CF71FA2670100B6CBD1 /* TestDetailStructure.swift in Sources */,
 				C7535CEA1FA2670100B6CBD1 /* DataManager.swift in Sources */,
-				3F2BF59B1F9F61F600B2FA7E /* AddNewRecordViewController.swift in Sources */,
+				3FF673641FB48B6B001C7147 /* QuestionInfoViewController.swift in Sources */,
 				3F9505E31FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift in Sources */,
 				894AA5CA1FA9E40E00B7669D /* Storyboard.swift in Sources */,
 				C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */,
+				3FF6735B1FB48B19001C7147 /* AnswerTableViewCell.swift in Sources */,
 				C7535CF91FA2670100B6CBD1 /* TimeTableStructure.swift in Sources */,
-				3F2BF59D1F9F61F600B2FA7E /* SubjectTableViewController.swift in Sources */,
 				C7535CF41FA2670100B6CBD1 /* SpecialityStructure.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
 				3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */,
+				3FF673721FB48BAD001C7147 /* ShowTestInfoViewController.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
@@ -556,17 +619,17 @@
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
 				3F9505E51FACBA16003F3EB9 /* GroupDetailsViewController.swift in Sources */,
 				897D0E341F9B6BC300825E62 /* CommonNetworkManager.swift in Sources */,
+				3FF6735E1FB48B3A001C7147 /* AnswersTableViewController.swift in Sources */,
 				C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */,
-				3F2BF59F1F9F61F600B2FA7E /* LogViewController.swift in Sources */,
-				3F2BF59C1F9F61F600B2FA7E /* Subject.swift in Sources */,
 				C7535CEB1FA2670100B6CBD1 /* Entities.swift in Sources */,
-				3F2BF5A01F9F61F600B2FA7E /* QueryService.swift in Sources */,
+				3FF6736C1FB48B89001C7147 /* AddNewRecordViewController.swift in Sources */,
 				C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */,
 				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
+				3FF6735F1FB48B3A001C7147 /* AddNewAnswerViewController.swift in Sources */,
 				C7535CED1FA2670100B6CBD1 /* HTTPStatusCodes.swift in Sources */,
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
 				3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */,
-				3F2BF5A21F9F7A5900B2FA7E /* DetailSubjectViewController.swift in Sources */,
+				3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
 				890376041F9DE0FB002A99A8 /* Date.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
@@ -575,16 +638,20 @@
 				C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */,
 				C7535CF51FA2670100B6CBD1 /* StudentStructure.swift in Sources */,
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
+				3FF6736B1FB48B89001C7147 /* SubjectTableViewController.swift in Sources */,
 				89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */,
 				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
+				3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
 				C7535CEF1FA2670100B6CBD1 /* AnswerStructure.swift in Sources */,
 				C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
+				3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 				C7535CF21FA2670100B6CBD1 /* QuestionStructure.swift in Sources */,
 				C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */,
+				3FF673661FB48B6B001C7147 /* AddNewQuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

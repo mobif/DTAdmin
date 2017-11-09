@@ -37,7 +37,7 @@ class GroupDetailsViewController: UIViewController {
     func getDetailsByGroup() {
         guard let group = group else { return }
         self.groupNameLabel.text = group.groupName
-        DataManager.shared.getEntity(byId: group.facultyId, typeEntity: .Faculty){
+        DataManager.shared.getEntity(byId: group.facultyId, typeEntity: .faculty){
             (faculty, error) in
             if let error = error {
                 self.showWarningMsg(error)
@@ -49,7 +49,7 @@ class GroupDetailsViewController: UIViewController {
                 }
             }
         }
-        DataManager.shared.getEntity(byId: group.specialityId, typeEntity: .Speciality){
+        DataManager.shared.getEntity(byId: group.specialityId, typeEntity: .speciality){
             (speciality, error) in
             if let error = error {
                 self.showWarningMsg(error)

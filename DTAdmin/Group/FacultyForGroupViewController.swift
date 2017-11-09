@@ -29,7 +29,7 @@ class FacultyForGroupViewController: UIViewController {
         self.title = NSLocalizedString("Faculties", comment: "Title for Faculties table view")
         facultyTableView.delegate = self
         facultyTableView.dataSource = self
-        DataManager.shared.getList(byEntity: .Faculty){ (faculties, error) in
+        DataManager.shared.getList(byEntity: .faculty){ (faculties, error) in
             if let error = error {
                 self.showWarningMsg(error)
             } else {

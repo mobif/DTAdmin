@@ -29,7 +29,7 @@ class SpecialityForGroupViewController: UIViewController {
         self.title = NSLocalizedString("Specialities", comment: "Title for Specialities table view")
         specialityTableView.delegate = self
         specialityTableView.dataSource = self
-        DataManager.shared.getList(byEntity: .Speciality){ (specialities, error) in
+        DataManager.shared.getList(byEntity: .speciality){ (specialities, error) in
             if let error = error {
                 self.showWarningMsg(error)
             } else {
