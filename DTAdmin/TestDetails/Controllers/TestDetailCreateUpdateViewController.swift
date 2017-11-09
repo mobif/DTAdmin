@@ -9,7 +9,7 @@
 import UIKit
 
 class TestDetailCreateUpdateViewController: UIViewController {
-
+    
     var testDetailForSave: TestDetailStructure?
     var resultModification: ((TestDetailStructure) -> ())?
     var canEdit = Bool()
@@ -44,20 +44,27 @@ class TestDetailCreateUpdateViewController: UIViewController {
         
     }
     
-    /* - - - building for request - - - */
+    /**
+     This function get data from text fields for creation new text detail item.
+     - Precondition: All text fields have to have its property value.
+     - Postcondition: Test detail item is prepared to request to API.
+     - Returns: This function returns true - when all text fields are filled or false - when empty
+     */
     func prepareForRequest() -> Bool {
-        guard let level =  testLevelTextfield.text, let task = numberOfTaskTextField.text, let rate = numberOfMarkTextField.text else { return false }
-        let dictionary: [String: Any] = ["id": idForEditing, "test_id": id, "level": level, "tasks": task, "rate": rate]
-        self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
-        return true
+        guard let level = testLevelTextfield.text, let task = numberOfTaskTextField.text, let rate = numberOfMarkTextField.text else { return false }
+        if !level.isEmpty && !task.isEmpty && !rate.isEmpty {
+            let dictionary: [String: Any] = ["id": idForEditing, "test_id": id, "level": level, "tasks": task, "rate": rate]
+            self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
+            return true
+        } else {
+            return false
+        }
     }
     
     @IBAction func CreateSpecialityButton(_ sender: Any) {
         !canEdit ? createTestDetail() : updateTestDetail()
-        self.navigationController?.popViewController(animated: true)
     }
     
-    /* - - - create - - -  */
     func createTestDetail() {
         if prepareForRequest() {
             guard let testDetailForSave = testDetailForSave else { return }
@@ -74,10 +81,12 @@ class TestDetailCreateUpdateViewController: UIViewController {
                     }
                 }
             }
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
         }
     }
-
-    /* - - - update - - -  */
+    
     func updateTestDetail() {
         if prepareForRequest() {
             guard let testDetailForSave = testDetailForSave else { return }
@@ -91,8 +100,11 @@ class TestDetailCreateUpdateViewController: UIViewController {
                     }
                 }
             }
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
         }
     }
-
-
+    
+    
 }

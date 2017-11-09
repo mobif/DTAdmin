@@ -9,7 +9,7 @@
 import UIKit
 
 class SpecialityCreateUpdateViewController: UIViewController {
-
+    
     var specialityForSave: SpecialityStructure?
     var resultModification: ((SpecialityStructure) -> ())?
     var canEdit = Bool()
@@ -41,20 +41,27 @@ class SpecialityCreateUpdateViewController: UIViewController {
         
     }
     
-    /* - - - building for request - - - */
+    /**
+     This function get data from text fields for creation new speciality item.
+     - Precondition: All text fields have to have its property value.
+     - Postcondition: Speciality item is prepared to request to API.
+     - Returns: This function returns true - when all text fields are filled or false - when empty
+     */
     func prepareForRequest() -> Bool {
         guard let code = specialityCodeTextField.text, let name = specialityNameTextField.text else { return false }
-        let dictionary: [String: Any] = ["speciality_id": idForEditing, "speciality_code": code, "speciality_name": name]
-        self.specialityForSave = SpecialityStructure(dictionary: dictionary)
-        return true
+        if !code.isEmpty && !name.isEmpty {
+            let dictionary: [String : Any] = ["speciality_id": idForEditing, "speciality_code": code, "speciality_name": name]
+            self.specialityForSave = SpecialityStructure(dictionary: dictionary)
+            return true
+        } else {
+            return false
+        }
     }
     
     @IBAction func CreateSpecialityButton(_ sender: Any) {
         !canEdit ? createSpeciality() : updateSpeciality()
-        self.navigationController?.popViewController(animated: true)
     }
-
-    /* - - - create - - -  */
+    
     func createSpeciality() {
         if prepareForRequest() {
             guard let specialityForSave = specialityForSave else { return }
@@ -71,11 +78,12 @@ class SpecialityCreateUpdateViewController: UIViewController {
                     }
                 }
             }
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
         }
-        
     }
     
-    /* - - - update - - -  */
     func updateSpeciality() {
         if prepareForRequest() {
             guard let specialityForSave = specialityForSave else { return }
@@ -89,9 +97,11 @@ class SpecialityCreateUpdateViewController: UIViewController {
                     }
                 }
             }
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
         }
     }
     
-
     
 }

@@ -10,7 +10,7 @@
 import UIKit
 
 class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-  
+    
     var specialitiesArray = [SpecialityStructure]()
     var filteredSpecialitiesArray = [SpecialityStructure]()
     lazy var refresh: UIRefreshControl = UIRefreshControl()
@@ -20,15 +20,13 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString(Entities.Speciality.rawValue, comment: "All specialities")
-        refresh.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(refreshDataInTableView), for: .valueChanged)
         specialitiesTableView.refreshControl = refresh
-        refreshData()
-        setUpSerchBar()
+        refreshDataInTableView()
+        searchBar.delegate = self
     }
     
-    
-    /* - - - refresh - - -  */
-    @objc func refreshData(){
+    @objc func refreshDataInTableView(){
         refresh.beginRefreshing()
         DataManager.shared.getList(byEntity: .Speciality) { (speciality, error) in
             if error == nil, let specialityies = speciality as? [SpecialityStructure] {
@@ -38,14 +36,9 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             } else {
                 self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
             }
-
+            
         }
         self.refresh.endRefreshing()
-    }
-
-    /* - - - search - - - */
-    private func setUpSerchBar(){
-        searchBar.delegate = self
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -58,7 +51,6 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         specialitiesTableView.reloadData()
     }
     
-    /* - - - tableView - - - */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredSpecialitiesArray.count
     }
@@ -73,11 +65,6 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        
-//    }
-    
-    /* - - - edit && delete - - -  */
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
             guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality", bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController") as? SpecialityCreateUpdateViewController else  { return }
@@ -86,8 +73,8 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             specialityCreateUpdateViewController.resultModification = { updateResult in
                 self.filteredSpecialitiesArray[indexPath.row] = updateResult
                 self.specialitiesTableView.reloadData()
-        }
-        self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
+            }
+            self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
         })
         let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { action, indexPath in
             let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this speciality?", preferredStyle: .alert)
@@ -139,7 +126,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
         }
-    
+        
     }
     
     
