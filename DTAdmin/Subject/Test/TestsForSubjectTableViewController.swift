@@ -8,7 +8,17 @@
 
 import UIKit
 
-class TestsForSubjectTableViewController: UITableViewController {
+class TestsForSubjectTableViewController: UITableViewController, TestTableViewCellDelegate {
+    
+    func didTapShowTestDetail(id: String) {
+        //add seque to show test detail
+    }
+    
+    func didTapShowQuestions(id: String) {
+        guard let wayToShowQuestions = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionTableView") as? QuestionsTableViewController else { return }
+        wayToShowQuestions.testId = id
+        self.navigationController?.pushViewController(wayToShowQuestions, animated: true)
+    }
     
     var test = [TestStructure]()
     var subjectId: String?
@@ -46,8 +56,9 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath.row + 1). " + test[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as! TestTableViewCell
+        cell.setTest(test: test[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -64,12 +75,6 @@ class TestsForSubjectTableViewController: UITableViewController {
         }
         update.backgroundColor = UIColor.blue
         return [delete, update]
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let wayToShowTestInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "showTestInfo") as? ShowTestInfoViewController else { return }
-        wayToShowTestInfo.test = self.test[indexPath.row]
-        self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
     }
     
 }

@@ -16,7 +16,7 @@
 
 import UIKit
 
-class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
+class SubjectTableViewController: UITableViewController, UISearchBarDelegate, SubjectTableViewCellDelegate {
     
     var records = [SubjectStructure]()
     var filteredData = [SubjectStructure]()
@@ -94,10 +94,10 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SubjectTableViewCell
         let cellData = inSearchMode ? filteredData[indexPath.row] : records[indexPath.row]
-        cell.textLabel?.text = "\(indexPath.row + 1). " + cellData.name
-        cell.detailTextLabel?.text = cellData.description
+        cell.setSubject(subject: cellData)
+        cell.delegate = self
         return cell
     }
     
@@ -132,17 +132,18 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
         return [delete, update]
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let selectedSubject = self.selectedSubject {
-            selectedSubject(self.records[indexPath.row])
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            if let wayToShowTests = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "DetailSubject") as? DetailSubjectViewController
-            {
-                wayToShowTests.subject = self.records[indexPath.row]
-                self.navigationController?.pushViewController(wayToShowTests, animated: true)
-            }
-        }
+    func didTapShowTest(id: String) {
+        guard let wayToShowTestsForSubject = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "TestForSubjectTableViewController") as? TestsForSubjectTableViewController else { return }
+        wayToShowTestsForSubject.subjectId = id
+        self.navigationController?.pushViewController(wayToShowTestsForSubject, animated: true)
+    }
+    
+    
+    func didTapShowTimeTable(id: String) {
+        let timeTableStoryboard = UIStoryboard.stoyboard(by: .timeTable)
+        guard let timeTableViewController = timeTableStoryboard.instantiateViewController(withIdentifier: "TimeTableListViewController") as? TimeTableListViewController else { return }
+        timeTableViewController.subjectID = Int(id)
+        self.navigationController?.pushViewController(timeTableViewController, animated: true)
     }
     
 }

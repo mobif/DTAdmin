@@ -73,6 +73,8 @@ class AnswersTableViewController: UITableViewController {
                 let decodedimage = UIImage(data: dataDecoded)
                 cell.attachment.image = decodedimage
             }
+        } else {
+            cell.attachment.image = UIImage(named: "Image")
         }
         return cell
     }

@@ -172,7 +172,7 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func removeImage(_ sender: UIButton) {
-        attachmentImageView.image = UIImage(named: "Image")
+        attachmentImageView.image = nil
     }
     
     

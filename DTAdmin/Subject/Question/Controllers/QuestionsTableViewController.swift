@@ -8,7 +8,14 @@
 
 import UIKit
 
-class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
+class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, QuestionTableViewCellDelegate {
+    
+    func didTapShowAnswers(id: String) {
+        guard let wayToShowAnswers = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "Answers") as? AnswersTableViewController
+            else { return }
+        wayToShowAnswers.questionId = id
+        self.navigationController?.pushViewController(wayToShowAnswers, animated: true)
+    }
     
     var questions = [QuestionStructure]()
     var testId: String?
@@ -102,9 +109,11 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as! QuestionTableViewCell
         let cellData = inSearchMode ? filteredData[indexPath.row] : questions[indexPath.row]
-        cell.textLabel?.text = "\(indexPath.row + 1). " + cellData.questionText
+        cell.setQuestion(question: cellData)
+        cell.delegate = self
+        //cell.textLabel?.text = "\(indexPath.row + 1). " + cellData.questionText
         return cell
     }
     
@@ -137,11 +146,8 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate {
         return [delete, update]
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let wayToShowQuestionInfo = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionInfo") as? QuestionInfoViewController
-            else { return }
-        wayToShowQuestionInfo.question = self.questions[indexPath.row]
-        self.navigationController?.pushViewController(wayToShowQuestionInfo, animated: true)
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150.0
     }
     
 }
