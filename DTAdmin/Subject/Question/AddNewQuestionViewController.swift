@@ -174,7 +174,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         questionAttachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
         
         self.questionLevelTextField.dropDownData = levels
-        self.questionTypeTextField.tag = 0
+        self.questionLevelTextField.tag = 0
         self.questionTypeTextField.dropDownData = types
         self.questionTypeTextField.tag = 1
     }
