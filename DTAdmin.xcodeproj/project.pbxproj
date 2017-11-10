@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F004FCE1FB60CC80045F2EE /* DesignedButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */; };
+		3F004FD31FB60E790045F2EE /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */; };
+		3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */; };
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
 		3F70659E1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */; };
-		3F7065A51FB5F8F2009C0EC8 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7065A41FB5F8F2009C0EC8 /* TestTableViewCell.swift */; };
-		3F7065A71FB5FFE2009C0EC8 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7065A61FB5FFE2009C0EC8 /* QuestionTableViewCell.swift */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
@@ -86,10 +87,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignedButtons.swift; sourceTree = "<group>"; };
+		3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
+		3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
 		3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableViewCell.swift; sourceTree = "<group>"; };
-		3F7065A41FB5F8F2009C0EC8 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
-		3F7065A61FB5FFE2009C0EC8 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F004FD11FB60E6E0045F2EE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3F01D7CF1F8D1458005CA03A /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,14 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		3F7065A81FB5FFE5009C0EC8 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				3F7065A61FB5FFE2009C0EC8 /* QuestionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -356,8 +358,8 @@
 		3FF673601FB48B40001C7147 /* Question */ = {
 			isa = PBXGroup;
 			children = (
+				3F004FD11FB60E6E0045F2EE /* View */,
 				3F7065A91FB60519009C0EC8 /* Controllers */,
-				3F7065A81FB5FFE5009C0EC8 /* View */,
 			);
 			path = Question;
 			sourceTree = "<group>";
@@ -375,7 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */,
-				3F7065A41FB5F8F2009C0EC8 /* TestTableViewCell.swift */,
+				3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -465,6 +467,7 @@
 			children = (
 				89C96E091F9D03DC0019FE77 /* PickedTextField.swift */,
 				89C96E0B1F9D079D0019FE77 /* TimePicker.swift */,
+				3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */,
 			);
 			name = Controlls;
 			sourceTree = "<group>";
@@ -633,7 +636,6 @@
 				C7535CF71FA2670100B6CBD1 /* TestDetailStructure.swift in Sources */,
 				C7535CEA1FA2670100B6CBD1 /* DataManager.swift in Sources */,
 				3F9505E31FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift in Sources */,
-				3F7065A71FB5FFE2009C0EC8 /* QuestionTableViewCell.swift in Sources */,
 				894AA5CA1FA9E40E00B7669D /* Storyboard.swift in Sources */,
 				C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */,
 				3FF6735B1FB48B19001C7147 /* AnswerTableViewCell.swift in Sources */,
@@ -649,6 +651,7 @@
 				C7535CEC1FA2670100B6CBD1 /* HTTPManager.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
+				3F004FCE1FB60CC80045F2EE /* DesignedButtons.swift in Sources */,
 				3F9505E51FACBA16003F3EB9 /* GroupDetailsViewController.swift in Sources */,
 				897D0E341F9B6BC300825E62 /* CommonNetworkManager.swift in Sources */,
 				3FF6735E1FB48B3A001C7147 /* AnswersTableViewController.swift in Sources */,
@@ -669,12 +672,13 @@
 				89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */,
 				C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */,
 				C7535CF51FA2670100B6CBD1 /* StudentStructure.swift in Sources */,
+				3F004FD31FB60E790045F2EE /* QuestionTableViewCell.swift in Sources */,
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
 				3FF6736B1FB48B89001C7147 /* SubjectTableViewController.swift in Sources */,
 				89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */,
 				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
-				3F7065A51FB5F8F2009C0EC8 /* TestTableViewCell.swift in Sources */,
+				3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
 				C7535CEF1FA2670100B6CBD1 /* AnswerStructure.swift in Sources */,
 				C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */,

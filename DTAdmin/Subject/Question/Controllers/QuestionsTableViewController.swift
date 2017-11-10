@@ -10,7 +10,7 @@ import UIKit
 
 class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, QuestionTableViewCellDelegate {
     
-    func didTapShowAnswers(id: String) {
+    func didTapShowAnswer(id: String) {
         guard let wayToShowAnswers = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "Answers") as? AnswersTableViewController
             else { return }
         wayToShowAnswers.questionId = id

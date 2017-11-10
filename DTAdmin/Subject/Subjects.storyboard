@@ -46,7 +46,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFJ-Pr-DEl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFJ-Pr-DEl" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="164" y="456.5" width="46" height="30"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
@@ -129,14 +129,14 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzh-Oj-8G1">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzh-Oj-8G1" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="10" y="57" width="76" height="37.5"/>
                                             <state key="normal" title="Show tests"/>
                                             <connections>
                                                 <action selector="showTest:" destination="iHT-40-O9A" eventType="touchUpInside" id="BWj-oe-iCs"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUk-oO-aaL">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUk-oO-aaL" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="255" y="64.5" width="110" height="30"/>
                                             <state key="normal" title="Show time table"/>
                                             <connections>
@@ -233,12 +233,12 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-a4-fYd">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-a4-fYd" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="206" y="108" width="99" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Show answers"/>
                                             <connections>
-                                                <action selector="showAnswers:" destination="ral-VH-XqA" eventType="touchUpInside" id="H75-xQ-qth"/>
+                                                <action selector="showAnswers:" destination="ral-VH-XqA" eventType="touchUpInside" id="ZJw-df-eQ7"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -260,10 +260,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="questionImageView" destination="LBH-IG-x3j" id="KRX-nR-bGj"/>
+                                    <outlet property="attachmentImageView" destination="LBH-IG-x3j" id="crX-ra-pMK"/>
                                     <outlet property="questionLevelLabel" destination="T2n-Op-FLx" id="sOJ-ow-KS3"/>
-                                    <outlet property="questionTextLabel" destination="Hhr-0J-Mj2" id="FqY-Vh-mTl"/>
-                                    <outlet property="questionTypeLabel" destination="eDa-qL-Fcf" id="8qG-kL-198"/>
+                                    <outlet property="questionTextLabel" destination="Hhr-0J-Mj2" id="RRX-Nc-Rwt"/>
+                                    <outlet property="questionTypeLabel" destination="eDa-qL-Fcf" id="sMg-mR-PGY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -402,14 +402,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KiI-l5-Hr4">
                                 <rect key="frame" x="20" y="373" width="335" height="128"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXt-oc-jf2">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXt-oc-jf2" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="20" y="526" width="87" height="30"/>
                                 <state key="normal" title="Open gallery"/>
                                 <connections>
                                     <action selector="openGallery:" destination="Gby-7T-Ueo" eventType="touchUpInside" id="7R0-KN-8WU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM0-oF-4Qw">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM0-oF-4Qw" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="254" y="526" width="101" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="JlR-rM-TS3"/>
@@ -495,7 +495,7 @@
                             <constraint firstItem="Eal-e8-bl9" firstAttribute="trailing" secondItem="dkw-hT-cJR" secondAttribute="trailing" constant="20" id="h92-vS-M9T"/>
                             <constraint firstItem="JXF-Nm-cbP" firstAttribute="centerX" secondItem="dkw-hT-cJR" secondAttribute="centerX" id="i6V-4L-xtS"/>
                             <constraint firstItem="JXF-Nm-cbP" firstAttribute="trailing" secondItem="dkw-hT-cJR" secondAttribute="trailing" id="iMw-aj-Qwy"/>
-                            <constraint firstItem="XM0-oF-4Qw" firstAttribute="baseline" secondItem="yXt-oc-jf2" secondAttribute="baseline" id="iqM-5d-xHC"/>
+                            <constraint firstItem="XM0-oF-4Qw" firstAttribute="baseline" secondItem="yXt-oc-jf2" secondAttribute="baseline" id="iqM-5d-xHC" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target"/>
                             <constraint firstItem="XM0-oF-4Qw" firstAttribute="bottom" secondItem="yXt-oc-jf2" secondAttribute="bottom" id="jNx-r1-tCC"/>
                             <constraint firstItem="dkw-hT-cJR" firstAttribute="leading" secondItem="jnb-wP-fwf" secondAttribute="leading" id="jhS-Lb-y12"/>
                             <constraint firstItem="wcz-FP-tJI" firstAttribute="trailing" secondItem="KiI-l5-Hr4" secondAttribute="trailing" id="kTb-ky-u8v"/>
@@ -564,7 +564,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rF-gB-7Px">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rF-gB-7Px" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="20" y="486" width="87" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3aX-GO-uwz"/>
@@ -575,7 +575,7 @@
                                     <action selector="openGallery:" destination="jl6-lo-VWW" eventType="touchUpInside" id="6cn-Us-Rnx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-B6-92z">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-B6-92z" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="254" y="486" width="101" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="N5r-hS-4W5"/>
@@ -782,18 +782,18 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJb-n5-rhR">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJb-n5-rhR" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="10" y="85" width="110" height="30"/>
                                             <state key="normal" title="Show test detail"/>
                                             <connections>
-                                                <action selector="showTestDetail:" destination="axH-dR-DfP" eventType="touchUpInside" id="LW6-PK-ief"/>
+                                                <action selector="showTestDetail:" destination="axH-dR-DfP" eventType="touchUpInside" id="X9l-lZ-AI8"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXz-4K-vuF">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXz-4K-vuF" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="256" y="85" width="109" height="30"/>
                                             <state key="normal" title="Show questions"/>
                                             <connections>
-                                                <action selector="showQuestions:" destination="axH-dR-DfP" eventType="touchUpInside" id="aZF-yl-v0g"/>
+                                                <action selector="showQuestion:" destination="axH-dR-DfP" eventType="touchUpInside" id="0Ap-ZW-NAK"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hd-Ra-fDp">
@@ -830,11 +830,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="attemtsTestLabel" destination="YP5-2R-ToQ" id="sW9-OH-L38"/>
-                                    <outlet property="enabledTestLabel" destination="9hd-Ra-fDp" id="o1h-Sc-r03"/>
-                                    <outlet property="tasksTestLabel" destination="G57-6A-7lI" id="CcH-v5-ejE"/>
-                                    <outlet property="testNameLabel" destination="VXe-M5-Mcc" id="pO4-mo-ZZR"/>
-                                    <outlet property="timeForTestLabel" destination="lF0-ej-Sme" id="7ub-0s-cNw"/>
+                                    <outlet property="attemptsLabel" destination="YP5-2R-ToQ" id="IG7-2x-jg9"/>
+                                    <outlet property="enabledLabel" destination="9hd-Ra-fDp" id="0CH-WJ-vJK"/>
+                                    <outlet property="tasksTestLabel" destination="G57-6A-7lI" id="FI6-xy-Atv"/>
+                                    <outlet property="testLabel" destination="VXe-M5-Mcc" id="J6O-Z2-r8k"/>
+                                    <outlet property="timeForTestLabel" destination="lF0-ej-Sme" id="vXO-U0-s2i"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
