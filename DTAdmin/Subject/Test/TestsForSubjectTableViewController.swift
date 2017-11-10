@@ -22,6 +22,7 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     @IBAction func addTest(_ sender: UIBarButtonItem) {
+        
         guard let newTestViewController = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else  { return }
         newTestViewController.subjectId = self.subjectId
         newTestViewController.resultModification = { test in
@@ -29,6 +30,15 @@ class TestsForSubjectTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         self.navigationController?.pushViewController(newTestViewController, animated: true)
+        
+//        let testTableStoryboard = UIStoryboard(name: "Test", bundle: nil)//UIStoryboard.stoyboard(by: .test)
+//        guard let testViewController = testTableStoryboard.instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else { return }
+//        testViewController.subjectId = subjectId
+//        testViewController.resultModification = { test in
+//            self.test.append(test)
+//            self.tableView.reloadData()
+//        self.navigationController?.pushViewController(testViewController, animated: true)
+//        }
     }
     
     func showTests(id: String) {
@@ -76,22 +86,15 @@ class TestsForSubjectTableViewController: UITableViewController {
                             self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed test delete"))
                         })
                     }
-        let update = UITableViewRowAction(style: .normal, title: "Update") {_,_ in
-            //TODO: update test record
-            // Alina's code for subjects
-//            let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
-//                guard let wayToAddNewRecord = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewSubject") as? AddNewRecordViewController else { return }
-//                wayToAddNewRecord.subjectId = self.records[indexPath.row].id
-//                wayToAddNewRecord.updateDates = true
-//                wayToAddNewRecord.subject = self.records[indexPath.row]
-//                wayToAddNewRecord.resultModification = { subjectResult in
-//                    self.records[indexPath.row] = subjectResult
-//                    self.tableView.reloadData()
-//                }
-//                self.navigationController?.pushViewController(wayToAddNewRecord, animated: true)
-//            }
-        }
-        
+        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+                guard let wayToAddNewTest = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else { return }
+                wayToAddNewTest.testInstance = self.test[indexPath.row]
+                wayToAddNewTest.resultModification = { test in
+                    self.test[indexPath.row] = test
+                    self.tableView.reloadData()
+                }
+                self.navigationController?.pushViewController(wayToAddNewTest, animated: true)
+            }
         delete.backgroundColor = UIColor.red
         update.backgroundColor = UIColor.blue
         return [delete, update]
@@ -102,6 +105,5 @@ class TestsForSubjectTableViewController: UITableViewController {
         wayToShowTestInfo.test = self.test[indexPath.row]
         self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
     }
-    
 }
 
