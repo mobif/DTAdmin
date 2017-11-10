@@ -53,10 +53,10 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
         self.rateTestTextField.tag = 2
     }
     
-    func createArray(max: Int) -> [String] {
-        var array = [String]()
+    func createArray(max: Int) -> [Int] {
+        var array = [Int]()
         for i in 1...max {
-            array.append(String(i))
+            array.append(i)
         }
         return array
     }
