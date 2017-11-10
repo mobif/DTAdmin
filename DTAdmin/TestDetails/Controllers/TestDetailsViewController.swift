@@ -83,8 +83,11 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
         self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
         for i in 0...testDetailArray.count - 1 {
-            guard let item = Int(testDetailArray[i].level) else { return }
-            self.levelArrayForFiltering.append(item)
+            guard let levels = Int(testDetailArray[i].level) else { return }
+            self.levelArrayForFiltering.append(levels)
+            guard let tasks = Int(testDetailArray[i].rate) else { return }
+            self.levelArrayForFiltering.append(tasks)
+            
         }
         testDetailCreateUpdateViewController.doneLevelArray = self.levelArrayForFiltering
         testDetailCreateUpdateViewController.resultModification = { newTestDetail in

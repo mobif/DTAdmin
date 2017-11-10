@@ -15,6 +15,7 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
     var canEdit = Bool()
     var idForEditing = String()
     var doneLevelArray = [Int]()
+    var doneTasksArray = [Int]()
     var id = "3"
 
 
@@ -48,9 +49,9 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
         taskTestTextField.customDelegate = self
         rateTestTextField.customDelegate = self
         
-        self.testLevelTextField.dropDownData = getFilteredArray(firstArray: createArray(max: 10), secondArray: doneLevelArray)
+        self.testLevelTextField.dropDownData = getFilteredArrayForLevels(firstArray: createArray(max: 10), secondArray: doneLevelArray)
         self.testLevelTextField.tag = 0
-        self.taskTestTextField.dropDownData = createArray(max: 5)
+        self.taskTestTextField.dropDownData = getFilteredArrayForTasks(array: createArray(max: 5))
         self.taskTestTextField.tag = 1
         self.rateTestTextField.dropDownData = createArray(max: 3)
         self.rateTestTextField.tag = 2
@@ -64,13 +65,20 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
         return array
     }
     
-    func getFilteredArray(firstArray: [Int], secondArray: [Int]) -> [Int] {
+    func getFilteredArrayForLevels(firstArray: [Int], secondArray: [Int]) -> [Int] {
         var filtered = firstArray 
         for item in secondArray {
             if let index = filtered.index(of: item) {
                 filtered.remove(at: index)
             }
         }
+        return filtered
+    }
+    
+    func getFilteredArrayForTasks(array: [Int]) -> [Int] {
+        var filtered = [Int]()
+        let sum = array.reduce(0, +)
+        filtered.append(sum)
         return filtered
     }
     
