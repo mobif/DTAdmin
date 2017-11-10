@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIStoryboard {
-    class func stoyboard(by type: StoryboardType) -> UIStoryboard {
+    class func storyboard(by type: StoryboardType) -> UIStoryboard {
         return UIStoryboard.init(name: type.rawValue, bundle: nil)
     }
 }
@@ -19,4 +19,5 @@ enum StoryboardType: String {
     case timeTable = "TimeTable"
     case admin = "Admin"
     case group = "Group"
+    case student = "Student"
 }

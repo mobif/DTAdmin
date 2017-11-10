@@ -24,14 +24,14 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(studentNavigationController)
 
 //MARK: Create subjects tab
-        let subjectStoryboard = UIStoryboard.stoyboard(by: .subject)
+        let subjectStoryboard = UIStoryboard.storyboard(by: .subject)
         guard let subjectNavController = subjectStoryboard.instantiateViewController(withIdentifier: "SubjectNavController") as? UINavigationController else { return }
         let subjectBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
         subjectNavController.tabBarItem = subjectBarItem
         tabBarViewControllers.append(subjectNavController)
 
 //MARK: Create groups tab
-        let groupStoryboard = UIStoryboard.stoyboard(by: .group)
+        let groupStoryboard = UIStoryboard.storyboard(by: .group)
         guard let groupNavController = groupStoryboard.instantiateViewController(withIdentifier: "GroupNavController") as? UINavigationController else { return }
         let groupsBarItem = UITabBarItem(title: "Groups", image: nil, selectedImage: nil)
         groupNavController.tabBarItem = groupsBarItem
@@ -50,14 +50,14 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBarViewControllers.append(specialityTab)
         
 //MARK: Create admins tab
-        let adminStoryboard = UIStoryboard.stoyboard(by: .admin)
+        let adminStoryboard = UIStoryboard.storyboard(by: .admin)
         guard let adminsNavController = adminStoryboard.instantiateViewController(withIdentifier: "AdminListView") as? UINavigationController else { return }
         let adminsBarItem = UITabBarItem(title: "Admins", image: nil, selectedImage: nil)
         adminsNavController.tabBarItem = adminsBarItem
         tabBarViewControllers.append(adminsNavController)
         
 //MARK: Create timeTable tab
-        let timeTableStoryboard = UIStoryboard.stoyboard(by: .timeTable)
+        let timeTableStoryboard = UIStoryboard.storyboard(by: .timeTable)
         guard let timeTableNavController = timeTableStoryboard.instantiateViewController(withIdentifier: "timeTableNavController") as? UINavigationController else { return }
         let timeTableBarItem = UITabBarItem(title: "Time Table", image: nil, selectedImage: nil)
         timeTableNavController.tabBarItem = timeTableBarItem

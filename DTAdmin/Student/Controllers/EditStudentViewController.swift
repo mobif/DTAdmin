@@ -160,14 +160,15 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @IBAction func selectGroup(_ sender: UIButton) {
-        guard let groupsViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "GroupsTableViewController") as? GroupsTableViewController else { return }
-        groupsViewController.titleViewController = "Groups"
-        groupsViewController.selecectedGroup = {
+        let groupStoryboard = UIStoryboard.storyboard(by: .group)
+        guard let groupViewController = groupStoryboard.instantiateViewController(withIdentifier: "GroupVC") as? GroupViewController else { return }
+        groupViewController.isSelectAction = true
+        groupViewController.selectGroup = {
             group in
             self.selectedGroupForStudent = group
             self.groupButton.setTitle(group.groupName, for: .normal)
         }
-        self.navigationController?.pushViewController(groupsViewController, animated: true)
+        self.navigationController?.pushViewController(groupViewController, animated: true)
     }
     func getGroupFromAPI(byId: String) {
         DataManager.shared.getEntity(byId: byId, typeEntity: .group) { (groupInstance, error) in

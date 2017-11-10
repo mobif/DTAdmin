@@ -76,7 +76,8 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
         self.refreshControl.endRefreshing()
     }
     @objc func addNewStudent(){
-        guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else { return }
+        let studentStoryboard = UIStoryboard.storyboard(by: .student)
+        guard let editStudentViewController = studentStoryboard.instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else { return }
         editStudentViewController.titleViewController = NSLocalizedString("New Student", comment: "Create new Student")
         editStudentViewController.resultModification = { (studentReturn, isNew) in
             if isNew {
