@@ -23,22 +23,14 @@ class TestsForSubjectTableViewController: UITableViewController {
     
     @IBAction func addTest(_ sender: UIBarButtonItem) {
         
-        guard let newTestViewController = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else  { return }
-        newTestViewController.subjectId = self.subjectId
-        newTestViewController.resultModification = { test in
+        let groupStoryboard = UIStoryboard.stoyboard(by: .test)
+        guard let testViewController = groupStoryboard.instantiateViewController(withIdentifier: "newTestViewController") as? NewTestViewController else { return }
+        testViewController.subjectId = self.subjectId
+        testViewController.resultModification = { test in
             self.test.append(test)
             self.tableView.reloadData()
         }
-        self.navigationController?.pushViewController(newTestViewController, animated: true)
-        
-//        let testTableStoryboard = UIStoryboard(name: "Test", bundle: nil)//UIStoryboard.stoyboard(by: .test)
-//        guard let testViewController = testTableStoryboard.instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else { return }
-//        testViewController.subjectId = subjectId
-//        testViewController.resultModification = { test in
-//            self.test.append(test)
-//            self.tableView.reloadData()
-//        self.navigationController?.pushViewController(testViewController, animated: true)
-//        }
+        self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
     func showTests(id: String) {
