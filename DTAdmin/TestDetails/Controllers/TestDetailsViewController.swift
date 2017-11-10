@@ -12,6 +12,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
 
     var testDetailArray = [TestDetailStructure]()
     var id = "3"
+    var levelArrayForFiltering = [Int]()
     @IBOutlet weak var testDetailsTableView: UITableView!
     
     override func viewDidLoad() {
@@ -81,6 +82,11 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func addButtonTapped(_ sender: Any) {
         guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
         self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
+        for i in 0...testDetailArray.count - 1 {
+            guard let item = Int(testDetailArray[i].level) else { return }
+            self.levelArrayForFiltering.append(item)
+        }
+        testDetailCreateUpdateViewController.doneLevelArray = self.levelArrayForFiltering
         testDetailCreateUpdateViewController.resultModification = { newTestDetail in
             self.testDetailArray.append(newTestDetail)
             self.testDetailsTableView.reloadData()

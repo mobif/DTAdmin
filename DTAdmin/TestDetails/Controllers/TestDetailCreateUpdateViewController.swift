@@ -1,4 +1,4 @@
-//
+ //
 //  TestDetailCreateUpdateViewController.swift
 //  DTAdmin
 //
@@ -14,7 +14,9 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
     var resultModification: ((TestDetailStructure) -> ())?
     var canEdit = Bool()
     var idForEditing = String()
+    var doneLevelArray = [Int]()
     var id = "3"
+
 
     @IBOutlet weak var testLevelTextField: PickedTextField!
     @IBOutlet weak var taskTestTextField: PickedTextField!
@@ -45,7 +47,8 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
         testLevelTextField.customDelegate = self
         taskTestTextField.customDelegate = self
         rateTestTextField.customDelegate = self
-        self.testLevelTextField.dropDownData = createArray(max: 10)
+        
+        self.testLevelTextField.dropDownData = getFilteredArray(firstArray: createArray(max: 10), secondArray: doneLevelArray)
         self.testLevelTextField.tag = 0
         self.taskTestTextField.dropDownData = createArray(max: 5)
         self.taskTestTextField.tag = 1
@@ -59,6 +62,16 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
             array.append(i)
         }
         return array
+    }
+    
+    func getFilteredArray(firstArray: [Int], secondArray: [Int]) -> [Int] {
+        var filtered = firstArray 
+        for item in secondArray {
+            if let index = filtered.index(of: item) {
+                filtered.remove(at: index)
+            }
+        }
+        return filtered
     }
     
     func pickedValue(value: Any, tag: Int) {
