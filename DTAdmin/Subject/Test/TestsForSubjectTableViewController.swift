@@ -22,7 +22,15 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     @IBAction func addTest(_ sender: UIBarButtonItem) {
-        //add new test
+        
+        let groupStoryboard = UIStoryboard.stoyboard(by: .test)
+        guard let testViewController = groupStoryboard.instantiateViewController(withIdentifier: "newTestViewController") as? NewTestViewController else { return }
+        testViewController.subjectId = self.subjectId
+        testViewController.resultModification = { test in
+            self.test.append(test)
+            self.tableView.reloadData()
+        }
+        self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
     func showTests(id: String) {
@@ -55,13 +63,31 @@ class TestsForSubjectTableViewController: UITableViewController {
         return true
     }
     
+    // Nastia's method
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") {_,_ in
-            //delete test record
-        }
-        let update = UITableViewRowAction(style: .normal, title: "Update") {_,_ in
-            //update test record
-        }
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+                        let testToDelete = self.test[indexPath.row]
+                        DataManager.shared.deleteEntity(byId: testToDelete.id!, typeEntity: .test, completionHandler: { (status, error) in
+                            guard let error = error else {
+                                self.tableView.beginUpdates()
+                                self.test.remove(at: indexPath.row)
+                                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                                self.tableView.endUpdates()
+                                return
+                            }
+                            self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed test delete"))
+                        })
+                    }
+        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+                guard let wayToAddNewTest = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else { return }
+                wayToAddNewTest.testInstance = self.test[indexPath.row]
+                wayToAddNewTest.resultModification = { test in
+                    self.test[indexPath.row] = test
+                    self.tableView.reloadData()
+                }
+                self.navigationController?.pushViewController(wayToAddNewTest, animated: true)
+            }
+        delete.backgroundColor = UIColor.red
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
@@ -71,6 +97,5 @@ class TestsForSubjectTableViewController: UITableViewController {
         wayToShowTestInfo.test = self.test[indexPath.row]
         self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
     }
-    
 }
 
