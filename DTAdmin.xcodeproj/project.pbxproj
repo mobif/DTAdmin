@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
+		3F7A61D71FB75C2B00C9ACC8 /* reportForm.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F7A61D51FB75C2B00C9ACC8 /* reportForm.html */; };
+		3F7A61D81FB75C2B00C9ACC8 /* reportFormStudentRow.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F7A61D61FB75C2B00C9ACC8 /* reportFormStudentRow.html */; };
+		3F7A61DD1FB75C5200C9ACC8 /* PDFComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61D91FB75C5200C9ACC8 /* PDFComposer.swift */; };
+		3F7A61DE1FB75C5200C9ACC8 /* PDFPrinter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7A61DA1FB75C5200C9ACC8 /* PDFPrinter.storyboard */; };
+		3F7A61DF1FB75C5200C9ACC8 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61DB1FB75C5200C9ACC8 /* PreviewViewController.swift */; };
+		3F7A61E01FB75C5200C9ACC8 /* PrintPageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61DC1FB75C5200C9ACC8 /* PrintPageRenderer.swift */; };
+		3F7A61E61FB75CDB00C9ACC8 /* ResultByGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61E21FB75CDA00C9ACC8 /* ResultByGroupViewController.swift */; };
+		3F7A61E81FB75CDB00C9ACC8 /* Result.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7A61E41FB75CDB00C9ACC8 /* Result.storyboard */; };
+		3F7A61E91FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61E51FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift */; };
+		3F7A61EB1FB7823D00C9ACC8 /* ResultStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61EA1FB7823C00C9ACC8 /* ResultStructure.swift */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
@@ -87,6 +97,16 @@
 
 /* Begin PBXFileReference section */
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
+		3F7A61D51FB75C2B00C9ACC8 /* reportForm.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reportForm.html; sourceTree = "<group>"; };
+		3F7A61D61FB75C2B00C9ACC8 /* reportFormStudentRow.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reportFormStudentRow.html; sourceTree = "<group>"; };
+		3F7A61D91FB75C5200C9ACC8 /* PDFComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFComposer.swift; sourceTree = "<group>"; };
+		3F7A61DA1FB75C5200C9ACC8 /* PDFPrinter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PDFPrinter.storyboard; sourceTree = "<group>"; };
+		3F7A61DB1FB75C5200C9ACC8 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		3F7A61DC1FB75C5200C9ACC8 /* PrintPageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPageRenderer.swift; sourceTree = "<group>"; };
+		3F7A61E21FB75CDA00C9ACC8 /* ResultByGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultByGroupViewController.swift; sourceTree = "<group>"; };
+		3F7A61E41FB75CDB00C9ACC8 /* Result.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Result.storyboard; sourceTree = "<group>"; };
+		3F7A61E51FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableTestViewCell.swift; sourceTree = "<group>"; };
+		3F7A61EA1FB7823C00C9ACC8 /* ResultStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStructure.swift; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +202,7 @@
 		3F01D7CF1F8D1458005CA03A /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				3F7A61D31FB75BB400C9ACC8 /* Printer */,
 				3FDE8FA11F8D0DF60057BF3C /* Assets.xcassets */,
 				3FDE8FA61F8D0DF60057BF3C /* Info.plist */,
 				3FDE8F9E1F8D0DF60057BF3C /* DTAdmin.xcdatamodeld */,
@@ -241,6 +262,37 @@
 			path = Admins;
 			sourceTree = "<group>";
 		};
+		3F7A61D31FB75BB400C9ACC8 /* Printer */ = {
+			isa = PBXGroup;
+			children = (
+				3F7A61D91FB75C5200C9ACC8 /* PDFComposer.swift */,
+				3F7A61DA1FB75C5200C9ACC8 /* PDFPrinter.storyboard */,
+				3F7A61DB1FB75C5200C9ACC8 /* PreviewViewController.swift */,
+				3F7A61DC1FB75C5200C9ACC8 /* PrintPageRenderer.swift */,
+				3F7A61D41FB75BD500C9ACC8 /* HTML Templates */,
+			);
+			path = Printer;
+			sourceTree = "<group>";
+		};
+		3F7A61D41FB75BD500C9ACC8 /* HTML Templates */ = {
+			isa = PBXGroup;
+			children = (
+				3F7A61D51FB75C2B00C9ACC8 /* reportForm.html */,
+				3F7A61D61FB75C2B00C9ACC8 /* reportFormStudentRow.html */,
+			);
+			name = "HTML Templates";
+			sourceTree = "<group>";
+		};
+		3F7A61E11FB75C8900C9ACC8 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				3F7A61E41FB75CDB00C9ACC8 /* Result.storyboard */,
+				3F7A61E21FB75CDA00C9ACC8 /* ResultByGroupViewController.swift */,
+				3F7A61E51FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
 		3F9505C31FACB8E1003F3EB9 /* Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +327,7 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				3F7A61E11FB75C8900C9ACC8 /* Result */,
 				3F9505C31FACB8E1003F3EB9 /* Group */,
 				89C96DFF1F9CC2F90019FE77 /* TimeTable */,
 				8927571A1F97648C00FF669D /* Common */,
@@ -463,6 +516,7 @@
 		C7535CDD1FA2670100B6CBD1 /* Structures */ = {
 			isa = PBXGroup;
 			children = (
+				3F7A61EA1FB7823C00C9ACC8 /* ResultStructure.swift */,
 				C7535CDE1FA2670100B6CBD1 /* AnswerStructure.swift */,
 				C7535CDF1FA2670100B6CBD1 /* FacultyStructure.swift */,
 				C7535CE01FA2670100B6CBD1 /* GroupStructure.swift */,
@@ -572,13 +626,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C96E031F9CFD1F0019FE77 /* TimeTable.storyboard in Resources */,
+				3F7A61D71FB75C2B00C9ACC8 /* reportForm.html in Resources */,
 				3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */,
 				C799D68D1FA267590092170E /* Student.storyboard in Resources */,
 				3F9505E71FACBA16003F3EB9 /* Group.storyboard in Resources */,
 				3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
+				3F7A61E81FB75CDB00C9ACC8 /* Result.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
+				3F7A61D81FB75C2B00C9ACC8 /* reportFormStudentRow.html in Resources */,
+				3F7A61DE1FB75C5200C9ACC8 /* PDFPrinter.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +660,7 @@
 				C7535CEA1FA2670100B6CBD1 /* DataManager.swift in Sources */,
 				3FF673641FB48B6B001C7147 /* QuestionInfoViewController.swift in Sources */,
 				3F9505E31FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift in Sources */,
+				3F7A61DD1FB75C5200C9ACC8 /* PDFComposer.swift in Sources */,
 				894AA5CA1FA9E40E00B7669D /* Storyboard.swift in Sources */,
 				C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */,
 				3FF6735B1FB48B19001C7147 /* AnswerTableViewCell.swift in Sources */,
@@ -611,6 +670,7 @@
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
 				3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */,
 				3FF673721FB48BAD001C7147 /* ShowTestInfoViewController.swift in Sources */,
+				3F7A61EB1FB7823D00C9ACC8 /* ResultStructure.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
@@ -630,11 +690,14 @@
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
 				3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */,
 				3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */,
+				3F7A61DF1FB75C5200C9ACC8 /* PreviewViewController.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
 				890376041F9DE0FB002A99A8 /* Date.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				C7535CF11FA2670100B6CBD1 /* GroupStructure.swift in Sources */,
+				3F7A61E01FB75C5200C9ACC8 /* PrintPageRenderer.swift in Sources */,
 				89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */,
+				3F7A61E61FB75CDB00C9ACC8 /* ResultByGroupViewController.swift in Sources */,
 				C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */,
 				C7535CF51FA2670100B6CBD1 /* StudentStructure.swift in Sources */,
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
@@ -642,6 +705,7 @@
 				89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */,
 				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
 				3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */,
+				3F7A61E91FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
 				C7535CEF1FA2670100B6CBD1 /* AnswerStructure.swift in Sources */,
