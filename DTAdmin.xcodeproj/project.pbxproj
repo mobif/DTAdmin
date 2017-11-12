@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DEC165D1FB88A3B002BAFA5 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC165C1FB88A3A002BAFA5 /* DataModel.swift */; };
 		2DEC908F1FB505160080D83D /* SpecialitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC908B1FB505160080D83D /* SpecialitiesViewController.swift */; };
 		2DEC90901FB505160080D83D /* SpecialityCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC908C1FB505160080D83D /* SpecialityCreateUpdateViewController.swift */; };
 		2DEC90911FB505160080D83D /* Speciality.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC908D1FB505160080D83D /* Speciality.storyboard */; };
@@ -102,6 +103,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2DEC165C1FB88A3A002BAFA5 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		2DEC908B1FB505160080D83D /* SpecialitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialitiesViewController.swift; sourceTree = "<group>"; };
 		2DEC908C1FB505160080D83D /* SpecialityCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		2DEC908D1FB505160080D83D /* Speciality.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speciality.storyboard; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				2DEC90941FB505240080D83D /* Controllers */,
 				2DEC90971FB505240080D83D /* TestDetails.storyboard */,
+				2DEC165C1FB88A3A002BAFA5 /* DataModel.swift */,
 				2DEC90981FB505240080D83D /* TestDetailsTableViewCell.swift */,
 			);
 			path = TestDetails;
@@ -741,6 +744,7 @@
 				3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */,
 				3FF6735F1FB48B3A001C7147 /* AddNewAnswerViewController.swift in Sources */,
 				C7535CED1FA2670100B6CBD1 /* HTTPStatusCodes.swift in Sources */,
+				2DEC165D1FB88A3B002BAFA5 /* DataModel.swift in Sources */,
 				2DEC908F1FB505160080D83D /* SpecialitiesViewController.swift in Sources */,
 				2DEC90991FB505240080D83D /* TestDetailCreateUpdateViewController.swift in Sources */,
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,

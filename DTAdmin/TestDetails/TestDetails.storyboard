@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rf-bv-pV7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1rf-bv-pV7">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,8 +70,8 @@
                                         <connections>
                                             <outlet property="testDetailId" destination="XHZ-99-8rx" id="Wh6-b1-9Rx"/>
                                             <outlet property="testDetailLevel" destination="X51-nb-ii0" id="n8i-JN-3zK"/>
-                                            <outlet property="testDetailRate" destination="qeS-Y6-PIX" id="ean-bP-UCQ"/>
-                                            <outlet property="testDetailTasks" destination="Vnv-i0-3Vm" id="Bn1-iQ-uFi"/>
+                                            <outlet property="testDetailRate" destination="qeS-Y6-PIX" id="SBe-eW-0Ea"/>
+                                            <outlet property="testDetailTasks" destination="Vnv-i0-3Vm" id="VAf-aI-aHD"/>
                                             <outlet property="testDetailTestId" destination="ena-gu-gGN" id="2lA-3d-Qma"/>
                                         </connections>
                                     </tableViewCell>
@@ -103,6 +103,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="LQ7-NZ-Eoo" id="8du-DJ-et5"/>
                         <outlet property="testDetailsTableView" destination="dGv-WL-8eR" id="Omj-vY-1Y7"/>
                     </connections>
                 </viewController>

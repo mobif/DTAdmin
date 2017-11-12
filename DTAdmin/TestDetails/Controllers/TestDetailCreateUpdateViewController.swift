@@ -10,12 +10,11 @@ import UIKit
 
 class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
     
+    var dataModel = DataModel.dataModel
     var testDetailForSave: TestDetailStructure?
     var resultModification: ((TestDetailStructure) -> ())?
     var canEdit = Bool()
     var idForEditing = String()
-    var doneLevelArray = [Int]()
-    var doneTasksArray = [Int]()
     var id = "3"
 
 
@@ -48,38 +47,14 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
         testLevelTextField.customDelegate = self
         taskTestTextField.customDelegate = self
         rateTestTextField.customDelegate = self
-        
-        self.testLevelTextField.dropDownData = getFilteredArrayForLevels(firstArray: createArray(max: 10), secondArray: doneLevelArray)
+        let levels = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max), secondArray: dataModel.levelArrayForFiltering)
+        self.testLevelTextField.dropDownData = levels
         self.testLevelTextField.tag = 0
-        self.taskTestTextField.dropDownData = getFilteredArrayForTasks(array: createArray(max: 5))
+        let tasks = dataModel.max - dataModel.getTasksSum()
+        self.taskTestTextField.dropDownData = dataModel.createArray(max: tasks)
         self.taskTestTextField.tag = 1
-        self.rateTestTextField.dropDownData = createArray(max: 3)
+        self.rateTestTextField.dropDownData = dataModel.createArray(max: dataModel.max)
         self.rateTestTextField.tag = 2
-    }
-    
-    func createArray(max: Int) -> [Int] {
-        var array = [Int]()
-        for i in 1...max {
-            array.append(i)
-        }
-        return array
-    }
-    
-    func getFilteredArrayForLevels(firstArray: [Int], secondArray: [Int]) -> [Int] {
-        var filtered = firstArray 
-        for item in secondArray {
-            if let index = filtered.index(of: item) {
-                filtered.remove(at: index)
-            }
-        }
-        return filtered
-    }
-    
-    func getFilteredArrayForTasks(array: [Int]) -> [Int] {
-        var filtered = [Int]()
-        let sum = array.reduce(0, +)
-        filtered.append(sum)
-        return filtered
     }
     
     func pickedValue(value: Any, tag: Int) {

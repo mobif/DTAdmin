@@ -9,17 +9,17 @@
 import UIKit
 
 class TestDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    var testDetailArray = [TestDetailStructure]()
+    
+    let dataModel = DataModel.dataModel
     var id = "3"
-    var levelArrayForFiltering = [Int]()
     @IBOutlet weak var testDetailsTableView: UITableView!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.shared.getTestDetails(byTest: id) { (details, error) in
             if error == nil, let testDetails = details {
-                self.testDetailArray = testDetails
+                self.dataModel.testDetailArray = testDetails
                 self.testDetailsTableView.reloadData()
             } else {
                 self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
@@ -28,13 +28,13 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testDetailArray.count
+        return dataModel.testDetailArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "testDetailsCell", for: indexPath) as? TestDetailsTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
-        let array = testDetailArray[indexPath.row]
+        let array = dataModel.testDetailArray[indexPath.row]
         cell.testDetailId.text = array.id
         cell.testDetailTestId.text = array.testId
         cell.testDetailLevel.text = array.level
@@ -46,10 +46,10 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
             guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else  { return }
-            testDetailCreateUpdateViewController.testDetailsInstance = self.testDetailArray[indexPath.row]
+            testDetailCreateUpdateViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
             testDetailCreateUpdateViewController.canEdit = true
             testDetailCreateUpdateViewController.resultModification = { updateResult in
-                self.testDetailArray[indexPath.row] = updateResult
+                self.dataModel.testDetailArray[indexPath.row] = updateResult
                 self.testDetailsTableView.reloadData()
             }
             self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
@@ -58,13 +58,13 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this test detail?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
-                guard let id = self.testDetailArray[indexPath.row].id else { return }
-                if indexPath.row < self.testDetailArray.count {
+                guard let id = self.dataModel.testDetailArray[indexPath.row].id else { return }
+                if indexPath.row < self.dataModel.testDetailArray.count {
                     DataManager.shared.deleteEntity(byId: id, typeEntity: Entities.testDetail) { (deleted, error) in
                         if let error = error {
                             self.showWarningMsg(error)
                         } else {
-                            self.testDetailArray.remove(at: indexPath.row)
+                            self.dataModel.testDetailArray.remove(at: indexPath.row)
                             tableView.deleteRows(at: [indexPath], with: .top)
                             self.testDetailsTableView.reloadData()
                         }
@@ -82,16 +82,16 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func addButtonTapped(_ sender: Any) {
         guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
         self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
-        for i in 0...testDetailArray.count - 1 {
-            guard let levels = Int(testDetailArray[i].level) else { return }
-            self.levelArrayForFiltering.append(levels)
-            guard let tasks = Int(testDetailArray[i].rate) else { return }
-            self.levelArrayForFiltering.append(tasks)
-            
+        dataModel.levelArrayForFiltering = []
+        dataModel.taskArrayForFiltering = []
+        for i in dataModel.testDetailArray {
+            guard let levels = Int(i.level) else { return }
+            dataModel.levelArrayForFiltering.append(levels)
+            guard let tasks = Int(i.tasks) else { return }
+            dataModel.taskArrayForFiltering.append(tasks)
         }
-        testDetailCreateUpdateViewController.doneLevelArray = self.levelArrayForFiltering
         testDetailCreateUpdateViewController.resultModification = { newTestDetail in
-            self.testDetailArray.append(newTestDetail)
+            self.dataModel.testDetailArray.append(newTestDetail)
             self.testDetailsTableView.reloadData()
         }
     }
