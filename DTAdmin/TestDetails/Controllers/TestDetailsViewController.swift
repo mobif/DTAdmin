@@ -17,7 +17,12 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DataManager.shared.getTestDetails(byTest: id) { (details, error) in
+        getTestDetails()
+        currentDataForPickers()
+    }
+    
+    func getTestDetails() {
+        DataManager.shared.getTestDetails(byTest: self.id) { (details, error) in
             if error == nil, let testDetails = details {
                 self.dataModel.testDetailArray = testDetails
                 self.testDetailsTableView.reloadData()
@@ -46,6 +51,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
             guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else  { return }
+            self.currentDataForPickers()
             testDetailCreateUpdateViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
             testDetailCreateUpdateViewController.canEdit = true
             testDetailCreateUpdateViewController.resultModification = { updateResult in
@@ -78,21 +84,31 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         })
         return [delete, edit]
     }
-
-    @IBAction func addButtonTapped(_ sender: Any) {
-        guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
-        self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
+    
+    func currentDataForPickers() {
         dataModel.levelArrayForFiltering = []
         dataModel.taskArrayForFiltering = []
-        for i in dataModel.testDetailArray {
+        for i in self.dataModel.testDetailArray {
             guard let levels = Int(i.level) else { return }
-            dataModel.levelArrayForFiltering.append(levels)
+            self.dataModel.levelArrayForFiltering.append(levels)
             guard let tasks = Int(i.tasks) else { return }
-            dataModel.taskArrayForFiltering.append(tasks)
+            self.dataModel.taskArrayForFiltering.append(tasks)
         }
-        testDetailCreateUpdateViewController.resultModification = { newTestDetail in
-            self.dataModel.testDetailArray.append(newTestDetail)
-            self.testDetailsTableView.reloadData()
+        
+    }
+    
+    @IBAction func addButtonTapped(_ sender: Any) {
+        currentDataForPickers()
+        if dataModel.taskArrayForFiltering.reduce(0, +) >= dataModel.max {
+            self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then 10", comment: "Sum of tasks should be from 1 to 10"))
+        } else {
+            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
+            self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
+            currentDataForPickers()
+            testDetailCreateUpdateViewController.resultModification = { newTestDetail in
+                self.dataModel.testDetailArray.append(newTestDetail)
+                self.testDetailsTableView.reloadData()
+            }
         }
     }
     

@@ -33,10 +33,5 @@ class DataModel: NSObject {
         }
         return filtered
     }
-    
-    func getTasksSum() -> Int {
-        let sum = taskArrayForFiltering.reduce(0, +)
-        return sum
-    }
 
 }

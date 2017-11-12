@@ -1,14 +1,14 @@
  //
-//  TestDetailCreateUpdateViewController.swift
-//  DTAdmin
-//
-//  Created by ITA student on 11/8/17.
-//  Copyright © 2017 if-ios-077. All rights reserved.
-//
-
-import UIKit
-
-class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
+ //  TestDetailCreateUpdateViewController.swift
+ //  DTAdmin
+ //
+ //  Created by ITA student on 11/8/17.
+ //  Copyright © 2017 if-ios-077. All rights reserved.
+ //
+ 
+ import UIKit
+ 
+ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
     
     var dataModel = DataModel.dataModel
     var testDetailForSave: TestDetailStructure?
@@ -16,8 +16,8 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
     var canEdit = Bool()
     var idForEditing = String()
     var id = "3"
-
-
+    var task = Int()
+    
     @IBOutlet weak var testLevelTextField: PickedTextField!
     @IBOutlet weak var taskTestTextField: PickedTextField!
     @IBOutlet weak var rateTestTextField: PickedTextField!
@@ -50,8 +50,14 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
         let levels = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max), secondArray: dataModel.levelArrayForFiltering)
         self.testLevelTextField.dropDownData = levels
         self.testLevelTextField.tag = 0
-        let tasks = dataModel.max - dataModel.getTasksSum()
-        self.taskTestTextField.dropDownData = dataModel.createArray(max: tasks)
+        if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
+            guard let task1 = testDetailsInstance?.tasks else { return }
+            task = Int(task1)! - 1
+        } else {
+            let task2 = dataModel.max - dataModel.taskArrayForFiltering.reduce(0, +)
+            task = task2
+        }
+        self.taskTestTextField.dropDownData = dataModel.createArray(max: task)
         self.taskTestTextField.tag = 1
         self.rateTestTextField.dropDownData = dataModel.createArray(max: dataModel.max)
         self.rateTestTextField.tag = 2
@@ -136,4 +142,4 @@ class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
     }
     
     
-}
+ }
