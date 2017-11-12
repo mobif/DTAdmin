@@ -18,6 +18,7 @@
 		3F7A61E81FB75CDB00C9ACC8 /* Result.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7A61E41FB75CDB00C9ACC8 /* Result.storyboard */; };
 		3F7A61E91FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61E51FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift */; };
 		3F7A61EB1FB7823D00C9ACC8 /* ResultStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61EA1FB7823C00C9ACC8 /* ResultStructure.swift */; };
+		3F7A61ED1FB8DB3800C9ACC8 /* UserStructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A61EC1FB8DB3800C9ACC8 /* UserStructureTests.swift */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
@@ -107,6 +108,7 @@
 		3F7A61E41FB75CDB00C9ACC8 /* Result.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Result.storyboard; sourceTree = "<group>"; };
 		3F7A61E51FB75CDB00C9ACC8 /* ResultsTableTestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableTestViewCell.swift; sourceTree = "<group>"; };
 		3F7A61EA1FB7823C00C9ACC8 /* ResultStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStructure.swift; sourceTree = "<group>"; };
+		3F7A61EC1FB8DB3800C9ACC8 /* UserStructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStructureTests.swift; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 		843422251FAF41B20087A418 /* DTAdminTests */ = {
 			isa = PBXGroup;
 			children = (
+				3F7A61EC1FB8DB3800C9ACC8 /* UserStructureTests.swift */,
 				843422261FAF41B20087A418 /* DTAdminTests.swift */,
 				843422281FAF41B20087A418 /* Info.plist */,
 				8434222E1FAF7EB60087A418 /* GroupStructureTests.swift */,
@@ -725,6 +728,7 @@
 			files = (
 				843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */,
 				8434222F1FAF7EB60087A418 /* GroupStructureTests.swift in Sources */,
+				3F7A61ED1FB8DB3800C9ACC8 /* UserStructureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
