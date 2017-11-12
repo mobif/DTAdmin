@@ -11,9 +11,7 @@ import UIKit
 class ResultsTableTestViewCell: UITableViewCell {
   
   @IBOutlet weak var testIdLabel: UILabel!
-  
   @IBOutlet weak var testNameLabel: UILabel!
-  
   @IBOutlet weak var testSubjectNameLabel: UILabel!
   
   override func awakeFromNib() {

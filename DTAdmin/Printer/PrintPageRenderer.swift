@@ -2,7 +2,7 @@
 //  PrintPageRenderer.swift
 //  DTAdmin
 //
-//  Created by ITA student on 11/5/17.
+//  Created by Yurii Krupa on 11/5/17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 

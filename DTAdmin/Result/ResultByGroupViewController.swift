@@ -12,88 +12,88 @@ class ResultByGroupViewController: ParentViewController {
   
   @IBOutlet weak var resultsTableView: UITableView!
   
-  var group: GroupStructure? //{
-  //    didSet {
-  //      guard let group = self.group, let groupId = self.group?.groupId else {
-  //        showWarningMsg("Wrong group structure")
-  //        return
-  //      }
-  //      DataManager.shared.getResultTestIds(byGroup: groupId) { (error, testIds) in
-  //        if let error = error {
-  //          print(error)
-  //        } else {
-  //          print(testIds)
-  //        }
-  //      }
-  //    }
-  //  }
-  //var subject: SubjectStructure?
+  var group: GroupStructure? {
+    didSet {
+      guard let group = self.group else {
+        showWarningMsg("Wrong group structure")
+        return
+      }
+      self.prepareView(group: group)
+    }
+  }
+
   var tests: [TestStructure]?
-  
+  lazy var refreshControl: UIRefreshControl = UIRefreshControl()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    refreshControl.addTarget(self, action: #selector(loadDataFromAPI), for: .valueChanged)
+    resultsTableView.refreshControl = refreshControl
+
+  }
+  
+  private func prepareView(group: GroupStructure) {
+    self.startActivity()
+    self.title = NSLocalizedString("Results by \(group.groupName)", comment: "Title for results table list view")
+    self.refreshControl.beginRefreshing()
+    loadDataFromAPI()
+  }
+  
+  @objc private func loadDataFromAPI() {
+    guard let groupId = self.group?.groupId else { return }
     var testsIds = [String]()
     var subjectsIds = [String]()
-    DataManager.shared.getResultTestIds(byGroup: group!.groupId!) { (error, testIds) in
-      
+    
+    DataManager.shared.getResultTestIds(byGroup: groupId) { (error, testIds) in
       if let error = error {
-        print(error)
+        self.stopActivity()
+        self.showWarningMsg(error)
       } else {
-        print(testIds)
-        //        print(testIds?.first!["test_id"])
-        guard let testIds = testIds else { return}
-        
+        guard let testIds = testIds else {
+          self.showWarningMsg("Error occured during data handle")
+          return
+        }
         for i in testIds {
           testsIds.append(i["test_id"]!)
-          //          subjectsIds.append(i["subject_id"]!)
         }
         
         DataManager.shared.getTestsBy(ids: testsIds, completionHandler: { (error, tests) in
           if let error = error {
-            print(error)
+            self.stopActivity()
+            self.showWarningMsg(error)
           } else {
-            print(tests)
+            guard var tests = tests else {
+              self.showWarningMsg("Wrong API response")
+              return
+            }
             self.tests = tests
-            for i in tests! {
-              //              testsIds.append(i["test_id"]!)
+            for i in tests {
               subjectsIds.append(i.subjectId)
             }
-            //            DispatchQueue.main.sync {
-            //              self.setUpView()
-            //              self.resultsTableView.reloadData()
-            //            }
-          }
-          
-          DataManager.shared.getSubjectsBy(ids: subjectsIds, completionHandler: { (error, subjects) in
-            for i in 0..<self.tests!.count {
-              var testSubj = subjects?.filter({ $0.id == self.tests![i].subjectId })
-              self.tests![i].subjectName = testSubj?.first?.name
-              DispatchQueue.main.sync {
-                self.setUpView()
-                self.resultsTableView.reloadData()
+            
+            DataManager.shared.getSubjectsBy(ids: subjectsIds, completionHandler: { (error, subjects) in
+              for i in 0..<tests.count {
+                let testSubj = subjects?.filter({ $0.id == tests[i].subjectId })
+                tests[i].subjectName = testSubj?.first?.name
               }
-            }
-          })
-          
+              DispatchQueue.main.sync {
+                self.stopActivity()
+                self.tests = tests
+                self.resultsTableView.reloadData()
+                self.refreshControl.endRefreshing()
+              }
+            })
+          }
         })
         
-        
-        
       }
-      
     }
-  }
-  
-  private func setUpView() {
-    self.title = NSLocalizedString("Results by group", comment: "Title for results table list view")
-    
   }
   
 }
 
 extension ResultByGroupViewController: UITableViewDelegate {
-  
 }
 
 extension ResultByGroupViewController: UITableViewDataSource {
@@ -117,13 +117,13 @@ extension ResultByGroupViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let previewViewController = UIStoryboard(name: "PDFPrinter", bundle: nil).instantiateViewController(withIdentifier: "PrintReportByGroupTest") as? PreviewViewController else  { return }
     
-    guard let test = tests?[indexPath.row] else {
+    guard let test = self.tests?[indexPath.row], let group = self.group else {
       return
     }
     previewViewController.title = NSLocalizedString("Printer", comment: "")
-    var quizParameters: [String: [String: String]] =
+    let quizParameters: [String: [String: String]] =
       ["Subject": ["id": test.subjectId, "name": test.subjectName!],
-       "Group": ["id": "1", "name": "CI-12-1"],
+       "Group": ["id": group.groupId!, "name": group.groupName],
        "Quiz": ["id": test.id!, "name": test.name]]
     previewViewController.quizParameters = quizParameters
     

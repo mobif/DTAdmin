@@ -598,25 +598,19 @@ class DataManager: HTTPManager {
     
     _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
       if let error = error {
-        print(error.localizedDescription)
         completionHandler(error.localizedDescription, nil)
       } else {
         if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-          print(sessionResponse)
-          
           if sessionResponse.statusCode == 200 {
             var json: Any
             do {
               json = try JSONSerialization.jsonObject(with: sessionData, options: [])
-              
             } catch {
-              print(Error.self)
-              
+              completionHandler(String(describing: Error.self), nil)
               return
             }
             guard let list = json as? [[String: Any]] else { return }
             let results: [ResultStructure] = list.flatMap { ResultStructure(dictionary: $0) }
-            print(results)
             completionHandler(nil, results)
             
           }
@@ -636,6 +630,7 @@ class DataManager: HTTPManager {
     guard let cookie = StoreHelper.getCookie() else { return }
     let httpManager = HTTPManager()
     guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/Result/getResultTestIdsByGroup/" + id) else { return }
+    
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -643,29 +638,27 @@ class DataManager: HTTPManager {
     request.setValue(cookie[Keys.cookie], forHTTPHeaderField: Keys.cookie)
     
     _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+      if let error = error {
+        completionHandler(error.localizedDescription, nil)
+        return
+      }
       if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-        print(sessionResponse)
-        
-        
         if sessionResponse.statusCode == 200 {
           var testIds = [[String: String]]()
           do {
             guard let json = (try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String: String]]) else {
-              completionHandler("Wrong response data" , nil)
-              return }
+              completionHandler("Group haven't passed any tests yet!" , nil)
+              return
+            }
             testIds = json
             completionHandler(nil, testIds)
           } catch {
             completionHandler(error.localizedDescription, nil)
-            
             return
           }
-          //          print(testIds)
-          
         }
       }
-      }.resume()
-    
+    }.resume()
   }
   
   func getTestsBy(ids: [String], completionHandler: @escaping (_ error: String?, _ tests: [TestStructure]?) -> ()) {
@@ -673,6 +666,7 @@ class DataManager: HTTPManager {
     guard let cookie = StoreHelper.getCookie() else { return }
     let httpManager = HTTPManager()
     guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/EntityManager/getEntityValues") else { return }
+    
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -685,28 +679,21 @@ class DataManager: HTTPManager {
     
     _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
       if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-        print(sessionResponse)
-        
-        
+
         if sessionResponse.statusCode == 200 {
           var json: Any
           do {
             json = try JSONSerialization.jsonObject(with: sessionData, options: [])
-            
           } catch {
-            print(Error.self)
-            completionHandler(error.localizedDescription, nil)
+            completionHandler(String(describing: Error.self), nil)
             return
           }
           guard let list = json as? [[String: Any]] else { return }
           let tests = list.flatMap { TestStructure(dictionary: $0) }
-          print(tests)
           completionHandler(nil, tests)
-          
         }
       }
-      
-      }.resume()
+    }.resume()
   }
   
   func getSubjectsBy(ids: [String], completionHandler: @escaping (_ error: String?, _ subjects: [SubjectStructure]?) -> ()) {
@@ -726,28 +713,21 @@ class DataManager: HTTPManager {
     
     _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
       if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-        print(sessionResponse)
-        
-        
+
         if sessionResponse.statusCode == 200 {
           var json: Any
           do {
             json = try JSONSerialization.jsonObject(with: sessionData, options: [])
-            
           } catch {
-            print(Error.self)
-            completionHandler(error.localizedDescription, nil)
+            completionHandler(String(describing: Error.self), nil)
             return
           }
           guard let list = json as? [[String: Any]] else { return }
           let subjects = list.flatMap { SubjectStructure(dictionary: $0) }
-          print(subjects)
           completionHandler(nil, subjects)
-          
         }
       }
-      
-      }.resume()
+    }.resume()
   }
 
 }

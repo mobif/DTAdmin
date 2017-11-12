@@ -13,12 +13,12 @@ class PDFComposer: NSObject {
   let pathToReportFormHTMLTemplate = Bundle.main.path(forResource: "reportForm", ofType: "html")
   let pathToReportFromStudentRowHTMLTemplate = Bundle.main.path(forResource: "reportFormStudentRow", ofType: "html")
   
-  var subjectName: String!
-  var quizName: String!
-  var groupName: String!
-  var maxMark: String!
+  var subjectName = String()
+  var quizName = String()
+  var groupName = String()
+  var maxMark = String()
   
-  var fileName: String!
+  var fileName = String()
   
   override init() {
     super.init()
@@ -42,9 +42,9 @@ class PDFComposer: NSObject {
       HTMLContent = HTMLContent.replacingOccurrences(of: "#GROUP_NAME#", with: groupName)
       HTMLContent = HTMLContent.replacingOccurrences(of: "#MAX_MARK#", with: maxMark)
     
-      var allStudents = ""
+      var allStudents = String()
       
-      var number = 0
+      var number = UInt()
       for i in resulsts {
         number += 1
         guard let result = Double(i.result) else { return nil }
@@ -81,7 +81,7 @@ class PDFComposer: NSObject {
     
     let pdfData = drawPDFUsingPrintPageRenderer(printPageRenderer: printPageRenderer)
     
-    fileName = "\(AppDelegate.getAppDelegate().getDocDir())/Quiz_\(self.quizName!)_\(self.subjectName!)_\(self.groupName!)_\(Date().dateString).pdf"
+    fileName = "\(AppDelegate.getAppDelegate().getDocDir())/Quiz_\(self.quizName)_\(self.subjectName)_\(self.groupName)_\(Date().dateString).pdf"
     pdfData?.write(toFile: fileName, atomically: true)
     
     print("\nPath to pdf file in File System\n",fileName)
@@ -110,7 +110,5 @@ class PDFComposer: NSObject {
     default: return "F"
     }
   }
-  
 
-  
 }
