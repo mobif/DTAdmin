@@ -17,6 +17,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Test details"
         getTestDetails()
         currentDataForPickers()
     }
@@ -30,6 +31,20 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                 self.showWarningMsg(error ?? NSLocalizedString("Incorect type data", comment: "Incorect type data"))
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.darkGray
+        view.tintColor = UIColor.white
+        let segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 28))
+        segmentedControl.insertSegment(withTitle: "id", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "test id", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "level", at: 2, animated: false)
+        segmentedControl.insertSegment(withTitle: "task", at: 3, animated: false)
+        segmentedControl.insertSegment(withTitle: "rate", at: 4, animated: false)
+        view.addSubview(segmentedControl)
+        return view
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

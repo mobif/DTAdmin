@@ -51,6 +51,27 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         specialitiesTableView.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.darkGray
+        let id = UILabel()
+        id.text = "id"
+        id.textColor = UIColor.white
+        id.frame = CGRect(x: 10, y: 2, width: 20, height: 25)
+        view.addSubview(id)
+        let code = UILabel()
+        code.text = "code"
+        code.textColor = UIColor.white
+        code.frame = CGRect(x: 40, y: 2, width: 40, height: 25)
+        view.addSubview(code)
+        let name = UILabel()
+        name.text = "speciality"
+        name.textColor = UIColor.white
+        name.frame = CGRect(x: 170, y: 2, width: 120, height: 25)
+        view.addSubview(name)
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredSpecialitiesArray.count
     }
