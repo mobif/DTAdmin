@@ -15,26 +15,30 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         var tabBarViewControllers = [UIViewController]()
         
-// Create students tab
-        let studentsTab = TabOneViewController()
-        let studentsBarItem = UITabBarItem(title: "Students", image: nil, selectedImage: nil)
-        studentsBarItem.image = UIImage(named: "ic_person_outline_white")
-        studentsTab.tabBarItem = studentsBarItem
-        tabBarViewControllers.append(studentsTab)
+//MARK: Create students tab
+        let studentStoryboard = UIStoryboard(name: "Student", bundle: nil)
+        guard let studentNavigationController = studentStoryboard.instantiateViewController(withIdentifier: "StudentNavigationController") as? UINavigationController else { return }
+        let titleText = NSLocalizedString("Students", comment: "List all students")
+        let studentBarItem = UITabBarItem(title: titleText, image: nil, selectedImage: nil)
+        studentBarItem.image = UIImage(named: "ic_person_outline_white")
+        studentNavigationController.tabBarItem = studentBarItem
+        tabBarViewControllers.append(studentNavigationController)
 
-// Create subjects tab
-        let subjectsTab = TabTwoViewController()
-        let subjectsBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
-        subjectsBarItem.image = UIImage(named: "ic_subject_white")
-        subjectsTab.tabBarItem = subjectsBarItem
-        tabBarViewControllers.append(subjectsTab)
+//MARK: Create subjects tab
+        let subjectStoryboard = UIStoryboard.stoyboard(by: .subject)
+        guard let subjectNavController = subjectStoryboard.instantiateViewController(withIdentifier: "SubjectNavController") as? UINavigationController else { return }
+        let subjectBarItem = UITabBarItem(title: "Subjects", image: nil, selectedImage: nil)
+        subjectBarItem.image = UIImage(named: "ic_subject_white")
+        subjectNavController.tabBarItem = subjectBarItem
+        tabBarViewControllers.append(subjectNavController)
 
-// Create groups tab
-        let groupsTab = TabThreeViewController()
+//MARK: Create groups tab
+        let groupStoryboard = UIStoryboard.stoyboard(by: .group)
+        guard let groupNavController = groupStoryboard.instantiateViewController(withIdentifier: "GroupNavController") as? UINavigationController else { return }
         let groupsBarItem = UITabBarItem(title: "Groups", image: nil, selectedImage: nil)
         groupsBarItem.image = UIImage(named: "ic_supervisor_account_white")
-        groupsTab.tabBarItem = groupsBarItem
-        tabBarViewControllers.append(groupsTab)
+        groupNavController.tabBarItem = groupsBarItem
+        tabBarViewControllers.append(groupNavController)
         
 // Create faculty tab
         let facultyTab = TabFourViewController()
@@ -50,21 +54,13 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         specialityTab.tabBarItem = specialityBarItem
         tabBarViewControllers.append(specialityTab)
         
-// Create admins tab
-        let adminStoryboard = UIStoryboard.init(name: "Admin", bundle: nil)
+//MARK: Create admins tab
+        let adminStoryboard = UIStoryboard.stoyboard(by: .admin)
         guard let adminsNavController = adminStoryboard.instantiateViewController(withIdentifier: "AdminListView") as? UINavigationController else { return }
         let adminsBarItem = UITabBarItem(title: "Admins", image: nil, selectedImage: nil)
         adminsBarItem.image = UIImage(named: "ic_subject_white")
         adminsNavController.tabBarItem = adminsBarItem
         tabBarViewControllers.append(adminsNavController)
-        
-// Create timeTable tab
-        let timeTableStoryboard = UIStoryboard.init(name: "TimeTable", bundle: nil)
-        guard let timeTableNavController = timeTableStoryboard.instantiateViewController(withIdentifier: "timeTableNavController") as? UINavigationController else { return }
-        let timeTableBarItem = UITabBarItem(title: "Time Table", image: nil, selectedImage: nil)
-        timeTableBarItem.image = UIImage(named: "ic_subject_white")
-        timeTableNavController.tabBarItem = timeTableBarItem
-        tabBarViewControllers.append(timeTableNavController)
         
         self.setViewControllers(tabBarViewControllers, animated: true)
     }
