@@ -101,9 +101,6 @@
                                     <constraint firstAttribute="height" constant="44" id="Vqp-zQ-mcf"/>
                                 </constraints>
                                 <state key="normal" title="Yes, I want logout!"/>
-                                <connections>
-                                    <action selector="logoutButtonTapped:" destination="NLb-Of-3z2" eventType="touchUpInside" id="ece-fF-B62"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure? Do you want logout?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EX2-0z-ubA">
                                 <rect key="frame" x="16" y="245" width="343" height="57.5"/>

@@ -18,16 +18,17 @@ class LogoutViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.showLoginScreen()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    @IBAction func logoutButtonTapped(_ sender: Any) {
-        self.showLoginScreen()
-    }
     /*
     // MARK: - Navigation
 
