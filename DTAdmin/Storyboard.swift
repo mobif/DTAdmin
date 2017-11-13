@@ -15,7 +15,8 @@ extension UIStoryboard {
 }
 
 enum StoryboardType: String {
-    case Subject = "Subjects"
-    case TimeTable = "TimeTable"
-    case Admin = "Admin"
+    case subject = "Subjects"
+    case timeTable = "TimeTable"
+    case admin = "Admin"
+    case group = "Group"
 }

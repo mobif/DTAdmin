@@ -74,6 +74,8 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
                     }
                     if code == 200 {
                         self.tableView.reloadData()
+                    } else if code == HTTPStatusCodes.Unauthorized.rawValue {
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }
             }
@@ -118,6 +120,8 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate {
                     if code == 200 {
                         self.records.remove(at: indexPath.row)
                         tableView.reloadData()
+                    } else if code == HTTPStatusCodes.Unauthorized.rawValue {
+                        self.navigationController?.popViewController(animated: true)
                     } else {
                         self.showMessage(message: NSLocalizedString("Error", comment: "Message for user") )
                     }

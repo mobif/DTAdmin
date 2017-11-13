@@ -35,7 +35,7 @@ class DetailSubjectViewController: UIViewController {
     }
     
     @IBAction func timeTableButtonTapped(_ sender: Any) {
-        let timeTableStoryboard = UIStoryboard.stoyboard(by: .TimeTable)
+        let timeTableStoryboard = UIStoryboard.stoyboard(by: .timeTable)
         guard let timeTableViewController = timeTableStoryboard.instantiateViewController(withIdentifier: "TimeTableListViewController") as? TimeTableListViewController else { return }
         timeTableViewController.subjectID = Int(self.subject?.id ?? "")
         self.navigationController?.pushViewController(timeTableViewController, animated: true)

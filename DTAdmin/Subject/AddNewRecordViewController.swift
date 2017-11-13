@@ -57,6 +57,8 @@ class AddNewRecordViewController: UIViewController {
                             } else {
                                 self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
                             }
+                        } else if code == HTTPStatusCodes.Unauthorized.rawValue {
+                            self.navigationController?.popViewController(animated: true)
                         } else {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                         }
@@ -81,6 +83,8 @@ class AddNewRecordViewController: UIViewController {
                                 self.showMessage(message: NSLocalizedString("Server error. Record isn't add!", comment: "Message for user"))
                             }
                             
+                        } else if code == HTTPStatusCodes.Unauthorized.rawValue {
+                            self.navigationController?.popViewController(animated: true)
                         } else {
                             self.showMessage(message: NSLocalizedString("Duplicate data! Please, write another information", comment: "Message for user"))
                             }
