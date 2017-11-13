@@ -100,6 +100,12 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         return [delete, edit]
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let testDetailsInfoViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailsInfoViewController") as? TestDetailsInfoViewController else  { return }
+        testDetailsInfoViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
+        self.navigationController?.pushViewController(testDetailsInfoViewController, animated: true)
+    }
+    
     func currentDataForPickers() {
         dataModel.levelArrayForFiltering = []
         dataModel.taskArrayForFiltering = []

@@ -16,6 +16,8 @@
 		2DEC909A1FB505240080D83D /* TestDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC90961FB505240080D83D /* TestDetailsViewController.swift */; };
 		2DEC909B1FB505240080D83D /* TestDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC90971FB505240080D83D /* TestDetails.storyboard */; };
 		2DEC909C1FB505240080D83D /* TestDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC90981FB505240080D83D /* TestDetailsTableViewCell.swift */; };
+		2DEDDCB81FB99E4500DF9151 /* TestDetailsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDDCB71FB99E4500DF9151 /* TestDetailsInfoViewController.swift */; };
+		2DF0B64B1FB995F500A542EF /* SpecialityInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0B64A1FB995F500A542EF /* SpecialityInfoViewController.swift */; };
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
@@ -112,6 +114,8 @@
 		2DEC90961FB505240080D83D /* TestDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailsViewController.swift; sourceTree = "<group>"; };
 		2DEC90971FB505240080D83D /* TestDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestDetails.storyboard; sourceTree = "<group>"; };
 		2DEC90981FB505240080D83D /* TestDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		2DEDDCB71FB99E4500DF9151 /* TestDetailsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailsInfoViewController.swift; sourceTree = "<group>"; };
+		2DF0B64A1FB995F500A542EF /* SpecialityInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialityInfoViewController.swift; sourceTree = "<group>"; };
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 			children = (
 				2DEC908B1FB505160080D83D /* SpecialitiesViewController.swift */,
 				2DEC908C1FB505160080D83D /* SpecialityCreateUpdateViewController.swift */,
+				2DF0B64A1FB995F500A542EF /* SpecialityInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				2DEC90951FB505240080D83D /* TestDetailCreateUpdateViewController.swift */,
+				2DEDDCB71FB99E4500DF9151 /* TestDetailsInfoViewController.swift */,
 				2DEC90961FB505240080D83D /* TestDetailsViewController.swift */,
 			);
 			path = Controllers;
@@ -736,6 +742,7 @@
 				3FF6735E1FB48B3A001C7147 /* AnswersTableViewController.swift in Sources */,
 				2DEC909A1FB505240080D83D /* TestDetailsViewController.swift in Sources */,
 				C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */,
+				2DF0B64B1FB995F500A542EF /* SpecialityInfoViewController.swift in Sources */,
 				C7535CEB1FA2670100B6CBD1 /* Entities.swift in Sources */,
 				2DEC909C1FB505240080D83D /* TestDetailsTableViewCell.swift in Sources */,
 				3FF6736C1FB48B89001C7147 /* AddNewRecordViewController.swift in Sources */,
@@ -765,6 +772,7 @@
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
 				C7535CEF1FA2670100B6CBD1 /* AnswerStructure.swift in Sources */,
+				2DEDDCB81FB99E4500DF9151 /* TestDetailsInfoViewController.swift in Sources */,
 				C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */,

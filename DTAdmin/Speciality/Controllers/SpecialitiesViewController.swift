@@ -122,6 +122,12 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         return [edit, delete]
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let specialityInfoViewController = UIStoryboard(name: "Speciality", bundle: nil).instantiateViewController(withIdentifier: "SpecialityInfoViewController") as? SpecialityInfoViewController else  { return }
+        specialityInfoViewController.specialityInstance = self.filteredSpecialitiesArray[indexPath.row]
+        self.navigationController?.pushViewController(specialityInfoViewController, animated: true)
+    }
+    
     @IBAction func addButtonTapped(_ sender: Any) {
         guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality", bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController") as? SpecialityCreateUpdateViewController else  { return }
         self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
