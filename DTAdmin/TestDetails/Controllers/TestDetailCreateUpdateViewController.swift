@@ -51,8 +51,8 @@
         self.testLevelTextField.dropDownData = levels
         self.testLevelTextField.tag = 0
         if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
-            guard let task1 = testDetailsInstance?.tasks else { return }
-            task = Int(task1)! - 1
+            guard let task1 = testDetailsInstance?.tasks, let taskInt = Int(task1) else { return }
+            task = taskInt - 1
         } else {
             let task2 = dataModel.max - dataModel.taskArrayForFiltering.reduce(0, +)
             task = task2
