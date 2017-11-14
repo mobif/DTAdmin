@@ -59,8 +59,6 @@
                 self.taskTestTextField.alpha = 0.5
             } else {
                 maxTask = taskInt - 1
-                /* -1 because when sum of tasks for some test equal 10, and we have to edit task,
-                 current array have to be smaller then current task */
             }
         } else {
             let task = dataModel.max - dataModel.taskArrayForFiltering.reduce(0, +)
