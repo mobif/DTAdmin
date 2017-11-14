@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VKh-BV-U6f">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VKh-BV-U6f">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -86,6 +86,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bpn-Qh-bBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="350" y="-177"/>
+        </scene>
+        <!--Logout View Controller-->
+        <scene sceneID="9yS-St-mXa">
+            <objects>
+                <viewController storyboardIdentifier="LogoutViewController" id="NLb-Of-3z2" customClass="LogoutViewController" customModule="DTAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yvu-ro-Xq8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hO-1p-YfD">
+                                <rect key="frame" x="16" y="607" width="343" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Vqp-zQ-mcf"/>
+                                </constraints>
+                                <state key="normal" title="Yes, I want logout!"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure? Do you want logout?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EX2-0z-ubA">
+                                <rect key="frame" x="16" y="245" width="343" height="57.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="epA-jm-vGm" firstAttribute="trailing" secondItem="EX2-0z-ubA" secondAttribute="trailing" constant="16" id="8ya-Xm-AQu"/>
+                            <constraint firstItem="5hO-1p-YfD" firstAttribute="leading" secondItem="epA-jm-vGm" secondAttribute="leading" constant="16" id="CQ5-si-5fb"/>
+                            <constraint firstItem="EX2-0z-ubA" firstAttribute="centerY" secondItem="epA-jm-vGm" secondAttribute="centerY" constant="-70" id="CZb-xF-L8v"/>
+                            <constraint firstItem="epA-jm-vGm" firstAttribute="trailing" secondItem="5hO-1p-YfD" secondAttribute="trailing" constant="16" id="Tx0-ju-IwX"/>
+                            <constraint firstItem="epA-jm-vGm" firstAttribute="bottom" secondItem="5hO-1p-YfD" secondAttribute="bottom" constant="16" id="fJD-SQ-zHJ"/>
+                            <constraint firstItem="EX2-0z-ubA" firstAttribute="leading" secondItem="epA-jm-vGm" secondAttribute="leading" constant="16" id="ftq-3k-4Vk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="epA-jm-vGm"/>
+                    </view>
+                    <connections>
+                        <outlet property="centerTextLabel" destination="EX2-0z-ubA" id="tEh-p0-z1A"/>
+                        <outlet property="logoutButton" destination="5hO-1p-YfD" id="qsq-k3-PJY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2aL-4j-HoJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1078" y="-178"/>
         </scene>
         <!--Root Nav Controller-->
         <scene sceneID="AGa-an-0xN">
