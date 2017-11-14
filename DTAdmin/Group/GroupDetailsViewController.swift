@@ -24,6 +24,15 @@ class GroupDetailsViewController: UIViewController {
     @IBAction func getTimeTableByGroupTapped(_ sender: Any) {
     }
     @IBAction func getResultsByGroupTapped(_ sender: Any) {
+      guard let resultByGroupViewController = UIStoryboard(name: "Result", bundle: nil).instantiateViewController(withIdentifier: "ResultByGroup") as? ResultByGroupViewController else  { return }
+      
+//      guard let test = tests?[indexPath.row] else {
+//        return
+//      }
+      resultByGroupViewController.title = NSLocalizedString("Results of \(self.group?.groupName)", comment: "FIXME")
+      resultByGroupViewController.group = self.group
+      
+      self.navigationController?.pushViewController(resultByGroupViewController, animated: true)
     }
     
     var group: GroupStructure?
