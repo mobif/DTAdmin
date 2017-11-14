@@ -52,7 +52,8 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "testDetailsCell", for: indexPath) as? TestDetailsTableViewCell
+        let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "testDetailsCell",
+                                                          for: indexPath) as? TestDetailsTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
         let array = dataModel.testDetailArray[indexPath.row]
         cell.testDetailId.text = array.id
@@ -65,7 +66,11 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
-            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else  { return }
+            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
+                                                                          bundle: nil).instantiateViewController(
+            withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else {
+                return
+            }
             self.currentDataForPickers()
             testDetailCreateUpdateViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
             testDetailCreateUpdateViewController.canEdit = true
@@ -76,7 +81,8 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
         })
         let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { action, indexPath in
-            let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this test detail?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this test detail?",
+                                          preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
                 guard let id = self.dataModel.testDetailArray[indexPath.row].id else { return }
@@ -101,7 +107,9 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let testDetailsInfoViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailsInfoViewController") as? TestDetailsInfoViewController else  { return }
+        guard let testDetailsInfoViewController = UIStoryboard(name: "TestDetails",
+                                                               bundle: nil).instantiateViewController(
+        withIdentifier: "TestDetailsInfoViewController") as? TestDetailsInfoViewController else  { return }
         testDetailsInfoViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
         self.navigationController?.pushViewController(testDetailsInfoViewController, animated: true)
     }
@@ -121,9 +129,14 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func addButtonTapped(_ sender: Any) {
         currentDataForPickers()
         if dataModel.taskArrayForFiltering.reduce(0, +) >= dataModel.max {
-            self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then 10", comment: "Sum of tasks should be from 1 to 10"))
+            self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then 10",
+                                                  comment: "Sum of tasks should be from 1 to 10"))
         } else {
-            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails", bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else { return }
+            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
+                                                                          bundle: nil).instantiateViewController(
+            withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else {
+                return
+            }
             self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
             currentDataForPickers()
             testDetailCreateUpdateViewController.resultModification = { newTestDetail in

@@ -80,14 +80,16 @@ class SpecialityCreateUpdateViewController: UIViewController {
             }
             self.navigationController?.popViewController(animated: true)
         } else {
-            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
+                                             comment: "All fields have to be filled"))
         }
     }
     
     func updateSpeciality() {
         if prepareForRequest() {
             guard let specialityForSave = specialityForSave else { return }
-            DataManager.shared.updateEntity(byId: idForEditing, entity: specialityForSave, typeEntity: .speciality) { (error) in
+            DataManager.shared.updateEntity(byId: idForEditing, entity: specialityForSave,
+                                            typeEntity: .speciality) { (error) in
                 if let error = error {
                     self.showWarningMsg(error)
                     return
@@ -100,7 +102,8 @@ class SpecialityCreateUpdateViewController: UIViewController {
             }
             self.navigationController?.popViewController(animated: true)
         } else {
-            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
+                                             comment: "All fields have to be filled"))
         }
     }
     

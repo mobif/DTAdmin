@@ -47,7 +47,8 @@
         testLevelTextField.customDelegate = self
         taskTestTextField.customDelegate = self
         rateTestTextField.customDelegate = self
-        let levels = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max), secondArray: dataModel.levelArrayForFiltering)
+        let levels = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max),
+                                                         secondArray: dataModel.levelArrayForFiltering)
         self.testLevelTextField.dropDownData = levels
         self.testLevelTextField.tag = 0
         if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
@@ -58,7 +59,8 @@
                 self.taskTestTextField.alpha = 0.5
             } else {
                 maxTask = taskInt - 1
-                /* -1 because when sum of tasks for some test equal 10, and we have to edit task, current array have to be smaller then current task */
+                /* -1 because when sum of tasks for some test equal 10, and we have to edit task,
+                 current array have to be smaller then current task */
             }
         } else {
             let task = dataModel.max - dataModel.taskArrayForFiltering.reduce(0, +)
@@ -92,7 +94,9 @@
      - Returns: This function returns true - when all text fields are filled or false - when empty
      */
     func prepareForRequest() -> Bool {
-        guard let level = testLevelTextField.text, let task = taskTestTextField.text, let rate = rateTestTextField.text else { return false }
+        guard let level = testLevelTextField.text,
+            let task = taskTestTextField.text,
+            let rate = rateTestTextField.text else { return false }
         if !level.isEmpty && !task.isEmpty && !rate.isEmpty {
             let dictionary: [String: Any] = ["test_id": id, "level": level, "tasks": task, "rate": rate]
             self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
@@ -124,14 +128,17 @@
             }
             self.navigationController?.popViewController(animated: true)
         } else {
-            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
+                                             comment: "All fields have to be filled"))
         }
     }
     
     func updateTestDetail() {
         if prepareForRequest() {
             guard let testDetailForSave = testDetailForSave else { return }
-            DataManager.shared.updateEntity(byId: idForEditing, entity: testDetailForSave, typeEntity: .testDetail) { (error) in
+            DataManager.shared.updateEntity(byId: idForEditing,
+                                            entity: testDetailForSave,
+                                            typeEntity: .testDetail) { (error) in
                 if let error = error {
                     self.showWarningMsg(error)
                     return
@@ -144,7 +151,8 @@
             }
             self.navigationController?.popViewController(animated: true)
         } else {
-            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled", comment: "All fields have to be filled"))
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
+                                             comment: "All fields have to be filled"))
         }
     }
     
