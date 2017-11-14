@@ -62,6 +62,14 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         adminsNavController.tabBarItem = adminsBarItem
         tabBarViewControllers.append(adminsNavController)
         
+
+//MARK: Create timeTable tab
+        guard let logoutController = self.storyboard?.instantiateViewController(withIdentifier: "LogoutViewController") as? LogoutViewController else { return }
+        let logoutBarItem = UITabBarItem(title: "Logout", image: nil, selectedImage: nil)
+        logoutBarItem.image = UIImage(named: "ic_exit_to_app_white")
+        logoutController.tabBarItem = logoutBarItem
+        tabBarViewControllers.append(logoutController)
+
         self.setViewControllers(tabBarViewControllers, animated: true)
     }
     
