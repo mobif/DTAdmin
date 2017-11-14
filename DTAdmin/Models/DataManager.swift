@@ -93,7 +93,6 @@ class DataManager: HTTPManager {
                     return
                 }
                 DispatchQueue.main.async {
-                    
                     if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                         completionHandler(json, nil)
                     } else {
