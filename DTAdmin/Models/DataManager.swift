@@ -96,8 +96,7 @@ class DataManager: HTTPManager {
                     
                     if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                         completionHandler(json, nil)
-                    }
-                    else {
+                    } else {
                         var errorMsg: String = ""
                         if let errorReason = json as? [String: String]  {
                             guard let errorServerMsg = errorReason["response"] else { return }

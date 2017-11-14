@@ -146,7 +146,6 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
             let dictionary: [String: Any] = ["username": login, "password": pass, "password_confirm": passConfirm, "plain_password": pass, "email": email, "gradebook_id": gradebook, "student_surname": sname, "student_name": name, "student_fname": fname, "group_id": group]
             studentForSave = StudentStructure(dictionary: dictionary)
-            
             if let image: UIImage = studentPhoto.image {
                 studentForSave?.photo = image
             }
