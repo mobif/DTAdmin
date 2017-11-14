@@ -6,6 +6,7 @@
 # Swift Style Guide
 
 Please use [RayWenderlich Swift Style Guide](https://github.com/raywenderlich/swift-style-guide) for your changes.
+Note: Any line which have more than 120 characters should be wrapped to another line.
 
 # IDE Settings
 
