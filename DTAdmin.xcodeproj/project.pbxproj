@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
-		3F7065941FB4B04A009C0EC8 /* AnswerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7065931FB4B04A009C0EC8 /* AnswerTest.swift */; };
-		3F7065961FB4B053009C0EC8 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7065951FB4B053009C0EC8 /* QuestionTests.swift */; };
-		3F7065981FB4B05A009C0EC8 /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7065971FB4B05A009C0EC8 /* SubjectTests.swift */; };
+		3F5C2CE71FBB053600C05E73 /* SubjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CE61FBB053600C05E73 /* SubjectTest.swift */; };
+		3F5C2CE91FBB056100C05E73 /* QuestionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CE81FBB056100C05E73 /* QuestionTest.swift */; };
+		3F5C2CEB1FBB05A200C05E73 /* AnswerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEA1FBB05A200C05E73 /* AnswerTest.swift */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
@@ -92,9 +92,9 @@
 
 /* Begin PBXFileReference section */
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
-		3F7065931FB4B04A009C0EC8 /* AnswerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnswerTest.swift; path = ../../../Desktop/DTAdminTests/AnswerTest.swift; sourceTree = "<group>"; };
-		3F7065951FB4B053009C0EC8 /* QuestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuestionTests.swift; path = ../../../Desktop/DTAdminTests/QuestionTests.swift; sourceTree = "<group>"; };
-		3F7065971FB4B05A009C0EC8 /* SubjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectTests.swift; path = ../../../Desktop/DTAdminTests/SubjectTests.swift; sourceTree = "<group>"; };
+		3F5C2CE61FBB053600C05E73 /* SubjectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTest.swift; sourceTree = "<group>"; };
+		3F5C2CE81FBB056100C05E73 /* QuestionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTest.swift; sourceTree = "<group>"; };
+		3F5C2CEA1FBB05A200C05E73 /* AnswerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTest.swift; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
@@ -360,12 +360,12 @@
 		843422251FAF41B20087A418 /* DTAdminTests */ = {
 			isa = PBXGroup;
 			children = (
-				3F7065971FB4B05A009C0EC8 /* SubjectTests.swift */,
-				3F7065951FB4B053009C0EC8 /* QuestionTests.swift */,
-				3F7065931FB4B04A009C0EC8 /* AnswerTest.swift */,
 				843422261FAF41B20087A418 /* DTAdminTests.swift */,
 				843422281FAF41B20087A418 /* Info.plist */,
 				8434222E1FAF7EB60087A418 /* GroupStructureTests.swift */,
+				3F5C2CE61FBB053600C05E73 /* SubjectTest.swift */,
+				3F5C2CE81FBB056100C05E73 /* QuestionTest.swift */,
+				3F5C2CEA1FBB05A200C05E73 /* AnswerTest.swift */,
 			);
 			path = DTAdminTests;
 			sourceTree = "<group>";
@@ -674,10 +674,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F7065981FB4B05A009C0EC8 /* SubjectTests.swift in Sources */,
-				3F7065941FB4B04A009C0EC8 /* AnswerTest.swift in Sources */,
-				3F7065961FB4B053009C0EC8 /* QuestionTests.swift in Sources */,
 				843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */,
+				3F5C2CEB1FBB05A200C05E73 /* AnswerTest.swift in Sources */,
+				3F5C2CE91FBB056100C05E73 /* QuestionTest.swift in Sources */,
+				3F5C2CE71FBB053600C05E73 /* SubjectTest.swift in Sources */,
 				8434222F1FAF7EB60087A418 /* GroupStructureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
