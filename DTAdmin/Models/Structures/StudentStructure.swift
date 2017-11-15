@@ -6,7 +6,7 @@
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct StudentStructure: Serializable {
     
@@ -21,14 +21,16 @@ struct StudentStructure: Serializable {
     var studentName: String
     var studentFname: String
     var groupId: String
-    var photo: String?
+    var photo: UIImage?
     init?(dictionary: [String: Any]) {
         userId = dictionary["user_id"] as? String
         userName = dictionary["username"] as? String
         password = dictionary["password"] as? String
         passwordConfirm = dictionary["password_confirm"] as? String
         email = dictionary["email"] as? String
-        photo = dictionary["photo"] as? String
+        if let photoCode64 = dictionary["photo"] as? String {
+            photo = UIImage.convert(fromBase64: photoCode64)
+        }
         guard
             let plainPassword = dictionary["plain_password"] as? String,
             let gradebookId = dictionary["gradebook_id"] as? String,
@@ -50,7 +52,7 @@ struct StudentStructure: Serializable {
         if let email = email { result["email"] = email }
         if let password = password { result["password"] = password }
         if let passwordConfirm = passwordConfirm { result["password_confirm"] = passwordConfirm }
-        if let photo = photo { result["photo"] = photo }
+        if let photo = photo { result["photo"] = UIImage.convert(fromImage: photo) }
         return result
     }
 }

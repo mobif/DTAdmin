@@ -84,9 +84,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     
     func showStudentPhoto(){
         guard let photoBase64 = studentLoaded?.photo else { return }
-        guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
-        let decodedimage = UIImage(data: dataDecoded)
-        studentPhoto.image = decodedimage
+        studentPhoto.image = photoBase64
     }
     
     @objc func postUpdateStudentToAPI(){
@@ -148,9 +146,8 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         if (name.count > 2) && (sname.count > 2) && (fname.count > 1) && (gradebook.count > 4) && (pass.count > 6) && (pass == passConfirm){
             let dictionary: [String: Any] = ["username": login, "password": pass, "password_confirm": passConfirm, "plain_password": pass, "email": email, "gradebook_id": gradebook, "student_surname": sname, "student_name": name, "student_fname": fname, "group_id": group]
             studentForSave = StudentStructure(dictionary: dictionary)
-            if let image : UIImage = studentPhoto.image, let imageData = UIImagePNGRepresentation(image) {
-                let photo = imageData.base64EncodedString(options: .lineLength64Characters)
-                studentForSave?.photo = photo
+            if let image: UIImage = studentPhoto.image {
+                studentForSave?.photo = image
             }
         } else {
             showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
@@ -191,21 +188,4 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         }
     }
 }
-extension UIImage {
-/**
-     Resize image to defined size and scale according to bitmap-based graphics context.
-     - Parameters:
-        - size: The size (measured in points) of the new bitmap context.
-        - scale: The scale factor to apply to the bitmap.
-     - returns: Image after resizing.
- */
-    func convert(toSize size:CGSize, scale:CGFloat) -> UIImage
-    {
-        let imgRect = CGRect(origin: CGPoint(x:0.0, y:0.0), size: size)
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        self.draw(in: imgRect)
-        guard let copied = UIGraphicsGetImageFromCurrentImageContext() else { return self }
-        UIGraphicsEndImageContext()
-        return copied
-    }
-}
+
