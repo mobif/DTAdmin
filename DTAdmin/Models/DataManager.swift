@@ -386,18 +386,18 @@ class DataManager: HTTPManager {
             }
         }
     }
-    func getTestDetails(byTest test: String, completionHandler: @escaping (_ testDetails: [TestDetailStructure]?, _ error: String?) -> ()) {
+    func getTestDetails(byTest test: String, completionHandler: @escaping (_ error: String?, _ testDetails: [TestDetailStructure]?) -> ()) {
         getList(byID: test, type: .getTestDetailsByTest, entityStructure: .testDetail) {
             (list, error) in
             if let error = error {
-                completionHandler(nil, error)
+                completionHandler(error, nil)
             }
             if let list = list {
                 let testList = list as? [TestDetailStructure]
-                completionHandler( testList, nil)
+                completionHandler(nil, testList)
             } else {
                 let error = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, error)
+                completionHandler(error, nil)
             }
         }
     }
@@ -583,6 +583,153 @@ class DataManager: HTTPManager {
             completionHandler(recordList, nil)
         }
     }
+    
+    func getResultsBy(group: [String: String], subject: [String: String], test: [String: String], maxMark: String, completionHandler: @escaping (_ error: String?, _ students: [ResultStructure]?) -> ()) {
+        
+        guard let cookie = StoreHelper.getCookie() else { return }
+        let httpManager = HTTPManager()
+        guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/Result/GetRecordsByTestGroupDate/" + test["id"]! + "/" + group["id"]!) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("utf-8", forHTTPHeaderField: "Charset")
+        request.setValue(cookie[Keys.cookie], forHTTPHeaderField: Keys.cookie)
+        
+        _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completionHandler(error.localizedDescription, nil)
+            } else {
+                if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+                    if sessionResponse.statusCode == 200 {
+                        var json: Any
+                        do {
+                            json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+                        } catch {
+                            completionHandler(String(describing: Error.self), nil)
+                            return
+                        }
+                        guard let list = json as? [[String: Any]] else { return }
+                        let results: [ResultStructure] = list.flatMap { ResultStructure(dictionary: $0) }
+                        completionHandler(nil, results)
+                        
+                    }
+                }
+                return
+            }
+            }.resume()
+    }
+    
+    func getResultsBy(subject id: String, completionHandler: @escaping (_ error: String?, _ students: [ResultStructure]) -> ()) {
+        assertionFailure("Get results by subject")
+    }
+    
+    //should return json in that format ["test_id":"id,...]
+    func getResultTestIds(byGroup id: String, completionHandler: @escaping (_ error: String?, _ testIds: [[String: String]]?) -> ()) {
+        
+        guard let cookie = StoreHelper.getCookie() else { return }
+        let httpManager = HTTPManager()
+        guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/Result/getResultTestIdsByGroup/" + id) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("utf-8", forHTTPHeaderField: "Charset")
+        request.setValue(cookie[Keys.cookie], forHTTPHeaderField: Keys.cookie)
+        
+        _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completionHandler(error.localizedDescription, nil)
+                return
+            }
+            if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+                if sessionResponse.statusCode == 200 {
+                    var testIds = [[String: String]]()
+                    do {
+                        guard let json = (try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String: String]]) else {
+                            completionHandler("Group haven't passed any tests yet!" , nil)
+                            return
+                        }
+                        testIds = json
+                        completionHandler(nil, testIds)
+                    } catch {
+                        completionHandler(error.localizedDescription, nil)
+                        return
+                    }
+                }
+            }
+            }.resume()
+    }
+    
+    func getTestsBy(ids: [String], completionHandler: @escaping (_ error: String?, _ tests: [TestStructure]?) -> ()) {
+        
+        guard let cookie = StoreHelper.getCookie() else { return }
+        let httpManager = HTTPManager()
+        guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/EntityManager/getEntityValues") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("utf-8", forHTTPHeaderField: "Charset")
+        request.setValue(cookie[Keys.cookie], forHTTPHeaderField: Keys.cookie)
+        
+        let parameters = ["entity": "Test", "ids": ids] as [String : Any]
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { preconditionFailure("JSON serialization failed") }
+        request.httpBody = httpBody
+        
+        _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+                
+                if sessionResponse.statusCode == 200 {
+                    var json: Any
+                    do {
+                        json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+                    } catch {
+                        completionHandler(String(describing: Error.self), nil)
+                        return
+                    }
+                    guard let list = json as? [[String: Any]] else { return }
+                    let tests = list.flatMap { TestStructure(dictionary: $0) }
+                    completionHandler(nil, tests)
+                }
+            }
+            }.resume()
+    }
+    
+    func getSubjectsBy(ids: [String], completionHandler: @escaping (_ error: String?, _ subjects: [SubjectStructure]?) -> ()) {
+        
+        guard let cookie = StoreHelper.getCookie() else { return }
+        let httpManager = HTTPManager()
+        guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/EntityManager/getEntityValues") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("utf-8", forHTTPHeaderField: "Charset")
+        request.setValue(cookie[Keys.cookie], forHTTPHeaderField: Keys.cookie)
+        
+        let parameters = ["entity": "Subject", "ids": ids] as [String : Any]
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { preconditionFailure("JSON serialization failed") }
+        request.httpBody = httpBody
+        
+        _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
+                
+                if sessionResponse.statusCode == 200 {
+                    var json: Any
+                    do {
+                        json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+                    } catch {
+                        completionHandler(String(describing: Error.self), nil)
+                        return
+                    }
+                    guard let list = json as? [[String: Any]] else { return }
+                    let subjects = list.flatMap { SubjectStructure(dictionary: $0) }
+                    completionHandler(nil, subjects)
+                }
+            }
+            }.resume()
+    }
+    
 }
 
 

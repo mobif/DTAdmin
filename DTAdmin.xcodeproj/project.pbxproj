@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
+		3F94FD5E1FBC7C8C004F2F74 /* ResultStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94FD5D1FBC7C8C004F2F74 /* ResultStructure.swift */; };
+		3F94FD621FBC7C9F004F2F74 /* ResultByGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94FD5F1FBC7C9E004F2F74 /* ResultByGroupViewController.swift */; };
+		3F94FD631FBC7C9F004F2F74 /* Result.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F94FD601FBC7C9E004F2F74 /* Result.storyboard */; };
+		3F94FD641FBC7C9F004F2F74 /* ResultsTableTestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94FD611FBC7C9F004F2F74 /* ResultsTableTestViewCell.swift */; };
+		3F94FD6B1FBC7CA6004F2F74 /* PDFComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94FD651FBC7CA6004F2F74 /* PDFComposer.swift */; };
+		3F94FD6C1FBC7CA6004F2F74 /* PDFPrinter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F94FD661FBC7CA6004F2F74 /* PDFPrinter.storyboard */; };
+		3F94FD6D1FBC7CA6004F2F74 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94FD671FBC7CA6004F2F74 /* PreviewViewController.swift */; };
+		3F94FD6E1FBC7CA6004F2F74 /* PrintPageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94FD681FBC7CA6004F2F74 /* PrintPageRenderer.swift */; };
+		3F94FD6F1FBC7CA6004F2F74 /* reportForm.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F94FD691FBC7CA6004F2F74 /* reportForm.html */; };
+		3F94FD701FBC7CA6004F2F74 /* reportFormStudentRow.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F94FD6A1FBC7CA6004F2F74 /* reportFormStudentRow.html */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
@@ -89,6 +99,16 @@
 
 /* Begin PBXFileReference section */
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
+		3F94FD5D1FBC7C8C004F2F74 /* ResultStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultStructure.swift; sourceTree = "<group>"; };
+		3F94FD5F1FBC7C9E004F2F74 /* ResultByGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultByGroupViewController.swift; sourceTree = "<group>"; };
+		3F94FD601FBC7C9E004F2F74 /* Result.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Result.storyboard; sourceTree = "<group>"; };
+		3F94FD611FBC7C9F004F2F74 /* ResultsTableTestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableTestViewCell.swift; sourceTree = "<group>"; };
+		3F94FD651FBC7CA6004F2F74 /* PDFComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFComposer.swift; sourceTree = "<group>"; };
+		3F94FD661FBC7CA6004F2F74 /* PDFPrinter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PDFPrinter.storyboard; sourceTree = "<group>"; };
+		3F94FD671FBC7CA6004F2F74 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		3F94FD681FBC7CA6004F2F74 /* PrintPageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPageRenderer.swift; sourceTree = "<group>"; };
+		3F94FD691FBC7CA6004F2F74 /* reportForm.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reportForm.html; sourceTree = "<group>"; };
+		3F94FD6A1FBC7CA6004F2F74 /* reportFormStudentRow.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reportFormStudentRow.html; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +264,29 @@
 			path = Admins;
 			sourceTree = "<group>";
 		};
+		3F94FD5B1FBC7B7C004F2F74 /* Printer */ = {
+			isa = PBXGroup;
+			children = (
+				3F94FD651FBC7CA6004F2F74 /* PDFComposer.swift */,
+				3F94FD661FBC7CA6004F2F74 /* PDFPrinter.storyboard */,
+				3F94FD671FBC7CA6004F2F74 /* PreviewViewController.swift */,
+				3F94FD681FBC7CA6004F2F74 /* PrintPageRenderer.swift */,
+				3F94FD691FBC7CA6004F2F74 /* reportForm.html */,
+				3F94FD6A1FBC7CA6004F2F74 /* reportFormStudentRow.html */,
+			);
+			path = Printer;
+			sourceTree = "<group>";
+		};
+		3F94FD5C1FBC7B94004F2F74 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				3F94FD601FBC7C9E004F2F74 /* Result.storyboard */,
+				3F94FD5F1FBC7C9E004F2F74 /* ResultByGroupViewController.swift */,
+				3F94FD611FBC7C9F004F2F74 /* ResultsTableTestViewCell.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
 		3F9505C31FACB8E1003F3EB9 /* Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +321,8 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				3F94FD5C1FBC7B94004F2F74 /* Result */,
+				3F94FD5B1FBC7B7C004F2F74 /* Printer */,
 				3F9505C31FACB8E1003F3EB9 /* Group */,
 				89C96DFF1F9CC2F90019FE77 /* TimeTable */,
 				8927571A1F97648C00FF669D /* Common */,
@@ -467,6 +512,7 @@
 		C7535CDD1FA2670100B6CBD1 /* Structures */ = {
 			isa = PBXGroup;
 			children = (
+				3F94FD5D1FBC7C8C004F2F74 /* ResultStructure.swift */,
 				C7535CDE1FA2670100B6CBD1 /* AnswerStructure.swift */,
 				C7535CDF1FA2670100B6CBD1 /* FacultyStructure.swift */,
 				C7535CE01FA2670100B6CBD1 /* GroupStructure.swift */,
@@ -576,13 +622,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C96E031F9CFD1F0019FE77 /* TimeTable.storyboard in Resources */,
+				3F94FD631FBC7C9F004F2F74 /* Result.storyboard in Resources */,
+				3F94FD6C1FBC7CA6004F2F74 /* PDFPrinter.storyboard in Resources */,
 				3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */,
 				C799D68D1FA267590092170E /* Student.storyboard in Resources */,
 				3F9505E71FACBA16003F3EB9 /* Group.storyboard in Resources */,
+				3F94FD6F1FBC7CA6004F2F74 /* reportForm.html in Resources */,
 				3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
+				3F94FD701FBC7CA6004F2F74 /* reportFormStudentRow.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +666,7 @@
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
 				3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */,
 				3FF673721FB48BAD001C7147 /* ShowTestInfoViewController.swift in Sources */,
+				3F94FD5E1FBC7C8C004F2F74 /* ResultStructure.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
@@ -635,18 +686,22 @@
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
 				3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */,
 				3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */,
+				3F94FD6B1FBC7CA6004F2F74 /* PDFComposer.swift in Sources */,
 				89F4A4C41FB9ADE900807527 /* LogoutViewController.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
 				890376041F9DE0FB002A99A8 /* Date.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				C7535CF11FA2670100B6CBD1 /* GroupStructure.swift in Sources */,
 				89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */,
+				3F94FD621FBC7C9F004F2F74 /* ResultByGroupViewController.swift in Sources */,
+				3F94FD6D1FBC7CA6004F2F74 /* PreviewViewController.swift in Sources */,
 				C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */,
 				C7535CF51FA2670100B6CBD1 /* StudentStructure.swift in Sources */,
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
 				3FF6736B1FB48B89001C7147 /* SubjectTableViewController.swift in Sources */,
 				89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */,
 				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
+				3F94FD6E1FBC7CA6004F2F74 /* PrintPageRenderer.swift in Sources */,
 				3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
@@ -654,6 +709,7 @@
 				C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */,
+				3F94FD641FBC7C9F004F2F74 /* ResultsTableTestViewCell.swift in Sources */,
 				3FDE8F981F8D0DF60057BF3C /* AppDelegate.swift in Sources */,
 				C7535CF21FA2670100B6CBD1 /* QuestionStructure.swift in Sources */,
 				C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */,
