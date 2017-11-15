@@ -25,13 +25,9 @@ protocol TestTableViewCellDelegate {
 class TestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var testLabel: UILabel!
-    
     @IBOutlet weak var tasksTestLabel: UILabel!
-    
     @IBOutlet weak var timeForTestLabel: UILabel!
-    
     @IBOutlet weak var enabledLabel: UILabel!
-    
     @IBOutlet weak var attemptsLabel: UILabel!
     
     var testItem: TestStructure?
@@ -42,7 +38,8 @@ class TestTableViewCell: UITableViewCell {
         testLabel.text = test.name
         tasksTestLabel.text = NSLocalizedString("Tasks: ", comment: "Information for user") + test.tasks
         timeForTestLabel.text = NSLocalizedString("Time for test: ", comment: "Information for user") + test.timeForTest
-        enabledLabel.text = NSLocalizedString("Enabled: ", comment: "Information for user") + test.enabled
+        let enabled = test.enabled == "0" ? "false" : "true"
+        enabledLabel.text = NSLocalizedString("Enabled: ", comment: "Information for user") + enabled
         attemptsLabel.text = NSLocalizedString("Attemts: ", comment: "Information for user") + test.attempts
     }
     
@@ -56,12 +53,4 @@ class TestTableViewCell: UITableViewCell {
         delegate?.didTapShowQuestions(id: id)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

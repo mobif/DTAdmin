@@ -29,6 +29,19 @@ class AddNewRecordViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.title = updateDates ? "Update record" : "Add new item"
+        
+        subjectDescriptionTextField.layer.cornerRadius = 5
+        subjectDescriptionTextField.layer.borderWidth = 1
+        subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     @IBAction func saveNewRecord(_ sender: UIButton) {
         if !updateDates {
             saveNewSubject()
@@ -77,6 +90,7 @@ class AddNewRecordViewController: UIViewController {
     func prepareForSave() -> Bool {
         guard let name = subjectNameTextField.text,
             let description = subjectDescriptionTextField.text else { return false }
+        
         if (name.count > 2) && (description.count > 2) {
             let dictionary: [String: Any] = ["subject_name": name, "subject_description": description]
             self.subjectForSave = SubjectStructure(dictionary: dictionary)
@@ -85,18 +99,6 @@ class AddNewRecordViewController: UIViewController {
             return false
         }
         return true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.title = updateDates ? "Update record" : "Add new item"
-        subjectDescriptionTextField.layer.cornerRadius = 5
-        subjectDescriptionTextField.layer.borderWidth = 1
-        subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
 }

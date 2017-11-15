@@ -19,9 +19,7 @@ protocol QuestionTableViewCellDelegate {
 class QuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var questionTextLabel: UILabel!
-    
     @IBOutlet weak var questionLevelLabel: UILabel!
-    
     @IBOutlet weak var questionTypeLabel: UILabel!
     
     var questionItem: QuestionStructure?
@@ -42,5 +40,4 @@ class QuestionTableViewCell: UITableViewCell {
         delegate?.didTapShowAnswer(id: id)
     }
 
-    
 }

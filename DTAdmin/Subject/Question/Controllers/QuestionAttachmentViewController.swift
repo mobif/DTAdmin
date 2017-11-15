@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionAttachmentViewController: ParentViewController {
+class QuestionAttachmentViewController: ParentViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var questionTextLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -19,15 +19,16 @@ class QuestionAttachmentViewController: ParentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Question detail"
-        print(questionId ?? "nooo")
         showQuestionRecord()
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 6.0
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func showQuestionRecord() {
+    private func showQuestionRecord() {
         startActivity()
         guard let id = questionId else { return }
         DataManager.shared.getEntity(byId: id, typeEntity: .question) {(questionRecord, errorMessage) in
@@ -36,7 +37,7 @@ class QuestionAttachmentViewController: ParentViewController {
                 guard let question = questionRecord as? QuestionStructure else { return }
                 self.questionTextLabel.text = question.questionText
                 if question.attachment.count > 0 {
-                    
+                    self.questionAttachmentImageView.image = UIImage.convert(fromBase64: question.attachment)
                 } else {
                     self.questionAttachmentImageView.image = UIImage(named: "Image")
                 }
@@ -44,8 +45,9 @@ class QuestionAttachmentViewController: ParentViewController {
                 self.showWarningMsg(NSLocalizedString(errorMessage ?? "Incorect type data", comment: "Message for user") )
             }
         }
-            
-        
     }
 
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.questionAttachmentImageView
+    }
 }

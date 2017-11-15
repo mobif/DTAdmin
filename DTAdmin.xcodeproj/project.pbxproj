@@ -12,6 +12,7 @@
 		3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */; };
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
 		3F5C2CED1FBB387800C05E73 /* QuestionAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEC1FBB387800C05E73 /* QuestionAttachmentViewController.swift */; };
+		3F5C2CEF1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */; };
 		3F70659E1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
@@ -96,6 +97,7 @@
 		3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
 		3F5C2CEC1FBB387800C05E73 /* QuestionAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAttachmentViewController.swift; sourceTree = "<group>"; };
+		3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerAttachmentViewController.swift; sourceTree = "<group>"; };
 		3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableViewCell.swift; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 			children = (
 				3FF6735D1FB48B3A001C7147 /* AddNewAnswerViewController.swift */,
 				3FF6735C1FB48B39001C7147 /* AnswersTableViewController.swift */,
+				3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				897D0E341F9B6BC300825E62 /* CommonNetworkManager.swift in Sources */,
 				3FF6735E1FB48B3A001C7147 /* AnswersTableViewController.swift in Sources */,
 				C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */,
+				3F5C2CEF1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift in Sources */,
 				C7535CEB1FA2670100B6CBD1 /* Entities.swift in Sources */,
 				3FF6736C1FB48B89001C7147 /* AddNewRecordViewController.swift in Sources */,
 				C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */,

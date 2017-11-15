@@ -10,32 +10,25 @@ import UIKit
 
 class TestsForSubjectTableViewController: UITableViewController, TestTableViewCellDelegate {
     
-    func didTapShowTestDetail(id: String) {
-        //add seque to show test detail
-    }
-    
-    func didTapShowQuestions(id: String) {
-        guard let wayToShowQuestions = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionTableView") as? QuestionsTableViewController else { return }
-        wayToShowQuestions.testId = id
-        self.navigationController?.pushViewController(wayToShowQuestions, animated: true)
-    }
-    
     var test = [TestStructure]()
     var subjectId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Subject tests"
-        guard let id = subjectId else { return }
-        print(id)
-        showTests(id: id)
+        showTests()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     @IBAction func addTest(_ sender: UIBarButtonItem) {
         //add new test
     }
     
-    func showTests(id: String) {
+    private func showTests() {
+        guard let id = subjectId else { return }
         DataManager.shared.getTest(bySubject: id) { (tests, error) in
             if error == nil {
                 guard let tests = tests else { return }
@@ -45,10 +38,6 @@ class TestsForSubjectTableViewController: UITableViewController, TestTableViewCe
                 self.showMessage(message: error ?? "Incorect type data")
             }
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,6 +64,16 @@ class TestsForSubjectTableViewController: UITableViewController, TestTableViewCe
         }
         update.backgroundColor = UIColor.blue
         return [delete, update]
+    }
+
+    func didTapShowTestDetail(id: String) {
+        //add seque to show test detail
+    }
+
+    func didTapShowQuestions(id: String) {
+        guard let wayToShowQuestions = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionTableView") as? QuestionsTableViewController else { return }
+        wayToShowQuestions.testId = id
+        self.navigationController?.pushViewController(wayToShowQuestions, animated: true)
     }
     
 }

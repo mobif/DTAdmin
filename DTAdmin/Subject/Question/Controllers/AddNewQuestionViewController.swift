@@ -40,7 +40,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
             self.questionLevelTextField.text = question.level
             self.questionTypeTextField.text = question.type
             if question.attachment.count > 1 {
-                showQuestionAttachment()
+                showQuestionAttachment(for: question.attachment)
             }
         }
     }
@@ -57,9 +57,9 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     func saveNewQuestion() {
         if prepareForSave(){
             guard let questionForSave = questionForSave else { return }
-            DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) { (questionResult, error) in
-                if let error = error {
-                    self.showWarningMsg(error)
+            DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) { (questionResult, errorMessage) in
+                if let errorMessage = errorMessage {
+                    self.showWarningMsg(errorMessage)
                 } else {
                     guard let result = questionResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -77,9 +77,9 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         if prepareForSave(){
             guard let questionId = questionId else { return }
             guard let questionForSave = questionForSave else { return }
-            DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .question) { error in
-                if let error = error {
-                    self.showWarningMsg(error)
+            DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .question) { errorMessage in
+                if let errorMessage = errorMessage {
+                    self.showWarningMsg(errorMessage)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(questionForSave)
@@ -100,9 +100,11 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
             let type = questionTypeTextField.text,
             let testId = testId,
             let typeNumber = types.index(of: type) else { return false }
+        
         let typeNumberString = String(typeNumber)
-        if let attachment : UIImage = questionAttachmentImageView.image, let attachmentData = UIImagePNGRepresentation(attachment) {
-            let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
+        
+        if let attachment: UIImage = questionAttachmentImageView.image {
+            let picture = UIImage.convert(fromImage: attachment)
             if questionText.count > 2 {
                 let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": typeNumberString, "attachment": picture]
                 questionForSave = QuestionStructure(dictionary: dictionary)
@@ -123,11 +125,8 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
-    func showQuestionAttachment(){
-        guard let photoBase64 = question?.attachment else { return }
-        guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
-        let decodedimage = UIImage(data: dataDecoded)
-        questionAttachmentImageView.image = decodedimage
+    func showQuestionAttachment(for text: String){
+        questionAttachmentImageView.image = UIImage.convert(fromBase64: text)
     }
     
     @objc func openGallery(_ sender: UIButton) {

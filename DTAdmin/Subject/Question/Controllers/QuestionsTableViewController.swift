@@ -23,21 +23,28 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
     var refresherForQuestion: UIRefreshControl!
     var filteredData = [QuestionStructure]()
     var inSearchMode = false
-    
+    let myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+
     @IBOutlet weak var searchOfQuestion: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Questions"
+
         refresherForQuestion = UIRefreshControl()
         tableView.addSubview(refresherForQuestion)
         refresherForQuestion.attributedTitle = NSAttributedString (string: "Pull to refresh")
         refresherForQuestion.tintColor = UIColor(red: 1.0, green: 0.21, blue: 0.55, alpha: 0.5)
         refresherForQuestion.addTarget(self, action: #selector(getCountOfQuestion), for: .valueChanged)
+
         searchOfQuestion.showsScopeBar = true
         searchOfQuestion.scopeButtonTitles = ["Question", "Level", "Type"]
         searchOfQuestion.selectedScopeButtonIndex = 0
+
         getCountOfQuestion()
+
+        myActivityIndicator.center = view.center
+        view.addSubview(myActivityIndicator)
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,9 +52,12 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     @objc func getCountOfQuestion() {
-        DataManager.shared.getCountItems(forEntity: .question) { count, error in
-            if let error = error {
-                self.showMessage(message: error)
+        myActivityIndicator.startAnimating()
+        DataManager.shared.getCountItems(forEntity: .question) { count, errorMessage in
+            self.myActivityIndicator.stopAnimating()
+            self.myActivityIndicator.hidesWhenStopped = true
+            if let errorMessage = errorMessage {
+                self.showMessage(message: errorMessage)
             } else {
                 if let countOfQuestions = count {
                     print(countOfQuestions)
@@ -60,13 +70,13 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     func showQuestions(id: String, quantity: UInt) {
-        DataManager.shared.getRecordsRange(byTest: id, limit: String(quantity), offset: "0", withoutImages: true) {(questions, error) in
-            if error == nil,
+        DataManager.shared.getRecordsRange(byTest: id, limit: String(quantity), offset: "0", withoutImages: true) {(questions, errorMessage) in
+            if errorMessage == nil,
                 let questions = questions {
                 self.questions = questions
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: error ?? "Incorect type data")
+                self.showMessage(message: errorMessage ?? "Incorect type data")
             }
         }
     }
@@ -119,9 +129,9 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             guard let questionId = self.questions[indexPath.row].id else { return }
-            DataManager.shared.deleteEntity(byId: questionId, typeEntity: .question)  { (result, error) in
-                if let error = error {
-                    self.showMessage(message: NSLocalizedString(error, comment: "Message for user") )
+            DataManager.shared.deleteEntity(byId: questionId, typeEntity: .question)  { (result, errorMessage) in
+                if let errorMessage = errorMessage {
+                    self.showMessage(message: NSLocalizedString(errorMessage, comment: "Message for user") )
                 } else {
                     self.questions.remove(at: indexPath.row)
                 }

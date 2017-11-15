@@ -18,26 +18,32 @@ import UIKit
 
 class SubjectTableViewController: UITableViewController, UISearchBarDelegate, SubjectTableViewCellDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
+
     var records = [SubjectStructure]()
     var filteredData = [SubjectStructure]()
     var inSearchMode = false
     var selectedSubject: ((SubjectStructure) -> ())?
     var refresher: UIRefreshControl!
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Subjects"
         showRecords()
+
         searchBar.showsScopeBar = true
         searchBar.scopeButtonTitles = ["Name", "Description"]
         searchBar.selectedScopeButtonIndex = 0
+
         refresher = UIRefreshControl()
         tableView.addSubview(refresher)
         refresher.attributedTitle = NSAttributedString (string: "Pull to refresh")
         refresher.tintColor = UIColor(red: 1.0, green: 0.21, blue: 0.55, alpha: 0.5)
         refresher.addTarget(self, action: #selector(showRecords), for: .valueChanged)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
@@ -71,20 +77,16 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate, Su
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     @objc private func showRecords() {
-        DataManager.shared.getList(byEntity: .subject) { (subjects, error) in
-            if error == nil,
-                let students = subjects as? [SubjectStructure] {
-                self.records = students
+        DataManager.shared.getList(byEntity: .subject) { (subjects, errorMessage) in
+            if errorMessage == nil,
+                let subjectsRecords = subjects as? [SubjectStructure] {
+                self.records = subjectsRecords
                 self.records.sort { return $0.name < $1.name}
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
             } else {
-                self.showMessage(message: NSLocalizedString(error ?? "Incorect type data", comment: "Message for user") )
+                self.showMessage(message: NSLocalizedString(errorMessage ?? "Incorect type data", comment: "Message for user"))
             }
         }
     }
@@ -94,23 +96,19 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate, Su
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SubjectTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SubjectTableViewCell else { fatalError("The dequeued cell is not an instance of MealTableViewCell.") }
         let cellData = inSearchMode ? filteredData[indexPath.row] : records[indexPath.row]
         cell.setSubject(subject: cellData)
         cell.delegate = self
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
+
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             guard let subjectId = self.records[indexPath.row].id else { return }
-            DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, error) in
-                if let error = error {
-                    self.showMessage(message: NSLocalizedString(error, comment: "Message for user") )
+            DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, errorMessage) in
+                if let errorMessage = errorMessage {
+                    self.showMessage(message: NSLocalizedString(errorMessage, comment: "Message for user") )
                 } else {
                     self.records.remove(at: indexPath.row)
                 }

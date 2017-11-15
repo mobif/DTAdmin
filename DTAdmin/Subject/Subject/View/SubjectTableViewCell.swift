@@ -24,7 +24,6 @@ protocol SubjectTableViewCellDelegate {
 class SubjectTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameSubjectLabel: UILabel!
-    
     @IBOutlet weak var descriptionSubjectLabel: UILabel!
     
     var subjectItem: SubjectStructure?

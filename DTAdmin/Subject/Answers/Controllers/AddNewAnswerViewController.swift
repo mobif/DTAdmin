@@ -9,17 +9,6 @@
 import UIKit
 
 class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PickerDelegate  {
-    
-    func pickedValue(value: Any, tag: Int) {
-        if let stringValue = value as? String {
-            switch tag {
-            case 0:
-                self.trueAnswerTextField.text = stringValue
-            default:
-                break
-            }
-        }
-    }
    
     @IBOutlet weak var answerTextView: UITextView!
     
@@ -39,7 +28,7 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
             self.answerTextView.text = answer.answerText
             self.trueAnswerTextField.text = answer.trueAnswer
             if answer.attachmant.count > 1 {
-                showAnswerAttachment()
+                showAnswerAttachment(for: answer.attachmant)
             }
         }
     }
@@ -47,29 +36,26 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = updateDates ? "Update answer" : "Add new answer"
-        guard let id = questionId else { return }
-        print("Add new " + id)
+        
         attachmentImageView.layer.cornerRadius = 5
         attachmentImageView.layer.borderWidth = 1
         attachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+        
         answerTextView.layer.cornerRadius = 5
         answerTextView.layer.borderWidth = 1
         answerTextView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+        
         trueAnswerTextField.customDelegate = self
         self.trueAnswerTextField.dropDownData = correctmess
         self.trueAnswerTextField.tag = 0
     }
    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func showAnswerAttachment() {
-        guard let photoBase64 = answer?.attachmant else { return }
-        guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
-        let decodedimage = UIImage(data: dataDecoded)
-        attachmentImageView.image = decodedimage
+    func showAnswerAttachment(for text: String) {
+        attachmentImageView.image = UIImage.convert(fromBase64: text)
     }
     
     @IBAction func saveAnswer(_ sender: UIBarButtonItem) {
@@ -83,9 +69,9 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
     func saveNewAnswer() {
         if prepareForSave(){
             guard let answerForSave = answerForSave else { return }
-            DataManager.shared.insertEntity(entity: answerForSave, typeEntity: .answer) { (answerResult, error) in
-                if let error = error {
-                    self.showWarningMsg(error)
+            DataManager.shared.insertEntity(entity: answerForSave, typeEntity: .answer) { (answerResult, errorMessage) in
+                if let errorMessage = errorMessage {
+                    self.showWarningMsg(errorMessage)
                 } else {
                     guard let result = answerResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -103,9 +89,9 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         if prepareForSave(){
             guard let answerId = answer?.id else { return }
             guard let answerForSave = answerForSave else { return }
-            DataManager.shared.updateEntity(byId: answerId, entity: answerForSave, typeEntity: .answer) { error in
-                if let error = error {
-                    self.showWarningMsg(error)
+            DataManager.shared.updateEntity(byId: answerId, entity: answerForSave, typeEntity: .answer) { errorMessage in
+                if let errorMessage = errorMessage {
+                    self.showWarningMsg(errorMessage)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(answerForSave)
@@ -117,7 +103,7 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func prepareForSave() -> Bool {
-        
+    
         guard let id = questionId else { return false }
         
         guard let answerText = answerTextView.text,
@@ -126,8 +112,8 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         
         let correctnessNumberString = String(correctnessNumber)
         
-        if let attachment : UIImage = attachmentImageView.image, let attachmentData = UIImagePNGRepresentation(attachment) {
-            let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
+        if let attachment: UIImage = attachmentImageView.image {
+            let picture = UIImage.convert(fromImage: attachment)
             if answerText.count >= 1 {
                 let dictionary: [String: Any] = ["question_id": id, "true_answer": correctnessNumberString, "answer_text": answerText, "attachment": picture]
                 answerForSave = AnswerStructure(dictionary: dictionary)
@@ -156,7 +142,6 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         self.present(image, animated: true)
     }
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let size = image.size
@@ -167,12 +152,22 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         } else {
             showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))
         }
-        
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func removeImage(_ sender: UIButton) {
         attachmentImageView.image = nil
+    }
+    
+    func pickedValue(value: Any, tag: Int) {
+        if let stringValue = value as? String {
+            switch tag {
+            case 0:
+                self.trueAnswerTextField.text = stringValue
+            default:
+                break
+            }
+        }
     }
     
 }
