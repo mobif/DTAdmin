@@ -9,8 +9,15 @@
 import UIKit
 
 protocol SubjectTableViewCellDelegate {
-    
+    /**
+        Sends to the TestViewController when you press ShowTests button
+        - Parameter id: Send subject id to the next View Controller for create request and making call's to API
+     */
     func didTapShowTest(id: String)
+    /**
+        Sends to the TimeTableViewController when you press ShowTimeTable button
+        - Parameter id: Send subject id to the next View Controller for create request and making call's to API
+     */
     func didTapShowTimeTable(id: String)
 }
 
@@ -20,7 +27,7 @@ class SubjectTableViewCell: UITableViewCell {
     
     @IBOutlet weak var descriptionSubjectLabel: UILabel!
     
-    var subjectItem: SubjectStructure!
+    var subjectItem: SubjectStructure?
     var delegate: SubjectTableViewCellDelegate?
     
     func setSubject(subject: SubjectStructure) {
@@ -30,24 +37,13 @@ class SubjectTableViewCell: UITableViewCell {
     }
     
     @IBAction func showTest(_ sender: UIButton) {
-        guard let id = subjectItem.id else { return }
+        guard let id = subjectItem?.id else { return }
         delegate?.didTapShowTest(id: id)
     }
     
     @IBAction func showTimeTable(_ sender: UIButton) {
-        guard let id = subjectItem.id else { return }
+        guard let id = subjectItem?.id else { return }
         delegate?.didTapShowTimeTable(id: id)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

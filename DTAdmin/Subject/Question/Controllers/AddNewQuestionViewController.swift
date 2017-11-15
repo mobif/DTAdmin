@@ -10,7 +10,7 @@ import UIKit
 
 class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PickerDelegate  {
     
-    @IBOutlet weak var qustionTextField: UITextField!
+    @IBOutlet weak var questionTextView: UITextView!
     
     @IBOutlet weak var questionLevelTextField: PickedTextField!
     
@@ -18,23 +18,17 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     
     @IBOutlet weak var questionAttachmentImageView: UIImageView!
     
-    var levels: [Int] {
-        var array = [Int]()
+    var levels: [String] {
+        var array = [String]()
         for i in 1...30 {
-            array.append(i)
+            array.append(String(i))
         }
         return array
     }
     
-    var types: [Int] {
-        var array = [Int]()
-        for i in 1...3 {
-            array.append(i)
-        }
-        return array
-    }
+    var types = ["Simple choice", "Multy choice", "Input field"]
     
-    var testId: String = ""
+    var testId: String?
     var questionId: String?
     var resultModification: ((QuestionStructure) -> ())?
     var updateDates = false
@@ -42,7 +36,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         didSet {
             guard let question = question else { return }
             self.view.layoutIfNeeded()
-            self.qustionTextField.text = question.questionText
+            self.questionTextView.text = question.questionText
             self.questionLevelTextField.text = question.level
             self.questionTypeTextField.text = question.type
             if question.attachment.count > 1 {
@@ -101,18 +95,16 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func prepareForSave() -> Bool {
-        guard let questionText = qustionTextField.text,
+        guard let questionText = questionTextView.text,
             let level = questionLevelTextField.text,
-            let type = questionTypeTextField.text else { return false }
-        
+            let type = questionTypeTextField.text,
+            let testId = testId,
+            let typeNumber = types.index(of: type) else { return false }
+        let typeNumberString = String(typeNumber)
         if let attachment : UIImage = questionAttachmentImageView.image, let attachmentData = UIImagePNGRepresentation(attachment) {
             let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
             if questionText.count > 2 {
-                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": picture]
-                print(testId)
-                print(questionText)
-                print(level)
-                print(type)
+                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": typeNumberString, "attachment": picture]
                 questionForSave = QuestionStructure(dictionary: dictionary)
             } else {
                 showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
@@ -121,11 +113,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
             return true
         } else {
             if questionText.count > 2 {
-                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": type, "attachment": ""]
-                print(testId)
-                print(questionText)
-                print(level)
-                print(type)
+                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": typeNumberString, "attachment": ""]
                 questionForSave = QuestionStructure(dictionary: dictionary)
             } else {
                 showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
@@ -172,9 +160,11 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         questionAttachmentImageView.layer.cornerRadius = 5
         questionAttachmentImageView.layer.borderWidth = 1
         questionAttachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-        
+        questionTextView.layer.cornerRadius = 5
+        questionTextView.layer.borderWidth = 1
+        questionTextView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
         self.questionLevelTextField.dropDownData = levels
-        self.questionTypeTextField.tag = 0
+        self.questionLevelTextField.tag = 0
         self.questionTypeTextField.dropDownData = types
         self.questionTypeTextField.tag = 1
     }
@@ -184,12 +174,12 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func pickedValue(value: Any, tag: Int) {
-        if let intValue = value as? Int {
+        if let stringValue = value as? String {
             switch tag {
             case 0:
-                self.questionLevelTextField.text = String(intValue)
+                self.questionLevelTextField.text = stringValue
             case 1:
-                self.questionTypeTextField.text = String(intValue)
+                self.questionTypeTextField.text = stringValue
             default:
                 break
             }

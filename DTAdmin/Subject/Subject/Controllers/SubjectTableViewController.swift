@@ -84,7 +84,7 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate, Su
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
             } else {
-                self.showMessage(message: error ?? "Incorect type data")
+                self.showMessage(message: NSLocalizedString(error ?? "Incorect type data", comment: "Message for user") )
             }
         }
     }
@@ -133,9 +133,9 @@ class SubjectTableViewController: UITableViewController, UISearchBarDelegate, Su
     }
     
     func didTapShowTest(id: String) {
-        guard let wayToShowTestsForSubject = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "TestForSubjectTableViewController") as? TestsForSubjectTableViewController else { return }
-        wayToShowTestsForSubject.subjectId = id
-        self.navigationController?.pushViewController(wayToShowTestsForSubject, animated: true)
+        guard let subjectTestsTableViewController = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "TestForSubjectTableViewController") as? TestsForSubjectTableViewController else { return }
+        subjectTestsTableViewController.subjectId = id
+        self.navigationController?.pushViewController(subjectTestsTableViewController, animated: true)
     }
     
     

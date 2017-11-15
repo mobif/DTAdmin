@@ -47,10 +47,6 @@ class AnswersTableViewController: UITableViewController {
         }
         self.navigationController?.pushViewController(wayToAddNewAnswer, animated: true)
     }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answers.count

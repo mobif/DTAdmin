@@ -19,7 +19,7 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
     
     var questions = [QuestionStructure]()
     var testId: String?
-    var countOfQuestions: UInt = 100
+    var countOfQuestions: UInt?
     var refresherForQuestion: UIRefreshControl!
     var filteredData = [QuestionStructure]()
     var inSearchMode = false
@@ -60,9 +60,9 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     func showQuestions(id: String, quantity: UInt) {
-        DataManager.shared.getListRange(forEntity: .question, fromNo: 0, quantity: quantity) {(questions, error) in
+        DataManager.shared.getRecordsRange(byTest: id, limit: String(quantity), offset: "0", withoutImages: true) {(questions, error) in
             if error == nil,
-                let questions = questions as? [QuestionStructure] {
+                let questions = questions {
                 self.questions = questions
                 self.tableView.reloadData()
             } else {
@@ -96,7 +96,7 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
     @IBAction func addQuestion(_ sender: UIBarButtonItem) {
         guard let wayToAddNewQuestion = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewQuestion") as? AddNewQuestionViewController
             else { return }
-        wayToAddNewQuestion.testId = testId!
+        wayToAddNewQuestion.testId = testId
         wayToAddNewQuestion.resultModification = { questionReturn in
             self.questions.append(questionReturn)
             self.tableView.reloadData()
@@ -113,7 +113,6 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
         let cellData = inSearchMode ? filteredData[indexPath.row] : questions[indexPath.row]
         cell.setQuestion(question: cellData)
         cell.delegate = self
-        //cell.textLabel?.text = "\(indexPath.row + 1). " + cellData.questionText
         return cell
     }
     
@@ -146,8 +145,10 @@ class QuestionsTableViewController: UITableViewController, UISearchBarDelegate, 
         return [delete, update]
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150.0
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let questionAttachmentViewController = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "QuestionAttachmentViewController") as? QuestionAttachmentViewController else { return }
+        questionAttachmentViewController.questionId = questions[indexPath.row].id
+        self.navigationController?.pushViewController(questionAttachmentViewController, animated: true)
     }
     
 }

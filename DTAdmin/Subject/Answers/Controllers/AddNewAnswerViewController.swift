@@ -11,23 +11,23 @@ import UIKit
 class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PickerDelegate  {
     
     func pickedValue(value: Any, tag: Int) {
-        if let intValue = value as? Int {
+        if let stringValue = value as? String {
             switch tag {
             case 0:
-                self.trueAnswerTextField.text = String(intValue)
+                self.trueAnswerTextField.text = stringValue
             default:
                 break
             }
         }
     }
-    
-    @IBOutlet weak var answerTextField: UITextField!
+   
+    @IBOutlet weak var answerTextView: UITextView!
     
     @IBOutlet weak var trueAnswerTextField: PickedTextField!
     
     @IBOutlet weak var attachmentImageView: UIImageView!
     
-    var correctmess = ["True", "False"]
+    let correctmess = ["Wrong", "Right"]
     var questionId: String?
     var updateDates = false
     var resultModification: ((AnswerStructure) -> ())?
@@ -36,15 +36,13 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         didSet {
             guard let answer = answer else { return }
             self.view.layoutIfNeeded()
-            self.answerTextField.text = answer.answerText
+            self.answerTextView.text = answer.answerText
             self.trueAnswerTextField.text = answer.trueAnswer
             if answer.attachmant.count > 1 {
                 showAnswerAttachment()
             }
         }
     }
-    
-    let trueAnswer = [0, 1]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +52,11 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         attachmentImageView.layer.cornerRadius = 5
         attachmentImageView.layer.borderWidth = 1
         attachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+        answerTextView.layer.cornerRadius = 5
+        answerTextView.layer.borderWidth = 1
+        answerTextView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
         trueAnswerTextField.customDelegate = self
-        self.trueAnswerTextField.dropDownData = trueAnswer
+        self.trueAnswerTextField.dropDownData = correctmess
         self.trueAnswerTextField.tag = 0
     }
    
@@ -119,15 +120,16 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         
         guard let id = questionId else { return false }
         
-        guard let answerText = answerTextField.text,
-            let trueAnswer = trueAnswerTextField.text else { return false }
+        guard let answerText = answerTextView.text,
+            let trueAnswer = trueAnswerTextField.text,
+            let correctnessNumber = correctmess.index(of: trueAnswer) else { return false }
+        
+        let correctnessNumberString = String(correctnessNumber)
         
         if let attachment : UIImage = attachmentImageView.image, let attachmentData = UIImagePNGRepresentation(attachment) {
             let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
             if answerText.count >= 1 {
-                let dictionary: [String: Any] = ["question_id": id, "true_answer": trueAnswer, "answer_text": answerText, "attachment": picture]
-                print(trueAnswer)
-                print(answerText)
+                let dictionary: [String: Any] = ["question_id": id, "true_answer": correctnessNumberString, "answer_text": answerText, "attachment": picture]
                 answerForSave = AnswerStructure(dictionary: dictionary)
             } else {
                 showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
@@ -136,9 +138,7 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
             return true
         } else {
             if answerText.count >= 1 {
-                let dictionary: [String: Any] = ["question_id": id, "true_answer": trueAnswer, "answer_text": answerText, "attachment": ""]
-                print(trueAnswer)
-                print(answerText)
+                let dictionary: [String: Any] = ["question_id": id, "true_answer": correctnessNumberString, "answer_text": answerText, "attachment": ""]
                 answerForSave = AnswerStructure(dictionary: dictionary)
             } else {
                 showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
@@ -174,6 +174,5 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func removeImage(_ sender: UIButton) {
         attachmentImageView.image = nil
     }
-    
     
 }

@@ -9,10 +9,12 @@
 import UIKit
 
 protocol QuestionTableViewCellDelegate {
-    
+    /**
+        Sends to the AnswerViewController
+        - Parameter id: Send question id to the next View Controller for create request and making call's to API
+     */
     func didTapShowAnswer(id: String)
 }
-
 
 class QuestionTableViewCell: UITableViewCell {
     
@@ -22,28 +24,21 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var questionTypeLabel: UILabel!
     
-    @IBOutlet weak var attachmentImageView: UIImageView!
-    
-    var questionItem: QuestionStructure!
+    var questionItem: QuestionStructure?
     var delegate: QuestionTableViewCellDelegate?
+    var types = ["Simple choice", "Multy choice", "Input field"]
     
     func setQuestion(question: QuestionStructure) {
         questionItem = question
         questionTextLabel.text = question.questionText
-        questionLevelLabel.text = "Level: " + question.level
-        questionTypeLabel.text = "Type: " + question.type
-        if question.attachment.count > 0 {
-            let photoBase64 = question.attachment
-            guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
-            let decodedimage = UIImage(data: dataDecoded)
-            attachmentImageView.image = decodedimage
-        } else {
-            attachmentImageView.image = UIImage(named: "Image")
-        }
+        questionLevelLabel.text = NSLocalizedString("Level of difficulty: ", comment: "Information for user") + question.level
+        guard let index = Int(question.type) else { return }
+        let type = types[index]
+        questionTypeLabel.text = NSLocalizedString("Type of question: ", comment: "Information for user") + type
     }
     
     @IBAction func showAnswers(_ sender: UIButton) {
-        guard let id = questionItem.id else { return }
+        guard let id = questionItem?.id else { return }
         delegate?.didTapShowAnswer(id: id)
     }
 
