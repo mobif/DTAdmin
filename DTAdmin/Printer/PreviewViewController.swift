@@ -72,7 +72,6 @@ class PreviewViewController: ParentViewController {
                 self.showWarningMsg(error)
             } else {
                 guard let students = students else { return }
-                //FIXME: Replace this shit if possible
                 for i in 0..<self.studentsResult.count {
                     for j in students {
                         if j.userId == self.studentsResult[i].studentId {
