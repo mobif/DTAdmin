@@ -16,7 +16,7 @@ extension UIImage {
      - scale: The scale factor to apply to the bitmap.
      - returns: Image after resizing.
      */
-    func convert(toSize size:CGSize, scale:CGFloat) -> UIImage {
+    func resize(toSize size:CGSize, scale:CGFloat) -> UIImage {
         let imgRect = CGRect(origin: CGPoint(x:0.0, y:0.0), size: size)
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         self.draw(in: imgRect)
@@ -29,7 +29,7 @@ extension UIImage {
      - Parameter fromBase64: Text in format Base-64.
      - Returns: Image converted from text. If text isn't convertable returns nil.
      */
-    static func convert(fromBase64 text: String) -> UIImage? {
+    static func decode(fromBase64 text: String) -> UIImage? {
         guard let dataDecoded : Data = Data(base64Encoded: text, options: .ignoreUnknownCharacters) else { return nil }
         return  UIImage(data: dataDecoded)
     }
@@ -38,7 +38,7 @@ extension UIImage {
      - Parameter fromImage: Image for encoding to text.
      - Returns: Text in format Base-64 as Strint.
      */
-    static func convert(fromImage image: UIImage) -> String {
+    static func encode(fromImage image: UIImage) -> String {
         var encodeImage: String = ""
         if let imageData = UIImagePNGRepresentation(image) {
             let photo = imageData.base64EncodedString(options: .lineLength64Characters)
@@ -46,5 +46,4 @@ extension UIImage {
         }
         return encodeImage
     }
-    
 }
