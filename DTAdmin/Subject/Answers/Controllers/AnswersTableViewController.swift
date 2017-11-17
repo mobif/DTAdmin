@@ -13,49 +13,44 @@ class AnswersTableViewController: UITableViewController {
     var answers = [AnswerStructure]()
     var questionId: String?
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
-    let myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Answers"
+        self.navigationItem.title = NSLocalizedString("Answers", comment: "Title for AnswersTableViewController")
 
-        myActivityIndicator.center = view.center
-        view.addSubview(myActivityIndicator)
+        tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(showAnswers), for: .valueChanged)
 
         showAnswers()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    private func showAnswers() {
-        myActivityIndicator.startAnimating()
+    @objc private func showAnswers() {
+        startActivityIndicator()
         guard let id = questionId else { return }
         DataManager.shared.getAnswers(byQuestion: id) { (answersResult, errorMessage) in
-            self.myActivityIndicator.stopAnimating()
-            self.myActivityIndicator.hidesWhenStopped = true
+            self.stopActivityIndicator()
             if errorMessage == nil,
                 let answersUnwrap = answersResult {
                 self.answers = answersUnwrap
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: errorMessage ?? "Incorect type data")
+                self.showMessage(message: errorMessage ??
+                    NSLocalizedString("Incorect type data",comment: "Information for user about incorect data"))
             }
         }
+        refreshControl.endRefreshing()
     }
 
     @IBAction func addNewAnswer(_ sender: Any) {
-        guard let wayToAddNewAnswer = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewAnswerViewController") as? AddNewAnswerViewController else { return }
+        guard let addNewAnswerViewController = UIStoryboard(name: "Subjects",
+                                                            bundle: nil).instantiateViewController(withIdentifier: "AddNewAnswerViewController") as?
+                                                            AddNewAnswerViewController else { return }
         guard let id = questionId else { return }
-        wayToAddNewAnswer.questionId = id
-        wayToAddNewAnswer.resultModification = { anserReturn in
+        addNewAnswerViewController.questionId = id
+        addNewAnswerViewController.resultModification = { anserReturn in
             self.answers.append(anserReturn)
             self.tableView.reloadData()
         }
-        self.navigationController?.pushViewController(wayToAddNewAnswer, animated: true)
+        self.navigationController?.pushViewController(addNewAnswerViewController, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,20 +58,23 @@ class AnswersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "answerCell", for: indexPath) as? AnswerTableViewCell else {
-            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "answerCell", for: indexPath) as?
+                                                                                    AnswerTableViewCell else {
+                                            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+                                                }
         let cellData = answers[indexPath.row]
         cell.setAnswer(answer: cellData)
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
+        [UITableViewRowAction]? {
+
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             guard let answerId = self.answers[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: answerId, typeEntity: .answer)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
-                    self.showMessage(message: NSLocalizedString(errorMessage, comment: "Message for user") )
+                    self.showMessage(message: errorMessage)
                 } else {
                     self.answers.remove(at: indexPath.row)
                 }
@@ -84,22 +82,26 @@ class AnswersTableViewController: UITableViewController {
             }
         }
         let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
-            guard let wayToAddNewAnswer = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AddNewAnswerViewController") as? AddNewAnswerViewController else { return }
-            wayToAddNewAnswer.questionId = self.answers[indexPath.row].questionId
-            wayToAddNewAnswer.updateDates = true
-            wayToAddNewAnswer.answer = self.answers[indexPath.row]
-            wayToAddNewAnswer.resultModification = { answerResult in
+            guard let addNewAnswerViewController = UIStoryboard(name: "Subjects",
+                                                                bundle: nil).instantiateViewController(withIdentifier: "AddNewAnswerViewController") as?
+                                                                AddNewAnswerViewController else { return }
+            addNewAnswerViewController.questionId = self.answers[indexPath.row].questionId
+            addNewAnswerViewController.updateDates = true
+            addNewAnswerViewController.answer = self.answers[indexPath.row]
+            addNewAnswerViewController.resultModification = { answerResult in
                 self.answers[indexPath.row] = answerResult
                 self.tableView.reloadData()
             }
-            self.navigationController?.pushViewController(wayToAddNewAnswer, animated: true)
+            self.navigationController?.pushViewController(addNewAnswerViewController, animated: true)
         }
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let answerAttachmentViewController = UIStoryboard(name: "Subjects", bundle: nil).instantiateViewController(withIdentifier: "AnswerAttachmentViewController") as? AnswerAttachmentViewController else { return }
+        guard let answerAttachmentViewController = UIStoryboard(name: "Subjects",
+                                                                bundle: nil).instantiateViewController(withIdentifier: "AnswerAttachmentViewController") as?
+                                                                AnswerAttachmentViewController else { return }
         answerAttachmentViewController.answerId = answers[indexPath.row].id
         self.navigationController?.pushViewController(answerAttachmentViewController, animated: true)
     }

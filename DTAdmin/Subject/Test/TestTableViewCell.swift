@@ -13,12 +13,12 @@ protocol TestTableViewCellDelegate {
      Sends to the TestDetailViewController when you press ShowTestDetails button
      - Parameter id: Send test id to the next View Controller for create request and making call's to API
      */
-    func didTapShowTestDetail(id: String)
+    func didTapShowTestDetail(for id: String)
     /**
      Sends to the QuestionViewController when you press ShowQuestions button
      - Parameter id: Send test id to the next View Controller for create request and making call's to API
      */
-    func didTapShowQuestions(id: String)
+    func didTapShowQuestions(for id: String)
 }
 
 
@@ -36,21 +36,22 @@ class TestTableViewCell: UITableViewCell {
     func setTest(test: TestStructure) {
         testItem = test
         testLabel.text = test.name
-        tasksTestLabel.text = NSLocalizedString("Tasks: ", comment: "Information for user") + test.tasks
-        timeForTestLabel.text = NSLocalizedString("Time for test: ", comment: "Information for user") + test.timeForTest
+        tasksTestLabel.text = NSLocalizedString("Tasks: ", comment: "Test tasks showing") + test.tasks
+        timeForTestLabel.text = NSLocalizedString("Time for test: ",
+                                                  comment: "Time for test showing") + test.timeForTest
         let enabled = test.enabled == "0" ? "false" : "true"
-        enabledLabel.text = NSLocalizedString("Enabled: ", comment: "Information for user") + enabled
-        attemptsLabel.text = NSLocalizedString("Attemts: ", comment: "Information for user") + test.attempts
+        enabledLabel.text = NSLocalizedString("Enabled: ", comment: "Enabled for test showing") + enabled
+        attemptsLabel.text = NSLocalizedString("Attempts: ", comment: "Attempts for test showing") + test.attempts
     }
     
     @IBAction func showTestDetail(_ sender: UIButton) {
         guard let id = testItem?.id else { return }
-        delegate?.didTapShowTestDetail(id: id)
+        delegate?.didTapShowTestDetail(for: id)
     }
     
     @IBAction func showQuestion(_ sender: UIButton) {
         guard let id = testItem?.id else { return }
-        delegate?.didTapShowQuestions(id: id)
+        delegate?.didTapShowQuestions(for: id)
     }
     
 }

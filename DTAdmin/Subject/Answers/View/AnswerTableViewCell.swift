@@ -12,14 +12,17 @@ class AnswerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var attachmentImageView: UIImageView!
     @IBOutlet weak var answerTextLabel: UILabel!
-    @IBOutlet weak var trueAnswerLabel: UILabel!
+    @IBOutlet weak var isAnswerCorrectLabel: UILabel!
 
     func setAnswer(answer: AnswerStructure) {
         answerTextLabel.text = answer.answerText
-        let answerTrue = answer.trueAnswer == "1" ? "Right" : "Wrong"
-        trueAnswerLabel.text = answerTrue
-        if answer.attachmant.count > 0 {
-            attachmentImageView.image = UIImage.convert(fromBase64: answer.attachmant)
+        if answer.trueAnswer == "1" {
+            isAnswerCorrectLabel.text = NSLocalizedString("Right", comment: "Right answer")
+        } else {
+            isAnswerCorrectLabel.text = NSLocalizedString("Wrong", comment: "Wrong answer")
+        }
+        if answer.attachment.count > 0 {
+            attachmentImageView.image = UIImage.decode(fromBase64: answer.attachment)
         } else {
             attachmentImageView.image = UIImage(named: "Image")
         }

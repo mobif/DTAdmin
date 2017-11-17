@@ -74,7 +74,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             let size = selectedImage.size
             let imageHeight: CGFloat = 50.0
             let aspectRatioForWidth = ( size.width / size.height ) * imageHeight
-            let resizedImage = selectedImage.convert(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight), scale: UIScreen.main.scale)
+            let resizedImage = selectedImage.resize(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight), scale: UIScreen.main.scale)
             studentPhoto.image = resizedImage
         } else {
             showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))

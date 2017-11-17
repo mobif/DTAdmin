@@ -11,6 +11,10 @@
 		3F004FD31FB60E790045F2EE /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */; };
 		3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */; };
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
+		3F322AC61FBDDF37003D0AC6 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AC51FBDDF37003D0AC6 /* UITableViewController.swift */; };
+		3F322ACA1FBF0567003D0AC6 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AC91FBF0567003D0AC6 /* UITextView.swift */; };
+		3F322ACC1FBF07BD003D0AC6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ACB1FBF07BD003D0AC6 /* UIImageView.swift */; };
+		3F322ACE1FBF442D003D0AC6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ACD1FBF442D003D0AC6 /* Constants.swift */; };
 		3F5C2CED1FBB387800C05E73 /* QuestionAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEC1FBB387800C05E73 /* QuestionAttachmentViewController.swift */; };
 		3F5C2CEF1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */; };
 		3F70659E1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */; };
@@ -96,6 +100,10 @@
 		3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
+		3F322AC51FBDDF37003D0AC6 /* UITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewController.swift; sourceTree = "<group>"; };
+		3F322AC91FBF0567003D0AC6 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		3F322ACB1FBF07BD003D0AC6 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		3F322ACD1FBF442D003D0AC6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3F5C2CEC1FBB387800C05E73 /* QuestionAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAttachmentViewController.swift; sourceTree = "<group>"; };
 		3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerAttachmentViewController.swift; sourceTree = "<group>"; };
 		3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableViewCell.swift; sourceTree = "<group>"; };
@@ -246,6 +254,7 @@
 				3FF673601FB48B40001C7147 /* Question */,
 				3FF673571FB48AB3001C7147 /* Answers */,
 				3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */,
+				3F322ACD1FBF442D003D0AC6 /* Constants.swift */,
 			);
 			path = Subject;
 			sourceTree = "<group>";
@@ -410,6 +419,7 @@
 				890376031F9DE0FB002A99A8 /* Date.swift */,
 				899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */,
 				3FD4C0B91FBB26DF005DC403 /* ImageTools.swift */,
+				3F322AC51FBDDF37003D0AC6 /* UITableViewController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -481,6 +491,8 @@
 				89C96E091F9D03DC0019FE77 /* PickedTextField.swift */,
 				89C96E0B1F9D079D0019FE77 /* TimePicker.swift */,
 				3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */,
+				3F322AC91FBF0567003D0AC6 /* UITextView.swift */,
+				3F322ACB1FBF07BD003D0AC6 /* UIImageView.swift */,
 			);
 			name = Controlls;
 			sourceTree = "<group>";
@@ -653,18 +665,22 @@
 				894AA5CA1FA9E40E00B7669D /* Storyboard.swift in Sources */,
 				C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */,
 				3FF6735B1FB48B19001C7147 /* AnswerTableViewCell.swift in Sources */,
+				3F322ACA1FBF0567003D0AC6 /* UITextView.swift in Sources */,
 				3F5C2CED1FBB387800C05E73 /* QuestionAttachmentViewController.swift in Sources */,
 				C7535CF91FA2670100B6CBD1 /* TimeTableStructure.swift in Sources */,
 				C7535CF41FA2670100B6CBD1 /* SpecialityStructure.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
 				3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */,
+				3F322ACC1FBF07BD003D0AC6 /* UIImageView.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
 				3F70659E1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
 				C7535CEC1FA2670100B6CBD1 /* HTTPManager.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
+				3F322ACE1FBF442D003D0AC6 /* Constants.swift in Sources */,
+				3F322AC61FBDDF37003D0AC6 /* UITableViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
 				3F004FCE1FB60CC80045F2EE /* DesignedButtons.swift in Sources */,
 				3F9505E51FACBA16003F3EB9 /* GroupDetailsViewController.swift in Sources */,

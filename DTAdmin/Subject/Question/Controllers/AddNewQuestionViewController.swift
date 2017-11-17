@@ -8,14 +8,11 @@
 
 import UIKit
 
-class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PickerDelegate  {
+class AddNewQuestionViewController: UIViewController {
     
     @IBOutlet weak var questionTextView: UITextView!
-    
     @IBOutlet weak var questionLevelTextField: PickedTextField!
-    
     @IBOutlet weak var questionTypeTextField: PickedTextField!
-    
     @IBOutlet weak var questionAttachmentImageView: UIImageView!
     
     var levels: [String] {
@@ -26,7 +23,7 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         return array
     }
     
-    var types = ["Simple choice", "Multy choice", "Input field"]
+    //var types = ["Simple choice", "Multy choice", "Input field"]
     
     var testId: String?
     var questionId: String?
@@ -45,6 +42,25 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     var questionForSave: QuestionStructure?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if !updateDates {
+            self.navigationItem.title = NSLocalizedString("Add new question",
+                                                          comment: "Title for AddNewQuestionViewController")
+        } else {
+            self.navigationItem.title = NSLocalizedString("Update question",
+                                                          comment: "Title for AddNewQuestionViewController")
+        }
+        questionLevelTextField.customDelegate = self
+        questionTypeTextField.customDelegate = self
+
+        
+        self.questionLevelTextField.dropDownData = levels
+        self.questionLevelTextField.tag = 0
+        self.questionTypeTextField.dropDownData = types
+        self.questionTypeTextField.tag = 1
+    }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
         if !updateDates {
@@ -57,7 +73,9 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     func saveNewQuestion() {
         if prepareForSave(){
             guard let questionForSave = questionForSave else { return }
-            DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) { (questionResult, errorMessage) in
+            DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) {
+                (questionResult, errorMessage) in
+
                 if let errorMessage = errorMessage {
                     self.showWarningMsg(errorMessage)
                 } else {
@@ -77,7 +95,9 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         if prepareForSave(){
             guard let questionId = questionId else { return }
             guard let questionForSave = questionForSave else { return }
-            DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .question) { errorMessage in
+            DataManager.shared.updateEntity(byId: questionId, entity: questionForSave, typeEntity: .question) {
+                errorMessage in
+
                 if let errorMessage = errorMessage {
                     self.showWarningMsg(errorMessage)
                 } else {
@@ -104,21 +124,35 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         let typeNumberString = String(typeNumber)
         
         if let attachment: UIImage = questionAttachmentImageView.image {
-            let picture = UIImage.convert(fromImage: attachment)
+            let picture = UIImage.encode(fromImage: attachment)
             if questionText.count > 2 {
-                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": typeNumberString, "attachment": picture]
+                let dictionary: [String: Any] = [
+                                                 "test_id": testId,
+                                                 "question_text": questionText,
+                                                 "level": level,
+                                                 "type": typeNumberString,
+                                                 "attachment": picture
+                                                ]
                 questionForSave = QuestionStructure(dictionary: dictionary)
             } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+                showWarningMsg(NSLocalizedString("Entered incorect data",
+                                                 comment: "All fields have to be filled correctly"))
                 return false
             }
             return true
         } else {
             if questionText.count > 2 {
-                let dictionary: [String: Any] = ["test_id": testId, "question_text": questionText, "level": level, "type": typeNumberString, "attachment": ""]
+                let dictionary: [String: Any] = [
+                                                 "test_id": testId,
+                                                 "question_text": questionText,
+                                                 "level": level,
+                                                 "type": typeNumberString,
+                                                 "attachment": ""
+                                                ]
                 questionForSave = QuestionStructure(dictionary: dictionary)
             } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+                showWarningMsg(NSLocalizedString("Entered incorect data",
+                                                 comment: "All fields have to be filled correctly"))
                 return false
             }
             return true
@@ -126,9 +160,13 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func showQuestionAttachment(for text: String){
-        questionAttachmentImageView.image = UIImage.convert(fromBase64: text)
+        questionAttachmentImageView.image = UIImage.decode(fromBase64: text)
     }
     
+}
+
+extension AddNewQuestionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
     @objc func openGallery(_ sender: UIButton) {
         let image = UIImagePickerController()
         image.delegate = self
@@ -136,42 +174,26 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
         image.allowsEditing = false
         self.present(image, animated: true)
     }
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let size = image.size
             let imageHeight: CGFloat = 100.0
             let aspectRatioForWidth = ( size.width / size.height ) * imageHeight
-            let resizedImage = image.convert(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight), scale: UIScreen.main.scale)
+            let resizedImage = image.resize(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight),
+                                            scale: UIScreen.main.scale)
             questionAttachmentImageView.image = resizedImage
         } else {
-            showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))
+            showWarningMsg(NSLocalizedString("Image not selected!",
+                                             comment: "You have to select image to adding in profile."))
         }
-        
+
         self.dismiss(animated: true, completion: nil)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.title = updateDates ? "Update question" : "Add new question"
-        questionLevelTextField.customDelegate = self
-        questionTypeTextField.customDelegate = self
-        questionAttachmentImageView.layer.cornerRadius = 5
-        questionAttachmentImageView.layer.borderWidth = 1
-        questionAttachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-        questionTextView.layer.cornerRadius = 5
-        questionTextView.layer.borderWidth = 1
-        questionTextView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-        self.questionLevelTextField.dropDownData = levels
-        self.questionLevelTextField.tag = 0
-        self.questionTypeTextField.dropDownData = types
-        self.questionTypeTextField.tag = 1
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+}
+
+extension AddNewQuestionViewController: PickerDelegate {
+
     func pickedValue(value: Any, tag: Int) {
         if let stringValue = value as? String {
             switch tag {
@@ -184,5 +206,4 @@ class AddNewQuestionViewController: UIViewController, UIImagePickerControllerDel
             }
         }
     }
-    
 }

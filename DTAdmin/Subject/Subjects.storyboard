@@ -45,15 +45,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFJ-Pr-DEl" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="164" y="456.5" width="46" height="30"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveNewRecord:" destination="2fJ-8n-ALk" eventType="touchUpInside" id="IRD-S2-3EB"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SCR-yW-UVI">
-                                <rect key="frame" x="16" y="269.5" width="343" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SCR-yW-UVI" customClass="MyTextView" customModule="DTAdmin" customModuleProvider="target">
+                                <rect key="frame" x="16" y="270" width="343" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="7t4-ii-Liz"/>
@@ -61,25 +54,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFJ-Pr-DEl" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
+                                <rect key="frame" x="127" y="458" width="120" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveNewRecord:" destination="2fJ-8n-ALk" eventType="touchUpInside" id="IRD-S2-3EB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VFJ-Pr-DEl" firstAttribute="top" secondItem="SCR-yW-UVI" secondAttribute="bottom" constant="59" id="04Y-Gq-gn3"/>
                             <constraint firstItem="zah-mK-j2H" firstAttribute="top" secondItem="PYV-bJ-zzs" secondAttribute="bottom" constant="10" id="1rj-NI-rte"/>
-                            <constraint firstItem="ABO-xg-riS" firstAttribute="trailing" secondItem="SCR-yW-UVI" secondAttribute="trailing" constant="16" id="FXS-V2-gRe"/>
-                            <constraint firstItem="ABO-xg-riS" firstAttribute="trailing" secondItem="VFJ-Pr-DEl" secondAttribute="trailing" constant="165" id="IW9-MZ-wHa"/>
+                            <constraint firstItem="SCR-yW-UVI" firstAttribute="leading" secondItem="1Pj-Dx-z5H" secondAttribute="leading" id="MOV-wC-ffO"/>
+                            <constraint firstItem="VFJ-Pr-DEl" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="127" id="NPF-SH-beO"/>
                             <constraint firstItem="ABO-xg-riS" firstAttribute="trailing" secondItem="zah-mK-j2H" secondAttribute="trailing" constant="16" id="SQC-e4-DJu"/>
+                            <constraint firstItem="VFJ-Pr-DEl" firstAttribute="top" secondItem="SCR-yW-UVI" secondAttribute="bottom" constant="60" id="UOe-q8-Q7l"/>
                             <constraint firstItem="1Pj-Dx-z5H" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="Yeb-LD-hy9"/>
                             <constraint firstItem="PYV-bJ-zzs" firstAttribute="top" secondItem="ABO-xg-riS" secondAttribute="top" constant="100" id="dc6-Ha-hSg"/>
-                            <constraint firstItem="SCR-yW-UVI" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="fMf-o5-kzW"/>
                             <constraint firstItem="zah-mK-j2H" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="fad-NU-U1K"/>
                             <constraint firstItem="1Pj-Dx-z5H" firstAttribute="top" secondItem="zah-mK-j2H" secondAttribute="bottom" constant="20" id="iHq-wg-7Ev"/>
-                            <constraint firstItem="SCR-yW-UVI" firstAttribute="centerX" secondItem="VFJ-Pr-DEl" secondAttribute="centerX" id="lM8-y5-1cq"/>
                             <constraint firstItem="zah-mK-j2H" firstAttribute="top" secondItem="PYV-bJ-zzs" secondAttribute="bottom" constant="10" id="otr-rb-9Vg"/>
                             <constraint firstItem="PYV-bJ-zzs" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="t45-75-xjL"/>
                             <constraint firstItem="SCR-yW-UVI" firstAttribute="centerY" secondItem="zJK-94-JYw" secondAttribute="centerY" id="tPh-vN-Bng"/>
-                            <constraint firstItem="VFJ-Pr-DEl" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="164" id="u4R-Hl-xMR"/>
                             <constraint firstItem="SCR-yW-UVI" firstAttribute="centerX" secondItem="zJK-94-JYw" secondAttribute="centerX" id="w1k-fF-QCV"/>
+                            <constraint firstItem="ABO-xg-riS" firstAttribute="trailing" secondItem="VFJ-Pr-DEl" secondAttribute="trailing" constant="128" id="zQ2-3W-NHN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ABO-xg-riS"/>
                     </view>
@@ -100,13 +98,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="Woe-Vo-vWj">
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="1Dr-WF-Rc7">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="6BQ-7a-qo0" id="mC6-0G-eAe"/>
-                            </connections>
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="iHT-40-O9A" customClass="SubjectTableViewCell" customModule="DTAdmin" customModuleProvider="target">
@@ -117,26 +112,34 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaU-QB-9Ol">
-                                            <rect key="frame" x="10" y="5" width="355" height="24"/>
+                                            <rect key="frame" x="10" y="5" width="355" height="31.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCM-cX-N4q">
-                                            <rect key="frame" x="10" y="34" width="355" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCM-cX-N4q">
+                                            <rect key="frame" x="10" y="41.5" width="355" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzh-Oj-8G1" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="57" width="76" height="37.5"/>
+                                            <rect key="frame" x="10" y="64.5" width="120" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="Bt1-lE-cmN"/>
+                                                <constraint firstAttribute="width" constant="120" id="ymb-u2-sEd"/>
+                                            </constraints>
                                             <state key="normal" title="Show tests"/>
                                             <connections>
                                                 <action selector="showTest:" destination="iHT-40-O9A" eventType="touchUpInside" id="BWj-oe-iCs"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUk-oO-aaL" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                            <rect key="frame" x="255" y="64.5" width="110" height="30"/>
+                                            <rect key="frame" x="245" y="64.5" width="120" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="6vl-Vp-Bc5"/>
+                                                <constraint firstAttribute="width" constant="120" id="Coi-SN-A6B"/>
+                                            </constraints>
                                             <state key="normal" title="Show time table"/>
                                             <connections>
                                                 <action selector="showTimeTable:" destination="iHT-40-O9A" eventType="touchUpInside" id="PnJ-KK-3mo"/>
@@ -177,7 +180,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="searchBar" destination="Woe-Vo-vWj" id="c8m-Cy-WTF"/>
+                        <outlet property="searchBar" destination="1Dr-WF-Rc7" id="U5E-m4-dRC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qMV-QD-qNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -227,7 +230,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-a4-fYd" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="124.5" width="99" height="30"/>
+                                            <rect key="frame" x="10" y="124.5" width="120" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="IcO-jS-uMd"/>
+                                                <constraint firstAttribute="width" constant="120" id="blC-W2-sLd"/>
+                                            </constraints>
                                             <state key="normal" title="Show answers"/>
                                             <connections>
                                                 <action selector="showAnswers:" destination="ral-VH-XqA" eventType="touchUpInside" id="ZJw-df-eQ7"/>
@@ -293,7 +300,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bl-v7-eL4">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="6" translatesAutoresizingMaskIntoConstraints="NO" id="6bl-v7-eL4">
                                 <rect key="frame" x="0.0" y="165" width="375" height="502"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bqD-Iw-dHz">
@@ -352,7 +359,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5W8-Vf-ST7">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="6" translatesAutoresizingMaskIntoConstraints="NO" id="5W8-Vf-ST7">
                                 <rect key="frame" x="0.0" y="163" width="375" height="504"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eq3-1k-KLv">
@@ -424,7 +431,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" fixedFrame="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="p7t-aZ-c8g">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" fixedFrame="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="p7t-aZ-c8g" customClass="MyImageView" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="8" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -433,7 +440,7 @@
                                 <connections>
                                     <outlet property="answerTextLabel" destination="yh7-ko-u1D" id="YQI-EX-lCh"/>
                                     <outlet property="attachmentImageView" destination="p7t-aZ-c8g" id="qyl-LM-WNU"/>
-                                    <outlet property="trueAnswerLabel" destination="Had-db-8n4" id="ySt-Gu-u8m"/>
+                                    <outlet property="isAnswerCorrectLabel" destination="Had-db-8n4" id="Vb5-ms-tFq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -488,9 +495,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXt-oc-jf2" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="20" y="565" width="87" height="30"/>
+                                <rect key="frame" x="20" y="565" width="120" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3oA-zM-pUf"/>
+                                    <constraint firstAttribute="width" constant="120" id="EPA-XX-fmV"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="NQU-84-23q"/>
                                 </constraints>
                                 <state key="normal" title="Open gallery"/>
                                 <connections>
@@ -498,13 +507,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM0-oF-4Qw" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="254" y="565" width="101" height="30"/>
+                                <rect key="frame" x="235" y="565" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7Zd-Rj-FTo"/>
+                                    <constraint firstAttribute="width" constant="120" id="tPg-hh-6NY"/>
+                                </constraints>
                                 <state key="normal" title="Remove image"/>
                                 <connections>
                                     <action selector="removeImage:" destination="Gby-7T-Ueo" eventType="touchUpInside" id="VeE-56-MW7"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eZR-1Q-86P">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eZR-1Q-86P" customClass="MyTextView" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="20" y="110" width="335" height="126"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -519,7 +532,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KiI-l5-Hr4">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KiI-l5-Hr4" customClass="MyImageView" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="20" y="366" width="335" height="159"/>
                             </imageView>
                         </subviews>
@@ -564,7 +577,7 @@
                     <connections>
                         <outlet property="answerTextView" destination="eZR-1Q-86P" id="zv9-Mf-zlh"/>
                         <outlet property="attachmentImageView" destination="KiI-l5-Hr4" id="Iko-Kn-o8p"/>
-                        <outlet property="trueAnswerTextField" destination="Lb6-G1-x0B" id="7ix-77-9qU"/>
+                        <outlet property="isAnswerCorrectTextField" destination="Lb6-G1-x0B" id="3gv-Zr-VuU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpg-FU-RLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -592,14 +605,22 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rF-gB-7Px" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="20" y="576" width="87" height="30"/>
+                                <rect key="frame" x="20" y="576" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="GY2-r6-wav"/>
+                                    <constraint firstAttribute="height" constant="30" id="kOq-fL-tJz"/>
+                                </constraints>
                                 <state key="normal" title="Open gallery"/>
                                 <connections>
                                     <action selector="openGallery:" destination="jl6-lo-VWW" eventType="touchUpInside" id="6cn-Us-Rnx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-B6-92z" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                <rect key="frame" x="254" y="576" width="101" height="30"/>
+                                <rect key="frame" x="235" y="576" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5eX-Ln-frg"/>
+                                    <constraint firstAttribute="width" constant="120" id="ovY-bq-Lgh"/>
+                                </constraints>
                                 <state key="normal" title="Remove image"/>
                                 <connections>
                                     <action selector="removeImage:" destination="jl6-lo-VWW" eventType="touchUpInside" id="Tva-yX-L3z"/>
@@ -611,7 +632,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pMj-F1-iwI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pMj-F1-iwI" customClass="MyImageView" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="20" y="433" width="335" height="128"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type of question:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AI-Yx-agk">
@@ -632,7 +653,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eU2-oX-AbH">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eU2-oX-AbH" customClass="MyTextView" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="16" y="112" width="339" height="130"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -734,14 +755,22 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJb-n5-rhR" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="85" width="110" height="30"/>
+                                            <rect key="frame" x="10" y="85" width="120" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="iHL-EO-CIv"/>
+                                                <constraint firstAttribute="height" constant="30" id="uSF-ji-9zx"/>
+                                            </constraints>
                                             <state key="normal" title="Show test detail"/>
                                             <connections>
                                                 <action selector="showTestDetail:" destination="axH-dR-DfP" eventType="touchUpInside" id="X9l-lZ-AI8"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXz-4K-vuF" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                            <rect key="frame" x="256" y="85" width="109" height="30"/>
+                                            <rect key="frame" x="245" y="85" width="120" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="e63-YK-zZB"/>
+                                                <constraint firstAttribute="width" constant="120" id="iPe-0h-7C3"/>
+                                            </constraints>
                                             <state key="normal" title="Show questions"/>
                                             <connections>
                                                 <action selector="showQuestion:" destination="axH-dR-DfP" eventType="touchUpInside" id="0Ap-ZW-NAK"/>

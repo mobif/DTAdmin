@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionAttachmentViewController: ParentViewController, UIScrollViewDelegate {
+class QuestionAttachmentViewController: ParentViewController {
 
     @IBOutlet weak var questionTextLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -18,14 +18,10 @@ class QuestionAttachmentViewController: ParentViewController, UIScrollViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Question detail"
-        showQuestionRecord()
-        self.scrollView.minimumZoomScale = 1.0
-        self.scrollView.maximumZoomScale = 6.0
-    }
+        self.navigationItem.title = NSLocalizedString("Question detail",
+                                                      comment: "Title for QuestionAttachmentViewController")
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        showQuestionRecord()
     }
     
     private func showQuestionRecord() {
@@ -37,17 +33,23 @@ class QuestionAttachmentViewController: ParentViewController, UIScrollViewDelega
                 guard let question = questionRecord as? QuestionStructure else { return }
                 self.questionTextLabel.text = question.questionText
                 if question.attachment.count > 0 {
-                    self.questionAttachmentImageView.image = UIImage.convert(fromBase64: question.attachment)
+                    self.questionAttachmentImageView.image = UIImage.decode(fromBase64: question.attachment)
                 } else {
                     self.questionAttachmentImageView.image = UIImage(named: "Image")
                 }
             } else {
-                self.showWarningMsg(NSLocalizedString(errorMessage ?? "Incorect type data", comment: "Message for user") )
+                self.showWarningMsg(errorMessage ??
+                    NSLocalizedString("Incorect type data", comment: "Message for user about incorect data"))
             }
         }
     }
 
+}
+
+extension QuestionAttachmentViewController: UIScrollViewDelegate {
+
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.questionAttachmentImageView
     }
+    
 }

@@ -29,7 +29,7 @@ struct StudentStructure: Serializable {
         passwordConfirm = dictionary["password_confirm"] as? String
         email = dictionary["email"] as? String
         if let photoCode64 = dictionary["photo"] as? String {
-            photo = UIImage.convert(fromBase64: photoCode64)
+            photo = UIImage.decode(fromBase64: photoCode64)
         }
         guard
             let plainPassword = dictionary["plain_password"] as? String,
@@ -52,7 +52,7 @@ struct StudentStructure: Serializable {
         if let email = email { result["email"] = email }
         if let password = password { result["password"] = password }
         if let passwordConfirm = passwordConfirm { result["password_confirm"] = passwordConfirm }
-        if let photo = photo { result["photo"] = UIImage.convert(fromImage: photo) }
+        if let photo = photo { result["photo"] = UIImage.encode(fromImage: photo) }
         return result
     }
 }

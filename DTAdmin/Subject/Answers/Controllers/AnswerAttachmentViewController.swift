@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AnswerAttachmentViewController: ParentViewController, UIScrollViewDelegate {
+class AnswerAttachmentViewController: ParentViewController {
 
     @IBOutlet weak var answerTextLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -18,15 +18,10 @@ class AnswerAttachmentViewController: ParentViewController, UIScrollViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Answer detail"
-        showAnswerRecord()
+        self.navigationItem.title = NSLocalizedString("Answer detail",
+                                                      comment: "Title for AnswerAttachmentViewController")
         
-        self.scrollView.minimumZoomScale = 1.0
-        self.scrollView.maximumZoomScale = 6.0
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        showAnswerRecord()
     }
     
     private func showAnswerRecord() {
@@ -37,18 +32,24 @@ class AnswerAttachmentViewController: ParentViewController, UIScrollViewDelegate
             if errorMessage == nil {
                 guard let answer = answerRecord as? AnswerStructure else { return }
                 self.answerTextLabel.text = answer.answerText
-                if answer.attachmant.count > 0 {
-                    self.answerAttachmentImageView.image = UIImage.convert(fromBase64: answer.attachmant)
+                if answer.attachment.count > 0 {
+                    self.answerAttachmentImageView.image = UIImage.decode(fromBase64: answer.attachment)
                 } else {
                     self.answerAttachmentImageView.image = UIImage(named: "Image")
                 }
             } else {
-                self.showWarningMsg(NSLocalizedString(errorMessage ?? "Incorect type data", comment: "Message for user") )
+                self.showWarningMsg(errorMessage ?? NSLocalizedString("Incorect type data",
+                                                                      comment: "Message for user about incorect data"))
             }
         }
     }
-    
+
+}
+
+extension AnswerAttachmentViewController: UIScrollViewDelegate {
+
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.answerAttachmentImageView
     }
+
 }

@@ -11,7 +11,6 @@ import UIKit
 class AddNewRecordViewController: UIViewController {
     
     @IBOutlet weak var subjectNameTextField: UITextField!
-    
     @IBOutlet weak var subjectDescriptionTextField: UITextView!
     
     var updateDates = false
@@ -31,15 +30,13 @@ class AddNewRecordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = updateDates ? "Update record" : "Add new item"
-        
-        subjectDescriptionTextField.layer.cornerRadius = 5
-        subjectDescriptionTextField.layer.borderWidth = 1
-        subjectDescriptionTextField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        if !updateDates {
+            self.navigationItem.title = NSLocalizedString("Add new item",
+                                                          comment: "Title for AddNewRecordViewController")
+        } else {
+            self.navigationItem.title = NSLocalizedString("Update record",
+                                                          comment: "Title for AddNewRecordViewController")
+        }
     }
     
     @IBAction func saveNewRecord(_ sender: UIButton) {
@@ -69,12 +66,13 @@ class AddNewRecordViewController: UIViewController {
             }
         }
     }
-    
+
     func updateSubject() {
         if prepareForSave(){
             guard let subjectIdUnwrap = subjectId else { return }
             guard let subjectForSave = subjectForSave else { return }
-            DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .subject) { error in
+            DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .subject) {
+                    error in
                 if let error = error {
                     self.showWarningMsg(error)
                 } else {
@@ -95,7 +93,8 @@ class AddNewRecordViewController: UIViewController {
             let dictionary: [String: Any] = ["subject_name": name, "subject_description": description]
             self.subjectForSave = SubjectStructure(dictionary: dictionary)
         } else {
-            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+            showWarningMsg(NSLocalizedString("Entered incorect data",
+                                             comment: "All fields have to be filled correctly"))
             return false
         }
         return true

@@ -13,7 +13,7 @@ protocol QuestionTableViewCellDelegate {
         Sends to the AnswerViewController
         - Parameter id: Send question id to the next View Controller for create request and making call's to API
      */
-    func didTapShowAnswer(id: String)
+    func didTapShowAnswer(for id: String)
 }
 
 class QuestionTableViewCell: UITableViewCell {
@@ -24,20 +24,19 @@ class QuestionTableViewCell: UITableViewCell {
     
     var questionItem: QuestionStructure?
     var delegate: QuestionTableViewCellDelegate?
-    var types = ["Simple choice", "Multy choice", "Input field"]
     
     func setQuestion(question: QuestionStructure) {
         questionItem = question
         questionTextLabel.text = question.questionText
-        questionLevelLabel.text = NSLocalizedString("Level of difficulty: ", comment: "Information for user") + question.level
+        questionLevelLabel.text = NSLocalizedString("Level of difficulty: ",
+                                                    comment: "Level of difficulty question") + question.level
         guard let index = Int(question.type) else { return }
-        let type = types[index]
-        questionTypeLabel.text = NSLocalizedString("Type of question: ", comment: "Information for user") + type
+        questionTypeLabel.text = NSLocalizedString("Type of question: ", comment: "Type of question") + types[index]
     }
     
     @IBAction func showAnswers(_ sender: UIButton) {
         guard let id = questionItem?.id else { return }
-        delegate?.didTapShowAnswer(id: id)
+        delegate?.didTapShowAnswer(for: id)
     }
 
 }
