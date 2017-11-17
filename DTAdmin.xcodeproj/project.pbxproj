@@ -11,13 +11,16 @@
 		3F004FD31FB60E790045F2EE /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */; };
 		3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */; };
 		3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */; };
-		3F322AC61FBDDF37003D0AC6 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AC51FBDDF37003D0AC6 /* UITableViewController.swift */; };
-		3F322ACA1FBF0567003D0AC6 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AC91FBF0567003D0AC6 /* UITextView.swift */; };
-		3F322ACC1FBF07BD003D0AC6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ACB1FBF07BD003D0AC6 /* UIImageView.swift */; };
-		3F322ACE1FBF442D003D0AC6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ACD1FBF442D003D0AC6 /* Constants.swift */; };
-		3F5C2CED1FBB387800C05E73 /* QuestionAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEC1FBB387800C05E73 /* QuestionAttachmentViewController.swift */; };
-		3F5C2CEF1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */; };
-		3F70659E1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */; };
+		3F322AD01FBF5161003D0AC6 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */; };
+		3F322AD21FBF5171003D0AC6 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD11FBF5171003D0AC6 /* UITextView.swift */; };
+		3F322AD41FBF517B003D0AC6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD31FBF517B003D0AC6 /* UIImageView.swift */; };
+		3F322AD61FBF5190003D0AC6 /* SubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD51FBF5190003D0AC6 /* SubjectTableViewCell.swift */; };
+		3F322AD81FBF51B7003D0AC6 /* AnswerAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD71FBF51B7003D0AC6 /* AnswerAttachmentViewController.swift */; };
+		3F322ADA1FBF51C8003D0AC6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD91FBF51C8003D0AC6 /* Constants.swift */; };
+		3F322ADC1FBF51D9003D0AC6 /* QuestionAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ADB1FBF51D9003D0AC6 /* QuestionAttachmentViewController.swift */; };
+		3F5C2CE71FBB053600C05E73 /* SubjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CE61FBB053600C05E73 /* SubjectTest.swift */; };
+		3F5C2CE91FBB056100C05E73 /* QuestionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CE81FBB056100C05E73 /* QuestionTest.swift */; };
+		3F5C2CEB1FBB05A200C05E73 /* AnswerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C2CEA1FBB05A200C05E73 /* AnswerTest.swift */; };
 		3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */; };
 		3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */; };
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
@@ -100,13 +103,16 @@
 		3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Subjects.storyboard; sourceTree = "<group>"; };
-		3F322AC51FBDDF37003D0AC6 /* UITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewController.swift; sourceTree = "<group>"; };
-		3F322AC91FBF0567003D0AC6 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
-		3F322ACB1FBF07BD003D0AC6 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		3F322ACD1FBF442D003D0AC6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3F5C2CEC1FBB387800C05E73 /* QuestionAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAttachmentViewController.swift; sourceTree = "<group>"; };
-		3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerAttachmentViewController.swift; sourceTree = "<group>"; };
-		3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTableViewCell.swift; sourceTree = "<group>"; };
+		3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewController.swift; sourceTree = "<group>"; };
+		3F322AD11FBF5171003D0AC6 /* UITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		3F322AD31FBF517B003D0AC6 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		3F322AD51FBF5190003D0AC6 /* SubjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectTableViewCell.swift; sourceTree = "<group>"; };
+		3F322AD71FBF51B7003D0AC6 /* AnswerAttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerAttachmentViewController.swift; sourceTree = "<group>"; };
+		3F322AD91FBF51C8003D0AC6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3F322ADB1FBF51D9003D0AC6 /* QuestionAttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionAttachmentViewController.swift; sourceTree = "<group>"; };
+		3F5C2CE61FBB053600C05E73 /* SubjectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTest.swift; sourceTree = "<group>"; };
+		3F5C2CE81FBB056100C05E73 /* QuestionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTest.swift; sourceTree = "<group>"; };
+		3F5C2CEA1FBB05A200C05E73 /* AnswerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTest.swift; sourceTree = "<group>"; };
 		3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
@@ -249,12 +255,12 @@
 		3F2BF5941F9F61C300B2FA7E /* Subject */ = {
 			isa = PBXGroup;
 			children = (
+				3F322AD91FBF51C8003D0AC6 /* Constants.swift */,
 				3FF6736E1FB48B9A001C7147 /* Test */,
 				3FF673671FB48B77001C7147 /* Subject */,
 				3FF673601FB48B40001C7147 /* Question */,
 				3FF673571FB48AB3001C7147 /* Answers */,
 				3F2BF5981F9F61F600B2FA7E /* Subjects.storyboard */,
-				3F322ACD1FBF442D003D0AC6 /* Constants.swift */,
 			);
 			path = Subject;
 			sourceTree = "<group>";
@@ -281,7 +287,7 @@
 		3F7065A31FB5F52C009C0EC8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3F70659D1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift */,
+				3F322AD51FBF5190003D0AC6 /* SubjectTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -289,9 +295,9 @@
 		3F7065A91FB60519009C0EC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3F322ADB1FBF51D9003D0AC6 /* QuestionAttachmentViewController.swift */,
 				3FF673631FB48B6B001C7147 /* AddNewQuestionViewController.swift */,
 				3FF673621FB48B6B001C7147 /* QuestionsTableViewController.swift */,
-				3F5C2CEC1FBB387800C05E73 /* QuestionAttachmentViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -360,9 +366,9 @@
 		3FF673581FB48ADE001C7147 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3F322AD71FBF51B7003D0AC6 /* AnswerAttachmentViewController.swift */,
 				3FF6735D1FB48B3A001C7147 /* AddNewAnswerViewController.swift */,
 				3FF6735C1FB48B39001C7147 /* AnswersTableViewController.swift */,
-				3F5C2CEE1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -422,7 +428,6 @@
 				890376031F9DE0FB002A99A8 /* Date.swift */,
 				899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */,
 				3FD4C0B91FBB26DF005DC403 /* ImageTools.swift */,
-				3F322AC51FBDDF37003D0AC6 /* UITableViewController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -491,11 +496,12 @@
 		89C96E081F9D03CC0019FE77 /* Controlls */ = {
 			isa = PBXGroup;
 			children = (
+				3F322AD31FBF517B003D0AC6 /* UIImageView.swift */,
+				3F322AD11FBF5171003D0AC6 /* UITextView.swift */,
+				3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */,
 				89C96E091F9D03DC0019FE77 /* PickedTextField.swift */,
 				89C96E0B1F9D079D0019FE77 /* TimePicker.swift */,
 				3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */,
-				3F322AC91FBF0567003D0AC6 /* UITextView.swift */,
-				3F322ACB1FBF07BD003D0AC6 /* UIImageView.swift */,
 			);
 			name = Controlls;
 			sourceTree = "<group>";
@@ -662,35 +668,32 @@
 				89F4A4C51FB9B0AF00807527 /* UIViewController.swift in Sources */,
 				3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */,
 				89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */,
+				3F322AD01FBF5161003D0AC6 /* UITableViewController.swift in Sources */,
 				C7535CF71FA2670100B6CBD1 /* TestDetailStructure.swift in Sources */,
 				C7535CEA1FA2670100B6CBD1 /* DataManager.swift in Sources */,
 				3F9505E31FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift in Sources */,
 				894AA5CA1FA9E40E00B7669D /* Storyboard.swift in Sources */,
 				C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */,
 				3FF6735B1FB48B19001C7147 /* AnswerTableViewCell.swift in Sources */,
-				3F322ACA1FBF0567003D0AC6 /* UITextView.swift in Sources */,
-				3F5C2CED1FBB387800C05E73 /* QuestionAttachmentViewController.swift in Sources */,
+				3F322AD61FBF5190003D0AC6 /* SubjectTableViewCell.swift in Sources */,
 				C7535CF91FA2670100B6CBD1 /* TimeTableStructure.swift in Sources */,
 				C7535CF41FA2670100B6CBD1 /* SpecialityStructure.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
+				3F322AD41FBF517B003D0AC6 /* UIImageView.swift in Sources */,
 				3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */,
-				3F322ACC1FBF07BD003D0AC6 /* UIImageView.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
-				3F70659E1FB5ECC3009C0EC8 /* SubjectTableViewCell.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
+				3F322ADA1FBF51C8003D0AC6 /* Constants.swift in Sources */,
 				C7535CEC1FA2670100B6CBD1 /* HTTPManager.swift in Sources */,
 				893450C51F98B4F9008565F1 /* RootNavController.swift in Sources */,
-				3F322ACE1FBF442D003D0AC6 /* Constants.swift in Sources */,
-				3F322AC61FBDDF37003D0AC6 /* UITableViewController.swift in Sources */,
 				3FDE8FA01F8D0DF60057BF3C /* DTAdmin.xcdatamodeld in Sources */,
 				3F004FCE1FB60CC80045F2EE /* DesignedButtons.swift in Sources */,
 				3F9505E51FACBA16003F3EB9 /* GroupDetailsViewController.swift in Sources */,
 				897D0E341F9B6BC300825E62 /* CommonNetworkManager.swift in Sources */,
 				3FF6735E1FB48B3A001C7147 /* AnswersTableViewController.swift in Sources */,
 				C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */,
-				3F5C2CEF1FBC6A8A00C05E73 /* AnswerAttachmentViewController.swift in Sources */,
 				C7535CEB1FA2670100B6CBD1 /* Entities.swift in Sources */,
 				3FF6736C1FB48B89001C7147 /* AddNewRecordViewController.swift in Sources */,
 				C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */,
@@ -701,13 +704,16 @@
 				897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */,
 				3F9505DF1FACBA16003F3EB9 /* FacultyForGroupViewController.swift in Sources */,
 				3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */,
+				3F322ADC1FBF51D9003D0AC6 /* QuestionAttachmentViewController.swift in Sources */,
 				89F4A4C41FB9ADE900807527 /* LogoutViewController.swift in Sources */,
+				3F322AD81FBF51B7003D0AC6 /* AnswerAttachmentViewController.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
 				890376041F9DE0FB002A99A8 /* Date.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				C7535CF11FA2670100B6CBD1 /* GroupStructure.swift in Sources */,
 				89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */,
 				C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */,
+				3F322AD21FBF5171003D0AC6 /* UITextView.swift in Sources */,
 				C7535CF51FA2670100B6CBD1 /* StudentStructure.swift in Sources */,
 				3F004FD31FB60E790045F2EE /* QuestionTableViewCell.swift in Sources */,
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
