@@ -37,7 +37,7 @@ class ResultByGroupViewController: ParentViewController {
         self.startActivity()
         self.title = NSLocalizedString("Results by \(group.groupName)", comment: "Title for results table list view")
         self.refreshControl.beginRefreshing()
-        loadDataFromAPI()
+        self.loadDataFromAPI()
     }
     
     @objc private func loadDataFromAPI() {
@@ -51,6 +51,7 @@ class ResultByGroupViewController: ParentViewController {
                 self.showWarningMsg(error)
             } else {
                 guard let testIds = testIds else {
+                    self.stopActivity()
                     self.showWarningMsg("Error occured during data handle")
                     return
                 }
@@ -65,6 +66,7 @@ class ResultByGroupViewController: ParentViewController {
                     } else {
                         guard var tests = tests else {
                             self.showWarningMsg("Wrong API response")
+                            self.stopActivity()
                             return
                         }
                         self.tests = tests
@@ -77,11 +79,11 @@ class ResultByGroupViewController: ParentViewController {
                                 let testSubj = subjects?.filter({ $0.id == tests[i].subjectId })
                                 tests[i].subjectName = testSubj?.first?.name
                             }
-                            DispatchQueue.main.sync {
-                                self.stopActivity()
+                            DispatchQueue.main.async {
                                 self.tests = tests
                                 self.resultsTableView.reloadData()
                                 self.refreshControl.endRefreshing()
+                                self.stopActivity()
                             }
                         })
                     }
@@ -111,11 +113,9 @@ extension ResultByGroupViewController: UITableViewDataSource {
         cell.testNameLabel.text = tests?[indexPath.row].name
         cell.testSubjectNameLabel.text = tests?[indexPath.row].subjectName
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let previewViewController = UIStoryboard(name: "PDFPrinter", bundle: nil).instantiateViewController(withIdentifier: "PrintReportByGroupTest") as? PreviewViewController else { return }
         let storyboard = UIStoryboard(name: "PDFPrinter", bundle: nil)
         guard let previewViewController = storyboard.instantiateViewController(withIdentifier: "PrintReportByGroupTest")
             as? PreviewViewController else { return }
@@ -131,6 +131,5 @@ extension ResultByGroupViewController: UITableViewDataSource {
         
         self.navigationController?.pushViewController(previewViewController, animated: true)
     }
-    
     
 }

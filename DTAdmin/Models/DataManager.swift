@@ -9,20 +9,20 @@
 import Foundation
 
 class DataManager: HTTPManager {
-
+    
     static let shared = DataManager()
     var session:URLSession = URLSession.shared
     private override init(){}
-/**
+    /**
      Returns an array containing the non-nil defined type of elements from API
      - Precondition: Get list all records is not supported by API for next enitities: __Student__, __Question__, __Answer__, __User__
      - Parameters:
-        - typeEntity : Type of entity from Entities enum
-        - listEntity : Returns an optional array of elements type Any. Use __cast to type__ for all elements according to structure of data
-        - error : Optional string in case of error while receiving data
-*/
+     - typeEntity : Type of entity from Entities enum
+     - listEntity : Returns an optional array of elements type Any. Use __cast to type__ for all elements according to structure of data
+     - error : Optional string in case of error while receiving data
+     */
     func getList(byEntity typeEntity: Entities, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
-      if typeEntity == .student || typeEntity == .question || typeEntity == .answer {
+        if typeEntity == .student || typeEntity == .question || typeEntity == .answer {
             completionHandler(nil, NSLocalizedString("Request not supported.", comment: "Request not supported for entity."))
         }
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.getRecords) else {
@@ -106,7 +106,7 @@ class DataManager: HTTPManager {
                     }
                 }
             }
-        }.resume()
+            }.resume()
     }
     
     func getListRange(forEntity typeEntity: Entities, fromNo index: UInt, quantity:UInt, completionHandler: @escaping (_ listEntity: [Any]?, _ error: String?) -> ()) {
@@ -249,7 +249,7 @@ class DataManager: HTTPManager {
             }
         }
     }
-
+    
     func updateEntity<TypeEntity: Serializable>(byId: String, entity: TypeEntity, typeEntity: Entities, completionHandler: @escaping (_ error: String?) -> ()) {
         guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.updateData, id: byId) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
@@ -315,7 +315,7 @@ class DataManager: HTTPManager {
         }
         getResponse(request: request) { (entity, error) in
             if let error = error {
-                    completionHandler(nil, error)
+                completionHandler(nil, error)
             } else {
                 guard let entity = entity else { return }
                 guard let  json = entity as? [String: String] else {
@@ -584,7 +584,7 @@ class DataManager: HTTPManager {
         }
     }
     
-    func getResultsBy(group: [String: String], subject: [String: String], test: [String: String], maxMark: String, completionHandler: @escaping (_ error: String?, _ students: [ResultStructure]?) -> ()) {
+    func getResultsBy(group: [String: String], subject: [String: String], test: [String: String], maxMark: String, completionHandler: @escaping (_ error: String?, _ students: [TestResults]?) -> ()) {
         
         guard let cookie = StoreHelper.getCookie() else { return }
         let httpManager = HTTPManager()
@@ -601,7 +601,7 @@ class DataManager: HTTPManager {
                 completionHandler(error.localizedDescription, nil)
             } else {
                 if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-                    if sessionResponse.statusCode == 200 {
+                    if sessionResponse.statusCode == HTTPStatusCodes.OK.rawValue {
                         var json: Any
                         do {
                             json = try JSONSerialization.jsonObject(with: sessionData, options: [])
@@ -610,7 +610,7 @@ class DataManager: HTTPManager {
                             return
                         }
                         guard let list = json as? [[String: Any]] else { return }
-                        let results: [ResultStructure] = list.flatMap { ResultStructure(dictionary: $0) }
+                        let results: [TestResults] = list.flatMap { TestResults(dictionary: $0) }
                         completionHandler(nil, results)
                         
                     }
@@ -620,7 +620,7 @@ class DataManager: HTTPManager {
             }.resume()
     }
     
-    func getResultsBy(subject id: String, completionHandler: @escaping (_ error: String?, _ students: [ResultStructure]) -> ()) {
+    func getResultsBy(subject id: String, completionHandler: @escaping (_ error: String?, _ students: [TestResults]) -> ()) {
         assertionFailure("Get results by subject")
     }
     
@@ -643,7 +643,7 @@ class DataManager: HTTPManager {
                 return
             }
             if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
-                if sessionResponse.statusCode == 200 {
+                if sessionResponse.statusCode == HTTPStatusCodes.OK.rawValue {
                     var testIds = [[String: String]]()
                     do {
                         guard let json = (try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String: String]]) else {
@@ -680,7 +680,7 @@ class DataManager: HTTPManager {
         _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
                 
-                if sessionResponse.statusCode == 200 {
+                if sessionResponse.statusCode == HTTPStatusCodes.OK.rawValue {
                     var json: Any
                     do {
                         json = try JSONSerialization.jsonObject(with: sessionData, options: [])
@@ -714,7 +714,7 @@ class DataManager: HTTPManager {
         _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let sessionResponse = response as? HTTPURLResponse, let sessionData = data {
                 
-                if sessionResponse.statusCode == 200 {
+                if sessionResponse.statusCode == HTTPStatusCodes.OK.rawValue {
                     var json: Any
                     do {
                         json = try JSONSerialization.jsonObject(with: sessionData, options: [])
