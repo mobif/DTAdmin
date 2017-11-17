@@ -402,6 +402,9 @@
 				843422261FAF41B20087A418 /* DTAdminTests.swift */,
 				843422281FAF41B20087A418 /* Info.plist */,
 				8434222E1FAF7EB60087A418 /* GroupStructureTests.swift */,
+				3F5C2CE61FBB053600C05E73 /* SubjectTest.swift */,
+				3F5C2CE81FBB056100C05E73 /* QuestionTest.swift */,
+				3F5C2CEA1FBB05A200C05E73 /* AnswerTest.swift */,
 			);
 			path = DTAdminTests;
 			sourceTree = "<group>";
@@ -722,6 +725,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */,
+				3F5C2CEB1FBB05A200C05E73 /* AnswerTest.swift in Sources */,
+				3F5C2CE91FBB056100C05E73 /* QuestionTest.swift in Sources */,
+				3F5C2CE71FBB053600C05E73 /* SubjectTest.swift in Sources */,
 				8434222F1FAF7EB60087A418 /* GroupStructureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
