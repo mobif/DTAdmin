@@ -60,13 +60,19 @@ class NewTestViewController: UIViewController {
     
     @objc private func create() {
         guard let sample = unWrapFields() else { return }
-        guard var testForSave = TestStructure(dictionary: ["test_name": sample.name, "subject_id": sample.subjectId, "tasks": sample.tasks, "time_for_test": sample.timeForTest, "enabled": sample.enabled, "attempts": sample.attempts]) else { return }
+        guard var testForSave = TestStructure(dictionary: ["test_name": sample.name,
+                                                           "subject_id": sample.subjectId,
+                                                           "tasks": sample.tasks,
+                                                           "time_for_test": sample.timeForTest,
+                                                           "enabled": sample.enabled,
+                                                           "attempts": sample.attempts]) else { return }
         DataManager.shared.insertEntity(entity: testForSave, typeEntity: .test) { (entity, error) in
             if let error = error {
                 self.showWarningMsg(error)
             } else {
                 guard let newEntity = entity as? [[String : Any]] else {
-                    self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New test not found in the response message"))
+                    self.showWarningMsg(NSLocalizedString("Incorect response structure",
+                                                          comment: "New test not found in the response message"))
                     return
                 }
                 guard let firstElement = newEntity.first else { return }
@@ -83,7 +89,13 @@ class NewTestViewController: UIViewController {
         guard let sample = unWrapFields() else { return }
         
         guard let testInstance = testInstance, let testId = testInstance.id else { return }
-        guard var testForSave = TestStructure(dictionary: ["test_id": testId, "test_name": sample.name, "subject_id": sample.subjectId, "tasks": sample.tasks, "time_for_test": sample.timeForTest, "enabled": sample.enabled, "attempts": sample.attempts]) else { return }
+        guard var testForSave = TestStructure(dictionary: ["test_id": testId,
+                                                           "test_name": sample.name,
+                                                           "subject_id": sample.subjectId,
+                                                           "tasks": sample.tasks,
+                                                           "time_for_test": sample.timeForTest,
+                                                           "enabled": sample.enabled,
+                                                           "attempts": sample.attempts]) else { return }
         DataManager.shared.updateEntity(byId: testId, entity: testForSave, typeEntity: .test) { (error) in
             if let error = error {
                 self.showWarningMsg(error)
