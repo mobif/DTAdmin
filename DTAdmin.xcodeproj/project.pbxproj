@@ -37,6 +37,10 @@
 		3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6736A1FB48B88001C7147 /* DetailSubjectViewController.swift */; };
 		3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */; };
 		3FF673721FB48BAD001C7147 /* ShowTestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */; };
+		4C37B1F11FC31CA400561B80 /* NewTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37B1ED1FC31CA400561B80 /* NewTestViewController.swift */; };
+		4C37B1F21FC31CA400561B80 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C37B1EE1FC31CA400561B80 /* Test.storyboard */; };
+		4C37B1F31FC31CA400561B80 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37B1EF1FC31CA400561B80 /* TestCell.swift */; };
+		4C37B1F41FC31CA400561B80 /* TestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37B1F01FC31CA400561B80 /* TestsViewController.swift */; };
 		843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843422261FAF41B20087A418 /* DTAdminTests.swift */; };
 		8434222F1FAF7EB60087A418 /* GroupStructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434222E1FAF7EB60087A418 /* GroupStructureTests.swift */; };
 		890376041F9DE0FB002A99A8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890376031F9DE0FB002A99A8 /* Date.swift */; };
@@ -125,6 +129,10 @@
 		3FF6736A1FB48B88001C7147 /* DetailSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSubjectViewController.swift; sourceTree = "<group>"; };
 		3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsForSubjectTableViewController.swift; sourceTree = "<group>"; };
 		3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTestInfoViewController.swift; sourceTree = "<group>"; };
+		4C37B1ED1FC31CA400561B80 /* NewTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTestViewController.swift; sourceTree = "<group>"; };
+		4C37B1EE1FC31CA400561B80 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
+		4C37B1EF1FC31CA400561B80 /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
+		4C37B1F01FC31CA400561B80 /* TestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsViewController.swift; sourceTree = "<group>"; };
 		843422241FAF41B20087A418 /* DTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		843422261FAF41B20087A418 /* DTAdminTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTAdminTests.swift; sourceTree = "<group>"; };
 		843422281FAF41B20087A418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -284,6 +292,7 @@
 		3FDE8F961F8D0DF60057BF3C /* DTAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				4C37B1EC1FC31C4A00561B80 /* Test */,
 				3F9505C31FACB8E1003F3EB9 /* Group */,
 				89C96DFF1F9CC2F90019FE77 /* TimeTable */,
 				8927571A1F97648C00FF669D /* Common */,
@@ -353,6 +362,17 @@
 			children = (
 				3FF673701FB48BAD001C7147 /* ShowTestInfoViewController.swift */,
 				3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		4C37B1EC1FC31C4A00561B80 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				4C37B1ED1FC31CA400561B80 /* NewTestViewController.swift */,
+				4C37B1EE1FC31CA400561B80 /* Test.storyboard */,
+				4C37B1EF1FC31CA400561B80 /* TestCell.swift */,
+				4C37B1F01FC31CA400561B80 /* TestsViewController.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -590,6 +610,7 @@
 				3F9505E71FACBA16003F3EB9 /* Group.storyboard in Resources */,
 				3F2BF59E1F9F61F600B2FA7E /* Subjects.storyboard in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
+				4C37B1F21FC31CA400561B80 /* Test.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
 			);
@@ -646,6 +667,7 @@
 				3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */,
 				89F4A4C41FB9ADE900807527 /* LogoutViewController.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
+				4C37B1F31FC31CA400561B80 /* TestCell.swift in Sources */,
 				890376041F9DE0FB002A99A8 /* Date.swift in Sources */,
 				893450C31F9892A9008565F1 /* MainTabBarController.swift in Sources */,
 				C7535CF11FA2670100B6CBD1 /* GroupStructure.swift in Sources */,
@@ -655,6 +677,7 @@
 				897D0E371F9B6DA700825E62 /* User.swift in Sources */,
 				3FF6736B1FB48B89001C7147 /* SubjectTableViewController.swift in Sources */,
 				89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */,
+				4C37B1F11FC31CA400561B80 /* NewTestViewController.swift in Sources */,
 				897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */,
 				3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
@@ -667,6 +690,7 @@
 				C7535CF21FA2670100B6CBD1 /* QuestionStructure.swift in Sources */,
 				C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */,
 				3FF673661FB48B6B001C7147 /* AddNewQuestionViewController.swift in Sources */,
+				4C37B1F41FC31CA400561B80 /* TestsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
