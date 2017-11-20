@@ -22,11 +22,10 @@ class SearchFooter: UIView {
         configureView()
     }
 
+    // Function for configuration footer view
     func configureView() {
         backgroundColor = .blue
         alpha = 0.0
-
-        // Configure label
         label.textAlignment = .center
         label.textColor = UIColor.white
         addSubview(label)
@@ -36,8 +35,7 @@ class SearchFooter: UIView {
         label.frame = bounds
     }
 
-    //MARK: - Animation
-
+    // Functions which generate animation for footer view
     fileprivate func hideFooter() {
         UIView.animate(withDuration: 0.7) {[unowned self] in
             self.alpha = 0.0
@@ -52,8 +50,6 @@ class SearchFooter: UIView {
 }
 
 extension SearchFooter {
-    //MARK: - Public API
-
     public func setNotFiltering() {
         label.text = ""
         hideFooter()
@@ -63,10 +59,11 @@ extension SearchFooter {
         if (filteredItemCount == totalItemCount) {
             setNotFiltering()
         } else if (filteredItemCount == 0) {
-            label.text = "No items match your query"
+            label.text = NSLocalizedString("No items match your query", comment: "Information for user about no items")
             showFooter()
         } else {
-            label.text = "Filtering \(filteredItemCount) of \(totalItemCount)"
+            label.text = NSLocalizedString("Filtering \(filteredItemCount) of \(totalItemCount)",
+                                            comment: "Filtering information")
             showFooter()
         }
     }
