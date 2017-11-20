@@ -8,34 +8,32 @@
 
 import Foundation
 
-class HTTPManager {
+class HTTPManager: HTTPHeaderPreparable {
     let urlProtocol = "http://"
     let urlDomain = "vps9615.hyperhost.name"
     
-    enum TypeReqest {
-        case insertData
-        case getRecords
-        case updateData
-        case delete
-        case getOneRecord
-        case getCount
-        case getRecordsRange
-        case getStudentsByGroup
-        case getGroupBySpeciality
-        case getGroupByFaculty
-        case getTestDetailsByTest
-        case getTestsBySubject
-        case getTimeTablesForGroup
-        case getTimeTablesForSubject
-        case getQuestionsByLevelRand
-        case getQuestionIdsByLevelRand
-        case getAnswersByQuestion
-        case countRecordsByTest
-        case getRecordsRangeByTest
-    }
-    let urlPrepare: [TypeReqest: (command: String, method: String)] = [.insertData: ("/insertData", "POST"), .getRecords: ("/getRecords", "GET"), .updateData: ("/update/", "POST"), .delete: ("/del/", "GET"), .getOneRecord: ("/getRecords/", "GET"), .getCount: ("/countRecords", "GET"), .getRecordsRange: ("/getRecordsRange", "GET"), .getStudentsByGroup: ("/getStudentsByGroup/", "GET"), .getGroupBySpeciality: ("/getGroupsBySpeciality/", "GET"), .getGroupByFaculty: ("/getGroupsByFaculty/", "GET"), .getTestDetailsByTest: ("/getTestDetailsByTest/", "GET"), .getTestsBySubject: ("/getTestsBySubject/", "GET"), .getTimeTablesForGroup: ("/getTimeTablesForGroup/", "GET"), .getTimeTablesForSubject: ("/getTimeTablesForSubject/", "GET"), .getQuestionsByLevelRand: ("/getQuestionsByLevelRand/", "GET"), .getQuestionIdsByLevelRand: ("/getQuestionIdsByLevelRand/", "GET"), .getAnswersByQuestion: ("/getAnswersByQuestion/", "GET"), .countRecordsByTest: ("/countRecordsByTest/", "GET"), .getRecordsRangeByTest: ("/getRecordsRangeByTest/", "GET") ]
+    let urlPrepare: [TypeReqest: (command: String, method: String)] = [TypeReqest.insertData: ("/insertData", "POST"),
+                                .getRecords: ("/getRecords", "GET"),
+                                .updateData: ("/update/", "POST"),
+                                .delete: ("/del/", "GET"),
+                                .getOneRecord: ("/getRecords/", "GET"),
+                                .getCount: ("/countRecords", "GET"),
+                                .getRecordsRange: ("/getRecordsRange", "GET"),
+                                .getStudentsByGroup: ("/getStudentsByGroup/", "GET"),
+                                .getGroupBySpeciality: ("/getGroupsBySpeciality/", "GET"),
+                                .getGroupByFaculty: ("/getGroupsByFaculty/", "GET"),
+                                .getTestDetailsByTest: ("/getTestDetailsByTest/", "GET"),
+                                .getTestsBySubject: ("/getTestsBySubject/", "GET"),
+                                .getTimeTablesForGroup: ("/getTimeTablesForGroup/", "GET"),
+                                .getTimeTablesForSubject: ("/getTimeTablesForSubject/", "GET"),
+                                .getQuestionsByLevelRand: ("/getQuestionsByLevelRand/", "GET"),
+                                .getQuestionIdsByLevelRand: ("/getQuestionIdsByLevelRand/", "GET"),
+                                .getAnswersByQuestion: ("/getAnswersByQuestion/", "GET"),
+                                .countRecordsByTest: ("/countRecordsByTest/", "GET"),
+                                .getRecordsRangeByTest: ("/getRecordsRangeByTest/", "GET") ]
     
-    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "", limit: String = "", offset: String = "", withoutImages: Bool = false) -> URLRequest? {
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String = "", limit: String = "",
+                      offset: String = "", withoutImages: Bool = false) -> URLRequest? {
         guard let URLCreationData = urlPrepare[type] else { return nil }
         let withImages = withoutImages ? "/without_images" : ""
         let rangeString = (limit != "" && offset != "") ? "/\(limit)/\(offset)" : ""
@@ -49,5 +47,28 @@ class HTTPManager {
             request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         }
         return request
+    }
+    func getURLReqest(entityStructure: Entities, type: TypeReqest) -> URLRequest? {
+        return getURLReqest(entityStructure: entityStructure, type: type, id: "", limit: "", offset: "",
+                            withoutImages: false)
+    }
+    
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, limit: String, offset: String) -> URLRequest? {
+        return getURLReqest(entityStructure: entityStructure, type: type, id: "", limit: limit, offset: offset,
+                            withoutImages: false)
+    }
+    
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String) -> URLRequest? {
+        return getURLReqest(entityStructure: entityStructure, type: type, id: id, limit: "", offset: "",
+                            withoutImages: false)
+    }
+    
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String, withoutImages: Bool) -> URLRequest? {
+        return getURLReqest(entityStructure: entityStructure, type: type, id: id, limit: "", offset: "",
+                            withoutImages: withoutImages)
+    }
+    func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String, limit: String,
+                      offset: String) -> URLRequest? {
+        return getURLReqest(entityStructure: entityStructure, type: type, id: id, limit: limit, offset: offset)
     }
 }
