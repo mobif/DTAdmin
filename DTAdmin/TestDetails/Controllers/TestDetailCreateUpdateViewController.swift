@@ -17,12 +17,12 @@
     var idForEditing = String()
     var id = "3"
     var maxTask = Int()
-    
+
     @IBOutlet weak var testLevelTextField: PickedTextField!
     @IBOutlet weak var taskTestTextField: PickedTextField!
     @IBOutlet weak var rateTestTextField: PickedTextField!
     @IBOutlet weak var createButton: UIButton!
-    
+
     var testDetailsInstance: TestDetailStructure? {
         didSet {
             self.view.layoutIfNeeded()

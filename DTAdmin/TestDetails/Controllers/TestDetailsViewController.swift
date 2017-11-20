@@ -67,10 +67,8 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
             guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
-                                                                          bundle: nil).instantiateViewController(
-            withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else {
-                return
-            }
+            bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController")
+            as? TestDetailCreateUpdateViewController else { return }
             self.currentDataForPickers()
             testDetailCreateUpdateViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
             testDetailCreateUpdateViewController.canEdit = true
@@ -108,8 +106,8 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let testDetailsInfoViewController = UIStoryboard(name: "TestDetails",
-                                                               bundle: nil).instantiateViewController(
-        withIdentifier: "TestDetailsInfoViewController") as? TestDetailsInfoViewController else  { return }
+        bundle: nil).instantiateViewController(withIdentifier: "TestDetailsInfoViewController") 
+        as? TestDetailsInfoViewController else  { return }
         testDetailsInfoViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
         self.navigationController?.pushViewController(testDetailsInfoViewController, animated: true)
     }
@@ -133,10 +131,9 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                                                   comment: "Sum of tasks should be from 1 to 10"))
         } else {
             guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
-                                                                          bundle: nil).instantiateViewController(
-            withIdentifier: "TestDetailCreateUpdateViewController") as? TestDetailCreateUpdateViewController else {
-                return
-            }
+            bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController")
+            as? TestDetailCreateUpdateViewController else { return }
+
             self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
             currentDataForPickers()
             testDetailCreateUpdateViewController.resultModification = { newTestDetail in
@@ -144,6 +141,13 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                 self.testDetailsTableView.reloadData()
             }
         }
+    }
+
+    @IBAction func itemButtonTapped(_ sender: Any) {
+        guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
+                                                              bundle: nil).instantiateViewController(
+        withIdentifier: "GetTestDetailsViewController") as? GetTestDetailsViewController else { return }
+        self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
     }
     
     /* - - - LogIn for testing - - - */

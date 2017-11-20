@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sq6-pM-wa8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sq6-pM-wa8">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,23 +17,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ebW-5S-K59">
+                                <rect key="frame" x="0.0" y="64" width="320" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="VJ8-fi-AVi" id="2Tn-y3-NpX"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v9Q-dY-f9O">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="448"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="ebW-5S-K59">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="VJ8-fi-AVi" id="2Tn-y3-NpX"/>
-                                    </connections>
-                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="specialityCell" id="anT-In-FSJ" customClass="SpecialityTableViewCell" customModule="DTAdmin" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="anT-In-FSJ" id="7hI-y7-YaU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7N-BN-S6H">
@@ -75,10 +74,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="top" secondItem="KCA-pN-DFL" secondAttribute="top" id="4X6-gW-SHF"/>
-                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="leading" secondItem="KCA-pN-DFL" secondAttribute="leading" id="AnZ-4K-dyt"/>
-                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="bottom" secondItem="KCA-pN-DFL" secondAttribute="bottom" id="nd5-sf-wd6"/>
-                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="trailing" secondItem="KCA-pN-DFL" secondAttribute="trailing" id="udL-k3-bBp"/>
+                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="bottom" secondItem="KCA-pN-DFL" secondAttribute="bottom" id="DhP-9C-ob9"/>
+                            <constraint firstItem="ebW-5S-K59" firstAttribute="top" secondItem="KCA-pN-DFL" secondAttribute="top" id="GW1-lz-YQS"/>
+                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="top" secondItem="ebW-5S-K59" secondAttribute="bottom" id="a4B-Ri-AOV"/>
+                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="top" secondItem="ebW-5S-K59" secondAttribute="bottom" id="ab9-f5-hRc"/>
+                            <constraint firstItem="ebW-5S-K59" firstAttribute="trailing" secondItem="KCA-pN-DFL" secondAttribute="trailing" id="bro-Rh-h81"/>
+                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="trailing" secondItem="KCA-pN-DFL" secondAttribute="trailing" id="gJV-HT-gt3"/>
+                            <constraint firstItem="ebW-5S-K59" firstAttribute="leading" secondItem="KCA-pN-DFL" secondAttribute="leading" id="pEw-Jm-nIM"/>
+                            <constraint firstItem="v9Q-dY-f9O" firstAttribute="leading" secondItem="KCA-pN-DFL" secondAttribute="leading" id="uSn-IP-Yyc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KCA-pN-DFL"/>
                     </view>

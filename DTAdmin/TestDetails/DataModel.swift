@@ -14,6 +14,7 @@ class DataModel: NSObject {
     var testDetailArray = [TestDetailStructure]()
     var levelArrayForFiltering = [Int]()
     var taskArrayForFiltering = [Int]()
+    var testDetails = ["level", "task", "rate"]
     let max = 10
     
     func createArray(max: Int) -> [Int] {
@@ -34,4 +35,5 @@ class DataModel: NSObject {
         return filtered
     }
 
+    
 }
