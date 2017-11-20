@@ -10,23 +10,32 @@ import UIKit
 
 class QuestionsTableViewController: UITableViewController {
     
+    @IBOutlet weak var searchFooter: SearchFooter!
+
     var questions = [QuestionStructure]()
     var testId: String?
     var filteredData = [QuestionStructure]()
-    var inSearchMode = false
+    var refresh: MyRefreshController!
+    let searchController = UISearchController(searchResultsController: nil)
 
-    @IBOutlet weak var searchOfQuestion: UISearchBar!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Question", comment: "Title for QuestionsTableViewController")
-        
-        tableView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(getCountOfQuestion), for: .valueChanged)
 
-        searchOfQuestion.showsScopeBar = true
-        searchOfQuestion.scopeButtonTitles = ["Question", "Level", "Type"]
-        searchOfQuestion.selectedScopeButtonIndex = 0
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+
+        searchController.searchBar.scopeButtonTitles = ["Question", "Level"]
+        searchController.searchBar.delegate = self
+
+        tableView.tableFooterView = searchFooter
+
+        refresh = MyRefreshController()
+        tableView.addSubview(refresh)
+        refresh.addTarget(self, action: #selector(getCountOfQuestion), for: .valueChanged)
 
         getCountOfQuestion()
 
@@ -37,7 +46,7 @@ class QuestionsTableViewController: UITableViewController {
         DataManager.shared.getCountItems(forEntity: .question) { count, errorMessage in
             if let errorMessage = errorMessage {
                 self.stopActivityIndicator()
-                self.refreshControl.endRefreshing()
+                self.refresh.endRefreshing()
                 self.showMessage(message: errorMessage)
             } else {
                 if let countOfQuestions = count {
@@ -52,12 +61,12 @@ class QuestionsTableViewController: UITableViewController {
     func showQuestions(id: String, quantity: UInt) {
         DataManager.shared.getRecordsRange(byTest: id, limit: String(quantity), offset: "0", withoutImages: true) {
             (questions, errorMessage) in
-
+            self.refresh.endRefreshing()
             self.stopActivityIndicator()
-            self.refreshControl.endRefreshing()
             if errorMessage == nil,
                 let questions = questions {
                 self.questions = questions
+                self.questions.sort { return $0.type < $1.type}
                 self.tableView.reloadData()
             } else {
                 self.showMessage(message: errorMessage ??
@@ -79,14 +88,41 @@ class QuestionsTableViewController: UITableViewController {
         self.navigationController?.pushViewController(addNewQuestionViewController, animated: true)
     }
 
+    // MARK: - Private instance methods
+    func filterContentForSearchText(_ searchText: String, scope: String) {
+        filteredData = questions.filter({ (question : QuestionStructure) -> Bool in
+            if scope == "Question" {
+                return question.questionText.lowercased().contains(searchText.lowercased())
+            } else {
+                return question.level.lowercased().contains(searchText.lowercased())
+            }
+        })
+        tableView.reloadData()
+    }
+
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return inSearchMode ? filteredData.count : questions.count
+        if isFiltering() {
+            searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: questions.count)
+            return filteredData.count
+        }
+
+        searchFooter.setNotFiltering()
+        return questions.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as!
             QuestionTableViewCell
-        let cellData = inSearchMode ? filteredData[indexPath.row] : questions[indexPath.row]
+        let cellData = isFiltering() ? filteredData[indexPath.row] : questions[indexPath.row]
         cell.setQuestion(question: cellData)
         cell.delegate = self
         return cell
@@ -136,31 +172,6 @@ class QuestionsTableViewController: UITableViewController {
     
 }
 
-extension QuestionsTableViewController: UISearchBarDelegate {
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text == nil || searchBar.text == "" {
-            inSearchMode = false
-            view.endEditing(true)
-            tableView.reloadData()
-        } else {
-            inSearchMode = true
-            guard let searchText = searchOfQuestion.text else { return }
-            switch searchBar.selectedScopeButtonIndex {
-            case 0:
-                filteredData = questions.filter{$0.questionText.contains(searchText)}
-            case 1:
-                filteredData = questions.filter{$0.level.contains(searchText)}
-            case 2:
-                filteredData = questions.filter{$0.type.contains(searchText)}
-            default:
-                print("No match")
-            }
-            tableView.reloadData()
-        }
-    }
-}
-
 extension QuestionsTableViewController: QuestionTableViewCellDelegate {
     
     func didTapShowAnswer(for id: String) {
@@ -170,5 +181,20 @@ extension QuestionsTableViewController: QuestionTableViewCellDelegate {
             else { return }
         answersTableViewController.questionId = id
         self.navigationController?.pushViewController(answersTableViewController, animated: true)
+    }
+}
+
+extension QuestionsTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+}
+
+extension QuestionsTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }

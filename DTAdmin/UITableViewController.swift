@@ -36,14 +36,6 @@ extension UITableViewController {
         }
     }
 
-    var refreshControl: UIRefreshControl {
-        let refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString (string: "Pull to refresh")
-        refreshControl.tintColor = UIColor(red: 1.0, green: 0.21, blue: 0.55, alpha: 0.5)
-
-        return refreshControl
-    }
-
     func showMessage(message: String) {
         let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))

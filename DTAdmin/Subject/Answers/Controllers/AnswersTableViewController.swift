@@ -12,13 +12,15 @@ class AnswersTableViewController: UITableViewController {
     
     var answers = [AnswerStructure]()
     var questionId: String?
+    var refresh: MyRefreshController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Answers", comment: "Title for AnswersTableViewController")
 
-        tableView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(showAnswers), for: .valueChanged)
+        refresh = MyRefreshController()
+        tableView.addSubview(refresh)
+        refresh.addTarget(self, action: #selector(showAnswers), for: .valueChanged)
 
         showAnswers()
     }
@@ -28,6 +30,7 @@ class AnswersTableViewController: UITableViewController {
         guard let id = questionId else { return }
         DataManager.shared.getAnswers(byQuestion: id) { (answersResult, errorMessage) in
             self.stopActivityIndicator()
+            self.refresh.endRefreshing()
             if errorMessage == nil,
                 let answersUnwrap = answersResult {
                 self.answers = answersUnwrap
@@ -37,7 +40,7 @@ class AnswersTableViewController: UITableViewController {
                     NSLocalizedString("Incorect type data",comment: "Information for user about incorect data"))
             }
         }
-        refreshControl.endRefreshing()
+
     }
 
     @IBAction func addNewAnswer(_ sender: Any) {

@@ -17,27 +17,34 @@
 import UIKit
 
 class SubjectTableViewController: UITableViewController {
-    
-    @IBOutlet weak var searchBar: UISearchBar!
+
+    @IBOutlet weak var searchFooter: SearchFooter!
 
     var records = [SubjectStructure]()
     var filteredData = [SubjectStructure]()
-    var inSearchMode = false
     var selectedSubject: ((SubjectStructure) -> ())?
-    var searchController: UISearchController!
+    var refresh: MyRefreshController!
+    let searchController = UISearchController(searchResultsController: nil)
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Subjects", comment: "Title for SubjectTableViewController")
         showRecords()
 
-        searchBar.showsScopeBar = true
-        searchBar.scopeButtonTitles = ["Name", "Description"]
-        searchBar.selectedScopeButtonIndex = 0
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
 
-        tableView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(showRecords), for: .valueChanged)
+        searchController.searchBar.scopeButtonTitles = ["Name", "Description"]
+        searchController.searchBar.delegate = self
+
+        tableView.tableFooterView = searchFooter
+
+        refresh = MyRefreshController()
+        tableView.addSubview(refresh)
+        refresh.addTarget(self, action: #selector(showRecords), for: .valueChanged)
     }
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
@@ -58,6 +65,7 @@ class SubjectTableViewController: UITableViewController {
        startActivityIndicator()
         DataManager.shared.getList(byEntity: .subject) { (subjects, errorMessage) in
             self.stopActivityIndicator()
+            self.refresh.endRefreshing()
             if errorMessage == nil,
                 let subjectsRecords = subjects as? [SubjectStructure] {
                 self.records = subjectsRecords
@@ -68,17 +76,44 @@ class SubjectTableViewController: UITableViewController {
                                                                             comment: "Message for about incorect data"))
             }
         }
-        self.refreshControl.endRefreshing()
     }
-    
+
+    // MARK: - Private instance methods
+    func filterContentForSearchText(_ searchText: String, scope: String) {
+        filteredData = records.filter({ (subject : SubjectStructure) -> Bool in
+
+            if scope == "Description" {
+                return subject.description.lowercased().contains(searchText.lowercased())
+            } else {
+                return subject.name.lowercased().contains(searchText.lowercased())
+            }
+        })
+        tableView.reloadData()
+    }
+
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return inSearchMode ? filteredData.count : records.count
+        if isFiltering() {
+            searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: records.count)
+            return filteredData.count
+        }
+
+        searchFooter.setNotFiltering()
+        return records.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             as? SubjectTableViewCell else { fatalError("The dequeued cell is not an instance of MealTableViewCell.") }
-        let cellData = inSearchMode ? filteredData[indexPath.row] : records[indexPath.row]
+        let cellData = isFiltering() ? filteredData[indexPath.row] : records[indexPath.row]
         cell.setSubject(subject: cellData)
         cell.delegate = self
         return cell
@@ -117,26 +152,18 @@ class SubjectTableViewController: UITableViewController {
 
 }
 
+extension SubjectTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+}
+
 extension SubjectTableViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text == nil || searchBar.text == "" {
-            inSearchMode = false
-            view.endEditing(true)
-            tableView.reloadData()
-        } else {
-            inSearchMode = true
-            guard let searchText = searchBar.text else { return }
-            switch searchBar.selectedScopeButtonIndex {
-            case 0:
-                filteredData = records.filter{$0.name.contains(searchText)}
-            case 1:
-                filteredData = records.filter{$0.description.contains(searchText)}
-            default:
-                print("No match")
-            }
-            tableView.reloadData()
-        }
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 

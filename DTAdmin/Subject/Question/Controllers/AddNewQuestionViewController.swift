@@ -121,7 +121,7 @@ class AddNewQuestionViewController: UIViewController {
             let testId = testId,
             let typeNumber = types.index(of: type) else { return false }
         
-        let typeNumberString = String(typeNumber)
+        let typeNumberString = String(typeNumber + 1)
         
         if let attachment: UIImage = questionAttachmentImageView.image {
             let picture = UIImage.encode(fromImage: attachment)
