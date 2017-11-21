@@ -16,7 +16,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Select test \(dataModel.testDetails[detail])"
         switch detail {
         case 0:
             self.currentArray = dataModel.createArray(max: 10)
@@ -27,7 +27,12 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
         default:
             return
         }
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.isMovingFromParentViewController {
+            print("move")
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +46,10 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
         let item = currentArray[indexPath.row]
         cell.numberForTestDetailsLabel.text = String(item)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //checkmark
     }
 
 }
