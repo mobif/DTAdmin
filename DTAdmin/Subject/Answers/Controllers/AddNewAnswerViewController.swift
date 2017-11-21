@@ -8,26 +8,13 @@
 
 import UIKit
 
-class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PickerDelegate  {
-    
-    func pickedValue(value: Any, tag: Int) {
-        if let intValue = value as? Int {
-            switch tag {
-            case 0:
-                self.trueAnswerTextField.text = String(intValue)
-            default:
-                break
-            }
-        }
-    }
-    
-    @IBOutlet weak var answerTextField: UITextField!
-    
-    @IBOutlet weak var trueAnswerTextField: PickedTextField!
-    
+class AddNewAnswerViewController: UIViewController {
+   
+    @IBOutlet weak var answerTextView: UITextView!
+    @IBOutlet weak var isAnswerCorrectTextField: PickedTextField!
     @IBOutlet weak var attachmentImageView: UIImageView!
     
-    var correctmess = ["True", "False"]
+    let isAnswerCorrect = ["Wrong", "Right"]
     var questionId: String?
     var updateDates = false
     var resultModification: ((AnswerStructure) -> ())?
@@ -36,39 +23,32 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         didSet {
             guard let answer = answer else { return }
             self.view.layoutIfNeeded()
-            self.answerTextField.text = answer.answerText
-            self.trueAnswerTextField.text = answer.trueAnswer
-            if answer.attachmant.count > 1 {
-                showAnswerAttachment()
+            self.answerTextView.text = answer.answerText
+            self.isAnswerCorrectTextField.text = answer.trueAnswer
+            if answer.attachment.count > 1 {
+                showAnswerAttachment(for: answer.attachment)
             }
         }
     }
     
-    let trueAnswer = [0, 1]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = updateDates ? "Update answer" : "Add new answer"
-        guard let id = questionId else { return }
-        print("Add new " + id)
-        attachmentImageView.layer.cornerRadius = 5
-        attachmentImageView.layer.borderWidth = 1
-        attachmentImageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
-        trueAnswerTextField.customDelegate = self
-        self.trueAnswerTextField.dropDownData = trueAnswer
-        self.trueAnswerTextField.tag = 0
-    }
-   
+        
+        if !updateDates {
+            self.navigationItem.title = NSLocalizedString("Add new answer",
+                                                          comment: "Title for AddNewAnswerViewController")
+        } else {
+            self.navigationItem.title = NSLocalizedString("Update answer",
+                                                          comment: "Title for AddNewAnswerViewController")
+        }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        isAnswerCorrectTextField.customDelegate = self
+        self.isAnswerCorrectTextField.dropDownData = isAnswerCorrect
+        self.isAnswerCorrectTextField.tag = 0
     }
     
-    func showAnswerAttachment() {
-        guard let photoBase64 = answer?.attachmant else { return }
-        guard let dataDecoded : Data = Data(base64Encoded: photoBase64, options: .ignoreUnknownCharacters) else { return }
-        let decodedimage = UIImage(data: dataDecoded)
-        attachmentImageView.image = decodedimage
+    func showAnswerAttachment(for text: String) {
+        attachmentImageView.image = UIImage.decode(fromBase64: text)
     }
     
     @IBAction func saveAnswer(_ sender: UIBarButtonItem) {
@@ -82,9 +62,11 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
     func saveNewAnswer() {
         if prepareForSave(){
             guard let answerForSave = answerForSave else { return }
-            DataManager.shared.insertEntity(entity: answerForSave, typeEntity: .answer) { (answerResult, error) in
-                if let error = error {
-                    self.showWarningMsg(error)
+            DataManager.shared.insertEntity(entity: answerForSave, typeEntity: .answer) {
+                (answerResult, errorMessage) in
+
+                if let errorMessage = errorMessage {
+                    self.showWarningMsg(errorMessage)
                 } else {
                     guard let result = answerResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -102,9 +84,11 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         if prepareForSave(){
             guard let answerId = answer?.id else { return }
             guard let answerForSave = answerForSave else { return }
-            DataManager.shared.updateEntity(byId: answerId, entity: answerForSave, typeEntity: .answer) { error in
-                if let error = error {
-                    self.showWarningMsg(error)
+            DataManager.shared.updateEntity(byId: answerId, entity: answerForSave, typeEntity: .answer) {
+                errorMessage in
+
+                if let errorMessage = errorMessage {
+                    self.showWarningMsg(errorMessage)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(answerForSave)
@@ -116,38 +100,57 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func prepareForSave() -> Bool {
-        
+    
         guard let id = questionId else { return false }
         
-        guard let answerText = answerTextField.text,
-            let trueAnswer = trueAnswerTextField.text else { return false }
+        guard let answerText = answerTextView.text,
+            let trueAnswer = isAnswerCorrectTextField.text,
+            let correctnessNumber = isAnswerCorrect.index(of: trueAnswer) else { return false }
         
-        if let attachment : UIImage = attachmentImageView.image, let attachmentData = UIImagePNGRepresentation(attachment) {
-            let picture = attachmentData.base64EncodedString(options: .lineLength64Characters)
+        let correctnessNumberString = String(correctnessNumber)
+        
+        if let attachment: UIImage = attachmentImageView.image {
+            let picture = UIImage.encode(fromImage: attachment)
             if answerText.count >= 1 {
-                let dictionary: [String: Any] = ["question_id": id, "true_answer": trueAnswer, "answer_text": answerText, "attachment": picture]
-                print(trueAnswer)
-                print(answerText)
+                let dictionary: [String: Any] = [
+                                                 "question_id": id,
+                                                 "true_answer": correctnessNumberString,
+                                                 "answer_text": answerText,
+                                                 "attachment": picture
+                                                ]
                 answerForSave = AnswerStructure(dictionary: dictionary)
             } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+                showWarningMsg(NSLocalizedString("Entered incorect data",
+                                                 comment: "All fields have to be filled correctly"))
                 return false
             }
             return true
         } else {
             if answerText.count >= 1 {
-                let dictionary: [String: Any] = ["question_id": id, "true_answer": trueAnswer, "answer_text": answerText, "attachment": ""]
-                print(trueAnswer)
-                print(answerText)
+                let dictionary: [String: Any] = [
+                                                 "question_id": id,
+                                                 "true_answer": correctnessNumberString,
+                                                 "answer_text": answerText,
+                                                 "attachment": ""
+                                                ]
                 answerForSave = AnswerStructure(dictionary: dictionary)
             } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+                showWarningMsg(NSLocalizedString("Entered incorect data",
+                                                 comment: "All fields have to be filled correctly"))
                 return false
             }
             return true
         }
     }
     
+    @IBAction func removeImage(_ sender: UIButton) {
+        attachmentImageView.image = nil
+    }
+    
+}
+
+extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
     @objc func openGallery(_ sender: UIButton) {
         let image = UIImagePickerController()
         image.delegate = self
@@ -155,25 +158,32 @@ class AddNewAnswerViewController: UIViewController, UIImagePickerControllerDeleg
         image.allowsEditing = false
         self.present(image, animated: true)
     }
-    
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let size = image.size
-            let imageHeight: CGFloat = 100.0
-            let aspectRatioForWidth = ( size.width / size.height ) * imageHeight
-            let resizedImage = image.convert(toSize: CGSize(width: aspectRatioForWidth, height: imageHeight), scale: UIScreen.main.scale)
+            let resizedImage = image.resize(toSize: CGSize(width: ( size.width / size.height ) * 100.0,
+                                                           height: 100.0),
+                                            scale: UIScreen.main.scale)
             attachmentImageView.image = resizedImage
         } else {
-            showWarningMsg(NSLocalizedString("Image not selected!", comment: "You have to select image to adding in profile."))
+            showWarningMsg(NSLocalizedString("Image not selected!",
+                                             comment: "You have to select image to adding in profile."))
         }
-        
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+extension AddNewAnswerViewController: PickerDelegate {
     
-    @IBAction func removeImage(_ sender: UIButton) {
-        attachmentImageView.image = UIImage(named: "Image")
+    func pickedValue(value: Any, tag: Int) {
+        if let stringValue = value as? String {
+            switch tag {
+            case 0:
+                self.isAnswerCorrectTextField.text = stringValue
+            default:
+                break
+            }
+        }
     }
-    
-    
 }

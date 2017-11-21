@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StoreHelper: NSObject {
+class StoreHelper {
     static let loginKey = "loginKey"
     
     class func isLoggedUser() -> Bool {

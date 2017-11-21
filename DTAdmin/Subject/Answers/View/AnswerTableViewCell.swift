@@ -10,20 +10,22 @@ import UIKit
 
 class AnswerTableViewCell: UITableViewCell {
     
-    //@IBOutlet weak var rowNumber: UILabel!
-    @IBOutlet weak var attachment: UIImageView!
-    @IBOutlet weak var answerText: UILabel!
-    @IBOutlet weak var trueAnswer: UILabel!
+    @IBOutlet weak var attachmentImageView: UIImageView!
+    @IBOutlet weak var answerTextLabel: UILabel!
+    @IBOutlet weak var isAnswerCorrectLabel: UILabel!
+
+    func setAnswer(answer: AnswerStructure) {
+        answerTextLabel.text = answer.answerText
+        if answer.trueAnswer == "1" {
+            isAnswerCorrectLabel.text = NSLocalizedString("Right", comment: "Right answer")
+        } else {
+            isAnswerCorrectLabel.text = NSLocalizedString("Wrong", comment: "Wrong answer")
+        }
+        if answer.attachment.count > 0 {
+            attachmentImageView.image = UIImage.decode(fromBase64: answer.attachment)
+        } else {
+            attachmentImageView.image = UIImage(named: "Image")
+        }
+    }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
