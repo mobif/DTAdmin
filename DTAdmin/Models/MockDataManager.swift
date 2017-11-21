@@ -14,49 +14,37 @@ class MockDataManager: HTTPManager, DataRequestable {
     var response: Any?
     var error: Error?
     private override init(){}
-    
+    var urlRequest: String = ""
     func setError(_ domain: String, _ code: HTTPStatusCodes) {
         self.error = NSError(domain: domain, code: code.rawValue, userInfo: nil)
     }
-    func setData(caseData: Int) {
-        let fileName = "Tests"
-        let dir = try? FileManager.default.url(for: .documentDirectory,
-                                               in: .userDomainMask, appropriateFor: nil, create: true)
-        // If the directory was found, we write a file to it and read it back
-        if let fileURL = dir?.appendingPathComponent(fileName).appendingPathExtension("txt") {
-            do {
-                let data = try Data(contentsOf: fileURL, options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let person = jsonResult["person"] as? [Any] {
-                    // do stuff
-                }
-            } catch let error {
-                print("parse error: \(error.localizedDescription)")
-            }
-            // Then reading it back from the file
-            var inString = ""
-            do {
-                inString = try String(contentsOf: fileURL)
-            } catch {
-                print("Failed reading from URL: \(fileURL), Error: " + error.localizedDescription)
-            }
-            print("Read from the file: \(inString)")
-        }
+    func setData(caseURL: String) {
+        
         
     }
-    func getUploadedFileSet(filename:String) {
-        if let path = Bundle.main.path(forResource: "assets/\(filename)", ofType: "json") {
+    func getUploadedFileSet(fileName: String) -> Data {
+        let dir = try? FileManager.default.url(for: .documentDirectory,
+                                               in: .userDomainMask, appropriateFor: nil, create: true)
+        print(dir)
+        if let fileURL = dir?.appendingPathComponent(fileName).appendingPathExtension("test") {
             do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let person = jsonResult["person"] as? [Any] {
-                    // do stuff
+                let data = try Data(contentsOf: fileURL, options: [])
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: [])
+                //print(jsonResult)
+                if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
+                    //                    let firstElemenet = jsonResult["role1"] as? [Any] {
+                    //                    print(firstElemenet)
+//                    self.selectKeyButton.isEnabled = true
+//                    collectionTests = jsonResult
+//                    let strData = String(describing: jsonResult)
+//                    fileContentTextView.text = strData
+                    let resultData = jsonResult[urlRequest] as? Data
+                    
                 }
             } catch let error {
                 print("parse error: \(error.localizedDescription)")
             }
-        } else {
-            print("Invalid filename/path.")
+            
         }
     }
     func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
