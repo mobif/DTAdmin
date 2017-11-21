@@ -88,7 +88,6 @@ class QuestionsTableViewController: UITableViewController {
         self.navigationController?.pushViewController(addNewQuestionViewController, animated: true)
     }
 
-    // MARK: - Private instance methods
     func filterContentForSearchText(_ searchText: String, scope: String) {
         filteredData = questions.filter({ (question : QuestionStructure) -> Bool in
             if scope == "Question" {
@@ -185,16 +184,17 @@ extension QuestionsTableViewController: QuestionTableViewCellDelegate {
 }
 
 extension QuestionsTableViewController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        guard let searchText = searchController.searchBar.text else { return }
+        filterContentForSearchText(searchText, scope: scope)
     }
 }
 
 extension QuestionsTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        guard let searchText = searchBar.text else { return }
+        filterContentForSearchText(searchText, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }

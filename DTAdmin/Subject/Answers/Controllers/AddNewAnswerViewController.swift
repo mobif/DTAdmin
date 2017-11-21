@@ -11,7 +11,7 @@ import UIKit
 class AddNewAnswerViewController: UIViewController {
    
     @IBOutlet weak var answerTextView: UITextView!
-    @IBOutlet weak var isAnswerCorrectTextField: PickedTextField!
+    @IBOutlet weak var isAnswerCorrectTextField: UITextField!
     @IBOutlet weak var attachmentImageView: UIImageView!
     
     let isAnswerCorrect = ["Wrong", "Right"]
@@ -41,10 +41,22 @@ class AddNewAnswerViewController: UIViewController {
             self.navigationItem.title = NSLocalizedString("Update answer",
                                                           comment: "Title for AddNewAnswerViewController")
         }
+        let isAnswerCorrect = UITapGestureRecognizer(target: self, action: #selector(chooseAnswerCorrect))
+        isAnswerCorrectTextField.addGestureRecognizer(isAnswerCorrect)
+    }
 
-        isAnswerCorrectTextField.customDelegate = self
-        self.isAnswerCorrectTextField.dropDownData = isAnswerCorrect
-        self.isAnswerCorrectTextField.tag = 0
+    @objc func chooseAnswerCorrect() {
+        guard let itemTableViewController = UIStoryboard(name: "Subjects",
+                                                         bundle: nil).instantiateViewController(withIdentifier:
+                                                            "ItemTableViewController") as?
+            ItemTableViewController else { return }
+        itemTableViewController.currentArray = isAnswerCorrect
+        itemTableViewController.navigationItem.title = NSLocalizedString("Answer correctness",
+                                                                         comment: "Title for ItemTableViewController")
+        itemTableViewController.resultModification = { result in
+            self.isAnswerCorrectTextField.text = result
+        }
+        self.navigationController?.pushViewController(itemTableViewController, animated: true)
     }
     
     func showAnswerAttachment(for text: String) {
@@ -174,16 +186,3 @@ extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigat
     }
 }
 
-extension AddNewAnswerViewController: PickerDelegate {
-    
-    func pickedValue(value: Any, tag: Int) {
-        if let stringValue = value as? String {
-            switch tag {
-            case 0:
-                self.isAnswerCorrectTextField.text = stringValue
-            default:
-                break
-            }
-        }
-    }
-}

@@ -31,7 +31,7 @@ class QuestionTableViewCell: UITableViewCell {
         questionLevelLabel.text = NSLocalizedString("Level of difficulty: ",
                                                     comment: "Level of difficulty question") + question.level
         guard let index = Int(question.type) else { return }
-        questionTypeLabel.text = NSLocalizedString("Type of question: ", comment: "Type of question") + types[index + 1]
+        questionTypeLabel.text = NSLocalizedString("Type of question: ", comment: "Type of question") + types[index - 1]
     }
     
     @IBAction func showAnswers(_ sender: UIButton) {

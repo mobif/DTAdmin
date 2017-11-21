@@ -11,8 +11,8 @@ import UIKit
 class AddNewQuestionViewController: UIViewController {
     
     @IBOutlet weak var questionTextView: UITextView!
-    @IBOutlet weak var questionLevelTextField: PickedTextField!
-    @IBOutlet weak var questionTypeTextField: PickedTextField!
+    @IBOutlet weak var questionLevelTextField: UITextField!
+    @IBOutlet weak var questionTypeTextField: UITextField!
     @IBOutlet weak var questionAttachmentImageView: UIImageView!
     
     var levels: [String] {
@@ -22,8 +22,6 @@ class AddNewQuestionViewController: UIViewController {
         }
         return array
     }
-    
-    //var types = ["Simple choice", "Multy choice", "Input field"]
     
     var testId: String?
     var questionId: String?
@@ -52,14 +50,39 @@ class AddNewQuestionViewController: UIViewController {
             self.navigationItem.title = NSLocalizedString("Update question",
                                                           comment: "Title for AddNewQuestionViewController")
         }
-        questionLevelTextField.customDelegate = self
-        questionTypeTextField.customDelegate = self
 
-        
-        self.questionLevelTextField.dropDownData = levels
-        self.questionLevelTextField.tag = 0
-        self.questionTypeTextField.dropDownData = types
-        self.questionTypeTextField.tag = 1
+        let questionLevel = UITapGestureRecognizer(target: self, action: #selector(chooseQuestionLevel))
+        questionLevelTextField.addGestureRecognizer(questionLevel)
+        let questionType = UITapGestureRecognizer(target: self, action: #selector(chooseQuestionType))
+        questionTypeTextField.addGestureRecognizer(questionType)
+
+    }
+
+    @objc func chooseQuestionLevel() {
+        guard let itemTableViewController = UIStoryboard(name: "Subjects",
+                                                                  bundle: nil).instantiateViewController(withIdentifier: "ItemTableViewController") as?
+            ItemTableViewController else { return }
+        itemTableViewController.currentArray = levels
+        itemTableViewController.navigationItem.title = NSLocalizedString("Question level",
+                                                                         comment: "Title for ItemTableViewController")
+        itemTableViewController.resultModification = { result in
+            self.questionLevelTextField.text = result
+        }
+        self.navigationController?.pushViewController(itemTableViewController, animated: true)
+    }
+
+    @objc func chooseQuestionType() {
+        guard let itemTableViewController = UIStoryboard(name: "Subjects",
+                                                         bundle: nil).instantiateViewController(withIdentifier:
+                                                            "ItemTableViewController") as?
+            ItemTableViewController else { return }
+        itemTableViewController.currentArray = types
+        itemTableViewController.navigationItem.title = NSLocalizedString("Question type",
+                                                                         comment: "Title for ItemTableViewController")
+        itemTableViewController.resultModification = { result in
+            self.questionTypeTextField.text = result
+        }
+        self.navigationController?.pushViewController(itemTableViewController, animated: true)
     }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
@@ -192,18 +215,3 @@ extension AddNewQuestionViewController: UIImagePickerControllerDelegate, UINavig
     }
 }
 
-extension AddNewQuestionViewController: PickerDelegate {
-
-    func pickedValue(value: Any, tag: Int) {
-        if let stringValue = value as? String {
-            switch tag {
-            case 0:
-                self.questionLevelTextField.text = stringValue
-            case 1:
-                self.questionTypeTextField.text = stringValue
-            default:
-                break
-            }
-        }
-    }
-}
