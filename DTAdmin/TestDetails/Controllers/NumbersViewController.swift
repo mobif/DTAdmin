@@ -13,6 +13,9 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
     let dataModel = DataModel.dataModel
     var currentArray = [Int]()
     var detail = Int()
+    var selectedItem = Int()
+    var result: ((Int) -> ())?
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,9 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewWillDisappear(_ animated: Bool) {
         if self.isMovingFromParentViewController {
-            print("move")
+            if let result = self.result {
+                result(self.selectedItem)
+            }
         }
     }
 
@@ -49,7 +54,12 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //checkmark
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        selectedItem = currentArray[indexPath.row]
+    }
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
 
 }

@@ -172,6 +172,9 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="eeF-F9-R91"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Zvw-tA-nPy" id="ejp-dN-ca4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vbf-tl-Khz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -355,6 +358,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lv4-Ks-D6J"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="jFf-9k-W9o" id="3RS-iF-tH7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyC-eO-sIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

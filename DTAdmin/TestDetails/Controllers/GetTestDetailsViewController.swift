@@ -11,6 +11,7 @@ import UIKit
 class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let dataModel = DataModel.dataModel
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,10 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
                                                               bundle: nil).instantiateViewController(
         withIdentifier: "NumbersViewController") as? NumbersViewController else { return }
         numbersViewController.detail = indexPath.row
+        numbersViewController.result = { result in
+            self.dataModel.testDetails[indexPath.row] = String(result)
+            self.tableView.reloadData()
+        }
         self.navigationController?.pushViewController(numbersViewController, animated: true)
     }
 
