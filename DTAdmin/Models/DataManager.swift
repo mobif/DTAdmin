@@ -102,7 +102,7 @@ class DataManager: HTTPManager {
                             errorMsg = errorServerMsg
                         }
                         errorMsg = NSLocalizedString("Error response: \(responseValue.statusCode) - \(errorMsg)", comment: "Incorrect request")
-                        completionHandler(nil, errorMsg)
+                        completionHandler(nil, errorMsg)   
                     }
                 }
             }
@@ -562,7 +562,7 @@ class DataManager: HTTPManager {
             completionHandler(result, nil)
         }
     }
-    func getRecordsRange(byTest testId: String, limit: String, offset: String, completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
+    func getRecordsRange(byTest testId: String, limit: String, offset: String, withoutImages: Bool, completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: .question, type: .getRecordsRangeByTest, id: testId, limit: limit, offset: offset) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)

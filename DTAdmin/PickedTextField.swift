@@ -26,7 +26,7 @@ class PickedTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addRightArrowDown()
+        //self.addRightArrowDown()
         self.tintColor = UIColor.clear
         self.picker.delegate = self
         self.addToolBar(textField: self)

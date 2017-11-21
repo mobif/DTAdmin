@@ -13,7 +13,7 @@ struct AnswerStructure: Serializable {
     var questionId: String
     var trueAnswer: String
     var answerText: String
-    var attachmant: String
+    var attachment: String
     init?(dictionary: [String: Any]) {
         id = dictionary["answer_id"] as? String
         guard let questionId = dictionary["question_id"] as? String,
@@ -24,10 +24,15 @@ struct AnswerStructure: Serializable {
         self.questionId = questionId
         self.trueAnswer = trueAnswer
         self.answerText = answerText
-        self.attachmant = attachment
+        self.attachment = attachment
     }
     var dictionary: [String: Any] {
-        var result: [String: Any] = ["question_id": self.questionId, "true_answer": self.trueAnswer, "answer_text": self.answerText, "attachment": self.attachmant]
+        var result: [String: Any] = [
+                                     "question_id": self.questionId,
+                                     "true_answer": self.trueAnswer,
+                                     "answer_text": self.answerText,
+                                     "attachment": self.attachment
+                                    ]
         if let id = id { result["answer_id"] = id }
         return result
     }
