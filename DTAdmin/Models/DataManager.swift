@@ -562,8 +562,11 @@ class DataManager: HTTPManager {
             completionHandler(result, nil)
         }
     }
-    func getRecordsRange(byTest testId: String, limit: String, offset: String, withoutImages: Bool, completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
-        guard let request = getURLReqest(entityStructure: .question, type: .getRecordsRangeByTest, id: testId, limit: limit, offset: offset) else {
+    func getRecordsRange(byTest testId: String, limit: String, offset: String, withoutImages: Bool,
+                         completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
+        guard let request =
+            getURLReqest(entityStructure: .question, type: .getRecordsRangeByTest, id: testId,
+                         limit: limit, offset: offset) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return
@@ -584,7 +587,10 @@ class DataManager: HTTPManager {
         }
     }
     
-    func getResultsBy(group: [String: String], subject: [String: String], test: [String: String], maxMark: String, completionHandler: @escaping (_ error: String?, _ students: [TestResults]?) -> ()) {
+//    FIXME: - Update to common datamanager
+    
+    func getResultsBy(group: [String: String], subject: [String: String], test: [String: String], maxMark: String,
+                      completionHandler: @escaping (_ error: String?, _ students: [TestResults]?) -> ()) {
         
         guard let cookie = StoreHelper.getCookie() else { return }
         let httpManager = HTTPManager()
@@ -620,15 +626,12 @@ class DataManager: HTTPManager {
             }.resume()
     }
     
-    func getResultsBy(subject id: String, completionHandler: @escaping (_ error: String?, _ students: [TestResults]) -> ()) {
-        assertionFailure("Get results by subject")
-    }
-    
     //should return json in that format ["test_id":"id,...]
-    func getResultTestIds(byGroup id: String, completionHandler: @escaping (_ error: String?, _ testIds: [[String: String]]?) -> ()) {
-        
+    func getTestsResultIds(byGroup id: String,
+                          completionHandler: @escaping (_ error: String?, _ testIds: [[String: String]]?) -> ()) {
         guard let cookie = StoreHelper.getCookie() else { return }
         let httpManager = HTTPManager()
+        
         guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/Result/getResultTestIdsByGroup/" + id) else { return }
         
         var request = URLRequest(url: url)
@@ -647,7 +650,10 @@ class DataManager: HTTPManager {
                     var testIds = [[String: String]]()
                     do {
                         guard let json = (try JSONSerialization.jsonObject(with: sessionData, options: []) as? [[String: String]]) else {
-                            completionHandler("Group haven't passed any tests yet!" , nil)
+                            completionHandler(
+                                NSLocalizedString("Group haven't passed any tests yet!",
+                                                  comment: "Error message says that group haven't passed any tests yet"),
+                                              nil)
                             return
                         }
                         testIds = json
@@ -661,6 +667,7 @@ class DataManager: HTTPManager {
             }.resume()
     }
     
+    //ids should be in such format => ["1","2",.....,"n"]
     func getTestsBy(ids: [String], completionHandler: @escaping (_ error: String?, _ tests: [TestStructure]?) -> ()) {
         
         guard let cookie = StoreHelper.getCookie() else { return }
@@ -674,7 +681,10 @@ class DataManager: HTTPManager {
         request.setValue(cookie[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         
         let parameters = ["entity": "Test", "ids": ids] as [String : Any]
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { preconditionFailure("JSON serialization failed") }
+        
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
+            preconditionFailure("JSON serialization failed")
+        }
         request.httpBody = httpBody
         
         _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -693,14 +703,16 @@ class DataManager: HTTPManager {
                     completionHandler(nil, tests)
                 }
             }
-            }.resume()
+        }.resume()
     }
     
+    //ids should be in such format => ["1","2",.....,"n"]
     func getSubjectsBy(ids: [String], completionHandler: @escaping (_ error: String?, _ subjects: [SubjectStructure]?) -> ()) {
         
         guard let cookie = StoreHelper.getCookie() else { return }
         let httpManager = HTTPManager()
-        guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/EntityManager/getEntityValues") else { return }
+        guard let url = URL(string: httpManager.urlProtocol + httpManager.urlDomain + "/EntityManager/getEntityValues")
+            else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -708,7 +720,10 @@ class DataManager: HTTPManager {
         request.setValue(cookie[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         
         let parameters = ["entity": "Subject", "ids": ids] as [String : Any]
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { preconditionFailure("JSON serialization failed") }
+        
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
+            preconditionFailure("JSON serialization failed")
+        }
         request.httpBody = httpBody
         
         _ = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -727,9 +742,7 @@ class DataManager: HTTPManager {
                     completionHandler(nil, subjects)
                 }
             }
-            }.resume()
+        }.resume()
     }
     
 }
-
-

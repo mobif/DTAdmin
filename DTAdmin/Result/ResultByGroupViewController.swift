@@ -12,10 +12,13 @@ class ResultByGroupViewController: ParentViewController {
     
     @IBOutlet weak var resultsTableView: UITableView!
     
+    let badApiResponseWarning = NSLocalizedString("Wrong server response, please make refresh to update data",
+                                                  comment:"Message says that server return wrong data")
+    
     var group: GroupStructure? {
         didSet {
             guard let group = self.group else {
-                showWarningMsg("Wrong group structure")
+                self.showWarningMsg(badApiResponseWarning)
                 return
             }
             self.prepareView(group: group)
@@ -30,7 +33,6 @@ class ResultByGroupViewController: ParentViewController {
         
         refreshControl.addTarget(self, action: #selector(loadDataFromAPI), for: .valueChanged)
         resultsTableView.refreshControl = refreshControl
-        
     }
     
     private func prepareView(group: GroupStructure) {
@@ -45,18 +47,21 @@ class ResultByGroupViewController: ParentViewController {
         var testsIds = [String]()
         var subjectsIds = [String]()
         
-        DataManager.shared.getResultTestIds(byGroup: groupId) { (error, testIds) in
+        DataManager.shared.getTestsResultIds(byGroup: groupId) { (error, testIds) in
             if let error = error {
                 self.stopActivity()
                 self.showWarningMsg(error)
+                return
             } else {
                 guard let testIds = testIds else {
                     self.stopActivity()
-                    self.showWarningMsg("Error occured during data handle")
+                    self.showWarningMsg(self.badApiResponseWarning)
                     return
                 }
                 for i in testIds {
-                    testsIds.append(i["test_id"]!)
+                    if let testId = i["test_id"] {
+                        testsIds.append(testId)
+                    }
                 }
                 
                 DataManager.shared.getTestsBy(ids: testsIds, completionHandler: { (error, tests) in
@@ -65,8 +70,8 @@ class ResultByGroupViewController: ParentViewController {
                         self.showWarningMsg(error)
                     } else {
                         guard var tests = tests else {
-                            self.showWarningMsg("Wrong API response")
                             self.stopActivity()
+                            self.showWarningMsg(self.badApiResponseWarning)
                             return
                         }
                         self.tests = tests
@@ -86,6 +91,7 @@ class ResultByGroupViewController: ParentViewController {
                                 self.stopActivity()
                             }
                         })
+                        
                     }
                 })
                 
@@ -105,8 +111,8 @@ extension ResultByGroupViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reusableResultCell") as? ResultsTableTestViewCell else {
-            let cell = UITableViewCell()
-            cell.textLabel?.text = "This group haven't passed tests yet!"
+            let cell = UITableViewCell() as! ResultsTableTestViewCell
+            cell.testNameLabel?.text = "This group haven't passed tests yet!"
             return cell
         }
         cell.testIdLabel.text = tests?[indexPath.row].id

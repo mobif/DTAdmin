@@ -45,7 +45,7 @@ class PreviewViewController: ParentViewController {
                 self.showWarningMsg("Quiz has wrong parameters please try again")
                 return
         }
-        // Get sudents test passed by group
+        // Get students test passed by group
         DataManager.shared.getResultsBy(group: group, subject: subject, test: test, maxMark: "100") { (error, studentsResult) in
             if let error = error {
                 self.showWarningMsg(error)
@@ -116,31 +116,23 @@ class PreviewViewController: ParentViewController {
         self.showOptionsAlert()
     }
     
-    func showOptionsAlert() {
+    private func showOptionsAlert() {
         let alertController =
-            UIAlertController(title: NSLocalizedString("Yeah!", comment: "Print alert title"),
-                              message: NSLocalizedString("Your Report has successfully printed to a PDF file.\n What do you want to do now?", comment: "Alert body notify that pdf has been printed and ask for next steps to do -> Priview or Send via Email or do nothing"),
+            UIAlertController(title: NSLocalizedString("Success", comment: "Print alert title"),
+                              message: NSLocalizedString("Your report has successfully printed to a PDF file. Now you can share it.",
+                                                         comment: "Alert body notify that pdf has been printed and ask for next steps to do -> Send via Email or close alert"),
                               preferredStyle: UIAlertControllerStyle.alert)
         
-        let actionPreview = UIAlertAction(title: NSLocalizedString("Preview it", comment: "Preview it UIAlert option"),
-                                          style: UIAlertActionStyle.default) { (action) in
-            if let url = URL(string: self.pdfComposer.fileName) {
-                let request = URLRequest(url: url)
-                self.webPreview.loadRequest(request)
-            }
-        }
-        
-        let actionEmail = UIAlertAction(title: NSLocalizedString("Send via Email", comment: "Send email UIAlert option"),
+        let actionEmail = UIAlertAction(title: NSLocalizedString("Send via Email", comment: "Send email option text"),
                                         style: UIAlertActionStyle.default) { (action) in
             DispatchQueue.main.async { self.sendEmail() }
         }
-        let actionNothing = UIAlertAction(title: NSLocalizedString("Nothing", comment: "Do nothing UIAlert option"),
-                                          style: UIAlertActionStyle.cancel) { (action) in
+        let actionClose = UIAlertAction(title: NSLocalizedString("Close", comment: "Close alert option text"),
+                                          style: UIAlertActionStyle.destructive) { (action) in
         }
         
-        alertController.addAction(actionPreview)
         alertController.addAction(actionEmail)
-        alertController.addAction(actionNothing)
+        alertController.addAction(actionClose)
         present(alertController, animated: true, completion: nil)
     }
     
