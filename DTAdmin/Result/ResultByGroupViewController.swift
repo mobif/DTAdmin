@@ -106,7 +106,9 @@ extension ResultByGroupViewController: UITableViewDelegate {
 
 extension ResultByGroupViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tests != nil ? tests!.count : 0
+        if let tests = self.tests {
+            return tests.count
+        } else { return 0 }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
