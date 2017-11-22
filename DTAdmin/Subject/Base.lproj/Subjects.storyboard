@@ -70,7 +70,7 @@
                             <constraint firstItem="VFJ-Pr-DEl" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="127" id="NPF-SH-beO"/>
                             <constraint firstItem="ABO-xg-riS" firstAttribute="trailing" secondItem="zah-mK-j2H" secondAttribute="trailing" constant="16" id="SQC-e4-DJu"/>
                             <constraint firstItem="VFJ-Pr-DEl" firstAttribute="top" secondItem="SCR-yW-UVI" secondAttribute="bottom" constant="60" id="UOe-q8-Q7l"/>
-                            <constraint firstItem="1Pj-Dx-z5H" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="Yeb-LD-hy9"/>
+                            <constraint firstItem="1Pj-Dx-z5H" firstAttribute="top" secondItem="zah-mK-j2H" secondAttribute="bottom" constant="20" id="bGM-Vb-ra9"/>
                             <constraint firstItem="PYV-bJ-zzs" firstAttribute="top" secondItem="ABO-xg-riS" secondAttribute="top" constant="100" id="dc6-Ha-hSg"/>
                             <constraint firstItem="SCR-yW-UVI" firstAttribute="leading" secondItem="1Pj-Dx-z5H" secondAttribute="leading" id="fIG-kj-MMI"/>
                             <constraint firstItem="zah-mK-j2H" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="fad-NU-U1K"/>
@@ -91,7 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3u-RR-AHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-17" y="-673"/>
+            <point key="canvasLocation" x="-18.399999999999999" y="-673.31334332833592"/>
         </scene>
         <!--Subject Table View Controller-->
         <scene sceneID="hrC-kC-aAy">

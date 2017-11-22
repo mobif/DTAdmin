@@ -39,7 +39,8 @@ class TestTableViewCell: UITableViewCell {
         tasksTestLabel.text = NSLocalizedString("Tasks: ", comment: "Test tasks showing") + test.tasks
         timeForTestLabel.text = NSLocalizedString("Time for test: ",
                                                   comment: "Time for test showing") + test.timeForTest
-        let enabled = test.enabled == "0" ? "false" : "true"
+        let enabled = test.enabled == "0" ? NSLocalizedString("false", comment: "False enabled") :
+                                            NSLocalizedString("true", comment: "True enabled")
         enabledLabel.text = NSLocalizedString("Enabled: ", comment: "Enabled for test showing") + enabled
         attemptsLabel.text = NSLocalizedString("Attempts: ", comment: "Attempts for test showing") + test.attempts
     }

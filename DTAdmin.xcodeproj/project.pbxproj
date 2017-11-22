@@ -444,6 +444,7 @@
 				890376031F9DE0FB002A99A8 /* Date.swift */,
 				899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */,
 				3FD4C0B91FBB26DF005DC403 /* ImageTools.swift */,
+				3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -514,7 +515,6 @@
 			children = (
 				3F322AD31FBF517B003D0AC6 /* UIImageView.swift */,
 				3F322AD11FBF5171003D0AC6 /* UITextView.swift */,
-				3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */,
 				89C96E091F9D03DC0019FE77 /* PickedTextField.swift */,
 				89C96E0B1F9D079D0019FE77 /* TimePicker.swift */,
 				3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */,
