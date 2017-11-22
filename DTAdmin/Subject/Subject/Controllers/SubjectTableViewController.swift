@@ -33,11 +33,15 @@ class SubjectTableViewController: UITableViewController {
 
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = NSLocalizedString("Search",
+                                                                   comment: "Placeholder for searchController")
         navigationItem.searchController = searchController
         definesPresentationContext = true
 
-        searchController.searchBar.scopeButtonTitles = ["Name", "Description"]
+        searchController.searchBar.scopeButtonTitles = [
+                                        NSLocalizedString("Name", comment: "Scope title for searchController"),
+                                        NSLocalizedString("Description", comment: "Scope title for searchController")
+                                        ]
         searchController.searchBar.delegate = self
 
         tableView.tableFooterView = searchFooter
@@ -120,7 +124,9 @@ class SubjectTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
     [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive,
+                                          title: NSLocalizedString("Delete",
+                                                                comment: "Swipe button title")) { (action, indexPath) in
             guard let subjectId = self.records[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
@@ -131,7 +137,9 @@ class SubjectTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+        let update = UITableViewRowAction(style: .normal,
+                                          title: NSLocalizedString("Update",
+                                                                comment: "Swipe button title")) { (action, indexPath) in
             guard let addNewRecordViewController = UIStoryboard(name: "Subjects",
                                                                 bundle: nil).instantiateViewController(withIdentifier:
                                                                     "AddNewSubject") as? AddNewRecordViewController
