@@ -1,0 +1,42 @@
+{“http://vps9615.hyperhost.name/login/index”:{
+  "roles": [
+    "login",
+    "admin"
+  ],
+  "id": "1",
+  "username": "admin",
+  "response": "ok"
+},
+“http://vps9615.hyperhost.name/group/getRecords”:[
+  {
+    "group_id": "1",
+    "group_name": "СІ-R1-2",
+    "speciality_id": "2",
+    "faculty_id": "1"
+  },
+  {
+    "group_id": "2",
+    "group_name": "XX-rr-00",
+    "speciality_id": "1",
+    "faculty_id": "1"
+  },
+  {
+    "group_id": "3",
+    "group_name": "QІ-1B-B",
+    "speciality_id": "2",
+    "faculty_id": "3"
+  },
+  {
+    "group_id": "4",
+    "group_name": "ТX-22-0",
+    "speciality_id": "12",
+    "faculty_id": "4"
+  },
+  {
+    "group_id": "5",
+    "group_name": "fs!-13-4",
+    "speciality_id": "10",
+    "faculty_id": "5"
+  }
+ ]
+}

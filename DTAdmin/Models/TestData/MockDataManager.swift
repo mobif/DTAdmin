@@ -19,34 +19,50 @@ class MockDataManager: HTTPManager, DataRequestable {
         self.error = NSError(domain: domain, code: code.rawValue, userInfo: nil)
     }
     func setData(caseURL: String) {
-        
+        loadJSON() {
+            (json, error) in
+            if let json = json {
+                if let response = json[caseURL] {
+                    self.data = try? JSONSerialization.data(withJSONObject: response,
+                                                            options: JSONSerialization.WritingOptions.prettyPrinted)
+                }
+            }
+        }
         
     }
-    func getUploadedFileSet(fileName: String) -> Data {
-        let dir = try? FileManager.default.url(for: .documentDirectory,
-                                               in: .userDomainMask, appropriateFor: nil, create: true)
-        print(dir)
-        if let fileURL = dir?.appendingPathComponent(fileName).appendingPathExtension("test") {
-            do {
-                let data = try Data(contentsOf: fileURL, options: [])
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: [])
-                //print(jsonResult)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
-                    //                    let firstElemenet = jsonResult["role1"] as? [Any] {
-                    //                    print(firstElemenet)
-//                    self.selectKeyButton.isEnabled = true
-//                    collectionTests = jsonResult
-//                    let strData = String(describing: jsonResult)
-//                    fileContentTextView.text = strData
-                    let resultData = jsonResult[urlRequest] as? Data
-                    
+    func loadJSON(finishedClosure:@escaping ((_ jsonObject:[String:AnyObject]?,_ error: NSError?) ->Void)) {
+        DispatchQueue.global().async {
+            guard let path = Bundle.main.path(forResource: "test_cases", ofType: "json") else{
+                DispatchQueue.main.async {
+                    finishedClosure(nil, NSError(domain: "JSON file don't founded", code: 998, userInfo: nil))
                 }
-            } catch let error {
-                print("parse error: \(error.localizedDescription)")
+                return
+            }
+            //Load file data part
+            guard let jsonData = (try? Data(contentsOf: URL(fileURLWithPath: path))) else{
+                DispatchQueue.main.async {
+                    finishedClosure(nil, NSError(domain: "can convert to data", code: 999, userInfo: nil))
+                }
+                return
             }
             
+            do {
+                if let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization
+                                                            .ReadingOptions.mutableContainers) as? [String:AnyObject]
+                {
+                    DispatchQueue.main.async {
+                        finishedClosure(jsonObject,nil)
+                    }
+                }
+            } catch let error as NSError {
+                print(error)
+                DispatchQueue.main.async {
+                    finishedClosure(nil,error)
+                }
+            }
         }
     }
+    
     func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
         DispatchQueue.global(qos: .background).async {
             [unowned self] in
