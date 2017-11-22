@@ -28,19 +28,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYV-bJ-zzs">
-                                <rect key="frame" x="16" y="120" width="110" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="TJu-xw-DrT"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="120" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Pj-Dx-z5H">
-                                <rect key="frame" x="16" y="201" width="158" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="158" id="hki-xm-ymA"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="201" width="153" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -65,16 +59,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zah-mK-j2H" firstAttribute="top" secondItem="PYV-bJ-zzs" secondAttribute="bottom" constant="10" id="1rj-NI-rte"/>
-                            <constraint firstItem="SCR-yW-UVI" firstAttribute="leading" secondItem="1Pj-Dx-z5H" secondAttribute="leading" id="MOV-wC-ffO"/>
+                            <constraint firstItem="1Pj-Dx-z5H" firstAttribute="leading" secondItem="SCR-yW-UVI" secondAttribute="leading" id="DVu-IE-52I"/>
+                            <constraint firstItem="PYV-bJ-zzs" firstAttribute="leading" secondItem="zah-mK-j2H" secondAttribute="leading" id="HX2-hd-yB7"/>
                             <constraint firstItem="VFJ-Pr-DEl" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="127" id="NPF-SH-beO"/>
                             <constraint firstItem="ABO-xg-riS" firstAttribute="trailing" secondItem="zah-mK-j2H" secondAttribute="trailing" constant="16" id="SQC-e4-DJu"/>
                             <constraint firstItem="VFJ-Pr-DEl" firstAttribute="top" secondItem="SCR-yW-UVI" secondAttribute="bottom" constant="60" id="UOe-q8-Q7l"/>
-                            <constraint firstItem="1Pj-Dx-z5H" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="Yeb-LD-hy9"/>
+                            <constraint firstItem="1Pj-Dx-z5H" firstAttribute="top" secondItem="zah-mK-j2H" secondAttribute="bottom" constant="20" id="bGM-Vb-ra9"/>
                             <constraint firstItem="PYV-bJ-zzs" firstAttribute="top" secondItem="ABO-xg-riS" secondAttribute="top" constant="100" id="dc6-Ha-hSg"/>
-                            <constraint firstItem="zah-mK-j2H" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="fad-NU-U1K"/>
-                            <constraint firstItem="1Pj-Dx-z5H" firstAttribute="top" secondItem="zah-mK-j2H" secondAttribute="bottom" constant="20" id="iHq-wg-7Ev"/>
+                            <constraint firstItem="PYV-bJ-zzs" firstAttribute="trailing" secondItem="zah-mK-j2H" secondAttribute="trailing" id="f29-k5-rdh"/>
                             <constraint firstItem="zah-mK-j2H" firstAttribute="top" secondItem="PYV-bJ-zzs" secondAttribute="bottom" constant="10" id="otr-rb-9Vg"/>
-                            <constraint firstItem="PYV-bJ-zzs" firstAttribute="leading" secondItem="ABO-xg-riS" secondAttribute="leading" constant="16" id="t45-75-xjL"/>
+                            <constraint firstItem="1Pj-Dx-z5H" firstAttribute="leading" secondItem="zah-mK-j2H" secondAttribute="leading" id="tHp-bs-qtl"/>
                             <constraint firstItem="SCR-yW-UVI" firstAttribute="centerY" secondItem="zJK-94-JYw" secondAttribute="centerY" id="tPh-vN-Bng"/>
                             <constraint firstItem="SCR-yW-UVI" firstAttribute="centerX" secondItem="zJK-94-JYw" secondAttribute="centerX" id="w1k-fF-QCV"/>
                             <constraint firstItem="ABO-xg-riS" firstAttribute="trailing" secondItem="VFJ-Pr-DEl" secondAttribute="trailing" constant="128" id="zQ2-3W-NHN"/>
@@ -88,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3u-RR-AHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-17" y="-673"/>
+            <point key="canvasLocation" x="-18.399999999999999" y="-673.31334332833592"/>
         </scene>
         <!--Subject Table View Controller-->
         <scene sceneID="hrC-kC-aAy">
