@@ -16,7 +16,7 @@ class AddNewAnswerViewController: UIViewController {
     
     let isAnswerCorrect = [
                         NSLocalizedString("Wrong", comment: "Wrong answer"),
-                           NSLocalizedString("Right", comment: "Right answer")
+                        NSLocalizedString("Right", comment: "Right answer")
                         ]
     var questionId: String?
     var qustionType: String?

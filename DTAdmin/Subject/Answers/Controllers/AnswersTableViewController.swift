@@ -76,7 +76,9 @@ class AnswersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
         [UITableViewRowAction]? {
 
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive,
+                                          title: NSLocalizedString("Delete",
+                                                                comment: "Swipe title button")) { (action, indexPath) in
             guard let answerId = self.answers[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: answerId, typeEntity: .answer)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
@@ -87,7 +89,9 @@ class AnswersTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+        let update = UITableViewRowAction(style: .normal,
+                                          title: NSLocalizedString("Update",
+                                                                comment: "Swipe title button")) { (action, indexPath) in
             guard let addNewAnswerViewController = UIStoryboard(name: "Subjects",
                                                                 bundle: nil).instantiateViewController(withIdentifier: "AddNewAnswerViewController") as?
                                                                 AddNewAnswerViewController else { return }
