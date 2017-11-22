@@ -8,7 +8,7 @@
  
  import UIKit
  
- class TestDetailCreateUpdateViewController: UIViewController, PickerDelegate {
+ class TestDetailCreateUpdateViewController: UIViewController {
     
     var dataModel = DataModel.dataModel
     var testDetailForSave: TestDetailStructure?
@@ -18,9 +18,9 @@
     var id = "3"
     var maxTask = Int()
 
-    @IBOutlet weak var testLevelTextField: PickedTextField!
-    @IBOutlet weak var taskTestTextField: PickedTextField!
-    @IBOutlet weak var rateTestTextField: PickedTextField!
+    @IBOutlet weak var testLevelTextField: UITextField!
+    @IBOutlet weak var taskTestTextField: UITextField!
+    @IBOutlet weak var rateTestTextField: UITextField!
     @IBOutlet weak var createButton: UIButton!
 
     var testDetailsInstance: TestDetailStructure? {
@@ -44,45 +44,7 @@
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testLevelTextField.customDelegate = self
-        taskTestTextField.customDelegate = self
-        rateTestTextField.customDelegate = self
-        let levels = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max),
-                                                         secondArray: dataModel.levelArrayForFiltering)
-        self.testLevelTextField.dropDownData = levels
-        self.testLevelTextField.tag = 0
-        if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
-            guard let task = testDetailsInstance?.tasks, let taskInt = Int(task) else { return }
-            if taskInt == 1 {
-                maxTask = 1
-                self.taskTestTextField.isEnabled = false
-                self.taskTestTextField.alpha = 0.5
-            } else {
-                maxTask = taskInt - 1
-            }
-        } else {
-            let task = dataModel.max - dataModel.taskArrayForFiltering.reduce(0, +)
-            maxTask = task
-        }
-        self.taskTestTextField.dropDownData = dataModel.createArray(max: maxTask)
-        self.taskTestTextField.tag = 1
-        self.rateTestTextField.dropDownData = dataModel.createArray(max: dataModel.max)
-        self.rateTestTextField.tag = 2
-    }
-    
-    func pickedValue(value: Any, tag: Int) {
-        if let intValue = value as? Int {
-            switch tag {
-            case 0:
-                self.testLevelTextField.text = String(intValue)
-            case 1:
-                self.taskTestTextField.text = String(intValue)
-            case 2:
-                self.rateTestTextField.text = String(intValue)
-            default:
-                break
-            }
-        }
+
     }
     
     /**

@@ -19,7 +19,6 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         self.title = "Test details"
         getTestDetails()
-        currentDataForPickers()
     }
     
     func getTestDetails() {
@@ -69,7 +68,6 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
             bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController")
             as? TestDetailCreateUpdateViewController else { return }
-            self.currentDataForPickers()
             testDetailCreateUpdateViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
             testDetailCreateUpdateViewController.canEdit = true
             testDetailCreateUpdateViewController.resultModification = { updateResult in
@@ -103,39 +101,17 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         })
         return [delete, edit]
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let testDetailsInfoViewController = UIStoryboard(name: "TestDetails",
-        bundle: nil).instantiateViewController(withIdentifier: "TestDetailsInfoViewController") 
-        as? TestDetailsInfoViewController else  { return }
-        testDetailsInfoViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
-        self.navigationController?.pushViewController(testDetailsInfoViewController, animated: true)
-    }
-    
-    func currentDataForPickers() {
-        dataModel.levelArrayForFiltering = []
-        dataModel.taskArrayForFiltering = []
-        for i in self.dataModel.testDetailArray {
-            guard let levels = Int(i.level) else { return }
-            self.dataModel.levelArrayForFiltering.append(levels)
-            guard let tasks = Int(i.tasks) else { return }
-            self.dataModel.taskArrayForFiltering.append(tasks)
-        }
         
-    }
-    
     @IBAction func addButtonTapped(_ sender: Any) {
-        currentDataForPickers()
         if dataModel.taskArrayForFiltering.reduce(0, +) >= dataModel.max {
-            self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then 10",
-                                                  comment: "Sum of tasks should be from 1 to 10"))
+            self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then \(dataModel.max)",
+                                                  comment: "Sum of tasks should be from 1 to \(dataModel.max)"))
         } else {
             guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
             bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController")
             as? TestDetailCreateUpdateViewController else { return }
 
             self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
-            currentDataForPickers()
             testDetailCreateUpdateViewController.resultModification = { newTestDetail in
                 self.dataModel.testDetailArray.append(newTestDetail)
                 self.testDetailsTableView.reloadData()
