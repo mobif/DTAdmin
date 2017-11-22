@@ -26,7 +26,7 @@
 "Answers" = "Відповіді";
 
 /* Attempts for test showing */
-"Attempts: " = "Кількість спроб:";
+"Attempts: " = "Кількість спроб: ";
 
 /* Title for create new group */
 "Create" = "Створити";
@@ -47,7 +47,7 @@
 "Edit" = "Редагувати";
 
 /* Enabled for test showing */
-"Enabled: " = "Можливіть:";
+"Enabled: " = "Можливіть: ";
 
 /* All fields have to be filled correctly */
 "Entered incorect data" = "Введені неправильні дані";
@@ -61,8 +61,11 @@
 /* Title for Faculties table view */
 "Faculties" = "Факультети";
 
+/* Title for faculty tap */
+"Faculty" = "Факультети";
+
 /* Filtering information */
-"Filtering (filteredItemCount) of (totalItemCount)" = "Відфільтровано (filteredItemCount) з (totalItemCount)";
+"Filtering (filteredItemCount) of (totalItemCount)" = "Відфільтровано \\(filteredItemCount) з \\(totalItemCount)";
 
 /* Title for Groups table view
    Title for groups tap */
@@ -124,6 +127,9 @@
 
 /* Passwords fields empty or don't match */
 "Passwords fileds are empty or don't match" = "Поля паролей порожні або не збігаються";
+
+/* Pull to refresh */
+"Pull to refresh" = "Оновлення";
 
 /* Scope title for searchController
    Title for QuestionsTableViewController */
@@ -230,4 +236,10 @@
 
 /* Inputed email has invalid structure */
 "Wrong email" = "Не правильна електронна адреса";
+
+/* False enabled */
+"false" = "недоступно";
+
+/* True enabled */
+"true" = "доступно";
 
