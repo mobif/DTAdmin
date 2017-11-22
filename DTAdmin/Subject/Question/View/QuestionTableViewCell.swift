@@ -13,7 +13,7 @@ protocol QuestionTableViewCellDelegate {
         Sends to the AnswerViewController
         - Parameter id: Send question id to the next View Controller for create request and making call's to API
      */
-    func didTapShowAnswer(for id: String)
+    func didTapShowAnswer(for id: String, and type: String)
 }
 
 class QuestionTableViewCell: UITableViewCell {
@@ -36,7 +36,8 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBAction func showAnswers(_ sender: UIButton) {
         guard let id = questionItem?.id else { return }
-        delegate?.didTapShowAnswer(for: id)
+        guard let type = questionItem?.type else { return }
+        delegate?.didTapShowAnswer(for: id, and: type)
     }
 
 }

@@ -12,6 +12,7 @@ class AnswersTableViewController: UITableViewController {
     
     var answers = [AnswerStructure]()
     var questionId: String?
+    var qustionType: String?
     var refresh: MyRefreshController!
     
     override func viewDidLoad() {
@@ -48,7 +49,9 @@ class AnswersTableViewController: UITableViewController {
                                                             bundle: nil).instantiateViewController(withIdentifier: "AddNewAnswerViewController") as?
                                                             AddNewAnswerViewController else { return }
         guard let id = questionId else { return }
+        guard let type = qustionType else { return }
         addNewAnswerViewController.questionId = id
+        addNewAnswerViewController.qustionType = type
         addNewAnswerViewController.resultModification = { anserReturn in
             self.answers.append(anserReturn)
             self.tableView.reloadData()
