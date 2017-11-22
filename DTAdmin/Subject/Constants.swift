@@ -8,4 +8,9 @@
 
 import Foundation
 
-var types = ["Single choice", "Multiple choice", "Write answer by yourself"]
+var types = [
+    NSLocalizedString("Simple choice", comment: "Simple choice type of question"),
+             NSLocalizedString("Multiple choice", comment: "Multiple choice type of question"),
+             NSLocalizedString("Write answer by yourself", comment: "Write answer by yourself type of question"),
+             NSLocalizedString("Numerical", comment: "Numerical type of question")
+]

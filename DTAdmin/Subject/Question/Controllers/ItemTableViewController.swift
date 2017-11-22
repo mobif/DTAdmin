@@ -32,10 +32,15 @@ class ItemTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         if let resultModification = self.resultModification {
             resultModification(currentArray[indexPath.row])
         }
-        self.navigationController?.popViewController(animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+
     }
 
 }

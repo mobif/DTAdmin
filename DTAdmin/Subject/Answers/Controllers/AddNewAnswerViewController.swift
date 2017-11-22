@@ -14,8 +14,12 @@ class AddNewAnswerViewController: UIViewController {
     @IBOutlet weak var isAnswerCorrectTextField: UITextField!
     @IBOutlet weak var attachmentImageView: UIImageView!
     
-    let isAnswerCorrect = ["Wrong", "Right"]
+    let isAnswerCorrect = [
+                        NSLocalizedString("Wrong", comment: "Wrong answer"),
+                           NSLocalizedString("Right", comment: "Right answer")
+                        ]
     var questionId: String?
+    var qustionType: String?
     var updateDates = false
     var resultModification: ((AnswerStructure) -> ())?
     var answerForSave: AnswerStructure?
@@ -41,8 +45,14 @@ class AddNewAnswerViewController: UIViewController {
             self.navigationItem.title = NSLocalizedString("Update answer",
                                                           comment: "Title for AddNewAnswerViewController")
         }
-        let isAnswerCorrect = UITapGestureRecognizer(target: self, action: #selector(chooseAnswerCorrect))
-        isAnswerCorrectTextField.addGestureRecognizer(isAnswerCorrect)
+
+        if qustionType == "3" || qustionType == "4" {
+            isAnswerCorrectTextField.text = isAnswerCorrect[1]
+            isAnswerCorrectTextField.isEnabled = false
+        } else {
+            let isAnswerCorrect = UITapGestureRecognizer(target: self, action: #selector(chooseAnswerCorrect))
+            isAnswerCorrectTextField.addGestureRecognizer(isAnswerCorrect)
+        }
     }
 
     @objc func chooseAnswerCorrect() {
@@ -184,5 +194,20 @@ extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigat
         }
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+extension AddNewAnswerViewController: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if qustionType == "3" || qustionType == "4" {
+            var result = true
+            let disallowedCharacterSet = NSCharacterSet(charactersIn: "0123456789.-")
+            let replacementStringIsLegal = text.rangeOfCharacter(from: disallowedCharacterSet as CharacterSet)
+            result = (replacementStringIsLegal != nil)
+            return result
+        }
+        return true
+    }
+
 }
 

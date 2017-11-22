@@ -173,12 +173,13 @@ class QuestionsTableViewController: UITableViewController {
 
 extension QuestionsTableViewController: QuestionTableViewCellDelegate {
     
-    func didTapShowAnswer(for id: String) {
+    func didTapShowAnswer(for id: String, and type: String) {
         guard let answersTableViewController = UIStoryboard(name: "Subjects",
                                                             bundle: nil).instantiateViewController(withIdentifier:
                                                                 "Answers") as? AnswersTableViewController
             else { return }
         answersTableViewController.questionId = id
+        answersTableViewController.qustionType = type
         self.navigationController?.pushViewController(answersTableViewController, animated: true)
     }
 }
