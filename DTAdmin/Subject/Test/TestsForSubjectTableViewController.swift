@@ -54,10 +54,12 @@ class TestsForSubjectTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
     [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") {_,_ in
+        let delete = UITableViewRowAction(style: .destructive,
+                                          title: NSLocalizedString("Delete", comment: "Swipe button title")) {_,_ in
             //delete test record
         }
-        let update = UITableViewRowAction(style: .normal, title: "Update") {_,_ in
+        let update = UITableViewRowAction(style: .normal,
+                                          title: NSLocalizedString("Update", comment: "Swipe button title")) {_,_ in
             //update test record
         }
         update.backgroundColor = UIColor.blue
