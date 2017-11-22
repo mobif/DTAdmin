@@ -10,6 +10,9 @@
 /* Title for admins table list view */
 "Administrators" = "Адміністратори";
 
+/* Title for admins tap */
+"Admins" = "Адміни";
+
 /* Alert title */
 "Alert" = "Попередження";
 
@@ -27,6 +30,13 @@
 
 /* Title for create new group */
 "Create" = "Створити";
+
+/* Swipe button title
+   Swipe title button */
+"Delete" = "Видалити";
+
+/* Scope title for searchController */
+"Description" = "Опис";
 
 /* Title for Group Detail view */
 "Details" = "Деталі";
@@ -54,7 +64,8 @@
 /* Filtering information */
 "Filtering (filteredItemCount) of (totalItemCount)" = "Відфільтровано (filteredItemCount) з (totalItemCount)";
 
-/* Title for Groups table view */
+/* Title for Groups table view
+   Title for groups tap */
 "Groups" = "Групи";
 
 /* You have to select image to adding in profile. */
@@ -78,8 +89,20 @@
 /* Incorrect type */
 "Incorrect type" = "Неправильні дані";
 
+/* Scope title for searchController */
+"Level" = "Рівень";
+
 /* Level of difficulty question */
 "Level of difficulty: " = "Рівень складності:";
+
+/* Title for logout */
+"Logout" = "Вийти";
+
+/* Multiple choice type of question */
+"Multiple choice" = "Мульти вибір";
+
+/* Scope title for searchController */
+"Name" = "Ім'я";
 
 /* Title for new admin creation view */
 "New" = "Новий";
@@ -90,6 +113,9 @@
 /* Information for user about no items */
 "No items match your query" = "Немає даних до вашого запиту";
 
+/* Numerical type of question */
+"Numerical" = "Цифровий";
+
 /* Ok button */
 "Ok" = "Добре";
 
@@ -99,7 +125,8 @@
 /* Passwords fields empty or don't match */
 "Passwords fileds are empty or don't match" = "Поля паролей порожні або не збігаються";
 
-/* Title for QuestionsTableViewController */
+/* Scope title for searchController
+   Title for QuestionsTableViewController */
 "Question" = "Питання";
 
 /* Title for QuestionAttachmentViewController */
@@ -129,8 +156,17 @@
 /* Right answer */
 "Right" = "Правильно";
 
+/* Placeholder for searchController */
+"Search" = "Пошук";
+
+/* Simple choice type of question */
+"Simple choice" = "Простий вибір";
+
 /* Title for Specialities table view */
 "Specialities" = "Спеціальності";
+
+/* Title for speciality tap */
+"Speciality" = "Спеціальності";
 
 /* Response unrelated to structure */
 "Structure is incorrect: (entity)" = "Структура неправильна: (entity)";
@@ -141,7 +177,8 @@
 /* Title for TestsForSubjectTableViewController */
 "Subject tests" = "Тести по предмету";
 
-/* Title for SubjectTableViewController */
+/* Title for subjects tap
+   Title for SubjectTableViewController */
 "Subjects" = "Предмети";
 
 /* Test tasks showing */
@@ -162,7 +199,9 @@
 /* Selected group havent ID */
 "Undefined group" = "Невідома група";
 
-/* Title for update group */
+/* Swipe button title
+   Swipe title button
+   Title for update group */
 "Update" = "Оновлення";
 
 /* Title for AddNewAnswerViewController */
@@ -182,6 +221,9 @@
 
 /* Alert title */
 "Warning" = "Попередження";
+
+/* Write answer by yourself type of question */
+"Write answer by yourself" = "Введіть вашу відповідь";
 
 /* Wrong answer */
 "Wrong" = "Неправильно";
