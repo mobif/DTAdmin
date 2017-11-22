@@ -1,0 +1,191 @@
+/* Title for AddNewAnswerViewController */
+"Add new answer" = "Додати нове питання";
+
+/* Title for AddNewRecordViewController */
+"Add new item" = "Додати новий запис";
+
+/* Title for AddNewQuestionViewController */
+"Add new question" = "Додати нове питання";
+
+/* Title for admins table list view */
+"Administrators" = "Адміністратори";
+
+/* Alert title */
+"Alert" = "Попередження";
+
+/* Title for ItemTableViewController */
+"Answer correctness" = "Правильність відповіді";
+
+/* Title for AnswerAttachmentViewController */
+"Answer detail" = "Деталі відповіді";
+
+/* Title for AnswersTableViewController */
+"Answers" = "Відповіді";
+
+/* Attempts for test showing */
+"Attempts: " = "Кількість спроб:";
+
+/* Title for create new group */
+"Create" = "Створити";
+
+/* Title for Group Detail view */
+"Details" = "Деталі";
+
+/* Edit account of student
+   Title for admin editing view
+   Title for edit admin creation view */
+"Edit" = "Редагувати";
+
+/* Enabled for test showing */
+"Enabled: " = "Можливіть:";
+
+/* All fields have to be filled correctly */
+"Entered incorect data" = "Введені неправильні дані";
+
+/* Alert title */
+"Error" = "Помилка";
+
+/* Incorrect request */
+"Error response: (responseValue.statusCode) - (errorMsg)" = "Відповідь на помилку: (responseValue.statusCode) - (errorMsg)";
+
+/* Title for Faculties table view */
+"Faculties" = "Факультети";
+
+/* Filtering information */
+"Filtering (filteredItemCount) of (totalItemCount)" = "Відфільтровано (filteredItemCount) з (totalItemCount)";
+
+/* Title for Groups table view */
+"Groups" = "Групи";
+
+/* You have to select image to adding in profile. */
+"Image not selected!" = "Зображення не вибрано!";
+
+/* Error while downloading data from server */
+"Incorect data" = "Неправильні дані";
+
+/* New user ID not found in the response message */
+"Incorect response structure" = "Недостатня структура відповіді";
+
+/* Incorect server response! */
+"Incorect server response!" = "Невідповідність відповіді сервера!";
+
+/* Incorect type data
+   Information for user about incorect data
+   Message for about incorect data
+   Message for user about incorect data */
+"Incorect type data" = "Недійсний тип даних";
+
+/* Incorrect type */
+"Incorrect type" = "Неправильні дані";
+
+/* Level of difficulty question */
+"Level of difficulty: " = "Рівень складності:";
+
+/* Title for new admin creation view */
+"New" = "Новий";
+
+/* Create new Student */
+"New Student" = "Новий студент";
+
+/* Information for user about no items */
+"No items match your query" = "Немає даних до вашого запиту";
+
+/* Ok button */
+"Ok" = "Добре";
+
+/* Out of Bounds */
+"Out of Bounds" = "За межами поля";
+
+/* Passwords fields empty or don't match */
+"Passwords fileds are empty or don't match" = "Поля паролей порожні або не збігаються";
+
+/* Title for QuestionsTableViewController */
+"Question" = "Питання";
+
+/* Title for QuestionAttachmentViewController */
+"Question detail" = "Деталі питань";
+
+/* Title for ItemTableViewController */
+"Question level" = "Рівень питання";
+
+/* Title for ItemTableViewController */
+"Question type" = "Тип питання";
+
+/* Request not supported! */
+"Request not supported!" = "Запит не підтримується!";
+
+/* Request not supported for entity. */
+"Request not supported." = "Запит не підтримується.";
+
+/* No data in server response */
+"Response is empty" = "Відповідь порожня";
+
+/* No data in server response */
+"Response is empty: (entity)" = "Відповідь порожня: (entity)";
+
+/* Response is empty */
+"Response is empty: (jsonArray)" = "Відповідь порожня: (jsonArray)";
+
+/* Right answer */
+"Right" = "Правильно";
+
+/* Title for Specialities table view */
+"Specialities" = "Спеціальності";
+
+/* Response unrelated to structure */
+"Structure is incorrect: (entity)" = "Структура неправильна: (entity)";
+
+/* List all students */
+"Students" = "Студенти";
+
+/* Title for TestsForSubjectTableViewController */
+"Subject tests" = "Тести по предмету";
+
+/* Title for SubjectTableViewController */
+"Subjects" = "Предмети";
+
+/* Test tasks showing */
+"Tasks: " = "Завдання: ";
+
+/* Cannot prepare header for URLRequest */
+"The Header isn't prepared!" = "Заголовок не готовий!";
+
+/* Time for test showing */
+"Time for test: " = "Час для тесту: ";
+
+/* Type of question */
+"Type of question: " = "Тип питання: ";
+
+/* Uncountable list of Entity or response is incorrect */
+"Uncountable list of Entity" = "Незчисленний список об'єктів";
+
+/* Selected group havent ID */
+"Undefined group" = "Невідома група";
+
+/* Title for update group */
+"Update" = "Оновлення";
+
+/* Title for AddNewAnswerViewController */
+"Update answer" = "Оновлення відповіді";
+
+/* Title for AddNewQuestionViewController */
+"Update question" = "Оновлення питання";
+
+/* Title for AddNewRecordViewController */
+"Update record" = "Оновлення запису";
+
+/* Updated user not found! */
+"User not found!" = "Не знайдено користувача!";
+
+/* UserID not found in list! */
+"UserID not found!" = "ІД користувача не знайдено!";
+
+/* Alert title */
+"Warning" = "Попередження";
+
+/* Wrong answer */
+"Wrong" = "Неправильно";
+
+/* Inputed email has invalid structure */
+"Wrong email" = "Не правильна електронна адреса";
+
