@@ -59,11 +59,7 @@ class TestsForSubjectTableViewController: UITableViewController {
         cell.delegate = self
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
+        
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let testToDelete = self.test[indexPath.row]
@@ -93,13 +89,6 @@ class TestsForSubjectTableViewController: UITableViewController {
         delete.backgroundColor = UIColor.red
         update.backgroundColor = UIColor.blue
         return [delete, update]
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let wayToShowTestInfo = UIStoryboard(name: "Subjects", bundle: nil)
-            .instantiateViewController(withIdentifier: "showTestInfo") as? ShowTestInfoViewController else { return }
-        wayToShowTestInfo.test = self.test[indexPath.row]
-        self.navigationController?.pushViewController(wayToShowTestInfo, animated: true)
     }
     
 }
