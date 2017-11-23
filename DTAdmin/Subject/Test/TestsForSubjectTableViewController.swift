@@ -68,18 +68,20 @@ class TestsForSubjectTableViewController: UITableViewController {
             let testToDelete = self.test[indexPath.row]
             DataManager.shared.deleteEntity(byId: testToDelete.id!, typeEntity: .test, completionHandler: {
                     (status, error) in
-                guard let error = error else {
+                if error == nil {
                     self.tableView.beginUpdates()
                     self.test.remove(at: indexPath.row)
                     self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                     self.tableView.endUpdates()
                     return
+                } else {
+                    self.showWarningMsg(error!)
                 }
-                self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed test delete"))
             })
         }
         let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
             guard let wayToAddNewTest = UIStoryboard.stoyboard(by: .test).instantiateViewController(withIdentifier: "newTestViewController") as? NewTestViewController else { return }
+            wayToAddNewTest.edit = true
             wayToAddNewTest.testInstance = self.test[indexPath.row]
             wayToAddNewTest.resultModification = { test in
                 self.test[indexPath.row] = test

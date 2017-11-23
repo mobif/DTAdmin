@@ -11,6 +11,9 @@ import UIKit
 class NewTestViewController: UIViewController {
 
     var subjectId: String?
+    var edit = Bool()
+    private let isDisabled = NSLocalizedString("Is Disabled", comment: "Test is disabled for students ot take")
+    private let isEnabled = NSLocalizedString("Is Enabled", comment: "Test is enabled for students ot take")
     
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var isEnabledLabel: UILabel!
@@ -25,10 +28,10 @@ class NewTestViewController: UIViewController {
         didSet {
             self.view.layoutIfNeeded()
             enabledSwitch.isOn = false
-            isEnabledLabel.text = "Is Disabled"
+            isEnabledLabel.text = isDisabled
             if testInstance?.enabled == "1" {
                 enabledSwitch.isOn = true
-                isEnabledLabel.text = "Is Enabled"
+                isEnabledLabel.text = isEnabled
             }
             testNameTextField.text = testInstance?.name
             timeForTestTextField.text = testInstance?.timeForTest
@@ -39,14 +42,19 @@ class NewTestViewController: UIViewController {
     
     @IBAction func `switch`(_ sender: UISwitch) {
         if (sender.isOn == true) {
-            isEnabledLabel.text = "Is Enabled"
+            isEnabledLabel.text = isEnabled
         } else {
-            isEnabledLabel.text = "Is Disabled"
+            isEnabledLabel.text = isDisabled
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if edit {
+            self.title = NSLocalizedString("Update test", comment: "ViewController title")
+        } else {
+            self.title = NSLocalizedString("New test", comment: "ViewController title")
+        }
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {
@@ -101,7 +109,9 @@ class NewTestViewController: UIViewController {
                 self.showWarningMsg(error)
             } else {
                 testForSave.id = testId
-                self.resultModification!(testForSave)
+                if let resultModification = self.resultModification {
+                    resultModification(testForSave)
+                }
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -117,10 +127,12 @@ class NewTestViewController: UIViewController {
                 enabled = "1"
             }
             
-            guard let subjectId = testInstance?.subjectId else {
-                return (self.subjectId!, name, tasks, timeForTest, enabled, attempts)
+            if let subjectId = testInstance?.subjectId {
+                return (subjectId, name, tasks, timeForTest, enabled, attempts)
             }
-            return (subjectId, name, tasks, timeForTest, enabled, attempts)
+            if let subjectId = self.subjectId {
+                return (subjectId, name, tasks, timeForTest, enabled, attempts)
+            }
         }
         return nil
     }

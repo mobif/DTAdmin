@@ -12,17 +12,13 @@ class TestsViewController: UIViewController {
     
     var cookie: HTTPCookie?
     var testsList: [TestStructure]?
-    
     var subjectId: String?
-    var subjectName: String? {
-        didSet {
-        }
-    }
-    
+    var subjectName: String?
+        
+       
     @IBOutlet weak var testsTableView: UITableView!
     
     @IBAction func showNewTestController(_ sender: UIBarButtonItem) {
-        
         guard let newTestViewController = UIStoryboard(name: "Test", bundle: nil).instantiateViewController(withIdentifier: "NewTestViewController") as? NewTestViewController else  { return }
         newTestViewController.resultModification = { test in
             self.testsList?.append(test)
@@ -38,7 +34,8 @@ class TestsViewController: UIViewController {
     }
     
     func update() {
-        DataManager.shared.getTest(bySubject: "5") { (tests, error) in
+        guard let id = subjectId else { return }
+        DataManager.shared.getTest(bySubject: id) { (tests, error) in
             guard let tests = tests as? [TestStructure] else {
                 print(error)
                 return
@@ -55,7 +52,7 @@ extension TestsViewController: UITableViewDelegate {
 extension TestsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testsList != nil ? testsList!.count : 0  // ternary operator
+        return testsList != nil ? testsList!.count : 0 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
