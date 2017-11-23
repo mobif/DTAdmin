@@ -12,23 +12,31 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
 
     let dataModel = DataModel.dataModel
     @IBOutlet weak var tableView: UITableView!
+    var testDetailForSave: TestDetailStructure?
+    var resultModification: ((TestDetailStructure) -> ())?
+    var canEdit = Bool()
+    var idForEditing = String()
+    var id = "3"
+    var maxTask = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Details"
+        for item in dataModel.details {
+            dataModel.detailDictionary[item] = "0"
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataModel.testDetails.count
+        return dataModel.detailDictionary.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "selectDetailsCell",
                                                           for: indexPath) as? SelectDetailsTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
-        let item = dataModel.testDetails[indexPath.row]
-        cell.testDetailNameLabel.text = item
-        cell.numberOfTestDetailLabel.text = "select"
+        cell.testDetailNameLabel.text = Array(dataModel.detailDictionary.keys)[indexPath.row]
+        cell.numberOfTestDetailLabel.text = Array(dataModel.detailDictionary.values)[indexPath.row]
         cell.numberOfTestDetailLabel.alpha = 0.5
         return cell
     }
@@ -39,10 +47,82 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
         withIdentifier: "NumbersViewController") as? NumbersViewController else { return }
         numbersViewController.detail = indexPath.row
         numbersViewController.result = { result in
-            self.dataModel.testDetails[indexPath.row] = String(result)
-            self.tableView.reloadData()
+            if result != 0 {
+                self.dataModel.detailNumber[indexPath.row] = String(result)
+                self.tableView.reloadData()
+            } else {
+                return
+            }
         }
         self.navigationController?.pushViewController(numbersViewController, animated: true)
+    }
+
+    /**
+     This function get data from text fields for creation new text detail item.
+     - Precondition: All text fields have to have its property value.
+     - Postcondition: Test detail item is prepared to request to API.
+     - Returns: This function returns true - when all text fields are filled or false - when empty
+     */
+    func prepareForRequest() -> Bool {
+        let level = dataModel.detailNumber[0]
+        let task = dataModel.detailNumber[1]
+        let rate = dataModel.detailNumber[2]
+        if level != "0" && task != "0" && rate != "0"  {
+            let dictionary: [String: Any] = ["test_id": id, "level": level, "tasks": task, "rate": rate]
+            self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
+            return true
+        } else {
+            return false
+        }
+    }
+
+    @IBAction func CreateSpecialityButton(_ sender: Any) {
+        !canEdit ? createTestDetail() : updateTestDetail()
+    }
+
+    func createTestDetail() {
+        if prepareForRequest() {
+            guard let testDetailForSave = testDetailForSave else { return }
+            DataManager.shared.insertEntity(entity: testDetailForSave, typeEntity: .testDetail) { (result, error) in
+                if let error = error {
+                    self.showWarningMsg(error)
+                    return
+                } else {
+                    guard let result = result as? [[String : Any]] else { return }
+                    guard let firstResult = result.first else { return }
+                    guard let testDetailResult = TestDetailStructure(dictionary: firstResult) else { return }
+                    if let resultModification = self.resultModification {
+                        resultModification(testDetailResult)
+                    }
+                }
+            }
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
+                                             comment: "All fields have to be filled"))
+        }
+    }
+
+    func updateTestDetail() {
+        if prepareForRequest() {
+            guard let testDetailForSave = testDetailForSave else { return }
+            DataManager.shared.updateEntity(byId: idForEditing,
+                                            entity: testDetailForSave, typeEntity: .testDetail) { (error) in
+                                                if let error = error {
+                                                    self.showWarningMsg(error)
+                                                    return
+                                                } else {
+                                                    if let resultModification = self.resultModification {
+                                                        testDetailForSave.id = self.idForEditing
+                                                        resultModification(testDetailForSave)
+                                                    }
+                                                }
+            }
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
+                                             comment: "All fields have to be filled"))
+        }
     }
 
     

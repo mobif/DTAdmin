@@ -19,7 +19,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Select test \(dataModel.testDetails[detail])"
+        self.title = "Select \(dataModel.details[detail])"
         switch detail {
         case 0:
             self.currentArray = dataModel.createArray(max: 10)

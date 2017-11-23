@@ -107,23 +107,15 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then \(dataModel.max)",
                                                   comment: "Sum of tasks should be from 1 to \(dataModel.max)"))
         } else {
-            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
-            bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController")
-            as? TestDetailCreateUpdateViewController else { return }
-
-            self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
-            testDetailCreateUpdateViewController.resultModification = { newTestDetail in
-                self.dataModel.testDetailArray.append(newTestDetail)
-                self.testDetailsTableView.reloadData()
-            }
+            guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
+                                                                  bundle: nil).instantiateViewController(
+                withIdentifier: "GetTestDetailsViewController") as? GetTestDetailsViewController else { return }
+            self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
+//            testDetailCreateUpdateViewController.resultModification = { newTestDetail in
+//                self.dataModel.testDetailArray.append(newTestDetail)
+//                self.testDetailsTableView.reloadData()
+//            }
         }
-    }
-
-    @IBAction func itemButtonTapped(_ sender: Any) {
-        guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
-                                                              bundle: nil).instantiateViewController(
-        withIdentifier: "GetTestDetailsViewController") as? GetTestDetailsViewController else { return }
-        self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
     }
     
     /* - - - LogIn for testing - - - */

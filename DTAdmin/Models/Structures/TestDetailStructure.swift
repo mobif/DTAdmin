@@ -30,4 +30,5 @@ class TestDetailStructure: Serializable {
         if let id = id { result["id"] = id }
         return result
     }
+
 }
