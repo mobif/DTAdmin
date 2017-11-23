@@ -24,7 +24,7 @@ class SubjectTableViewController: UITableViewController {
     var filteredData = [SubjectStructure]()
     var selectedSubject: ((SubjectStructure) -> ())?
     var refresh: MyRefreshController!
-    let searchController = UISearchController(searchResultsController: nil)
+    let searchController = MySearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,17 +94,8 @@ class SubjectTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-
-    func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
+        if searchController.isFiltering() {
             searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: records.count)
             return filteredData.count
         }
@@ -116,7 +107,7 @@ class SubjectTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             as? SubjectTableViewCell else { fatalError("The dequeued cell is not an instance of MealTableViewCell.") }
-        let cellData = isFiltering() ? filteredData[indexPath.row] : records[indexPath.row]
+        let cellData = searchController.isFiltering() ? filteredData[indexPath.row] : records[indexPath.row]
         cell.setSubject(subject: cellData)
         cell.delegate = self
         return cell

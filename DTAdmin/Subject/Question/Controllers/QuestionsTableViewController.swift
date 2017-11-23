@@ -16,7 +16,7 @@ class QuestionsTableViewController: UITableViewController {
     var testId: String?
     var filteredData = [QuestionStructure]()
     var refresh: MyRefreshController!
-    let searchController = UISearchController(searchResultsController: nil)
+    let searchController = MySearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,17 +103,8 @@ class QuestionsTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-
-    func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
+        if searchController.isFiltering() {
             searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: questions.count)
             return filteredData.count
         }
@@ -125,7 +116,7 @@ class QuestionsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as!
             QuestionTableViewCell
-        let cellData = isFiltering() ? filteredData[indexPath.row] : questions[indexPath.row]
+        let cellData = searchController.isFiltering() ? filteredData[indexPath.row] : questions[indexPath.row]
         cell.setQuestion(question: cellData)
         cell.delegate = self
         return cell
