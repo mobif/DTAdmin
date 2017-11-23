@@ -62,8 +62,9 @@ extension SearchFooter {
             label.text = NSLocalizedString("No items match your query", comment: "Information for user about no items")
             showFooter()
         } else {
-            label.text = NSLocalizedString("Filtering \(filteredItemCount) of \(totalItemCount)",
-                                            comment: "Filtering information")
+            let filteringText = NSLocalizedString("Filtering ", comment: "Filtering information - filtering")
+            let ofText = NSLocalizedString(" of ", comment: "Filtering information - filtering")
+            label.text = filteringText + String(filteredItemCount) + ofText + String(totalItemCount)
             showFooter()
         }
     }
