@@ -36,13 +36,21 @@ class TestTableViewCell: UITableViewCell {
     func setTest(test: TestStructure) {
         testItem = test
         testLabel.text = test.name
-        tasksTestLabel.text = NSLocalizedString("Tasks: ", comment: "Test tasks showing") + test.tasks
-        timeForTestLabel.text = NSLocalizedString("Time for test: ",
-                                                  comment: "Time for test showing") + test.timeForTest
-        let enabled = test.enabled == "0" ? NSLocalizedString("false", comment: "False enabled") :
-                                            NSLocalizedString("true", comment: "True enabled")
-        enabledLabel.text = NSLocalizedString("Enabled: ", comment: "Enabled for test showing") + enabled
-        attemptsLabel.text = NSLocalizedString("Attempts: ", comment: "Attempts for test showing") + test.attempts
+        
+        let testTasksText = NSLocalizedString("Tasks: ", comment: "Test tasks showing")
+        tasksTestLabel.text = testTasksText + test.tasks
+
+        let timeForTestText = NSLocalizedString("Time for test: ", comment: "Time for test showing")
+        timeForTestLabel.text = timeForTestText + test.timeForTest
+
+        let falseEnabledTest = NSLocalizedString("false", comment: "False enabled")
+        let trueEnabledTest = NSLocalizedString("true", comment: "True enabled")
+        let enabledText = test.enabled == "0" ? falseEnabledTest : trueEnabledTest
+        let enabledTestText = NSLocalizedString("Enabled: ", comment: "Enabled for test showing")
+        enabledLabel.text = enabledTestText + enabledText
+
+        let attemptsText = NSLocalizedString("Attempts: ", comment: "Attempts for test showing")
+        attemptsLabel.text = attemptsText + test.attempts
     }
     
     @IBAction func showTestDetail(_ sender: UIButton) {

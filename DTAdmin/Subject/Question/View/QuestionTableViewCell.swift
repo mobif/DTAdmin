@@ -28,10 +28,13 @@ class QuestionTableViewCell: UITableViewCell {
     func setQuestion(question: QuestionStructure) {
         questionItem = question
         questionTextLabel.text = question.questionText
-        questionLevelLabel.text = NSLocalizedString("Level of difficulty: ",
-                                                    comment: "Level of difficulty question") + question.level
+
+        let levelQuestionText = NSLocalizedString("Level of difficulty: ", comment: "Level of difficulty question")
+        questionLevelLabel.text = levelQuestionText + question.level
+        
+        let typeQuestionText = NSLocalizedString("Type of question: ", comment: "Type of question")
         guard let index = Int(question.type) else { return }
-        questionTypeLabel.text = NSLocalizedString("Type of question: ", comment: "Type of question") + types[index - 1]
+        questionTypeLabel.text = typeQuestionText + types[index - 1]
     }
     
     @IBAction func showAnswers(_ sender: UIButton) {
