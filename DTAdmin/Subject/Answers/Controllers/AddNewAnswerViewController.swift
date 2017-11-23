@@ -46,7 +46,7 @@ class AddNewAnswerViewController: UIViewController {
                                                           comment: "Title for AddNewAnswerViewController")
         }
 
-        if qustionType == "3" || qustionType == "4" {
+        if isCorrectTypeOFQuestion() {
             isAnswerCorrectTextField.text = isAnswerCorrect[1]
             isAnswerCorrectTextField.isEnabled = false
         } else {
@@ -67,6 +67,13 @@ class AddNewAnswerViewController: UIViewController {
             self.isAnswerCorrectTextField.text = result
         }
         self.navigationController?.pushViewController(itemTableViewController, animated: true)
+    }
+
+    func isCorrectTypeOFQuestion() -> Bool {
+        if qustionType == "3" || qustionType == "4" {
+            return true
+        }
+        return false
     }
     
     func showAnswerAttachment(for text: String) {
@@ -199,7 +206,7 @@ extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigat
 extension AddNewAnswerViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if qustionType == "3" || qustionType == "4" {
+        if isCorrectTypeOFQuestion() {
             var result = true
             let disallowedCharacterSet = NSCharacterSet(charactersIn: "0123456789.-")
             let replacementStringIsLegal = text.rangeOfCharacter(from: disallowedCharacterSet as CharacterSet)
