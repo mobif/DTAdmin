@@ -1,3 +1,6 @@
+/* Filtering information - filtering */
+" of " = " з ";
+
 /* Title for AddNewAnswerViewController */
 "Add new answer" = "Додати нове питання";
 
@@ -64,8 +67,8 @@
 /* Title for faculty tap */
 "Faculty" = "Факультети";
 
-/* Filtering information */
-"Filtering (filteredItemCount) of (totalItemCount)" = "Відфільтровано \\(filteredItemCount) з \\(totalItemCount)";
+/* Filtering information - filtering */
+"Filtering " = "Відфільтровано ";
 
 /* Title for Groups table view
    Title for groups tap */
