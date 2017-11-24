@@ -19,11 +19,15 @@ class AnswersTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Answers", comment: "Title for AnswersTableViewController")
 
+        refreshControllConfigure()
+
+        showAnswers()
+    }
+
+    private func refreshControllConfigure() {
         refresh = MyRefreshController()
         tableView.addSubview(refresh)
         refresh.addTarget(self, action: #selector(showAnswers), for: .valueChanged)
-
-        showAnswers()
     }
     
     @objc private func showAnswers() {
@@ -59,6 +63,7 @@ class AnswersTableViewController: UITableViewController {
         self.navigationController?.pushViewController(addNewAnswerViewController, animated: true)
     }
 
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answers.count
     }
@@ -72,7 +77,8 @@ class AnswersTableViewController: UITableViewController {
         cell.setAnswer(answer: cellData)
         return cell
     }
-    
+
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
         [UITableViewRowAction]? {
 

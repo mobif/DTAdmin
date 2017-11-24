@@ -46,6 +46,7 @@ class QuestionAttachmentViewController: ParentViewController {
 
 }
 
+// MARK: - UIScrollViewDelegate
 extension QuestionAttachmentViewController: UIScrollViewDelegate {
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

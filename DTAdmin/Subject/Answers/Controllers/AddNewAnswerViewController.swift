@@ -28,7 +28,7 @@ class AddNewAnswerViewController: UIViewController {
             guard let answer = answer else { return }
             self.view.layoutIfNeeded()
             self.answerTextView.text = answer.answerText
-            self.isAnswerCorrectTextField.text = answer.trueAnswer
+            self.isAnswerCorrectTextField.text = answer.trueAnswer == "0" ? isAnswerCorrect[0] : isAnswerCorrect[1]
             if answer.attachment.count > 1 {
                 showAnswerAttachment(for: answer.attachment)
             }
@@ -46,6 +46,21 @@ class AddNewAnswerViewController: UIViewController {
                                                           comment: "Title for AddNewAnswerViewController")
         }
 
+        tapGestureRecognizerConfigure()
+    }
+
+    private func showAnswerAttachment(for text: String) {
+        attachmentImageView.image = UIImage.decode(fromBase64: text)
+    }
+
+    fileprivate func isCorrectTypeOFQuestion() -> Bool {
+        if qustionType == "3" || qustionType == "4" {
+            return true
+        }
+        return false
+    }
+
+    private func tapGestureRecognizerConfigure() {
         if isCorrectTypeOFQuestion() {
             isAnswerCorrectTextField.text = isAnswerCorrect[1]
             isAnswerCorrectTextField.isEnabled = false
@@ -69,17 +84,6 @@ class AddNewAnswerViewController: UIViewController {
         self.navigationController?.pushViewController(itemTableViewController, animated: true)
     }
 
-    func isCorrectTypeOFQuestion() -> Bool {
-        if qustionType == "3" || qustionType == "4" {
-            return true
-        }
-        return false
-    }
-    
-    func showAnswerAttachment(for text: String) {
-        attachmentImageView.image = UIImage.decode(fromBase64: text)
-    }
-    
     @IBAction func saveAnswer(_ sender: UIBarButtonItem) {
         if !updateDates {
             saveNewAnswer()
@@ -88,7 +92,7 @@ class AddNewAnswerViewController: UIViewController {
         }
     }
     
-    func saveNewAnswer() {
+    private func saveNewAnswer() {
         if prepareForSave(){
             guard let answerForSave = answerForSave else { return }
             DataManager.shared.insertEntity(entity: answerForSave, typeEntity: .answer) {
@@ -109,7 +113,7 @@ class AddNewAnswerViewController: UIViewController {
         }
     }
     
-    func updateAnswer() {
+    private func updateAnswer() {
         if prepareForSave(){
             guard let answerId = answer?.id else { return }
             guard let answerForSave = answerForSave else { return }
@@ -128,7 +132,7 @@ class AddNewAnswerViewController: UIViewController {
         }
     }
     
-    func prepareForSave() -> Bool {
+    private func prepareForSave() -> Bool {
     
         guard let id = questionId else { return false }
         
@@ -178,6 +182,7 @@ class AddNewAnswerViewController: UIViewController {
     
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @objc func openGallery(_ sender: UIButton) {
@@ -203,6 +208,7 @@ extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigat
     }
 }
 
+// MARK: - UITextViewDelegate
 extension AddNewAnswerViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
