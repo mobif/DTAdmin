@@ -14,6 +14,9 @@ class ItemTableViewController: UITableViewController {
     var resultModification: ((String) -> ())?
 
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        if let resultModification = self.resultModification {
+            resultModification("")
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -21,6 +24,7 @@ class ItemTableViewController: UITableViewController {
         super.viewDidLoad()
     }
 
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentArray.count
     }
@@ -31,6 +35,7 @@ class ItemTableViewController: UITableViewController {
         return cell
     }
 
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         if let resultModification = self.resultModification {

@@ -40,7 +40,8 @@ class TestsForSubjectTableViewController: UITableViewController {
             }
         }
     }
-    
+
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return test.count
     }
@@ -51,7 +52,8 @@ class TestsForSubjectTableViewController: UITableViewController {
         cell.delegate = self
         return cell
     }
-    
+
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
     [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive,
@@ -68,6 +70,7 @@ class TestsForSubjectTableViewController: UITableViewController {
     
 }
 
+// MARK: - TestTableViewCellDelegate
 extension TestsForSubjectTableViewController: TestTableViewCellDelegate {
 
     func didTapShowTestDetail(for id: String) {

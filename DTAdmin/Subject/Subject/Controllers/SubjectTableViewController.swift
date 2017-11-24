@@ -30,22 +30,25 @@ class SubjectTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Subjects", comment: "Title for SubjectTableViewController")
         showRecords()
+        searchControllerConfigure()
+        refreshControllerConfigure()
+        tableView.tableFooterView = searchFooter
+    }
 
+    private func searchControllerConfigure() {
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = NSLocalizedString("Search",
-                                                                   comment: "Placeholder for searchController")
+        searchController.configure()
         navigationItem.searchController = searchController
         definesPresentationContext = true
 
         searchController.searchBar.scopeButtonTitles = [
-                                        NSLocalizedString("Name", comment: "Scope title for searchController"),
-                                        NSLocalizedString("Description", comment: "Scope title for searchController")
-                                        ]
+            NSLocalizedString("Name", comment: "Scope title for searchController"),
+            NSLocalizedString("Description", comment: "Scope title for searchController")
+        ]
         searchController.searchBar.delegate = self
+    }
 
-        tableView.tableFooterView = searchFooter
-
+    private func refreshControllerConfigure() {
         refresh = MyRefreshController()
         tableView.addSubview(refresh)
         refresh.addTarget(self, action: #selector(showRecords), for: .valueChanged)
@@ -82,7 +85,7 @@ class SubjectTableViewController: UITableViewController {
         }
     }
 
-    func filterContentForSearchText(_ searchText: String, scope: String) {
+    private func filterContentForSearchText(_ searchText: String, scope: String) {
         filteredData = records.filter({ (subject : SubjectStructure) -> Bool in
 
             if scope == "Description" {
@@ -94,6 +97,7 @@ class SubjectTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isFiltering() {
             searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: records.count)
@@ -113,6 +117,7 @@ class SubjectTableViewController: UITableViewController {
         return cell
     }
 
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
     [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive,
@@ -150,6 +155,7 @@ class SubjectTableViewController: UITableViewController {
 
 }
 
+// MARK: - UISearchResultsUpdating
 extension SubjectTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
@@ -160,6 +166,7 @@ extension SubjectTableViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension SubjectTableViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -168,6 +175,7 @@ extension SubjectTableViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - SubjectTableViewCellDelegate
 extension SubjectTableViewController: SubjectTableViewCellDelegate {
 
     func didTapShowTest(for id: String) {
