@@ -23,7 +23,20 @@ class DTAdminTests: XCTestCase {
     
     func testExample() {
         let mockData = MockDataManager.shared
-        
+        mockData.setData(caseURL: "vps9615.hyperhost.name/group/getRecords")
+        weak var promise = expectation(description: "User list")
+        var responseError: String?
+        var groups: [GroupStructure]?
+        mockData.getList(byEntity: .group) {
+            (list, error) in
+            responseError = error
+            groups = list as? [GroupStructure]
+            promise?.fulfill()
+            promise = nil
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssertNil(responseError)
+        XCTAssertNotNil(groups)
     }
     
     func testPerformanceExample() {

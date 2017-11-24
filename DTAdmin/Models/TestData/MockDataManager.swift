@@ -45,13 +45,14 @@ class MockDataManager: HTTPManager, DataRequestable {
                 }
                 return
             }
-            
+            print(jsonData)
             do {
-                if let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization
-                                                            .ReadingOptions.mutableContainers) as? [String:AnyObject]
+                //JSONSerialization.ReadingOptions.mutableContainers replaced by []
+                let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
+                if    let jsonResponse = jsonObject as? [String:AnyObject]
                 {
                     DispatchQueue.main.async {
-                        finishedClosure(jsonObject,nil)
+                        finishedClosure(jsonResponse,nil)
                     }
                 }
             } catch let error as NSError {
