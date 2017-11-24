@@ -33,7 +33,8 @@ class AddNewQuestionViewController: UIViewController {
             self.view.layoutIfNeeded()
             self.questionTextView.text = question.questionText
             self.questionLevelTextField.text = question.level
-            self.questionTypeTextField.text = question.type
+            guard let index = Int(question.type) else { return }
+            self.questionTypeTextField.text = types[index - 1]
             if question.attachment.count > 1 {
                 showQuestionAttachment(for: question.attachment)
             }
@@ -51,14 +52,17 @@ class AddNewQuestionViewController: UIViewController {
                                                           comment: "Title for AddNewQuestionViewController")
         }
 
+        tapGestureRecognizerConfigure()
+    }
+
+    private func tapGestureRecognizerConfigure() {
         let questionLevel = UITapGestureRecognizer(target: self, action: #selector(chooseQuestionLevel))
         questionLevelTextField.addGestureRecognizer(questionLevel)
         let questionType = UITapGestureRecognizer(target: self, action: #selector(chooseQuestionType))
         questionTypeTextField.addGestureRecognizer(questionType)
-
     }
 
-    @objc func chooseQuestionLevel() {
+    @objc private func chooseQuestionLevel() {
         guard let itemTableViewController = UIStoryboard(name: "Subjects",
                                                                   bundle: nil).instantiateViewController(withIdentifier: "ItemTableViewController") as?
             ItemTableViewController else { return }
@@ -71,7 +75,7 @@ class AddNewQuestionViewController: UIViewController {
         self.navigationController?.pushViewController(itemTableViewController, animated: true)
     }
 
-    @objc func chooseQuestionType() {
+    @objc private func chooseQuestionType() {
         guard let itemTableViewController = UIStoryboard(name: "Subjects",
                                                          bundle: nil).instantiateViewController(withIdentifier:
                                                             "ItemTableViewController") as?
@@ -93,7 +97,7 @@ class AddNewQuestionViewController: UIViewController {
         }
     }
     
-    func saveNewQuestion() {
+    private func saveNewQuestion() {
         if prepareForSave(){
             guard let questionForSave = questionForSave else { return }
             DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) {
@@ -114,7 +118,7 @@ class AddNewQuestionViewController: UIViewController {
         }
     }
     
-    func updateQuestion() {
+    private func updateQuestion() {
         if prepareForSave(){
             guard let questionId = questionId else { return }
             guard let questionForSave = questionForSave else { return }
@@ -137,7 +141,7 @@ class AddNewQuestionViewController: UIViewController {
         questionAttachmentImageView.image = nil
     }
     
-    func prepareForSave() -> Bool {
+    private func prepareForSave() -> Bool {
         guard let questionText = questionTextView.text,
             let level = questionLevelTextField.text,
             let type = questionTypeTextField.text,
@@ -182,12 +186,13 @@ class AddNewQuestionViewController: UIViewController {
         }
     }
     
-    func showQuestionAttachment(for text: String){
+    private func showQuestionAttachment(for text: String){
         questionAttachmentImageView.image = UIImage.decode(fromBase64: text)
     }
     
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension AddNewQuestionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @objc func openGallery(_ sender: UIButton) {
