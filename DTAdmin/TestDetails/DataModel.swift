@@ -15,8 +15,7 @@ class DataModel: NSObject {
     var levelArrayForFiltering = [Int]()
     var taskArrayForFiltering = [Int]()
     var details = ["level", "task", "rate"]
-    var detailNumber = ["0", "0", "0"]
-    var detailDictionary = [String: String]()
+    var detailArray = [DetailStructure]()
     let max = 10
 
     func createArray(max: Int) -> [Int] {
@@ -36,6 +35,15 @@ class DataModel: NSObject {
         }
         return filtered
     }
+}
 
-    
+class DetailStructure {
+
+    var detail: String
+    var number: String
+
+    init(detail: String, number: String) {
+        self.detail = detail
+        self.number = number
+    }
 }

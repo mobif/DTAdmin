@@ -22,22 +22,25 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Details"
-        for item in dataModel.details {
-            dataModel.detailDictionary[item] = "0"
+        var array = [DetailStructure]()
+        for i in dataModel.details {
+            array.append(DetailStructure(detail: i, number: "0"))
         }
+        dataModel.detailArray = array
+        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataModel.detailDictionary.count
+        return dataModel.detailArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "selectDetailsCell",
                                                           for: indexPath) as? SelectDetailsTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
-        cell.testDetailNameLabel.text = Array(dataModel.detailDictionary.keys)[indexPath.row]
-        cell.numberOfTestDetailLabel.text = Array(dataModel.detailDictionary.values)[indexPath.row]
-        cell.numberOfTestDetailLabel.alpha = 0.5
+        cell.testDetailNameLabel.text = dataModel.detailArray[indexPath.row].detail
+        cell.numberOfTestDetailLabel.text = dataModel.detailArray[indexPath.row].number
+//        cell.numberOfTestDetailLabel.alpha = 0.5
         return cell
     }
 
@@ -48,7 +51,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
         numbersViewController.detail = indexPath.row
         numbersViewController.result = { result in
             if result != 0 {
-                self.dataModel.detailNumber[indexPath.row] = String(result)
+                self.dataModel.detailArray[indexPath.row].number = String(result)
                 self.tableView.reloadData()
             } else {
                 return
@@ -64,9 +67,9 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
      - Returns: This function returns true - when all text fields are filled or false - when empty
      */
     func prepareForRequest() -> Bool {
-        let level = dataModel.detailNumber[0]
-        let task = dataModel.detailNumber[1]
-        let rate = dataModel.detailNumber[2]
+        let level = dataModel.detailArray[0].number
+        let task = dataModel.detailArray[1].number
+        let rate = dataModel.detailArray[2].number
         if level != "0" && task != "0" && rate != "0"  {
             let dictionary: [String: Any] = ["test_id": id, "level": level, "tasks": task, "rate": rate]
             self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
