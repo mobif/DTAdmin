@@ -153,6 +153,10 @@ class SubjectTableViewController: UITableViewController {
         return [delete, update] 
     }
 
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
+
 }
 
 // MARK: - UISearchResultsUpdating

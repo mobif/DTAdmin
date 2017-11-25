@@ -121,5 +121,9 @@ class AnswersTableViewController: UITableViewController {
         answerAttachmentViewController.answerId = answers[indexPath.row].id
         self.navigationController?.pushViewController(answerAttachmentViewController, animated: true)
     }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
     
 }

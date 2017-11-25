@@ -41,4 +41,20 @@ extension UITableViewController {
         alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+
+    /**
+     Making animation for tables view cell
+     - Parameter cell: getting cell for current table view
+     */
+    func animatedCell(for cell: UITableViewCell) {
+        let degree: Double = 90
+        let rotationAngle = CGFloat(degree * Double.pi / 180)
+        let rotationTransform = CATransform3DMakeRotation(rotationAngle, 1, 0, 0)
+        cell.layer.transform = rotationTransform
+
+        UIView.animate(withDuration: 1, delay: 0.2, options: .curveEaseOut, animations: {
+            cell.layer.transform = CATransform3DIdentity
+        })
+    }
+    
 }
