@@ -40,7 +40,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
         guard let cell = prototypeCell else { return UITableViewCell() }
         cell.testDetailNameLabel.text = dataModel.detailArray[indexPath.row].detail
         cell.numberOfTestDetailLabel.text = dataModel.detailArray[indexPath.row].number
-//        cell.numberOfTestDetailLabel.alpha = 0.5
+        cell.numberOfTestDetailLabel.alpha = 0.5
         return cell
     }
 
@@ -61,16 +61,16 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     /**
-     This function get data from text fields for creation new text detail item.
-     - Precondition: All text fields have to have its property value.
+     This function get data from table view for creation new text detail item.
+     - Precondition: All test details have to have its property value.
      - Postcondition: Test detail item is prepared to request to API.
-     - Returns: This function returns true - when all text fields are filled or false - when empty
+     - Returns: This function returns true - when all test details property value are selected or false - when not
      */
     func prepareForRequest() -> Bool {
         let level = dataModel.detailArray[0].number
         let task = dataModel.detailArray[1].number
         let rate = dataModel.detailArray[2].number
-        if level != "0" && task != "0" && rate != "0"  {
+        if level != "0" && task != "0" && rate != "0" {
             let dictionary: [String: Any] = ["test_id": id, "level": level, "tasks": task, "rate": rate]
             self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
             return true
