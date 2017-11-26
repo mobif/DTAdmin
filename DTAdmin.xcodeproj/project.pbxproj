@@ -58,6 +58,7 @@
 		89F4A4C41FB9ADE900807527 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F4A4C31FB9ADE900807527 /* LogoutViewController.swift */; };
 		89F4A4C51FB9B0AF00807527 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */; };
 		C71717D81FCB14E700493467 /* test_cases.json in Resources */ = {isa = PBXBuildFile; fileRef = 3FE11F3E1FC5AF0600C4A10B /* test_cases.json */; };
+		C732F1FA1FCB1FD6000330E8 /* TestResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F1F91FCB1FD5000330E8 /* TestResults.swift */; };
 		C73B2A061FC1D2A70047ED70 /* HTTPHeaderPreparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73B2A051FC1D2A70047ED70 /* HTTPHeaderPreparable.swift */; };
 		C73B2A081FC1D2D70047ED70 /* DataRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73B2A071FC1D2D70047ED70 /* DataRequestable.swift */; };
 		C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */; };
@@ -151,6 +152,7 @@
 		89C96E091F9D03DC0019FE77 /* PickedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickedTextField.swift; sourceTree = "<group>"; };
 		89C96E0B1F9D079D0019FE77 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		89F4A4C31FB9ADE900807527 /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
+		C732F1F91FCB1FD5000330E8 /* TestResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResults.swift; sourceTree = "<group>"; };
 		C73B2A051FC1D2A70047ED70 /* HTTPHeaderPreparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeaderPreparable.swift; sourceTree = "<group>"; };
 		C73B2A071FC1D2D70047ED70 /* DataRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRequestable.swift; sourceTree = "<group>"; };
 		C73B2A091FC1DC800047ED70 /* MockDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataManager.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 		C7535CDD1FA2670100B6CBD1 /* Structures */ = {
 			isa = PBXGroup;
 			children = (
+				C732F1F91FCB1FD5000330E8 /* TestResults.swift */,
 				C7535CDE1FA2670100B6CBD1 /* AnswerStructure.swift */,
 				C7535CDF1FA2670100B6CBD1 /* FacultyStructure.swift */,
 				C7535CE01FA2670100B6CBD1 /* GroupStructure.swift */,
@@ -682,6 +685,7 @@
 				3FF6736D1FB48B89001C7147 /* DetailSubjectViewController.swift in Sources */,
 				3FDE8F9A1F8D0DF60057BF3C /* ViewController.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
+				C732F1FA1FCB1FD6000330E8 /* TestResults.swift in Sources */,
 				C7535CEF1FA2670100B6CBD1 /* AnswerStructure.swift in Sources */,
 				3F8E37461FC5BA2F00C766DD /* MockDataManager.swift in Sources */,
 				C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */,
