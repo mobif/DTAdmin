@@ -93,7 +93,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             guard var studentForSave = studentForSave else { return }
             DataManager.shared.updateEntity(byId: userIDForUpdate, entity: studentForSave, typeEntity: .student) { error in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.message)
                 } else {
                     if let resultModification = self.resultModification {
                         studentForSave.userId = userIDForUpdate
@@ -110,7 +110,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             guard let studentForSave = studentForSave else { return }
             DataManager.shared.insertEntity(entity: studentForSave, typeEntity: .student) { (id, error) in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.message)
                 } else {
                     guard let id = id else {
                         self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
@@ -172,7 +172,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
                 self.selectedGroupForStudent = groupInstance
                 self.groupButton.setTitle(groupInstance.groupName, for: .normal)
             } else if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.message)
             }
         }
     }
@@ -183,7 +183,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
                 self.loginStudentTextField.text = userInstance.userName
                 self.emailStudentTextField.text = userInstance.email
             } else if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.message)
             }
         }
     }

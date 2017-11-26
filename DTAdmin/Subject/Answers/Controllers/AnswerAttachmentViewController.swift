@@ -38,7 +38,7 @@ class AnswerAttachmentViewController: ParentViewController {
                     self.answerAttachmentImageView.image = UIImage(named: "Image")
                 }
             } else {
-                self.showWarningMsg(errorMessage ?? NSLocalizedString("Incorect type data",
+                self.showWarningMsg(errorMessage?.message ?? NSLocalizedString("Incorect type data",
                                                                       comment: "Message for user about incorect data"))
             }
         }

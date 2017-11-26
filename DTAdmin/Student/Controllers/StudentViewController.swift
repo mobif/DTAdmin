@@ -49,8 +49,8 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     guard let error = error else {
                         self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
                         return }
-                    self.showWarningMsg(error)
-                    if error.contains("Error response: 403") {
+                    self.showWarningMsg(error.message)
+                    if error.code == 403 {
                         StoreHelper.logout()
                     }
                 }
@@ -66,8 +66,8 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     guard let error = error else {
                         self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
                         return }
-                    self.showWarningMsg(error)
-                    if error.contains("Error response: 403") {
+                    self.showWarningMsg(error.message)
+                    if error.code == 403 {
                         StoreHelper.logout()
                     }
                 }
@@ -148,7 +148,7 @@ extension StudentViewController: UITableViewDataSource {
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
             DataManager.shared.deleteEntity(byId: studentId, typeEntity: .student)  { (result, error) in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.message)
                 } else {
                     if self.filtered {
                         guard let indexOfStudent = self.getIndex(byId: studentId) else {

@@ -56,7 +56,7 @@ class AdminViewController: ParentViewController {
       self.stopActivity()
       guard let admins = admins as? [UserStructure] else {
         self.refreshControl.endRefreshing()
-        self.showWarningMsg(error ?? "Incorect data")
+        self.showWarningMsg(error?.message ?? "Incorect data")
         return
       }
       self.admins = admins
@@ -117,7 +117,7 @@ extension AdminViewController: UITableViewDataSource {
           self.adminsListTableView.endUpdates()
           return
         }
-        self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed admin delete"))
+        self.showWarningMsg(NSLocalizedString(error.message, comment: "Error alert after failed admin delete"))
       })
     }
     

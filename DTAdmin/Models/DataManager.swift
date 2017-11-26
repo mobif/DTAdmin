@@ -9,29 +9,32 @@
 import Foundation
 
 class DataManager: HTTPManager, DataRequestable {
-
+    
     static let shared = DataManager()
     private var session:URLSession = URLSession.shared
     private override init(){}
 
-    func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
+    func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: ErrorData?) -> ()) {
         session.dataTask(with: request) { (data, response, error) in
             if let sessionError = error {
                 DispatchQueue.main.async {
-                    completionHandler(nil, sessionError.localizedDescription)
+                    let errorMsg = sessionError.localizedDescription
+                    let errorData = ErrorData(errorMsg)
+                    errorData.nserror = sessionError as NSError
+                    completionHandler(nil, errorData)
                 }
             } else {
                 guard let responseValue = response as? HTTPURLResponse else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
                     DispatchQueue.main.async {
-                        completionHandler(nil, errorMsg)
+                        completionHandler(nil, ErrorData(errorMsg))
                     }
                     return
                 }
                 guard let sessionData = data else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
                     DispatchQueue.main.async {
-                        completionHandler(nil, errorMsg)
+                        completionHandler(nil, ErrorData(errorMsg))
                     }
                     return
                 }
@@ -42,7 +45,10 @@ class DataManager: HTTPManager, DataRequestable {
                     
                 } catch {
                     DispatchQueue.main.async {
-                        completionHandler(nil, error.localizedDescription)
+                        let errorMsg = error.localizedDescription
+                        let errorData = ErrorData(errorMsg)
+                        errorData.nserror = error as NSError
+                        completionHandler(nil, errorData)
                     }
                     return
                 }
@@ -50,17 +56,20 @@ class DataManager: HTTPManager, DataRequestable {
                     if responseValue.statusCode == HTTPStatusCodes.OK.rawValue {
                         completionHandler(json, nil)
                     } else {
-                        var errorMsg: String = ""
+                        var errorMsgResponse: String = ""
                         if let errorReason = json as? [String: String]  {
                             guard let errorServerMsg = errorReason["response"] else { return }
-                            errorMsg = errorServerMsg
+                            errorMsgResponse = errorServerMsg
                         }
-                        errorMsg = NSLocalizedString("Error response: \(responseValue.statusCode) - \(errorMsg)", comment: "Incorrect request")
-                        completionHandler(nil, errorMsg)
+                        let errorMsg = NSLocalizedString("Error response", comment: "Incorrect request")
+                        let errorData = ErrorData(errorMsg)
+                        errorData.code = responseValue.statusCode
+                        errorData.descriptionError = errorMsgResponse
+                        completionHandler(nil, errorData)
                     }
                 }
             }
-            }.resume()
+        }.resume()
     }
 }
 

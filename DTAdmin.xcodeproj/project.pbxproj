@@ -91,6 +91,7 @@
 		C7535CF81FA2670100B6CBD1 /* TestStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE71FA2670100B6CBD1 /* TestStructure.swift */; };
 		C7535CF91FA2670100B6CBD1 /* TimeTableStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE81FA2670100B6CBD1 /* TimeTableStructure.swift */; };
 		C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE91FA2670100B6CBD1 /* UserStructure.swift */; };
+		C77D2D051FCB57530054E49C /* ErrorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D2D041FCB57530054E49C /* ErrorData.swift */; };
 		C799D68C1FA267590092170E /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D6891FA267580092170E /* GroupTableViewCell.swift */; };
 		C799D68D1FA267590092170E /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C799D68A1FA267580092170E /* Student.storyboard */; };
 		C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D68B1FA267580092170E /* StudentsTableViewCell.swift */; };
@@ -197,6 +198,7 @@
 		C7535CE71FA2670100B6CBD1 /* TestStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStructure.swift; sourceTree = "<group>"; };
 		C7535CE81FA2670100B6CBD1 /* TimeTableStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableStructure.swift; sourceTree = "<group>"; };
 		C7535CE91FA2670100B6CBD1 /* UserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
+		C77D2D041FCB57530054E49C /* ErrorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorData.swift; sourceTree = "<group>"; };
 		C799D6891FA267580092170E /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		C799D68A1FA267580092170E /* Student.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		C799D68B1FA267580092170E /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				C7535CDA1FA2670100B6CBD1 /* HTTPManager.swift */,
 				C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */,
 				C7535CDB1FA2670100B6CBD1 /* HTTPStatusCodes.swift */,
+				C77D2D041FCB57530054E49C /* ErrorData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				89F4A4C51FB9B0AF00807527 /* UIViewController.swift in Sources */,
 				3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */,
 				89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */,
+				C77D2D051FCB57530054E49C /* ErrorData.swift in Sources */,
 				C732F2011FCB4806000330E8 /* DataRequestable.swift in Sources */,
 				3F322AD01FBF5161003D0AC6 /* UITableViewController.swift in Sources */,
 				C7535CF71FA2670100B6CBD1 /* TestDetailStructure.swift in Sources */,

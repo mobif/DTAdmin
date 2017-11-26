@@ -66,7 +66,7 @@ class AddNewAnswerViewController: UIViewController {
                 (answerResult, errorMessage) in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage)
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     guard let result = answerResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -88,7 +88,7 @@ class AddNewAnswerViewController: UIViewController {
                 errorMessage in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage)
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(answerForSave)

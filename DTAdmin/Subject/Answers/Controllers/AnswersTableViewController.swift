@@ -36,7 +36,7 @@ class AnswersTableViewController: UITableViewController {
                 self.answers = answersUnwrap
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: errorMessage ??
+                self.showMessage(message: errorMessage?.message ??
                     NSLocalizedString("Incorect type data",comment: "Information for user about incorect data"))
             }
         }
@@ -77,7 +77,7 @@ class AnswersTableViewController: UITableViewController {
             guard let answerId = self.answers[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: answerId, typeEntity: .answer)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
-                    self.showMessage(message: errorMessage)
+                    self.showMessage(message: errorMessage.message)
                 } else {
                     self.answers.remove(at: indexPath.row)
                 }

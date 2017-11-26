@@ -77,7 +77,7 @@ class AddNewQuestionViewController: UIViewController {
                 (questionResult, errorMessage) in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage)
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     guard let result = questionResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -99,7 +99,7 @@ class AddNewQuestionViewController: UIViewController {
                 errorMessage in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage)
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(questionForSave)

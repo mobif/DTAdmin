@@ -53,7 +53,7 @@ class AddNewRecordViewController: UIViewController {
             guard let subjectForSave = subjectForSave else { return }
             DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .subject) { (subjectResult, error) in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.message)
                 } else {
                     guard let result = subjectResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -74,7 +74,7 @@ class AddNewRecordViewController: UIViewController {
             DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .subject) {
                     error in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.message)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(subjectForSave)

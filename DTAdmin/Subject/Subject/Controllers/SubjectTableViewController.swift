@@ -72,7 +72,7 @@ class SubjectTableViewController: UITableViewController {
                 self.records.sort { return $0.name < $1.name}
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: errorMessage ?? NSLocalizedString("Incorect type data",
+                self.showMessage(message: errorMessage?.message ?? NSLocalizedString("Incorect type data",
                                                                             comment: "Message for about incorect data"))
             }
         }
@@ -125,7 +125,7 @@ class SubjectTableViewController: UITableViewController {
             guard let subjectId = self.records[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
-                    self.showMessage(message: errorMessage)
+                    self.showMessage(message: errorMessage.message)
                 } else {
                     self.records.remove(at: indexPath.row)
                 }

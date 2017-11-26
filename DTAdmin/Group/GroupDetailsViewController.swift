@@ -40,7 +40,7 @@ class GroupDetailsViewController: UIViewController {
         DataManager.shared.getEntity(byId: group.facultyId, typeEntity: .faculty){
             (faculty, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.message)
             } else {
                 guard let faculty = faculty as? FacultyStructure else { return }
                 DispatchQueue.main.async {
@@ -52,7 +52,7 @@ class GroupDetailsViewController: UIViewController {
         DataManager.shared.getEntity(byId: group.specialityId, typeEntity: .speciality){
             (speciality, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.message)
             } else {
                 guard let speciality = speciality as? SpecialityStructure else { return }
                 DispatchQueue.main.async {

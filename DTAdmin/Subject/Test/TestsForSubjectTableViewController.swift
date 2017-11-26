@@ -35,7 +35,7 @@ class TestsForSubjectTableViewController: UITableViewController {
                 self.test = tests
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: error ?? NSLocalizedString("Incorect type data",
+                self.showMessage(message: error?.message ?? NSLocalizedString("Incorect type data",
                                                                      comment: "Message for user about incorect data"))
             }
         }

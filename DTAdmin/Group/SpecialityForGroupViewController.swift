@@ -31,7 +31,7 @@ class SpecialityForGroupViewController: UIViewController {
         specialityTableView.dataSource = self
         DataManager.shared.getList(byEntity: .speciality){ (specialities, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.message)
             } else {
                 guard let specialities = specialities as? [SpecialityStructure] else {return}
                 self.specialities = specialities
