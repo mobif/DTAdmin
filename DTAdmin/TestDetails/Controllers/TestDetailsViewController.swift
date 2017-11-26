@@ -65,16 +65,16 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
-            guard let testDetailCreateUpdateViewController = UIStoryboard(name: "TestDetails",
-            bundle: nil).instantiateViewController(withIdentifier: "TestDetailCreateUpdateViewController")
-            as? TestDetailCreateUpdateViewController else { return }
-            testDetailCreateUpdateViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
-            testDetailCreateUpdateViewController.canEdit = true
-            testDetailCreateUpdateViewController.resultModification = { updateResult in
+            guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
+            bundle: nil).instantiateViewController(withIdentifier: "GetTestDetailsViewController")
+            as? GetTestDetailsViewController else { return }
+            getTestDetailsViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
+            getTestDetailsViewController.canEdit = true
+            getTestDetailsViewController.resultModification = { updateResult in
                 self.dataModel.testDetailArray[indexPath.row] = updateResult
                 self.testDetailsTableView.reloadData()
             }
-            self.navigationController?.pushViewController(testDetailCreateUpdateViewController, animated: true)
+            self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
         })
         let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { action, indexPath in
             let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this test detail?",
@@ -111,10 +111,10 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                                                                   bundle: nil).instantiateViewController(
                 withIdentifier: "GetTestDetailsViewController") as? GetTestDetailsViewController else { return }
             self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
-//            testDetailCreateUpdateViewController.resultModification = { newTestDetail in
-//                self.dataModel.testDetailArray.append(newTestDetail)
-//                self.testDetailsTableView.reloadData()
-//            }
+            getTestDetailsViewController.resultModification = { newTestDetail in
+                self.dataModel.testDetailArray.append(newTestDetail)
+                self.testDetailsTableView.reloadData()
+            }
         }
     }
     
@@ -129,9 +129,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                 print(error.localizedDescription)
             } else {
                 StoreHelper.saveUser(user: user)
-                DispatchQueue.main.async {
-                    print("user is logged")
-                }
+                print("user is logged")
             }
         }
         

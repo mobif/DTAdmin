@@ -18,10 +18,31 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
     var idForEditing = String()
     var id = "3"
     var maxTask = Int()
-
+    var testDetailsInstance: TestDetailStructure? {
+        didSet {
+            self.view.layoutIfNeeded()
+            guard let detailsLevel = testDetailsInstance?.level,
+                let detailsTask = testDetailsInstance?.tasks, 
+                let detailsRate = testDetailsInstance?.rate else { return }
+            dataModel.detailArray[0].number = detailsLevel
+            dataModel.detailArray[1].number = detailsTask
+            dataModel.detailArray[2].number = detailsRate
+            DispatchQueue.main.async {
+                if self.canEdit {
+                    self.title = "Editing"
+                    guard let testDetailId = self.testDetailsInstance?.id else { return }
+                    self.idForEditing = testDetailId
+                    self.tableView.reloadData()
+                } else {
+                    return
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Details"
+        self.title = "Creating"
         var array = [DetailStructure]()
         for i in dataModel.details {
             array.append(DetailStructure(detail: i, number: "0"))
@@ -110,16 +131,16 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
         if prepareForRequest() {
             guard let testDetailForSave = testDetailForSave else { return }
             DataManager.shared.updateEntity(byId: idForEditing,
-                                            entity: testDetailForSave, typeEntity: .testDetail) { (error) in
-                                                if let error = error {
-                                                    self.showWarningMsg(error)
-                                                    return
-                                                } else {
-                                                    if let resultModification = self.resultModification {
-                                                        testDetailForSave.id = self.idForEditing
-                                                        resultModification(testDetailForSave)
-                                                    }
-                                                }
+                entity: testDetailForSave, typeEntity: .testDetail) { (error) in
+                    if let error = error {
+                        self.showWarningMsg(error)
+                        return
+                    } else {
+                        if let resultModification = self.resultModification {
+                            testDetailForSave.id = self.idForEditing
+                            resultModification(testDetailForSave)
+                        }
+                    }
             }
             self.navigationController?.popViewController(animated: true)
         } else {
