@@ -11,68 +11,62 @@ import Foundation
 class MockDataManager: HTTPManager, DataRequestable {
     static let shared = MockDataManager()
     var data: Data?
-    var response: Any?
+    var response: HTTPURLResponse?
     var error: Error?
     private override init(){}
     var urlRequest: String = ""
     func setError(_ domain: String, _ code: HTTPStatusCodes) {
         self.error = NSError(domain: domain, code: code.rawValue, userInfo: nil)
     }
-    func setData(caseURL: String) {
-        loadJSON() {
-            (json, error) in
-            if let json = json {
-                if let response = json[caseURL] {
-                    self.data = try? JSONSerialization.data(withJSONObject: response,
-                                                            options: JSONSerialization.WritingOptions.prettyPrinted)
-                }
-            }
-        }
-        
+    
+    func getData(json: Any) throws  -> Data {
+        let result =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+        return result
     }
-    func loadJSON(finishedClosure:@escaping ((_ jsonObject:[String:AnyObject]?,_ error: NSError?) ->Void)) {
-        DispatchQueue.global().async {
-            guard let path = Bundle.main.path(forResource: "test_cases", ofType: "json") else{
-                DispatchQueue.main.async {
-                    finishedClosure(nil, NSError(domain: "JSON file don't founded", code: 998, userInfo: nil))
-                }
-                return
-            }
-            //Load file data part
-            guard let jsonData = (try? Data(contentsOf: URL(fileURLWithPath: path))) else{
-                DispatchQueue.main.async {
-                    finishedClosure(nil, NSError(domain: "can convert to data", code: 999, userInfo: nil))
-                }
-                return
-            }
-            print(jsonData)
-            do {
-                //JSONSerialization.ReadingOptions.mutableContainers replaced by []
-                let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
-                if    let jsonResponse = jsonObject as? [String:AnyObject]
-                {
-                    DispatchQueue.main.async {
-                        finishedClosure(jsonResponse,nil)
-                    }
-                }
-            } catch let error as NSError {
-                print(error)
-                DispatchQueue.main.async {
-                    finishedClosure(nil,error)
-                }
-            }
+    func getJSON(data: Data) throws -> Any {
+        let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+        return jsonObject
+    }
+    
+    func prepareDataForTest(caseURL: String) {
+        if let json = loadJSON(),
+            let responseCase = json[caseURL],
+            let responseData = responseCase as? [String: AnyObject],
+            let data = responseData["data"],
+            let response = responseData["response"] as? String,
+            let url = URL(string: caseURL),
+            let statusCode = Int(response) {
+                self.data = try? getData(json: data)
+                self.response = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: nil, headerFields: nil)
         }
+    }
+
+    func loadJSON() -> [String: AnyObject]? {
+        guard let path = Bundle.main.path(forResource: "test_cases", ofType: "json"),
+            let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),
+            let jsonObject = try? getJSON(data: jsonData),
+            let jsonResponse = jsonObject as? [String: AnyObject]
+            else { return nil }
+        return jsonResponse
     }
     
     func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: String?) -> ()) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global().async {
             [unowned self] in
+            guard let urlRequest = request.url?.absoluteString else {
+                DispatchQueue.main.async {
+                    completionHandler(nil, NSLocalizedString("Request incorrect", comment: "Request incorrect!"))
+                }
+                return
+            }
+            
+            self.prepareDataForTest(caseURL: urlRequest)
             if let sessionError = self.error {
                 DispatchQueue.main.async {
                     completionHandler(nil, sessionError.localizedDescription)
                 }
             } else {
-                guard let responseValue = self.response as? HTTPURLResponse else {
+                guard let responseValue = self.response else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
                     DispatchQueue.main.async {
                         completionHandler(nil, errorMsg)
@@ -89,7 +83,7 @@ class MockDataManager: HTTPManager, DataRequestable {
                 //JSON Serialization
                 var json: Any
                 do {
-                    json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+                    json = try self.getJSON(data: sessionData)
                 } catch {
                     DispatchQueue.main.async {
                         completionHandler(nil, error.localizedDescription)

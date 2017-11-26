@@ -10,21 +10,17 @@ import XCTest
 @testable import DTAdmin
 
 class DTAdminTests: XCTestCase {
+    let mockData = MockDataManager.shared
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        let mockData = MockDataManager.shared
-        mockData.setData(caseURL: "vps9615.hyperhost.name/group/getRecords")
-        weak var promise = expectation(description: "User list")
+    func testGetRecords() {
+        weak var promise = expectation(description: "Group list")
         var responseError: String?
         var groups: [GroupStructure]?
         mockData.getList(byEntity: .group) {
@@ -37,6 +33,26 @@ class DTAdminTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(responseError)
         XCTAssertNotNil(groups)
+        let groupCount = groups?.count
+        XCTAssertEqual(groupCount, 3)
+    }
+    
+    func testGetStudentsByGroup() {
+        weak var promise = expectation(description: "Student list by group")
+        var responseError: String?
+        var students: [StudentStructure]?
+        mockData.getStudents(forGroup: "1", withoutImages: true) {
+            (list, error) in
+            responseError = error
+            students = list
+            promise?.fulfill()
+            promise = nil
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssertNil(responseError)
+        XCTAssertNotNil(students)
+        let studentsCount = students?.count
+        XCTAssertEqual(studentsCount, 2)
     }
     
     func testPerformanceExample() {
