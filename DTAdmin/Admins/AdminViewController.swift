@@ -117,10 +117,9 @@ extension AdminViewController: UITableViewDataSource {
           self.adminsListTableView.endUpdates()
           return
         }
-        self.showWarningMsg(NSLocalizedString(error.message, comment: "Error alert after failed admin delete"))
+        self.showWarningMsg(error.message)
       })
     }
-    
     deleteOpt.backgroundColor = UIColor.red
     return [deleteOpt]
   }
