@@ -28,9 +28,11 @@ enum TypeReqest {
     case getAnswersByQuestion
     case countRecordsByTest
     case getRecordsRangeByTest
+    case getRecordsByTestGroupDate
+    case getResultTestIdsByGroup
 }
 protocol HTTPHeaderPreparable {
-    
+    func getURLReqestForEntityManager(entityStructure: Entities,ids: [String]) -> URLRequest?
     func getURLReqest(entityStructure: Entities, type: TypeReqest) -> URLRequest?
     func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String) -> URLRequest?
     func getURLReqest(entityStructure: Entities, type: TypeReqest, limit: String, offset: String) -> URLRequest?

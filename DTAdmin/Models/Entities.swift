@@ -20,7 +20,8 @@ enum Entities: String {
     case answer = "Answer"
     case student = "Student"
     case user = "AdminUser"
+    case result = "Result"
     static let allValues: [Entities] = [faculty, speciality, group, subject, test, testDetail, timeTable, question,
-                                        answer, student, user]
+                                        answer, student, user, result]
 }
 
