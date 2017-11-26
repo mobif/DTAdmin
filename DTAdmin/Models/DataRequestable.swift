@@ -545,10 +545,10 @@ extension DataRequestable {
             completionHandler(result, nil)
         }
     }
-    func getRecordsRange(byTest testId: String, limit: String, offset: String,
+    func getRecordsRange(byTest testId: String, limit: String, offset: String, withoutImages: Bool,
                          completionHandler: @escaping (_ records: [QuestionStructure]?, _ error: String?) -> ()) {
         guard let request = getURLReqest(entityStructure: .question, type: .getRecordsRangeByTest, id: testId,
-                                         limit: limit, offset: offset) else {
+                                         limit: limit, offset: offset, withoutImages: withoutImages) else {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(nil, error)
             return

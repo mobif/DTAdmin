@@ -70,6 +70,8 @@
 		C732F1FF1FCB47C1000330E8 /* MockDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F1FE1FCB47C1000330E8 /* MockDataManager.swift */; };
 		C732F2011FCB4806000330E8 /* DataRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F2001FCB4806000330E8 /* DataRequestable.swift */; };
 		C732F2031FCB480F000330E8 /* HTTPHeaderPreparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */; };
+		C732F2051FCB4B18000330E8 /* TestMockDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F2041FCB4B18000330E8 /* TestMockDataManager.swift */; };
+		C732F2071FCB4BC7000330E8 /* test_cases.json in Resources */ = {isa = PBXBuildFile; fileRef = C732F2061FCB4BC7000330E8 /* test_cases.json */; };
 		C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */; };
 		C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */; };
 		C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */; };
@@ -174,6 +176,8 @@
 		C732F1FE1FCB47C1000330E8 /* MockDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDataManager.swift; sourceTree = "<group>"; };
 		C732F2001FCB4806000330E8 /* DataRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRequestable.swift; sourceTree = "<group>"; };
 		C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeaderPreparable.swift; sourceTree = "<group>"; };
+		C732F2041FCB4B18000330E8 /* TestMockDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockDataManager.swift; sourceTree = "<group>"; };
+		C732F2061FCB4BC7000330E8 /* test_cases.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_cases.json; sourceTree = "<group>"; };
 		C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStudentViewController.swift; sourceTree = "<group>"; };
 		C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
@@ -423,7 +427,9 @@
 		843422251FAF41B20087A418 /* DTAdminTests */ = {
 			isa = PBXGroup;
 			children = (
+				C732F2061FCB4BC7000330E8 /* test_cases.json */,
 				843422261FAF41B20087A418 /* DTAdminTests.swift */,
+				C732F2041FCB4B18000330E8 /* TestMockDataManager.swift */,
 				843422281FAF41B20087A418 /* Info.plist */,
 				8434222E1FAF7EB60087A418 /* GroupStructureTests.swift */,
 				3F5C2CE61FBB053600C05E73 /* SubjectTest.swift */,
@@ -681,6 +687,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C732F2071FCB4BC7000330E8 /* test_cases.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +780,7 @@
 				843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */,
 				3F5C2CEB1FBB05A200C05E73 /* AnswerTest.swift in Sources */,
 				3F5C2CE91FBB056100C05E73 /* QuestionTest.swift in Sources */,
+				C732F2051FCB4B18000330E8 /* TestMockDataManager.swift in Sources */,
 				3F5C2CE71FBB053600C05E73 /* SubjectTest.swift in Sources */,
 				8434222F1FAF7EB60087A418 /* GroupStructureTests.swift in Sources */,
 			);
