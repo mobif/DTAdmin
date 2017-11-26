@@ -101,12 +101,12 @@ class GroupViewController: ParentViewController {
 extension GroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.isSelectAction == nil {
-            showGroupDetails(group: groups[indexPath.row])
-        } else {
+        if let selected = self.selectGroup {
             let selectedGroup = self.groups[indexPath.row]
-            self.selectGroup!(selectedGroup)
+            selected(selectedGroup)
             navigationController?.popViewController(animated: true)
+        } else {
+            showGroupDetails(group: groups[indexPath.row])
         }
     }
 }

@@ -157,9 +157,9 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @IBAction func selectGroup(_ sender: UIButton) {
-        guard let groupsViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "GroupsTableViewController") as? GroupsTableViewController else { return }
-        groupsViewController.titleViewController = "Groups"
-        groupsViewController.selecectedGroup = {
+        guard let groupsViewController = UIStoryboard.stoyboard(by: .group).instantiateViewController(withIdentifier: "GroupVC") as? GroupViewController else { return }
+        //groupsViewController.titleViewController = "Groups"
+        groupsViewController.selectGroup = {
             group in
             self.selectedGroupForStudent = group
             self.groupButton.setTitle(group.groupName, for: .normal)

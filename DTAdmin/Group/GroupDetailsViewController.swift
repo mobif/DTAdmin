@@ -20,6 +20,7 @@ class GroupDetailsViewController: UIViewController {
     @IBOutlet weak var specialityCodeLabel: UILabel!
     
     @IBAction func getStudentsByGroupTapped(_ sender: Any) {
+        
     }
     @IBAction func getTimeTableByGroupTapped(_ sender: Any) {
     }
