@@ -67,6 +67,9 @@
 		89F4A4C41FB9ADE900807527 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F4A4C31FB9ADE900807527 /* LogoutViewController.swift */; };
 		89F4A4C51FB9B0AF00807527 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */; };
 		C732F1FC1FCB4735000330E8 /* TestResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F1FB1FCB4735000330E8 /* TestResults.swift */; };
+		C732F1FF1FCB47C1000330E8 /* MockDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F1FE1FCB47C1000330E8 /* MockDataManager.swift */; };
+		C732F2011FCB4806000330E8 /* DataRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F2001FCB4806000330E8 /* DataRequestable.swift */; };
+		C732F2031FCB480F000330E8 /* HTTPHeaderPreparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */; };
 		C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */; };
 		C7535CD51FA266EE00B6CBD1 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */; };
 		C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */; };
@@ -168,6 +171,9 @@
 		89C96E0B1F9D079D0019FE77 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		89F4A4C31FB9ADE900807527 /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		C732F1FB1FCB4735000330E8 /* TestResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResults.swift; sourceTree = "<group>"; };
+		C732F1FE1FCB47C1000330E8 /* MockDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDataManager.swift; sourceTree = "<group>"; };
+		C732F2001FCB4806000330E8 /* DataRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRequestable.swift; sourceTree = "<group>"; };
+		C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeaderPreparable.swift; sourceTree = "<group>"; };
 		C7535CD11FA266EE00B6CBD1 /* EditStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditStudentViewController.swift; sourceTree = "<group>"; };
 		C7535CD21FA266EE00B6CBD1 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		C7535CD31FA266EE00B6CBD1 /* StudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
@@ -514,6 +520,14 @@
 			name = Controlls;
 			sourceTree = "<group>";
 		};
+		C732F1FD1FCB47C1000330E8 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				C732F1FE1FCB47C1000330E8 /* MockDataManager.swift */,
+			);
+			path = TestData;
+			sourceTree = "<group>";
+		};
 		C7535CD01FA266EE00B6CBD1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +541,9 @@
 		C7535CD71FA2670100B6CBD1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */,
+				C732F2001FCB4806000330E8 /* DataRequestable.swift */,
+				C732F1FD1FCB47C1000330E8 /* TestData */,
 				C7535CDD1FA2670100B6CBD1 /* Structures */,
 				C7535CD81FA2670100B6CBD1 /* DataManager.swift */,
 				C7535CE21FA2670100B6CBD1 /* Serializable.swift */,
@@ -678,6 +695,7 @@
 				89F4A4C51FB9B0AF00807527 /* UIViewController.swift in Sources */,
 				3F9505E01FACBA16003F3EB9 /* GroupViewController.swift in Sources */,
 				89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */,
+				C732F2011FCB4806000330E8 /* DataRequestable.swift in Sources */,
 				3F322AD01FBF5161003D0AC6 /* UITableViewController.swift in Sources */,
 				C7535CF71FA2670100B6CBD1 /* TestDetailStructure.swift in Sources */,
 				C7535CEA1FA2670100B6CBD1 /* DataManager.swift in Sources */,
@@ -705,6 +723,7 @@
 				3FF6735E1FB48B3A001C7147 /* AnswersTableViewController.swift in Sources */,
 				C7535CD41FA266EE00B6CBD1 /* EditStudentViewController.swift in Sources */,
 				C7535CEB1FA2670100B6CBD1 /* Entities.swift in Sources */,
+				C732F1FF1FCB47C1000330E8 /* MockDataManager.swift in Sources */,
 				3FF6736C1FB48B89001C7147 /* AddNewRecordViewController.swift in Sources */,
 				C7535CD61FA266EE00B6CBD1 /* StudentViewController.swift in Sources */,
 				3FD4C0BA1FBB26DF005DC403 /* ImageTools.swift in Sources */,
@@ -716,6 +735,7 @@
 				3FF673651FB48B6B001C7147 /* QuestionsTableViewController.swift in Sources */,
 				3F322ADC1FBF51D9003D0AC6 /* QuestionAttachmentViewController.swift in Sources */,
 				89F4A4C41FB9ADE900807527 /* LogoutViewController.swift in Sources */,
+				C732F2031FCB480F000330E8 /* HTTPHeaderPreparable.swift in Sources */,
 				3F322AD81FBF51B7003D0AC6 /* AnswerAttachmentViewController.swift in Sources */,
 				C7535CF61FA2670100B6CBD1 /* SubjectStructure.swift in Sources */,
 				890376041F9DE0FB002A99A8 /* Date.swift in Sources */,
