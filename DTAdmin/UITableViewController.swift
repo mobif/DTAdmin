@@ -36,8 +36,8 @@ extension UITableViewController {
         }
     }
 
-    func showMessage(message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Warning", comment: "Alert title"), message: message, preferredStyle: .alert)
+    func showMessage(message: String, title: String = "Warning") {
+        let alert = UIAlertController(title: NSLocalizedString(title, comment: "Alert title"), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Ok button"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

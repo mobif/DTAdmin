@@ -177,7 +177,11 @@ class QuestionsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         animatedCell(for: cell)
     }
-    
+
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let message = questions[indexPath.row].questionText
+        showMessage(message: message, title: "Detail")
+    }
 }
 
 // MARK: - QuestionTableViewCellDelegate
