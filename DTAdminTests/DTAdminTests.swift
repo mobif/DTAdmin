@@ -14,6 +14,10 @@ class DTAdminTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        let testBundle = Bundle(for: type(of: self))
+        if let pathBundle = testBundle.path(forResource: "test_cases", ofType: "json") {
+            mockData.setPath(pathBundle)
+        }
     }
     override func tearDown() {
         super.tearDown()
