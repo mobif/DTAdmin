@@ -16,24 +16,12 @@ class MockDataManager: HTTPManager, DataRequestable {
     var error: Error?
     private override init(){}
     var urlRequest: String = ""
-    
     func setError(_ domain: String, _ code: HTTPStatusCodes) {
         self.error = NSError(domain: domain, code: code.rawValue, userInfo: nil)
     }
-    
     func setPath(_ path: String) {
         self.path = path
     }
-    
-    func getData(json: Any) throws  -> Data {
-        let result =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
-        return result
-    }
-    func getJSON(data: Data) throws -> Any {
-        let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-        return jsonObject
-    }
-    
     func prepareDataForTest(caseURL: String) {
         if let json = loadJSON(),
             let responseCase = json[caseURL],
@@ -46,7 +34,6 @@ class MockDataManager: HTTPManager, DataRequestable {
                 self.response = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: nil, headerFields: nil)
         }
     }
-
     func loadJSON() -> [String: AnyObject]? {
         guard let path = self.path,
             let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),

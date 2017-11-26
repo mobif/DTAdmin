@@ -38,7 +38,7 @@ class DataManager: HTTPManager, DataRequestable {
                 //JSON Serialization
                 var json: Any
                 do {
-                    json = try JSONSerialization.jsonObject(with: sessionData, options: [])
+                    json = try self.getJSON(data: sessionData)
                     
                 } catch {
                     DispatchQueue.main.async {

@@ -547,14 +547,14 @@
 		C7535CD71FA2670100B6CBD1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */,
-				C732F2001FCB4806000330E8 /* DataRequestable.swift */,
 				C732F1FD1FCB47C1000330E8 /* TestData */,
 				C7535CDD1FA2670100B6CBD1 /* Structures */,
 				C7535CD81FA2670100B6CBD1 /* DataManager.swift */,
+				C732F2001FCB4806000330E8 /* DataRequestable.swift */,
 				C7535CE21FA2670100B6CBD1 /* Serializable.swift */,
 				C7535CD91FA2670100B6CBD1 /* Entities.swift */,
 				C7535CDA1FA2670100B6CBD1 /* HTTPManager.swift */,
+				C732F2021FCB480F000330E8 /* HTTPHeaderPreparable.swift */,
 				C7535CDB1FA2670100B6CBD1 /* HTTPStatusCodes.swift */,
 			);
 			path = Models;

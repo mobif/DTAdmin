@@ -218,10 +218,10 @@ extension DataRequestable {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completionHandler(error)
             return }
-        let postData = entity.dictionary
+        let postJSON = entity.dictionary
         do {
-            let json = try JSONSerialization.data(withJSONObject: postData, options: [])
-            request.httpBody = json
+            let data = try self.getData(json: postJSON)
+            request.httpBody = data
         } catch {
             completionHandler(error.localizedDescription)
         }
@@ -238,10 +238,10 @@ extension DataRequestable {
             let error = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             completion(nil, error)
             return }
-        let postData = entity.dictionary
+        let postJSON = entity.dictionary
         do {
-            let json = try JSONSerialization.data(withJSONObject: postData, options: [])
-            request.httpBody = json
+            let data = try self.getData(json: postJSON)
+            request.httpBody = data
         } catch {
             completion(nil, error.localizedDescription)
         }
@@ -654,8 +654,6 @@ extension DataRequestable {
             }
         }
     }
-
-    
 
 }
 

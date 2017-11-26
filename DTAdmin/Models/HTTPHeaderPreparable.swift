@@ -41,4 +41,6 @@ protocol HTTPHeaderPreparable {
                       offset: String) -> URLRequest?
     func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String, limit: String, offset: String,
                       withoutImages: Bool) -> URLRequest?
+    func getData(json: Any) throws -> Data
+    func getJSON(data: Data) throws -> Any
 }

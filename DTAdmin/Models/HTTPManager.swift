@@ -63,7 +63,7 @@ class HTTPManager: HTTPHeaderPreparable {
             request.setValue(cookies[Keys.cookie], forHTTPHeaderField: Keys.cookie)
         }
         let parameters = ["entity": entityStructure.rawValue, "ids": ids] as [String : Any]
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
+        guard let httpBody = try? getData(json: parameters) else {
             return nil
         }
         request.httpBody = httpBody
@@ -92,5 +92,13 @@ class HTTPManager: HTTPHeaderPreparable {
     func getURLReqest(entityStructure: Entities, type: TypeReqest, id: String, limit: String,
                       offset: String) -> URLRequest? {
         return getURLReqest(entityStructure: entityStructure, type: type, id: id, limit: limit, offset: offset)
+    }
+    func getData(json: Any) throws -> Data {
+        let result =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+        return result
+    }
+    func getJSON(data: Data) throws -> Any {
+        let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+        return jsonObject
     }
 }
