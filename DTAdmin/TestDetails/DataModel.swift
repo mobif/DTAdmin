@@ -26,6 +26,17 @@ class DataModel: NSObject {
         return array
     }
     
+    func currentDataForSelecting() {
+        levelArrayForFiltering = []
+        taskArrayForFiltering = []
+        for i in testDetailArray {
+            guard let levels = Int(i.level) else { return }
+            levelArrayForFiltering.append(levels)
+            guard let tasks = Int(i.tasks) else { return }
+            taskArrayForFiltering.append(tasks)
+        }
+    }
+    
     func getFilteredArrayForLevels(firstArray: [Int], secondArray: [Int]) -> [Int] {
         var filtered = firstArray
         for item in secondArray {

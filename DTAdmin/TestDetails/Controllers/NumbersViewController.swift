@@ -14,6 +14,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
     var currentArray = [Int]()
     var detail = Int()
     var selectedItem = Int()
+    var task = Int()
     var result: ((Int) -> ())?
     @IBOutlet weak var tableView: UITableView!
 
@@ -22,9 +23,22 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
         self.title = "Select \(dataModel.details[detail])"
         switch detail {
         case 0:
-            self.currentArray = dataModel.createArray(max: 10)
+            self.currentArray = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max),
+                                                                    secondArray: dataModel.levelArrayForFiltering)
         case 1:
-            self.currentArray = dataModel.createArray(max: dataModel.max)
+            if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
+                let task1 = dataModel.detailArray[1].number
+                guard let taskInt = Int(task1) else { return }
+                if taskInt == 1 {
+                    task = 1
+                } else {
+                    task = taskInt - 1
+                }
+            } else {
+                let task2 = dataModel.max - dataModel.taskArrayForFiltering.reduce(0, +)
+                task = task2
+            }
+            self.currentArray = dataModel.createArray(max: task)
         case 2:
             self.currentArray = dataModel.createArray(max: 100)
         default:

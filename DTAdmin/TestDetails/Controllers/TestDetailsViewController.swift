@@ -101,8 +101,9 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         })
         return [delete, edit]
     }
-        
+    
     @IBAction func addButtonTapped(_ sender: Any) {
+        dataModel.currentDataForSelecting()
         if dataModel.taskArrayForFiltering.reduce(0, +) >= dataModel.max {
             self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then \(dataModel.max)",
                                                   comment: "Sum of tasks should be from 1 to \(dataModel.max)"))

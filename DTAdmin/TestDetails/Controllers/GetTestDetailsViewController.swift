@@ -48,7 +48,6 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
             array.append(DetailStructure(detail: i, number: "0"))
         }
         dataModel.detailArray = array
-        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,6 +77,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
                 return
             }
         }
+        dataModel.currentDataForSelecting()
         self.navigationController?.pushViewController(numbersViewController, animated: true)
     }
 
