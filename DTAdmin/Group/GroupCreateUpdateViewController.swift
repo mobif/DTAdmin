@@ -61,7 +61,7 @@ class GroupCreateUpdateViewController: UIViewController {
             DataManager.shared.getEntity(byId: groupFacultId, typeEntity: .faculty){
                 (faculty, error) in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.info)
                 } else {
                     guard let faculty = faculty as? FacultyStructure else { return }
                     DispatchQueue.main.async {
@@ -72,7 +72,7 @@ class GroupCreateUpdateViewController: UIViewController {
             DataManager.shared.getEntity(byId: groupSpecialityId, typeEntity: .speciality){
                 (speciality, error) in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.info)
                 } else {
                     guard let speciality = speciality as? SpecialityStructure else { return }
                     DispatchQueue.main.async {
@@ -99,7 +99,7 @@ class GroupCreateUpdateViewController: UIViewController {
         DataManager.shared.updateEntity(byId: id, entity: groupForUpdate, typeEntity: .group){
             (error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.info)
             } else {
                 groupForUpdate.groupId = id
                 guard let saveAction = self.saveAction else { return }
@@ -121,7 +121,7 @@ class GroupCreateUpdateViewController: UIViewController {
         DataManager.shared.insertEntity(entity: groupForSave, typeEntity: .group) {
             (id, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.info)
             } else {
                 guard let id = id as? String else { return }
                 groupForSave.groupId = id

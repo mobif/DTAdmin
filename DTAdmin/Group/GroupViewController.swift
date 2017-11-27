@@ -57,7 +57,7 @@ class GroupViewController: ParentViewController {
                 DispatchQueue.main.async {
                     self.refreshControl!.endRefreshing()
                 }
-                self.showWarningMsg(error ?? NSLocalizedString("Incorect data", comment: "Error while downloading data from server"))
+                self.showWarningMsg(error?.message ?? NSLocalizedString("Incorect data", comment: "Error while downloading data from server"))
                 return
             }
             self.groups = groups
@@ -101,12 +101,12 @@ class GroupViewController: ParentViewController {
 extension GroupViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.isSelectAction == nil {
-            showGroupDetails(group: groups[indexPath.row])
-        } else {
+        if let selected = self.selectGroup {
             let selectedGroup = self.groups[indexPath.row]
-            self.selectGroup!(selectedGroup)
+            selected(selectedGroup)
             navigationController?.popViewController(animated: true)
+        } else {
+            showGroupDetails(group: groups[indexPath.row])
         }
     }
 }
@@ -128,7 +128,7 @@ extension GroupViewController : UITableViewDataSource {
         let delete = UITableViewRowAction(style: .destructive, title: "DELETE"){(action, indexPath) in
             DataManager.shared.deleteEntity(byId: self.groups[indexPath.row].groupId!, typeEntity: .group, completionHandler: { (status, error) in
                 if let error = error {
-                    self.showWarningMsg(error)
+                    self.showWarningMsg(error.info)
                 } else {
                     self.groups.remove(at: indexPath.row)
                 }
