@@ -31,7 +31,7 @@ class FacultyForGroupViewController: UIViewController {
         facultyTableView.dataSource = self
         DataManager.shared.getList(byEntity: .faculty){ (faculties, error) in
             if let error = error {
-                self.showWarningMsg(error.message)
+                self.showWarningMsg(error.info)
             } else {
                 guard let faculties = faculties as? [FacultyStructure] else {return}
                 self.faculties = faculties

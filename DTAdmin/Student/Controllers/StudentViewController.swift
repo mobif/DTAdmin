@@ -150,7 +150,7 @@ extension StudentViewController: UITableViewDataSource {
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
             DataManager.shared.deleteEntity(byId: studentId, typeEntity: .student)  { (result, error) in
                 if let error = error {
-                    self.showWarningMsg(error.message)
+                    self.showWarningMsg(error.info)
                 } else {
                     if self.filtered {
                         guard let indexOfStudent = self.getIndex(byId: studentId) else {

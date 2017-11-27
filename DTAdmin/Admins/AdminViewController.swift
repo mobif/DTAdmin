@@ -117,7 +117,7 @@ extension AdminViewController: UITableViewDataSource {
           self.adminsListTableView.endUpdates()
           return
         }
-        self.showWarningMsg(error.message)
+        self.showWarningMsg(error.info)
       })
     }
     deleteOpt.backgroundColor = UIColor.red
