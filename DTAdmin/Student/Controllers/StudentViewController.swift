@@ -52,6 +52,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     self.showWarningMsg(error.message)
                     if error.code == 403 {
                         StoreHelper.logout()
+                        self.showLoginScreen()
                     }
                 }
             }
@@ -69,6 +70,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     self.showWarningMsg(error.message)
                     if error.code == 403 {
                         StoreHelper.logout()
+                        self.showLoginScreen()
                     }
                 }
             }

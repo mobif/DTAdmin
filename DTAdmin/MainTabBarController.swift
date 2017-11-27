@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         var tabBarViewControllers = [UIViewController]()
         
 //MARK: Create students tab
-        let studentStoryboard = UIStoryboard(name: "Student", bundle: nil)
+        let studentStoryboard = UIStoryboard.stoyboard(by: .student)
         guard let studentNavigationController = studentStoryboard.instantiateViewController(withIdentifier: "StudentNavigationController") as? UINavigationController else { return }
         let titleText = NSLocalizedString("Students", comment: "List all students")
         let studentBarItem = UITabBarItem(title: titleText, image: nil, selectedImage: nil)

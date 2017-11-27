@@ -20,8 +20,10 @@ class GroupDetailsViewController: UIViewController {
     @IBOutlet weak var specialityCodeLabel: UILabel!
     
     @IBAction func getStudentsByGroupTapped(_ sender: Any) {
-        
-    }
+        let studentStoryboard = UIStoryboard.stoyboard(by: .student)
+        guard let studentViewControler = studentStoryboard.instantiateViewController(withIdentifier: "StudentViewController") as? StudentViewController, let group = group else { return }
+        studentViewControler.selectedGroup = group
+        self.navigationController?.pushViewController(studentViewControler, animated: true)    }
     @IBAction func getTimeTableByGroupTapped(_ sender: Any) {
     }
     @IBAction func getResultsByGroupTapped(_ sender: Any) {
