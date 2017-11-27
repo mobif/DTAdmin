@@ -80,10 +80,10 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 //MARK: UITabBarControllerDelegate method
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let title = viewController.title {
-            print("Selected \(title)")
+            //print("Selected \(title)")
         }
         if let navTitle = (viewController as? UINavigationController)?.viewControllers.first?.title {
-            print("Selected \(navTitle)")
+            //print("Selected \(navTitle)")
         }
     }
 }

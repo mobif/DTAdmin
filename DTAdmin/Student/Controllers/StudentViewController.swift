@@ -49,7 +49,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     guard let error = error else {
                         self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
                         return }
-                    self.showWarningMsg(error.message)
+                    self.showWarningMsg(error.info)
                     if error.code == 403 {
                         StoreHelper.logout()
                         self.showLoginScreen()
@@ -67,7 +67,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     guard let error = error else {
                         self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
                         return }
-                    self.showWarningMsg(error.message)
+                    self.showWarningMsg(error.info)
                     if error.code == 403 {
                         StoreHelper.logout()
                         self.showLoginScreen()

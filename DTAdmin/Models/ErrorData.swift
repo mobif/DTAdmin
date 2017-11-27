@@ -15,4 +15,9 @@ class ErrorData {
     init(_ message: String) {
         self.message = message
     }
+    var info: String {
+        let code = self.code != nil ? String(describing: self.code) : ""
+        let description = self.descriptionError ?? ""
+        return message + " \(code): \(description)"
+    }
 }

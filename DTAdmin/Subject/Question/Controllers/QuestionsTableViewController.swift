@@ -69,7 +69,7 @@ class QuestionsTableViewController: UITableViewController {
                 self.questions.sort { return $0.type < $1.type}
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: errorMessage?.message ??
+                self.showMessage(message: errorMessage?.info ??
                     NSLocalizedString("Incorect type data", comment: "Information for user about incorect data"))
             }
         }
