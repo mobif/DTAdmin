@@ -60,17 +60,32 @@ class TestsForSubjectTableViewController: UITableViewController {
         cell.delegate = self
         return cell
     }
-
-    // MARK: - Table view delegate
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
-    [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive,
-                                          title: NSLocalizedString("Delete", comment: "Swipe button title")) {_,_ in
-            //delete test record
+        
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            let testToDelete = self.test[indexPath.row]
+            DataManager.shared.deleteEntity(byId: testToDelete.id!, typeEntity: .test, completionHandler: {
+                    (status, error) in
+                if error == nil {
+                    self.tableView.beginUpdates()
+                    self.test.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    self.tableView.endUpdates()
+                    return
+                } else {
+                    self.showWarningMsg(error!)
+                }
+            })
         }
-        let update = UITableViewRowAction(style: .normal,
-                                          title: NSLocalizedString("Update", comment: "Swipe button title")) {_,_ in
-            //update test record
+        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+            guard let wayToAddNewTest = UIStoryboard.stoyboard(by: .test).instantiateViewController(withIdentifier: "newTestViewController") as? NewTestViewController else { return }
+            wayToAddNewTest.edit = true
+            wayToAddNewTest.testInstance = self.test[indexPath.row]
+            wayToAddNewTest.resultModification = { test in
+                self.test[indexPath.row] = test
+                self.tableView.reloadData()
+            }
+            self.navigationController?.pushViewController(wayToAddNewTest, animated: true)
         }
         delete.backgroundColor = UIColor.red
         update.backgroundColor = UIColor.blue
