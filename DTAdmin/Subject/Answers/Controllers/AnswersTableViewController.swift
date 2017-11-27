@@ -121,5 +121,13 @@ class AnswersTableViewController: UITableViewController {
         answerAttachmentViewController.answerId = answers[indexPath.row].id
         self.navigationController?.pushViewController(answerAttachmentViewController, animated: true)
     }
-    
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
+
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let message = answers[indexPath.row].answerText
+        showMessage(message: message, title: "Detail")
+    }
 }

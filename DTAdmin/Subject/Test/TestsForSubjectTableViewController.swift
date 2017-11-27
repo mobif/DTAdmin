@@ -67,6 +67,10 @@ class TestsForSubjectTableViewController: UITableViewController {
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
     
 }
 
