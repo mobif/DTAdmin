@@ -76,7 +76,7 @@ extension TestsViewController: UITableViewDataSource {
                     self.testsTableView.endUpdates()
                     return
                 }
-                self.showWarningMsg(NSLocalizedString(error, comment: "Error alert after failed test delete"))
+                self.showWarningMsg(NSLocalizedString(error.info, comment: "Error alert after failed test delete"))
             })
         }
         deleteOpt.backgroundColor = UIColor.red

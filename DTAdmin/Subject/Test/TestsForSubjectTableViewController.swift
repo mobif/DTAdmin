@@ -73,7 +73,7 @@ class TestsForSubjectTableViewController: UITableViewController {
                     self.tableView.endUpdates()
                     return
                 } else {
-                    self.showWarningMsg(error!)
+                    self.showWarningMsg(error?.info ?? "")
                 }
             })
         }

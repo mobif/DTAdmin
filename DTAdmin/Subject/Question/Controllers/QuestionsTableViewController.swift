@@ -57,8 +57,9 @@ class QuestionsTableViewController: UITableViewController {
                 self.showMessage(message: errorMessage.message)
             } else {
                 if let countOfQuestions = count {
-                    print(countOfQuestions)
+                    print("Count of question " + String(countOfQuestions))
                     guard let id = self.testId else { return }
+                    print("Test id " + id)
                     self.showQuestions(id: id, quantity: countOfQuestions)
                 }
             }
