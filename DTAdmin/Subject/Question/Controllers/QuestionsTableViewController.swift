@@ -50,16 +50,14 @@ class QuestionsTableViewController: UITableViewController {
     
     @objc private func getCountOfQuestion() {
         startActivityIndicator()
-        DataManager.shared.getCountItems(forEntity: .question) { count, errorMessage in
+        guard let id = self.testId else { return }
+        DataManager.shared.countRecords(byTest: id) { count, errorMessage in
             if let errorMessage = errorMessage {
                 self.stopActivityIndicator()
                 self.refresh.endRefreshing()
                 self.showMessage(message: errorMessage.message)
             } else {
                 if let countOfQuestions = count {
-                    print("Count of question " + String(countOfQuestions))
-                    guard let id = self.testId else { return }
-                    print("Test id " + id)
                     self.showQuestions(id: id, quantity: countOfQuestions)
                 }
             }
@@ -68,17 +66,17 @@ class QuestionsTableViewController: UITableViewController {
     
     private func showQuestions(id: String, quantity: UInt) {
         DataManager.shared.getRecordsRange(byTest: id, limit: String(quantity), offset: "0", withoutImages: true) {
-            (questions, errorMessage) in
-            self.refresh.endRefreshing()
-            self.stopActivityIndicator()
-            if errorMessage == nil,
-                let questions = questions {
-                self.questions = questions
+            (questions, error) in
+            if let errorMessage = error {
+                self.showMessage(message: errorMessage.message)
+            } else {
+                if let questionsUnwrap = questions {
+                self.questions = questionsUnwrap
                 self.questions.sort { return $0.type < $1.type}
                 self.tableView.reloadData()
-            } else {
-                self.showMessage(message: errorMessage?.info ??
-                    NSLocalizedString("Incorect type data", comment: "Information for user about incorect data"))
+            }
+            self.refresh.endRefreshing()
+            self.stopActivityIndicator()
             }
         }
     }
@@ -135,8 +133,8 @@ class QuestionsTableViewController: UITableViewController {
                                           title: NSLocalizedString("Delete",
                                                                 comment: "Swipe title button")) { (action, indexPath) in
             guard let questionId = self.questions[indexPath.row].id else { return }
-            DataManager.shared.deleteEntity(byId: questionId, typeEntity: .question)  { (result, errorMessage) in
-                if let errorMessage = errorMessage {
+            DataManager.shared.deleteEntity(byId: questionId, typeEntity: .question)  { (result, error) in
+                if let errorMessage = error {
                     self.showMessage(message: errorMessage.message)
                 } else {
                     self.questions.remove(at: indexPath.row)

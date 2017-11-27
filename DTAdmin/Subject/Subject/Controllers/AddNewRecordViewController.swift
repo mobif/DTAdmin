@@ -52,8 +52,8 @@ class AddNewRecordViewController: UIViewController {
         if prepareForSave(){
             guard let subjectForSave = subjectForSave else { return }
             DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .subject) { (subjectResult, error) in
-                if let error = error {
-                    self.showWarningMsg(error.info)
+                if let errorMessage = error {
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     guard let result = subjectResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -73,8 +73,8 @@ class AddNewRecordViewController: UIViewController {
             guard let subjectForSave = subjectForSave else { return }
             DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .subject) {
                     error in
-                if let error = error {
-                    self.showWarningMsg(error.info)
+                if let errorMessage = error {
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(subjectForSave)
@@ -89,15 +89,15 @@ class AddNewRecordViewController: UIViewController {
         guard let name = subjectNameTextField.text,
             let description = subjectDescriptionTextField.text else { return false }
         
-        if (name.count > 2) && (description.count > 2) {
+        if (name.count > minCountOfText) && (description.count > minCountOfText) {
             let dictionary: [String: Any] = ["subject_name": name, "subject_description": description]
             self.subjectForSave = SubjectStructure(dictionary: dictionary)
+            return true
         } else {
             showWarningMsg(NSLocalizedString("Entered incorect data",
                                              comment: "All fields have to be filled correctly"))
             return false
         }
-        return true
     }
     
 }

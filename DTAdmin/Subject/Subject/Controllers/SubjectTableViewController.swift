@@ -124,8 +124,8 @@ class SubjectTableViewController: UITableViewController {
                                           title: NSLocalizedString("Delete",
                                                                 comment: "Swipe button title")) { (action, indexPath) in
             guard let subjectId = self.records[indexPath.row].id else { return }
-            DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, errorMessage) in
-                if let errorMessage = errorMessage {
+            DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, error) in
+                if let errorMessage = error {
                     self.showMessage(message: errorMessage.message)
                 } else {
                     self.records.remove(at: indexPath.row)

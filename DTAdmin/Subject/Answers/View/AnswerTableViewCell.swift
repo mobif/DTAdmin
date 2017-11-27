@@ -21,8 +21,8 @@ class AnswerTableViewCell: UITableViewCell {
         } else {
             isAnswerCorrectLabel.text = NSLocalizedString("Wrong", comment: "Wrong answer")
         }
-        if answer.attachment.count > 0 {
-            attachmentImageView.image = UIImage.decode(fromBase64: answer.attachment)
+        if let attachment = answer.attachment {
+            attachmentImageView.image = attachment
         } else {
             attachmentImageView.image = UIImage(named: "Image")
         }
