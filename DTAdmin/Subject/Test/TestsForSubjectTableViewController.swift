@@ -23,7 +23,15 @@ class TestsForSubjectTableViewController: UITableViewController {
     }
     
     @IBAction func addTest(_ sender: UIBarButtonItem) {
-        //add new test
+        let groupStoryboard = UIStoryboard.stoyboard(by: .test)
+        guard let testViewController = groupStoryboard.instantiateViewController(
+            withIdentifier: "newTestViewController") as? NewTestViewController else { return }
+        testViewController.subjectId = self.subjectId
+        testViewController.resultModification = { test in
+            self.test.append(test)
+            self.tableView.reloadData()
+        }
+        self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
     private func showTests() {
@@ -64,6 +72,7 @@ class TestsForSubjectTableViewController: UITableViewController {
                                           title: NSLocalizedString("Update", comment: "Swipe button title")) {_,_ in
             //update test record
         }
+        delete.backgroundColor = UIColor.red
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
