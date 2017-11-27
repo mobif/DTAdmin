@@ -1,37 +1,73 @@
 //
-//  DataManager.swift
+//  MockDataManager.swift
 //  DTAdmin
 //
-//  Created by Volodymyr on 10/24/17.
+//  Created by Volodymyr on 19.11.17.
 //  Copyright © 2017 if-ios-077. All rights reserved.
 //
 
 import Foundation
 
-class DataManager: HTTPManager, DataRequestable {
-    
-    static let shared = DataManager()
-    private var session:URLSession = URLSession.shared
+class MockDataManager: HTTPManager, DataRequestable {
+    static let shared = MockDataManager()
+    var path: String?
+    var data: Data?
+    var response: HTTPURLResponse?
+    var error: ErrorData?
     private override init(){}
-
+    var urlRequest: String = ""
+    func setError(_ errorMsg: String) {
+        self.error = ErrorData(errorMsg)
+    }
+    func setPath(_ path: String) {
+        self.path = path
+    }
+    func prepareDataForTest(caseURL: String) {
+        if let json = loadJSON(),
+            let responseCase = json[caseURL],
+            let responseData = responseCase as? [String: AnyObject],
+            let data = responseData["data"],
+            let response = responseData["response"] as? String,
+            let url = URL(string: caseURL),
+            let statusCode = Int(response) {
+                self.data = try? getData(json: data)
+                self.response = HTTPURLResponse(url: url, statusCode: statusCode, httpVersion: nil, headerFields: nil)
+        }
+    }
+    func loadJSON() -> [String: AnyObject]? {
+        guard let path = self.path,
+            let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)),
+            let jsonObject = try? getJSON(data: jsonData),
+            let jsonResponse = jsonObject as? [String: AnyObject]
+            else { return nil }
+        return jsonResponse
+    }
+    
     func getResponse(request: URLRequest, completionHandler: @escaping (_ list: Any?, _ error: ErrorData?) -> ()) {
-        session.dataTask(with: request) { (data, response, error) in
-            if let sessionError = error {
+        DispatchQueue.global().async {
+            [unowned self] in
+            guard let urlRequest = request.url?.absoluteString else {
                 DispatchQueue.main.async {
-                    let errorMsg = sessionError.localizedDescription
-                    let errorData = ErrorData(errorMsg)
-                    errorData.nserror = sessionError as NSError
-                    completionHandler(nil, errorData)
+                    let errorMsg = NSLocalizedString("Request incorrect", comment: "Request incorrect!")
+                    completionHandler(nil, ErrorData(errorMsg))
+                }
+                return
+            }
+            
+            self.prepareDataForTest(caseURL: urlRequest)
+            if let sessionError = self.error {
+                DispatchQueue.main.async {
+                    completionHandler(nil, sessionError)
                 }
             } else {
-                guard let responseValue = response as? HTTPURLResponse else {
+                guard let responseValue = self.response else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
                     DispatchQueue.main.async {
                         completionHandler(nil, ErrorData(errorMsg))
                     }
                     return
                 }
-                guard let sessionData = data else {
+                guard let sessionData = self.data else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
                     DispatchQueue.main.async {
                         completionHandler(nil, ErrorData(errorMsg))
@@ -42,7 +78,6 @@ class DataManager: HTTPManager, DataRequestable {
                 var json: Any
                 do {
                     json = try self.getJSON(data: sessionData)
-                    
                 } catch {
                     DispatchQueue.main.async {
                         let errorMsg = error.localizedDescription
@@ -69,8 +104,6 @@ class DataManager: HTTPManager, DataRequestable {
                     }
                 }
             }
-        }.resume()
+        }
     }
 }
-
-

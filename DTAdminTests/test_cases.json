@@ -1,0 +1,44 @@
+{"http://vps9615.hyperhost.name/Student/getStudentsByGroup/1/without_images": {
+    "data":
+    [{
+     "user_id": "218",
+     "gradebook_id": "MS-1234121",
+     "student_surname": "Жимбата",
+     "student_name": "Ростислав",
+     "student_fname": "Григорович",
+     "group_id": "1",
+     "plain_password": "qazwsxedc123",
+     "photo": ""
+     },
+     {
+     "user_id": "182",
+     "gradebook_id": "UU-4939332",
+     "student_surname": "Зрайничка",
+     "student_name": "Іван",
+     "student_fname": "Михайлович",
+     "group_id": "1",
+     "plain_password": "qazwsxedc1",
+     "photo": ""
+     }] , "response": "200" },
+    "http://vps9615.hyperhost.name/Group/getRecords": {
+        "data":
+        [{
+         "group_id": "2",
+         "group_name": "XX-rr-00",
+         "speciality_id": "1",
+         "faculty_id": "1"
+         },
+         {
+         "group_id": "3",
+         "group_name": "QІ-1B-B",
+         "speciality_id": "2",
+         "faculty_id": "3"
+         },
+         {
+         "group_id": "4",
+         "group_name": "ТX-22-0",
+         "speciality_id": "12",
+         "faculty_id": "4"
+         }] , "response": "200" }
+}
+

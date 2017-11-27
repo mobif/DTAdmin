@@ -54,7 +54,7 @@ class QuestionsTableViewController: UITableViewController {
             if let errorMessage = errorMessage {
                 self.stopActivityIndicator()
                 self.refresh.endRefreshing()
-                self.showMessage(message: errorMessage)
+                self.showMessage(message: errorMessage.message)
             } else {
                 if let countOfQuestions = count {
                     print(countOfQuestions)
@@ -76,7 +76,7 @@ class QuestionsTableViewController: UITableViewController {
                 self.questions.sort { return $0.type < $1.type}
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: errorMessage ??
+                self.showMessage(message: errorMessage?.info ??
                     NSLocalizedString("Incorect type data", comment: "Information for user about incorect data"))
             }
         }
@@ -136,7 +136,7 @@ class QuestionsTableViewController: UITableViewController {
             guard let questionId = self.questions[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: questionId, typeEntity: .question)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
-                    self.showMessage(message: errorMessage)
+                    self.showMessage(message: errorMessage.message)
                 } else {
                     self.questions.remove(at: indexPath.row)
                 }

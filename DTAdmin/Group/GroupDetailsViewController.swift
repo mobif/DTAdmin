@@ -20,7 +20,10 @@ class GroupDetailsViewController: UIViewController {
     @IBOutlet weak var specialityCodeLabel: UILabel!
     
     @IBAction func getStudentsByGroupTapped(_ sender: Any) {
-    }
+        let studentStoryboard = UIStoryboard.stoyboard(by: .student)
+        guard let studentViewControler = studentStoryboard.instantiateViewController(withIdentifier: "StudentViewController") as? StudentViewController, let group = group else { return }
+        studentViewControler.selectedGroup = group
+        self.navigationController?.pushViewController(studentViewControler, animated: true)    }
     @IBAction func getTimeTableByGroupTapped(_ sender: Any) {
     }
     @IBAction func getResultsByGroupTapped(_ sender: Any) {
@@ -40,7 +43,7 @@ class GroupDetailsViewController: UIViewController {
         DataManager.shared.getEntity(byId: group.facultyId, typeEntity: .faculty){
             (faculty, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.info)
             } else {
                 guard let faculty = faculty as? FacultyStructure else { return }
                 DispatchQueue.main.async {
@@ -52,7 +55,7 @@ class GroupDetailsViewController: UIViewController {
         DataManager.shared.getEntity(byId: group.specialityId, typeEntity: .speciality){
             (speciality, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.info)
             } else {
                 guard let speciality = speciality as? SpecialityStructure else { return }
                 DispatchQueue.main.async {

@@ -120,7 +120,7 @@ class AdminCreateUpdateViewController: UIViewController {
           return
         }
       }
-      self.showWarningMsg(NSLocalizedString(error, comment: "Admin create request failed with error..."))
+      self.showWarningMsg(error.info)
     }
   }
   
@@ -135,7 +135,7 @@ class AdminCreateUpdateViewController: UIViewController {
     userForSave.password = params.password
     DataManager.shared.updateEntity(byId: id, entity:  userForSave, typeEntity: .user) { (error) in
       if let error = error {
-        self.showWarningMsg(NSLocalizedString(error, comment: "Admin update request failed with error..."))
+        self.showWarningMsg(error.info)
         return
       }
       self.saveAction!(userForSave)
