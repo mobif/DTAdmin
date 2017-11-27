@@ -110,6 +110,9 @@
 /* Scope title for searchController */
 "Name" = "Ім'я";
 
+/* Name of subject for alert message in accesory button tapped */
+"Name: " = "Ім'я";
+
 /* Title for new admin creation view */
 "New" = "Новий";
 
@@ -227,9 +230,6 @@
 
 /* UserID not found in list! */
 "UserID not found!" = "ІД користувача не знайдено!";
-
-/* Alert title */
-"Warning" = "Попередження";
 
 /* Write answer by yourself type of question */
 "Write answer by yourself" = "Введіть вашу відповідь";
