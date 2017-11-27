@@ -161,7 +161,7 @@ class SubjectTableViewController: UITableViewController {
         let messageFirstWord = NSLocalizedString("Name: ",
                                         comment: "Name of subject for alert message in accesory button tapped")
         let messageSecondWord = records[indexPath.row].name
-        let messageThirdWord = NSLocalizedString("Descroption: ",
+        let messageThirdWord = NSLocalizedString("Description: ",
                               comment: "Description of subject for alert message in accesory button tapped")
         let messageFourthWord = records[indexPath.row].description
         showMessage(message: messageFirstWord + messageSecondWord + "\n" + messageThirdWord + messageFourthWord,

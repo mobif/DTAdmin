@@ -115,13 +115,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaU-QB-9Ol">
-                                            <rect key="frame" x="10" y="5" width="355" height="32"/>
+                                            <rect key="frame" x="10" y="5" width="287" height="32"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCM-cX-N4q">
-                                            <rect key="frame" x="10" y="42" width="355" height="18"/>
+                                            <rect key="frame" x="10" y="42" width="287" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -129,8 +129,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzh-Oj-8G1" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="10" y="65" width="120" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="Bt1-lE-cmN"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="ymb-u2-sEd"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="hbY-b3-jTL"/>
                                             </constraints>
                                             <state key="normal" title="Show tests"/>
                                             <connections>
@@ -138,7 +137,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUk-oO-aaL" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
-                                            <rect key="frame" x="245" y="65" width="120" height="30"/>
+                                            <rect key="frame" x="177" y="65" width="120" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="6vl-Vp-Bc5"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Coi-SN-A6B"/>
@@ -153,16 +152,16 @@
                                         <constraint firstAttribute="bottom" secondItem="jUk-oO-aaL" secondAttribute="bottom" constant="5" id="3uR-XS-nw0"/>
                                         <constraint firstAttribute="trailing" secondItem="oaU-QB-9Ol" secondAttribute="trailing" constant="10" id="5N5-N3-unA"/>
                                         <constraint firstItem="oaU-QB-9Ol" firstAttribute="top" secondItem="ob4-SU-uMU" secondAttribute="top" constant="5" id="5ur-hE-LHw"/>
-                                        <constraint firstItem="mzh-Oj-8G1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LCM-cX-N4q" secondAttribute="leading" id="A5a-pu-M9Q"/>
-                                        <constraint firstAttribute="bottom" secondItem="mzh-Oj-8G1" secondAttribute="bottom" constant="5" id="FBr-qe-H8j"/>
                                         <constraint firstAttribute="trailing" secondItem="LCM-cX-N4q" secondAttribute="trailing" constant="10" id="Fwm-P1-56L"/>
-                                        <constraint firstItem="mzh-Oj-8G1" firstAttribute="top" secondItem="LCM-cX-N4q" secondAttribute="bottom" constant="5" id="MlR-wV-pLu"/>
-                                        <constraint firstAttribute="trailing" secondItem="mzh-Oj-8G1" secondAttribute="trailing" constant="245" id="PHv-hk-Anm"/>
+                                        <constraint firstItem="mzh-Oj-8G1" firstAttribute="top" secondItem="LCM-cX-N4q" secondAttribute="bottom" constant="5" id="SVV-xR-1VD"/>
                                         <constraint firstItem="jUk-oO-aaL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ob4-SU-uMU" secondAttribute="leading" constant="20" symbolic="YES" id="SYS-kb-1Jy"/>
+                                        <constraint firstItem="mzh-Oj-8G1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LCM-cX-N4q" secondAttribute="leading" id="UXC-lS-Hm2"/>
+                                        <constraint firstAttribute="trailing" secondItem="mzh-Oj-8G1" secondAttribute="trailing" constant="177" id="dTn-dU-uoV"/>
                                         <constraint firstAttribute="trailing" secondItem="jUk-oO-aaL" secondAttribute="trailing" constant="10" id="g8s-sc-QTp"/>
                                         <constraint firstItem="oaU-QB-9Ol" firstAttribute="leading" secondItem="ob4-SU-uMU" secondAttribute="leading" constant="10" id="ojk-0k-ffs"/>
                                         <constraint firstItem="LCM-cX-N4q" firstAttribute="leading" secondItem="ob4-SU-uMU" secondAttribute="leading" constant="10" id="qLX-h2-gAG"/>
                                         <constraint firstItem="LCM-cX-N4q" firstAttribute="top" secondItem="oaU-QB-9Ol" secondAttribute="bottom" constant="5" id="wCC-x1-pTY"/>
+                                        <constraint firstItem="mzh-Oj-8G1" firstAttribute="top" secondItem="jUk-oO-aaL" secondAttribute="top" id="wac-7E-2uv"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -234,7 +233,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-a4-fYd" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                             <rect key="frame" x="10" y="125" width="120" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="TUF-6z-Kci"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="gKz-vu-vmI"/>
                                             </constraints>
                                             <state key="normal" title="Show answers"/>
                                             <connections>
@@ -243,15 +242,15 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="fgj-a4-fYd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eDa-qL-Fcf" secondAttribute="leading" id="2oe-I3-2wf"/>
                                         <constraint firstItem="eDa-qL-Fcf" firstAttribute="top" secondItem="T2n-Op-FLx" secondAttribute="bottom" constant="10" id="2yl-po-yfg"/>
-                                        <constraint firstAttribute="trailing" secondItem="fgj-a4-fYd" secondAttribute="trailing" constant="211" id="3HE-Lj-Bs8"/>
+                                        <constraint firstAttribute="trailing" secondItem="fgj-a4-fYd" secondAttribute="trailing" constant="177" id="43G-Gc-tQx"/>
                                         <constraint firstItem="Hhr-0J-Mj2" firstAttribute="leading" secondItem="ySy-uV-JuQ" secondAttribute="leading" constant="10" id="4gO-s0-trT"/>
-                                        <constraint firstItem="fgj-a4-fYd" firstAttribute="top" secondItem="eDa-qL-Fcf" secondAttribute="bottom" constant="34" id="6vY-xC-GJN"/>
+                                        <constraint firstItem="fgj-a4-fYd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eDa-qL-Fcf" secondAttribute="leading" id="CfW-gY-8S8"/>
                                         <constraint firstItem="T2n-Op-FLx" firstAttribute="leading" secondItem="ySy-uV-JuQ" secondAttribute="leading" constant="10" id="E4b-P6-A25"/>
                                         <constraint firstItem="eDa-qL-Fcf" firstAttribute="leading" secondItem="ySy-uV-JuQ" secondAttribute="leading" constant="10" id="HP4-RD-mFr"/>
                                         <constraint firstAttribute="trailing" secondItem="Hhr-0J-Mj2" secondAttribute="trailing" constant="10" id="Lgx-fF-Ukj"/>
                                         <constraint firstItem="Hhr-0J-Mj2" firstAttribute="top" secondItem="ySy-uV-JuQ" secondAttribute="top" constant="5" id="aru-ZR-Psb"/>
+                                        <constraint firstItem="fgj-a4-fYd" firstAttribute="top" secondItem="eDa-qL-Fcf" secondAttribute="bottom" constant="34" id="iYY-8Y-Xpu"/>
                                         <constraint firstAttribute="trailing" secondItem="T2n-Op-FLx" secondAttribute="trailing" constant="10" id="kfP-fQ-kO8"/>
                                         <constraint firstAttribute="trailing" secondItem="eDa-qL-Fcf" secondAttribute="trailing" constant="10" id="vJX-kg-mSe"/>
                                         <constraint firstItem="T2n-Op-FLx" firstAttribute="top" secondItem="Hhr-0J-Mj2" secondAttribute="bottom" constant="10" id="yCT-Bx-GsU"/>
