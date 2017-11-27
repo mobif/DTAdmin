@@ -153,6 +153,20 @@ class SubjectTableViewController: UITableViewController {
         return [delete, update] 
     }
 
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
+
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let messageFirstWord = NSLocalizedString("Name: ",
+                                        comment: "Name of subject for alert message in accesory button tapped")
+        let messageSecondWord = records[indexPath.row].name
+        let messageThirdWord = NSLocalizedString("Descroption: ",
+                              comment: "Description of subject for alert message in accesory button tapped")
+        let messageFourthWord = records[indexPath.row].description
+        showMessage(message: messageFirstWord + messageSecondWord + "\n" + messageThirdWord + messageFourthWord,
+                    title: "Detail")
+    }
 }
 
 // MARK: - UISearchResultsUpdating

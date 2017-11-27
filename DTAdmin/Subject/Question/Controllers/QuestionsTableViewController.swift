@@ -173,7 +173,15 @@ class QuestionsTableViewController: UITableViewController {
         questionAttachmentViewController.questionId = questions[indexPath.row].id
         self.navigationController?.pushViewController(questionAttachmentViewController, animated: true)
     }
-    
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
+
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let message = questions[indexPath.row].questionText
+        showMessage(message: message, title: "Detail")
+    }
 }
 
 // MARK: - QuestionTableViewCellDelegate
