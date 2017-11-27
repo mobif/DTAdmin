@@ -20,7 +20,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Select \(dataModel.details[detail])"
+        self.title = NSLocalizedString("Select \(dataModel.details[detail])", comment: "title of NumbersViewController")
         switch detail {
         case 0:
             self.currentArray = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max),

@@ -56,17 +56,17 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         let view = UIView()
         view.backgroundColor = UIColor.darkGray
         let id = UILabel()
-        id.text = "id"
+        id.text = NSLocalizedString("id", comment: "header for id in table")
         id.textColor = UIColor.white
         id.frame = CGRect(x: 10, y: 2, width: 20, height: 25)
         view.addSubview(id)
         let code = UILabel()
-        code.text = "code"
+        code.text = NSLocalizedString("code", comment: "header for code in table")
         code.textColor = UIColor.white
         code.frame = CGRect(x: 40, y: 2, width: 40, height: 25)
         view.addSubview(code)
         let name = UILabel()
-        name.text = "speciality"
+        name.text = NSLocalizedString("speciality", comment: "header for speciality in table")
         name.textColor = UIColor.white
         name.frame = CGRect(x: 170, y: 2, width: 120, height: 25)
         view.addSubview(name)
@@ -89,7 +89,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
+        let edit = UITableViewRowAction(style: .normal, title: NSLocalizedString("Edit", comment: "title for editing"), handler: { action, indexPath in
             guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality",
             bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController")
             as? SpecialityCreateUpdateViewController else { return }
@@ -101,11 +101,11 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             }
             self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
         })
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { action, indexPath in
-            let alert = UIAlertController(title: "WARNING",
-                                          message: "Do you want to delete this speciality?",
+        let delete = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: "title for deleting"), handler: { action, indexPath in
+            let alert = UIAlertController(title: NSLocalizedString("WARNING", comment: "title for alert"),
+                                          message: NSLocalizedString("Do you want to delete this speciality?", comment: "title for alert message"),
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: "title for ok key"), style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
                 guard let id = self.filteredSpecialitiesArray[indexPath.row].id else { return }
                 if indexPath.row < self.filteredSpecialitiesArray.count {
@@ -120,7 +120,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
                     }
                 }
             }))
-            alert.addAction(UIAlertAction(title: "NO", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: "title for cancel key"), style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
@@ -130,7 +130,6 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if getSpeciality {
-            print("true")
             self.navigationController?.popViewController(animated: true)
         } else {
             guard let specialityInfoViewController = UIStoryboard(name: "Speciality",
@@ -163,9 +162,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
                 print(error.localizedDescription)
             } else {
                 StoreHelper.saveUser(user: user)
-                DispatchQueue.main.async {
-                    print("user is logged")
-                }
+                print("user is logged")
             }
         }
         

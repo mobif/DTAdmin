@@ -29,7 +29,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
             dataModel.detailArray[2].number = detailsRate
             DispatchQueue.main.async {
                 if self.canEdit {
-                    self.title = "Editing"
+                    self.title = NSLocalizedString("Editing", comment: "title of GetTestDetailsViewController for editing")
                     guard let testDetailId = self.testDetailsInstance?.id else { return }
                     self.idForEditing = testDetailId
                     self.tableView.reloadData()
@@ -42,7 +42,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Creating"
+        self.title = NSLocalizedString("Creating", comment: "title of GetTestDetailsViewController")
         var array = [DetailStructure]()
         for i in dataModel.details {
             array.append(DetailStructure(detail: i, number: "0"))

@@ -25,12 +25,12 @@ class SpecialityCreateUpdateViewController: UIViewController {
             specialityCodeTextField.text = specialityInstance?.code
             DispatchQueue.main.async {
                 if self.canEdit {
-                    self.title = "Editing"
+                    self.title = NSLocalizedString("Editing", comment: "title of SpecialityCreateUpdateViewController for editing")
                     self.createButton.titleLabel?.text = "Save"
                     guard let specialityId = self.specialityInstance?.id else { return }
                     self.idForEditing = specialityId
                 } else {
-                    self.title = "New speciality"
+                    self.title = NSLocalizedString("New speciality", comment: "title of SpecialityCreateUpdateViewController")
                 }
             }
         }

@@ -18,15 +18,16 @@ class SpecialityInfoViewController: UIViewController {
     var specialityInstance: SpecialityStructure? {
         didSet {
             self.view.layoutIfNeeded()
-            specialityIdTextField.text = specialityInstance?.id
-            specialityCodeTextField.text = specialityInstance?.code
-            specialityNameTextField.text = specialityInstance?.name
+            guard let specialityInstance = specialityInstance else { return }
+            specialityIdTextField.text = specialityInstance.id
+            specialityCodeTextField.text = specialityInstance.code
+            specialityNameTextField.text = specialityInstance.name
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Info"
+        self.title = NSLocalizedString("Info", comment: "title of SpecialityInfoViewController")
     }
 
     @IBAction func backButtonTapped(_ sender: Any) {

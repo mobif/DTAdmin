@@ -17,7 +17,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Test details"
+        self.title = NSLocalizedString("Test details", comment: "title of TestDetailsViewController")
         getTestDetails()
     }
     
@@ -37,11 +37,12 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         view.backgroundColor = UIColor.darkGray
         view.tintColor = UIColor.white
         let segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 28))
-        segmentedControl.insertSegment(withTitle: "id", at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: "test id", at: 1, animated: false)
-        segmentedControl.insertSegment(withTitle: "level", at: 2, animated: false)
-        segmentedControl.insertSegment(withTitle: "task", at: 3, animated: false)
-        segmentedControl.insertSegment(withTitle: "rate", at: 4, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("id", comment: "header for id in table"), at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("test id", comment: "header for test id in table"), at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("level", comment: "header for test level in table"), at: 2, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("task", comment: "header for test task in table"), at: 3, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("rate", comment: "header for test rate in table"), at: 4, animated: false)
+        segmentedControl.insertSegment(withTitle: "", at: 5, animated: false)
         view.addSubview(segmentedControl)
         return view
     }
@@ -64,7 +65,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .normal, title: "Edit", handler: { action, indexPath in
+        let edit = UITableViewRowAction(style: .normal, title: NSLocalizedString("Edit", comment: "title for editing"), handler: { action, indexPath in
             guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
             bundle: nil).instantiateViewController(withIdentifier: "GetTestDetailsViewController")
             as? GetTestDetailsViewController else { return }
@@ -76,10 +77,10 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             }
             self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
         })
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: { action, indexPath in
-            let alert = UIAlertController(title: "WARNING", message: "Do you want to delete this test detail?",
+        let delete = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: "title for deleting"), handler: { action, indexPath in
+            let alert = UIAlertController(title: NSLocalizedString("WARNING", comment: "title for alert"), message: NSLocalizedString("Do you want to delete this test detail?", comment: "message for alert"),
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: "title for ok key"), style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
                 guard let id = self.dataModel.testDetailArray[indexPath.row].id else { return }
                 if indexPath.row < self.dataModel.testDetailArray.count {
@@ -94,7 +95,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                     }
                 }
             }))
-            alert.addAction(UIAlertAction(title: "NO", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: "title for cancel key"), style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
