@@ -11,8 +11,8 @@ import UIKit
 class AddNewQuestionViewController: UIViewController {
     
     @IBOutlet weak var questionTextView: UITextView!
-    @IBOutlet weak var questionLevelTextField: PickedTextField!
-    @IBOutlet weak var questionTypeTextField: PickedTextField!
+    @IBOutlet weak var questionLevelTextField: UITextField!
+    @IBOutlet weak var questionTypeTextField: UITextField!
     @IBOutlet weak var questionAttachmentImageView: UIImageView!
     
     var levels: [String] {
@@ -22,8 +22,6 @@ class AddNewQuestionViewController: UIViewController {
         }
         return array
     }
-    
-    //var types = ["Simple choice", "Multy choice", "Input field"]
     
     var testId: String?
     var questionId: String?
@@ -35,7 +33,8 @@ class AddNewQuestionViewController: UIViewController {
             self.view.layoutIfNeeded()
             self.questionTextView.text = question.questionText
             self.questionLevelTextField.text = question.level
-            self.questionTypeTextField.text = question.type
+            guard let index = Int(question.type) else { return }
+            self.questionTypeTextField.text = types[index - 1]
             if question.attachment.count > 1 {
                 showQuestionAttachment(for: question.attachment)
             }
@@ -52,14 +51,42 @@ class AddNewQuestionViewController: UIViewController {
             self.navigationItem.title = NSLocalizedString("Update question",
                                                           comment: "Title for AddNewQuestionViewController")
         }
-        questionLevelTextField.customDelegate = self
-        questionTypeTextField.customDelegate = self
 
-        
-        self.questionLevelTextField.dropDownData = levels
-        self.questionLevelTextField.tag = 0
-        self.questionTypeTextField.dropDownData = types
-        self.questionTypeTextField.tag = 1
+        tapGestureRecognizerConfigure()
+    }
+
+    private func tapGestureRecognizerConfigure() {
+        let questionLevel = UITapGestureRecognizer(target: self, action: #selector(chooseQuestionLevel))
+        questionLevelTextField.addGestureRecognizer(questionLevel)
+        let questionType = UITapGestureRecognizer(target: self, action: #selector(chooseQuestionType))
+        questionTypeTextField.addGestureRecognizer(questionType)
+    }
+
+    @objc private func chooseQuestionLevel() {
+        guard let itemTableViewController = UIStoryboard(name: "Subjects",
+                                                                  bundle: nil).instantiateViewController(withIdentifier: "ItemTableViewController") as?
+            ItemTableViewController else { return }
+        itemTableViewController.currentArray = levels
+        itemTableViewController.navigationItem.title = NSLocalizedString("Question level",
+                                                                         comment: "Title for ItemTableViewController")
+        itemTableViewController.resultModification = { result in
+            self.questionLevelTextField.text = result
+        }
+        self.navigationController?.pushViewController(itemTableViewController, animated: true)
+    }
+
+    @objc private func chooseQuestionType() {
+        guard let itemTableViewController = UIStoryboard(name: "Subjects",
+                                                         bundle: nil).instantiateViewController(withIdentifier:
+                                                            "ItemTableViewController") as?
+            ItemTableViewController else { return }
+        itemTableViewController.currentArray = types
+        itemTableViewController.navigationItem.title = NSLocalizedString("Question type",
+                                                                         comment: "Title for ItemTableViewController")
+        itemTableViewController.resultModification = { result in
+            self.questionTypeTextField.text = result
+        }
+        self.navigationController?.pushViewController(itemTableViewController, animated: true)
     }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
@@ -70,7 +97,7 @@ class AddNewQuestionViewController: UIViewController {
         }
     }
     
-    func saveNewQuestion() {
+    private func saveNewQuestion() {
         if prepareForSave(){
             guard let questionForSave = questionForSave else { return }
             DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) {
@@ -91,7 +118,7 @@ class AddNewQuestionViewController: UIViewController {
         }
     }
     
-    func updateQuestion() {
+    private func updateQuestion() {
         if prepareForSave(){
             guard let questionId = questionId else { return }
             guard let questionForSave = questionForSave else { return }
@@ -114,7 +141,7 @@ class AddNewQuestionViewController: UIViewController {
         questionAttachmentImageView.image = nil
     }
     
-    func prepareForSave() -> Bool {
+    private func prepareForSave() -> Bool {
         guard let questionText = questionTextView.text,
             let level = questionLevelTextField.text,
             let type = questionTypeTextField.text,
@@ -159,12 +186,13 @@ class AddNewQuestionViewController: UIViewController {
         }
     }
     
-    func showQuestionAttachment(for text: String){
+    private func showQuestionAttachment(for text: String){
         questionAttachmentImageView.image = UIImage.decode(fromBase64: text)
     }
     
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension AddNewQuestionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @objc func openGallery(_ sender: UIButton) {
@@ -192,18 +220,3 @@ extension AddNewQuestionViewController: UIImagePickerControllerDelegate, UINavig
     }
 }
 
-extension AddNewQuestionViewController: PickerDelegate {
-
-    func pickedValue(value: Any, tag: Int) {
-        if let stringValue = value as? String {
-            switch tag {
-            case 0:
-                self.questionLevelTextField.text = stringValue
-            case 1:
-                self.questionTypeTextField.text = stringValue
-            default:
-                break
-            }
-        }
-    }
-}

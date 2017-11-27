@@ -48,7 +48,7 @@ class AddNewRecordViewController: UIViewController {
         }
     }
     
-    func saveNewSubject() {
+    private func saveNewSubject() {
         if prepareForSave(){
             guard let subjectForSave = subjectForSave else { return }
             DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .subject) { (subjectResult, error) in
@@ -67,7 +67,7 @@ class AddNewRecordViewController: UIViewController {
         }
     }
 
-    func updateSubject() {
+    private func updateSubject() {
         if prepareForSave(){
             guard let subjectIdUnwrap = subjectId else { return }
             guard let subjectForSave = subjectForSave else { return }
@@ -85,7 +85,7 @@ class AddNewRecordViewController: UIViewController {
         }
     }
     
-    func prepareForSave() -> Bool {
+    private func prepareForSave() -> Bool {
         guard let name = subjectNameTextField.text,
             let description = subjectDescriptionTextField.text else { return false }
         

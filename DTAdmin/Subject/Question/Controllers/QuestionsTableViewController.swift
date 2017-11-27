@@ -16,32 +16,39 @@ class QuestionsTableViewController: UITableViewController {
     var testId: String?
     var filteredData = [QuestionStructure]()
     var refresh: MyRefreshController!
-    let searchController = UISearchController(searchResultsController: nil)
+    let searchController = MySearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Question", comment: "Title for QuestionsTableViewController")
 
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-
-        searchController.searchBar.scopeButtonTitles = ["Question", "Level"]
-        searchController.searchBar.delegate = self
-
         tableView.tableFooterView = searchFooter
-
-        refresh = MyRefreshController()
-        tableView.addSubview(refresh)
-        refresh.addTarget(self, action: #selector(getCountOfQuestion), for: .valueChanged)
-
+        navigationControllerConfigure()
+        refresherControllerConfigure()
         getCountOfQuestion()
 
     }
+
+    private func navigationControllerConfigure() {
+        searchController.searchResultsUpdater = self
+        searchController.configure()
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+
+        searchController.searchBar.scopeButtonTitles = [
+            NSLocalizedString("Question", comment: "Scope title for searchController"),
+            NSLocalizedString("Level", comment: "Scope title for searchController")
+        ]
+        searchController.searchBar.delegate = self
+    }
+
+    private func refresherControllerConfigure() {
+        refresh = MyRefreshController()
+        tableView.addSubview(refresh)
+        refresh.addTarget(self, action: #selector(getCountOfQuestion), for: .valueChanged)
+    }
     
-    @objc func getCountOfQuestion() {
+    @objc private func getCountOfQuestion() {
         startActivityIndicator()
         DataManager.shared.getCountItems(forEntity: .question) { count, errorMessage in
             if let errorMessage = errorMessage {
@@ -58,7 +65,7 @@ class QuestionsTableViewController: UITableViewController {
         }
     }
     
-    func showQuestions(id: String, quantity: UInt) {
+    private func showQuestions(id: String, quantity: UInt) {
         DataManager.shared.getRecordsRange(byTest: id, limit: String(quantity), offset: "0", withoutImages: true) {
             (questions, errorMessage) in
             self.refresh.endRefreshing()
@@ -88,8 +95,7 @@ class QuestionsTableViewController: UITableViewController {
         self.navigationController?.pushViewController(addNewQuestionViewController, animated: true)
     }
 
-    // MARK: - Private instance methods
-    func filterContentForSearchText(_ searchText: String, scope: String) {
+    private func filterContentForSearchText(_ searchText: String, scope: String) {
         filteredData = questions.filter({ (question : QuestionStructure) -> Bool in
             if scope == "Question" {
                 return question.questionText.lowercased().contains(searchText.lowercased())
@@ -100,17 +106,9 @@ class QuestionsTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-
-    func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
-    }
-
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
+        if searchController.isFiltering() {
             searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: questions.count)
             return filteredData.count
         }
@@ -122,16 +120,19 @@ class QuestionsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as!
             QuestionTableViewCell
-        let cellData = isFiltering() ? filteredData[indexPath.row] : questions[indexPath.row]
+        let cellData = searchController.isFiltering() ? filteredData[indexPath.row] : questions[indexPath.row]
         cell.setQuestion(question: cellData)
         cell.delegate = self
         return cell
     }
-    
+
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
         [UITableViewRowAction]? {
 
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive,
+                                          title: NSLocalizedString("Delete",
+                                                                comment: "Swipe title button")) { (action, indexPath) in
             guard let questionId = self.questions[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: questionId, typeEntity: .question)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
@@ -142,7 +143,9 @@ class QuestionsTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+        let update = UITableViewRowAction(style: .normal,
+                                          title: NSLocalizedString("Update",
+                                                                comment: "Swipe title button")) { (action, indexPath) in
             guard let addNewQuestionViewController = UIStoryboard(name: "Subjects",
                                                                   bundle: nil).instantiateViewController(withIdentifier:
                                                                     "AddNewQuestion") as? AddNewQuestionViewController
@@ -154,6 +157,7 @@ class QuestionsTableViewController: UITableViewController {
             addNewQuestionViewController.question = self.questions[indexPath.row]
             addNewQuestionViewController.resultModification = { questionResult in
                 self.questions[indexPath.row] = questionResult
+                self.questions.sort { return $0.type < $1.type}
                 self.tableView.reloadData()
             }
             self.navigationController?.pushViewController(addNewQuestionViewController, animated: true)
@@ -169,32 +173,45 @@ class QuestionsTableViewController: UITableViewController {
         questionAttachmentViewController.questionId = questions[indexPath.row].id
         self.navigationController?.pushViewController(questionAttachmentViewController, animated: true)
     }
-    
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
+
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let message = questions[indexPath.row].questionText
+        showMessage(message: message, title: "Detail")
+    }
 }
 
+// MARK: - QuestionTableViewCellDelegate
 extension QuestionsTableViewController: QuestionTableViewCellDelegate {
     
-    func didTapShowAnswer(for id: String) {
+    func didTapShowAnswer(for id: String, and type: String) {
         guard let answersTableViewController = UIStoryboard(name: "Subjects",
                                                             bundle: nil).instantiateViewController(withIdentifier:
                                                                 "Answers") as? AnswersTableViewController
             else { return }
         answersTableViewController.questionId = id
+        answersTableViewController.qustionType = type
         self.navigationController?.pushViewController(answersTableViewController, animated: true)
     }
 }
 
+// MARK: - UISearchResultsUpdating
 extension QuestionsTableViewController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        guard let searchText = searchController.searchBar.text else { return }
+        filterContentForSearchText(searchText, scope: scope)
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension QuestionsTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        guard let searchText = searchBar.text else { return }
+        filterContentForSearchText(searchText, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }

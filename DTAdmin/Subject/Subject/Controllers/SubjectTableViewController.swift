@@ -24,24 +24,31 @@ class SubjectTableViewController: UITableViewController {
     var filteredData = [SubjectStructure]()
     var selectedSubject: ((SubjectStructure) -> ())?
     var refresh: MyRefreshController!
-    let searchController = UISearchController(searchResultsController: nil)
+    let searchController = MySearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Subjects", comment: "Title for SubjectTableViewController")
         showRecords()
+        searchControllerConfigure()
+        refreshControllerConfigure()
+        tableView.tableFooterView = searchFooter
+    }
 
+    private func searchControllerConfigure() {
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
+        searchController.configure()
         navigationItem.searchController = searchController
         definesPresentationContext = true
 
-        searchController.searchBar.scopeButtonTitles = ["Name", "Description"]
+        searchController.searchBar.scopeButtonTitles = [
+            NSLocalizedString("Name", comment: "Scope title for searchController"),
+            NSLocalizedString("Description", comment: "Scope title for searchController")
+        ]
         searchController.searchBar.delegate = self
+    }
 
-        tableView.tableFooterView = searchFooter
-
+    private func refreshControllerConfigure() {
         refresh = MyRefreshController()
         tableView.addSubview(refresh)
         refresh.addTarget(self, action: #selector(showRecords), for: .valueChanged)
@@ -78,8 +85,7 @@ class SubjectTableViewController: UITableViewController {
         }
     }
 
-    // MARK: - Private instance methods
-    func filterContentForSearchText(_ searchText: String, scope: String) {
+    private func filterContentForSearchText(_ searchText: String, scope: String) {
         filteredData = records.filter({ (subject : SubjectStructure) -> Bool in
 
             if scope == "Description" {
@@ -91,17 +97,9 @@ class SubjectTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-
-    func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
-    }
-
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
+        if searchController.isFiltering() {
             searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: records.count)
             return filteredData.count
         }
@@ -113,15 +111,18 @@ class SubjectTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             as? SubjectTableViewCell else { fatalError("The dequeued cell is not an instance of MealTableViewCell.") }
-        let cellData = isFiltering() ? filteredData[indexPath.row] : records[indexPath.row]
+        let cellData = searchController.isFiltering() ? filteredData[indexPath.row] : records[indexPath.row]
         cell.setSubject(subject: cellData)
         cell.delegate = self
         return cell
     }
 
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
     [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive,
+                                          title: NSLocalizedString("Delete",
+                                                                comment: "Swipe button title")) { (action, indexPath) in
             guard let subjectId = self.records[indexPath.row].id else { return }
             DataManager.shared.deleteEntity(byId: subjectId, typeEntity: .subject)  { (result, errorMessage) in
                 if let errorMessage = errorMessage {
@@ -132,7 +133,9 @@ class SubjectTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-        let update = UITableViewRowAction(style: .normal, title: "Update") { (action, indexPath) in
+        let update = UITableViewRowAction(style: .normal,
+                                          title: NSLocalizedString("Update",
+                                                                comment: "Swipe button title")) { (action, indexPath) in
             guard let addNewRecordViewController = UIStoryboard(name: "Subjects",
                                                                 bundle: nil).instantiateViewController(withIdentifier:
                                                                     "AddNewSubject") as? AddNewRecordViewController
@@ -150,23 +153,43 @@ class SubjectTableViewController: UITableViewController {
         return [delete, update] 
     }
 
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
+
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let messageFirstWord = NSLocalizedString("Name: ",
+                                        comment: "Name of subject for alert message in accesory button tapped")
+        let messageSecondWord = records[indexPath.row].name
+        let messageThirdWord = NSLocalizedString("Descroption: ",
+                              comment: "Description of subject for alert message in accesory button tapped")
+        let messageFourthWord = records[indexPath.row].description
+        showMessage(message: messageFirstWord + messageSecondWord + "\n" + messageThirdWord + messageFourthWord,
+                    title: "Detail")
+    }
 }
 
+// MARK: - UISearchResultsUpdating
 extension SubjectTableViewController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
+
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        guard let searchText = searchController.searchBar.text else { return }
+        filterContentForSearchText(searchText, scope: scope)
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension SubjectTableViewController: UISearchBarDelegate {
+
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        guard let searchText = searchBar.text else { return }
+        filterContentForSearchText(searchText, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 
+// MARK: - SubjectTableViewCellDelegate
 extension SubjectTableViewController: SubjectTableViewCellDelegate {
 
     func didTapShowTest(for id: String) {

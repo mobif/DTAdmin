@@ -12,7 +12,8 @@ class MyRefreshController: UIRefreshControl {
 
     private func applyStyle() {
         self.tintColor = UIColor(red: 1.0, green: 0.21, blue: 0.55, alpha: 0.5)
-        self.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.attributedTitle = NSAttributedString(string:
+                                                    NSLocalizedString("Pull to refresh", comment: "Pull to refresh"))
     }
 
      override init() {
