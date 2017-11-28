@@ -25,12 +25,14 @@ class SpecialityCreateUpdateViewController: UIViewController {
             specialityCodeTextField.text = specialityInstance?.code
             DispatchQueue.main.async {
                 if self.canEdit {
-                    self.title = NSLocalizedString("Editing", comment: "title of SpecialityCreateUpdateViewController for editing")
+                    self.title = NSLocalizedString("Editing",
+                        comment: "title of SpecialityCreateUpdateViewController for editing")
                     self.createButton.titleLabel?.text = "Save"
                     guard let specialityId = self.specialityInstance?.id else { return }
                     self.idForEditing = specialityId
                 } else {
-                    self.title = NSLocalizedString("New speciality", comment: "title of SpecialityCreateUpdateViewController")
+                    self.title = NSLocalizedString("New speciality",
+                        comment: "title of SpecialityCreateUpdateViewController")
                 }
             }
         }
@@ -81,7 +83,7 @@ class SpecialityCreateUpdateViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         } else {
             showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
-                                             comment: "All fields have to be filled"))
+                comment: "All fields have to be filled"))
         }
     }
     
@@ -103,7 +105,7 @@ class SpecialityCreateUpdateViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         } else {
             showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
-                                             comment: "All fields have to be filled"))
+                comment: "All fields have to be filled"))
         }
     }
     

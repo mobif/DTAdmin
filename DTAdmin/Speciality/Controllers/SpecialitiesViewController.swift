@@ -87,7 +87,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "specialityCell",
-                                                          for: indexPath) as? SpecialityTableViewCell
+            for: indexPath) as? SpecialityTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
         let array = filteredSpecialitiesArray[indexPath.row]
         cell.specialityIdLabel.text = array.id
@@ -98,43 +98,42 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: NSLocalizedString("Edit", comment: "title for editing"),
-                                        handler: { action, indexPath in
-            guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality",
-            bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController")
-            as? SpecialityCreateUpdateViewController else { return }
-            specialityCreateUpdateViewController.specialityInstance = self.filteredSpecialitiesArray[indexPath.row]
-            specialityCreateUpdateViewController.canEdit = true
-            specialityCreateUpdateViewController.resultModification = { updateResult in
-                self.filteredSpecialitiesArray[indexPath.row] = updateResult
-                self.specialitiesTableView.reloadData()
-            }
+            handler: { action, indexPath in
+                guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality",
+                bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController")
+                as? SpecialityCreateUpdateViewController else { return }
+                specialityCreateUpdateViewController.specialityInstance = self.filteredSpecialitiesArray[indexPath.row]
+                specialityCreateUpdateViewController.canEdit = true
+                specialityCreateUpdateViewController.resultModification = { updateResult in
+                    self.filteredSpecialitiesArray[indexPath.row] = updateResult
+                    self.specialitiesTableView.reloadData()
+                }
             self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
         })
         let delete = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete",
-                                          comment: "title for deleting"),
-                                          handler: { action, indexPath in
-            let alert = UIAlertController(title: NSLocalizedString("WARNING", comment: "title for alert"),
-                                          message: NSLocalizedString("Do you want to delete this speciality?",
-                                                                     comment: "title for alert message"),
-                                          preferredStyle: .alert)
+                comment: "title for deleting"), handler: { action, indexPath in
+                    let alert = UIAlertController(title: NSLocalizedString("WARNING", comment: "title for alert"),
+                        message: NSLocalizedString("Do you want to delete this speciality?",
+                            comment: "title for alert message"), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: "title for ok key"),
-                                          style: .default, handler: { (action) in
-                alert.dismiss(animated: true, completion: nil)
-                guard let id = self.filteredSpecialitiesArray[indexPath.row].id else { return }
-                if indexPath.row < self.filteredSpecialitiesArray.count {
-                    DataManager.shared.deleteEntity(byId: id, typeEntity: .speciality) { (deleted, error) in
-                        if let error = error {
-                            self.showWarningMsg(error.info)
-                        } else {
-                            self.filteredSpecialitiesArray.remove(at: indexPath.row)
-                            tableView.deleteRows(at: [indexPath], with: .top)
-                            self.specialitiesTableView.reloadData()
+                style: .default, handler: { (action) in
+                    alert.dismiss(animated: true, completion: nil)
+                    guard let id = self.filteredSpecialitiesArray[indexPath.row].id else { return }
+                    if indexPath.row < self.filteredSpecialitiesArray.count {
+                        DataManager.shared.deleteEntity(byId: id, typeEntity: .speciality) { (deleted, error) in
+                            if let error = error {
+                                self.showWarningMsg(error.info)
+                            } else {
+                                self.filteredSpecialitiesArray.remove(at: indexPath.row)
+                                tableView.deleteRows(at: [indexPath], with: .top)
+                                self.specialitiesTableView.reloadData()
+                            }
                         }
                     }
-                }
             }))
-            alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: "title for cancel key"), style: .default, handler: { (action) in
-                alert.dismiss(animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: "title for cancel key"),
+                style: .default, handler: { (action) in
+                    alert.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
         })
@@ -146,8 +145,8 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             self.navigationController?.popViewController(animated: true)
         } else {
             guard let specialityInfoViewController = UIStoryboard(name: "Speciality",
-            bundle: nil).instantiateViewController(withIdentifier: "SpecialityInfoViewController")
-            as? SpecialityInfoViewController else  { return }
+                bundle: nil).instantiateViewController(withIdentifier: "SpecialityInfoViewController")
+                    as? SpecialityInfoViewController else  { return }
             specialityInfoViewController.specialityInstance = self.filteredSpecialitiesArray[indexPath.row]
             self.navigationController?.pushViewController(specialityInfoViewController, animated: true)
         }
@@ -155,8 +154,8 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func addButtonTapped(_ sender: Any) {
         guard let specialityCreateUpdateViewController = UIStoryboard(name: "Speciality",
-        bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController")
-        as? SpecialityCreateUpdateViewController else { return }
+            bundle: nil).instantiateViewController(withIdentifier: "SpecialityCreateUpdateViewController")
+                as? SpecialityCreateUpdateViewController else { return }
         self.navigationController?.pushViewController(specialityCreateUpdateViewController, animated: true)
         specialityCreateUpdateViewController.resultModification = { newSpeciality in
             self.filteredSpecialitiesArray.append(newSpeciality)

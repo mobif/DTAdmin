@@ -45,11 +45,16 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         view.backgroundColor = UIColor.darkGray
         view.tintColor = UIColor.white
         let segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 28))
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("id", comment: "header for id in table"), at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("test id", comment: "header for test id in table"), at: 1, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("level", comment: "header for test level in table"), at: 2, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("task", comment: "header for test task in table"), at: 3, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("rate", comment: "header for test rate in table"), at: 4, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("id", comment: "header for id in table"),
+            at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("test id", comment: "header for test id in table"),
+            at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("level", comment: "header for test level in table"),
+            at: 2, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("task", comment: "header for test task in table"),
+            at: 3, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString("rate", comment: "header for test rate in table"),
+            at: 4, animated: false)
         segmentedControl.insertSegment(withTitle: "", at: 5, animated: false)
         view.addSubview(segmentedControl)
         return view
@@ -73,24 +78,28 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .normal, title: NSLocalizedString("Edit", comment: "title for editing"), handler: { action, indexPath in
-            guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
-            bundle: nil).instantiateViewController(withIdentifier: "GetTestDetailsViewController")
-            as? GetTestDetailsViewController else { return }
-            getTestDetailsViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
-            getTestDetailsViewController.canEdit = true
-            getTestDetailsViewController.resultModification = { updateResult in
-                self.dataModel.testDetailArray[indexPath.row] = updateResult
-                self.testDetailsTableView.reloadData()
-            }
-            self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
+        let edit = UITableViewRowAction(style: .normal, title: NSLocalizedString("Edit", comment: "title for editing"),
+                handler: { action, indexPath in
+                    guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
+                        bundle: nil).instantiateViewController(withIdentifier: "GetTestDetailsViewController")
+                            as? GetTestDetailsViewController else { return }
+                    getTestDetailsViewController.testDetailsInstance = self.dataModel.testDetailArray[indexPath.row]
+                    getTestDetailsViewController.canEdit = true
+                    getTestDetailsViewController.resultModification = { updateResult in
+                        self.dataModel.testDetailArray[indexPath.row] = updateResult
+                        self.testDetailsTableView.reloadData()
+                    }
+                    self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
         })
-        let delete = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: "title for deleting"), handler: { action, indexPath in
-            let alert = UIAlertController(title: NSLocalizedString("WARNING", comment: "title for alert"), message: NSLocalizedString("Do you want to delete this test detail?", comment: "message for alert"),
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: "title for ok key"), style: .default, handler: { (action) in
-                alert.dismiss(animated: true, completion: nil)
-                guard let id = self.dataModel.testDetailArray[indexPath.row].id else { return }
+        let delete = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete",
+            comment: "title for deleting"), handler: { action, indexPath in
+                let alert = UIAlertController(title: NSLocalizedString("WARNING", comment: "title for alert"),
+                    message: NSLocalizedString("Do you want to delete this test detail?", comment: "message for alert"),
+                        preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("YES", comment: "title for ok key"),
+                style: .default, handler: { (action) in
+                    alert.dismiss(animated: true, completion: nil)
+            guard let id = self.dataModel.testDetailArray[indexPath.row].id else { return }
                 if indexPath.row < self.dataModel.testDetailArray.count {
                     DataManager.shared.deleteEntity(byId: id, typeEntity: Entities.testDetail) { (deleted, error) in
                         if let error = error {
@@ -115,11 +124,11 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         dataModel.currentDataForSelecting()
         if dataModel.taskArrayForFiltering.reduce(0, +) >= dataModel.max {
             self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then \(dataModel.max)",
-                                                  comment: "Sum of tasks should be from 1 to \(dataModel.max)"))
+                comment: "Sum of tasks should be from 1 to \(dataModel.max)"))
         } else {
             guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
-                                                                  bundle: nil).instantiateViewController(
-                withIdentifier: "GetTestDetailsViewController") as? GetTestDetailsViewController else { return }
+                bundle: nil).instantiateViewController(withIdentifier: "GetTestDetailsViewController")
+                    as? GetTestDetailsViewController else { return }
             self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
             getTestDetailsViewController.resultModification = { newTestDetail in
                 self.dataModel.testDetailArray.append(newTestDetail)
@@ -133,7 +142,6 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         //test data
         let loginText = "admin"
         let passwordText = "dtapi_admin"
-        
         CommonNetworkManager.shared().logIn(username: loginText, password: passwordText) { (user, error) in
             if let error = error {
                 print(error.localizedDescription)

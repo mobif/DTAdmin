@@ -24,7 +24,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
         switch detail {
         case 0:
             self.currentArray = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max),
-                                                                    secondArray: dataModel.levelArrayForFiltering)
+                secondArray: dataModel.levelArrayForFiltering)
         case 1:
             if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
                 let task1 = dataModel.detailArray[1].number
@@ -60,7 +60,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let prototypeCell = tableView.dequeueReusableCell(withIdentifier: "selectDetailCell",
-                                                          for: indexPath) as? SelectDetailTableViewCell
+            for: indexPath) as? SelectDetailTableViewCell
         guard let cell = prototypeCell else { return UITableViewCell() }
         let item = currentArray[indexPath.row]
         cell.numberForTestDetailsLabel.text = String(item)

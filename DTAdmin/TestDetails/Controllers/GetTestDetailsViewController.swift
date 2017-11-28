@@ -29,7 +29,8 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
             dataModel.detailArray[2].number = detailsRate
             DispatchQueue.main.async {
                 if self.canEdit {
-                    self.title = NSLocalizedString("Editing", comment: "title of GetTestDetailsViewController for editing")
+                    self.title = NSLocalizedString("Editing",
+                        comment: "title of GetTestDetailsViewController for editing")
                     guard let testDetailId = self.testDetailsInstance?.id else { return }
                     self.idForEditing = testDetailId
                     self.tableView.reloadData()
@@ -123,7 +124,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
             self.navigationController?.popViewController(animated: true)
         } else {
             showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
-                                             comment: "All fields have to be filled"))
+                comment: "All fields have to be filled"))
         }
     }
 
@@ -145,7 +146,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
             self.navigationController?.popViewController(animated: true)
         } else {
             showWarningMsg(NSLocalizedString("Incorrect data. All fields have to be filled",
-                                             comment: "All fields have to be filled"))
+                comment: "All fields have to be filled"))
         }
     }
 
