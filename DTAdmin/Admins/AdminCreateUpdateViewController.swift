@@ -113,12 +113,12 @@ class AdminCreateUpdateViewController: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                     return
                 } else {
-//                    FIXME: - make id optional
-                    assertionFailure("AdminCreate..VC, Bad id return after creation")
+                    self.showWarningMsg(NSLocalizedString("Server error\nNew user creation failed\nPlease try again", comment: "Server error. New user creation failed. Please try again"))
+                    assertionFailure("AdminCreate..VC, Bad id return after creation")	
                     return
                 }
             }
-            self.showWarningMsg(error)
+            self.showWarningMsg(error.info)
         }
     }
     
@@ -127,13 +127,13 @@ class AdminCreateUpdateViewController: UIViewController {
             let params = unWrapFields(),
             let id = self.admin?.id else { return }
         
-        guard var userForSave = admin else { return }
+        guard var userForSave = self.admin else { return }
         userForSave.userName = params.userName
         userForSave.email = params.email
         userForSave.password = params.password
         DataManager.shared.updateEntity(byId: id, entity:  userForSave, typeEntity: .user) { (error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.info)
                 return
             }
             self.saveAction!(userForSave)

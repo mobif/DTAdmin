@@ -46,9 +46,9 @@ class PreviewViewController: ParentViewController {
                 return
         }
         // Get students test passed by group
-        DataManager.shared.getResultsBy(group: group, subject: subject, test: test, maxMark: "100") { (error, studentsResult) in
+        DataManager.shared.getResultsBy(groupId: groupId, testId: testId) { (studentsResult, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.info)
             } else {
                 guard let studentsResult = studentsResult else { return }
                 self.studentsResult = studentsResult
@@ -56,7 +56,7 @@ class PreviewViewController: ParentViewController {
         }
         
         //getting quiz details for counting correct marks
-        DataManager.shared.getTestDetails(byTest: testId) { (error, testDetail) in
+        DataManager.shared.getTestDetails(byTest: testId) { (testDetail, error) in
             guard let testDetail = testDetail else { return }
             for i in testDetail {
                 guard let rate = Int(i.rate), let tasks = Int(i.tasks) else { return }
@@ -69,7 +69,7 @@ class PreviewViewController: ParentViewController {
         // adding students full name to results by theirs' id
         DataManager.shared.getStudents(forGroup: groupId, withoutImages: true) { (students, error) in
             if let error = error {
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.info)
             } else {
                 guard let students = students else { return }
                 for i in 0..<self.studentsResult.count {

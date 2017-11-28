@@ -47,10 +47,10 @@ class ResultByGroupViewController: ParentViewController {
         var testsIds = [String]()
         var subjectsIds = [String]()
         
-        DataManager.shared.getTestsResultIds(byGroup: groupId) { (error, testIds) in
+        DataManager.shared.getTestsResultIds(byGroup: groupId) { (testIds, error) in
             if let error = error {
                 self.stopActivity()
-                self.showWarningMsg(error)
+                self.showWarningMsg(error.message)
                 return
             } else {
                 guard let testIds = testIds else {
@@ -64,10 +64,10 @@ class ResultByGroupViewController: ParentViewController {
                     }
                 }
                 
-                DataManager.shared.getTestsBy(ids: testsIds, completionHandler: { (error, tests) in
+                DataManager.shared.getTestsBy(ids: testsIds, completionHandler: { (tests, error) in
                     if let error = error {
                         self.stopActivity()
-                        self.showWarningMsg(error)
+                        self.showWarningMsg(error.message)
                     } else {
                         guard var tests = tests else {
                             self.stopActivity()
@@ -79,17 +79,15 @@ class ResultByGroupViewController: ParentViewController {
                             subjectsIds.append(i.subjectId)
                         }
                         
-                        DataManager.shared.getSubjectsBy(ids: subjectsIds, completionHandler: { (error, subjects) in
+                        DataManager.shared.getSubjectsBy(ids: subjectsIds, completionHandler: { (subjects, error) in
                             for i in 0..<tests.count {
                                 let testSubj = subjects?.filter({ $0.id == tests[i].subjectId })
                                 tests[i].subjectName = testSubj?.first?.name
                             }
-                            DispatchQueue.main.async {
                                 self.tests = tests
                                 self.resultsTableView.reloadData()
                                 self.refreshControl.endRefreshing()
                                 self.stopActivity()
-                            }
                         })
                         
                     }
