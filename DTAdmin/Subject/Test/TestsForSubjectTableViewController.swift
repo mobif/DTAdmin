@@ -150,7 +150,7 @@ extension TestsForSubjectTableViewController: TestTableViewCellDelegate {
         guard let testDetailsViewController = UIStoryboard.stoyboard(by:
             .testDetails).instantiateViewController(withIdentifier: "TestDetailsViewController") as? TestDetailsViewController
             else { return }
-        testDetailsViewController.id = id
+        testDetailsViewController.testId = id
         testDetailsViewController.maxTasks = maxTasks
         self.navigationController?.pushViewController(testDetailsViewController, animated: true)
     }

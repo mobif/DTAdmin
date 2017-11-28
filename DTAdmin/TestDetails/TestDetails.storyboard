@@ -178,7 +178,7 @@
                     <navigationItem key="navigationItem" id="wij-n3-xVM">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="jOa-CN-zQC">
                             <connections>
-                                <action selector="CreateSpecialityButton:" destination="7fu-Tk-SDN" id="Sfe-e6-tA6"/>
+                                <action selector="DoneButtontapped:" destination="7fu-Tk-SDN" id="hDg-Op-GiX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

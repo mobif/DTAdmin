@@ -24,8 +24,8 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
         guard let max = dataModel.max else { return }
         switch detail {
         case 0:
-            self.currentArray = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: max),
-                secondArray: dataModel.levelArrayForFiltering)
+            self.currentArray = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(
+                max: Numbers.maxLevel.rawValue), secondArray: dataModel.levelArrayForFiltering)
         case 1:
             if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
                 let task1 = dataModel.detailArray[1].number
@@ -41,7 +41,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             self.currentArray = dataModel.createArray(max: task)
         case 2:
-            self.currentArray = dataModel.createArray(max: 100)
+            self.currentArray = dataModel.createArray(max: Numbers.maxRate.rawValue)
         default:
             return
         }

@@ -28,8 +28,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let subjectStoryboard = UIStoryboard.stoyboard(by: .subject)
         guard let subjectNavController = subjectStoryboard.instantiateViewController(withIdentifier: "SubjectNavController") as? UINavigationController else { return }
         let subjectBarItem = UITabBarItem(title: NSLocalizedString("Subjects", comment: "Title for subjects tap"),
-                                          image: nil,
-                                          selectedImage: nil)
+                                          image: nil,  selectedImage: nil)
         subjectBarItem.image = UIImage(named: "ic_subject_white")
         subjectNavController.tabBarItem = subjectBarItem
         tabBarViewControllers.append(subjectNavController)
@@ -38,19 +37,19 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let groupStoryboard = UIStoryboard.stoyboard(by: .group)
         guard let groupNavController = groupStoryboard.instantiateViewController(withIdentifier: "GroupNavController") as? UINavigationController else { return }
         let groupsBarItem = UITabBarItem(title: NSLocalizedString("Groups", comment: "Title for groups tap"),
-                                         image: nil,
-                                         selectedImage: nil)
+                                         image: nil, selectedImage: nil)
         groupsBarItem.image = UIImage(named: "ic_supervisor_account_white")
         groupNavController.tabBarItem = groupsBarItem
         tabBarViewControllers.append(groupNavController)
         
 // Create faculty tab
-        let facultyTab = TabFourViewController()
+        let facultyStoryboard = UIStoryboard.stoyboard(by: .faculty)
+        guard let facultyNavController = facultyStoryboard.instantiateViewController(withIdentifier: "FacultyNavController") as? UINavigationController else { return }
         let facultyBarItem = UITabBarItem(title: NSLocalizedString("Faculty", comment: "Title for faculty tap"),
-                                          image: nil, selectedImage: nil)
+                                             image: nil, selectedImage: nil)
         facultyBarItem.image = UIImage(named: "ic_account_balance_white")
-        facultyTab.tabBarItem = facultyBarItem
-        tabBarViewControllers.append(facultyTab)
+        facultyNavController.tabBarItem = facultyBarItem
+        tabBarViewControllers.append(facultyNavController)
 
 // Create speciality tab
         let specialityStoryboard = UIStoryboard.stoyboard(by: .speciality)
@@ -91,10 +90,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 //MARK: UITabBarControllerDelegate method
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let title = viewController.title {
-            //print("Selected \(title)")
         }
         if let navTitle = (viewController as? UINavigationController)?.viewControllers.first?.title {
-            //print("Selected \(navTitle)")
         }
     }
 }

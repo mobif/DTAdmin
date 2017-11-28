@@ -16,7 +16,6 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
     var resultModification: ((TestDetailStructure) -> ())?
     var canEdit = Bool()
     var idForEditing = String()
-    var id = "3"
     var maxTask = Int()
     var testDetailsInstance: TestDetailStructure? {
         didSet {
@@ -46,7 +45,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
         self.title = NSLocalizedString("Creating", comment: "title of GetTestDetailsViewController")
         var array = [DetailStructure]()
         for i in dataModel.details {
-            array.append(DetailStructure(detail: i, number: "0"))
+            array.append(DetailStructure(detail: i.rawValue, number: String(Numbers.minDetail.rawValue)))
         }
         dataModel.detailArray = array
     }
@@ -92,8 +91,12 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
         let level = dataModel.detailArray[0].number
         let task = dataModel.detailArray[1].number
         let rate = dataModel.detailArray[2].number
-        if level != "0" && task != "0" && rate != "0" {
-            let dictionary: [String: Any] = ["test_id": id, "level": level, "tasks": task, "rate": rate]
+        if level != String(Numbers.minDetail.rawValue) && task != String(Numbers.minDetail.rawValue)
+            && rate != String(Numbers.minDetail.rawValue) {
+            let dictionary: [String: Any] = [TestDetails.testId.rawValue: dataModel.id,
+                                             TestDetails.level.rawValue: level,
+                                             TestDetails.tasks.rawValue: task,
+                                             TestDetails.rate.rawValue: rate]
             self.testDetailForSave = TestDetailStructure(dictionary: dictionary)
             return true
         } else {
@@ -101,7 +104,7 @@ class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
 
-    @IBAction func CreateSpecialityButton(_ sender: Any) {
+    @IBAction func DoneButtontapped(_ sender: Any) {
         !canEdit ? createTestDetail() : updateTestDetail()
     }
 

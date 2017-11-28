@@ -25,9 +25,10 @@ class GroupCreateUpdateViewController: UIViewController {
     @IBOutlet weak var selectSpecialityButton: UIButton!
     
     @IBAction func selectFacultyTapped(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
-        guard let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as? FacultyForGroupViewController else { return }
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Faculty", bundle: nil)
+        guard let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as? FacultyViewController else { return }
         self.navigationController?.pushViewController(facultyViewController, animated: true)
+        facultyViewController.getFaculty = true
         facultyViewController.selectFaculty = { selectedFaculty in
             self.faculty = selectedFaculty
             self.selectFacultyButton.titleLabel?.text = selectedFaculty.name

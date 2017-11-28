@@ -1,4 +1,3 @@
-
 //
 //  SpecialityViewController.swift
 //  DTAdmin
@@ -41,12 +40,11 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
                     return
                 }
                 self.showWarningMsg(error.info)
-                if error.code == 403 {
+                if error.code == HTTPStatusCodes.Unauthorized.rawValue {
                     StoreHelper.logout()
                     self.showLoginScreen()
                 }
             }
-            
         }
         self.refresh.endRefreshing()
     }

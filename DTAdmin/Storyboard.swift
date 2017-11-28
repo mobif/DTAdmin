@@ -23,4 +23,5 @@ enum StoryboardType: String {
     case test = "Test"
     case speciality = "Speciality"
     case testDetails = "TestDetails"
+    case faculty = "Faculty"
 }

@@ -11,7 +11,7 @@ import UIKit
 class TestDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let dataModel = DataModel.dataModel
-    var id: String?
+    var testId: String?
     var maxTasks: String?
     @IBOutlet weak var testDetailsTableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -19,16 +19,17 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString("Test details", comment: "title of TestDetailsViewController")
-        getTestDetails()
+        guard let id = testId else { return }
+        dataModel.id = id
         if let maxTasks = maxTasks {
             dataModel.max = Int(maxTasks)
         }
-        
+        dataModel.testDetailArray = []
+        getTestDetails()
     }
     
     func getTestDetails() {
-        guard let testId = id else { return }
-        DataManager.shared.getTestDetails(byTest: testId) { (details, error) in
+        DataManager.shared.getTestDetails(byTest: dataModel.id) { (details, error) in
             if error == nil, let testDetails = details {
                 self.dataModel.testDetailArray = testDetails
                 self.testDetailsTableView.reloadData()
@@ -51,16 +52,16 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         view.backgroundColor = UIColor.darkGray
         view.tintColor = UIColor.white
         let segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 28))
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("id", comment: "header for id in table"),
-            at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("test id", comment: "header for test id in table"),
-            at: 1, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("level", comment: "header for test level in table"),
-            at: 2, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("task", comment: "header for test task in table"),
-            at: 3, animated: false)
-        segmentedControl.insertSegment(withTitle: NSLocalizedString("rate", comment: "header for test rate in table"),
-            at: 4, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString(TestDetails.id.rawValue,
+            comment: "header for id in table"), at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString(TestDetails.testId.rawValue,
+            comment: "header for test id in table"), at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString(TestDetails.level.rawValue,
+            comment: "header for test level in table"), at: 2, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString(TestDetails.tasks.rawValue,
+            comment: "header for test task in table"), at: 3, animated: false)
+        segmentedControl.insertSegment(withTitle: NSLocalizedString(TestDetails.rate.rawValue,
+            comment: "header for test rate in table"), at: 4, animated: false)
         segmentedControl.insertSegment(withTitle: "", at: 5, animated: false)
         view.addSubview(segmentedControl)
         return view
@@ -118,7 +119,8 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                     }
                 }
             }))
-            alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: "title for cancel key"), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: NSLocalizedString("NO", comment: "title for cancel key"),
+                                          style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
@@ -129,8 +131,8 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func addButtonTapped(_ sender: Any) {
         dataModel.currentDataForSelecting()
         if let max = dataModel.max, dataModel.taskArrayForFiltering.reduce(0, +) >= max {
-            let message = NSLocalizedString("Sum of tasks for the test can't be more then",
-                comment: "Sum of tasks should be from 1 to ")
+            let message = NSLocalizedString("Sum of tasks for the test can't be more then ",
+                comment: "Sum of tasks should be from 1 to max")
             self.showWarningMsg(message + "\(max)")
         } else {
             guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",

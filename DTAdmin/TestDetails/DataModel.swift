@@ -14,10 +14,11 @@ class DataModel: NSObject {
     var testDetailArray = [TestDetailStructure]()
     var levelArrayForFiltering = [Int]()
     var taskArrayForFiltering = [Int]()
-    var details = ["level", "task", "rate"]
+    var details = TestDetails.allValues
     var detailArray = [DetailStructure]()
     var max: Int?
-
+    var id = String()
+    
     func createArray(max: Int) -> [Int] {
         var array = [Int]()
         for i in 1...max {
