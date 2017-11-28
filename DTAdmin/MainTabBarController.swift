@@ -72,7 +72,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 
 //MARK: Create timeTable tab
-        guard let logoutController = self.storyboard?.instantiateViewController(withIdentifier: "LogoutViewController") as? LogoutViewController else { return }
+        guard let logoutController = self.storyboard?.instantiateViewController(withIdentifier: "LogoutViewController")
+            as? LogoutViewController else { return }
         let logoutBarItem = UITabBarItem(title: NSLocalizedString("Logout", comment: "Title for logout"),
                                          image: nil, selectedImage: nil)
         logoutBarItem.image = UIImage(named: "ic_exit_to_app_white")
