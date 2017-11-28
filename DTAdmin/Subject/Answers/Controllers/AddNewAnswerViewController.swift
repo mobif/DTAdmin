@@ -11,11 +11,15 @@ import UIKit
 class AddNewAnswerViewController: UIViewController {
    
     @IBOutlet weak var answerTextView: UITextView!
-    @IBOutlet weak var isAnswerCorrectTextField: PickedTextField!
+    @IBOutlet weak var isAnswerCorrectTextField: UITextField!
     @IBOutlet weak var attachmentImageView: UIImageView!
     
-    let isAnswerCorrect = ["Wrong", "Right"]
+    let isAnswerCorrect = [
+                        NSLocalizedString("Wrong", comment: "Wrong answer"),
+                        NSLocalizedString("Right", comment: "Right answer")
+                        ]
     var questionId: String?
+    var qustionType: String?
     var updateDates = false
     var resultModification: ((AnswerStructure) -> ())?
     var answerForSave: AnswerStructure?
@@ -24,7 +28,7 @@ class AddNewAnswerViewController: UIViewController {
             guard let answer = answer else { return }
             self.view.layoutIfNeeded()
             self.answerTextView.text = answer.answerText
-            self.isAnswerCorrectTextField.text = answer.trueAnswer
+            self.isAnswerCorrectTextField.text = answer.trueAnswer == "0" ? isAnswerCorrect[0] : isAnswerCorrect[1]
             if answer.attachment.count > 1 {
                 showAnswerAttachment(for: answer.attachment)
             }
@@ -42,15 +46,44 @@ class AddNewAnswerViewController: UIViewController {
                                                           comment: "Title for AddNewAnswerViewController")
         }
 
-        isAnswerCorrectTextField.customDelegate = self
-        self.isAnswerCorrectTextField.dropDownData = isAnswerCorrect
-        self.isAnswerCorrectTextField.tag = 0
+        tapGestureRecognizerConfigure()
     }
-    
-    func showAnswerAttachment(for text: String) {
+
+    private func showAnswerAttachment(for text: String) {
         attachmentImageView.image = UIImage.decode(fromBase64: text)
     }
-    
+
+    fileprivate func isCorrectTypeOFQuestion() -> Bool {
+        if qustionType == "3" || qustionType == "4" {
+            return true
+        }
+        return false
+    }
+
+    private func tapGestureRecognizerConfigure() {
+        if isCorrectTypeOFQuestion() {
+            isAnswerCorrectTextField.text = isAnswerCorrect[1]
+            isAnswerCorrectTextField.isEnabled = false
+        } else {
+            let isAnswerCorrect = UITapGestureRecognizer(target: self, action: #selector(chooseAnswerCorrect))
+            isAnswerCorrectTextField.addGestureRecognizer(isAnswerCorrect)
+        }
+    }
+
+    @objc func chooseAnswerCorrect() {
+        guard let itemTableViewController = UIStoryboard(name: "Subjects",
+                                                         bundle: nil).instantiateViewController(withIdentifier:
+                                                            "ItemTableViewController") as?
+            ItemTableViewController else { return }
+        itemTableViewController.currentArray = isAnswerCorrect
+        itemTableViewController.navigationItem.title = NSLocalizedString("Answer correctness",
+                                                                         comment: "Title for ItemTableViewController")
+        itemTableViewController.resultModification = { result in
+            self.isAnswerCorrectTextField.text = result
+        }
+        self.navigationController?.pushViewController(itemTableViewController, animated: true)
+    }
+
     @IBAction func saveAnswer(_ sender: UIBarButtonItem) {
         if !updateDates {
             saveNewAnswer()
@@ -59,14 +92,14 @@ class AddNewAnswerViewController: UIViewController {
         }
     }
     
-    func saveNewAnswer() {
+    private func saveNewAnswer() {
         if prepareForSave(){
             guard let answerForSave = answerForSave else { return }
             DataManager.shared.insertEntity(entity: answerForSave, typeEntity: .answer) {
                 (answerResult, errorMessage) in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage)
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     guard let result = answerResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -80,7 +113,7 @@ class AddNewAnswerViewController: UIViewController {
         }
     }
     
-    func updateAnswer() {
+    private func updateAnswer() {
         if prepareForSave(){
             guard let answerId = answer?.id else { return }
             guard let answerForSave = answerForSave else { return }
@@ -88,7 +121,7 @@ class AddNewAnswerViewController: UIViewController {
                 errorMessage in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage)
+                    self.showWarningMsg(errorMessage.message)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(answerForSave)
@@ -99,7 +132,7 @@ class AddNewAnswerViewController: UIViewController {
         }
     }
     
-    func prepareForSave() -> Bool {
+    private func prepareForSave() -> Bool {
     
         guard let id = questionId else { return false }
         
@@ -149,6 +182,7 @@ class AddNewAnswerViewController: UIViewController {
     
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @objc func openGallery(_ sender: UIButton) {
@@ -174,16 +208,19 @@ extension AddNewAnswerViewController: UIImagePickerControllerDelegate, UINavigat
     }
 }
 
-extension AddNewAnswerViewController: PickerDelegate {
+// MARK: - UITextViewDelegate
+extension AddNewAnswerViewController: UITextViewDelegate {
     
-    func pickedValue(value: Any, tag: Int) {
-        if let stringValue = value as? String {
-            switch tag {
-            case 0:
-                self.isAnswerCorrectTextField.text = stringValue
-            default:
-                break
-            }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if isCorrectTypeOFQuestion() {
+            var result = true
+            let disallowedCharacterSet = NSCharacterSet(charactersIn: "0123456789.-")
+            let replacementStringIsLegal = text.rangeOfCharacter(from: disallowedCharacterSet as CharacterSet)
+            result = (replacementStringIsLegal != nil)
+            return result
         }
+        return true
     }
+
 }
+

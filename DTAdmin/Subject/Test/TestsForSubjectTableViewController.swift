@@ -35,12 +35,13 @@ class TestsForSubjectTableViewController: UITableViewController {
                 self.test = tests
                 self.tableView.reloadData()
             } else {
-                self.showMessage(message: error ?? NSLocalizedString("Incorect type data",
+                self.showMessage(message: error?.message ?? NSLocalizedString("Incorect type data",
                                                                      comment: "Message for user about incorect data"))
             }
         }
     }
-    
+
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return test.count
     }
@@ -51,21 +52,29 @@ class TestsForSubjectTableViewController: UITableViewController {
         cell.delegate = self
         return cell
     }
-    
+
+    // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) ->
     [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") {_,_ in
+        let delete = UITableViewRowAction(style: .destructive,
+                                          title: NSLocalizedString("Delete", comment: "Swipe button title")) {_,_ in
             //delete test record
         }
-        let update = UITableViewRowAction(style: .normal, title: "Update") {_,_ in
+        let update = UITableViewRowAction(style: .normal,
+                                          title: NSLocalizedString("Update", comment: "Swipe button title")) {_,_ in
             //update test record
         }
         update.backgroundColor = UIColor.blue
         return [delete, update]
     }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        animatedCell(for: cell)
+    }
     
 }
 
+// MARK: - TestTableViewCellDelegate
 extension TestsForSubjectTableViewController: TestTableViewCellDelegate {
 
     func didTapShowTestDetail(for id: String) {

@@ -38,7 +38,7 @@ class QuestionAttachmentViewController: ParentViewController {
                     self.questionAttachmentImageView.image = UIImage(named: "Image")
                 }
             } else {
-                self.showWarningMsg(errorMessage ??
+                self.showWarningMsg(errorMessage?.message ??
                     NSLocalizedString("Incorect type data", comment: "Message for user about incorect data"))
             }
         }
@@ -46,6 +46,7 @@ class QuestionAttachmentViewController: ParentViewController {
 
 }
 
+// MARK: - UIScrollViewDelegate
 extension QuestionAttachmentViewController: UIScrollViewDelegate {
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
