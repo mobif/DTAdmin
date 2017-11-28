@@ -17,6 +17,7 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var specialitiesTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     var getSpeciality = Bool()
+    var selectSpeciality: ((SpecialityStructure) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +67,12 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         let id = UILabel()
         id.text = NSLocalizedString("id", comment: "header for id in table")
         id.textColor = UIColor.white
-        id.frame = CGRect(x: 10, y: 2, width: 20, height: 25)
+        id.frame = CGRect(x: 15, y: 2, width: 20, height: 25)
         view.addSubview(id)
         let code = UILabel()
         code.text = NSLocalizedString("code", comment: "header for code in table")
         code.textColor = UIColor.white
-        code.frame = CGRect(x: 40, y: 2, width: 40, height: 25)
+        code.frame = CGRect(x: 50, y: 2, width: 40, height: 25)
         view.addSubview(code)
         let name = UILabel()
         name.text = NSLocalizedString("speciality", comment: "header for speciality in table")
@@ -142,6 +143,9 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if getSpeciality {
+            let selectedSpeciality = self.filteredSpecialitiesArray[indexPath.row]
+            guard let selectSpeciality = self.selectSpeciality else { return }
+            selectSpeciality(selectedSpeciality)
             self.navigationController?.popViewController(animated: true)
         } else {
             guard let specialityInfoViewController = UIStoryboard(name: "Speciality",
@@ -161,23 +165,6 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
             self.filteredSpecialitiesArray.append(newSpeciality)
             self.specialitiesTableView.reloadData()
         }
-    }
-    
-    /* - - - LogIn for testing - - - */
-    @IBAction func loginButtonTapped(_ sender: Any) {
-        //test data
-        let loginText = "admin"
-        let passwordText = "dtapi_admin"
-        
-        CommonNetworkManager.shared().logIn(username: loginText, password: passwordText) { (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                StoreHelper.saveUser(user: user)
-                print("user is logged")
-            }
-        }
-        
     }
     
     

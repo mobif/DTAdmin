@@ -35,10 +35,11 @@ class GroupCreateUpdateViewController: UIViewController {
     }
     
     @IBAction func selectSpecialityTapped(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
-        guard let specialityViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialityViewController") as? SpecialityForGroupViewController else { return }
-        self.navigationController?.pushViewController(specialityViewController, animated: true)
-        specialityViewController.selectSpeciality = { selectedSpeciality in
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Speciality", bundle: nil)
+        guard let specialitiesViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialitiesViewController") as? SpecialitiesViewController else { return }
+        self.navigationController?.pushViewController(specialitiesViewController, animated: true)
+        specialitiesViewController.getSpeciality = true
+        specialitiesViewController.selectSpeciality = { selectedSpeciality in
             self.speciality = selectedSpeciality
             self.selectSpecialityButton.titleLabel?.text = selectedSpeciality.name
         }

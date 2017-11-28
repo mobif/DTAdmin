@@ -144,20 +144,5 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    /* - - - LogIn for testing - - - */
-    @IBAction func loginButtonTapped(_ sender: Any) {
-        //test data
-        let loginText = "admin"
-        let passwordText = "dtapi_admin"
-        CommonNetworkManager.shared().logIn(username: loginText, password: passwordText) { (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                StoreHelper.saveUser(user: user)
-                print("user is logged")
-            }
-        }
-        
-    }
     
 }
