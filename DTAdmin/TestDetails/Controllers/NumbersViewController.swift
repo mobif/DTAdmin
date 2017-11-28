@@ -21,9 +21,10 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString("Select \(dataModel.details[detail])", comment: "title of NumbersViewController")
+        guard let max = dataModel.max else { return }
         switch detail {
         case 0:
-            self.currentArray = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: dataModel.max),
+            self.currentArray = dataModel.getFilteredArrayForLevels(firstArray: dataModel.createArray(max: max),
                 secondArray: dataModel.levelArrayForFiltering)
         case 1:
             if dataModel.taskArrayForFiltering.reduce(0, +) == dataModel.max {
@@ -35,7 +36,7 @@ class NumbersViewController: UIViewController, UITableViewDataSource, UITableVie
                     task = taskInt - 1
                 }
             } else {
-                let task2 = dataModel.max - dataModel.taskArrayForFiltering.reduce(0, +)
+                let task2 = max - dataModel.taskArrayForFiltering.reduce(0, +)
                 task = task2
             }
             self.currentArray = dataModel.createArray(max: task)

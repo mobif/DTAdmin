@@ -16,7 +16,7 @@ class DataModel: NSObject {
     var taskArrayForFiltering = [Int]()
     var details = ["level", "task", "rate"]
     var detailArray = [DetailStructure]()
-    let max = 10
+    var max: Int?
 
     func createArray(max: Int) -> [Int] {
         var array = [Int]()

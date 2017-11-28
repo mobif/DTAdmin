@@ -21,4 +21,6 @@ enum StoryboardType: String {
     case group = "Group"
     case student = "Student"
     case test = "Test"
+    case speciality = "Speciality"
+    case testDetails = "TestDetails"
 }

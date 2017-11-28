@@ -11,7 +11,8 @@ import UIKit
 class TestDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let dataModel = DataModel.dataModel
-    var id = "3"
+    var id: String?
+    var maxTasks: String?
     @IBOutlet weak var testDetailsTableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
     
@@ -19,10 +20,15 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         self.title = NSLocalizedString("Test details", comment: "title of TestDetailsViewController")
         getTestDetails()
+        if let maxTasks = maxTasks {
+            dataModel.max = Int(maxTasks)
+        }
+        
     }
     
     func getTestDetails() {
-        DataManager.shared.getTestDetails(byTest: self.id) { (details, error) in
+        guard let testId = id else { return }
+        DataManager.shared.getTestDetails(byTest: testId) { (details, error) in
             if error == nil, let testDetails = details {
                 self.dataModel.testDetailArray = testDetails
                 self.testDetailsTableView.reloadData()
@@ -32,7 +38,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                     return
                 }
                 self.showWarningMsg(error.info)
-                if error.code == 403 {
+                if error.code == HTTPStatusCodes.Unauthorized.rawValue {
                     StoreHelper.logout()
                     self.showLoginScreen()
                 }
@@ -122,9 +128,10 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBAction func addButtonTapped(_ sender: Any) {
         dataModel.currentDataForSelecting()
-        if dataModel.taskArrayForFiltering.reduce(0, +) >= dataModel.max {
-            self.showWarningMsg(NSLocalizedString("Sum of tasks for the test can't be more then \(dataModel.max)",
-                comment: "Sum of tasks should be from 1 to \(dataModel.max)"))
+        if let max = dataModel.max, dataModel.taskArrayForFiltering.reduce(0, +) >= max {
+            let message = NSLocalizedString("Sum of tasks for the test can't be more then",
+                comment: "Sum of tasks should be from 1 to ")
+            self.showWarningMsg(message + "\(max)")
         } else {
             guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
                 bundle: nil).instantiateViewController(withIdentifier: "GetTestDetailsViewController")

@@ -101,8 +101,13 @@ class TestsForSubjectTableViewController: UITableViewController {
 // MARK: - TestTableViewCellDelegate
 extension TestsForSubjectTableViewController: TestTableViewCellDelegate {
 
-    func didTapShowTestDetail(for id: String) {
-        //add seque to show test detail
+    func didTapShowTestDetail(for id: String, maxTasks: String) {
+        guard let testDetailsViewController = UIStoryboard.stoyboard(by:
+            .testDetails).instantiateViewController(withIdentifier: "TestDetailsViewController") as? TestDetailsViewController
+            else { return }
+        testDetailsViewController.id = id
+        testDetailsViewController.maxTasks = maxTasks
+        self.navigationController?.pushViewController(testDetailsViewController, animated: true)
     }
 
     func didTapShowQuestions(for id: String) {
