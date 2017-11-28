@@ -111,7 +111,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iHT-40-O9A" id="ob4-SU-uMU">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaU-QB-9Ol">
@@ -131,7 +131,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="hbY-b3-jTL"/>
                                             </constraints>
-                                            <state key="normal" title="Show tests"/>
+                                            <state key="normal" title="Tests"/>
                                             <connections>
                                                 <action selector="showTest:" destination="iHT-40-O9A" eventType="touchUpInside" id="BWj-oe-iCs"/>
                                             </connections>
@@ -142,7 +142,7 @@
                                                 <constraint firstAttribute="height" constant="30" id="6vl-Vp-Bc5"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Coi-SN-A6B"/>
                                             </constraints>
-                                            <state key="normal" title="Show time table"/>
+                                            <state key="normal" title="Time table"/>
                                             <connections>
                                                 <action selector="showTimeTable:" destination="iHT-40-O9A" eventType="touchUpInside" id="PnJ-KK-3mo"/>
                                             </connections>
@@ -209,7 +209,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="175"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ral-VH-XqA" id="ySy-uV-JuQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="175"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="174.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hhr-0J-Mj2">
@@ -235,7 +235,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="gKz-vu-vmI"/>
                                             </constraints>
-                                            <state key="normal" title="Show answers"/>
+                                            <state key="normal" title="Answers"/>
                                             <connections>
                                                 <action selector="showAnswers:" destination="ral-VH-XqA" eventType="touchUpInside" id="ZJw-df-eQ7"/>
                                             </connections>
@@ -415,7 +415,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="siP-Ni-UdY" id="EBC-3H-Ydh" customClass="AnswerTableViewCell" customModule="DTAdmin">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh7-ko-u1D">
@@ -476,7 +476,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1RI-PY-Oqa" id="Lyl-K2-VcY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -540,7 +540,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="EPA-XX-fmV"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="NQU-84-23q"/>
                                 </constraints>
-                                <state key="normal" title="Open gallery"/>
+                                <state key="normal" title="Gallery"/>
                                 <connections>
                                     <action selector="openGallery:" destination="Gby-7T-Ueo" eventType="touchUpInside" id="7R0-KN-8WU"/>
                                 </connections>
@@ -551,7 +551,7 @@
                                     <constraint firstAttribute="height" constant="30" id="7Zd-Rj-FTo"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="tPg-hh-6NY"/>
                                 </constraints>
-                                <state key="normal" title="Remove image"/>
+                                <state key="normal" title="Remove"/>
                                 <connections>
                                     <action selector="removeImage:" destination="Gby-7T-Ueo" eventType="touchUpInside" id="VeE-56-MW7"/>
                                 </connections>
@@ -654,7 +654,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="GY2-r6-wav"/>
                                     <constraint firstAttribute="height" constant="30" id="kOq-fL-tJz"/>
                                 </constraints>
-                                <state key="normal" title="Open gallery"/>
+                                <state key="normal" title="Gallery"/>
                                 <connections>
                                     <action selector="openGallery:" destination="jl6-lo-VWW" eventType="touchUpInside" id="6cn-Us-Rnx"/>
                                 </connections>
@@ -665,7 +665,7 @@
                                     <constraint firstAttribute="height" constant="30" id="5eX-Ln-frg"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="ovY-bq-Lgh"/>
                                 </constraints>
-                                <state key="normal" title="Remove image"/>
+                                <state key="normal" title="Remove"/>
                                 <connections>
                                     <action selector="removeImage:" destination="jl6-lo-VWW" eventType="touchUpInside" id="Tva-yX-L3z"/>
                                 </connections>
@@ -768,12 +768,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="9wV-PA-eAU" customClass="SearchFooter" customModule="DTAdmin" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="148" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="testCell" rowHeight="120" id="axH-dR-DfP" customClass="TestTableViewCell" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="axH-dR-DfP" id="5va-fJ-aJh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXe-M5-Mcc">
@@ -809,7 +814,7 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="iHL-EO-CIv"/>
                                                         <constraint firstAttribute="height" constant="30" id="uSF-ji-9zx"/>
                                                     </constraints>
-                                                    <state key="normal" title="Show test detail"/>
+                                                    <state key="normal" title="Test detail"/>
                                                     <connections>
                                                         <action selector="showTestDetail:" destination="axH-dR-DfP" eventType="touchUpInside" id="X9l-lZ-AI8"/>
                                                     </connections>
@@ -822,7 +827,7 @@
                                                 <constraint firstAttribute="height" constant="30" id="e63-YK-zZB"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="iPe-0h-7C3"/>
                                             </constraints>
-                                            <state key="normal" title="Show questions"/>
+                                            <state key="normal" title="Questions"/>
                                             <connections>
                                                 <action selector="showQuestion:" destination="axH-dR-DfP" eventType="touchUpInside" id="0Ap-ZW-NAK"/>
                                             </connections>
@@ -882,6 +887,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="searchFooter" destination="9wV-PA-eAU" id="pQh-t9-vri"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEN-QV-COy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

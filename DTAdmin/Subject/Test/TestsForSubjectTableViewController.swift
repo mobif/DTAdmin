@@ -12,6 +12,10 @@ class TestsForSubjectTableViewController: UITableViewController {
     
     var test = [TestStructure]()
     var subjectId: String?
+    @IBOutlet weak var searchFooter: SearchFooter!
+    var filteredData = [TestStructure]()
+    var refresh: MyRefreshController!
+    let searchController = MySearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +24,22 @@ class TestsForSubjectTableViewController: UITableViewController {
         
         startActivityIndicator()
         showTests()
+        searchControllerConfigure()
+        refreshControllerConfigure()
+        tableView.tableFooterView = searchFooter
+    }
+    
+    private func searchControllerConfigure() {
+        searchController.searchResultsUpdater = self
+        searchController.configure()
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    private func refreshControllerConfigure() {
+        refresh = MyRefreshController()
+        tableView.addSubview(refresh)
+        refresh.addTarget(self, action: #selector(showTests), for: .valueChanged)
     }
     
     @IBAction func addTest(_ sender: UIBarButtonItem) {
@@ -34,10 +54,16 @@ class TestsForSubjectTableViewController: UITableViewController {
         self.navigationController?.pushViewController(testViewController, animated: true)
     }
     
-    private func showTests() {
+    private func filterContentForSearchText(_ searchText: String) {
+        filteredData = test.filter({ (test : TestStructure) -> Bool in
+            return test.name.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+    
+    @objc private func showTests() {
         guard let id = subjectId else { return }
         DataManager.shared.getTest(bySubject: id) { (tests, error) in
-            self.stopActivityIndicator()
             if error == nil {
                 guard let tests = tests else { return }
                 self.test = tests
@@ -46,17 +72,27 @@ class TestsForSubjectTableViewController: UITableViewController {
                 self.showMessage(message: error?.message ?? NSLocalizedString("Incorect type data",
                                                                      comment: "Message for user about incorect data"))
             }
+            self.stopActivityIndicator()
+            self.refresh.endRefreshing()
         }
+        
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isFiltering() {
+            searchFooter.setIsFilteringToShow(filteredItemCount: filteredData.count, of: test.count)
+            return filteredData.count
+        }
+        
+        searchFooter.setNotFiltering()
         return test.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as! TestTableViewCell
-        cell.setTest(test: test[indexPath.row])
+        let cellData = searchController.isFiltering() ? filteredData[indexPath.row] : test[indexPath.row]
+        cell.setTest(test: cellData)
         cell.delegate = self
         return cell
     }
@@ -96,6 +132,15 @@ class TestsForSubjectTableViewController: UITableViewController {
         animatedCell(for: cell)
     }
     
+}
+
+// MARK: - UISearchResultsUpdating
+extension TestsForSubjectTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        filterContentForSearchText(searchText)
+    }
 }
 
 // MARK: - TestTableViewCellDelegate
