@@ -27,20 +27,19 @@ class QuestionAttachmentViewController: ParentViewController {
     private func showQuestionRecord() {
         startActivity()
         guard let id = questionId else { return }
-        DataManager.shared.getEntity(byId: id, typeEntity: .question) {(questionRecord, errorMessage) in
-            self.stopActivity()
-            if errorMessage == nil {
+        DataManager.shared.getEntity(byId: id, typeEntity: .question) {(questionRecord, error) in
+            if let errorMessage = error {
+                     self.showWarningMsg(errorMessage.message)
+            } else {
                 guard let question = questionRecord as? QuestionStructure else { return }
                 self.questionTextLabel.text = question.questionText
-                if question.attachment.count > 0 {
-                    self.questionAttachmentImageView.image = UIImage.decode(fromBase64: question.attachment)
+                if let attachment = question.attachment {
+                    self.questionAttachmentImageView.image = attachment
                 } else {
                     self.questionAttachmentImageView.image = UIImage(named: "Image")
                 }
-            } else {
-                self.showWarningMsg(errorMessage?.message ??
-                    NSLocalizedString("Incorect type data", comment: "Message for user about incorect data"))
             }
+            self.stopActivity()
         }
     }
 
