@@ -17,7 +17,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 //MARK: Create students tab
         let studentStoryboard = UIStoryboard.stoyboard(by: .student)
-        guard let studentNavigationController = studentStoryboard.instantiateViewController(withIdentifier: "StudentNavigationController") as? UINavigationController else { return }
+        guard let studentNavigationController = studentStoryboard.instantiateViewController(withIdentifier:
+            "StudentNavigationController") as? UINavigationController else { return }
         let titleText = NSLocalizedString("Students", comment: "List all students")
         let studentBarItem = UITabBarItem(title: titleText, image: nil, selectedImage: nil)
         studentBarItem.image = UIImage(named: "ic_person_outline_white")
@@ -26,7 +27,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
 //MARK: Create subjects tab
         let subjectStoryboard = UIStoryboard.stoyboard(by: .subject)
-        guard let subjectNavController = subjectStoryboard.instantiateViewController(withIdentifier: "SubjectNavController") as? UINavigationController else { return }
+        guard let subjectNavController = subjectStoryboard.instantiateViewController(withIdentifier:
+            "SubjectNavController") as? UINavigationController else { return }
         let subjectBarItem = UITabBarItem(title: NSLocalizedString("Subjects", comment: "Title for subjects tap"),
                                           image: nil,  selectedImage: nil)
         subjectBarItem.image = UIImage(named: "ic_subject_white")
@@ -35,7 +37,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
 //MARK: Create groups tab
         let groupStoryboard = UIStoryboard.stoyboard(by: .group)
-        guard let groupNavController = groupStoryboard.instantiateViewController(withIdentifier: "GroupNavController") as? UINavigationController else { return }
+        guard let groupNavController = groupStoryboard.instantiateViewController(withIdentifier:
+            "GroupNavController") as? UINavigationController else { return }
         let groupsBarItem = UITabBarItem(title: NSLocalizedString("Groups", comment: "Title for groups tap"),
                                          image: nil, selectedImage: nil)
         groupsBarItem.image = UIImage(named: "ic_supervisor_account_white")
@@ -44,7 +47,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 // Create faculty tab
         let facultyStoryboard = UIStoryboard.stoyboard(by: .faculty)
-        guard let facultyNavController = facultyStoryboard.instantiateViewController(withIdentifier: "FacultyNavController") as? UINavigationController else { return }
+        guard let facultyNavController = facultyStoryboard.instantiateViewController(withIdentifier:
+            "FacultyNavController") as? UINavigationController else { return }
         let facultyBarItem = UITabBarItem(title: NSLocalizedString("Faculty", comment: "Title for faculty tap"),
                                              image: nil, selectedImage: nil)
         facultyBarItem.image = UIImage(named: "ic_account_balance_white")
@@ -53,7 +57,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
 // Create speciality tab
         let specialityStoryboard = UIStoryboard.stoyboard(by: .speciality)
-        guard let specialityNavController = specialityStoryboard.instantiateViewController(withIdentifier: "SpecialityNavController") as? UINavigationController else { return }
+        guard let specialityNavController = specialityStoryboard.instantiateViewController(withIdentifier:
+            "SpecialityNavController") as? UINavigationController else { return }
         let specialityBarItem = UITabBarItem(title: NSLocalizedString("Speciality", comment: "Title for speciality tap"),
                                              image: nil, selectedImage: nil)
         specialityBarItem.image = UIImage(named: "ic_subject_white")
@@ -86,46 +91,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-////MARK: UITabBarControllerDelegate method
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        if viewController.title != nil {
-//        }
-//        if ((viewController as? UINavigationController)?.viewControllers.first?.title) != nil {
-//        }
-//    }
+
 }
 
-////MARK: temp view controllers for test
-//class TabOneViewController: UIViewController {
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.view.backgroundColor = UIColor.blue
-//        self.title = "Students"
-//    }
-//}
-//
-//class TabThreeViewController: UIViewController {
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.view.backgroundColor = UIColor.red
-//        self.title = "Groups"
-//    }
-//}
-//
-//class TabFourViewController: UIViewController {
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.view.backgroundColor = UIColor.blue
-//        self.title = "Faculty"
-//    }
-//}
-//
-//class TabFiveViewController: UIViewController {
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.view.backgroundColor = UIColor.red
-//        self.title = "Speciality"
-//    }
-//}
+
 

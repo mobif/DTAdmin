@@ -14,10 +14,16 @@
 		2DF0DBDC1FCE15B3004A497A /* CreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0DBD71FCE15B3004A497A /* CreateUpdateViewController.swift */; };
 		2DF0DBDD1FCE15B3004A497A /* FacultyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0DBD81FCE15B3004A497A /* FacultyInfoViewController.swift */; };
 		2DF0DBDE1FCE15B3004A497A /* FacultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0DBD91FCE15B3004A497A /* FacultyViewController.swift */; };
-		2DF0DBDF1FCE15B3004A497A /* Faculty.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF0DBDA1FCE15B3004A497A /* Faculty.storyboard */; };
 		3F004FCE1FB60CC80045F2EE /* DesignedButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */; };
 		3F004FD31FB60E790045F2EE /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */; };
 		3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */; };
+		3F0EA5921FCF25E3009A2CFB /* Faculty.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EA5941FCF25E3009A2CFB /* Faculty.storyboard */; };
+		3F0EA5971FCF25F0009A2CFB /* Speciality.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EA5991FCF25F0009A2CFB /* Speciality.storyboard */; };
+		3F0EA59C1FCF25FB009A2CFB /* TestDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EA59E1FCF25FB009A2CFB /* TestDetails.storyboard */; };
+		3F0EA5A11FCF2606009A2CFB /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EA5A31FCF2606009A2CFB /* Test.storyboard */; };
+		3F0EA5A61FCF2611009A2CFB /* Group.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EA5A81FCF2611009A2CFB /* Group.storyboard */; };
+		3F0EA5AB1FCF261A009A2CFB /* TimeTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EA5AD1FCF261A009A2CFB /* TimeTable.storyboard */; };
+		3F0EA5B01FCF2632009A2CFB /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EA5B21FCF2632009A2CFB /* Student.storyboard */; };
 		3F2E68E91FCEE38900FC8C0E /* SpecialityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E68E81FCEE38900FC8C0E /* SpecialityDetails.swift */; };
 		3F322AD01FBF5161003D0AC6 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */; };
 		3F322AD21FBF5171003D0AC6 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD11FBF5171003D0AC6 /* UITextView.swift */; };
@@ -40,12 +46,10 @@
 		3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */; };
 		3F9505E31FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505DA1FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift */; };
 		3F9505E51FACBA16003F3EB9 /* GroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9505DC1FACBA16003F3EB9 /* GroupDetailsViewController.swift */; };
-		3F9505E71FACBA16003F3EB9 /* Group.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9505DE1FACBA16003F3EB9 /* Group.storyboard */; };
 		3F97D7C11FCC5993007B1813 /* SpecialityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7AF1FCC5993007B1813 /* SpecialityTableViewCell.swift */; };
 		3F97D7C21FCC5993007B1813 /* SpecialitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7B11FCC5993007B1813 /* SpecialitiesViewController.swift */; };
 		3F97D7C31FCC5993007B1813 /* SpecialityCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7B21FCC5993007B1813 /* SpecialityCreateUpdateViewController.swift */; };
 		3F97D7C41FCC5993007B1813 /* SpecialityInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7B31FCC5993007B1813 /* SpecialityInfoViewController.swift */; };
-		3F97D7C51FCC5993007B1813 /* Speciality.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F97D7B41FCC5993007B1813 /* Speciality.storyboard */; };
 		3F97D7C61FCC5993007B1813 /* SelectDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7B71FCC5993007B1813 /* SelectDetailsTableViewCell.swift */; };
 		3F97D7C71FCC5993007B1813 /* SelectDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7B81FCC5993007B1813 /* SelectDetailTableViewCell.swift */; };
 		3F97D7C81FCC5993007B1813 /* TestDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7B91FCC5993007B1813 /* TestDetailsTableViewCell.swift */; };
@@ -53,7 +57,6 @@
 		3F97D7CB1FCC5993007B1813 /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7BD1FCC5993007B1813 /* NumbersViewController.swift */; };
 		3F97D7CC1FCC5993007B1813 /* TestDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7BE1FCC5993007B1813 /* TestDetailsViewController.swift */; };
 		3F97D7CD1FCC5993007B1813 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7BF1FCC5993007B1813 /* DataModel.swift */; };
-		3F97D7CE1FCC5993007B1813 /* TestDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F97D7C01FCC5993007B1813 /* TestDetails.storyboard */; };
 		3F97D7D01FCC599F007B1813 /* SpecialityAndTestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7CF1FCC599F007B1813 /* SpecialityAndTestDetails.swift */; };
 		3F97D7D21FCC5A08007B1813 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97D7D11FCC5A08007B1813 /* Details.swift */; };
 		3FA888181F9688B200D602F3 /* AdminCreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */; };
@@ -76,7 +79,6 @@
 		3FF6736C1FB48B89001C7147 /* AddNewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF673691FB48B88001C7147 /* AddNewRecordViewController.swift */; };
 		3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */; };
 		4C37B1F11FC31CA400561B80 /* NewTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37B1ED1FC31CA400561B80 /* NewTestViewController.swift */; };
-		4C37B1F21FC31CA400561B80 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C37B1EE1FC31CA400561B80 /* Test.storyboard */; };
 		4C37B1F31FC31CA400561B80 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37B1EF1FC31CA400561B80 /* TestCell.swift */; };
 		4C37B1F41FC31CA400561B80 /* TestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37B1F01FC31CA400561B80 /* TestsViewController.swift */; };
 		843422271FAF41B20087A418 /* DTAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843422261FAF41B20087A418 /* DTAdminTests.swift */; };
@@ -91,7 +93,6 @@
 		897D0E3A1F9B733400825E62 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E391F9B733400825E62 /* StoreHelper.swift */; };
 		897D0E3F1F9B77A000825E62 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897D0E3E1F9B77A000825E62 /* ParentViewController.swift */; };
 		89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E001F9CD6A60019FE77 /* TimeTable.swift */; };
-		89C96E031F9CFD1F0019FE77 /* TimeTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89C96E021F9CFD1F0019FE77 /* TimeTable.storyboard */; };
 		89C96E051F9CFD6E0019FE77 /* TimeTableListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E041F9CFD6E0019FE77 /* TimeTableListViewController.swift */; };
 		89C96E071F9D01DC0019FE77 /* NewTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E061F9D01DC0019FE77 /* NewTimeTableViewController.swift */; };
 		89C96E0A1F9D03DC0019FE77 /* PickedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C96E091F9D03DC0019FE77 /* PickedTextField.swift */; };
@@ -123,7 +124,6 @@
 		C7535CF91FA2670100B6CBD1 /* TimeTableStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE81FA2670100B6CBD1 /* TimeTableStructure.swift */; };
 		C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7535CE91FA2670100B6CBD1 /* UserStructure.swift */; };
 		C77D2D051FCB57530054E49C /* ErrorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D2D041FCB57530054E49C /* ErrorData.swift */; };
-		C799D68D1FA267590092170E /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C799D68A1FA267580092170E /* Student.storyboard */; };
 		C799D68E1FA267590092170E /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799D68B1FA267580092170E /* StudentsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -145,10 +145,23 @@
 		2DF0DBD71FCE15B3004A497A /* CreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUpdateViewController.swift; sourceTree = "<group>"; };
 		2DF0DBD81FCE15B3004A497A /* FacultyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyInfoViewController.swift; sourceTree = "<group>"; };
 		2DF0DBD91FCE15B3004A497A /* FacultyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyViewController.swift; sourceTree = "<group>"; };
-		2DF0DBDA1FCE15B3004A497A /* Faculty.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Faculty.storyboard; sourceTree = "<group>"; };
 		3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignedButtons.swift; sourceTree = "<group>"; };
 		3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
+		3F0EA5931FCF25E3009A2CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Faculty.storyboard; sourceTree = "<group>"; };
+		3F0EA5961FCF25E8009A2CFB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Faculty.strings; sourceTree = "<group>"; };
+		3F0EA5981FCF25F0009A2CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Speciality.storyboard; sourceTree = "<group>"; };
+		3F0EA59B1FCF25F3009A2CFB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Speciality.strings; sourceTree = "<group>"; };
+		3F0EA59D1FCF25FB009A2CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestDetails.storyboard; sourceTree = "<group>"; };
+		3F0EA5A01FCF25FF009A2CFB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/TestDetails.strings; sourceTree = "<group>"; };
+		3F0EA5A21FCF2606009A2CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Test.storyboard; sourceTree = "<group>"; };
+		3F0EA5A51FCF2609009A2CFB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Test.strings; sourceTree = "<group>"; };
+		3F0EA5A71FCF2611009A2CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Group.storyboard; sourceTree = "<group>"; };
+		3F0EA5AA1FCF2614009A2CFB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Group.strings; sourceTree = "<group>"; };
+		3F0EA5AC1FCF261A009A2CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TimeTable.storyboard; sourceTree = "<group>"; };
+		3F0EA5AF1FCF261D009A2CFB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/TimeTable.strings; sourceTree = "<group>"; };
+		3F0EA5B11FCF2632009A2CFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Student.storyboard; sourceTree = "<group>"; };
+		3F0EA5B41FCF2636009A2CFB /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Student.strings; sourceTree = "<group>"; };
 		3F2E68E81FCEE38900FC8C0E /* SpecialityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialityDetails.swift; sourceTree = "<group>"; };
 		3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewController.swift; sourceTree = "<group>"; };
 		3F322AD11FBF5171003D0AC6 /* UITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
@@ -174,12 +187,10 @@
 		3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityForGroupViewController.swift; sourceTree = "<group>"; };
 		3F9505DA1FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3F9505DC1FACBA16003F3EB9 /* GroupDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDetailsViewController.swift; sourceTree = "<group>"; };
-		3F9505DE1FACBA16003F3EB9 /* Group.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Group.storyboard; sourceTree = "<group>"; };
 		3F97D7AF1FCC5993007B1813 /* SpecialityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityTableViewCell.swift; sourceTree = "<group>"; };
 		3F97D7B11FCC5993007B1813 /* SpecialitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialitiesViewController.swift; sourceTree = "<group>"; };
 		3F97D7B21FCC5993007B1813 /* SpecialityCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityCreateUpdateViewController.swift; sourceTree = "<group>"; };
 		3F97D7B31FCC5993007B1813 /* SpecialityInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityInfoViewController.swift; sourceTree = "<group>"; };
-		3F97D7B41FCC5993007B1813 /* Speciality.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speciality.storyboard; sourceTree = "<group>"; };
 		3F97D7B71FCC5993007B1813 /* SelectDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3F97D7B81FCC5993007B1813 /* SelectDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDetailTableViewCell.swift; sourceTree = "<group>"; };
 		3F97D7B91FCC5993007B1813 /* TestDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,7 +198,6 @@
 		3F97D7BD1FCC5993007B1813 /* NumbersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
 		3F97D7BE1FCC5993007B1813 /* TestDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailsViewController.swift; sourceTree = "<group>"; };
 		3F97D7BF1FCC5993007B1813 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		3F97D7C01FCC5993007B1813 /* TestDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestDetails.storyboard; sourceTree = "<group>"; };
 		3F97D7CF1FCC599F007B1813 /* SpecialityAndTestDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialityAndTestDetails.swift; sourceTree = "<group>"; };
 		3F97D7D11FCC5A08007B1813 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		3FA888141F9688B200D602F3 /* AdminCreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCreateUpdateViewController.swift; sourceTree = "<group>"; };
@@ -214,7 +224,6 @@
 		3FF673691FB48B88001C7147 /* AddNewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewController.swift; sourceTree = "<group>"; };
 		3FF6736F1FB48BAD001C7147 /* TestsForSubjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsForSubjectTableViewController.swift; sourceTree = "<group>"; };
 		4C37B1ED1FC31CA400561B80 /* NewTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTestViewController.swift; sourceTree = "<group>"; };
-		4C37B1EE1FC31CA400561B80 /* Test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
 		4C37B1EF1FC31CA400561B80 /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		4C37B1F01FC31CA400561B80 /* TestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsViewController.swift; sourceTree = "<group>"; };
 		843422241FAF41B20087A418 /* DTAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,7 +241,6 @@
 		897D0E3E1F9B77A000825E62 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		899DBC4B1FAC7DF000139DA9 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		89C96E001F9CD6A60019FE77 /* TimeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
-		89C96E021F9CFD1F0019FE77 /* TimeTable.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimeTable.storyboard; sourceTree = "<group>"; };
 		89C96E041F9CFD6E0019FE77 /* TimeTableListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableListViewController.swift; sourceTree = "<group>"; };
 		89C96E061F9D01DC0019FE77 /* NewTimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeTableViewController.swift; sourceTree = "<group>"; };
 		89C96E091F9D03DC0019FE77 /* PickedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickedTextField.swift; sourceTree = "<group>"; };
@@ -263,7 +271,6 @@
 		C7535CE81FA2670100B6CBD1 /* TimeTableStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableStructure.swift; sourceTree = "<group>"; };
 		C7535CE91FA2670100B6CBD1 /* UserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
 		C77D2D041FCB57530054E49C /* ErrorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorData.swift; sourceTree = "<group>"; };
-		C799D68A1FA267580092170E /* Student.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		C799D68B1FA267580092170E /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -288,7 +295,7 @@
 		2DF0DBD31FCE15B3004A497A /* Faculty */ = {
 			isa = PBXGroup;
 			children = (
-				2DF0DBDA1FCE15B3004A497A /* Faculty.storyboard */,
+				3F0EA5941FCF25E3009A2CFB /* Faculty.storyboard */,
 				2DF0DBD61FCE15B3004A497A /* Controllers */,
 				3F2E68E51FCEE2F800FC8C0E /* Data */,
 				2DF0DBD41FCE15B3004A497A /* Cells */,
@@ -426,7 +433,7 @@
 				3F9505D61FACBA16003F3EB9 /* FacultyForGroupViewController.swift */,
 				3F9505DA1FACBA16003F3EB9 /* GroupCreateUpdateViewController.swift */,
 				3F9505DC1FACBA16003F3EB9 /* GroupDetailsViewController.swift */,
-				3F9505DE1FACBA16003F3EB9 /* Group.storyboard */,
+				3F0EA5A81FCF2611009A2CFB /* Group.storyboard */,
 				3F9505D71FACBA16003F3EB9 /* GroupViewController.swift */,
 				3F9505D81FACBA16003F3EB9 /* SpecialityForGroupViewController.swift */,
 			);
@@ -436,7 +443,7 @@
 		3F97D7AD1FCC5993007B1813 /* Speciality */ = {
 			isa = PBXGroup;
 			children = (
-				3F97D7B41FCC5993007B1813 /* Speciality.storyboard */,
+				3F0EA5991FCF25F0009A2CFB /* Speciality.storyboard */,
 				3F97D7B01FCC5993007B1813 /* Controllers */,
 				3F2E68E71FCEE36500FC8C0E /* Data */,
 				3F97D7AE1FCC5993007B1813 /* Cells */,
@@ -465,7 +472,7 @@
 		3F97D7B51FCC5993007B1813 /* TestDetails */ = {
 			isa = PBXGroup;
 			children = (
-				3F97D7C01FCC5993007B1813 /* TestDetails.storyboard */,
+				3F0EA59E1FCF25FB009A2CFB /* TestDetails.storyboard */,
 				3F2E68E61FCEE31C00FC8C0E /* Data */,
 				3F97D7BA1FCC5993007B1813 /* Controllers */,
 				3F97D7B61FCC5993007B1813 /* Cells */,
@@ -592,7 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				4C37B1ED1FC31CA400561B80 /* NewTestViewController.swift */,
-				4C37B1EE1FC31CA400561B80 /* Test.storyboard */,
+				3F0EA5A31FCF2606009A2CFB /* Test.storyboard */,
 				4C37B1EF1FC31CA400561B80 /* TestCell.swift */,
 				4C37B1F01FC31CA400561B80 /* TestsViewController.swift */,
 			);
@@ -681,7 +688,7 @@
 		89C96DFF1F9CC2F90019FE77 /* TimeTable */ = {
 			isa = PBXGroup;
 			children = (
-				89C96E021F9CFD1F0019FE77 /* TimeTable.storyboard */,
+				3F0EA5AD1FCF261A009A2CFB /* TimeTable.storyboard */,
 				89C96E041F9CFD6E0019FE77 /* TimeTableListViewController.swift */,
 				89C96E061F9D01DC0019FE77 /* NewTimeTableViewController.swift */,
 			);
@@ -759,7 +766,7 @@
 		C799D6881FA267580092170E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C799D68A1FA267580092170E /* Student.storyboard */,
+				3F0EA5B21FCF2632009A2CFB /* Student.storyboard */,
 				C799D68B1FA267580092170E /* StudentsTableViewCell.swift */,
 			);
 			path = Views;
@@ -849,17 +856,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89C96E031F9CFD1F0019FE77 /* TimeTable.storyboard in Resources */,
+				3F0EA5AB1FCF261A009A2CFB /* TimeTable.storyboard in Resources */,
 				3FA8A6911FAC8864002465E7 /* Admin.storyboard in Resources */,
-				C799D68D1FA267590092170E /* Student.storyboard in Resources */,
-				3F97D7CE1FCC5993007B1813 /* TestDetails.storyboard in Resources */,
-				3F9505E71FACBA16003F3EB9 /* Group.storyboard in Resources */,
-				2DF0DBDF1FCE15B3004A497A /* Faculty.storyboard in Resources */,
+				3F0EA5B01FCF2632009A2CFB /* Student.storyboard in Resources */,
+				3F0EA59C1FCF25FB009A2CFB /* TestDetails.storyboard in Resources */,
+				3F0EA5A61FCF2611009A2CFB /* Group.storyboard in Resources */,
+				3F0EA5921FCF25E3009A2CFB /* Faculty.storyboard in Resources */,
 				3F4ECD431FC5ACD0000A54FD /* Subjects.storyboard in Resources */,
 				3F4ECD511FC5BE77000A54FD /* Localizable.strings in Resources */,
 				3FDE8FA51F8D0DF60057BF3C /* LaunchScreen.storyboard in Resources */,
-				4C37B1F21FC31CA400561B80 /* Test.storyboard in Resources */,
-				3F97D7C51FCC5993007B1813 /* Speciality.storyboard in Resources */,
+				3F0EA5A11FCF2606009A2CFB /* Test.storyboard in Resources */,
+				3F0EA5971FCF25F0009A2CFB /* Speciality.storyboard in Resources */,
 				3FDE8FA21F8D0DF60057BF3C /* Assets.xcassets in Resources */,
 				3F4ECD4C1FC5BE76000A54FD /* InfoPlist.strings in Resources */,
 				3FDE8F9D1F8D0DF60057BF3C /* Main.storyboard in Resources */,
@@ -1005,6 +1012,69 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3F0EA5941FCF25E3009A2CFB /* Faculty.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0EA5931FCF25E3009A2CFB /* Base */,
+				3F0EA5961FCF25E8009A2CFB /* uk */,
+			);
+			name = Faculty.storyboard;
+			sourceTree = "<group>";
+		};
+		3F0EA5991FCF25F0009A2CFB /* Speciality.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0EA5981FCF25F0009A2CFB /* Base */,
+				3F0EA59B1FCF25F3009A2CFB /* uk */,
+			);
+			name = Speciality.storyboard;
+			sourceTree = "<group>";
+		};
+		3F0EA59E1FCF25FB009A2CFB /* TestDetails.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0EA59D1FCF25FB009A2CFB /* Base */,
+				3F0EA5A01FCF25FF009A2CFB /* uk */,
+			);
+			name = TestDetails.storyboard;
+			sourceTree = "<group>";
+		};
+		3F0EA5A31FCF2606009A2CFB /* Test.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0EA5A21FCF2606009A2CFB /* Base */,
+				3F0EA5A51FCF2609009A2CFB /* uk */,
+			);
+			name = Test.storyboard;
+			sourceTree = "<group>";
+		};
+		3F0EA5A81FCF2611009A2CFB /* Group.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0EA5A71FCF2611009A2CFB /* Base */,
+				3F0EA5AA1FCF2614009A2CFB /* uk */,
+			);
+			name = Group.storyboard;
+			sourceTree = "<group>";
+		};
+		3F0EA5AD1FCF261A009A2CFB /* TimeTable.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0EA5AC1FCF261A009A2CFB /* Base */,
+				3F0EA5AF1FCF261D009A2CFB /* uk */,
+			);
+			name = TimeTable.storyboard;
+			sourceTree = "<group>";
+		};
+		3F0EA5B21FCF2632009A2CFB /* Student.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0EA5B11FCF2632009A2CFB /* Base */,
+				3F0EA5B41FCF2636009A2CFB /* uk */,
+			);
+			name = Student.storyboard;
+			sourceTree = "<group>";
+		};
 		3F4ECD451FC5ACD0000A54FD /* Subjects.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
