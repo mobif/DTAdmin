@@ -16,7 +16,7 @@ class RootNavController: UINavigationController {
             let logedInUserName: String = StoreHelper.getLoggedUser().userName {
             DataManager.shared.checkUser(name: logedInUserName) {
                 error in
-                if let error = error {
+                if error != nil {
                     self.showLoginScreen()
                 } else {
                     self.moveToMain()

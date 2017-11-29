@@ -87,45 +87,45 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewWillAppear(animated)
     }
     
-//MARK: UITabBarControllerDelegate method
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let title = viewController.title {
-        }
-        if let navTitle = (viewController as? UINavigationController)?.viewControllers.first?.title {
-        }
-    }
+////MARK: UITabBarControllerDelegate method
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        if viewController.title != nil {
+//        }
+//        if ((viewController as? UINavigationController)?.viewControllers.first?.title) != nil {
+//        }
+//    }
 }
 
-//MARK: temp view controllers for test
-class TabOneViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
-        self.title = "Students"
-    }
-}
-
-class TabThreeViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
-        self.title = "Groups"
-    }
-}
-
-class TabFourViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
-        self.title = "Faculty"
-    }
-}
-
-class TabFiveViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
-        self.title = "Speciality"
-    }
-}
+////MARK: temp view controllers for test
+//class TabOneViewController: UIViewController {
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.view.backgroundColor = UIColor.blue
+//        self.title = "Students"
+//    }
+//}
+//
+//class TabThreeViewController: UIViewController {
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.view.backgroundColor = UIColor.red
+//        self.title = "Groups"
+//    }
+//}
+//
+//class TabFourViewController: UIViewController {
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.view.backgroundColor = UIColor.blue
+//        self.title = "Faculty"
+//    }
+//}
+//
+//class TabFiveViewController: UIViewController {
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.view.backgroundColor = UIColor.red
+//        self.title = "Speciality"
+//    }
+//}
 

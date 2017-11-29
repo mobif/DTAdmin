@@ -99,7 +99,7 @@
                         <viewLayoutGuide key="safeArea" id="HAc-iQ-L0K"/>
                     </view>
                     <navigationItem key="navigationItem" id="wxW-SJ-zsU">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="LQ7-NZ-Eoo">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LQ7-NZ-Eoo">
                             <connections>
                                 <action selector="addButtonTapped:" destination="fev-rm-xgq" id="qsB-ct-lX9"/>
                             </connections>

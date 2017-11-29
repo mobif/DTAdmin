@@ -343,13 +343,6 @@
 			path = Student;
 			sourceTree = "<group>";
 		};
-		3F05013B1F90ED59006651CE /* Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Group;
-			sourceTree = "<group>";
-		};
 		3F2BF5941F9F61C300B2FA7E /* Subject */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,7 +524,6 @@
 				8927571A1F97648C00FF669D /* Common */,
 				3F2BF5941F9F61C300B2FA7E /* Subject */,
 				3F3E68531F97BCB4004B8B2C /* Admins */,
-				3F05013B1F90ED59006651CE /* Group */,
 				3F05013A1F90ED08006651CE /* Student */,
 				3F01D7CF1F8D1458005CA03A /* Supporting files */,
 				3FDE8F971F8D0DF60057BF3C /* AppDelegate.swift */,

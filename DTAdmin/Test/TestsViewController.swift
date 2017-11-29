@@ -36,10 +36,7 @@ class TestsViewController: ParentViewController {
     func update() {
         guard let id = subjectId else { return }
         DataManager.shared.getTest(bySubject: id) { (tests, error) in
-            guard let tests = tests as? [TestStructure] else {
-                //print(error)
-                return
-            }
+            //guard let tests = tests as? [TestStructure] else { return }
             self.testsList = tests
         self.testsTableView.reloadData()
         }
