@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewAnswerViewController: UIViewController {
+class AddNewAnswerViewController: ParentViewController {
    
     @IBOutlet weak var answerTextView: UITextView!
     @IBOutlet weak var isAnswerCorrectTextField: UITextField!
@@ -95,7 +95,7 @@ class AddNewAnswerViewController: UIViewController {
                 (answerResult, errorMessage) in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage.message)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     guard let result = answerResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -117,7 +117,7 @@ class AddNewAnswerViewController: UIViewController {
                 error in
 
                 if let errorMessage = error {
-                    self.showWarningMsg(errorMessage.message)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(answerForSave)

@@ -25,11 +25,11 @@ extension DataRequestable {
         _ error: ErrorData?) -> ()) {
         if typeEntity == .student || typeEntity == .question || typeEntity == .answer {
             let errorMsg = NSLocalizedString("Request not supported.", comment: "Request not supported for entity.")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
         }
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.getRecords) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -39,7 +39,7 @@ extension DataRequestable {
             }
             guard let  json = list as? [[String: Any]] else {
                 let error = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(error))
+                completionHandler(nil, ErrorData(error, ErrorType.warning))
                 return
             }
             var entytiList = [Any]()
@@ -55,7 +55,7 @@ extension DataRequestable {
             default:
                 DispatchQueue.main.async {
                     let errorMsg = NSLocalizedString("Request not supported.", comment: "Request not supported for entity.")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.alert))
                 }
             }
             DispatchQueue.main.async {
@@ -72,12 +72,12 @@ extension DataRequestable {
             guard let count = count else {
                 let errorMsg = NSLocalizedString("Uncountable list of Entity",
                                                  comment: "Uncountable list of Entity is incorrect")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                 return
             }
             if index + quantity > count {
                 let errorMsg = NSLocalizedString("Out of Bounds", comment: "Out of Bounds")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             }
             var indexString: String
             var quantityString: String
@@ -90,7 +90,7 @@ extension DataRequestable {
             guard let request = self.getURLReqest(entityStructure: typeEntity, type: TypeReqest.getRecordsRange,
                                                   limit: quantityString, offset: indexString) else {
                 let errorMsg = NSLocalizedString("Cannot prepare header", comment: "Cannot prepare header for URLRequest")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                 return
             }
             self.getResponse(request: request) { (list, error) in
@@ -102,7 +102,7 @@ extension DataRequestable {
                 }
                 guard let  json = list as? [[String: Any]] else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                     return
                 }
                 var entytiList = [Any]()
@@ -132,7 +132,7 @@ extension DataRequestable {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.getOneRecord, id: byId) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
             DispatchQueue.main.async {
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             }
             return
         }
@@ -144,19 +144,19 @@ extension DataRequestable {
             }
             guard let entity = entity else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                 return
             }
             guard let  jsonArray = entity as? [[String: Any]] else {
                 let errorMsg = NSLocalizedString("Structure is incorrect", comment: "Response unrelated to structure")
-                let error = ErrorData(errorMsg)
+                let error = ErrorData(errorMsg, ErrorType.error)
                 error.descriptionError = String(describing: entity)
                 completionHandler(nil, error)
                 return
             }
             guard let json = jsonArray.first else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "Response is empty")
-                let error = ErrorData(errorMsg)
+                let error = ErrorData(errorMsg, ErrorType.warning)
                 error.descriptionError = String(describing: jsonArray)
                 completionHandler(nil, error)
                 return
@@ -178,7 +178,7 @@ extension DataRequestable {
             }
             guard let entityUnwraped = entityInstance else {
                 let errorMsg = NSLocalizedString("Incorrect type", comment: "Incorrect type")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                 return
             }
             DispatchQueue.main.async {
@@ -190,7 +190,7 @@ extension DataRequestable {
     func getCountItems(forEntity: Entities, completion: @escaping (_ count: UInt?, _ error: ErrorData?) -> () ) {
         guard let request = getURLReqest(entityStructure: forEntity, type: TypeReqest.getCount) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completion(nil, ErrorData(errorMsg))
+            completion(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (response, error) in
@@ -200,18 +200,18 @@ extension DataRequestable {
                 guard let responseUnwraped = response else { return }
                 guard let  json = responseUnwraped as? [String: Any] else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                    completion(nil, ErrorData(errorMsg))
+                    completion(nil, ErrorData(errorMsg, ErrorType.warning))
                     return
                 }
                 // MARK: Debug part
                 guard let countString = json["numberOfRecords"] as? String else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
-                    completion(nil, ErrorData(errorMsg))
+                    completion(nil, ErrorData(errorMsg, ErrorType.error))
                     return
                 }
                 guard let count = UInt(countString) else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
-                    completion(nil, ErrorData(errorMsg))
+                    completion(nil, ErrorData(errorMsg, ErrorType.error))
                     return
                 }
                 completion(count, nil)
@@ -223,7 +223,7 @@ extension DataRequestable {
                                                 completionHandler: @escaping (_ error: ErrorData?) -> ()) {
         guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.updateData, id: byId) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(ErrorData(errorMsg))
+            completionHandler(ErrorData(errorMsg, ErrorType.error))
             return }
         let postJSON = entity.dictionary
         do {
@@ -231,7 +231,7 @@ extension DataRequestable {
             request.httpBody = data
         } catch {
             let errorMsg = error.localizedDescription
-            let errorData = ErrorData(errorMsg)
+            let errorData = ErrorData(errorMsg, ErrorType.error)
             errorData.nserror = error as NSError
             completionHandler(errorData)
         }
@@ -246,7 +246,7 @@ extension DataRequestable {
                                                 completion: @escaping (_ confirmation: Any?, _ error: ErrorData?) -> ()) {
         guard var request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.insertData) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completion(nil, ErrorData(errorMsg))
+            completion(nil, ErrorData(errorMsg, ErrorType.error))
             return }
         let postJSON = entity.dictionary
         do {
@@ -254,7 +254,7 @@ extension DataRequestable {
             request.httpBody = data
         } catch {
             let errorMsg = error.localizedDescription
-            let errorData = ErrorData(errorMsg)
+            let errorData = ErrorData(errorMsg, ErrorType.error)
             errorData.nserror = error as NSError
             completion(nil, errorData)
         }
@@ -267,7 +267,7 @@ extension DataRequestable {
                 case .student, .user:
                     guard let  json = entity as? [String: Any] else {
                         let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                        let error = ErrorData(errorMsg)
+                        let error = ErrorData(errorMsg, ErrorType.warning)
                         error.descriptionError = String(describing: entity)
                         completion(nil, error)
                         return
@@ -277,7 +277,7 @@ extension DataRequestable {
                 default:
                     guard let  json = entity as? [[String: Any]] else {
                         let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                        let error = ErrorData(errorMsg)
+                        let error = ErrorData(errorMsg, ErrorType.warning)
                         error.descriptionError = String(describing: entity)
                         completion(nil, error)
                         return
@@ -292,7 +292,7 @@ extension DataRequestable {
                       completionHandler: @escaping (_ confirmation: Any?, _ error: ErrorData?) -> ()) {
         guard let request = getURLReqest(entityStructure: typeEntity, type: TypeReqest.delete, id: byId) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (entity, error) in
@@ -302,7 +302,7 @@ extension DataRequestable {
                 guard let entity = entity else { return }
                 guard let  json = entity as? [String: String] else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                     return
                 }
                 // MARK: Debug part
@@ -310,7 +310,7 @@ extension DataRequestable {
                     completionHandler("ok", nil)
                 } else {
                     let errorMsg = NSLocalizedString("Item not deleted", comment: "This item not deleted")
-                    let error = ErrorData(errorMsg)
+                    let error = ErrorData(errorMsg, ErrorType.alert)
                     error.descriptionError = json["response"]
                     completionHandler(nil, error)
                 }
@@ -323,7 +323,7 @@ extension DataRequestable {
         guard let request = getURLReqest(entityStructure: .student, type: TypeReqest.getStudentsByGroup,
                                          id: group, withoutImages: withoutImages) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -334,7 +334,9 @@ extension DataRequestable {
             }
             guard let  json = list as? [[String: Any]] else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                let error = ErrorData(errorMsg, ErrorType.warning)
+                error.code = HTTPStatusCodes.NotFound.rawValue
+                completionHandler(nil, error)
                 return
             }
             let studentList = json.flatMap { StudentStructure(dictionary: $0) }
@@ -355,7 +357,7 @@ extension DataRequestable {
                 completionHandler( groupList, nil)
             } else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
             }
         }
     }
@@ -371,7 +373,7 @@ extension DataRequestable {
                 completionHandler( groupList, nil)
             } else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
             }
         }
     }
@@ -387,7 +389,7 @@ extension DataRequestable {
                 completionHandler( testList, nil)
             } else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
             }
         }
     }
@@ -403,7 +405,7 @@ extension DataRequestable {
                 completionHandler(testList, nil)
             } else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
             }
         }
     }
@@ -419,7 +421,7 @@ extension DataRequestable {
                 completionHandler(timeTables, nil)
             } else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
             }
         }
     }
@@ -435,7 +437,7 @@ extension DataRequestable {
                 completionHandler(timeTables, nil)
             } else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
             }
         }
     }
@@ -444,7 +446,7 @@ extension DataRequestable {
                          completionHandler: @escaping (_ list: [Any]?, _ error: ErrorData?) -> ()) {
         guard let request = getURLReqest(entityStructure: entityStructure, type: type, id: byID) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -455,7 +457,7 @@ extension DataRequestable {
             }
             guard let  json = list as? [[String: Any]] else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                 return
             }
             var listAny: [Any]?
@@ -467,7 +469,7 @@ extension DataRequestable {
             case .answer: listAny = json.flatMap { AnswerStructure(dictionary: $0) }
             default:
                 let errorMsg = NSLocalizedString("Request not supported!", comment: "Request not supported!")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             }
             DispatchQueue.main.async {
                 completionHandler(listAny, nil)
@@ -480,7 +482,7 @@ extension DataRequestable {
                                          type: .getQuestionsByLevelRand, id: testId, limit: level,
                                          offset: number) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -491,7 +493,7 @@ extension DataRequestable {
             }
             guard let  json = list as? [[String: Any]] else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                 return
             }
             let questionList = json.flatMap { QuestionStructure(dictionary: $0) }
@@ -505,7 +507,7 @@ extension DataRequestable {
         guard let request = getURLReqest(entityStructure: .question, type: .getQuestionIdsByLevelRand, id: testId,
                                          limit: level, offset: number) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -516,7 +518,7 @@ extension DataRequestable {
             }
             guard let  json = list as? [[String: String]] else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                 return
             }
             let questionList = json.flatMap { $0["question_id"] }
@@ -537,7 +539,7 @@ extension DataRequestable {
                 completionHandler(answerList, nil)
             } else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
             }
         }
     }
@@ -545,7 +547,7 @@ extension DataRequestable {
         
         guard let request = getURLReqest(entityStructure: .question, type: .countRecordsByTest, id: testId) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -556,7 +558,7 @@ extension DataRequestable {
             }
             guard let  json = list as? [String: String] else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                 return
             }
             guard let countString = json["numberOfRecords"] else { return }
@@ -569,7 +571,7 @@ extension DataRequestable {
         guard let request = getURLReqest(entityStructure: .question, type: .getRecordsRangeByTest, id: testId,
                                          limit: limit, offset: offset, withoutImages: withoutImages) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -580,7 +582,7 @@ extension DataRequestable {
             }
             guard let  json = list as? [[String: Any]] else {
                 let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                 return
             }
             let recordList = json.flatMap { QuestionStructure(dictionary: $0) }
@@ -593,7 +595,7 @@ extension DataRequestable {
         guard let request = getURLReqest(entityStructure: .result, type: .getRecordsByTestGroupDate, limit: testId, offset: groupId)
         else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -602,7 +604,7 @@ extension DataRequestable {
             } else {
                 guard let  json = list as? [[String: Any]] else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                     return
                 }
                 let testList = json.flatMap { TestResults(dictionary: $0) }
@@ -616,7 +618,7 @@ extension DataRequestable {
         guard let request = getURLReqest(entityStructure: .result, type: .getResultTestIdsByGroup, id: id)
             else {
                 let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-                completionHandler(nil, ErrorData(errorMsg))
+                completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                 return
         }
         getResponse(request: request) { (list, error) in
@@ -625,7 +627,7 @@ extension DataRequestable {
             } else {
                 guard let  json = list as? [[String: String]] else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                     return
                 }
                 completionHandler(json, nil)
@@ -636,7 +638,7 @@ extension DataRequestable {
     func getTestsBy(ids: [String], completionHandler: @escaping (_ tests: [TestStructure]?, _ error: ErrorData?) -> ()) {
         guard let request = getURLReqestForEntityManager(entityStructure: .test, ids: ids) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -645,7 +647,7 @@ extension DataRequestable {
             } else {
                 guard let  json = list as? [[String: Any]] else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                     return
                 }
                 let tests = json.flatMap { TestStructure(dictionary: $0) }
@@ -656,7 +658,7 @@ extension DataRequestable {
     func getSubjectsBy(ids: [String], completionHandler: @escaping (_ subjects: [SubjectStructure]?, _ error: ErrorData?) -> ()) {
         guard let request = getURLReqestForEntityManager(entityStructure: .subject, ids: ids) else {
             let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
-            completionHandler(nil, ErrorData(errorMsg))
+            completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
             return
         }
         getResponse(request: request) { (list, error) in
@@ -665,11 +667,36 @@ extension DataRequestable {
             } else {
                 guard let  json = list as? [[String: Any]] else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                     return
                 }
                 let tests = json.flatMap { SubjectStructure(dictionary: $0) }
                 completionHandler(tests, nil)
+            }
+        }
+    }
+    func checkUser(name: String, completion: @escaping (_ error: ErrorData?) -> ()) {
+        guard let request = getURLRequestForTest(user: name) else {
+            let errorMsg = NSLocalizedString("The Header isn't prepared!", comment: "Cannot prepare header for URLRequest")
+            completion(ErrorData(errorMsg, ErrorType.error))
+            return
+        }
+        getResponse(request: request) { (response, error) in
+            if let error = error {
+                completion(error)
+            } else {
+                guard let result = response as? [String: Bool],
+                let check = result["response"]
+                else {
+                    let errorMsg = NSLocalizedString("Incorrect response", comment: "Incorect response")
+                    completion(ErrorData(errorMsg, ErrorType.error))
+                    return }
+                if check {
+                    completion(nil)
+                } else {
+                    let errorMsg = NSLocalizedString("User not found", comment: "User not found")
+                    completion(ErrorData(errorMsg, ErrorType.warning))
+                }
             }
         }
     }

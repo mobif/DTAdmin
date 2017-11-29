@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SpecialitiesViewController: ParentViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     var specialitiesArray = [SpecialityStructure]()
     var filteredSpecialitiesArray = [SpecialityStructure]()

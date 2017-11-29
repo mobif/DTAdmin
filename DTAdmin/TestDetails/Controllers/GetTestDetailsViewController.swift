@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GetTestDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GetTestDetailsViewController: ParentViewController, UITableViewDataSource, UITableViewDelegate {
 
     let dataModel = DataModel.dataModel
     @IBOutlet weak var tableView: UITableView!

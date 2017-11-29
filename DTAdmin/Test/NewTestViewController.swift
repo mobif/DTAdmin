@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTestViewController: UIViewController {
+class NewTestViewController: ParentViewController {
 
     var subjectId: String?
     var edit = Bool()
@@ -76,7 +76,7 @@ class NewTestViewController: UIViewController {
                                                            "attempts": sample.attempts]) else { return }
         DataManager.shared.insertEntity(entity: testForSave, typeEntity: .test) { (entity, error) in
             if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             } else {
                 guard let newEntity = entity as? [[String : Any]] else {
                     self.showWarningMsg(NSLocalizedString("Incorect response structure",
@@ -106,7 +106,7 @@ class NewTestViewController: UIViewController {
                                                            "attempts": sample.attempts]) else { return }
         DataManager.shared.updateEntity(byId: testId, entity: testForSave, typeEntity: .test) { (error) in
             if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             } else {
                 testForSave.id = testId
                 if let resultModification = self.resultModification {

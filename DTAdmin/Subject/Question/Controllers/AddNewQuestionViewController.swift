@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewQuestionViewController: UIViewController {
+class AddNewQuestionViewController: ParentViewController {
     
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var questionLevelTextField: UITextField!
@@ -104,7 +104,7 @@ class AddNewQuestionViewController: UIViewController {
                 (questionResult, error) in
 
                 if let errorMessage = error {
-                    self.showWarningMsg(errorMessage.info)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     guard let result = questionResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -126,7 +126,7 @@ class AddNewQuestionViewController: UIViewController {
                 errorMessage in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage.message)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(questionForSave)

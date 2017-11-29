@@ -19,7 +19,7 @@ class DataManager: HTTPManager, DataRequestable {
             if let sessionError = error {
                 DispatchQueue.main.async {
                     let errorMsg = sessionError.localizedDescription
-                    let errorData = ErrorData(errorMsg)
+                    let errorData = ErrorData(errorMsg, ErrorType.error)
                     errorData.nserror = sessionError as NSError
                     completionHandler(nil, errorData)
                 }
@@ -27,14 +27,16 @@ class DataManager: HTTPManager, DataRequestable {
                 guard let responseValue = response as? HTTPURLResponse else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
                     DispatchQueue.main.async {
-                        completionHandler(nil, ErrorData(errorMsg))
+                        completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                     }
                     return
                 }
                 guard let sessionData = data else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
+                    let error = ErrorData(errorMsg, ErrorType.warning)
+                    error.code = HTTPStatusCodes.NotFound.rawValue
                     DispatchQueue.main.async {
-                        completionHandler(nil, ErrorData(errorMsg))
+                        completionHandler(nil, error)
                     }
                     return
                 }
@@ -46,7 +48,7 @@ class DataManager: HTTPManager, DataRequestable {
                 } catch {
                     DispatchQueue.main.async {
                         let errorMsg = error.localizedDescription
-                        let errorData = ErrorData(errorMsg)
+                        let errorData = ErrorData(errorMsg, ErrorType.error)
                         errorData.nserror = error as NSError
                         completionHandler(nil, errorData)
                     }
@@ -62,7 +64,7 @@ class DataManager: HTTPManager, DataRequestable {
                             errorMsgResponse = errorServerMsg
                         }
                         let errorMsg = NSLocalizedString("Error response", comment: "Incorrect request")
-                        let errorData = ErrorData(errorMsg)
+                        let errorData = ErrorData(errorMsg, ErrorType.error)
                         errorData.code = responseValue.statusCode
                         errorData.descriptionError = errorMsgResponse
                         completionHandler(nil, errorData)

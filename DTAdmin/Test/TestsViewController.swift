@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestsViewController: UIViewController {
+class TestsViewController: ParentViewController {
     
     var cookie: HTTPCookie?
     var testsList: [TestStructure]?
@@ -37,7 +37,7 @@ class TestsViewController: UIViewController {
         guard let id = subjectId else { return }
         DataManager.shared.getTest(bySubject: id) { (tests, error) in
             guard let tests = tests as? [TestStructure] else {
-                print(error)
+                //print(error)
                 return
             }
             self.testsList = tests
@@ -76,7 +76,7 @@ extension TestsViewController: UITableViewDataSource {
                     self.testsTableView.endUpdates()
                     return
                 }
-                self.showWarningMsg(NSLocalizedString(error.info, comment: "Error alert after failed test delete"))
+                self.showAllert(error: error, completionHandler: nil)
             })
         }
         deleteOpt.backgroundColor = UIColor.red
