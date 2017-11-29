@@ -16,9 +16,9 @@ class MockDataManager: HTTPManager, DataRequestable {
     var error: ErrorData?
     private override init(){}
     var urlRequest: String = ""
-    func setError(_ errorMsg: String) {
-        self.error = ErrorData(errorMsg)
-    }
+//    func setError(_ errorMsg: String) {
+//        self.error = ErrorData(errorMsg, )
+//    }
     func setPath(_ path: String) {
         self.path = path
     }
@@ -49,7 +49,7 @@ class MockDataManager: HTTPManager, DataRequestable {
             guard let urlRequest = request.url?.absoluteString else {
                 DispatchQueue.main.async {
                     let errorMsg = NSLocalizedString("Request incorrect", comment: "Request incorrect!")
-                    completionHandler(nil, ErrorData(errorMsg))
+                    completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                 }
                 return
             }
@@ -63,14 +63,14 @@ class MockDataManager: HTTPManager, DataRequestable {
                 guard let responseValue = self.response else {
                     let errorMsg = NSLocalizedString("Incorect server response!", comment: "Incorect server response!")
                     DispatchQueue.main.async {
-                        completionHandler(nil, ErrorData(errorMsg))
+                        completionHandler(nil, ErrorData(errorMsg, ErrorType.error))
                     }
                     return
                 }
                 guard let sessionData = self.data else {
                     let errorMsg = NSLocalizedString("Response is empty", comment: "No data in server response")
                     DispatchQueue.main.async {
-                        completionHandler(nil, ErrorData(errorMsg))
+                        completionHandler(nil, ErrorData(errorMsg, ErrorType.warning))
                     }
                     return
                 }
@@ -81,7 +81,7 @@ class MockDataManager: HTTPManager, DataRequestable {
                 } catch {
                     DispatchQueue.main.async {
                         let errorMsg = error.localizedDescription
-                        let errorData = ErrorData(errorMsg)
+                        let errorData = ErrorData(errorMsg, ErrorType.error)
                         errorData.nserror = error as NSError
                         completionHandler(nil, errorData)
                     }
@@ -92,12 +92,14 @@ class MockDataManager: HTTPManager, DataRequestable {
                         completionHandler(json, nil)
                     } else {
                         var errorMsgResponse: String = ""
+                        var errorType = ErrorType.warning
                         if let errorReason = json as? [String: String]  {
                             guard let errorServerMsg = errorReason["response"] else { return }
                             errorMsgResponse = errorServerMsg
+                            errorType = ErrorType.error
                         }
                         let errorMsg = NSLocalizedString("Error response", comment: "Incorrect request")
-                        let errorData = ErrorData(errorMsg)
+                        let errorData = ErrorData(errorMsg, errorType)
                         errorData.code = responseValue.statusCode
                         errorData.descriptionError = errorMsgResponse
                         completionHandler(nil, errorData)

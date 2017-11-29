@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpecialityCreateUpdateViewController: UIViewController {
+class SpecialityCreateUpdateViewController: ParentViewController {
     
     var specialityForSave: SpecialityStructure?
     var resultModification: ((SpecialityStructure) -> ())?

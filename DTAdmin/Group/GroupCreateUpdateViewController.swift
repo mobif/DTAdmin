@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupCreateUpdateViewController: UIViewController {
+class GroupCreateUpdateViewController: ParentViewController {
     
     @IBOutlet weak var groupNameTextField: UITextField!
     @IBAction func saveGroup(_ sender: Any) {

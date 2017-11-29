@@ -29,9 +29,20 @@ class ParentViewController: UIViewController {
         let okAction = UIAlertAction(title: "ok", style: .cancel) { (action) in
             completionHandler?()
         }
-        
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
+    }
+    func showAllert(error: ErrorData?, completionHandler: (() -> Void)?) {
+        let errorMsg = (error?.message ?? "") + (error?.descriptionError ?? "")
+        let alertController = UIAlertController(title: error?.type.rawValue, message: errorMsg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok", style: .cancel) { (action) in
+            completionHandler?()
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
+    }
+    func showWarningMsg(_ text: String) {
+        showAllert(title: "Warning", message: text, completionHandler: nil)
     }
     
     func startActivity() {

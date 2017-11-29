@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdminCreateUpdateViewController: UIViewController {
+class AdminCreateUpdateViewController: ParentViewController {
   
   @IBOutlet weak var userNameTextField: UITextField!
   @IBOutlet weak var actualPaswordTextField: UITextField!

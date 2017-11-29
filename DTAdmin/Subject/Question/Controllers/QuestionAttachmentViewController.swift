@@ -29,7 +29,7 @@ class QuestionAttachmentViewController: ParentViewController {
         guard let id = questionId else { return }
         DataManager.shared.getEntity(byId: id, typeEntity: .question) {(questionRecord, error) in
             if let errorMessage = error {
-                     self.showWarningMsg(errorMessage.message)
+                     self.showAllert(error: errorMessage, completionHandler: nil)
             } else {
                 guard let question = questionRecord as? QuestionStructure else { return }
                 self.questionTextLabel.text = question.questionText

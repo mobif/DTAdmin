@@ -12,8 +12,17 @@ class RootNavController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if StoreHelper.isLoggedUser() {
-            self.moveToMain()
+        if StoreHelper.isLoggedUser(),
+            let logedInUserName: String = StoreHelper.getLoggedUser().userName {
+            DataManager.shared.checkUser(name: logedInUserName) {
+                error in
+                if let error = error {
+                    self.showLoginScreen()
+                } else {
+                    self.moveToMain()
+                }
+            }
+            
         }
         // Do any additional setup after loading the view.
     }

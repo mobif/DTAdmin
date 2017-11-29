@@ -30,7 +30,7 @@ class AnswerAttachmentViewController: ParentViewController {
         DataManager.shared.getEntity(byId: id, typeEntity: .answer) {(answerRecord, error) in
             self.stopActivity()
             if let errorMessage = error {
-                self.showWarningMsg(errorMessage.message)
+                self.showAllert(error: errorMessage, completionHandler: nil)
             } else {
                 guard let answer = answerRecord as? AnswerStructure else { return }
                 self.answerTextLabel.text = answer.answerText

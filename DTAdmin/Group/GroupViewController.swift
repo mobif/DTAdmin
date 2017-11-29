@@ -57,7 +57,7 @@ class GroupViewController: ParentViewController {
                 DispatchQueue.main.async {
                     self.refreshControl!.endRefreshing()
                 }
-                self.showWarningMsg(error?.message ?? NSLocalizedString("Incorect data", comment: "Error while downloading data from server"))
+                self.showAllert(error: error, completionHandler: nil)
                 return
             }
             self.groups = groups
@@ -128,7 +128,7 @@ extension GroupViewController : UITableViewDataSource {
         let delete = UITableViewRowAction(style: .destructive, title: "DELETE"){(action, indexPath) in
             DataManager.shared.deleteEntity(byId: self.groups[indexPath.row].groupId!, typeEntity: .group, completionHandler: { (status, error) in
                 if let error = error {
-                    self.showWarningMsg(error.info)
+                    self.showAllert(error: error, completionHandler: nil)
                 } else {
                     self.groups.remove(at: indexPath.row)
                 }

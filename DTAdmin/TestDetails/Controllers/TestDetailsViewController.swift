@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TestDetailsViewController: ParentViewController, UITableViewDataSource, UITableViewDelegate {
     
     let dataModel = DataModel.dataModel
     var id: String?
@@ -37,7 +37,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                     self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
                     return
                 }
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
                 if error.code == HTTPStatusCodes.Unauthorized.rawValue {
                     StoreHelper.logout()
                     self.showLoginScreen()
@@ -109,7 +109,7 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
                 if indexPath.row < self.dataModel.testDetailArray.count {
                     DataManager.shared.deleteEntity(byId: id, typeEntity: Entities.testDetail) { (deleted, error) in
                         if let error = error {
-                            self.showWarningMsg(error.info)
+                            self.showAllert(error: error, completionHandler: nil)
                         } else {
                             self.dataModel.testDetailArray.remove(at: indexPath.row)
                             tableView.deleteRows(at: [indexPath], with: .top)

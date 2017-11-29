@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewRecordViewController: UIViewController {
+class AddNewRecordViewController: ParentViewController {
     
     @IBOutlet weak var subjectNameTextField: UITextField!
     @IBOutlet weak var subjectDescriptionTextField: UITextView!
@@ -53,7 +53,7 @@ class AddNewRecordViewController: UIViewController {
             guard let subjectForSave = subjectForSave else { return }
             DataManager.shared.insertEntity(entity: subjectForSave, typeEntity: .subject) { (subjectResult, error) in
                 if let errorMessage = error {
-                    self.showWarningMsg(errorMessage.message)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     guard let result = subjectResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -74,7 +74,7 @@ class AddNewRecordViewController: UIViewController {
             DataManager.shared.updateEntity(byId: subjectIdUnwrap, entity: subjectForSave, typeEntity: .subject) {
                     error in
                 if let errorMessage = error {
-                    self.showWarningMsg(errorMessage.message)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(subjectForSave)
