@@ -64,7 +64,8 @@ class FacultyViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let protoCell = tableView.dequeueReusableCell(withIdentifier: "facultyCell", for: indexPath) as? FacultyTableViewCell
+        let protoCell = tableView.dequeueReusableCell(withIdentifier: "facultyCell", for: indexPath)
+            as? FacultyTableViewCell
         guard let cell = protoCell else { return UITableViewCell() }
         let item = filteredFacultyArray[indexPath.row]
         cell.facultyIdLabel.text = item.id
@@ -129,7 +130,7 @@ class FacultyViewController: UIViewController, UITableViewDataSource, UITableVie
             guard let facultyInfoViewController = UIStoryboard(name: "Faculty",
                 bundle: nil).instantiateViewController(withIdentifier: "FacultyInfoViewController")
                     as? FacultyInfoViewController else  { return }
-//            facultyInfoViewController.facultyInstance = self.filteredFacultyArray[indexPath.row]
+            facultyInfoViewController.facultyInstance = self.filteredFacultyArray[indexPath.row]
             self.navigationController?.pushViewController(facultyInfoViewController, animated: true)
             
         }

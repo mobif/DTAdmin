@@ -127,7 +127,15 @@ class TestDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         })
         return [delete, edit]
     }
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let testDetailInfoViewController = UIStoryboard(name: "TestDetails",
+            bundle: nil).instantiateViewController(withIdentifier: "TestDetailInfoViewController")
+                as? TestDetailInfoViewController else  { return }
+        testDetailInfoViewController.testDetailInstance = self.dataModel.testDetailArray[indexPath.row]
+        self.navigationController?.pushViewController(testDetailInfoViewController, animated: true)
+    }
+
     @IBAction func addButtonTapped(_ sender: Any) {
         dataModel.currentDataForSelecting()
         if let max = dataModel.max, dataModel.taskArrayForFiltering.reduce(0, +) >= max {

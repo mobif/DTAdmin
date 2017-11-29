@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2D040CC91FCDE49900530E81 /* TestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D040CC81FCDE49900530E81 /* TestDetails.swift */; };
-		2D7EAD8B1FCE0E6C0048A803 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7EAD8A1FCE0E6C0048A803 /* Numbers.swift */; };
+		2D4324101FCEB84E00466B88 /* FacultyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D43240F1FCEB84E00466B88 /* FacultyDetails.swift */; };
+		2D4324121FCECEE200466B88 /* TestDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4324111FCECEE200466B88 /* TestDetailInfoViewController.swift */; };
 		2DF0DBDB1FCE15B3004A497A /* FacultyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0DBD51FCE15B3004A497A /* FacultyTableViewCell.swift */; };
 		2DF0DBDC1FCE15B3004A497A /* CreateUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0DBD71FCE15B3004A497A /* CreateUpdateViewController.swift */; };
 		2DF0DBDD1FCE15B3004A497A /* FacultyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0DBD81FCE15B3004A497A /* FacultyInfoViewController.swift */; };
@@ -137,7 +138,8 @@
 
 /* Begin PBXFileReference section */
 		2D040CC81FCDE49900530E81 /* TestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetails.swift; sourceTree = "<group>"; };
-		2D7EAD8A1FCE0E6C0048A803 /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
+		2D43240F1FCEB84E00466B88 /* FacultyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyDetails.swift; sourceTree = "<group>"; };
+		2D4324111FCECEE200466B88 /* TestDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDetailInfoViewController.swift; sourceTree = "<group>"; };
 		2DF0DBD51FCE15B3004A497A /* FacultyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyTableViewCell.swift; sourceTree = "<group>"; };
 		2DF0DBD71FCE15B3004A497A /* CreateUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUpdateViewController.swift; sourceTree = "<group>"; };
 		2DF0DBD81FCE15B3004A497A /* FacultyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacultyInfoViewController.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				2DF0DBDA1FCE15B3004A497A /* Faculty.storyboard */,
+				2D43240F1FCEB84E00466B88 /* FacultyDetails.swift */,
 				2DF0DBD61FCE15B3004A497A /* Controllers */,
 				2DF0DBD41FCE15B3004A497A /* Cells */,
 			);
@@ -443,7 +446,6 @@
 				3F97D7C01FCC5993007B1813 /* TestDetails.storyboard */,
 				3F97D7BF1FCC5993007B1813 /* DataModel.swift */,
 				2D040CC81FCDE49900530E81 /* TestDetails.swift */,
-				2D7EAD8A1FCE0E6C0048A803 /* Numbers.swift */,
 				3F97D7D11FCC5A08007B1813 /* Details.swift */,
 				3F97D7BA1FCC5993007B1813 /* Controllers */,
 				3F97D7B61FCC5993007B1813 /* Cells */,
@@ -467,6 +469,7 @@
 				3F97D7BE1FCC5993007B1813 /* TestDetailsViewController.swift */,
 				3F97D7BB1FCC5993007B1813 /* GetTestDetailsViewController.swift */,
 				3F97D7BD1FCC5993007B1813 /* NumbersViewController.swift */,
+				2D4324111FCECEE200466B88 /* TestDetailInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -886,7 +889,6 @@
 				C7535CF41FA2670100B6CBD1 /* SpecialityStructure.swift in Sources */,
 				892757211F9768D100FF669D /* LoginViewController.swift in Sources */,
 				89C96E0C1F9D079D0019FE77 /* TimePicker.swift in Sources */,
-				2D7EAD8B1FCE0E6C0048A803 /* Numbers.swift in Sources */,
 				3F97D7C11FCC5993007B1813 /* SpecialityTableViewCell.swift in Sources */,
 				3F322AD41FBF517B003D0AC6 /* UIImageView.swift in Sources */,
 				3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */,
@@ -894,6 +896,7 @@
 				2DF0DBDB1FCE15B3004A497A /* FacultyTableViewCell.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
+				2D4324121FCECEE200466B88 /* TestDetailInfoViewController.swift in Sources */,
 				3F322ADA1FBF51C8003D0AC6 /* Constants.swift in Sources */,
 				2DF0DBDC1FCE15B3004A497A /* CreateUpdateViewController.swift in Sources */,
 				C7535CEC1FA2670100B6CBD1 /* HTTPManager.swift in Sources */,
@@ -945,6 +948,7 @@
 				3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */,
 				C7535CF31FA2670100B6CBD1 /* Serializable.swift in Sources */,
 				C7535CEF1FA2670100B6CBD1 /* AnswerStructure.swift in Sources */,
+				2D4324101FCEB84E00466B88 /* FacultyDetails.swift in Sources */,
 				3FA8881A1F9688B200D602F3 /* AdminViewController.swift in Sources */,
 				3FF673711FB48BAD001C7147 /* TestsForSubjectTableViewController.swift in Sources */,
 				3F97D7CC1FCC5993007B1813 /* TestDetailsViewController.swift in Sources */,

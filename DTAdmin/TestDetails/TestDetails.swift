@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 enum TestDetails: String {
     case id = "id"
     case testId = "test_id"
@@ -15,4 +16,10 @@ enum TestDetails: String {
     case rate = "rate"
     
     static let allValues: [TestDetails] = [level, tasks, rate]
+}
+
+enum Numbers: Int {
+    case maxLevel = 10
+    case maxRate = 100
+    case minDetail = 0
 }
