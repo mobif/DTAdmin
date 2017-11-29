@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FacultyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class FacultyViewController: ParentViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     var facultyArray = [FacultyStructure]()
     var filteredFacultyArray = [FacultyStructure]()

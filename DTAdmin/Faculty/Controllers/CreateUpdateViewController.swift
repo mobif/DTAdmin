@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUpdateViewController: UIViewController {
+class CreateUpdateViewController: ParentViewController {
 
     var facultyForSave: FacultyStructure?
     var resultModification: ((FacultyStructure) -> ())?
