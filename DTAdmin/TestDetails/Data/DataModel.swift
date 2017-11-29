@@ -28,8 +28,8 @@ class DataModel: NSObject {
     }
     
     func currentDataForSelecting() {
-        levelArrayForFiltering = []
-        taskArrayForFiltering = []
+        levelArrayForFiltering.removeAll()
+        taskArrayForFiltering.removeAll()
         for i in testDetailArray {
             guard let levels = Int(i.level) else { return }
             levelArrayForFiltering.append(levels)

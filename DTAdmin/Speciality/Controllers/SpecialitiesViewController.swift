@@ -63,17 +63,17 @@ class SpecialitiesViewController: UIViewController, UITableViewDelegate, UITable
         let view = UIView()
         view.backgroundColor = UIColor.darkGray
         let id = UILabel()
-        id.text = NSLocalizedString("id", comment: "header for id in table")
+        id.text = NSLocalizedString(SpecialityDetails.id.rawValue, comment: "header for id in table")
         id.textColor = UIColor.white
         id.frame = CGRect(x: 15, y: 2, width: 20, height: 25)
         view.addSubview(id)
         let code = UILabel()
-        code.text = NSLocalizedString("code", comment: "header for code in table")
+        code.text = NSLocalizedString(SpecialityDetails.code.rawValue, comment: "header for code in table")
         code.textColor = UIColor.white
         code.frame = CGRect(x: 50, y: 2, width: 40, height: 25)
         view.addSubview(code)
         let name = UILabel()
-        name.text = NSLocalizedString("speciality", comment: "header for speciality in table")
+        name.text = NSLocalizedString(SpecialityDetails.speciality.rawValue, comment: "header for speciality in table")
         name.textColor = UIColor.white
         name.frame = CGRect(x: 170, y: 2, width: 120, height: 25)
         view.addSubview(name)

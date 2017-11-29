@@ -8,9 +8,8 @@
 
 import Foundation
 enum FacultyDetails: String {
-//    case id = "id"
+
     case name = "faculty_name"
     case description = "faculty_description"
-//
-//    static let allValues: [FacultyDetails] = [id, name, description]
+
 }

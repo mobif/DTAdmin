@@ -18,6 +18,7 @@
 		3F004FCE1FB60CC80045F2EE /* DesignedButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */; };
 		3F004FD31FB60E790045F2EE /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */; };
 		3F004FD51FB610F00045F2EE /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */; };
+		3F2E68E91FCEE38900FC8C0E /* SpecialityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E68E81FCEE38900FC8C0E /* SpecialityDetails.swift */; };
 		3F322AD01FBF5161003D0AC6 /* UITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */; };
 		3F322AD21FBF5171003D0AC6 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD11FBF5171003D0AC6 /* UITextView.swift */; };
 		3F322AD41FBF517B003D0AC6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322AD31FBF517B003D0AC6 /* UIImageView.swift */; };
@@ -148,6 +149,7 @@
 		3F004FCD1FB60CC80045F2EE /* DesignedButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignedButtons.swift; sourceTree = "<group>"; };
 		3F004FD21FB60E790045F2EE /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		3F004FD41FB610F00045F2EE /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
+		3F2E68E81FCEE38900FC8C0E /* SpecialityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialityDetails.swift; sourceTree = "<group>"; };
 		3F322ACF1FBF5160003D0AC6 /* UITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewController.swift; sourceTree = "<group>"; };
 		3F322AD11FBF5171003D0AC6 /* UITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		3F322AD31FBF517B003D0AC6 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
@@ -287,8 +289,8 @@
 			isa = PBXGroup;
 			children = (
 				2DF0DBDA1FCE15B3004A497A /* Faculty.storyboard */,
-				2D43240F1FCEB84E00466B88 /* FacultyDetails.swift */,
 				2DF0DBD61FCE15B3004A497A /* Controllers */,
+				3F2E68E51FCEE2F800FC8C0E /* Data */,
 				2DF0DBD41FCE15B3004A497A /* Cells */,
 			);
 			path = Faculty;
@@ -361,6 +363,32 @@
 			path = Subject;
 			sourceTree = "<group>";
 		};
+		3F2E68E51FCEE2F800FC8C0E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2D43240F1FCEB84E00466B88 /* FacultyDetails.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3F2E68E61FCEE31C00FC8C0E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3F97D7BF1FCC5993007B1813 /* DataModel.swift */,
+				2D040CC81FCDE49900530E81 /* TestDetails.swift */,
+				3F97D7D11FCC5A08007B1813 /* Details.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3F2E68E71FCEE36500FC8C0E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3F2E68E81FCEE38900FC8C0E /* SpecialityDetails.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		3F3E68531F97BCB4004B8B2C /* Admins */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +445,7 @@
 			children = (
 				3F97D7B41FCC5993007B1813 /* Speciality.storyboard */,
 				3F97D7B01FCC5993007B1813 /* Controllers */,
+				3F2E68E71FCEE36500FC8C0E /* Data */,
 				3F97D7AE1FCC5993007B1813 /* Cells */,
 			);
 			path = Speciality;
@@ -444,9 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				3F97D7C01FCC5993007B1813 /* TestDetails.storyboard */,
-				3F97D7BF1FCC5993007B1813 /* DataModel.swift */,
-				2D040CC81FCDE49900530E81 /* TestDetails.swift */,
-				3F97D7D11FCC5A08007B1813 /* Details.swift */,
+				3F2E68E61FCEE31C00FC8C0E /* Data */,
 				3F97D7BA1FCC5993007B1813 /* Controllers */,
 				3F97D7B61FCC5993007B1813 /* Cells */,
 			);
@@ -894,6 +921,7 @@
 				3F9505E11FACBA16003F3EB9 /* SpecialityForGroupViewController.swift in Sources */,
 				C7535CF01FA2670100B6CBD1 /* FacultyStructure.swift in Sources */,
 				2DF0DBDB1FCE15B3004A497A /* FacultyTableViewCell.swift in Sources */,
+				3F2E68E91FCEE38900FC8C0E /* SpecialityDetails.swift in Sources */,
 				C7535CFA1FA2670100B6CBD1 /* UserStructure.swift in Sources */,
 				89C96E011F9CD6A60019FE77 /* TimeTable.swift in Sources */,
 				2D4324121FCECEE200466B88 /* TestDetailInfoViewController.swift in Sources */,
