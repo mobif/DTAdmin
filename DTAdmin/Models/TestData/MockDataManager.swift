@@ -16,9 +16,6 @@ class MockDataManager: HTTPManager, DataRequestable {
     var error: ErrorData?
     private override init(){}
     var urlRequest: String = ""
-//    func setError(_ errorMsg: String) {
-//        self.error = ErrorData(errorMsg, )
-//    }
     func setPath(_ path: String) {
         self.path = path
     }
