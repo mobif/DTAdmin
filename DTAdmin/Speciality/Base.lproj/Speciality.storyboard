@@ -45,45 +45,45 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7N-BN-S6H">
-                                                    <rect key="frame" x="6" y="11" width="30" height="21"/>
+                                                    <rect key="frame" x="6" y="12.5" width="25.5" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="U7N-BN-S6H" secondAttribute="height" multiplier="10:7" id="V0f-WU-dtH"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="skT-ug-lTS"/>
+                                                        <constraint firstAttribute="width" secondItem="U7N-BN-S6H" secondAttribute="height" multiplier="25:18" id="BBu-FH-xP9"/>
+                                                        <constraint firstAttribute="width" constant="25.5" id="Mhm-af-m6E"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9V-Yu-Dim">
-                                                    <rect key="frame" x="43" y="12" width="76" height="21"/>
+                                                    <rect key="frame" x="43" y="13.5" width="65" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="z9V-Yu-Dim" secondAttribute="height" multiplier="76:21" id="JAW-EX-bFh"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="76" id="rdn-6w-SAM"/>
+                                                        <constraint firstAttribute="width" secondItem="z9V-Yu-Dim" secondAttribute="height" multiplier="65:18" id="ngS-uj-Tbq"/>
+                                                        <constraint firstAttribute="width" constant="65" id="qrn-Pe-lv2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="num-dU-bOS">
-                                                    <rect key="frame" x="127" y="12" width="185" height="21"/>
+                                                    <rect key="frame" x="118" y="13" width="182" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="num-dU-bOS" secondAttribute="height" multiplier="185:21" id="a1w-zV-odS"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="185" id="q9w-NA-iHs"/>
+                                                        <constraint firstAttribute="width" secondItem="num-dU-bOS" secondAttribute="height" multiplier="91:9" id="I6r-VK-yTI"/>
+                                                        <constraint firstAttribute="width" constant="182" id="WEf-3f-9hi"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="num-dU-bOS" firstAttribute="centerY" secondItem="7hI-y7-YaU" secondAttribute="centerY" id="1al-iO-c9T"/>
-                                                <constraint firstItem="num-dU-bOS" firstAttribute="leading" secondItem="z9V-Yu-Dim" secondAttribute="trailing" constant="8" id="FRn-nd-mcJ"/>
-                                                <constraint firstItem="U7N-BN-S6H" firstAttribute="centerY" secondItem="7hI-y7-YaU" secondAttribute="centerY" id="Vyh-fH-8ka"/>
-                                                <constraint firstItem="z9V-Yu-Dim" firstAttribute="centerY" secondItem="7hI-y7-YaU" secondAttribute="centerY" id="imb-sI-QcC"/>
-                                                <constraint firstItem="z9V-Yu-Dim" firstAttribute="leading" secondItem="U7N-BN-S6H" secondAttribute="trailing" constant="7" id="ioq-bP-FHU"/>
-                                                <constraint firstItem="U7N-BN-S6H" firstAttribute="leading" secondItem="7hI-y7-YaU" secondAttribute="leading" constant="6" id="kMa-CI-Csq"/>
+                                                <constraint firstItem="U7N-BN-S6H" firstAttribute="centerY" secondItem="7hI-y7-YaU" secondAttribute="centerY" id="1bI-vN-lmU"/>
+                                                <constraint firstItem="z9V-Yu-Dim" firstAttribute="leading" secondItem="U7N-BN-S6H" secondAttribute="trailing" constant="11.5" id="6pF-zB-kCa"/>
+                                                <constraint firstItem="z9V-Yu-Dim" firstAttribute="centerY" secondItem="7hI-y7-YaU" secondAttribute="centerY" id="aL2-3d-JdL"/>
+                                                <constraint firstItem="num-dU-bOS" firstAttribute="leading" secondItem="z9V-Yu-Dim" secondAttribute="trailing" constant="10" id="haV-mt-rSm"/>
+                                                <constraint firstItem="U7N-BN-S6H" firstAttribute="leading" secondItem="7hI-y7-YaU" secondAttribute="leading" constant="6" id="i0s-AT-TTd"/>
+                                                <constraint firstItem="num-dU-bOS" firstAttribute="centerY" secondItem="7hI-y7-YaU" secondAttribute="centerY" id="v0P-kc-9JH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="num-dU-bOS" secondAttribute="trailing" constant="63" id="w1J-yE-HFI"/>
+                                            <constraint firstAttribute="trailing" secondItem="num-dU-bOS" secondAttribute="trailing" constant="75" id="e1E-VH-hbX"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="specialityCodeLabel" destination="z9V-Yu-Dim" id="Z5w-hh-awb"/>

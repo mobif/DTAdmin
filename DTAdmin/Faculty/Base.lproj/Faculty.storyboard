@@ -38,19 +38,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="faculty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zg4-Gd-9jU">
-                                                    <rect key="frame" x="58" y="11" width="242" height="21"/>
+                                                    <rect key="frame" x="53" y="13" width="248" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="242" id="E41-cf-5OC"/>
-                                                        <constraint firstAttribute="width" secondItem="Zg4-Gd-9jU" secondAttribute="height" multiplier="242:21" id="IxP-66-cSZ"/>
+                                                        <constraint firstAttribute="width" secondItem="Zg4-Gd-9jU" secondAttribute="height" multiplier="124:9" id="dMx-qh-vFf"/>
+                                                        <constraint firstAttribute="width" constant="248" id="zlc-9j-4C5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21e-2n-XNs">
-                                                    <rect key="frame" x="11" y="11" width="39" height="21"/>
+                                                    <rect key="frame" x="11" y="12.5" width="33.5" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="21e-2n-XNs" secondAttribute="height" multiplier="13:7" id="cFa-W2-9Rv"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="39" id="g4I-XS-tTK"/>
+                                                        <constraint firstAttribute="width" secondItem="21e-2n-XNs" secondAttribute="height" multiplier="13:7" id="dLA-lt-sJ0"/>
+                                                        <constraint firstAttribute="width" constant="33.5" id="nt9-Am-4MF"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
@@ -58,11 +58,10 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Zg4-Gd-9jU" secondAttribute="trailing" constant="8" id="9QR-BM-tzj"/>
-                                                <constraint firstItem="Zg4-Gd-9jU" firstAttribute="centerY" secondItem="AtE-yK-Ov9" secondAttribute="centerY" id="DVS-Mp-FgR"/>
-                                                <constraint firstItem="21e-2n-XNs" firstAttribute="leading" secondItem="AtE-yK-Ov9" secondAttribute="leading" constant="11" id="iBV-EU-SDd"/>
-                                                <constraint firstItem="21e-2n-XNs" firstAttribute="centerY" secondItem="AtE-yK-Ov9" secondAttribute="centerY" id="jOb-QQ-nRw"/>
-                                                <constraint firstItem="Zg4-Gd-9jU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="21e-2n-XNs" secondAttribute="trailing" constant="8" symbolic="YES" id="rx7-Ns-Uui"/>
+                                                <constraint firstItem="21e-2n-XNs" firstAttribute="centerY" secondItem="AtE-yK-Ov9" secondAttribute="centerY" id="OMG-KU-Viz"/>
+                                                <constraint firstItem="21e-2n-XNs" firstAttribute="leading" secondItem="AtE-yK-Ov9" secondAttribute="leading" constant="11" id="W2b-cM-6QH"/>
+                                                <constraint firstItem="Zg4-Gd-9jU" firstAttribute="centerY" secondItem="AtE-yK-Ov9" secondAttribute="centerY" id="hbz-sO-XKN"/>
+                                                <constraint firstItem="Zg4-Gd-9jU" firstAttribute="leading" secondItem="21e-2n-XNs" secondAttribute="trailing" constant="8.5" id="ti6-Gn-7Ia"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

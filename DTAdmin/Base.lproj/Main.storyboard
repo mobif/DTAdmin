@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,6 +29,9 @@
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="juP-vc-Avv">
                                 <rect key="frame" x="16" y="200" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="juP-vc-Avv" secondAttribute="height" multiplier="343:30" id="xQ6-kJ-60C"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -40,12 +44,18 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCY-TF-AVN">
                                 <rect key="frame" x="16" y="264" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gCY-TF-AVN" secondAttribute="height" multiplier="343:30" id="0m3-ol-sxe"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9p-cE-9fj" customClass="DesignedButtons" customModule="DTAdmin" customModuleProvider="target">
                                 <rect key="frame" x="16" y="328" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="R9p-cE-9fj" secondAttribute="height" multiplier="343:30" id="wgW-XF-PQg"/>
+                                </constraints>
                                 <state key="normal" title="login"/>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="MHF-1Q-PdI" eventType="touchUpInside" id="CMR-Kp-3FG"/>
@@ -97,9 +107,11 @@
                             <constraint firstItem="R7t-ny-a6E" firstAttribute="bottom" secondItem="bXT-4x-9hn" secondAttribute="bottom" id="oku-2P-yyU"/>
                             <constraint firstItem="mKb-Ad-Zt3" firstAttribute="top" secondItem="R9p-cE-9fj" secondAttribute="bottom" constant="18" id="pOt-rO-YtR"/>
                             <constraint firstItem="0vb-Lo-Iv6" firstAttribute="leading" secondItem="bXT-4x-9hn" secondAttribute="leading" constant="16" id="qBk-fz-l8w"/>
+                            <constraint firstItem="juP-vc-Avv" firstAttribute="top" secondItem="bXT-4x-9hn" secondAttribute="top" constant="180" id="sB2-fW-vQm"/>
                             <constraint firstItem="IOt-rQ-QuZ" firstAttribute="top" secondItem="R7t-ny-a6E" secondAttribute="top" id="wRg-ds-gh9"/>
                             <constraint firstItem="juP-vc-Avv" firstAttribute="leading" secondItem="bXT-4x-9hn" secondAttribute="leading" constant="16" id="x43-TN-PPp"/>
                             <constraint firstItem="bXT-4x-9hn" firstAttribute="trailing" secondItem="gCY-TF-AVN" secondAttribute="trailing" constant="16" id="yyy-75-Iqy"/>
+                            <constraint firstItem="mKb-Ad-Zt3" firstAttribute="leading" secondItem="SGB-zQ-nyE" secondAttribute="trailing" constant="-86" id="zOb-6A-Rc2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bXT-4x-9hn"/>
                     </view>
