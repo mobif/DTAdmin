@@ -51,7 +51,7 @@ class AdminCreateUpdateViewController: UIViewController {
             let email = emailTextField?.text {
             return (userName, password, email)
         }
-        self.showWarningMsg("Username field is empty")
+        self.showAlert(message: "Username field is empty")
         return nil
     }
     /**
@@ -67,7 +67,7 @@ class AdminCreateUpdateViewController: UIViewController {
             passwordTest.evaluate(with: actualPaswordTextField.text!) {
             return true
         } else {
-            showWarningMsg(NSLocalizedString("Passwords fileds are empty or don't match", comment: "Passwords fields empty or don't match"))
+            self.showAlert(message: NSLocalizedString("Passwords fileds are empty or don't match", comment: "Passwords fields empty or don't match"))
         }
         return false
     }
@@ -86,7 +86,7 @@ class AdminCreateUpdateViewController: UIViewController {
         if emailTest.evaluate(with: email) {
             return true
         } else {
-            showWarningMsg(NSLocalizedString("Wrong email", comment: "Inputed email has invalid structure"))
+            self.showAlert(message: NSLocalizedString("Wrong email", comment: "Inputed email has invalid structure"))
             return false
         }
     }
@@ -113,12 +113,12 @@ class AdminCreateUpdateViewController: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                     return
                 } else {
-                    self.showWarningMsg(NSLocalizedString("Server error\nNew user creation failed\nPlease try again", comment: "Server error. New user creation failed. Please try again"))
-                    assertionFailure("AdminCreate..VC, Bad id return after creation")	
+                    self.showAlert(message: NSLocalizedString("Server error\nNew user creation failed\nPlease try again", comment: "Server error. New user creation failed. Please try again"))
+                    assertionFailure("AdminCreate..VC, Bad id return after creation")    
                     return
                 }
             }
-            self.showWarningMsg(error.info)
+            self.showAlert(message: error.info)
         }
     }
     
@@ -133,7 +133,7 @@ class AdminCreateUpdateViewController: UIViewController {
         userForSave.password = params.password
         DataManager.shared.updateEntity(byId: id, entity:  userForSave, typeEntity: .user) { (error) in
             if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAlert(message: error.info)
                 return
             }
             self.saveAction!(userForSave)
