@@ -16,7 +16,7 @@
 /* Class = "UILabel"; text = "User Name"; ObjectID = "cI1-hq-tB6"; */
 "cI1-hq-tB6.text" = "Логін";
 
-/* Class = "UISearchBar"; placeholder = "Search by username albo email"; ObjectID = "cgr-r7-DQU"; */
+/* Class = "UISearchBar"; placeholder = "Search by username or email"; ObjectID = "cgr-r7-DQU"; */
 "cgr-r7-DQU.placeholder" = "Пошук за логіном або поштою";
 
 /* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "cxR-vT-iWK"; */

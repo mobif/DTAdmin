@@ -86,7 +86,7 @@ class AdminCreateUpdateViewController: UIViewController {
         if emailTest.evaluate(with: email) {
             return true
         } else {
-            self.showAlert(message: NSLocalizedString("Wrong email", comment: "Inputed email has invalid structure"))
+            self.showAlert(message: NSLocalizedString("Wrong email format", comment: "Inputed email has invalid structure"))
             return false
         }
     }
