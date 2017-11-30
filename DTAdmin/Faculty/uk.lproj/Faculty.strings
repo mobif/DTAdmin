@@ -1,0 +1,39 @@
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "0bZ-zd-7qX"; */
+"0bZ-zd-7qX.normalTitle" = "Зберегти";
+
+/* Class = "UILabel"; text = "Faculty id:"; ObjectID = "1bw-hK-QOa"; */
+"1bw-hK-QOa.text" = "Ід факультету:";
+
+/* Class = "UILabel"; text = "id"; ObjectID = "21e-2n-XNs"; */
+"21e-2n-XNs.text" = "ід";
+
+/* Class = "UILabel"; text = "id"; ObjectID = "HTf-Oz-QJf"; */
+"HTf-Oz-QJf.text" = "ід";
+
+/* Class = "UILabel"; text = "name"; ObjectID = "NC6-48-Oug"; */
+"NC6-48-Oug.text" = "ім'я";
+
+/* Class = "UILabel"; text = "description"; ObjectID = "QDQ-j4-Ihg"; */
+"QDQ-j4-Ihg.text" = "опис";
+
+/* Class = "UILabel"; text = "code"; ObjectID = "QHy-hN-6OS"; */
+"QHy-hN-6OS.text" = "код";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "XJE-nh-wEn"; */
+"XJE-nh-wEn.normalTitle" = "Повернутися";
+
+/* Class = "UILabel"; text = "faculty"; ObjectID = "Zg4-Gd-9jU"; */
+"Zg4-Gd-9jU.text" = "факультет";
+
+/* Class = "UILabel"; text = "faculty name"; ObjectID = "dk6-84-Iwu"; */
+"dk6-84-Iwu.text" = "назва факультету";
+
+/* Class = "UILabel"; text = "Faculty name:"; ObjectID = "mUJ-4H-g9I"; */
+"mUJ-4H-g9I.text" = "Назва факультету:";
+
+/* Class = "UILabel"; text = "Faculty description:"; ObjectID = "mw0-7d-6SH"; */
+"mw0-7d-6SH.text" = "Опис факультету:";
+
+/* Class = "UILabel"; text = "facultu description"; ObjectID = "uV3-tJ-oGC"; */
+"uV3-tJ-oGC.text" = "опис факультету";
+

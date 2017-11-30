@@ -11,6 +11,7 @@ struct TestStructure: Serializable {
     var id: String?
     var name: String
     var subjectId: String
+    var subjectName: String?
     var tasks: String
     var timeForTest: String
     var enabled: String

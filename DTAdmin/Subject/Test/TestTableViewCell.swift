@@ -13,7 +13,7 @@ protocol TestTableViewCellDelegate {
      Sends to the TestDetailViewController when you press ShowTestDetails button
      - Parameter id: Send test id to the next View Controller for create request and making call's to API
      */
-    func didTapShowTestDetail(for id: String)
+    func didTapShowTestDetail(for id: String, maxTasks: String)
     /**
      Sends to the QuestionViewController when you press ShowQuestions button
      - Parameter id: Send test id to the next View Controller for create request and making call's to API
@@ -54,8 +54,9 @@ class TestTableViewCell: UITableViewCell {
     }
     
     @IBAction func showTestDetail(_ sender: UIButton) {
-        guard let id = testItem?.id else { return }
-        delegate?.didTapShowTestDetail(for: id)
+        guard let id = testItem?.id,
+        let tasks = testItem?.tasks else { return }
+        delegate?.didTapShowTestDetail(for: id, maxTasks: tasks)
     }
     
     @IBAction func showQuestion(_ sender: UIButton) {

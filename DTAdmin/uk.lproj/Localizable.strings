@@ -1,0 +1,317 @@
+/* Filtering information - filtering */
+" of " = " з ";
+
+/* Title for AddNewAnswerViewController */
+"Add new answer" = "Додати нове питання";
+
+/* Title for AddNewRecordViewController */
+"Add new item" = "Додати новий запис";
+
+/* Title for AddNewQuestionViewController */
+"Add new question" = "Додати нове питання";
+
+/* Title for admins table list view */
+"Administrators" = "Адміністратори";
+
+/* Title for admins tap */
+"Admins" = "Адміни";
+
+/* Alert title */
+"Alert" = "Попередження";
+
+/* Title for ItemTableViewController */
+"Answer correctness" = "Правильність відповіді";
+
+/* Title for AnswerAttachmentViewController */
+"Answer detail" = "Деталі відповіді";
+
+/* Title for AnswersTableViewController */
+"Answers" = "Відповіді";
+
+/* Attempts for test showing */
+"Attempts: " = "Кількість спроб: ";
+
+/* Cannot prepare header for URLRequest */
+"Cannot prepare header" = "Не вдається підготувати заголовок";
+
+/* Title for create new group */
+"Create" = "Створити";
+
+/* title of GetTestDetailsViewController */
+"Creating" = "Створення";
+
+/* Swipe button title
+   Swipe title button
+   title for deleting */
+"Delete" = "Видалити";
+
+/* Scope title for searchController */
+"Description" = "Опис";
+
+/* Description of subject for alert message in accesory button tapped */
+"Description: " = "Опис: ";
+
+/* Title for Group Detail view */
+"Details" = "Деталі";
+
+/* title for alert message */
+"Do you want to delete this speciality?" = "Ви хочете видалити цю спеціальність?";
+
+/* message for alert */
+"Do you want to delete this test detail?" = "Ви хочете видалити деталі до тесту?";
+
+/* Edit account of student
+   Title for admin editing view
+   Title for edit admin creation view
+   title for editing */
+"Edit" = "Редагувати";
+
+/* title of CreateUpdateViewController for editing
+   title of GetTestDetailsViewController for editing
+   title of SpecialityCreateUpdateViewController for editing */
+"Editing" = "Редігування";
+
+/* Enabled for test showing */
+"Enabled: " = "Можливіть: ";
+
+/* All fields have to be filled correctly */
+"Entered incorect data" = "Введені неправильні дані";
+
+/* Alert title */
+"Error" = "Помилка";
+
+/* Incorrect request */
+"Error response" = "Відповідь на помилку";
+
+/* Title for Faculties table view */
+"Faculties" = "Факультети";
+
+/* Title for faculty tap */
+"Faculty" = "Факультети";
+
+/* Filtering information - filtering */
+"Filtering " = "Відфільтровано ";
+
+/* Title for Groups table view
+   Title for groups tap */
+"Groups" = "Групи";
+
+/* You have to select image to adding in profile. */
+"Image not selected!" = "Зображення не вибрано!";
+
+/* New test not found in the response message
+   New user ID not found in the response message */
+"Incorect response structure" = "Недостатня структура відповіді";
+
+/* Incorect server response! */
+"Incorect server response!" = "Невідповідність відповіді сервера!";
+
+/* Incorect type data
+   Message for about incorect data
+   Message for user about incorect data */
+"Incorect type data" = "Недійсний тип даних";
+
+/* Incorrect data type */
+"Incorrect data type" = "Недійсний тип даних";
+
+/* All fields have to be filled */
+"Incorrect data. All fields have to be filled" = "Неправильні дані. Всі поля потрібно заповнити";
+
+/* Incorect response */
+"Incorrect response" = "Неправильна відповідь";
+
+/* Incorrect type */
+"Incorrect type" = "Неправильні дані";
+
+/* title of SpecialityInfoViewController
+   title of TestDetailInfoViewController */
+"Info" = "Інфо";
+
+/* Test is disabled for students ot take */
+"Is Disabled" = "Відключено";
+
+/* Test is enabled for students ot take */
+"Is Enabled" = "Включено";
+
+/* This item not deleted */
+"Item not deleted" = "Пункт не видалено";
+
+/* Scope title for searchController */
+"Level" = "Рівень";
+
+/* Level of difficulty question */
+"Level of difficulty: " = "Рівень складності:";
+
+/* Title for logout */
+"Logout" = "Вийти";
+
+/* Multiple choice type of question */
+"Multiple choice" = "Мульти вибір";
+
+/* title for cancel key */
+"NO" = "Ні";
+
+/* Scope title for searchController */
+"Name" = "Ім'я";
+
+/* Name of subject for alert message in accesory button tapped */
+"Name: " = "Ім'я";
+
+/* Title for new admin creation view */
+"New" = "Новий";
+
+/* Create new Student */
+"New Student" = "Новий студент";
+
+/* title of CreateUpdateViewController */
+"New faculty" = "Новий факультет";
+
+/* title of SpecialityCreateUpdateViewController */
+"New speciality" = "Нова спеціальність";
+
+/* ViewController title */
+"New test" = "Новий тест";
+
+/* Information for user about no items */
+"No items match your query" = "Немає елементів, що відповідають вашому запиту";
+
+/* Numerical type of question */
+"Numerical" = "Цифровий";
+
+/* Ok button */
+"Ok" = "Добре";
+
+/* Out of Bounds */
+"Out of Bounds" = "За межами поля";
+
+/* Passwords fields empty or don't match */
+"Passwords fileds are empty or don't match" = "Поля паролей порожні або не збігаються";
+
+/* Pull to refresh */
+"Pull to refresh" = "Оновлення";
+
+/* Scope title for searchController
+   Title for QuestionsTableViewController */
+"Question" = "Питання";
+
+/* Title for QuestionAttachmentViewController */
+"Question detail" = "Деталі питань";
+
+/* Title for ItemTableViewController */
+"Question level" = "Рівень питання";
+
+/* Title for ItemTableViewController */
+"Question type" = "Тип питання";
+
+/* Request not supported! */
+"Request not supported!" = "Запит не підтримується!";
+
+/* Request not supported for entity. */
+"Request not supported." = "Запит не підтримується.";
+
+/* No data in server response
+   Response is empty */
+"Response is empty" = "Відповідь порожня";
+
+/* Right answer */
+"Right" = "Правильно";
+
+/* Placeholder for searchController */
+"Search" = "Пошук";
+
+/* title of NumbersViewController */
+"Select (dataModel.details[detail])" = "Вибрано";
+
+/* Simple choice type of question */
+"Simple choice" = "Простий вибір";
+
+/* Title for Specialities table view */
+"Specialities" = "Спеціальності";
+
+/* Title for speciality tap */
+"Speciality" = "Спеціальності";
+
+/* Response unrelated to structure */
+"Structure is incorrect" = "Структура неправильна";
+
+/* List all students */
+"Students" = "Студенти";
+
+/* Title for TestsForSubjectTableViewController */
+"Subject tests" = "Тести по предмету";
+
+/* Title for subjects tap
+   Title for SubjectTableViewController */
+"Subjects" = "Предмети";
+
+/* Sum of tasks should be from 1 to max */
+"Sum of tasks for the test can't be more then " = "Сума завдань для тесту не може бути більше";
+
+/* Test tasks showing */
+"Tasks: " = "Завдання: ";
+
+/* title of TestDetailsViewController */
+"Test details" = "Деталі до тесту";
+
+/* Cannot prepare header for URLRequest */
+"The Header isn't prepared!" = "Заголовок не готовий!";
+
+/* Time for test showing */
+"Time for test: " = "Час для тесту: ";
+
+/* Type of question */
+"Type of question: " = "Тип питання: ";
+
+/* Uncountable list of Entity is incorrect */
+"Uncountable list of Entity" = "Незчисленний список об'єктів";
+
+/* Selected group havent ID */
+"Undefined group" = "Невідома група";
+
+/* Swipe button title
+   Swipe title button
+   Title for update group */
+"Update" = "Оновлення";
+
+/* Title for AddNewAnswerViewController */
+"Update answer" = "Оновлення відповіді";
+
+/* Title for AddNewQuestionViewController */
+"Update question" = "Оновлення питання";
+
+/* Title for AddNewRecordViewController */
+"Update record" = "Оновлення запису";
+
+/* ViewController title */
+"Update test" = "Оновлення тесту";
+
+/* User not found */
+"User not found" = "Не знайдено користувача";
+
+/* Updated user not found! */
+"User not found!" = "Не знайдено користувача!";
+
+/* UserID not found in list! */
+"UserID not found!" = "ІД користувача не знайдено!";
+
+/* title for alert */
+"WARNING" = "ПОПЕРЕДЖЕННЯ";
+
+/* Write answer by yourself type of question */
+"Write answer by yourself" = "Введіть вашу відповідь";
+
+/* Wrong answer */
+"Wrong" = "Неправильно";
+
+/* Inputed email has invalid structure */
+"Wrong email" = "Не правильна електронна адреса";
+
+/* title for ok key */
+"YES" = "ТАК";
+
+/* False enabled */
+"false" = "недоступно";
+
+/* True enabled */
+"true" = "доступно";
+

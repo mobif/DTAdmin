@@ -1,0 +1,117 @@
+/* Class = "UILabel"; text = "Subject description:"; ObjectID = "1Pj-Dx-z5H"; */
+"1Pj-Dx-z5H.text" = "Опис предмету:";
+
+/* Class = "UIButton"; normalTitle = "Gallery"; ObjectID = "5rF-gB-7Px"; */
+"5rF-gB-7Px.normalTitle" = "Галерея";
+
+/* Class = "UILabel"; text = "Level of difficulty:"; ObjectID = "6es-km-t7G"; */
+"6es-km-t7G.text" = "Рівень складності:";
+
+/* Class = "UILabel"; text = "Type of question:"; ObjectID = "7AI-Yx-agk"; */
+"7AI-Yx-agk.text" = "Тип питання:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "7UZ-iK-niD"; */
+"7UZ-iK-niD.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9hd-Ra-fDp"; */
+"9hd-Ra-fDp.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "39f-gw-gHO"; */
+"39f-gw-gHO.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "AoI-86-ZIC"; */
+"AoI-86-ZIC.title" = "Title";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "G57-6A-7lI"; */
+"G57-6A-7lI.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Had-db-8n4"; */
+"Had-db-8n4.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Hhr-0J-Mj2"; */
+"Hhr-0J-Mj2.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "IYX-8N-OkA"; */
+"IYX-8N-OkA.title" = "Title";
+
+/* Class = "UILabel"; text = "Answer text:"; ObjectID = "JXF-Nm-cbP"; */
+"JXF-Nm-cbP.text" = "Відповідь:";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "KrS-M0-ugu"; */
+"KrS-M0-ugu.title" = "Title";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "LCM-cX-N4q"; */
+"LCM-cX-N4q.text" = "Label";
+
+/* Class = "UILabel"; text = "Subject name:"; ObjectID = "PYV-bJ-zzs"; */
+"PYV-bJ-zzs.text" = "Назва предмету:";
+
+/* Class = "UIButton"; normalTitle = "Questions"; ObjectID = "QXz-4K-vuF"; */
+"QXz-4K-vuF.normalTitle" = "Показати питання";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "T2n-Op-FLx"; */
+"T2n-Op-FLx.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "VFJ-Pr-DEl"; */
+"VFJ-Pr-DEl.normalTitle" = "Зберегти";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "VXe-M5-Mcc"; */
+"VXe-M5-Mcc.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "XA1-xu-Hkw"; */
+"XA1-xu-Hkw.title" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Remove"; ObjectID = "XM0-oF-4Qw"; */
+"XM0-oF-4Qw.normalTitle" = "Видалити зображення";
+
+/* Class = "UIButton"; normalTitle = "Remove"; ObjectID = "Y9c-B6-92z"; */
+"Y9c-B6-92z.normalTitle" = "Видалити";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "YP5-2R-ToQ"; */
+"YP5-2R-ToQ.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "b8I-w4-djB"; */
+"b8I-w4-djB.title" = "Title";
+
+/* Class = "UILabel"; text = "Correctness:"; ObjectID = "dkw-hT-cJR"; */
+"dkw-hT-cJR.text" = "Правильність:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "eDa-qL-Fcf"; */
+"eDa-qL-Fcf.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Test detail"; ObjectID = "fJb-n5-rhR"; */
+"fJb-n5-rhR.normalTitle" = "Деталі тесту";
+
+/* Class = "UIButton"; normalTitle = "Answers"; ObjectID = "fgj-a4-fYd"; */
+"fgj-a4-fYd.normalTitle" = "Відповіді";
+
+/* Class = "UIButton"; normalTitle = "Time table"; ObjectID = "jUk-oO-aaL"; */
+"jUk-oO-aaL.normalTitle" = "Розклад";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lF0-ej-Sme"; */
+"lF0-ej-Sme.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Tests"; ObjectID = "mzh-Oj-8G1"; */
+"mzh-Oj-8G1.normalTitle" = "Тести";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "oaU-QB-9Ol"; */
+"oaU-QB-9Ol.text" = "Label";
+
+/* Class = "UILabel"; text = "Attachment:"; ObjectID = "wcz-FP-tJI"; */
+"wcz-FP-tJI.text" = "Додаток:";
+
+/* Class = "UILabel"; text = "Attachment:"; ObjectID = "x3u-RR-zaB"; */
+"x3u-RR-zaB.text" = "Додаток:";
+
+/* Class = "UIButton"; normalTitle = "Gallery"; ObjectID = "yXt-oc-jf2"; */
+"yXt-oc-jf2.normalTitle" = "Галерею";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "yh7-ko-u1D"; */
+"yh7-ko-u1D.text" = "Label";
+
+/* Class = "UILabel"; text = "Question text:"; ObjectID = "zEk-Ci-WN7"; */
+"zEk-Ci-WN7.text" = "Запитання:";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "zLg-OB-E1x"; */
+"zLg-OB-E1x.title" = "Title";
+

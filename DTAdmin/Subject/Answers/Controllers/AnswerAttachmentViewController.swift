@@ -27,23 +27,22 @@ class AnswerAttachmentViewController: ParentViewController {
     private func showAnswerRecord() {
         startActivity()
         guard let id = answerId else { return }
-        DataManager.shared.getEntity(byId: id, typeEntity: .answer) {(answerRecord, errorMessage) in
+        DataManager.shared.getEntity(byId: id, typeEntity: .answer) {(answerRecord, error) in
             self.stopActivity()
-            if errorMessage == nil {
+            if let errorMessage = error {
+                self.showAllert(error: errorMessage, completionHandler: nil)
+            } else {
                 guard let answer = answerRecord as? AnswerStructure else { return }
                 self.answerTextLabel.text = answer.answerText
-                if answer.attachment.count > 0 {
-                    self.answerAttachmentImageView.image = UIImage.decode(fromBase64: answer.attachment)
+                if let attachment = answer.attachment {
+                    self.answerAttachmentImageView.image = attachment
                 } else {
                     self.answerAttachmentImageView.image = UIImage(named: "Image")
                 }
-            } else {
-                self.showWarningMsg(errorMessage?.message ?? NSLocalizedString("Incorect type data",
-                                                                      comment: "Message for user about incorect data"))
             }
+
         }
     }
-
 }
 
 // MARK: - UIScrollViewDelegate

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FacultyForGroupViewController: UIViewController {
+class FacultyForGroupViewController: ParentViewController {
     
     @IBOutlet weak var facultyTableView: UITableView!
     
@@ -31,7 +31,7 @@ class FacultyForGroupViewController: UIViewController {
         facultyTableView.dataSource = self
         DataManager.shared.getList(byEntity: .faculty){ (faculties, error) in
             if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             } else {
                 guard let faculties = faculties as? [FacultyStructure] else {return}
                 self.faculties = faculties

@@ -14,3 +14,5 @@ var types = [
             NSLocalizedString("Write answer by yourself", comment: "Write answer by yourself type of question"),
             NSLocalizedString("Numerical", comment: "Numerical type of question")
         ]
+
+let minCountOfText = 1
