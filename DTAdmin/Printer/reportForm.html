@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Звіт</title>
+    <style type="text/css">
+      h2 {
+        text-align: center;
+        font-size:22px;
+        font-family:"Times New Roman", Times, serif !important;
+      }
+      table {
+        font-size:14px;
+        font-family:"Times New Roman", Times, serif !important;
+        max-width: 2480px;
+        width:100%;
+      }
+      table th {
+        font-size:18px;
+      }
+      table td {
+        width: auto;
+        overflow: hidden;
+        word-wrap: break-word;
+      }
+      table.report {
+        border-collapse: collapse;
+      }
+      table.report, table.report th, table.report tr, table.report td  {
+        border: 2px solid black; 
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Відомість про результати тестування</h2>
+    <br>
+    <table>
+      <tr>
+        <td>Назва предмету: #SUBJECT_NAME#</td>
+        <td>Назва тесту: #QUIZ_NAME#</td>
+      </tr>
+      <tr>
+        <td>Група: #GROUP_NAME#</td>
+        <td>Максимальна кількість балів: #MAX_MARK#</td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <table class="report">
+      <tr>
+        <th>№</th>
+        <th>ПІБ Студента</th>
+        <th>Результат</th>
+        <th>Оцінка</th>
+        <th>ECTS</th>
+      </tr>
+      #STUDENTS#
+
+    </table>
+
+    <br><br>
+    <table style="width:100%">
+      <tr>
+        <td>
+          "____" ________________  20____ р.
+        </td>
+        <td>
+          Підпис ________________
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

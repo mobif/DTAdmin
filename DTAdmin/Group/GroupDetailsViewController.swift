@@ -26,7 +26,14 @@ class GroupDetailsViewController: ParentViewController {
         self.navigationController?.pushViewController(studentViewControler, animated: true)    }
     @IBAction func getTimeTableByGroupTapped(_ sender: Any) {
     }
+    
     @IBAction func getResultsByGroupTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Result", bundle: nil)
+        guard let resultByGroupViewController = storyboard.instantiateViewController(withIdentifier: "ResultByGroup") as? ResultByGroupViewController else  { return }
+        resultByGroupViewController.title = NSLocalizedString("Results of \(String(describing: self.group?.groupName))", comment: "Title of view with passed tests by group")
+        resultByGroupViewController.group = self.group
+        
+        self.navigationController?.pushViewController(resultByGroupViewController, animated: true)
     }
     
     var group: GroupStructure?

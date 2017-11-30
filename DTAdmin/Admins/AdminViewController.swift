@@ -108,8 +108,8 @@ extension AdminViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       
-      guard let admin = self.admins?[indexPath.row] else { return }
-      DataManager.shared.deleteEntity(byId: admin.id, typeEntity: .user, completionHandler: { (status, error) in
+        guard let admin = self.admins?[indexPath.row], let adminId = admin.id else { return }
+      DataManager.shared.deleteEntity(byId: adminId, typeEntity: .user, completionHandler: { (status, error) in
         guard let error = error else {
           self.adminsListTableView.beginUpdates()
           self.admins?.remove(at: indexPath.row)
