@@ -70,7 +70,6 @@ class FacultyViewController: ParentViewController, UITableViewDataSource, UITabl
         let item = filteredFacultyArray[indexPath.row]
         cell.facultyIdLabel.text = item.id
         cell.facultyNameLabel.text = item.name
-        cell.facultyDescriptionLabel.text = item.description
         return cell
     }
 

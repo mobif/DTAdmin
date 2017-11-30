@@ -24,6 +24,7 @@ class TestDetailsViewController: ParentViewController, UITableViewDataSource, UI
         if let maxTasks = maxTasks {
             dataModel.max = Int(maxTasks)
         }
+        dataModel.detailArray.removeAll()
         getTestDetails()
     }
     

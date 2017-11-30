@@ -8,9 +8,10 @@
 
 import UIKit
 
-class DataModel: NSObject {
+class DataModel {
 
     static let dataModel = DataModel()
+    private init() {}
     var testDetailArray = [TestDetailStructure]()
     var levelArrayForFiltering = [Int]()
     var taskArrayForFiltering = [Int]()
