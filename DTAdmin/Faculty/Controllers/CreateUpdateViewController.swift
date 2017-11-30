@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUpdateViewController: ParentViewController {
+class CreateUpdateViewController: ParentViewController, UITextFieldDelegate {
 
     var facultyForSave: FacultyStructure?
     var resultModification: ((FacultyStructure) -> ())?
@@ -30,7 +30,7 @@ class CreateUpdateViewController: ParentViewController {
                     guard let facultyId = self.facultyInstance?.id else { return }
                     self.idForEditing = facultyId
                 } else {
-                    self.title = NSLocalizedString("New faculty", comment: "title of CreateUpdateViewController")
+                    return
                 }
             }
         }
@@ -38,7 +38,7 @@ class CreateUpdateViewController: ParentViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = NSLocalizedString("New faculty", comment: "title of CreateUpdateViewController")
     }
     
     /**
@@ -108,5 +108,8 @@ class CreateUpdateViewController: ParentViewController {
         }
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
 }

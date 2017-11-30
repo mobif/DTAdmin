@@ -55,8 +55,13 @@ class SpecialitiesViewController: ParentViewController, UITableViewDelegate, UIT
             specialitiesTableView.reloadData()
             return
         }
-        filteredSpecialitiesArray = specialitiesArray.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
-        specialitiesTableView.reloadData()
+        let character = CharacterSet.init(charactersIn: ".0123456789")
+        if searchBar.text?.rangeOfCharacter(from: character) != nil {
+            filteredSpecialitiesArray = specialitiesArray.filter({ $0.code.contains(searchText) })
+        } else {
+            filteredSpecialitiesArray = specialitiesArray.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
+        }
+            specialitiesTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

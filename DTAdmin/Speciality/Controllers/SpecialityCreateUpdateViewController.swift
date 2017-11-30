@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpecialityCreateUpdateViewController: ParentViewController {
+class SpecialityCreateUpdateViewController: ParentViewController, UITextFieldDelegate {
     
     var specialityForSave: SpecialityStructure?
     var resultModification: ((SpecialityStructure) -> ())?
@@ -31,8 +31,7 @@ class SpecialityCreateUpdateViewController: ParentViewController {
                     guard let specialityId = self.specialityInstance?.id else { return }
                     self.idForEditing = specialityId
                 } else {
-                    self.title = NSLocalizedString("New speciality",
-                        comment: "title of SpecialityCreateUpdateViewController")
+                    return
                 }
             }
         }
@@ -40,7 +39,7 @@ class SpecialityCreateUpdateViewController: ParentViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = NSLocalizedString("New speciality", comment: "title of SpecialityCreateUpdateViewController")
     }
     
     /**
@@ -109,6 +108,9 @@ class SpecialityCreateUpdateViewController: ParentViewController {
                 comment: "All fields have to be filled"))
         }
     }
-    
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
 }
