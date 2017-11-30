@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewQuestionViewController: UIViewController {
+class AddNewQuestionViewController: ParentViewController {
     
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var questionLevelTextField: UITextField!
@@ -35,8 +35,8 @@ class AddNewQuestionViewController: UIViewController {
             self.questionLevelTextField.text = question.level
             guard let index = Int(question.type) else { return }
             self.questionTypeTextField.text = types[index - 1]
-            if question.attachment.count > 1 {
-                showQuestionAttachment(for: question.attachment)
+            if let attachment = question.attachment {
+               questionAttachmentImageView.image = attachment
             }
         }
     }
@@ -99,12 +99,12 @@ class AddNewQuestionViewController: UIViewController {
     
     private func saveNewQuestion() {
         if prepareForSave(){
-            guard let questionForSave = questionForSave else { return }
+            guard let questionForSave = questionForSave else { print("Baddddd"); return }
             DataManager.shared.insertEntity(entity: questionForSave, typeEntity: .question) {
-                (questionResult, errorMessage) in
+                (questionResult, error) in
 
-                if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage.message)
+                if let errorMessage = error {
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     guard let result = questionResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -126,7 +126,7 @@ class AddNewQuestionViewController: UIViewController {
                 errorMessage in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage.message)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(questionForSave)
@@ -149,47 +149,25 @@ class AddNewQuestionViewController: UIViewController {
             let typeNumber = types.index(of: type) else { return false }
         
         let typeNumberString = String(typeNumber + 1)
-        
-        if let attachment: UIImage = questionAttachmentImageView.image {
-            let picture = UIImage.encode(fromImage: attachment)
-            if questionText.count > 2 {
-                let dictionary: [String: Any] = [
-                                                 "test_id": testId,
-                                                 "question_text": questionText,
-                                                 "level": level,
-                                                 "type": typeNumberString,
-                                                 "attachment": picture
-                                                ]
-                questionForSave = QuestionStructure(dictionary: dictionary)
-            } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data",
-                                                 comment: "All fields have to be filled correctly"))
-                return false
+
+        if questionText.count > minCountOfText {
+            let dictionary: [String: Any] = [
+                "test_id": testId,
+                "question_text": questionText,
+                "level": level,
+                "type": typeNumberString
+            ]
+        questionForSave = QuestionStructure(dictionary: dictionary)
+        if let image: UIImage = questionAttachmentImageView.image{
+            questionForSave?.attachment = image
             }
-            return true
         } else {
-            if questionText.count > 2 {
-                let dictionary: [String: Any] = [
-                                                 "test_id": testId,
-                                                 "question_text": questionText,
-                                                 "level": level,
-                                                 "type": typeNumberString,
-                                                 "attachment": ""
-                                                ]
-                questionForSave = QuestionStructure(dictionary: dictionary)
-            } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data",
-                                                 comment: "All fields have to be filled correctly"))
-                return false
+            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+            return false
             }
-            return true
+        return true
         }
-    }
-    
-    private func showQuestionAttachment(for text: String){
-        questionAttachmentImageView.image = UIImage.decode(fromBase64: text)
-    }
-    
+
 }
 
 // MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate

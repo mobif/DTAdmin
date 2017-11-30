@@ -33,19 +33,18 @@ class AnswersTableViewController: UITableViewController {
     @objc private func showAnswers() {
         startActivityIndicator()
         guard let id = questionId else { return }
-        DataManager.shared.getAnswers(byQuestion: id) { (answersResult, errorMessage) in
+        DataManager.shared.getAnswers(byQuestion: id) { (answersResult, error) in
             self.stopActivityIndicator()
             self.refresh.endRefreshing()
-            if errorMessage == nil,
-                let answersUnwrap = answersResult {
-                self.answers = answersUnwrap
-                self.tableView.reloadData()
+            if let errorMessage = error {
+                self.showMessage(message: errorMessage.message)
             } else {
-                self.showMessage(message: errorMessage?.message ??
-                    NSLocalizedString("Incorect type data",comment: "Information for user about incorect data"))
+                if let answersUnwrap = answersResult {
+                    self.answers = answersUnwrap
+                    self.tableView.reloadData()
+                }
             }
         }
-
     }
 
     @IBAction func addNewAnswer(_ sender: Any) {

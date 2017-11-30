@@ -39,7 +39,7 @@ enum HTTPStatusCodes: Int {
     case Unauthorized = 403
     case PaymentRequired
     case Forbidden
-    case NotFound
+    case NotFound = 406
     case MethodNotAllowed
     case NotAcceptable
     case ProxyAuthenticationRequired

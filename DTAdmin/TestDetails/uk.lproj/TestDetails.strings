@@ -1,0 +1,60 @@
+/* Class = "UILabel"; text = "test id"; ObjectID = "1WX-Ti-hZf"; */
+"1WX-Ti-hZf.text" = "Ід тесту";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "7lM-R5-MiF"; */
+"7lM-R5-MiF.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Test detail task :"; ObjectID = "CVY-yq-ciq"; */
+"CVY-yq-ciq.text" = "Завдання деталей тесту :";
+
+/* Class = "UILabel"; text = "number"; ObjectID = "JRP-UC-8Qd"; */
+"JRP-UC-8Qd.text" = "Число";
+
+/* Class = "UILabel"; text = "rate"; ObjectID = "LE2-bu-ukU"; */
+"LE2-bu-ukU.text" = "курс";
+
+/* Class = "UILabel"; text = "Test id :"; ObjectID = "UOJ-wr-aHv"; */
+"UOJ-wr-aHv.text" = "Ід тесту :";
+
+/* Class = "UILabel"; text = "detail id"; ObjectID = "UYS-8p-k8U"; */
+"UYS-8p-k8U.text" = "Ід деталей";
+
+/* Class = "UILabel"; text = "tasks"; ObjectID = "Vnv-i0-3Vm"; */
+"Vnv-i0-3Vm.text" = "Завдання";
+
+/* Class = "UILabel"; text = "level"; ObjectID = "X51-nb-ii0"; */
+"X51-nb-ii0.text" = "Рівень";
+
+/* Class = "UILabel"; text = "id"; ObjectID = "XHZ-99-8rx"; */
+"XHZ-99-8rx.text" = "Ід";
+
+/* Class = "UILabel"; text = "test_id"; ObjectID = "ena-gu-gGN"; */
+"ena-gu-gGN.text" = "Ід тесту";
+
+/* Class = "UILabel"; text = "level"; ObjectID = "igd-Dp-kqS"; */
+"igd-Dp-kqS.text" = "Рівень";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "jOa-CN-zQC"; */
+"jOa-CN-zQC.title" = "Виконано";
+
+/* Class = "UILabel"; text = "number"; ObjectID = "msL-9N-XTY"; */
+"msL-9N-XTY.text" = "число";
+
+/* Class = "UILabel"; text = "rate"; ObjectID = "qeS-Y6-PIX"; */
+"qeS-Y6-PIX.text" = "курс";
+
+/* Class = "UILabel"; text = "task"; ObjectID = "sXj-C1-3hh"; */
+"sXj-C1-3hh.text" = "завдання";
+
+/* Class = "UILabel"; text = "Test detail rate :"; ObjectID = "ub3-6K-XRD"; */
+"ub3-6K-XRD.text" = "Курс деталей тесту :";
+
+/* Class = "UILabel"; text = "Test detail level :"; ObjectID = "w7S-Jo-MSU"; */
+"w7S-Jo-MSU.text" = "Test detail level :";
+
+/* Class = "UILabel"; text = "test detail"; ObjectID = "z9a-Oh-LM0"; */
+"z9a-Oh-LM0.text" = "деталі тесту";
+
+/* Class = "UILabel"; text = "Test detail id :"; ObjectID = "zA1-8D-tnj"; */
+"zA1-8D-tnj.text" = "Ід деталей тесту :";
+

@@ -56,7 +56,7 @@ class AdminViewController: ParentViewController {
       self.stopActivity()
       guard let admins = admins as? [UserStructure] else {
         self.refreshControl.endRefreshing()
-        self.showWarningMsg(error?.message ?? "Incorect data")
+        self.showAllert(error: error, completionHandler: nil)
         return
       }
       self.admins = admins
@@ -117,7 +117,7 @@ extension AdminViewController: UITableViewDataSource {
           self.adminsListTableView.endUpdates()
           return
         }
-        self.showWarningMsg(error.info)
+        self.showAllert(error: error, completionHandler: nil)
       })
     }
     deleteOpt.backgroundColor = UIColor.red

@@ -1,0 +1,18 @@
+/* Class = "UILabel"; text = "Subjects"; ObjectID = "3Lc-el-FtM"; */
+"3Lc-el-FtM.text" = "Предмети";
+
+/* Class = "UILabel"; text = "End Date"; ObjectID = "5cO-cl-1B9"; */
+"5cO-cl-1B9.text" = "Кінцева дата";
+
+/* Class = "UILabel"; text = "Start date"; ObjectID = "Jtm-hj-3xI"; */
+"Jtm-hj-3xI.text" = "Початкова дата";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "fTJ-WZ-tAg"; */
+"fTJ-WZ-tAg.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "gFm-Yx-bbs"; */
+"gFm-Yx-bbs.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Groups"; ObjectID = "hLD-3v-fr8"; */
+"hLD-3v-fr8.text" = "Групи";
+

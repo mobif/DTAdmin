@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpecialityForGroupViewController: UIViewController {
+class SpecialityForGroupViewController: ParentViewController {
     
     @IBOutlet weak var specialityTableView: UITableView!
     
@@ -31,7 +31,7 @@ class SpecialityForGroupViewController: UIViewController {
         specialityTableView.dataSource = self
         DataManager.shared.getList(byEntity: .speciality){ (specialities, error) in
             if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             } else {
                 guard let specialities = specialities as? [SpecialityStructure] else {return}
                 self.specialities = specialities
