@@ -17,8 +17,8 @@
 /* Class = "UILabel"; text = "User Name"; ObjectID = "cI1-hq-tB6"; */
 "cI1-hq-tB6.text" = "User Name";
 
-/* Class = "UISearchBar"; placeholder = "Search by username albo email"; ObjectID = "cgr-r7-DQU"; */
-"cgr-r7-DQU.placeholder" = "Search by username albo email";
+/* Class = "UISearchBar"; placeholder = "Search by username or email"; ObjectID = "cgr-r7-DQU"; */
+"cgr-r7-DQU.placeholder" = "Search by username or email";
 
 /* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "cxR-vT-iWK"; */
 "cxR-vT-iWK.placeholder" = "Confirm Password";

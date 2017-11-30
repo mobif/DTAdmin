@@ -39,7 +39,6 @@ class PreviewViewController: ParentViewController {
         //Unwrap all nessesary data
         guard let group = self.quizParameters["Group"],
             let groupId = group["id"],
-            let subject = self.quizParameters["Subject"],
             let test = self.quizParameters["Quiz"],
             let testId = test["id"] else {
                 self.showWarningMsg("Quiz has wrong parameters please try again")
@@ -125,10 +124,10 @@ class PreviewViewController: ParentViewController {
         
         let actionEmail = UIAlertAction(title: NSLocalizedString("Send via Email", comment: "Send email option text"),
                                         style: UIAlertActionStyle.default) { (action) in
-            DispatchQueue.main.async { self.sendEmail() }
+                                            DispatchQueue.main.async { self.sendEmail() }
         }
         let actionClose = UIAlertAction(title: NSLocalizedString("Close", comment: "Close alert option text"),
-                                          style: UIAlertActionStyle.destructive) { (action) in
+                                        style: UIAlertActionStyle.destructive) { (action) in
         }
         
         alertController.addAction(actionEmail)

@@ -84,10 +84,10 @@ class ResultByGroupViewController: ParentViewController {
                                 let testSubj = subjects?.filter({ $0.id == tests[i].subjectId })
                                 tests[i].subjectName = testSubj?.first?.name
                             }
-                                self.tests = tests
-                                self.resultsTableView.reloadData()
-                                self.refreshControl.endRefreshing()
-                                self.stopActivity()
+                            self.tests = tests
+                            self.resultsTableView.reloadData()
+                            self.refreshControl.endRefreshing()
+                            self.stopActivity()
                         })
                         
                     }

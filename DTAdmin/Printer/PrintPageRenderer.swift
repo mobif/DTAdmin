@@ -31,7 +31,7 @@ class PrintPageRenderer: UIPrintPageRenderer {
         self.headerHeight = 20.0
         self.footerHeight = 20.0
     }
-
+    
     func getTextSize(text: String, font: UIFont, textAttributes: [NSAttributedStringKey: AnyObject]! = nil) -> CGSize {
         let testLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: self.paperRect.size.width, height: footerHeight))
         if let attributes = textAttributes {
