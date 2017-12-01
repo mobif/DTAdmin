@@ -30,9 +30,7 @@ class SpecialityCreateUpdateViewController: ParentViewController, UITextFieldDel
                     self.createButton.titleLabel?.text = "Save"
                     guard let specialityId = self.specialityInstance?.id else { return }
                     self.idForEditing = specialityId
-                } else {
-                    return
-                }
+                } 
             }
         }
     }

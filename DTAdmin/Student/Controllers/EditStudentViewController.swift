@@ -9,11 +9,7 @@
 import UIKit
 
 class EditStudentViewController: ParentViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
-    var studentLoaded: StudentStructure? {
-        didSet {
-            self.view.layoutIfNeeded()
-        }
-    }
+    var studentLoaded: StudentStructure?
     var studentForSave: StudentStructure?
     @IBOutlet weak var loginStudentTextField: UITextField!
     @IBOutlet weak var emailStudentTextField: UITextField!
@@ -25,7 +21,7 @@ class EditStudentViewController: ParentViewController, UINavigationControllerDel
     @IBOutlet weak var passwordConfirmTextField: UITextField!
     @IBOutlet weak var gradeBookIdTextField: UITextField!
     @IBOutlet weak var studentPhoto: UIImageView!
-    var titleViewController: String?
+    
     var selectedGroupForStudent: GroupStructure?
     var selectedUserAccountForStudent: UserStructure?
     var isNewStudent = true
@@ -58,9 +54,7 @@ class EditStudentViewController: ParentViewController, UINavigationControllerDel
         onImageGestureRecognizer.numberOfTapsRequired = 1
         studentPhoto.isUserInteractionEnabled = true
         studentPhoto.addGestureRecognizer(onImageGestureRecognizer)
-        if titleViewController != nil {
-            navigationItem.title = titleViewController
-        }
+
     }
     @objc func imageTaped(recognizer: UITapGestureRecognizer) {
         let imagePhoto = UIImagePickerController()

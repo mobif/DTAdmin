@@ -28,7 +28,7 @@ class TestMockDataManager: XCTestCase {
         var groups: [GroupStructure]?
         mockData.getList(byEntity: .group) {
             (list, error) in
-            responseError = error
+            responseError = error?.info
             groups = list as? [GroupStructure]
             promise?.fulfill()
             promise = nil
@@ -46,7 +46,7 @@ class TestMockDataManager: XCTestCase {
         var students: [StudentStructure]?
         mockData.getStudents(forGroup: "1", withoutImages: true) {
             (list, error) in
-            responseError = error
+            responseError = error?.info
             students = list
             promise?.fulfill()
             promise = nil
