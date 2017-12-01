@@ -60,11 +60,9 @@ class GetTestDetailsViewController: ParentViewController, UITableViewDataSource,
         guard let cell = prototypeCell else { return UITableViewCell() }
         cell.testDetailNameLabel.text = dataModel.detailArray[indexPath.row].detail
         cell.numberOfTestDetailLabel.text = dataModel.detailArray[indexPath.row].number
-        if dataModel.detailArray[indexPath.row].number == String(Numbers.minDetail.rawValue) {
-            cell.numberOfTestDetailLabel.alpha = 0.5
-        } else {
-            cell.numberOfTestDetailLabel.alpha = 1
-        }
+        let currentNumber = dataModel.detailArray[indexPath.row].number
+        let minNumber = String(Numbers.minDetail.rawValue)
+        cell.numberOfTestDetailLabel.alpha = currentNumber == minNumber ? 0.4 : 1
         return cell
     }
 
