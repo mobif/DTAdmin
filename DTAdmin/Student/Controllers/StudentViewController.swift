@@ -85,7 +85,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
     }
     @objc func addNewStudent(){
         guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else { return }
-        editStudentViewController.titleViewController = NSLocalizedString("New Student", comment: "Create new Student")
+        editStudentViewController.title = NSLocalizedString("New Student", comment: "Create new Student")
         editStudentViewController.resultModification = { (studentReturn, isNew) in
             if isNew {
                 self.studentList.append(studentReturn)

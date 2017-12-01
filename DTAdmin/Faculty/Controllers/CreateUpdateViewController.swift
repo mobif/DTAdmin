@@ -29,8 +29,6 @@ class CreateUpdateViewController: ParentViewController, UITextFieldDelegate {
                     self.createButton.titleLabel?.text = "Save"
                     guard let facultyId = self.facultyInstance?.id else { return }
                     self.idForEditing = facultyId
-                } else {
-                    return
                 }
             }
         }

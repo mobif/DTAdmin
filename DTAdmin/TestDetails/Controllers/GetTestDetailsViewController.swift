@@ -75,8 +75,6 @@ class GetTestDetailsViewController: ParentViewController, UITableViewDataSource,
             if result != 0 {
                 self.dataModel.detailArray[indexPath.row].number = String(result)
                 self.tableView.reloadData()
-            } else {
-                return
             }
         }
         dataModel.currentDataForSelecting()

@@ -146,11 +146,11 @@ class TestDetailsViewController: ParentViewController, UITableViewDataSource, UI
             guard let getTestDetailsViewController = UIStoryboard(name: "TestDetails",
                 bundle: nil).instantiateViewController(withIdentifier: "GetTestDetailsViewController")
                     as? GetTestDetailsViewController else { return }
-            self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
             getTestDetailsViewController.resultModification = { newTestDetail in
                 self.dataModel.testDetailArray.append(newTestDetail)
                 self.testDetailsTableView.reloadData()
             }
+            self.navigationController?.pushViewController(getTestDetailsViewController, animated: true)
         }
     }
     
