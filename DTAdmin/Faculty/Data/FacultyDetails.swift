@@ -9,7 +9,9 @@
 import Foundation
 enum FacultyDetails: String {
 
-    case name = "faculty_name"
-    case description = "faculty_description"
+    case id = "id"
+    case name = "faculty name"
+    case nameForDictionary = "faculty_name"
+    case descriptionForDictionary = "faculty_description"
 
 }

@@ -59,6 +59,22 @@ class FacultyViewController: ParentViewController, UITableViewDataSource, UITabl
         facultyTableView.reloadData()
     }
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.darkGray
+        let id = UILabel()
+        id.text = NSLocalizedString(FacultyDetails.id.rawValue, comment: "header for id in table")
+        id.textColor = UIColor.white
+        id.frame = CGRect(x: 22, y: 2, width: 20, height: 25)
+        view.addSubview(id)
+        let code = UILabel()
+        code.text = NSLocalizedString(FacultyDetails.name.rawValue, comment: "header for faculty name in table")
+        code.textColor = UIColor.white
+        code.frame = CGRect(x: 140, y: 2, width: 100, height: 25)
+        view.addSubview(code)
+        return view
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredFacultyArray.count
     }
@@ -70,6 +86,8 @@ class FacultyViewController: ParentViewController, UITableViewDataSource, UITabl
         let item = filteredFacultyArray[indexPath.row]
         cell.facultyIdLabel.text = item.id
         cell.facultyNameLabel.text = item.name
+        cell.accessoryType = getFaculty ? UITableViewCellAccessoryType.none :
+            UITableViewCellAccessoryType.detailDisclosureButton
         return cell
     }
 

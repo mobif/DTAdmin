@@ -50,7 +50,9 @@ class SpecialityCreateUpdateViewController: ParentViewController, UITextFieldDel
      */
     func prepareForRequest() -> Bool {
         guard let code = specialityCodeTextField.text, let name = specialityNameTextField.text else { return false }
-        if !code.isEmpty && !name.isEmpty {
+        let characters = CharacterSet.init(charactersIn: SpecialityCharacters.characters.rawValue).inverted
+        if !code.isEmpty && code.rangeOfCharacter(from: characters) == nil
+            && !name.isEmpty {
             let dictionary: [String : Any] = [SpecialityDetails.codeForDictionary.rawValue: code,
                                               SpecialityDetails.nameForDictionary.rawValue: name]
             self.specialityForSave = SpecialityStructure(dictionary: dictionary)

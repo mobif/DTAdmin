@@ -50,8 +50,8 @@ class CreateUpdateViewController: ParentViewController, UITextFieldDelegate {
     func prepareForRequest() -> Bool {
         guard let name = nameTextField.text, let description = descriptionTextField.text else { return false }
         if !name.isEmpty && !description.isEmpty {
-            let dictionary: [String : Any] = [FacultyDetails.name.rawValue: name,
-                                              FacultyDetails.description.rawValue: description]
+            let dictionary: [String : Any] = [FacultyDetails.nameForDictionary.rawValue: name,
+                                              FacultyDetails.descriptionForDictionary.rawValue: description]
             self.facultyForSave = FacultyStructure(dictionary: dictionary)
             return true
         } else {

@@ -55,7 +55,7 @@ class SpecialitiesViewController: ParentViewController, UITableViewDelegate, UIT
             specialitiesTableView.reloadData()
             return
         }
-        let character = CharacterSet.init(charactersIn: ".0123456789")
+        let character = CharacterSet.init(charactersIn: SpecialityCharacters.characters.rawValue)
         if searchBar.text?.rangeOfCharacter(from: character) != nil {
             filteredSpecialitiesArray = specialitiesArray.filter({ $0.code.contains(searchText) })
         } else {
@@ -97,6 +97,8 @@ class SpecialitiesViewController: ParentViewController, UITableViewDelegate, UIT
         cell.specialityIdLabel.text = array.id
         cell.specialityCodeLabel.text = array.code
         cell.specialityNameLabel.text = array.name
+        cell.accessoryType = getSpeciality ? UITableViewCellAccessoryType.none :
+            UITableViewCellAccessoryType.detailDisclosureButton
         return cell
     }
     

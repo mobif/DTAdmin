@@ -15,3 +15,6 @@ enum SpecialityDetails: String {
     case nameForDictionary = "speciality_name"
 
 }
+enum SpecialityCharacters: String {
+    case characters = ".0123456789"
+}
