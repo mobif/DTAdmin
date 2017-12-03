@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="DTAdmin/Admins/Base.lproj/Admin.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="1Ib-GJ-ch4.placeholder">
+        <source>New Password</source>
+        <target>Введіть новий пароль</target>
+        <note>Class = "UITextField"; placeholder = "New Password"; ObjectID = "1Ib-GJ-ch4";</note>
+      </trans-unit>
+      <trans-unit id="2Xj-jg-agf.placeholder">
+        <source>User Name</source>
+        <target>Введіть логін</target>
+        <note>Class = "UITextField"; placeholder = "User Name"; ObjectID = "2Xj-jg-agf";</note>
+      </trans-unit>
+      <trans-unit id="7Jj-ZF-sp5.title">
+        <source>Item</source>
+        <target>Адміністратори</target>
+        <note>Class = "UITabBarItem"; title = "Item"; ObjectID = "7Jj-ZF-sp5";</note>
+      </trans-unit>
+      <trans-unit id="Yjf-0g-9Zt.text">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UILabel"; text = "Title"; ObjectID = "Yjf-0g-9Zt";</note>
+      </trans-unit>
+      <trans-unit id="bZS-wk-Vfx.text">
+        <source>Email</source>
+        <target>Електронна пошта</target>
+        <note>Class = "UILabel"; text = "Email"; ObjectID = "bZS-wk-Vfx";</note>
+      </trans-unit>
+      <trans-unit id="cI1-hq-tB6.text">
+        <source>User Name</source>
+        <target>Логін</target>
+        <note>Class = "UILabel"; text = "User Name"; ObjectID = "cI1-hq-tB6";</note>
+      </trans-unit>
+      <trans-unit id="cgr-r7-DQU.placeholder">
+        <source>Search by username albo email</source>
+        <target>Пошук за логіном або поштою</target>
+        <note>Class = "UISearchBar"; placeholder = "Search by username albo email"; ObjectID = "cgr-r7-DQU";</note>
+      </trans-unit>
+      <trans-unit id="cxR-vT-iWK.placeholder">
+        <source>Confirm Password</source>
+        <target>Введіть підтвердження паролю</target>
+        <note>Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "cxR-vT-iWK";</note>
+      </trans-unit>
+      <trans-unit id="ewp-WJ-th7.placeholder">
+        <source>Email: user@mail.com</source>
+        <target>Введіть електронну пошту</target>
+        <note>Class = "UITextField"; placeholder = "Email: user@mail.com"; ObjectID = "ewp-WJ-th7";</note>
+      </trans-unit>
+      <trans-unit id="gGj-sB-Kro.text">
+        <source>Password</source>
+        <target>Пароль</target>
+        <note>Class = "UILabel"; text = "Password"; ObjectID = "gGj-sB-Kro";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Base.lproj/LaunchScreen.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body/>
+  </file>
+  <file original="DTAdmin/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="0vb-Lo-Iv6.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "0vb-Lo-Iv6";</note>
+      </trans-unit>
+      <trans-unit id="5hO-1p-YfD.normalTitle">
+        <source>Yes, I want logout!</source>
+        <target>Так, я хочу вийти!</target>
+        <note>Class = "UIButton"; normalTitle = "Yes, I want logout!"; ObjectID = "5hO-1p-YfD";</note>
+      </trans-unit>
+      <trans-unit id="EX2-0z-ubA.text">
+        <source>Are you sure? Do you want logout?</source>
+        <target>Ви впевнені, що хочете вийти?</target>
+        <note>Class = "UILabel"; text = "Are you sure? Do you want logout?"; ObjectID = "EX2-0z-ubA";</note>
+      </trans-unit>
+      <trans-unit id="R9p-cE-9fj.normalTitle">
+        <source>login</source>
+        <target>Логін</target>
+        <note>Class = "UIButton"; normalTitle = "login"; ObjectID = "R9p-cE-9fj";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Faculty/Base.lproj/Faculty.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="0bZ-zd-7qX.normalTitle">
+        <source>Button</source>
+        <target>Button</target>
+        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "0bZ-zd-7qX";</note>
+      </trans-unit>
+      <trans-unit id="1bw-hK-QOa.text">
+        <source>Faculty id:</source>
+        <target>Faculty id:</target>
+        <note>Class = "UILabel"; text = "Faculty id:"; ObjectID = "1bw-hK-QOa";</note>
+      </trans-unit>
+      <trans-unit id="21e-2n-XNs.text">
+        <source>id</source>
+        <target>id</target>
+        <note>Class = "UILabel"; text = "id"; ObjectID = "21e-2n-XNs";</note>
+      </trans-unit>
+      <trans-unit id="HTf-Oz-QJf.text">
+        <source>id</source>
+        <target>id</target>
+        <note>Class = "UILabel"; text = "id"; ObjectID = "HTf-Oz-QJf";</note>
+      </trans-unit>
+      <trans-unit id="NC6-48-Oug.text">
+        <source>name</source>
+        <target>name</target>
+        <note>Class = "UILabel"; text = "name"; ObjectID = "NC6-48-Oug";</note>
+      </trans-unit>
+      <trans-unit id="QDQ-j4-Ihg.text">
+        <source>description</source>
+        <target>description</target>
+        <note>Class = "UILabel"; text = "description"; ObjectID = "QDQ-j4-Ihg";</note>
+      </trans-unit>
+      <trans-unit id="QHy-hN-6OS.text">
+        <source>code</source>
+        <target>code</target>
+        <note>Class = "UILabel"; text = "code"; ObjectID = "QHy-hN-6OS";</note>
+      </trans-unit>
+      <trans-unit id="XJE-nh-wEn.normalTitle">
+        <source>Back</source>
+        <target>Back</target>
+        <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "XJE-nh-wEn";</note>
+      </trans-unit>
+      <trans-unit id="Zg4-Gd-9jU.text">
+        <source>faculty</source>
+        <target>faculty</target>
+        <note>Class = "UILabel"; text = "faculty"; ObjectID = "Zg4-Gd-9jU";</note>
+      </trans-unit>
+      <trans-unit id="dk6-84-Iwu.text">
+        <source>faculty name</source>
+        <target>faculty name</target>
+        <note>Class = "UILabel"; text = "faculty name"; ObjectID = "dk6-84-Iwu";</note>
+      </trans-unit>
+      <trans-unit id="mUJ-4H-g9I.text">
+        <source>Faculty name:</source>
+        <target>Faculty name:</target>
+        <note>Class = "UILabel"; text = "Faculty name:"; ObjectID = "mUJ-4H-g9I";</note>
+      </trans-unit>
+      <trans-unit id="mw0-7d-6SH.text">
+        <source>Faculty description:</source>
+        <target>Faculty description:</target>
+        <note>Class = "UILabel"; text = "Faculty description:"; ObjectID = "mw0-7d-6SH";</note>
+      </trans-unit>
+      <trans-unit id="uV3-tJ-oGC.text">
+        <source>facultu description</source>
+        <target>facultu description</target>
+        <note>Class = "UILabel"; text = "facultu description"; ObjectID = "uV3-tJ-oGC";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Info.plist" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+        <target>ДТ-Адмін</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Localizable.strings" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id=" of ">
+        <source> of </source>
+        <target> з </target>
+        <note>Filtering information - filtering</note>
+      </trans-unit>
+      <trans-unit id="Add new answer">
+        <source>Add new answer</source>
+        <target>Додати нове питання</target>
+        <note>Title for AddNewAnswerViewController</note>
+      </trans-unit>
+      <trans-unit id="Add new item">
+        <source>Add new item</source>
+        <target>Додати новий запис</target>
+        <note>Title for AddNewRecordViewController</note>
+      </trans-unit>
+      <trans-unit id="Add new question">
+        <source>Add new question</source>
+        <target>Додати нове питання</target>
+        <note>Title for AddNewQuestionViewController</note>
+      </trans-unit>
+      <trans-unit id="Administrators">
+        <source>Administrators</source>
+        <target>Адміністратори</target>
+        <note>Title for admins table list view</note>
+      </trans-unit>
+      <trans-unit id="Admins">
+        <source>Admins</source>
+        <target>Адміни</target>
+        <note>Title for admins tap</note>
+      </trans-unit>
+      <trans-unit id="Alert">
+        <source>Alert</source>
+        <target>Попередження</target>
+        <note>Alert title</note>
+      </trans-unit>
+      <trans-unit id="Answer correctness">
+        <source>Answer correctness</source>
+        <target>Правильність відповіді</target>
+        <note>Title for ItemTableViewController</note>
+      </trans-unit>
+      <trans-unit id="Answer detail">
+        <source>Answer detail</source>
+        <target>Деталі відповіді</target>
+        <note>Title for AnswerAttachmentViewController</note>
+      </trans-unit>
+      <trans-unit id="Answers">
+        <source>Answers</source>
+        <target>Відповіді</target>
+        <note>Title for AnswersTableViewController</note>
+      </trans-unit>
+      <trans-unit id="Attempts: ">
+        <source>Attempts: </source>
+        <target>Кількість спроб: </target>
+        <note>Attempts for test showing</note>
+      </trans-unit>
+      <trans-unit id="Cannot prepare header">
+        <source>Cannot prepare header</source>
+        <note>Cannot prepare header for URLRequest</note>
+      </trans-unit>
+      <trans-unit id="Create">
+        <source>Create</source>
+        <target>Створити</target>
+        <note>Title for create new group</note>
+      </trans-unit>
+      <trans-unit id="Creating">
+        <source>Creating</source>
+        <note>title of GetTestDetailsViewController</note>
+      </trans-unit>
+      <trans-unit id="Delete">
+        <source>Delete</source>
+        <target>Видалити</target>
+        <note>Swipe button title
+   Swipe title button
+   title for deleting</note>
+      </trans-unit>
+      <trans-unit id="Description">
+        <source>Description</source>
+        <target>Опис</target>
+        <note>Scope title for searchController</note>
+      </trans-unit>
+      <trans-unit id="Description: ">
+        <source>Description: </source>
+        <note>Description of subject for alert message in accesory button tapped</note>
+      </trans-unit>
+      <trans-unit id="Details">
+        <source>Details</source>
+        <target>Деталі</target>
+        <note>Title for Group Detail view</note>
+      </trans-unit>
+      <trans-unit id="Do you want to delete this speciality?">
+        <source>Do you want to delete this speciality?</source>
+        <note>title for alert message</note>
+      </trans-unit>
+      <trans-unit id="Do you want to delete this test detail?">
+        <source>Do you want to delete this test detail?</source>
+        <note>message for alert</note>
+      </trans-unit>
+      <trans-unit id="Edit">
+        <source>Edit</source>
+        <target>Редагувати</target>
+        <note>Edit account of student
+   Title for admin editing view
+   Title for edit admin creation view
+   title for editing</note>
+      </trans-unit>
+      <trans-unit id="Editing">
+        <source>Editing</source>
+        <note>title of CreateUpdateViewController for editing
+   title of GetTestDetailsViewController for editing
+   title of SpecialityCreateUpdateViewController for editing</note>
+      </trans-unit>
+      <trans-unit id="Enabled: ">
+        <source>Enabled: </source>
+        <target>Можливіть: </target>
+        <note>Enabled for test showing</note>
+      </trans-unit>
+      <trans-unit id="Entered incorect data">
+        <source>Entered incorect data</source>
+        <target>Введені неправильні дані</target>
+        <note>All fields have to be filled correctly</note>
+      </trans-unit>
+      <trans-unit id="Error">
+        <source>Error</source>
+        <target>Помилка</target>
+        <note>Alert title</note>
+      </trans-unit>
+      <trans-unit id="Error response">
+        <source>Error response</source>
+        <note>Incorrect request</note>
+      </trans-unit>
+      <trans-unit id="Faculties">
+        <source>Faculties</source>
+        <target>Факультети</target>
+        <note>Title for Faculties table view</note>
+      </trans-unit>
+      <trans-unit id="Faculty">
+        <source>Faculty</source>
+        <target>Факультети</target>
+        <note>Title for faculty tap</note>
+      </trans-unit>
+      <trans-unit id="Filtering ">
+        <source>Filtering </source>
+        <target>Відфільтровано </target>
+        <note>Filtering information - filtering</note>
+      </trans-unit>
+      <trans-unit id="Group is empty">
+        <source>Group is empty</source>
+        <note>Students for group not found</note>
+      </trans-unit>
+      <trans-unit id="Groups">
+        <source>Groups</source>
+        <target>Групи</target>
+        <note>Title for Groups table view
+   Title for groups tap</note>
+      </trans-unit>
+      <trans-unit id="Image not selected!">
+        <source>Image not selected!</source>
+        <target>Зображення не вибрано!</target>
+        <note>You have to select image to adding in profile.</note>
+      </trans-unit>
+      <trans-unit id="Incorect response structure">
+        <source>Incorect response structure</source>
+        <target>Недостатня структура відповіді</target>
+        <note>New test not found in the response message
+   New user ID not found in the response message</note>
+      </trans-unit>
+      <trans-unit id="Incorect server response!">
+        <source>Incorect server response!</source>
+        <target>Невідповідність відповіді сервера!</target>
+        <note>Incorect server response!</note>
+      </trans-unit>
+      <trans-unit id="Incorect type data">
+        <source>Incorect type data</source>
+        <target>Недійсний тип даних</target>
+        <note>Incorect type data
+   Message for about incorect data
+   Message for user about incorect data</note>
+      </trans-unit>
+      <trans-unit id="Incorrect data type">
+        <source>Incorrect data type</source>
+        <note>Incorrect data type</note>
+      </trans-unit>
+      <trans-unit id="Incorrect data. All fields have to be filled">
+        <source>Incorrect data. All fields have to be filled</source>
+        <note>All fields have to be filled</note>
+      </trans-unit>
+      <trans-unit id="Incorrect response">
+        <source>Incorrect response</source>
+        <note>Incorect response</note>
+      </trans-unit>
+      <trans-unit id="Incorrect type">
+        <source>Incorrect type</source>
+        <target>Неправильні дані</target>
+        <note>Incorrect type</note>
+      </trans-unit>
+      <trans-unit id="Info">
+        <source>Info</source>
+        <note>title of SpecialityInfoViewController
+   title of TestDetailInfoViewController</note>
+      </trans-unit>
+      <trans-unit id="Is Disabled">
+        <source>Is Disabled</source>
+        <note>Test is disabled for students ot take</note>
+      </trans-unit>
+      <trans-unit id="Is Enabled">
+        <source>Is Enabled</source>
+        <note>Test is enabled for students ot take</note>
+      </trans-unit>
+      <trans-unit id="Item not deleted">
+        <source>Item not deleted</source>
+        <note>This item not deleted</note>
+      </trans-unit>
+      <trans-unit id="Level">
+        <source>Level</source>
+        <target>Рівень</target>
+        <note>Scope title for searchController</note>
+      </trans-unit>
+      <trans-unit id="Level of difficulty: ">
+        <source>Level of difficulty: </source>
+        <target>Рівень складності:</target>
+        <note>Level of difficulty question</note>
+      </trans-unit>
+      <trans-unit id="Logout">
+        <source>Logout</source>
+        <target>Вийти</target>
+        <note>Title for logout</note>
+      </trans-unit>
+      <trans-unit id="Multiple choice">
+        <source>Multiple choice</source>
+        <target>Мульти вибір</target>
+        <note>Multiple choice type of question</note>
+      </trans-unit>
+      <trans-unit id="NO">
+        <source>NO</source>
+        <note>title for cancel key</note>
+      </trans-unit>
+      <trans-unit id="Name">
+        <source>Name</source>
+        <target>Ім'я</target>
+        <note>Scope title for searchController</note>
+      </trans-unit>
+      <trans-unit id="Name: ">
+        <source>Name: </source>
+        <target>Ім'я</target>
+        <note>Name of subject for alert message in accesory button tapped</note>
+      </trans-unit>
+      <trans-unit id="New">
+        <source>New</source>
+        <target>Новий</target>
+        <note>Title for new admin creation view</note>
+      </trans-unit>
+      <trans-unit id="New Student">
+        <source>New Student</source>
+        <target>Новий студент</target>
+        <note>Create new Student</note>
+      </trans-unit>
+      <trans-unit id="New faculty">
+        <source>New faculty</source>
+        <note>title of CreateUpdateViewController</note>
+      </trans-unit>
+      <trans-unit id="New speciality">
+        <source>New speciality</source>
+        <note>title of SpecialityCreateUpdateViewController</note>
+      </trans-unit>
+      <trans-unit id="New test">
+        <source>New test</source>
+        <note>ViewController title</note>
+      </trans-unit>
+      <trans-unit id="No items match your query">
+        <source>No items match your query</source>
+        <target>Немає даних до вашого запиту</target>
+        <note>Information for user about no items</note>
+      </trans-unit>
+      <trans-unit id="Numerical">
+        <source>Numerical</source>
+        <target>Цифровий</target>
+        <note>Numerical type of question</note>
+      </trans-unit>
+      <trans-unit id="Ok">
+        <source>Ok</source>
+        <target>Добре</target>
+        <note>Ok button</note>
+      </trans-unit>
+      <trans-unit id="Out of Bounds">
+        <source>Out of Bounds</source>
+        <target>За межами поля</target>
+        <note>Out of Bounds</note>
+      </trans-unit>
+      <trans-unit id="Passwords fileds are empty or don't match">
+        <source>Passwords fileds are empty or don't match</source>
+        <target>Поля паролей порожні або не збігаються</target>
+        <note>Passwords fields empty or don't match</note>
+      </trans-unit>
+      <trans-unit id="Pull to refresh">
+        <source>Pull to refresh</source>
+        <target>Оновлення</target>
+        <note>Pull to refresh</note>
+      </trans-unit>
+      <trans-unit id="Question">
+        <source>Question</source>
+        <target>Питання</target>
+        <note>Scope title for searchController
+   Title for QuestionsTableViewController</note>
+      </trans-unit>
+      <trans-unit id="Question detail">
+        <source>Question detail</source>
+        <target>Деталі питань</target>
+        <note>Title for QuestionAttachmentViewController</note>
+      </trans-unit>
+      <trans-unit id="Question level">
+        <source>Question level</source>
+        <target>Рівень питання</target>
+        <note>Title for ItemTableViewController</note>
+      </trans-unit>
+      <trans-unit id="Question type">
+        <source>Question type</source>
+        <target>Тип питання</target>
+        <note>Title for ItemTableViewController</note>
+      </trans-unit>
+      <trans-unit id="Request incorrect">
+        <source>Request incorrect</source>
+        <note>Request incorrect!</note>
+      </trans-unit>
+      <trans-unit id="Request not supported!">
+        <source>Request not supported!</source>
+        <target>Запит не підтримується!</target>
+        <note>Request not supported!</note>
+      </trans-unit>
+      <trans-unit id="Request not supported.">
+        <source>Request not supported.</source>
+        <target>Запит не підтримується.</target>
+        <note>Request not supported for entity.</note>
+      </trans-unit>
+      <trans-unit id="Response is empty">
+        <source>Response is empty</source>
+        <target>Відповідь порожня</target>
+        <note>No data in server response
+   Response is empty</note>
+      </trans-unit>
+      <trans-unit id="Right">
+        <source>Right</source>
+        <target>Правильно</target>
+        <note>Right answer</note>
+      </trans-unit>
+      <trans-unit id="Search">
+        <source>Search</source>
+        <target>Пошук</target>
+        <note>Placeholder for searchController</note>
+      </trans-unit>
+      <trans-unit id="Select (dataModel.details[detail])">
+        <source>Select (dataModel.details[detail])</source>
+        <note>title of NumbersViewController</note>
+      </trans-unit>
+      <trans-unit id="Simple choice">
+        <source>Simple choice</source>
+        <target>Простий вибір</target>
+        <note>Simple choice type of question</note>
+      </trans-unit>
+      <trans-unit id="Specialities">
+        <source>Specialities</source>
+        <target>Спеціальності</target>
+        <note>Title for Specialities table view</note>
+      </trans-unit>
+      <trans-unit id="Speciality">
+        <source>Speciality</source>
+        <target>Спеціальності</target>
+        <note>Title for speciality tap</note>
+      </trans-unit>
+      <trans-unit id="Structure is incorrect">
+        <source>Structure is incorrect</source>
+        <note>Response unrelated to structure</note>
+      </trans-unit>
+      <trans-unit id="Students">
+        <source>Students</source>
+        <target>Студенти</target>
+        <note>List all students</note>
+      </trans-unit>
+      <trans-unit id="Subject tests">
+        <source>Subject tests</source>
+        <target>Тести по предмету</target>
+        <note>Title for TestsForSubjectTableViewController</note>
+      </trans-unit>
+      <trans-unit id="Subjects">
+        <source>Subjects</source>
+        <target>Предмети</target>
+        <note>Title for subjects tap
+   Title for SubjectTableViewController</note>
+      </trans-unit>
+      <trans-unit id="Sum of tasks for the test can't be more then ">
+        <source>Sum of tasks for the test can't be more then </source>
+        <note>Sum of tasks should be from 1 to max</note>
+      </trans-unit>
+      <trans-unit id="Tasks: ">
+        <source>Tasks: </source>
+        <target>Завдання: </target>
+        <note>Test tasks showing</note>
+      </trans-unit>
+      <trans-unit id="Test details">
+        <source>Test details</source>
+        <note>title of TestDetailsViewController</note>
+      </trans-unit>
+      <trans-unit id="The Header isn't prepared!">
+        <source>The Header isn't prepared!</source>
+        <target>Заголовок не готовий!</target>
+        <note>Cannot prepare header for URLRequest</note>
+      </trans-unit>
+      <trans-unit id="Time for test: ">
+        <source>Time for test: </source>
+        <target>Час для тесту: </target>
+        <note>Time for test showing</note>
+      </trans-unit>
+      <trans-unit id="Type of question: ">
+        <source>Type of question: </source>
+        <target>Тип питання: </target>
+        <note>Type of question</note>
+      </trans-unit>
+      <trans-unit id="Uncountable list of Entity">
+        <source>Uncountable list of Entity</source>
+        <target>Незчисленний список об'єктів</target>
+        <note>Uncountable list of Entity is incorrect</note>
+      </trans-unit>
+      <trans-unit id="Undefined group">
+        <source>Undefined group</source>
+        <target>Невідома група</target>
+        <note>Selected group havent ID</note>
+      </trans-unit>
+      <trans-unit id="Update">
+        <source>Update</source>
+        <target>Оновлення</target>
+        <note>Swipe button title
+   Swipe title button
+   Title for update group</note>
+      </trans-unit>
+      <trans-unit id="Update answer">
+        <source>Update answer</source>
+        <target>Оновлення відповіді</target>
+        <note>Title for AddNewAnswerViewController</note>
+      </trans-unit>
+      <trans-unit id="Update question">
+        <source>Update question</source>
+        <target>Оновлення питання</target>
+        <note>Title for AddNewQuestionViewController</note>
+      </trans-unit>
+      <trans-unit id="Update record">
+        <source>Update record</source>
+        <target>Оновлення запису</target>
+        <note>Title for AddNewRecordViewController</note>
+      </trans-unit>
+      <trans-unit id="Update test">
+        <source>Update test</source>
+        <note>ViewController title</note>
+      </trans-unit>
+      <trans-unit id="User not found">
+        <source>User not found</source>
+        <note>User not found</note>
+      </trans-unit>
+      <trans-unit id="User not found!">
+        <source>User not found!</source>
+        <target>Не знайдено користувача!</target>
+        <note>Updated user not found!</note>
+      </trans-unit>
+      <trans-unit id="UserID not found!">
+        <source>UserID not found!</source>
+        <target>ІД користувача не знайдено!</target>
+        <note>UserID not found in list!</note>
+      </trans-unit>
+      <trans-unit id="WARNING">
+        <source>WARNING</source>
+        <note>title for alert</note>
+      </trans-unit>
+      <trans-unit id="Write answer by yourself">
+        <source>Write answer by yourself</source>
+        <target>Введіть вашу відповідь</target>
+        <note>Write answer by yourself type of question</note>
+      </trans-unit>
+      <trans-unit id="Wrong">
+        <source>Wrong</source>
+        <target>Неправильно</target>
+        <note>Wrong answer</note>
+      </trans-unit>
+      <trans-unit id="Wrong email">
+        <source>Wrong email</source>
+        <target>Не правильна електронна адреса</target>
+        <note>Inputed email has invalid structure</note>
+      </trans-unit>
+      <trans-unit id="YES">
+        <source>YES</source>
+        <note>title for ok key</note>
+      </trans-unit>
+      <trans-unit id="false">
+        <source>false</source>
+        <target>недоступно</target>
+        <note>False enabled</note>
+      </trans-unit>
+      <trans-unit id="true">
+        <source>true</source>
+        <target>доступно</target>
+        <note>True enabled</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Speciality/Base.lproj/Speciality.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="6Tm-8N-nOb.text">
+        <source>Speciality name:</source>
+        <target>Speciality name:</target>
+        <note>Class = "UILabel"; text = "Speciality name:"; ObjectID = "6Tm-8N-nOb";</note>
+      </trans-unit>
+      <trans-unit id="BAe-6A-jtr.normalTitle">
+        <source>Back</source>
+        <target>Back</target>
+        <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "BAe-6A-jtr";</note>
+      </trans-unit>
+      <trans-unit id="EvO-n9-0jc.text">
+        <source>Speciality name :</source>
+        <target>Speciality name :</target>
+        <note>Class = "UILabel"; text = "Speciality name :"; ObjectID = "EvO-n9-0jc";</note>
+      </trans-unit>
+      <trans-unit id="LZ5-uw-yB7.text">
+        <source>Speciality code :</source>
+        <target>Speciality code :</target>
+        <note>Class = "UILabel"; text = "Speciality code :"; ObjectID = "LZ5-uw-yB7";</note>
+      </trans-unit>
+      <trans-unit id="U7N-BN-S6H.text">
+        <source>id</source>
+        <target>id</target>
+        <note>Class = "UILabel"; text = "id"; ObjectID = "U7N-BN-S6H";</note>
+      </trans-unit>
+      <trans-unit id="az2-Yl-5hD.text">
+        <source>Speciality id:</source>
+        <target>Speciality id:</target>
+        <note>Class = "UILabel"; text = "Speciality id:"; ObjectID = "az2-Yl-5hD";</note>
+      </trans-unit>
+      <trans-unit id="f6a-xF-2S7.text">
+        <source>code</source>
+        <target>code</target>
+        <note>Class = "UILabel"; text = "code"; ObjectID = "f6a-xF-2S7";</note>
+      </trans-unit>
+      <trans-unit id="fca-Wf-t0t.placeholder">
+        <source>Speciality name</source>
+        <target>Speciality name</target>
+        <note>Class = "UITextField"; placeholder = "Speciality name"; ObjectID = "fca-Wf-t0t";</note>
+      </trans-unit>
+      <trans-unit id="jg5-Cx-bGl.text">
+        <source>id</source>
+        <target>id</target>
+        <note>Class = "UILabel"; text = "id"; ObjectID = "jg5-Cx-bGl";</note>
+      </trans-unit>
+      <trans-unit id="kpr-ni-fqY.text">
+        <source>name</source>
+        <target>name</target>
+        <note>Class = "UILabel"; text = "name"; ObjectID = "kpr-ni-fqY";</note>
+      </trans-unit>
+      <trans-unit id="nfe-YH-RmV.placeholder">
+        <source>Speciality code</source>
+        <target>Speciality code</target>
+        <note>Class = "UITextField"; placeholder = "Speciality code"; ObjectID = "nfe-YH-RmV";</note>
+      </trans-unit>
+      <trans-unit id="num-dU-bOS.text">
+        <source>name</source>
+        <target>name</target>
+        <note>Class = "UILabel"; text = "name"; ObjectID = "num-dU-bOS";</note>
+      </trans-unit>
+      <trans-unit id="oy6-V7-lAT.text">
+        <source>Speciality code:</source>
+        <target>Speciality code:</target>
+        <note>Class = "UILabel"; text = "Speciality code:"; ObjectID = "oy6-V7-lAT";</note>
+      </trans-unit>
+      <trans-unit id="rY8-w1-nXO.normalTitle">
+        <source> Create</source>
+        <target> Create</target>
+        <note>Class = "UIButton"; normalTitle = " Create"; ObjectID = "rY8-w1-nXO";</note>
+      </trans-unit>
+      <trans-unit id="z9V-Yu-Dim.text">
+        <source>code</source>
+        <target>code</target>
+        <note>Class = "UILabel"; text = "code"; ObjectID = "z9V-Yu-Dim";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Student/Views/Base.lproj/Student.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="2DS-3L-efk.normalTitle">
+        <source>Вибрати</source>
+        <target>Вибрати</target>
+        <note>Class = "UIButton"; normalTitle = "Вибрати"; ObjectID = "2DS-3L-efk";</note>
+      </trans-unit>
+      <trans-unit id="2oH-3S-Lnl.text">
+        <source>Surname</source>
+        <target>Surname</target>
+        <note>Class = "UILabel"; text = "Surname"; ObjectID = "2oH-3S-Lnl";</note>
+      </trans-unit>
+      <trans-unit id="7Ve-Sa-Dnb.placeholder">
+        <source>Складний і &gt; 8 символів</source>
+        <target>Складний і &gt; 8 символів</target>
+        <note>Class = "UITextField"; placeholder = "Складний і &gt; 8 символів"; ObjectID = "7Ve-Sa-Dnb";</note>
+      </trans-unit>
+      <trans-unit id="Dca-nQ-l7S.text">
+        <source>FirstName</source>
+        <target>FirstName</target>
+        <note>Class = "UILabel"; text = "FirstName"; ObjectID = "Dca-nQ-l7S";</note>
+      </trans-unit>
+      <trans-unit id="GVG-CN-UA9.title">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UINavigationItem"; title = "Title"; ObjectID = "GVG-CN-UA9";</note>
+      </trans-unit>
+      <trans-unit id="H9c-Lg-w1k.text">
+        <source>E-Mail: </source>
+        <target>E-Mail: </target>
+        <note>Class = "UILabel"; text = "E-Mail: "; ObjectID = "H9c-Lg-w1k";</note>
+      </trans-unit>
+      <trans-unit id="KBM-jm-MaW.text">
+        <source>По-батькові: </source>
+        <target>По-батькові: </target>
+        <note>Class = "UILabel"; text = "По-батькові: "; ObjectID = "KBM-jm-MaW";</note>
+      </trans-unit>
+      <trans-unit id="Nkd-4g-qny.text">
+        <source>Пароль: </source>
+        <target>Пароль: </target>
+        <note>Class = "UILabel"; text = "Пароль: "; ObjectID = "Nkd-4g-qny";</note>
+      </trans-unit>
+      <trans-unit id="R5j-t4-a11.placeholder">
+        <source>Унікальний/латинські символи</source>
+        <target>Унікальний/латинські символи</target>
+        <note>Class = "UITextField"; placeholder = "Унікальний/латинські символи"; ObjectID = "R5j-t4-a11";</note>
+      </trans-unit>
+      <trans-unit id="UIy-gj-IM8.text">
+        <source>№ залікової книги: </source>
+        <target>№ залікової книги: </target>
+        <note>Class = "UILabel"; text = "№ залікової книги: "; ObjectID = "UIy-gj-IM8";</note>
+      </trans-unit>
+      <trans-unit id="VcQ-Vl-hLk.text">
+        <source>Пароль: </source>
+        <target>Пароль: </target>
+        <note>Class = "UILabel"; text = "Пароль: "; ObjectID = "VcQ-Vl-hLk";</note>
+      </trans-unit>
+      <trans-unit id="Yla-w5-vVW.title">
+        <source>Students</source>
+        <target>Students</target>
+        <note>Class = "UINavigationItem"; title = "Students"; ObjectID = "Yla-w5-vVW";</note>
+      </trans-unit>
+      <trans-unit id="jPd-ae-6vo.text">
+        <source>Група: </source>
+        <target>Група: </target>
+        <note>Class = "UILabel"; text = "Група: "; ObjectID = "jPd-ae-6vo";</note>
+      </trans-unit>
+      <trans-unit id="rwc-X7-0UN.text">
+        <source>Photo:</source>
+        <target>Photo:</target>
+        <note>Class = "UILabel"; text = "Photo:"; ObjectID = "rwc-X7-0UN";</note>
+      </trans-unit>
+      <trans-unit id="tvG-X0-eHA.placeholder">
+        <source>Адреса електронної пошти</source>
+        <target>Адреса електронної пошти</target>
+        <note>Class = "UITextField"; placeholder = "Адреса електронної пошти"; ObjectID = "tvG-X0-eHA";</note>
+      </trans-unit>
+      <trans-unit id="uEg-o2-5ug.text">
+        <source>Name</source>
+        <target>Name</target>
+        <note>Class = "UILabel"; text = "Name"; ObjectID = "uEg-o2-5ug";</note>
+      </trans-unit>
+      <trans-unit id="v83-CG-g2e.placeholder">
+        <source>Підтвердження</source>
+        <target>Підтвердження</target>
+        <note>Class = "UITextField"; placeholder = "Підтвердження"; ObjectID = "v83-CG-g2e";</note>
+      </trans-unit>
+      <trans-unit id="wcM-pB-TXl.text">
+        <source>Фамілія: </source>
+        <target>Фамілія: </target>
+        <note>Class = "UILabel"; text = "Фамілія: "; ObjectID = "wcM-pB-TXl";</note>
+      </trans-unit>
+      <trans-unit id="yJA-zZ-d5s.text">
+        <source>Логін: </source>
+        <target>Логін: </target>
+        <note>Class = "UILabel"; text = "Логін: "; ObjectID = "yJA-zZ-d5s";</note>
+      </trans-unit>
+      <trans-unit id="zqm-vh-9kq.text">
+        <source>Ім'я: </source>
+        <target>Ім'я: </target>
+        <note>Class = "UILabel"; text = "Ім'я: "; ObjectID = "zqm-vh-9kq";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Subject/Base.lproj/Subjects.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="1Pj-Dx-z5H.text">
+        <source>Subject description:</source>
+        <target>Опис предмету:</target>
+        <note>Class = "UILabel"; text = "Subject description:"; ObjectID = "1Pj-Dx-z5H";</note>
+      </trans-unit>
+      <trans-unit id="5rF-gB-7Px.normalTitle">
+        <source>Gallery</source>
+        <target>Відкрити галерею</target>
+        <note>Class = "UIButton"; normalTitle = "Gallery"; ObjectID = "5rF-gB-7Px";</note>
+      </trans-unit>
+      <trans-unit id="6es-km-t7G.text">
+        <source>Level of difficulty:</source>
+        <target>Рівень складності:</target>
+        <note>Class = "UILabel"; text = "Level of difficulty:"; ObjectID = "6es-km-t7G";</note>
+      </trans-unit>
+      <trans-unit id="7AI-Yx-agk.text">
+        <source>Type of question:</source>
+        <target>Тип питання:</target>
+        <note>Class = "UILabel"; text = "Type of question:"; ObjectID = "7AI-Yx-agk";</note>
+      </trans-unit>
+      <trans-unit id="7UZ-iK-niD.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "7UZ-iK-niD";</note>
+      </trans-unit>
+      <trans-unit id="9hd-Ra-fDp.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "9hd-Ra-fDp";</note>
+      </trans-unit>
+      <trans-unit id="39f-gw-gHO.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "39f-gw-gHO";</note>
+      </trans-unit>
+      <trans-unit id="AoI-86-ZIC.title">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UINavigationItem"; title = "Title"; ObjectID = "AoI-86-ZIC";</note>
+      </trans-unit>
+      <trans-unit id="G57-6A-7lI.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "G57-6A-7lI";</note>
+      </trans-unit>
+      <trans-unit id="Had-db-8n4.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "Had-db-8n4";</note>
+      </trans-unit>
+      <trans-unit id="Hhr-0J-Mj2.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "Hhr-0J-Mj2";</note>
+      </trans-unit>
+      <trans-unit id="IYX-8N-OkA.title">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UINavigationItem"; title = "Title"; ObjectID = "IYX-8N-OkA";</note>
+      </trans-unit>
+      <trans-unit id="JXF-Nm-cbP.text">
+        <source>Answer text:</source>
+        <target>Відповідь:</target>
+        <note>Class = "UILabel"; text = "Answer text:"; ObjectID = "JXF-Nm-cbP";</note>
+      </trans-unit>
+      <trans-unit id="KrS-M0-ugu.title">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UINavigationItem"; title = "Title"; ObjectID = "KrS-M0-ugu";</note>
+      </trans-unit>
+      <trans-unit id="LCM-cX-N4q.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "LCM-cX-N4q";</note>
+      </trans-unit>
+      <trans-unit id="PYV-bJ-zzs.text">
+        <source>Subject name:</source>
+        <target>Назва предмету:</target>
+        <note>Class = "UILabel"; text = "Subject name:"; ObjectID = "PYV-bJ-zzs";</note>
+      </trans-unit>
+      <trans-unit id="QXz-4K-vuF.normalTitle">
+        <source>Questions</source>
+        <target>Показати питання</target>
+        <note>Class = "UIButton"; normalTitle = "Questions"; ObjectID = "QXz-4K-vuF";</note>
+      </trans-unit>
+      <trans-unit id="T2n-Op-FLx.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "T2n-Op-FLx";</note>
+      </trans-unit>
+      <trans-unit id="VFJ-Pr-DEl.normalTitle">
+        <source>Save</source>
+        <target>Зберегти</target>
+        <note>Class = "UIButton"; normalTitle = "Save"; ObjectID = "VFJ-Pr-DEl";</note>
+      </trans-unit>
+      <trans-unit id="VXe-M5-Mcc.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "VXe-M5-Mcc";</note>
+      </trans-unit>
+      <trans-unit id="XA1-xu-Hkw.title">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UINavigationItem"; title = "Title"; ObjectID = "XA1-xu-Hkw";</note>
+      </trans-unit>
+      <trans-unit id="XM0-oF-4Qw.normalTitle">
+        <source>Remove</source>
+        <target>Видалити зображення</target>
+        <note>Class = "UIButton"; normalTitle = "Remove"; ObjectID = "XM0-oF-4Qw";</note>
+      </trans-unit>
+      <trans-unit id="Y9c-B6-92z.normalTitle">
+        <source>Remove</source>
+        <target>Видалити зображення</target>
+        <note>Class = "UIButton"; normalTitle = "Remove"; ObjectID = "Y9c-B6-92z";</note>
+      </trans-unit>
+      <trans-unit id="YP5-2R-ToQ.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "YP5-2R-ToQ";</note>
+      </trans-unit>
+      <trans-unit id="b8I-w4-djB.title">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UINavigationItem"; title = "Title"; ObjectID = "b8I-w4-djB";</note>
+      </trans-unit>
+      <trans-unit id="dkw-hT-cJR.text">
+        <source>Correctness:</source>
+        <target>Правильність:</target>
+        <note>Class = "UILabel"; text = "Correctness:"; ObjectID = "dkw-hT-cJR";</note>
+      </trans-unit>
+      <trans-unit id="eDa-qL-Fcf.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "eDa-qL-Fcf";</note>
+      </trans-unit>
+      <trans-unit id="fJb-n5-rhR.normalTitle">
+        <source>Test detail</source>
+        <target>Показати деталі тесту</target>
+        <note>Class = "UIButton"; normalTitle = "Test detail"; ObjectID = "fJb-n5-rhR";</note>
+      </trans-unit>
+      <trans-unit id="fgj-a4-fYd.normalTitle">
+        <source>Answers</source>
+        <target>Показати відповіді</target>
+        <note>Class = "UIButton"; normalTitle = "Answers"; ObjectID = "fgj-a4-fYd";</note>
+      </trans-unit>
+      <trans-unit id="jUk-oO-aaL.normalTitle">
+        <source>Time table</source>
+        <target>Показати розклад</target>
+        <note>Class = "UIButton"; normalTitle = "Time table"; ObjectID = "jUk-oO-aaL";</note>
+      </trans-unit>
+      <trans-unit id="lF0-ej-Sme.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "lF0-ej-Sme";</note>
+      </trans-unit>
+      <trans-unit id="mzh-Oj-8G1.normalTitle">
+        <source>Tests</source>
+        <target>Показати тести</target>
+        <note>Class = "UIButton"; normalTitle = "Tests"; ObjectID = "mzh-Oj-8G1";</note>
+      </trans-unit>
+      <trans-unit id="oaU-QB-9Ol.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "oaU-QB-9Ol";</note>
+      </trans-unit>
+      <trans-unit id="wcz-FP-tJI.text">
+        <source>Attachment:</source>
+        <target>Додаток:</target>
+        <note>Class = "UILabel"; text = "Attachment:"; ObjectID = "wcz-FP-tJI";</note>
+      </trans-unit>
+      <trans-unit id="x3u-RR-zaB.text">
+        <source>Attachment:</source>
+        <target>Додаток:</target>
+        <note>Class = "UILabel"; text = "Attachment:"; ObjectID = "x3u-RR-zaB";</note>
+      </trans-unit>
+      <trans-unit id="yXt-oc-jf2.normalTitle">
+        <source>Gallery</source>
+        <target>Відкрити галерею</target>
+        <note>Class = "UIButton"; normalTitle = "Gallery"; ObjectID = "yXt-oc-jf2";</note>
+      </trans-unit>
+      <trans-unit id="yh7-ko-u1D.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "yh7-ko-u1D";</note>
+      </trans-unit>
+      <trans-unit id="zEk-Ci-WN7.text">
+        <source>Question text:</source>
+        <target>Запитання:</target>
+        <note>Class = "UILabel"; text = "Question text:"; ObjectID = "zEk-Ci-WN7";</note>
+      </trans-unit>
+      <trans-unit id="zLg-OB-E1x.title">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UINavigationItem"; title = "Title"; ObjectID = "zLg-OB-E1x";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/Test/Base.lproj/Test.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="1Bc-X3-xXY.text">
+        <source>Questions</source>
+        <target>Questions</target>
+        <note>Class = "UILabel"; text = "Questions"; ObjectID = "1Bc-X3-xXY";</note>
+      </trans-unit>
+      <trans-unit id="2pB-Wg-qtw.placeholder">
+        <source>test name</source>
+        <target>test name</target>
+        <note>Class = "UITextField"; placeholder = "test name"; ObjectID = "2pB-Wg-qtw";</note>
+      </trans-unit>
+      <trans-unit id="768-DO-9Fn.text">
+        <source>Time for test</source>
+        <target>Time for test</target>
+        <note>Class = "UILabel"; text = "Time for test"; ObjectID = "768-DO-9Fn";</note>
+      </trans-unit>
+      <trans-unit id="DTU-AV-sZn.text">
+        <source>Time for test</source>
+        <target>Time for test</target>
+        <note>Class = "UILabel"; text = "Time for test"; ObjectID = "DTU-AV-sZn";</note>
+      </trans-unit>
+      <trans-unit id="IBo-A8-MV9.title">
+        <source>New test</source>
+        <target>New test</target>
+        <note>Class = "UIViewController"; title = "New test"; ObjectID = "IBo-A8-MV9";</note>
+      </trans-unit>
+      <trans-unit id="Ke6-CI-bOF.text">
+        <source>Attempts</source>
+        <target>Attempts</target>
+        <note>Class = "UILabel"; text = "Attempts"; ObjectID = "Ke6-CI-bOF";</note>
+      </trans-unit>
+      <trans-unit id="Rwj-20-N2J.text">
+        <source>Is Enabled</source>
+        <target>Is Enabled</target>
+        <note>Class = "UILabel"; text = "Is Enabled"; ObjectID = "Rwj-20-N2J";</note>
+      </trans-unit>
+      <trans-unit id="VPU-XH-ZOP.placeholder">
+        <source>00:00:00</source>
+        <target>00:00:00</target>
+        <note>Class = "UITextField"; placeholder = "00:00:00"; ObjectID = "VPU-XH-ZOP";</note>
+      </trans-unit>
+      <trans-unit id="dIS-DP-di3.normalTitle">
+        <source>Save</source>
+        <target>Save</target>
+        <note>Class = "UIButton"; normalTitle = "Save"; ObjectID = "dIS-DP-di3";</note>
+      </trans-unit>
+      <trans-unit id="evi-fO-DCA.placeholder">
+        <source>1-30</source>
+        <target>1-30</target>
+        <note>Class = "UITextField"; placeholder = "1-30"; ObjectID = "evi-fO-DCA";</note>
+      </trans-unit>
+      <trans-unit id="fLS-nM-Hkt.text">
+        <source>Test name</source>
+        <target>Test name</target>
+        <note>Class = "UILabel"; text = "Test name"; ObjectID = "fLS-nM-Hkt";</note>
+      </trans-unit>
+      <trans-unit id="gLo-zX-UZH.placeholder">
+        <source>1-10</source>
+        <target>1-10</target>
+        <note>Class = "UITextField"; placeholder = "1-10"; ObjectID = "gLo-zX-UZH";</note>
+      </trans-unit>
+      <trans-unit id="gOw-od-cvy.text">
+        <source>Attempts</source>
+        <target>Attempts</target>
+        <note>Class = "UILabel"; text = "Attempts"; ObjectID = "gOw-od-cvy";</note>
+      </trans-unit>
+      <trans-unit id="nHw-Sy-Hoi.text">
+        <source>Test Name</source>
+        <target>Test Name</target>
+        <note>Class = "UILabel"; text = "Test Name"; ObjectID = "nHw-Sy-Hoi";</note>
+      </trans-unit>
+      <trans-unit id="pt9-sa-BKU.text">
+        <source>Test name</source>
+        <target>Test name</target>
+        <note>Class = "UILabel"; text = "Test name"; ObjectID = "pt9-sa-BKU";</note>
+      </trans-unit>
+      <trans-unit id="vnz-DH-Hs3.title">
+        <source>Tests by subject</source>
+        <target>Tests by subject</target>
+        <note>Class = "UINavigationItem"; title = "Tests by subject"; ObjectID = "vnz-DH-Hs3";</note>
+      </trans-unit>
+      <trans-unit id="xpz-GU-xpr.text">
+        <source>Time for test</source>
+        <target>Time for test</target>
+        <note>Class = "UILabel"; text = "Time for test"; ObjectID = "xpz-GU-xpr";</note>
+      </trans-unit>
+      <trans-unit id="zJY-oR-t3h.text">
+        <source>Attempts</source>
+        <target>Attempts</target>
+        <note>Class = "UILabel"; text = "Attempts"; ObjectID = "zJY-oR-t3h";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DTAdmin/TestDetails/Base.lproj/TestDetails.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="1WX-Ti-hZf.text">
+        <source>test id</source>
+        <target>test id</target>
+        <note>Class = "UILabel"; text = "test id"; ObjectID = "1WX-Ti-hZf";</note>
+      </trans-unit>
+      <trans-unit id="7lM-R5-MiF.normalTitle">
+        <source>Button</source>
+        <target>Button</target>
+        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "7lM-R5-MiF";</note>
+      </trans-unit>
+      <trans-unit id="CVY-yq-ciq.text">
+        <source>Test detail task :</source>
+        <target>Test detail task :</target>
+        <note>Class = "UILabel"; text = "Test detail task :"; ObjectID = "CVY-yq-ciq";</note>
+      </trans-unit>
+      <trans-unit id="JRP-UC-8Qd.text">
+        <source>number</source>
+        <target>number</target>
+        <note>Class = "UILabel"; text = "number"; ObjectID = "JRP-UC-8Qd";</note>
+      </trans-unit>
+      <trans-unit id="LE2-bu-ukU.text">
+        <source>rate</source>
+        <target>rate</target>
+        <note>Class = "UILabel"; text = "rate"; ObjectID = "LE2-bu-ukU";</note>
+      </trans-unit>
+      <trans-unit id="UOJ-wr-aHv.text">
+        <source>Test id :</source>
+        <target>Test id :</target>
+        <note>Class = "UILabel"; text = "Test id :"; ObjectID = "UOJ-wr-aHv";</note>
+      </trans-unit>
+      <trans-unit id="UYS-8p-k8U.text">
+        <source>detail id</source>
+        <target>detail id</target>
+        <note>Class = "UILabel"; text = "detail id"; ObjectID = "UYS-8p-k8U";</note>
+      </trans-unit>
+      <trans-unit id="Vnv-i0-3Vm.text">
+        <source>tasks</source>
+        <target>tasks</target>
+        <note>Class = "UILabel"; text = "tasks"; ObjectID = "Vnv-i0-3Vm";</note>
+      </trans-unit>
+      <trans-unit id="X51-nb-ii0.text">
+        <source>level</source>
+        <target>level</target>
+        <note>Class = "UILabel"; text = "level"; ObjectID = "X51-nb-ii0";</note>
+      </trans-unit>
+      <trans-unit id="XHZ-99-8rx.text">
+        <source>id</source>
+        <target>id</target>
+        <note>Class = "UILabel"; text = "id"; ObjectID = "XHZ-99-8rx";</note>
+      </trans-unit>
+      <trans-unit id="ena-gu-gGN.text">
+        <source>test_id</source>
+        <target>test_id</target>
+        <note>Class = "UILabel"; text = "test_id"; ObjectID = "ena-gu-gGN";</note>
+      </trans-unit>
+      <trans-unit id="igd-Dp-kqS.text">
+        <source>level</source>
+        <target>level</target>
+        <note>Class = "UILabel"; text = "level"; ObjectID = "igd-Dp-kqS";</note>
+      </trans-unit>
+      <trans-unit id="jOa-CN-zQC.title">
+        <source>Done</source>
+        <target>Done</target>
+        <note>Class = "UIBarButtonItem"; title = "Done"; ObjectID = "jOa-CN-zQC";</note>
+      </trans-unit>
+      <trans-unit id="msL-9N-XTY.text">
+        <source>number</source>
+        <target>number</target>
+        <note>Class = "UILabel"; text = "number"; ObjectID = "msL-9N-XTY";</note>
+      </trans-unit>
+      <trans-unit id="qeS-Y6-PIX.text">
+        <source>rate</source>
+        <target>rate</target>
+        <note>Class = "UILabel"; text = "rate"; ObjectID = "qeS-Y6-PIX";</note>
+      </trans-unit>
+      <trans-unit id="sXj-C1-3hh.text">
+        <source>task</source>
+        <target>task</target>
+        <note>Class = "UILabel"; text = "task"; ObjectID = "sXj-C1-3hh";</note>
+      </trans-unit>
+      <trans-unit id="ub3-6K-XRD.text">
+        <source>Test detail rate :</source>
+        <target>Test detail rate :</target>
+        <note>Class = "UILabel"; text = "Test detail rate :"; ObjectID = "ub3-6K-XRD";</note>
+      </trans-unit>
+      <trans-unit id="w7S-Jo-MSU.text">
+        <source>Test detail level :</source>
+        <target>Test detail level :</target>
+        <note>Class = "UILabel"; text = "Test detail level :"; ObjectID = "w7S-Jo-MSU";</note>
+      </trans-unit>
+      <trans-unit id="z9a-Oh-LM0.text">
+        <source>test detail</source>
+        <target>test detail</target>
+        <note>Class = "UILabel"; text = "test detail"; ObjectID = "z9a-Oh-LM0";</note>
+      </trans-unit>
+      <trans-unit id="zA1-8D-tnj.text">
+        <source>Test detail id :</source>
+        <target>Test detail id :</target>
+        <note>Class = "UILabel"; text = "Test detail id :"; ObjectID = "zA1-8D-tnj";</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,9 @@
+/* Class = "UIButton"; normalTitle = "Yes, I want logout!"; ObjectID = "5hO-1p-YfD"; */
+"5hO-1p-YfD.normalTitle" = "Так, я хочу вийти!";
+
+/* Class = "UILabel"; text = "Are you sure? Do you want logout?"; ObjectID = "EX2-0z-ubA"; */
+"EX2-0z-ubA.text" = "Ви впевнені, що хочете вийти?";
+
+/* Class = "UIButton"; normalTitle = "login"; ObjectID = "R9p-cE-9fj"; */
+"R9p-cE-9fj.normalTitle" = "Логін";
+

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewAnswerViewController: UIViewController {
+class AddNewAnswerViewController: ParentViewController {
    
     @IBOutlet weak var answerTextView: UITextView!
     @IBOutlet weak var isAnswerCorrectTextField: UITextField!
@@ -29,8 +29,8 @@ class AddNewAnswerViewController: UIViewController {
             self.view.layoutIfNeeded()
             self.answerTextView.text = answer.answerText
             self.isAnswerCorrectTextField.text = answer.trueAnswer == "0" ? isAnswerCorrect[0] : isAnswerCorrect[1]
-            if answer.attachment.count > 1 {
-                showAnswerAttachment(for: answer.attachment)
+            if let attachment = answer.attachment {
+                attachmentImageView.image = attachment
             }
         }
     }
@@ -49,11 +49,7 @@ class AddNewAnswerViewController: UIViewController {
         tapGestureRecognizerConfigure()
     }
 
-    private func showAnswerAttachment(for text: String) {
-        attachmentImageView.image = UIImage.decode(fromBase64: text)
-    }
-
-    fileprivate func isCorrectTypeOFQuestion() -> Bool {
+    private func isCorrectTypeOFQuestion() -> Bool {
         if qustionType == "3" || qustionType == "4" {
             return true
         }
@@ -99,7 +95,7 @@ class AddNewAnswerViewController: UIViewController {
                 (answerResult, errorMessage) in
 
                 if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage.message)
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     guard let result = answerResult as? [[String : Any]] else { return }
                     guard let resultFirst = result.first else { return }
@@ -118,10 +114,10 @@ class AddNewAnswerViewController: UIViewController {
             guard let answerId = answer?.id else { return }
             guard let answerForSave = answerForSave else { return }
             DataManager.shared.updateEntity(byId: answerId, entity: answerForSave, typeEntity: .answer) {
-                errorMessage in
+                error in
 
-                if let errorMessage = errorMessage {
-                    self.showWarningMsg(errorMessage.message)
+                if let errorMessage = error {
+                    self.showAllert(error: errorMessage, completionHandler: nil)
                 } else {
                     if let resultModification = self.resultModification {
                         resultModification(answerForSave)
@@ -142,38 +138,21 @@ class AddNewAnswerViewController: UIViewController {
         
         let correctnessNumberString = String(correctnessNumber)
         
-        if let attachment: UIImage = attachmentImageView.image {
-            let picture = UIImage.encode(fromImage: attachment)
-            if answerText.count >= 1 {
-                let dictionary: [String: Any] = [
+        if answerText.count >= minCountOfText {
+            let dictionary: [String: Any] = [
                                                  "question_id": id,
                                                  "true_answer": correctnessNumberString,
-                                                 "answer_text": answerText,
-                                                 "attachment": picture
+                                                 "answer_text": answerText
                                                 ]
-                answerForSave = AnswerStructure(dictionary: dictionary)
-            } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data",
-                                                 comment: "All fields have to be filled correctly"))
-                return false
+            answerForSave = AnswerStructure(dictionary: dictionary)
+            if let image: UIImage = attachmentImageView.image{
+                answerForSave?.attachment = image
             }
-            return true
         } else {
-            if answerText.count >= 1 {
-                let dictionary: [String: Any] = [
-                                                 "question_id": id,
-                                                 "true_answer": correctnessNumberString,
-                                                 "answer_text": answerText,
-                                                 "attachment": ""
-                                                ]
-                answerForSave = AnswerStructure(dictionary: dictionary)
-            } else {
-                showWarningMsg(NSLocalizedString("Entered incorect data",
-                                                 comment: "All fields have to be filled correctly"))
-                return false
-            }
-            return true
+            showWarningMsg(NSLocalizedString("Entered incorect data", comment: "All fields have to be filled correctly"))
+            return false
         }
+        return true
     }
     
     @IBAction func removeImage(_ sender: UIButton) {

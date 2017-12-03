@@ -1,0 +1,54 @@
+/* Class = "UILabel"; text = "Questions"; ObjectID = "1Bc-X3-xXY"; */
+"1Bc-X3-xXY.text" = "Питання";
+
+/* Class = "UITextField"; placeholder = "test name"; ObjectID = "2pB-Wg-qtw"; */
+"2pB-Wg-qtw.placeholder" = "Назва тесту";
+
+/* Class = "UILabel"; text = "Time for test"; ObjectID = "768-DO-9Fn"; */
+"768-DO-9Fn.text" = "Час для тестування";
+
+/* Class = "UILabel"; text = "Time for test"; ObjectID = "DTU-AV-sZn"; */
+"DTU-AV-sZn.text" = "Час для тестування";
+
+/* Class = "UIViewController"; title = "New test"; ObjectID = "IBo-A8-MV9"; */
+"IBo-A8-MV9.title" = "Новий тест";
+
+/* Class = "UILabel"; text = "Attempts"; ObjectID = "Ke6-CI-bOF"; */
+"Ke6-CI-bOF.text" = "Спроби";
+
+/* Class = "UILabel"; text = "Is Enabled"; ObjectID = "Rwj-20-N2J"; */
+"Rwj-20-N2J.text" = "Доступно";
+
+/* Class = "UITextField"; placeholder = "00:00:00"; ObjectID = "VPU-XH-ZOP"; */
+"VPU-XH-ZOP.placeholder" = "00:00:00";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "dIS-DP-di3"; */
+"dIS-DP-di3.normalTitle" = "Зберегти";
+
+/* Class = "UITextField"; placeholder = "1-30"; ObjectID = "evi-fO-DCA"; */
+"evi-fO-DCA.placeholder" = "1-30";
+
+/* Class = "UILabel"; text = "Test name"; ObjectID = "fLS-nM-Hkt"; */
+"fLS-nM-Hkt.text" = "Назва тесту";
+
+/* Class = "UITextField"; placeholder = "1-10"; ObjectID = "gLo-zX-UZH"; */
+"gLo-zX-UZH.placeholder" = "1-10";
+
+/* Class = "UILabel"; text = "Attempts"; ObjectID = "gOw-od-cvy"; */
+"gOw-od-cvy.text" = "Спроби";
+
+/* Class = "UILabel"; text = "Test Name"; ObjectID = "nHw-Sy-Hoi"; */
+"nHw-Sy-Hoi.text" = "Назва тесту";
+
+/* Class = "UILabel"; text = "Test name"; ObjectID = "pt9-sa-BKU"; */
+"pt9-sa-BKU.text" = "Назва тесту";
+
+/* Class = "UINavigationItem"; title = "Tests by subject"; ObjectID = "vnz-DH-Hs3"; */
+"vnz-DH-Hs3.title" = "Тести по предмету";
+
+/* Class = "UILabel"; text = "Time for test"; ObjectID = "xpz-GU-xpr"; */
+"xpz-GU-xpr.text" = "Розклад";
+
+/* Class = "UILabel"; text = "Attempts"; ObjectID = "zJY-oR-t3h"; */
+"zJY-oR-t3h.text" = "Спроби";
+

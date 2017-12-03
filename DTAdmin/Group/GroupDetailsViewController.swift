@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupDetailsViewController: UIViewController {
+class GroupDetailsViewController: ParentViewController {
     @IBOutlet weak var groupNameLabel: UILabel!
     
     @IBOutlet weak var facultyNameLabel: UILabel!
@@ -26,7 +26,14 @@ class GroupDetailsViewController: UIViewController {
         self.navigationController?.pushViewController(studentViewControler, animated: true)    }
     @IBAction func getTimeTableByGroupTapped(_ sender: Any) {
     }
+    
     @IBAction func getResultsByGroupTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Result", bundle: nil)
+        guard let resultByGroupViewController = storyboard.instantiateViewController(withIdentifier: "ResultByGroup") as? ResultByGroupViewController else  { return }
+        resultByGroupViewController.title = NSLocalizedString("Results of \(String(describing: self.group?.groupName))", comment: "Title of view with passed tests by group")
+        resultByGroupViewController.group = self.group
+        
+        self.navigationController?.pushViewController(resultByGroupViewController, animated: true)
     }
     
     var group: GroupStructure?
@@ -43,7 +50,7 @@ class GroupDetailsViewController: UIViewController {
         DataManager.shared.getEntity(byId: group.facultyId, typeEntity: .faculty){
             (faculty, error) in
             if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             } else {
                 guard let faculty = faculty as? FacultyStructure else { return }
                 DispatchQueue.main.async {
@@ -55,7 +62,7 @@ class GroupDetailsViewController: UIViewController {
         DataManager.shared.getEntity(byId: group.specialityId, typeEntity: .speciality){
             (speciality, error) in
             if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             } else {
                 guard let speciality = speciality as? SpecialityStructure else { return }
                 DispatchQueue.main.async {

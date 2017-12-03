@@ -56,7 +56,7 @@ class AdminViewController: ParentViewController {
       self.stopActivity()
       guard let admins = admins as? [UserStructure] else {
         self.refreshControl.endRefreshing()
-        self.showWarningMsg(error?.message ?? "Incorect data")
+        self.showAllert(error: error, completionHandler: nil)
         return
       }
       self.admins = admins
@@ -108,8 +108,8 @@ extension AdminViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
     let deleteOpt = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
       
-      guard let admin = self.admins?[indexPath.row] else { return }
-      DataManager.shared.deleteEntity(byId: admin.id, typeEntity: .user, completionHandler: { (status, error) in
+        guard let admin = self.admins?[indexPath.row], let adminId = admin.id else { return }
+      DataManager.shared.deleteEntity(byId: adminId, typeEntity: .user, completionHandler: { (status, error) in
         guard let error = error else {
           self.adminsListTableView.beginUpdates()
           self.admins?.remove(at: indexPath.row)
@@ -117,7 +117,7 @@ extension AdminViewController: UITableViewDataSource {
           self.adminsListTableView.endUpdates()
           return
         }
-        self.showWarningMsg(error.info)
+        self.showAllert(error: error, completionHandler: nil)
       })
     }
     deleteOpt.backgroundColor = UIColor.red

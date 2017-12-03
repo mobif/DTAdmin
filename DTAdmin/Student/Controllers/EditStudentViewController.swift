@@ -8,12 +8,8 @@
 
 import UIKit
 
-class EditStudentViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
-    var studentLoaded: StudentStructure? {
-        didSet {
-            self.view.layoutIfNeeded()
-        }
-    }
+class EditStudentViewController: ParentViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
+    var studentLoaded: StudentStructure?
     var studentForSave: StudentStructure?
     @IBOutlet weak var loginStudentTextField: UITextField!
     @IBOutlet weak var emailStudentTextField: UITextField!
@@ -25,7 +21,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var passwordConfirmTextField: UITextField!
     @IBOutlet weak var gradeBookIdTextField: UITextField!
     @IBOutlet weak var studentPhoto: UIImageView!
-    var titleViewController: String?
+    
     var selectedGroupForStudent: GroupStructure?
     var selectedUserAccountForStudent: UserStructure?
     var isNewStudent = true
@@ -58,9 +54,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
         onImageGestureRecognizer.numberOfTapsRequired = 1
         studentPhoto.isUserInteractionEnabled = true
         studentPhoto.addGestureRecognizer(onImageGestureRecognizer)
-        if titleViewController != nil {
-            navigationItem.title = titleViewController
-        }
+
     }
     @objc func imageTaped(recognizer: UITapGestureRecognizer) {
         let imagePhoto = UIImagePickerController()
@@ -93,7 +87,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             guard var studentForSave = studentForSave else { return }
             DataManager.shared.updateEntity(byId: userIDForUpdate, entity: studentForSave, typeEntity: .student) { error in
                 if let error = error {
-                    self.showWarningMsg(error.info)
+                    self.showAllert(error: error, completionHandler: nil)
                 } else {
                     if let resultModification = self.resultModification {
                         studentForSave.userId = userIDForUpdate
@@ -110,7 +104,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
             guard let studentForSave = studentForSave else { return }
             DataManager.shared.insertEntity(entity: studentForSave, typeEntity: .student) { (id, error) in
                 if let error = error {
-                    self.showWarningMsg(error.info)
+                    self.showAllert(error: error, completionHandler: nil)
                 } else {
                     guard let id = id else {
                         self.showWarningMsg(NSLocalizedString("Incorect response structure", comment: "New user ID not found in the response message"))
@@ -171,7 +165,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
                 self.selectedGroupForStudent = groupInstance
                 self.groupButton.setTitle(groupInstance.groupName, for: .normal)
             } else if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             }
         }
     }
@@ -182,7 +176,7 @@ class EditStudentViewController: UIViewController, UINavigationControllerDelegat
                 self.loginStudentTextField.text = userInstance.userName
                 self.emailStudentTextField.text = userInstance.email
             } else if let error = error {
-                self.showWarningMsg(error.info)
+                self.showAllert(error: error, completionHandler: nil)
             }
         }
     }

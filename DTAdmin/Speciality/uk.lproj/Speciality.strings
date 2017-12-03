@@ -1,0 +1,45 @@
+/* Class = "UILabel"; text = "Speciality name:"; ObjectID = "6Tm-8N-nOb"; */
+"6Tm-8N-nOb.text" = "Назва спеціальності:";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "BAe-6A-jtr"; */
+"BAe-6A-jtr.normalTitle" = "Повернутися";
+
+/* Class = "UILabel"; text = "Speciality name :"; ObjectID = "EvO-n9-0jc"; */
+"EvO-n9-0jc.text" = "Назва спеціальності :";
+
+/* Class = "UILabel"; text = "Speciality code :"; ObjectID = "LZ5-uw-yB7"; */
+"LZ5-uw-yB7.text" = "Код спеціальності :";
+
+/* Class = "UILabel"; text = "id"; ObjectID = "U7N-BN-S6H"; */
+"U7N-BN-S6H.text" = "Ід";
+
+/* Class = "UILabel"; text = "Speciality id:"; ObjectID = "az2-Yl-5hD"; */
+"az2-Yl-5hD.text" = "Ід спеціальності:";
+
+/* Class = "UILabel"; text = "code"; ObjectID = "f6a-xF-2S7"; */
+"f6a-xF-2S7.text" = "код";
+
+/* Class = "UITextField"; placeholder = "Speciality name"; ObjectID = "fca-Wf-t0t"; */
+"fca-Wf-t0t.placeholder" = "Назва спеціальності";
+
+/* Class = "UILabel"; text = "id"; ObjectID = "jg5-Cx-bGl"; */
+"jg5-Cx-bGl.text" = "ід";
+
+/* Class = "UILabel"; text = "name"; ObjectID = "kpr-ni-fqY"; */
+"kpr-ni-fqY.text" = "назва";
+
+/* Class = "UITextField"; placeholder = "Speciality code"; ObjectID = "nfe-YH-RmV"; */
+"nfe-YH-RmV.placeholder" = "Код спеціальності";
+
+/* Class = "UILabel"; text = "name"; ObjectID = "num-dU-bOS"; */
+"num-dU-bOS.text" = "назва";
+
+/* Class = "UILabel"; text = "Speciality code:"; ObjectID = "oy6-V7-lAT"; */
+"oy6-V7-lAT.text" = "Код спеціальності:";
+
+/* Class = "UIButton"; normalTitle = " Create"; ObjectID = "rY8-w1-nXO"; */
+"rY8-w1-nXO.normalTitle" = " Створити";
+
+/* Class = "UILabel"; text = "code"; ObjectID = "z9V-Yu-Dim"; */
+"z9V-Yu-Dim.text" = "код";
+

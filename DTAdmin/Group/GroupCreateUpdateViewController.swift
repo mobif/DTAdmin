@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupCreateUpdateViewController: UIViewController {
+class GroupCreateUpdateViewController: ParentViewController {
     
     @IBOutlet weak var groupNameTextField: UITextField!
     @IBAction func saveGroup(_ sender: Any) {
@@ -25,9 +25,10 @@ class GroupCreateUpdateViewController: UIViewController {
     @IBOutlet weak var selectSpecialityButton: UIButton!
     
     @IBAction func selectFacultyTapped(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
-        guard let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as? FacultyForGroupViewController else { return }
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Faculty", bundle: nil)
+        guard let facultyViewController = storyBoard.instantiateViewController(withIdentifier: "FacultyViewController") as? FacultyViewController else { return }
         self.navigationController?.pushViewController(facultyViewController, animated: true)
+        facultyViewController.getFaculty = true
         facultyViewController.selectFaculty = { selectedFaculty in
             self.faculty = selectedFaculty
             self.selectFacultyButton.titleLabel?.text = selectedFaculty.name
@@ -35,10 +36,11 @@ class GroupCreateUpdateViewController: UIViewController {
     }
     
     @IBAction func selectSpecialityTapped(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Group", bundle: nil)
-        guard let specialityViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialityViewController") as? SpecialityForGroupViewController else { return }
-        self.navigationController?.pushViewController(specialityViewController, animated: true)
-        specialityViewController.selectSpeciality = { selectedSpeciality in
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Speciality", bundle: nil)
+        guard let specialitiesViewController = storyBoard.instantiateViewController(withIdentifier: "SpecialitiesViewController") as? SpecialitiesViewController else { return }
+        self.navigationController?.pushViewController(specialitiesViewController, animated: true)
+        specialitiesViewController.getSpeciality = true
+        specialitiesViewController.selectSpeciality = { selectedSpeciality in
             self.speciality = selectedSpeciality
             self.selectSpecialityButton.titleLabel?.text = selectedSpeciality.name
         }

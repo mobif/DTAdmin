@@ -33,10 +33,11 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
         studentTable.refreshControl = refreshControl
     }
     @objc func updateTable(){
-        startActivity()
+        self.startActivity()
         if let group = selectedGroup {
             guard let groupId = group.groupId else {
-                showWarningMsg(NSLocalizedString("Undefined group", comment: "Selected group havent ID"))
+                showAllert(title: "Warning", message: NSLocalizedString("Undefined group", comment:
+                    "Selected group havent ID"), completionHandler: nil)
                 return
             }
             DataManager.shared.getStudents(forGroup: groupId, withoutImages: true)  { (students, error) in
@@ -47,10 +48,15 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     self.studentTable.reloadData()
                 } else {
                     guard let error = error else {
-                        self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
+                        self.showAllert(title: "Warning", message: NSLocalizedString("Incorect type data", comment:
+                            "Incorect type data"), completionHandler: nil)
                         return }
-                    self.showWarningMsg(error.info)
-                    if error.code == 403 {
+                    if error.code == HTTPStatusCodes.NotFound.rawValue {
+                        error.message = NSLocalizedString("Group is empty", comment: "Students for group not found")
+                        self.showAllert(error: error, completionHandler: nil)
+                    }
+                    self.showAllert(error: error, completionHandler: nil)
+                    if error.code == HTTPStatusCodes.Unauthorized.rawValue {
                         StoreHelper.logout()
                         self.showLoginScreen()
                     }
@@ -67,8 +73,8 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
                     guard let error = error else {
                         self.showWarningMsg(NSLocalizedString("Incorect type data", comment: "Incorect type data"))
                         return }
-                    self.showWarningMsg(error.info)
-                    if error.code == 403 {
+                    self.showAllert(error: error, completionHandler: nil)
+                    if error.code == HTTPStatusCodes.Unauthorized.rawValue {
                         StoreHelper.logout()
                         self.showLoginScreen()
                     }
@@ -79,7 +85,7 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
     }
     @objc func addNewStudent(){
         guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else { return }
-        editStudentViewController.titleViewController = NSLocalizedString("New Student", comment: "Create new Student")
+        editStudentViewController.title = NSLocalizedString("New Student", comment: "Create new Student")
         editStudentViewController.resultModification = { (studentReturn, isNew) in
             if isNew {
                 self.studentList.append(studentReturn)
@@ -94,13 +100,13 @@ class StudentViewController: ParentViewController, UITableViewDelegate {
         return index
     }
 }
-extension UIViewController {
-    func showWarningMsg(_ textMsg: String) {
-        let alert = UIAlertController(title: "Error!", message: textMsg, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-}
+//extension UIViewController {
+//    func showWarningMsg(_ textMsg: String) {
+//        let alert = UIAlertController(title: "Error!", message: textMsg, preferredStyle: UIAlertControllerStyle.alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+//    }
+//}
 extension StudentViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         filtered = (searchBar.text!.count > 0)
@@ -126,7 +132,7 @@ extension StudentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let studentInstance = filtered ? filteredList[indexPath.row] : studentList[indexPath.row]
         guard let editStudentViewController = UIStoryboard(name: "Student", bundle: nil).instantiateViewController(withIdentifier: "EditStudentViewController") as? EditStudentViewController else {return}
-        editStudentViewController.titleViewController = NSLocalizedString("Edit", comment: "Edit account of student")
+        editStudentViewController.title = NSLocalizedString("Edit", comment: "Edit account of student")
         editStudentViewController.studentLoaded = studentInstance
         editStudentViewController.resultModification = { (studentReturn, isNew) in
             if !isNew {
@@ -150,7 +156,7 @@ extension StudentViewController: UITableViewDataSource {
             guard let studentId = self.filteredList[indexPath.row].userId else { return }
             DataManager.shared.deleteEntity(byId: studentId, typeEntity: .student)  { (result, error) in
                 if let error = error {
-                    self.showWarningMsg(error.info)
+                    self.showAllert(error: error, completionHandler: nil)
                 } else {
                     if self.filtered {
                         guard let indexOfStudent = self.getIndex(byId: studentId) else {

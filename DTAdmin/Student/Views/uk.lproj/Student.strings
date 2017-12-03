@@ -1,0 +1,60 @@
+/* Class = "UIButton"; normalTitle = "Вибрати"; ObjectID = "2DS-3L-efk"; */
+"2DS-3L-efk.normalTitle" = "Вибрати";
+
+/* Class = "UILabel"; text = "Surname"; ObjectID = "2oH-3S-Lnl"; */
+"2oH-3S-Lnl.text" = "Прізвище";
+
+/* Class = "UITextField"; placeholder = "Складний і > 8 символів"; ObjectID = "7Ve-Sa-Dnb"; */
+"7Ve-Sa-Dnb.placeholder" = "Складний і > 8 символів";
+
+/* Class = "UILabel"; text = "FirstName"; ObjectID = "Dca-nQ-l7S"; */
+"Dca-nQ-l7S.text" = "Ім'я";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "GVG-CN-UA9"; */
+"GVG-CN-UA9.title" = "Title";
+
+/* Class = "UILabel"; text = "E-Mail: "; ObjectID = "H9c-Lg-w1k"; */
+"H9c-Lg-w1k.text" = "Електронна пошта: ";
+
+/* Class = "UILabel"; text = "По-батькові: "; ObjectID = "KBM-jm-MaW"; */
+"KBM-jm-MaW.text" = "По-батькові: ";
+
+/* Class = "UILabel"; text = "Пароль: "; ObjectID = "Nkd-4g-qny"; */
+"Nkd-4g-qny.text" = "Пароль: ";
+
+/* Class = "UITextField"; placeholder = "Унікальний/латинські символи"; ObjectID = "R5j-t4-a11"; */
+"R5j-t4-a11.placeholder" = "Унікальний/латинські символи";
+
+/* Class = "UILabel"; text = "№ залікової книги: "; ObjectID = "UIy-gj-IM8"; */
+"UIy-gj-IM8.text" = "№ залікової книги: ";
+
+/* Class = "UILabel"; text = "Пароль: "; ObjectID = "VcQ-Vl-hLk"; */
+"VcQ-Vl-hLk.text" = "Пароль: ";
+
+/* Class = "UINavigationItem"; title = "Students"; ObjectID = "Yla-w5-vVW"; */
+"Yla-w5-vVW.title" = "Студенти";
+
+/* Class = "UILabel"; text = "Група: "; ObjectID = "jPd-ae-6vo"; */
+"jPd-ae-6vo.text" = "Група: ";
+
+/* Class = "UILabel"; text = "Photo:"; ObjectID = "rwc-X7-0UN"; */
+"rwc-X7-0UN.text" = "Фото:";
+
+/* Class = "UITextField"; placeholder = "Адреса електронної пошти"; ObjectID = "tvG-X0-eHA"; */
+"tvG-X0-eHA.placeholder" = "Адреса електронної пошти";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "uEg-o2-5ug"; */
+"uEg-o2-5ug.text" = "Ім'я";
+
+/* Class = "UITextField"; placeholder = "Підтвердження"; ObjectID = "v83-CG-g2e"; */
+"v83-CG-g2e.placeholder" = "Підтвердження";
+
+/* Class = "UILabel"; text = "Фамілія: "; ObjectID = "wcM-pB-TXl"; */
+"wcM-pB-TXl.text" = "Фамілія: ";
+
+/* Class = "UILabel"; text = "Логін: "; ObjectID = "yJA-zZ-d5s"; */
+"yJA-zZ-d5s.text" = "Логін: ";
+
+/* Class = "UILabel"; text = "Ім'я: "; ObjectID = "zqm-vh-9kq"; */
+"zqm-vh-9kq.text" = "Ім'я: ";
+

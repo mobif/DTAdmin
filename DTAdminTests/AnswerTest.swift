@@ -17,7 +17,6 @@ class AnswerTest: XCTestCase {
         XCTAssertEqual(newAnswer!.questionId, "1")
         XCTAssertEqual(newAnswer!.trueAnswer, "1")
         XCTAssertEqual(newAnswer!.answerText, "5")
-        //XCTAssertEqual(newAnswer!.attachmant, "")
         XCTAssertNil(newAnswer!.id)
     }
     

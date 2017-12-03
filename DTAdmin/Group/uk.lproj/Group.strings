@@ -1,0 +1,45 @@
+/* Class = "UILabel"; text = "Faculty Name"; ObjectID = "86O-Xq-YfI"; */
+"86O-Xq-YfI.text" = "Назва факультету";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "Rjp-XI-1gU"; */
+"Rjp-XI-1gU.title" = "Зберегти";
+
+/* Class = "UIButton"; normalTitle = "Students"; ObjectID = "U62-KV-CpV"; */
+"U62-KV-CpV.normalTitle" = "Студенти";
+
+/* Class = "UILabel"; text = "Speciality Name"; ObjectID = "VEv-dB-OM1"; */
+"VEv-dB-OM1.text" = "Назва спеціальності";
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "dFK-iK-7p7"; */
+"dFK-iK-7p7.title" = "Додати";
+
+/* Class = "UILabel"; text = "Speciality Code"; ObjectID = "iP3-wt-sk6"; */
+"iP3-wt-sk6.text" = "Код спеціальності";
+
+/* Class = "UILabel"; text = "Faculty Description"; ObjectID = "jP3-nL-GAF"; */
+"jP3-nL-GAF.text" = "Опис факультету";
+
+/* Class = "UITextField"; placeholder = "group name"; ObjectID = "mCd-6K-AR1"; */
+"mCd-6K-AR1.placeholder" = "назва групи";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "oTu-or-df0"; */
+"oTu-or-df0.title" = "Назва";
+
+/* Class = "UILabel"; text = "Group Name"; ObjectID = "ptJ-mi-rIk"; */
+"ptJ-mi-rIk.text" = "Назва групи";
+
+/* Class = "UIButton"; normalTitle = "Time Table"; ObjectID = "t0M-ro-bcm"; */
+"t0M-ro-bcm.normalTitle" = "Розклад";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "vEb-c5-R7o"; */
+"vEb-c5-R7o.title" = "Назва";
+
+/* Class = "UIButton"; normalTitle = "choose speciality"; ObjectID = "xhy-tN-KGO"; */
+"xhy-tN-KGO.normalTitle" = "Виберіть спеціальність";
+
+/* Class = "UIButton"; normalTitle = "choose faculty"; ObjectID = "y0L-vf-55Y"; */
+"y0L-vf-55Y.normalTitle" = "Виберіть факультет";
+
+/* Class = "UIButton"; normalTitle = "Results"; ObjectID = "yAj-Yd-tNE"; */
+"yAj-Yd-tNE.normalTitle" = "Результати";
+
